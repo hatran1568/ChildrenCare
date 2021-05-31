@@ -41,9 +41,9 @@ public class PostDAO extends BaseDAO {
                 p.setTitle(rs.getString("title"));
                 p.setContent(rs.getString("content"));
                 p.setDescription(rs.getString("description"));
-                p.setUpdated_date(rs.getDate("updated_date"));
+                p.setUpdatedDate(rs.getDate("updated_date"));
                 p.setFeatured(rs.getBoolean("featured"));
-                p.setThumbnail_link(rs.getString("thumbnail_link"));
+                p.setThumbnailLink(rs.getString("thumbnail_link"));
                 
                 User acc = new User();
                 acc.setId(rs.getInt("author_id"));
@@ -88,8 +88,8 @@ public class PostDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, p.getContent());
             stm.setString(2, p.getDescription());
-            stm.setDate(3, p.getUpdated_date());
-            stm.setString(4, p.getThumbnail_link());
+            stm.setDate(3, p.getUpdatedDate());
+            stm.setString(4, p.getThumbnailLink());
             stm.setInt(5, p.getCategory().getId());
             stm.setString(6, p.getTitle());
             
@@ -138,9 +138,9 @@ public class PostDAO extends BaseDAO {
                 p.setTitle(rs.getString("title"));
                 p.setContent(rs.getString("content"));
                 p.setDescription(rs.getString("description"));
-                p.setUpdated_date(rs.getDate("updated_date"));
+                p.setUpdatedDate(rs.getDate("updated_date"));
                 p.setFeatured(rs.getBoolean("featured"));
-                p.setThumbnail_link(rs.getString("thumbnail_link"));
+                p.setThumbnailLink(rs.getString("thumbnail_link"));
                 
                 User acc = new User();
                 acc.setId(rs.getInt("author_id"));

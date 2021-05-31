@@ -93,9 +93,9 @@ public class AddController extends HttpServlet {
         p.setCategory(pc);
         p.setTitle(title);
         p.setDescription(description);
-        p.setUpdated_date(updated_date);
+        p.setUpdatedDate(updated_date);
         p.setContent(content);
-        p.setThumbnail_link(thumbnail_link);
+        p.setThumbnailLink(thumbnail_link);
         
         PostDAO postDB = new PostDAO();
         postDB.addPost(p);
