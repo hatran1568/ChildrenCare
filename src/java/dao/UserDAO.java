@@ -146,8 +146,8 @@ public class UserDAO extends BaseDAO{
             stm.setString(6, u.getAddress());
             stm.setString(7, u.getImageLink());
             stm.setInt(8, u.getRole().getId());
-            stm.setInt(9, u.getId());
-            stm.setBoolean(10, u.isStatus());
+            stm.setInt(10, u.getId());
+            stm.setBoolean(9, u.isStatus());
             stm.executeUpdate();
             
         } catch (SQLException ex) {
