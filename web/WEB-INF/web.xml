@@ -64,7 +64,11 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/edit</url-pattern>
+        <url-pattern>/user/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/user/insert</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

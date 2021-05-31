@@ -102,7 +102,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     /**
@@ -169,7 +169,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("user", user);
 //        request.setAttribute("uid", uid);
 
-        request.getRequestDispatcher("../../view/account/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/account/edit.jsp").forward(request, response);
     }
 
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {

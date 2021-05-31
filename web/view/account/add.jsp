@@ -3,7 +3,7 @@
     Created on : May 24, 2021, 8:41:00 PM
     Author     : Tran Thi Nguyet Ha
 --%>
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +63,7 @@
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
 
-                            <form action="../../user/list/add" method="POST" >
+                            <form action="../user/insert" method="POST" >
                                 <div class="form-group">
                                     <label for="id">User id</label>
                                     <input type="text" class="form-control" name="id" >

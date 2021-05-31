@@ -63,7 +63,7 @@
                     <section class="right-image">
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="user/edit" method="GET" >
+                            <form action="../user/update" method="POST" >
                                 <div class="form-group">
                                     <label for="id">User id</label>
                                     <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
@@ -99,8 +99,6 @@
 
                                 <div class="form-group">
                                     <label for="role">Role</label>
-
-
                                     
 
                                     <select class="form-control" name="role">
