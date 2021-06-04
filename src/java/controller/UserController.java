@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.User;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,7 +27,7 @@ import bean.User;
  */
 @WebServlet(name = "UserController", urlPatterns = {"/user"})
 public class UserController extends HttpServlet {
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +48,7 @@ public class UserController extends HttpServlet {
             out.println("<title>Servlet UserController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserController at " + request.getServletPath()+ "</h1>");
+            out.println("<h1>Servlet UserController at " + request.getServletPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,9 +66,9 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+
         String action = request.getServletPath();
-       
+
         switch (action) {
             case "/user/new":
                 showAddForm(request, response);
@@ -85,8 +88,10 @@ public class UserController extends HttpServlet {
             case "/user/list":
                 showListUser(request, response);
                 break;
+            case "/login":
+                login(request, response);
             default:
-               
+
                 break;
         }
     }
@@ -112,6 +117,7 @@ public class UserController extends HttpServlet {
      */
     protected void showListUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String r_pagesize = getServletContext().getInitParameter("pagesize");
         int pagesize = Integer.parseInt(r_pagesize);
 
@@ -127,6 +133,7 @@ public class UserController extends HttpServlet {
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
+        
         ArrayList<User> accounts = db.getUsers(pageindex, pagesize);
         request.setAttribute("accounts", accounts);
         request.setAttribute("totalpage", totalpage);
@@ -157,6 +164,7 @@ public class UserController extends HttpServlet {
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
@@ -173,7 +181,9 @@ public class UserController extends HttpServlet {
     }
 
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
         User u = new User();
+        
         u.setId(Integer.parseInt(request.getParameter("id")));
         u.setEmail(request.getParameter("email"));
         u.setAddress(request.getParameter("address"));
@@ -192,23 +202,45 @@ public class UserController extends HttpServlet {
     }
 
     protected void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
         int id = Integer.parseInt(request.getParameter("id"));
         UserDAO db = new UserDAO();
         db.delete(id);
         response.sendRedirect("list");
+        
     }
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
 
         request.getRequestDispatcher("../view/account/add.jsp").forward(request, response);
     }
-    
-//    public User login(HttpServletRequest request,HttpServletResponse response){
-//        
-//    }
+
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
+        UserDAO userDb = new UserDAO();
+        ArrayList<User> list = new ArrayList<User>();
+
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        list = userDb.searchUserByEmailAndPass(email, pass);
+
+        if (list == null) {
+            
+            request.setAttribute("Alert", 0);
+            response.sendRedirect("home");
+
+        } else {
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("user", list.get(0));
+            response.sendRedirect("home");
+        }
+
+    }
 
     @Override
     public String getServletInfo() {

@@ -86,6 +86,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <c:if test="${ empty sessionScope.user}">
                         <div class="banner_title">
                             <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
 
@@ -97,8 +98,8 @@
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
                                             <form action="login" method="GET">
-                                                <input type="text" name="username" class="username form-control" placeholder="Username"/>
-                                                <input type="password" name="password" class="password form-control" placeholder="password"/>
+                                                <input type="text" name="email" class="username form-control" placeholder="Username"/>
+                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="btn login" type="submit" value="Login" />
                                             </form>
                                         </div>
@@ -107,6 +108,10 @@
                             </div>
 
                         </div>
+                        </c:if>
+                        <c:if test="${ not empty sessionScope.user}">
+                            <h3>${sessionScope["user"].fullName}</h3>>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -141,7 +146,7 @@
                 </div>
             </div>
             <!-- End Footer -->
-
+            Hello <c:out value="${sessionScope.user}"/>   
 
 
             <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
@@ -160,6 +165,7 @@
             <script src="assets/js/isotope.min.js"></script>
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
+           
     </body>
 </html>
 
