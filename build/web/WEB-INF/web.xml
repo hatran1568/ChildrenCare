@@ -6,24 +6,24 @@
     </context-param>
     <servlet>
         <servlet-name>UserController</servlet-name>
-        <servlet-class>controller.account.UserController</servlet-class>
+        <servlet-class>controller.UserController</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>ListPostController</servlet-name>
-        <servlet-class>controller.post.ListController</servlet-class>
+        <servlet-class>controller.ListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeletePostController</servlet-name>
-        <servlet-class>controller.post.DeleteController</servlet-class>
+        <servlet-class>controller.DeleteController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddPostController</servlet-name>
-        <servlet-class>controller.post.AddController</servlet-class>
+        <servlet-class>controller.AddController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DetailPostController</servlet-name>
-        <servlet-class>controller.post.DetailController</servlet-class>
+        <servlet-class>controller.DetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>

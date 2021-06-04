@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.account;
+package controller;
 
-import dao.UserDAO;
+import dao.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bean.Post;
 
 /**
  *
- * @author Tran Thi Nguyet Ha
+ * @author HP
  */
-public class DeleteController extends HttpServlet {
+public class DetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,10 +31,19 @@ public class DeleteController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        UserDAO db = new UserDAO();
-        db.delete(id);
-        response.sendRedirect("../list");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DetailController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet DetailController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +58,16 @@ public class DeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String raw_postid = request.getParameter("postid");
+        if(raw_postid == null || raw_postid.length() == 0)
+            raw_postid = "0";
+        int postid = Integer.parseInt(raw_postid);
+        
+        PostDAO postDB = new PostDAO();
+        Post post = postDB.getPostById(postid);
+        
+        request.setAttribute("post", post);
+        request.getRequestDispatcher("../view/post/details.jsp").forward(request, response);
     }
 
     /**
