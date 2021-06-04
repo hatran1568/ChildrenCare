@@ -9,7 +9,7 @@ package bean;
  *
  * @author HP
  */
-public class Post_Category {
+public class PostCategory {
     private int id;
     private String name;
 

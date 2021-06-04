@@ -5,23 +5,20 @@
  */
 package controller;
 
-import dao.PostDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import bean.Post;
-import bean.PostCategory;
 
 /**
  *
- * @author HP
+ * @author ACER
  */
-public class AddController extends HttpServlet {
+@WebServlet(name = "HomePageController", urlPatterns = {"/home"})
+public class HomePageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class AddController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddController</title>");            
+            out.println("<title>Servlet HomePageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet HomePageController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,11 +58,7 @@ public class AddController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostDAO postDB = new PostDAO();
-        ArrayList<PostCategory> post_categories = postDB.getCategories();
-        
-        request.setAttribute("post_categories", post_categories);
-        request.getRequestDispatcher("../view/post/add.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/homepage/homepage.jsp").forward(request, response);
     }
 
     /**
@@ -79,28 +72,7 @@ public class AddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int category_id = Integer.parseInt(request.getParameter("post_category"));
-        PostCategory pc = new PostCategory();
-        pc.setId(category_id);
-        
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        Date updated_date = Date.valueOf(request.getParameter("updated_date"));
-        String content = request.getParameter("content");
-        String thumbnail_link = request.getParameter("thumbnail_link");
-        
-        Post p = new Post();
-        p.setCategory(pc);
-        p.setTitle(title);
-        p.setDescription(description);
-        p.setUpdatedDate(updated_date);
-        p.setContent(content);
-        p.setThumbnailLink(thumbnail_link);
-        
-        PostDAO postDB = new PostDAO();
-        postDB.addPost(p);
-        
-        response.sendRedirect("list");
+        processRequest(request, response);
     }
 
     /**

@@ -21,7 +21,7 @@ public class Post {
     private boolean featured;
     private String thumbnailLink;
     private User author;
-    private Post_Category category;
+    private PostCategory category;
     private boolean status;
 
     public String getTitle() {
@@ -90,11 +90,11 @@ public class Post {
         this.author = author;
     }
 
-    public Post_Category getCategory() {
+    public PostCategory getCategory() {
         return category;
     }
 
-    public void setCategory(Post_Category category) {
+    public void setCategory(PostCategory category) {
         this.category = category;
     }
 

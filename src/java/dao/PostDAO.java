@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Post;
-import bean.Post_Category;
+import bean.PostCategory;
 
 /**
  *
@@ -52,7 +52,7 @@ public class PostDAO extends BaseDAO {
                 
                 p.setAuthor(acc);
                 
-                Post_Category pc = new Post_Category();
+                PostCategory pc = new PostCategory();
                 pc.setId(rs.getInt("category_id"));
                 pc.setName(rs.getString("category_name"));
                 
@@ -99,15 +99,15 @@ public class PostDAO extends BaseDAO {
         }
     }
     
-    public ArrayList<Post_Category> getCategories() {
-        ArrayList<Post_Category> post_categories = new ArrayList<>();
+    public ArrayList<PostCategory> getCategories() {
+        ArrayList<PostCategory> post_categories = new ArrayList<>();
         try {
             String sql = "select id, name\n"
                     + "                from post_category";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Post_Category pc = new Post_Category();
+                PostCategory pc = new PostCategory();
                 pc.setId(rs.getInt("id"));
                 pc.setName(rs.getString("name"));
                 
@@ -149,7 +149,7 @@ public class PostDAO extends BaseDAO {
                 
                 p.setAuthor(acc);
                 
-                Post_Category pc = new Post_Category();
+                PostCategory pc = new PostCategory();
                 pc.setId(rs.getInt("category_id"));
                 pc.setName(rs.getString("category_name"));
                 

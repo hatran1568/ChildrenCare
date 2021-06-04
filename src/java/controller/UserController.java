@@ -205,6 +205,10 @@ public class UserController extends HttpServlet {
 
         request.getRequestDispatcher("../view/account/add.jsp").forward(request, response);
     }
+    
+//    public User login(HttpServletRequest request,HttpServletResponse response){
+//        
+//    }
 
     @Override
     public String getServletInfo() {

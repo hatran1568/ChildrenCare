@@ -165,4 +165,8 @@ public class UserDAO extends BaseDAO{
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//    public ArrayList<User> searchUserByEmailAndPass(String email,String pass){
+//        ArrayList list = new ArrayList<User>();
+//        String sql = ""
+//    }
 }
