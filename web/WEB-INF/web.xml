@@ -79,6 +79,18 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/verifying</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HomePageController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
