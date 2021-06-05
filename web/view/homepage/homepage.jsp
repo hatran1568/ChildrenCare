@@ -268,6 +268,7 @@
             <script src="assets/js/isotope.min.js"></script>
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
+            <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
                 <script>
                     $(document).ready(function () {
@@ -279,6 +280,17 @@
                 <c:remove var="alert" scope="session" />
 
             </c:if>
+            </c:if>
+                <c:if test="${ not empty sessionScope.alert}">
+                     <script>
+                    $(document).ready(function () {
+                        let note = "${sessionScope.mess}"
+                        alert(mess);
+                    
+                    });
+                </script>
+                <c:remove var="mess" scope="session" />
+                </c:if>
 
     </body>
 </html>
