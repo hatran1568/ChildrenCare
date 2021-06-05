@@ -28,13 +28,17 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <!-- Pogo Slider CSS -->
         <link rel="stylesheet" href="assets/css/pogo-slider.min.css" />
+        <!-- owl carousel css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
         <!-- Site CSS -->
         <link rel="stylesheet" href="assets/css/style.css" />
         <!-- Responsive CSS -->
         <link rel="stylesheet" href="assets/css/responsive.css" />
         <!-- Custom CSS -->
         <link rel="stylesheet" href="assets/css/custom.css" />
-
+        <link href="assets/css/slider.css" rel="stylesheet" type="text/css"/>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -158,9 +162,69 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-
         <div class="container" style="height: 1000px;">
-
+            <div class="banner_section">
+                <div class="container-fluid padding_0">
+                    <div id="my_slider" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="padding_left_0">
+                                            <h1 class="retailer_text">Lorem ipsum</h1>
+                                            <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                                            <div class="btn_main">
+                                                <div class="more_bt"><a href="#">Read More </a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="padding_left_0">
+                                            <h1 class="retailer_text">Lorem ipsum</h1>
+                                            <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                                            <div class="btn_main">
+                                                <div class="more_bt"><a href="#">Read More </a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="padding_left_0">
+                                            <h1 class="retailer_text">Lorem ipsum</h1>
+                                            <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                                            <div class="btn_main">
+                                                <div class="more_bt"><a href="#">Read More </a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                            <i class="fa fa-left fa-arrow-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                            <i class="fa fa-right fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- end section -->
 
@@ -205,18 +269,31 @@
             <script src="assets/js/isotope.min.js"></script>
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
-            <c:if test="${ not empty sessionScope.alert}">
+
+            <c:if test="${ not empty sessionScope.mess}">
                 <script>
                     $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
+
                     });
                 </script>
-                <c:remove var="alert" scope="session" />
+                <c:remove var="mess" scope="session" />
 
             </c:if>
+            <c:if test="${empty sessionScope.alert}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
 
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
+            </c:if>
     </body>
 </html>
 

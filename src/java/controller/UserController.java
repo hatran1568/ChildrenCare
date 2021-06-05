@@ -72,22 +72,22 @@ public class UserController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
-            case "/user/new":
+            case "/admin/user/new":
                 showAddForm(request, response);
                 break;
-            case "/user/insert":
+            case "/admin/user/insert":
                 addUser(request, response);
                 break;
-            case "/user/delete":
+            case "/admin/user/delete":
                 deleteUser(request, response);
                 break;
-            case "/user/edit":
+            case "/admin/user/edit":
                 showEditForm(request, response);
                 break;
-            case "/user/update":
+            case "/admin/user/update":
                 editUser(request, response);
                 break;
-            case "/user/list":
+            case "/admin/user/list":
                 showListUser(request, response);
                 break;
             case "/login":
@@ -156,7 +156,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("/view/account/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/account/list.jsp").forward(request, response);
     }
 
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -238,6 +238,20 @@ public class UserController extends HttpServlet {
 
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        String message = request.getParameter("message");
+
+        if (message != null) {
+            if (message.equals("notpermission")) {
+                String mess = "You are not allowed to asscess this page!";
+
+                request.getSession().setAttribute("mess", mess);
+            }
+            if (message.equals("notlogin")) {
+                String mess = "Not Log in!";
+                request.getSession().setAttribute("mess", mess);
+            }
+        }
+
         UserDAO userDb = new UserDAO();
         ArrayList<User> list = new ArrayList<User>();
 
@@ -257,6 +271,7 @@ public class UserController extends HttpServlet {
             session.setAttribute("user", list.get(0));
             request.getRequestDispatcher("home").forward(request, response);
             return;
+
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -264,9 +279,8 @@ public class UserController extends HttpServlet {
             String verify = "verify";
             request.getSession().setAttribute("alert", alert);
             request.getSession().setAttribute("verify", verify);
-            request.setAttribute("email",list.get(0).getEmail());
+            request.setAttribute("email", list.get(0).getEmail());
             request.getRequestDispatcher("verify").forward(request, response);
-           
 
         }
 
