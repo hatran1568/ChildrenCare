@@ -83,94 +83,108 @@
 
         <!-- Start Banner -->
         <div class="section inner_page_banner">
-            <div class="container">
+            <div class="container" style="margin-right: 20px">
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test="${ empty sessionScope.user}">
-                        <div class="banner_title">
-                            <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
+                            
+                                <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
 
-                            <div id="login" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                                <div id="login" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
 
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Login</h4>
-                                            <form action="login" method="GET">
-                                                <input type="text" name="email" class="username form-control" placeholder="Username"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="btn login" type="submit" value="Login" />
-                                            </form>
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button data-dismiss="modal" class="close">&times;</button>
+                                                <h4>Login</h4>
+                                                <form action="login" method="GET">
+                                                    <input type="text" name="email" class="username form-control" placeholder="Username"/>
+                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                    <input class="btn login" type="submit" value="Login" />
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>  
-                            </div>
-
-                        </div>
+                                    </div>  
+                                </div>
+                           
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
-                            <h3>${sessionScope["user"].fullName}</h3>>
+                               <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                                <div class="dropdown ">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                   
+                                    <div class="dropdown-content">
+                                        <p> <a href="#">Profile</a></p>
+                                        <p> <a href="#">Change Password</a></p>
+                                        <p> <a href="#">Log Out</a></p>
+
+                                    </div>
+                                </div>
+                        
+                            
                         </c:if>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Banner -->
-        <!-- section -->
+            <!-- End Banner -->
+            <!-- section -->
 
-        <div class="container" style="height: 1000px;">
+            <div class="container" style="height: 1000px;">
 
-        </div>
-        <!-- end section -->
+            </div>
+            <!-- end section -->
 
-        <!-- Start Footer -->
-        <footer id="footer" class="site-footer">
+            <!-- Start Footer -->
+            <footer id="footer" class="site-footer">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                            <a href="#">Giangtt</a>.
-                        </p>
-                    </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                                <a href="#">Giangtt</a>.
+                            </p>
+                        </div>
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <ul class="social-icons">
+                                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Footer -->
-            Hello <c:out value="${sessionScope.user}"/>   
+                <!-- End Footer -->
+                
 
 
-            <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+                <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
-            <!-- ALL JS FILES -->
-            <script src="assets/js/jquery.min.js"></script>
-            <script src="assets/js/popper.min.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="assets/js/slider-index.js"></script>
-            <script src="assets/js/smoothscroll.js"></script>
-            <script src="assets/js/form-validator.min.js"></script>
-            <script src="assets/js/contact-form-script.js"></script>
-            <script src="assets/js/isotope.min.js"></script>
-            <script src="assets/js/images-loded.min.js"></script>
-            <script src="assets/js/custom.js"></script>
-           
-    </body>
-</html>
+                <!-- ALL JS FILES -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/popper.min.js"></script>
+                <script src="assets/js/bootstrap.min.js"></script>
+                <!-- ALL PLUGINS -->
+                <script src="assets/js/jquery.magnific-popup.min.js"></script>
+                <script src="assets/js/jquery.pogo-slider.min.js"></script>
+                <script src="assets/js/slider-index.js"></script>
+                <script src="assets/js/smoothscroll.js"></script>
+                <script src="assets/js/form-validator.min.js"></script>
+                <script src="assets/js/contact-form-script.js"></script>
+                <script src="assets/js/isotope.min.js"></script>
+                <script src="assets/js/images-loded.min.js"></script>
+                <script src="assets/js/custom.js"></script>
 
-</body>
-</html>
+                </body>
+                </html>
 
-</body>
-</html>
+                </body>
+                </html>
+
+                </body>
+                </html>
