@@ -41,7 +41,7 @@ public class Authorization implements Filter {
 
             if (u != null) {
 
-                if (u.getRole().getId() == 1) {
+                if (u.getRole().getName().equals("Admin")) {
                     chain.doFilter(Servletrequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
@@ -56,7 +56,7 @@ public class Authorization implements Filter {
 
             if (u != null) {
 
-                if (u.getRole().getId() == 2) {
+                if (u.getRole().getName().equals("Manager")) {
                     chain.doFilter(Servletrequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");

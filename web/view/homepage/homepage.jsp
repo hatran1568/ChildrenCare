@@ -281,10 +281,10 @@
 
             </c:if>
             </c:if>
-                <c:if test="${ not empty sessionScope.alert}">
+                <c:if test="${ not empty sessionScope.mess}">
                      <script>
                     $(document).ready(function () {
-                        let note = "${sessionScope.mess}"
+                        let mess = "${sessionScope.mess}"
                         alert(mess);
                     
                     });

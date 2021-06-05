@@ -91,7 +91,7 @@ public class UserController extends HttpServlet {
                 showListUser(request, response);
                 break;
             case "/login":
-                login(request, response);
+                    login(request, response);
                 break;
             case "/register":
                 register(request, response);

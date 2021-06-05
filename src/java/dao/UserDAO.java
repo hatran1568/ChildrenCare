@@ -228,6 +228,7 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
+                a.setStatus(rs.getBoolean("status"));
                 list.add(a);
             }
             return list;
