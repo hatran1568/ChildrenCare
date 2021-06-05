@@ -19,7 +19,9 @@ import bean.Role;
 import bean.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import ulti.EmailVerify;
 
 /**
  *
@@ -90,6 +92,21 @@ public class UserController extends HttpServlet {
                 break;
             case "/login":
                 login(request, response);
+                break;
+            case "/register":
+                register(request, response);
+                break;
+            case "/verify": {
+                try {
+                    verify(request, response);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case "/verifying":
+                verifying(request, response);
+                break;
             default:
 
                 break;
@@ -117,7 +134,7 @@ public class UserController extends HttpServlet {
      */
     protected void showListUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String r_pagesize = getServletContext().getInitParameter("pagesize");
         int pagesize = Integer.parseInt(r_pagesize);
 
@@ -133,7 +150,7 @@ public class UserController extends HttpServlet {
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
-        
+
         ArrayList<User> accounts = db.getUsers(pageindex, pagesize);
         request.setAttribute("accounts", accounts);
         request.setAttribute("totalpage", totalpage);
@@ -158,13 +175,13 @@ public class UserController extends HttpServlet {
         u.setRole(r);
 
         UserDAO userDB = new UserDAO();
-        userDB.addUser(u);
+        userDB.addUser(u, true);
 
         response.sendRedirect("list");
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
@@ -181,9 +198,9 @@ public class UserController extends HttpServlet {
     }
 
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+
         User u = new User();
-        
+
         u.setId(Integer.parseInt(request.getParameter("id")));
         u.setEmail(request.getParameter("email"));
         u.setAddress(request.getParameter("address"));
@@ -202,16 +219,16 @@ public class UserController extends HttpServlet {
     }
 
     protected void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+
         int id = Integer.parseInt(request.getParameter("id"));
         UserDAO db = new UserDAO();
         db.delete(id);
         response.sendRedirect("list");
-        
+
     }
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
@@ -219,8 +236,8 @@ public class UserController extends HttpServlet {
         request.getRequestDispatcher("../view/account/add.jsp").forward(request, response);
     }
 
-    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        
+    public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         UserDAO userDb = new UserDAO();
         ArrayList<User> list = new ArrayList<User>();
 
@@ -228,18 +245,115 @@ public class UserController extends HttpServlet {
         String pass = request.getParameter("pass");
         list = userDb.searchUserByEmailAndPass(email, pass);
 
-        if (list == null) {
-            
-            request.setAttribute("Alert", 0);
+        if (list.size() == 0) {
+            String alert = "Wrong email or password";
+            request.getSession().setAttribute("alert", alert);
+            response.sendRedirect("home");
+            return;
+
+        } else if (list.get(0).isStatus() == true) {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", list.get(0));
+            request.getRequestDispatcher("home").forward(request, response);
+            return;
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", list.get(0));
+            String alert = "Please Verify your account!";
+            String verify = "verify";
+            request.getSession().setAttribute("alert", alert);
+            request.getSession().setAttribute("verify", verify);
+            request.setAttribute("email",list.get(0).getEmail());
+            request.getRequestDispatcher("verify").forward(request, response);
+           
+
+        }
+
+    }
+
+    protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String phone = request.getParameter("phone");
+        String fullnames = request.getParameter("fullname");
+        String address = request.getParameter("address");
+        String gender = request.getParameter("gender");
+
+        UserDAO userDb = new UserDAO();
+
+        ArrayList<User> list = new ArrayList<User>();
+        list = userDb.searchUserByEmail(email);
+
+        if (email.length() == 0 || pass.length() == 0 || phone.length() == 0 || fullnames.length() == 0 || address.length() == 0 || gender == null) {
+            String alert = "Please Enter all field!";
+            request.getSession().setAttribute("alert", alert);
+            response.sendRedirect("home");
+            return;
+
+        }
+
+        if (list.size() > 0) {
+            String alert = "Email had been registed! Please enter another Email!";
+            request.getSession().setAttribute("alert", alert);
+            response.sendRedirect("home");
+            return;
+
+        }
+
+        User u = new User();
+        u.setAddress(address);
+        u.setEmail(email);
+        u.setFullName(fullnames);
+        u.setPassword(pass);
+        u.setMobile(phone);
+
+        if (gender.equals("male")) {
+            u.setGender(true);
+        } else {
+            u.setGender(false);
+        }
+
+        userDb.addCustomer(u, false);
+
+        request.setAttribute("email", email);
+        request.getRequestDispatcher("verify").forward(request, response);
+    }
+
+    protected void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, MessagingException {
+        String code = EmailVerify.getInstance().getRandom();
+        String email = (String) request.getAttribute("email");
+        User u = new User();
+        u.setEmail(email);
+        EmailVerify.getInstance().sendText(u, code);
+        request.setAttribute("email", email);
+        request.setAttribute("code", code);
+        request.getRequestDispatcher("/view/homepage/verify.jsp").forward(request, response);
+    }
+
+    protected void verifying(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String email = (String) request.getParameter("email");
+
+        User u = new User();
+        u.setEmail(email);
+
+        String code = request.getParameter("code");
+
+        String actual = request.getParameter("actualcode");
+
+        UserDAO userDb = new UserDAO();
+
+        if (code.equals(actual)) {
+            userDb.updateStatus(u, true);
+            String alert = "Register Successfully!";
+            request.getSession().setAttribute("alert", alert);
             response.sendRedirect("home");
 
         } else {
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("user", list.get(0));
-            response.sendRedirect("home");
+            request.setAttribute("email", email);
+            request.getRequestDispatcher("verify").forward(request, response);
         }
-
     }
 
     @Override
