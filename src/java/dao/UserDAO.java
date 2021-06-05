@@ -74,13 +74,13 @@ public class UserDAO extends BaseDAO {
         return -1;
     }
 
-    public void addUser(User u) {
+    public void addUser(User u, boolean status) {
         try {
-            String sql = "INSERT INTO `swp`.`user` (`id`, `email`, `password`, `full_name`, `gender`, `mobile`, `address`, `image_link`, `role_id`) \n"
+            String sql = "INSERT INTO `swp`.`user` (`status`,`email`, `password`, `full_name`, `gender`, `mobile`, `address`, `image_link`, `role_id`) \n"
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
 
-            stm.setInt(1, u.getId());
+            stm.setBoolean(1, status);
             stm.setString(2, u.getEmail());
             stm.setString(3, u.getPassword());
             stm.setString(4, u.getFullName());
@@ -89,6 +89,27 @@ public class UserDAO extends BaseDAO {
             stm.setString(7, u.getAddress());
             stm.setString(8, u.getImageLink());
             stm.setInt(9, u.getRole().getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void addCustomer(User u, boolean status) {
+        try {
+            String sql = "INSERT INTO `swp`.`user` (`status`,`email`, `password`, `full_name`, `gender`, `mobile`, `address`, `image_link`, `role_id`) \n"
+                    + "VALUES (?,?,?,?,?,?,?,?,4)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setBoolean(1, status);
+            stm.setString(2, u.getEmail());
+            stm.setString(3, u.getPassword());
+            stm.setString(4, u.getFullName());
+            stm.setBoolean(5, u.isGender());
+            stm.setString(6, u.getMobile());
+            stm.setString(7, u.getAddress());
+            stm.setString(8, u.getImageLink());
+
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,6 +175,22 @@ public class UserDAO extends BaseDAO {
         }
     }
 
+    public void updateStatus(User u, boolean status) {
+        try {
+            String sql = "update user set status=?\n"
+                    + "where email = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setBoolean(1, status);
+            stm.setString(2, u.getEmail());
+
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void delete(int uid) {
         try {
             String sql = "DELETE FROM user WHERE id = ?";
@@ -176,6 +213,41 @@ public class UserDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             stm.setString(2, pass);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User a = new User();
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getNString("role_name"));
+                a.setRole(r);
+                list.add(a);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<User> searchUserByEmail(String email) {
+        try {
+            ArrayList list = new ArrayList<User>();
+            String sql = "select a.id, a.email, a.password, a.full_name,\n"
+                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.id as role_id ,a.status\n"
+                    + "                    from user a left join Role r \n"
+                    + "                    on a.role_id = r.id\n"
+                    + "                    where a.email = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, email);
+          
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 User a = new User();

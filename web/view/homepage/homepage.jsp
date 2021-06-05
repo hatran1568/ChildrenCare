@@ -18,6 +18,7 @@
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
         <link rel="shortcut icon" href="#" type="image/x-icon" />
@@ -83,11 +84,11 @@
 
         <!-- Start Banner -->
         <div class="section inner_page_banner">
-            <div class="container">
+            <div class="container" style="margin-right: 20px">
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test="${ empty sessionScope.user}">
-                        <div class="banner_title">
+
                             <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
 
                             <div id="login" class="modal fade" role="dialog">
@@ -98,20 +99,59 @@
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
                                             <form action="login" method="GET">
-                                                <input type="text" name="email" class="username form-control" placeholder="Username"/>
+                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="btn login" type="submit" value="Login" />
+                                                <input class="login-trigger" type="submit" value="Login" />
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            <a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Register</a>
+
+                            <div id="register" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button data-dismiss="modal" class="close">&times;</button>
+                                            <h4>Register</h4>
+                                            <form action="register" method="GET">
+                                                <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
+                                                Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
+                                                Female <input type="radio" name="gender" value="female">
+                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
+                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
+                                                <input type="text" name="address" class="username form-control" placeholder="Address"/>
+                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                <input class="login-trigger" type="submit" value="Register" />
+
                                             </form>
                                         </div>
                                     </div>
                                 </div>  
                             </div>
 
-                        </div>
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
-                            <h3>${sessionScope["user"].fullName}</h3>>
+                            <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                            <div class="dropdown ">
+                                <img class="avatar" src="${sessionScope.user.imageLink}">
+
+                                <div class="dropdown-content">
+                                    <p> <a href="#">Profile</a></p>
+                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="#">Log Out</a></p>
+
+                                </div>
+                            </div>
+
+
                         </c:if>
+
+
+
                     </div>
                 </div>
             </div>
@@ -146,7 +186,7 @@
                 </div>
             </div>
             <!-- End Footer -->
-            Hello <c:out value="${sessionScope.user}"/>   
+
 
 
             <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
@@ -165,7 +205,18 @@
             <script src="assets/js/isotope.min.js"></script>
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
-           
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
+                    $(document).ready(function () {
+                        let note = "${sessionScope.alert}"
+                        alert(note);
+                    
+                    });
+                </script>
+                <c:remove var="alert" scope="session" />
+
+            </c:if>
+
     </body>
 </html>
 
