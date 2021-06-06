@@ -15,9 +15,18 @@ public class Service {
     private String details;
     private float originalPrice;
     private float salePrice;
+    private String description;
     private String thumbnailLink;
     private ServiceCategory category;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public int getId() {
         return id;
     }

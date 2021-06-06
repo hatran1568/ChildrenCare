@@ -77,6 +77,7 @@
                                     <img src="assets/images/search_icon.png" alt="#" />
                                 </a>
                             </div> 
+                            
                         </div>
                     </div>
                 </div>
@@ -129,7 +130,6 @@
                                                 <input type="text" name="address" class="username form-control" placeholder="Address"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Register" />
-
                                             </form>
                                         </div>
                                     </div>
@@ -146,22 +146,16 @@
                                     <p> <a href="#">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
                                     <p> <a href="#">Log Out</a></p>
-
                                 </div>
                             </div>
-
-
                         </c:if>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 1000px;">
+        <div class="container" style="height: 700px;">
             <div class="banner_section">
             <div class="container-fluid padding_0">
                <div id="my_slider" class="carousel slide" data-ride="carousel">
@@ -170,32 +164,32 @@
                         <div class="row">
                            <div class="col-md-6">
                               <div class="padding_left_0">
-                                 <h1 class="retailer_text">Lorem</h1>
-                                 <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                                  <h1 class="retailer_text">${requestScope.sliders[0].title}</h1>
+                                  <p class="search_text">${requestScope.sliders[0].notes}</p>
                                  <div class="btn_main">
-                                    <div class="more_bt"><a href="#">Read More </a></div>
+                                    <div class="more_bt"><a href="${requestScope.sliders[0].backlink}">Read More </a></div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-6">
-                               <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
+                               <div><img src="${requestScope.sliders[0].imageLink}" class="image_1"/></div>
                            </div>
                         </div>
                      </div>
-                     <c:forEach var="s" begin="1" end="3">
+                     <c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">
                      <div class="carousel-item">
                         <div class="row">
                            <div class="col-md-6">
                               <div class="padding_left_0">
-                                 <h1 class="retailer_text">Lorem ipsum</h1>
-                                 <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
+                                 <h1 class="retailer_text">${requestScope.sliders[i].title}</h1>
+                                 <p class="search_text">${requestScope.sliders[i].notes}</p>
                                  <div class="btn_main">
-                                     <div class="more_bt"><a href="#">Read More </a></div>
+                                     <div class="more_bt"><a href="${requestScope.sliders[i].backlink}">Read More </a></div>
                                  </div>
                               </div>
                            </div>
                            <div class="col-md-6">
-                               <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
+                               <div><img src="${requestScope.sliders[i].imageLink}" class="image_1"/></div>
                            </div>
                         </div>
                      </div>
@@ -212,63 +206,92 @@
          </div>
         </div>
         
+        <!--Service list-->
+        <div class="categories-area section-padding30">
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle text-center">
+                            <h1>Our services</h1>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <c:forEach items="${requestScope.services}" var="s">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-cat mb-50">
+                            <img src="${s.thumbnailLink}" alt="Image" class="img-fluid">
+                            <div class="cat-cap">
+                                <h5 class="service-title"><a  href="#">${s.fullname}</a></h5>
+                                <p>${s.description}</p>
+                                <a  href="#" class="read-more1">Read More ></a>
+                            </div>
+                        </div>
+                    </div>
+                    </c:forEach>
+                    
+                    
+                </div>
+                <!-- Section Button -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="browse-btn2 text-center mt-50">
+                            <a href="#" class="btn">Find More Services</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Post list-->
             <div class="site-section">
       <div class="container">
+          <div class="row justify-content-sm-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <!-- Section Tittle -->
+                        <div class="section-tittle text-center">
+                            <h1>Latest posts</h1>
+                        </div> 
+                    </div>
+                </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="row">
+<!--            <div class="row">
               <div class="col-12">
                 <div class="section-title">
-                  <h2>Editor's Pick</h2>
+                  <h2>Latest posts</h2>
                 </div>
               </div>
-            </div>
+            </div>-->
             <div class="row">
               <div class="col-md-6">
                 <div class="post-entry-1">
-                  <a href="post-single.html"><img src="images/img_h_1.jpg" alt="Image" class="img-fluid"></a>
-                  <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                  <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
+                  <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
+                  <p>${requestScope.posts[0].description}</p>
                   <div class="post-meta">
-                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                    <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                    <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
+                    
                   </div>
                 </div>
               </div>
+              
               <div class="col-md-6">
+                  <c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">
                 <div class="post-entry-2 d-flex bg-light">
-                  <div class="thumbnail" style="background-image: url('images/img_v_1.jpg')"></div>
+                  <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
                   <div class="contents">
-                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                      <h2><a href="#">${requestScope.posts[i].title}</a></h2>
                     <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                      <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
+                      <span class="date-read">${requestScope.posts[i].description}</span>
                     </div>
                   </div>
                 </div>
-
-                <div class="post-entry-2 d-flex">
-                  <div class="thumbnail" style="background-image: url('images/img_v_2.jpg')"></div>
-                  <div class="contents">
-                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                    <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="post-entry-2 d-flex">
-                  <div class="thumbnail" style="background-image: url('images/img_v_3.jpg')"></div>
-                  <div class="contents">
-                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
-                    <div class="post-meta">
-                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
-                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
-                    </div>
-                  </div>
-                </div>
+                </c:forEach>
+                  <p>
+              <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
+            </p>
               </div>
             </div>
           </div>
@@ -342,7 +365,7 @@
                 </script>
                 <c:remove var="mess" scope="session" />
                 </c:if>
-
+                
     </body>
 </html>
 
