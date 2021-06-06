@@ -114,7 +114,7 @@
                 
                 <div>
                     <div>
-                        <div class="full news_blog" style="border-radius: 20px;">
+                        <div class="full news_blog" style="border-radius: 20px; padding: 2%">
                             <div>
                                 <h3>Reservation Details</h3>
                                 <div>Reservation ID: ${requestScope.reservation.getId()}</div>

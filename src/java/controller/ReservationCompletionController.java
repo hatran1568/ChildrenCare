@@ -19,9 +19,11 @@ import bean.Reservation;
 import bean.Service;
 import dao.PostDAO;
 import dao.ReservationDAO;
+import dao.UserDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
+import ulti.EmailVerify;
 
 /**
  *
@@ -40,12 +42,23 @@ public class ReservationCompletionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        EmailVerify e = new EmailVerify();
         ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(5);
         ArrayList<Service> reservation_services = reservationDB.getReservationServices(5);
+        //Sub-function 1: The reservation status is changed to submitted
         reservationDB.submitReservation(5);
+        //Sub-function 2: The reservation is assigned to a staff
         if (reservationDB.getReservationById(5).getStaff()!=null)
             reservationDB.changeStaffReservation(5, 2);
+        //Sub-function 4: Send email to customer, confirming reservation and payment guides
+        UserDAO userDB = new UserDAO();
+        User user = userDB.getUser(reservation.getCustomer().getId());
+        try {
+            e.sendText(user, "UwU");
+        } catch (MessagingException ex) {
+            Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
@@ -78,7 +91,6 @@ public class ReservationCompletionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
