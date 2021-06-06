@@ -36,6 +36,7 @@ public class Authorization implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String url = request.getServletPath();
 
+        //Admin Function
         if (url.startsWith("/admin")) {
             User u = (User) request.getSession().getAttribute("user");
 
@@ -51,12 +52,13 @@ public class Authorization implements Filter {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
             }
 
-        } else if (url.startsWith("/manager")) {
+        } //Manager Function
+        else if (url.startsWith("/manager")) {
             User u = (User) request.getSession().getAttribute("user");
 
             if (u != null) {
 
-                if (u.getRole().getName().equals("Manager")) {
+                if (u.getRole().getName().equals("Manager") || u.getRole().getName().equals("Admin")) {
                     chain.doFilter(Servletrequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
@@ -65,7 +67,39 @@ public class Authorization implements Filter {
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
             }
-        } else {
+        } //Staff Function
+        else if (url.startsWith("/staff")) {
+            User u = (User) request.getSession().getAttribute("user");
+
+            if (u != null) {
+
+                if (u.getRole().getName().equals("Manager") || u.getRole().getName().equals("Admin") || u.getRole().getName().equals("Staff")) {
+                    chain.doFilter(Servletrequest, servletResponse);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                }
+
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+            }
+        } //Customer Function
+        else if (url.startsWith("/customer")) {
+            User u = (User) request.getSession().getAttribute("user");
+
+            if (u != null) {
+
+                if (u.getRole().getName().equals("Manager") || u.getRole().getName().equals("Admin") || u.getRole().getName().equals("Staff") || u.getRole().getName().equals("Customer")) {
+                    chain.doFilter(Servletrequest, servletResponse);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                }
+
+            } else {
+                response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+            }
+        } 
+        //Public Function
+        else {
             chain.doFilter(Servletrequest, servletResponse);
         }
     }

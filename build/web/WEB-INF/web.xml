@@ -4,7 +4,6 @@
         <param-name>pagesize</param-name>
         <param-value>10</param-value>
     </context-param>
- 
     <filter>
         <filter-name>Authorization</filter-name>
         <filter-class>filter.Authorization</filter-class>
@@ -40,6 +39,10 @@
     <servlet>
         <servlet-name>ReservationCompletionController</servlet-name>
         <servlet-class>controller.ReservationCompletionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>controller.CartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
@@ -108,6 +111,18 @@
     <servlet-mapping>
         <servlet-name>ReservationCompletionController</servlet-name>
         <url-pattern>/reservation/reservationcompletion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart/list</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart/edit</url-pattern>
+    </servlet-mapping>
+       <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
