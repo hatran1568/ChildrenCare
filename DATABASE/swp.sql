@@ -1,6 +1,10 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
+
 -- Host: localhost    Database: swp
+
+-- Host: 127.0.0.2    Database: swp
+
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -151,6 +155,7 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 --
 -- Dumping data for table `post`
 --
@@ -158,6 +163,9 @@ CREATE TABLE `post` (
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 INSERT INTO `post` VALUES (1,'Content','I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,2,NULL,'Lorem Ipsum'),(2,'Content','This is important to remember. ','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,3,NULL,'What have you noticed today?'),(3,'Content','What looked like stones in the pasture were actually rock candy','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'I am grateful for the distraction.'),(31,'Content','Description','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'Sketch Demo');
+
+
+
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +222,37 @@ LOCK TABLES `presription_detail` WRITE;
 UNLOCK TABLES;
 
 --
+
+-- Table structure for table `receiver`
+--
+
+DROP TABLE IF EXISTS `receiver`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `receiver` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `full_name` varchar(45) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `mobile` varchar(45) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_userid_idx` (`user_id`),
+  CONSTRAINT `FK_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `receiver`
+--
+
+LOCK TABLES `receiver` WRITE;
+/*!40000 ALTER TABLE `receiver` DISABLE KEYS */;
+/*!40000 ALTER TABLE `receiver` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+
 -- Table structure for table `reservation`
 --
 
@@ -255,11 +294,14 @@ CREATE TABLE `reservation_service` (
   `reservation_id` int NOT NULL,
   `service_id` int NOT NULL,
   `prescription_id` int NOT NULL,
+  `receiver_id` int DEFAULT NULL,
   `datetime` datetime DEFAULT NULL,
   `unit_price` float(10,2) DEFAULT NULL,
   PRIMARY KEY (`reservation_id`,`service_id`,`prescription_id`) USING BTREE,
   KEY `service_id` (`service_id`) USING BTREE,
   KEY `prescription_id` (`prescription_id`) USING BTREE,
+  KEY `fk_receiverid_idx` (`receiver_id`),
+  CONSTRAINT `fk_receiverid` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`),
   CONSTRAINT `reservation_service_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_service_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_service_ibfk_3` FOREIGN KEY (`prescription_id`) REFERENCES `presription_detail` (`presription_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -404,7 +446,10 @@ CREATE TABLE `slider` (
 
 LOCK TABLES `slider` WRITE;
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
+
 INSERT INTO `slider` VALUES (1,'Lorem Ipsum','assets/images/slider/slider-1.png','#',1,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.'),(2,'Ipsum','assets/images/slider/slider-1.png','#',1,'They rushed out the door, grabbing anything and everything they could think of they might need.'),(3,'Lorem','assets/images/slider/slider-1.png','#',1,'I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.');
+
+
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,4 +519,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+
 -- Dump completed on 2021-06-06 22:54:33
+
+
+
