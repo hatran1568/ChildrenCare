@@ -5,11 +5,12 @@
         <group>
             <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/verify.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/list.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/homepage.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/ulti/EmailVerify.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/filter/Authorization.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/ulti/EmailVerify.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/User.java</file>

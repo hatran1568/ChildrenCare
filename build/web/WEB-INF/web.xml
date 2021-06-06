@@ -4,6 +4,15 @@
         <param-name>pagesize</param-name>
         <param-value>10</param-value>
     </context-param>
+ 
+    <filter>
+        <filter-name>Authorization</filter-name>
+        <filter-class>filter.Authorization</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Authorization</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>UserController</servlet-name>
         <servlet-class>controller.UserController</servlet-class>
@@ -50,31 +59,31 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/list</url-pattern>
+        <url-pattern>/admin/user/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/new</url-pattern>
+        <url-pattern>/admin/user/new</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/add</url-pattern>
+        <url-pattern>/admin/user/add</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/edit</url-pattern>
+        <url-pattern>/admin/user/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/delete</url-pattern>
+        <url-pattern>/admin/user/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/update</url-pattern>
+        <url-pattern>/admin/user/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user/insert</url-pattern>
+        <url-pattern>/admin/user/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
