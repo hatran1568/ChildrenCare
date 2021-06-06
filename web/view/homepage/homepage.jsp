@@ -170,7 +170,7 @@
                         <div class="row">
                            <div class="col-md-6">
                               <div class="padding_left_0">
-                                 <h1 class="retailer_text">Lorem ipsum</h1>
+                                 <h1 class="retailer_text">Lorem</h1>
                                  <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
                                  <div class="btn_main">
                                     <div class="more_bt"><a href="#">Read More </a></div>
@@ -182,6 +182,7 @@
                            </div>
                         </div>
                      </div>
+                     <c:forEach var="s" begin="1" end="3">
                      <div class="carousel-item">
                         <div class="row">
                            <div class="col-md-6">
@@ -189,7 +190,7 @@
                                  <h1 class="retailer_text">Lorem ipsum</h1>
                                  <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
                                  <div class="btn_main">
-                                    <div class="more_bt"><a href="#">Read More </a></div>
+                                     <div class="more_bt"><a href="#">Read More </a></div>
                                  </div>
                               </div>
                            </div>
@@ -198,22 +199,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="padding_left_0">
-                                 <h1 class="retailer_text">Lorem ipsum</h1>
-                                 <p class="search_text">It is a long established fact that a reader will be distracted by the readable content of a page </p>
-                                 <div class="btn_main">
-                                    <div class="more_bt"><a href="#">Read More </a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                               <div><img src="assets/images/slider/slider-1.png" class="image_1"/></div>
-                           </div>
-                        </div>
-                     </div>
+                     </c:forEach>
                   </div>
                   <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
                   <i class="fa fa-left fa-arrow-left"></i>
@@ -225,6 +211,71 @@
             </div>
          </div>
         </div>
+        
+        <!--Post list-->
+            <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="section-title">
+                  <h2>Editor's Pick</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="post-entry-1">
+                  <a href="post-single.html"><img src="images/img_h_1.jpg" alt="Image" class="img-fluid"></a>
+                  <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.</p>
+                  <div class="post-meta">
+                    <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                    <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="post-entry-2 d-flex bg-light">
+                  <div class="thumbnail" style="background-image: url('images/img_v_1.jpg')"></div>
+                  <div class="contents">
+                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <div class="post-meta">
+                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="post-entry-2 d-flex">
+                  <div class="thumbnail" style="background-image: url('images/img_v_2.jpg')"></div>
+                  <div class="contents">
+                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <div class="post-meta">
+                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="post-entry-2 d-flex">
+                  <div class="thumbnail" style="background-image: url('images/img_v_3.jpg')"></div>
+                  <div class="contents">
+                    <h2><a href="blog-single.html">News Needs to Meet Its Audiences Where They Are</a></h2>
+                    <div class="post-meta">
+                      <span class="d-block"><a href="#">Dave Rogers</a> in <a href="#">News</a></span>
+                      <span class="date-read">Jun 14 <span class="mx-1">&bullet;</span> 3 min read <span class="icon-star2"></span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
         <!-- end section -->
 
         <!-- Start Footer -->

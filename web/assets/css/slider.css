@@ -25,7 +25,7 @@ and open the template in the editor.
 }
 
 .search_text {
-    width: 100%;
+    width: 490px;
     float: left;
     font-size: 16px;
     color: #0e0e0e;
@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 
 .more_bt a {
-    width: 100%;
+    width: 40%;
     float: left;
     font-size: 16px;
     color: #fffdfd;
@@ -51,4 +51,11 @@ and open the template in the editor.
     font-size: 30px;
     color: #ffffff;
     border-radius: 100%;
+}
+
+.image_1 {
+    width: 576px;
+    float: right;
+    height: 576px;
+    padding-right: 10px;
 }

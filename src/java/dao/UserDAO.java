@@ -26,7 +26,7 @@ public class UserDAO extends BaseDAO {
 
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, "
                     + "a.id, a.email, a.password, a.full_name,\n"
-                    + "a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.id as role_id \n"
+                    + "a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.role_id as role_id \n"
                     + "from user a left join Role r\n"
                     + "on a.role_id = r.id) as tbl\n"
                     + "where rid >= (? - 1)*? + 1 and rid <= ? * ?";
