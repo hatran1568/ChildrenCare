@@ -24,7 +24,7 @@ import javax.mail.internet.MimeMessage;
  * @author ACER
  */
 public class EmailVerify {
-    //generate vrification code
+    //generate email
 
     private static EmailVerify uniqueInstance;
 
@@ -42,7 +42,7 @@ public class EmailVerify {
     }
 
     //send email to the user email
-    public void sendText(User u, String code) throws AddressException, MessagingException {
+    public void sendText(User u, String msg) throws AddressException, MessagingException {
         Properties mailServerProperties;
         Session getMailSession;
         MimeMessage mailMessage;
@@ -57,17 +57,18 @@ public class EmailVerify {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         mailMessage = new MimeMessage(getMailSession);
 
-        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("giangtong199@gmail.com")); //Thay abc bằng địa chỉ người nhận
+        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("hoangnhatminh.139@gmail.com")); //Thay abc bằng địa chỉ người nhận
 
         // Bạn có thể chọn CC, BCC
 //    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
-        mailMessage.setSubject("send gmail from Java");
-        mailMessage.setText("Your verification code:" +code);
+        mailMessage.setSubject("Send email from Java");
+        mailMessage.setText(msg);
 
         // Step3: Send mail
         Transport transport = getMailSession.getTransport("smtp");
 
         // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
+        //Email của Giang "giangtong09@gmail.com" "huepham1905"
         transport.connect("smtp.gmail.com", "giangtong09@gmail.com", "huepham1905");
         transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
         transport.close();
