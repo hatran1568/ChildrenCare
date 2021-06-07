@@ -132,6 +132,14 @@
         <servlet-name>ReservationContactController</servlet-name>
         <url-pattern>/reservation/contact</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contact/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contact/forward</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

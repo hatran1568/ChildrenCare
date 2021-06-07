@@ -159,8 +159,8 @@
         <div class="container" >
 
             <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
+                <form id="form" action="contact/forward" method="POST">
+                    <table class="table" id="reservation-detail">
                         <thead  class="thead-dark">
                             <tr>
                                 <td class="col-md-1">Id</td>
@@ -178,11 +178,12 @@
                                             <td>${list.service.id}</td>
                                             <td>${list.service.fullname}</td>
                                             <td>${list.service.salePrice}</td>
-                                            <td>Name: ${sessionScope.user.fullName}<br>
-                                                Gender: <c:if test="${sessionScope.user.gender == true}">Male</c:if><c:if test="${sessionScope.user.gender == false}">Female</c:if><br>
-                                                Email: ${sessionScope.user.email}<br>
-                                                Mobile: ${sessionScope.user.mobile}<br>
-                                                Address: ${sessionScope.user.address}<br>
+                                            <td>Name: ${sessionScope.receivers[0].fullName}<br>
+                                                Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receiver[0].gender == false}">Female</c:if><br>
+                                                Email: ${sessionScope.receivers[0].email}<br>
+                                                Mobile: ${sessionScope.receivers[0].mobile}<br>
+                                                Address: ${sessionScope.receivers[0].address}<br>
+                                                <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
                                             </td>   
                                             <td><button type="button" class="btn" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
                                         </tr>
@@ -194,14 +195,18 @@
                                 <td class="total-cost" rowspan="5"><h3>${requestScope.totalcost}</h3></td></tr>
                         </tbody>
                     </table>
+                        <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>  
                 </form>
-
+                        
             </c:if>
             <c:if test="${empty requestScope.list}">
-
-                <h1>You have nothing in cart!</h1>
+                <div class="container" style="height:800px;">
+                    <h1>You have nothing in cart!</h1>
+                </div>
+                
             </c:if>
-
+                
             <!--            <h2>Total Cost:</h2>-->
         </div>
         <div class="modal fade" id="change-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,23 +220,62 @@
                     </div>
                     <form>
                         <div class="modal-body">
-<!--                            <div class="form-group">
-                                <label for="email1">Email address</label>
-                                <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter email">
-                                
-                            </div>
-                            <div class="form-group">
-                                <label for="password1">Password</label>
-                                <input type="password" class="form-control" id="password1" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="password1">Confirm Password</label>
-                                <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
-                            </div>-->
-                            
+                            <c:forEach items="${sessionScope.receivers}" var="r">
+                                <button id="receiver-select-${r.id}" class="btn" onclick="changeReceiver()" style="width: 100%; margin: 10px 0px; text-align: left;">Name: ${r.fullName}<br>
+                                                Gender: <c:if test="${r.gender == true}">Male</c:if><c:if test="${r.gender == false}">Female</c:if><br>
+                                                Email: ${r.email}<br>
+                                                Mobile: ${r.mobile}<br>
+                                                Address: ${r.address}<br></button>
+                            </c:forEach>
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-receiver">Add receiver</button>
+<!--                            <button type="submit" class="btn btn-success">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="add-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose a receiver</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="contact/add" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName">
+                            </div>
+                            <label>Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender1" value="male">
+                                <label class="form-check-label" for="gender1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender2" value="female">
+                                <label class="form-check-label" for="gender2">Female</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile</label>
+                                <input type="text" class="form-control" id="mobile" name="mobile">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </form>
                 </div>
@@ -284,6 +328,14 @@
                 function ResetCart() {
                     document.getElementById("form").submit();
                 }
+                function changeReceiver() {
+                    var receiverID = $(this).val();
+                    var rowNum = $(this).parent().parent().index();
+                    var receiverInfo = $(this).html();
+                    receiverInfo += '<input hidden type="text" name="receiver" value="'+receiverID.toString()+'">';
+                    var x = document.getElementById("reservation-detail").rows[rowNum].cells[3].innerHTML = receiverInfo;
+                }
+
             </script>
 
     </body>

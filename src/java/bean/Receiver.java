@@ -12,11 +12,12 @@ package bean;
 public class Receiver {
     private int id;
     private User user;
-    private String full_name;
+    private String fullName;
     private boolean gender;
     private String mobile;
     private String address;
-
+    private String email;
+    
     public int getId() {
         return id;
     }
@@ -33,13 +34,15 @@ public class Receiver {
         this.user = user;
     }
 
-    public String getFull_name() {
-        return full_name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
+
+    
 
     public boolean isGender() {
         return gender;
@@ -63,6 +66,14 @@ public class Receiver {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     

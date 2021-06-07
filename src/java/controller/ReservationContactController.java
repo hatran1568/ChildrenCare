@@ -6,11 +6,14 @@
 package controller;
 
 import bean.CartItem;
+import bean.Receiver;
 import bean.User;
 import dao.CartDAO;
+import dao.ReceiverDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,28 +63,25 @@ public class ReservationContactController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User u = (User) request.getSession().getAttribute("user");
-        CartDAO cartDB = new CartDAO();
-        
-        if (u!= null){
-            ArrayList<CartItem> list = new ArrayList<>();
+        String action = request.getServletPath();
+        switch (action) {
 
-            list = cartDB.getCartByUserId(u);
+            case "/reservation/contact":
+                getCartInfo(request, response);
+                break;
+
+            case "/reservation/contact/add":
+                addReceiver(request, response);
+                break;
             
-            float totalcost = 0;
-
-            for (CartItem cartItem : list) {
-                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
-            }
-
-            int numberofservice = list.size();
-
-            request.setAttribute("number", numberofservice);
-            request.setAttribute("totalcost", totalcost);
-            request.setAttribute("list", list);
+            case "/reservation/contact/forward":
+                getReservationInfo(request, response);
+                break;
+                
+            default:
+                getCartInfo(request, response);
+                break;
         }
-        
-        request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
     }
 
     /**
@@ -95,7 +95,7 @@ public class ReservationContactController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        this.doGet(request, response);
         
     }
 
@@ -108,5 +108,74 @@ public class ReservationContactController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    private void getCartInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        User u = (User) request.getSession().getAttribute("user");
+        CartDAO cartDB = new CartDAO();
+        ReceiverDAO receiverDB = new ReceiverDAO();
+        
+        ArrayList<Receiver> receiverList = (ArrayList<Receiver>)request.getSession().getAttribute("receivers");
+        if (u!=null && receiverList == null){
+            receiverList = receiverDB.getReceivers(u.getId());
+        }
+        ArrayList<CartItem> list = new ArrayList<>();
+        if (u!= null){
+            
+            
+            list = cartDB.getCartByUserId(u);
+            
+            float totalcost = 0;
 
+            for (CartItem cartItem : list) {
+                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
+            }
+
+            int numberofservice = list.size();
+            request.setAttribute("receivers", receiverList);
+            request.setAttribute("number", numberofservice);
+            request.setAttribute("totalcost", totalcost);
+            request.setAttribute("list", list);
+        }
+        request.getSession().setAttribute("receivers", receiverList);
+        request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
+    }
+
+    private void addReceiver(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        User u = (User) request.getSession().getAttribute("user");
+        String name = request.getParameter("fullName");
+        boolean gender = request.getParameter("gender").equals("male");
+        String email = request.getParameter("email");
+        String mobile = request.getParameter("mobile");
+        String address = request.getParameter("address");
+        
+        ArrayList<Receiver> receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+        
+        
+        Receiver r = new Receiver();
+        r.setId(receivers.size());
+        r.setFullName(name);
+        r.setGender(gender);
+        r.setAddress(address);
+        r.setEmail(email);
+        r.setMobile(mobile);
+        r.setUser(u);
+        
+        receivers.add(r);
+        request.getSession().removeAttribute("receivers");
+        request.getSession().setAttribute("receivers", receivers);
+        
+        response.sendRedirect("../contact");
+    }
+    
+    private void getReservationInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        String[] raw_receiverid = request.getParameterValues("receiver");
+        ArrayList<Integer> receiverIDs = new ArrayList<>();
+        for (String s: raw_receiverid){
+            receiverIDs.add(Integer.parseInt(s));
+        }
+        request.getSession().setAttribute("receiverIDs",receiverIDs);
+        response.sendRedirect("../reservationcompletion");
+    }
 }
