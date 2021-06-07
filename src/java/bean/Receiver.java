@@ -17,7 +17,7 @@ public class Receiver {
     private String mobile;
     private String address;
     private String email;
-    
+
     public int getId() {
         return id;
     }

@@ -24,8 +24,8 @@ public class ReceiverDAO extends BaseDAO {
     public void addReceiver(Receiver r) {
         try {
             String sql = "insert into receiver(id, user_id, full_name, gender,\n"
-                    + "            mobile, address)\n"
-                    + "            values(?, ?, ?, ?, ?, ?)";
+                    + "            mobile, address, email)\n"
+                    + "            values(?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getId());
@@ -34,6 +34,7 @@ public class ReceiverDAO extends BaseDAO {
             stm.setBoolean(4, r.isGender());
             stm.setString(5, r.getMobile());
             stm.setString(6, r.getAddress());
+            stm.setString(7, r.getEmail());
             
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -41,6 +42,7 @@ public class ReceiverDAO extends BaseDAO {
         }
     }
     
+
     public ArrayList<Receiver> getReceivers(int userid){
         ArrayList<Receiver> receiver = new ArrayList<>();
         try {
@@ -57,15 +59,60 @@ public class ReceiverDAO extends BaseDAO {
                 r.setId(rs.getInt("rid")-1);
                 r.setUser(u);
                 r.setFullName(rs.getString("full_name"));
+
+                receiver.add(r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return receiver;
+    }
+    
+    public Receiver getReceiversById(int id) {
+        Receiver r = new Receiver();
+        try {
+            String sql = "select * from receiver where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            r.setId(rs.getInt("id"));
+            User u = new User();
+            u.setId(rs.getInt("user_id"));
+            r.setUser(u);
+            r.setFullName(rs.getString("full_name"));
+            r.setGender(rs.getBoolean("gender"));
+            r.setMobile(rs.getString("mobile"));
+            r.setAddress(rs.getString("address"));
+            r.setEmail(rs.getString("email"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
+
+    }
+    public ArrayList<Receiver> getReceiversByUser(User u) {
+        ArrayList<Receiver> receivers = new ArrayList<>();
+        try {
+            String sql = "select * from receiver where user_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getId());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Receiver r = new Receiver();
+                r.setId(rs.getInt("id"));
+                r.setUser(u);
+                r.setFullName(rs.getString("full_name"));
+
                 r.setGender(rs.getBoolean("gender"));
                 r.setMobile(rs.getString("mobile"));
                 r.setAddress(rs.getString("address"));
                 r.setEmail(rs.getString("email"));
-                receiver.add(r);
+
+                receivers.add(r);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReceiverDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return receiver;
+        return receivers;
     }
 }
