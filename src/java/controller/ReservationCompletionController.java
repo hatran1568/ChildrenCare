@@ -6,20 +6,24 @@
 package controller;
 
 
+import bean.CartItem;
+import bean.Receiver;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.User;
-import bean.Post;
 import bean.Reservation;
 import bean.Service;
-import dao.PostDAO;
+import dao.CartDAO;
+import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -44,23 +48,91 @@ public class ReservationCompletionController extends HttpServlet {
             throws ServletException, IOException {
         EmailVerify e = new EmailVerify();
         ReservationDAO reservationDB = new ReservationDAO();
-        Reservation reservation = reservationDB.getReservationById(5);
-        ArrayList<Service> reservation_services = reservationDB.getReservationServices(5);
-        //Sub-function 1: The reservation status is changed to submitted
-        reservationDB.submitReservation(5);
-        //Sub-function 2: The reservation is assigned to a staff
-        if (reservationDB.getReservationById(5).getStaff()!=null)
-            reservationDB.changeStaffReservation(5, 2);
-        //Sub-function 4: Send email to customer, confirming reservation and payment guides
         UserDAO userDB = new UserDAO();
+        ReceiverDAO receiverDB = new ReceiverDAO();
+        
+        //Sub-function 1: Receiver information are saved
+        ArrayList<Receiver> receivers = new ArrayList<>();
+        receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+            //Check if receiver exists (If a receiver with the same email exists) and add them if not
+        for (Receiver r : receivers) {
+            if (!receiverDB.checkExistingReceiver(r.getEmail()))
+                receiverDB.addReceiver(r);
+        }
+        
+        //Sub-function 2: The reservation is submitted and assigned to a staff
+        Reservation reservation = new Reservation();
+            //Set Customer
+        User u = (User) request.getSession().getAttribute("user");
+        if (u != null)
+            reservation.setCustomer(u);
+        else 
+        {
+            User guest = new User();
+            guest.setId(0);
+            reservation.setCustomer(guest);
+        }
+            //Set Reservation date
+        Date d = null;
+        LocalDateTime now = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
+        Date reservation_date = (Date) Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+        reservation.setReservation_date(reservation_date);
+            //Set status
+        reservation.setStatus("Submitted");
+            //Set Staff
+        ArrayList<User> staff = userDB.getStaff();
+        int minRes = 0;
+        User assignStaff = new User();
+        for (User s : staff) {
+            if (reservationDB.countReservations(s) < minRes) {
+                minRes = reservationDB.countReservations(s);
+                assignStaff.setId(s.getId());
+            }
+        }
+        reservation.setStaff(assignStaff);
+            //Set numberofperson
+        reservation.setNumber_of_person(1);
+            //Submit reservation services
+            
+        CartDAO cartDB = new CartDAO();
+        ArrayList<Integer> receiverservice = new ArrayList<>();
+        receiverservice = (ArrayList<Integer>) request.getSession().getAttribute("receiverIDs");
+        ArrayList<Receiver> receiverlist = new ArrayList<>();
+        for (int i : receiverservice) {
+            receiverlist.add(receivers.get(i));
+        }
+        if (u == null)
+        {
+            ArrayList<CartItem> cart = new ArrayList<>();
+            cart = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
+            int rcount = 0;
+            for (CartItem cartItem : cart) {
+                reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
+                rcount++;
+            }
+        }
+        else
+        {
+            ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
+            int rcount = 0;
+            for (CartItem cartItem : cart) {
+                reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
+                rcount++;
+            }
+        }
+        
+        //Sub-function 3: Send email to customer confirming reservation and payment guides
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
             e.sendText(user, "UwU");
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservation.getId());
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
+        request.setAttribute("receiverlist", receiverlist);
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
     }
 

@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="../assets/css/responsive.css" />
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../assets/css/custom.css" />
-<!--        <link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>-->
+        <!--        <link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>-->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -102,7 +102,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../login" method="GET">
+                                            <form action="../login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -136,7 +136,6 @@
                                     </div>
                                 </div>  
                             </div>
-
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
                             <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
@@ -150,61 +149,137 @@
 
                                 </div>
                             </div>
-
-
                         </c:if>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 1000px;">
+        <div class="container" >
 
             <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
+                <form id="form" action="contact/forward" method="POST">
+                    <table class="table" id="reservation-detail">
                         <thead  class="thead-dark">
-                            <tr >
-                                <td >Id</td>
-                                <td >Title</td>
-                                <td >Price</td>
-
-                                <td > Quantity</td>
-                                <td>Cost</td>
+                            <tr>
+                                <td class="col-md-1">Id</td>
+                                <td class="col-md-2">Title</td>
+                                <td class="col-md-2">Price</td>
+                                <td class="col-md-5">Receiver</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3>Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="#">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact">Check Out</a></button></td>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="list" items="${requestScope.list}">
-                                <tr >
-                                    <td>${list.service.id}</td>
-                                    <td>${list.service.fullname}</td>
-                                    <td>${list.service.salePrice}</td>
-
-                                    <td> <input onchange="ResetCart()" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
-
-                                    <td>${list.service.salePrice * list.quantity} </td>
-                                    <td><a href="delete?sid=${list.service.id}?uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
-                                </tr>
+                                <c:forEach var="i" begin="1" end="${list.quantity}">
+                                    <c:if test="${ not empty sessionScope.user}">
+                                        <tr>
+                                            <td>${list.service.id}</td>
+                                            <td>${list.service.fullname}</td>
+                                            <td>${list.service.salePrice}</td>
+                                            <td>Name: ${sessionScope.receivers[0].fullName}<br>
+                                                Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receivers[0].gender == false}">Female</c:if><br>
+                                                Email: ${sessionScope.receivers[0].email}<br>
+                                                Mobile: ${sessionScope.receivers[0].mobile}<br>
+                                                Address: ${sessionScope.receivers[0].address}<br>
+                                                <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
+                                            </td>   
+                                            <td><button type="button" class="btn" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
+                            <tr><td></td>
+                                <td>Total Cost : </td>
+                                <td class="total-cost" rowspan="5"><h3>${requestScope.totalcost}</h3></td></tr>
                         </tbody>
                     </table>
+                        <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>  
                 </form>
-
+                        
             </c:if>
             <c:if test="${empty requestScope.list}">
-
-                <h1>You have nothing in cart!</h1>
+                <div class="container" style="height:800px;">
+                    <h1>You have nothing in cart!</h1>
+                </div>
+                
             </c:if>
-
+                
             <!--            <h2>Total Cost:</h2>-->
+        </div>
+        <div class="modal fade" id="change-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose a receiver</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body">
+                            <c:forEach items="${sessionScope.receivers}" var="r">
+                                <button id="receiver-select-${r.id}" class="btn" onclick="changeReceiver()" style="width: 100%; margin: 10px 0px; text-align: left;">Name: ${r.fullName}<br>
+                                                Gender: <c:if test="${r.gender == true}">Male</c:if><c:if test="${r.gender == false}">Female</c:if><br>
+                                                Email: ${r.email}<br>
+                                                Mobile: ${r.mobile}<br>
+                                                Address: ${r.address}<br></button>
+                            </c:forEach>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-receiver">Add receiver</button>
+<!--                            <button type="submit" class="btn btn-success">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="add-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose a receiver</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="contact/add" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName">
+                            </div>
+                            <label>Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender1" value="male">
+                                <label class="form-check-label" for="gender1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender2" value="female">
+                                <label class="form-check-label" for="gender2">Female</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile</label>
+                                <input type="text" class="form-control" id="mobile" name="mobile">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- end section -->
 
@@ -250,9 +325,17 @@
             <script src="../assets/js/images-loded.min.js"></script>
             <script src="../assets/js/custom.js"></script>
             <script>
-                                        function ResetCart() {
-                                            document.getElementById("form").submit();
-                                        }
+                function ResetCart() {
+                    document.getElementById("form").submit();
+                }
+                function changeReceiver() {
+                    var receiverID = $(this).attr('id').substr(15);
+                    var rowNum = $(this).parent().parent().index();
+                    var receiverInfo = $(this).html();
+                    receiverInfo += '<input hidden type="text" name="receiver" value="'+receiverID.toString()+'">';
+                    var x = document.getElementById("reservation-detail").rows[rowNum].cells[3].innerHTML = receiverInfo;
+                }
+
             </script>
 
     </body>

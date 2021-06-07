@@ -1,10 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
-
 -- Host: localhost    Database: swp
-
--- Host: 127.0.0.2    Database: swp
-
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -43,7 +39,7 @@ CREATE TABLE `cart_item` (
 
 LOCK TABLES `cart_item` WRITE;
 /*!40000 ALTER TABLE `cart_item` DISABLE KEYS */;
-INSERT INTO `cart_item` VALUES (2,1,2),(2,2,1),(2,3,1);
+INSERT INTO `cart_item` VALUES (2,1,3),(2,2,1),(2,3,1);
 /*!40000 ALTER TABLE `cart_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +151,6 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-
 --
 -- Dumping data for table `post`
 --
@@ -163,9 +158,6 @@ CREATE TABLE `post` (
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
 INSERT INTO `post` VALUES (1,'Content','I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,2,NULL,'Lorem Ipsum'),(2,'Content','This is important to remember. ','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,3,NULL,'What have you noticed today?'),(3,'Content','What looked like stones in the pasture were actually rock candy','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'I am grateful for the distraction.'),(31,'Content','Description','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'Sketch Demo');
-
-
-
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +214,6 @@ LOCK TABLES `presription_detail` WRITE;
 UNLOCK TABLES;
 
 --
-
 -- Table structure for table `receiver`
 --
 
@@ -236,10 +227,11 @@ CREATE TABLE `receiver` (
   `gender` tinyint(1) DEFAULT NULL,
   `mobile` varchar(45) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_userid_idx` (`user_id`),
   CONSTRAINT `FK_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,11 +240,11 @@ CREATE TABLE `receiver` (
 
 LOCK TABLES `receiver` WRITE;
 /*!40000 ALTER TABLE `receiver` DISABLE KEYS */;
+INSERT INTO `receiver` VALUES (1,2,'Bo Yates',0,'0559706307','3852 Ridiculus Rd.','Fusce@loremipsum.ca'),(2,2,'John Doe',1,'012345678','6661 Neque Avenue','egestas.drerit@mauriserat.net');
 /*!40000 ALTER TABLE `receiver` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
-
 -- Table structure for table `reservation`
 --
 
@@ -446,10 +438,7 @@ CREATE TABLE `slider` (
 
 LOCK TABLES `slider` WRITE;
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
-
 INSERT INTO `slider` VALUES (1,'Lorem Ipsum','assets/images/slider/slider-1.png','#',1,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.'),(2,'Ipsum','assets/images/slider/slider-1.png','#',1,'They rushed out the door, grabbing anything and everything they could think of they might need.'),(3,'Lorem','assets/images/slider/slider-1.png','#',1,'I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.');
-
-
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -519,8 +508,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-
--- Dump completed on 2021-06-06 22:54:33
-
-
-
+-- Dump completed on 2021-06-07 20:33:55

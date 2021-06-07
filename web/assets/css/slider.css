@@ -161,3 +161,8 @@ h1{
 .site-section{
     margin-bottom: 50px;
 }
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
