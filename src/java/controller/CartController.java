@@ -179,10 +179,11 @@ public class CartController extends HttpServlet {
                     String param = Integer.toString(id);
                     int quantity = Integer.parseInt(request.getParameter(param));
                     cartItem.setQuantity(quantity);
-                    cartDB.updateCart(cartItem.getUser(), cartItem.getService(), quantity);
+
                     totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
                 }
 
+                request.getSession().setAttribute("cart", list);
                 request.setAttribute("totalcost", totalcost);
                 request.setAttribute("list", list);
 
@@ -216,7 +217,9 @@ public class CartController extends HttpServlet {
 
                 cartDB.deleteCart(user, service);
             }
+            request.getSession().setAttribute("cart", list);
         }
+
         response.sendRedirect("list");
     }
 
