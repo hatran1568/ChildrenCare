@@ -329,7 +329,7 @@
                     document.getElementById("form").submit();
                 }
                 function changeReceiver() {
-                    var receiverID = $(this).val();
+                    var receiverID = $(this).attr('id').substr(15);
                     var rowNum = $(this).parent().parent().index();
                     var receiverInfo = $(this).html();
                     receiverInfo += '<input hidden type="text" name="receiver" value="'+receiverID.toString()+'">';
