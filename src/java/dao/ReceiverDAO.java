@@ -41,6 +41,7 @@ public class ReceiverDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     public ArrayList<Receiver> getReceiversByUser(User u) {
         ArrayList<Receiver> receivers = new ArrayList<>();
         try {
@@ -63,5 +64,27 @@ public class ReceiverDAO extends BaseDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return receivers;
+    }
+    
+    public Receiver getReceiversById(int id) {
+        Receiver r = new Receiver();
+        try {
+            String sql = "select * from receiver where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            r.setId(rs.getInt("id"));
+            User u = new User();
+            u.setId(rs.getInt("user_id"));
+            r.setUser(u);
+            r.setFull_name(rs.getString("full_name"));
+            r.setGender(rs.getBoolean("gender"));
+            r.setMobile(rs.getString("mobile"));
+            r.setAddress(rs.getString("address"));
+            r.setEmail(rs.getString("email"));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return r;
     }
 }

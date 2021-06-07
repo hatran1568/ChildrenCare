@@ -24,12 +24,9 @@ import dao.UserDAO;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
-import javax.mail.Session;
 import ulti.EmailVerify;
 
 /**
@@ -73,8 +70,15 @@ public class ReservationCompletionController extends HttpServlet {
         reservation.setStatus("Submitted");
             //Set Staff
         ArrayList<User> staff = userDB.getStaff();
-        int staff_id = ThreadLocalRandom.current().nextInt(0, staff.size() + 1);
-        reservation.setStaff(staff.get(staff_id));
+        int minRes = 0;
+        User assignStaff = new User();
+        for (User s : staff) {
+            if (reservationDB.countReservations(s) < minRes) {
+                minRes = reservationDB.countReservations(s);
+                assignStaff.setId(s.getId());
+            }
+        }
+        reservation.setStaff(assignStaff);
             //Set numberofperson
         reservation.setNumber_of_person(1);
             //Submit reservation services

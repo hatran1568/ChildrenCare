@@ -142,4 +142,18 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public int countReservations(User staff) {
+        try {
+            String sql = "SELECT COUNT(*) as total FROM reservation WHERE staff_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, staff.getId());
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }
