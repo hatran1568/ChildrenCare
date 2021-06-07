@@ -42,8 +42,6 @@ public class Receiver {
         this.fullName = fullName;
     }
 
-    
-
     public boolean isGender() {
         return gender;
     }

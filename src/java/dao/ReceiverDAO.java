@@ -59,7 +59,10 @@ public class ReceiverDAO extends BaseDAO {
                 r.setId(rs.getInt("rid")-1);
                 r.setUser(u);
                 r.setFullName(rs.getString("full_name"));
-
+                r.setGender(rs.getBoolean("gender"));
+                r.setMobile(rs.getString("mobile"));
+                r.setAddress(rs.getString("address"));
+                r.setEmail(rs.getString("email"));
                 receiver.add(r);
             }
         } catch (SQLException ex) {
@@ -102,7 +105,6 @@ public class ReceiverDAO extends BaseDAO {
                 r.setId(rs.getInt("id"));
                 r.setUser(u);
                 r.setFullName(rs.getString("full_name"));
-
                 r.setGender(rs.getBoolean("gender"));
                 r.setMobile(rs.getString("mobile"));
                 r.setAddress(rs.getString("address"));

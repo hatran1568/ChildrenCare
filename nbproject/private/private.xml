@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/CartController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/User.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/CartDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/reservation/reservationContact.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/cart/cart.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Receiver.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReceiverDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/CartItem.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/UserController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/slider.css</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationCompletionController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/custom.css</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
         </group>

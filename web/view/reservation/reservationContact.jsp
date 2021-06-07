@@ -179,7 +179,7 @@
                                             <td>${list.service.fullname}</td>
                                             <td>${list.service.salePrice}</td>
                                             <td>Name: ${sessionScope.receivers[0].fullName}<br>
-                                                Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receiver[0].gender == false}">Female</c:if><br>
+                                                Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receivers[0].gender == false}">Female</c:if><br>
                                                 Email: ${sessionScope.receivers[0].email}<br>
                                                 Mobile: ${sessionScope.receivers[0].mobile}<br>
                                                 Address: ${sessionScope.receivers[0].address}<br>
