@@ -13,13 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Reservation;
-import bean.PostCategory;
 import bean.Service;
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-import javax.naming.*;
 
 /**
  *
@@ -50,7 +44,7 @@ public class ReservationDAO extends BaseDAO {
         Reservation r = new Reservation();
         try {
             String sql = "select reservation.id, reservation.customer_id, reservation.reservation_date,\n"
-                    + "            reservation.checkup_time, reservation.status, reservation.number_of_person,\n"
+                    + "            reservation.status, reservation.number_of_person,\n"
                     + "            user.email, user.full_name, user.mobile, user.image_link  \n"
                     + "            from reservation left join user\n"
                     + "            on reservation.staff_id = user.id\n"
@@ -64,7 +58,6 @@ public class ReservationDAO extends BaseDAO {
                 customer.setId(rs.getInt("customer_id"));
                 r.setCustomer(customer);
                 r.setReservation_date(rs.getDate("reservation_date"));
-                r.setCheckup_time(rs.getDate("checkup_time"));
                 r.setStatus(rs.getString("status"));
                 r.setNumber_of_person(rs.getInt("number_of_person"));
                 
