@@ -149,14 +149,14 @@ h4 {
 }
 
 .table{
-    position: relative;
+    /*position: relative;*/
     top: 200px;
     text-align: center;
-    display: inline-block;
+    display: inline-table;
+    margin-top: 100px;
 }
 
 .btn{
-   
-    position: relative;
+    /*position: relative;*/
     bottom: 50px;
 }
