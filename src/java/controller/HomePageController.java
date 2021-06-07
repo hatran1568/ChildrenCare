@@ -5,14 +5,20 @@
  */
 package controller;
 
+import bean.Post;
+import bean.Service;
+import bean.Slider;
+import dao.PostDAO;
+import dao.ServiceDAO;
+import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -59,7 +65,16 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        PostDAO postDB = new PostDAO();
+        ArrayList<Post> posts = postDB.getPosts();
+        
+        SliderDAO sliderDB = new SliderDAO();
+        ArrayList<Slider> sliders = sliderDB.getActiveSliders();
+        ServiceDAO serviceDB = new ServiceDAO();
+        ArrayList<Service> services = serviceDB.getServices();
+        request.setAttribute("posts", posts);
+        request.setAttribute("sliders", sliders);
+        request.setAttribute("services", services);
         request.getRequestDispatcher("/view/homepage/homepage.jsp").forward(request, response);
     }
 

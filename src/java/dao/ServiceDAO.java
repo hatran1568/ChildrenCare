@@ -23,18 +23,19 @@ public class ServiceDAO extends BaseDAO{
         ArrayList<Service> list = new ArrayList<>();
         try {
             String sql = "SELECT s.id, s.fullname, s.details, s.original_price, "
-                    + "s.sale_price, s.thumbnail_link, s.category_id, c.name "
+                    + "s.sale_price, s.thumbnail_link, s.description, s.category_id, c.name "
                     + "from service s left join service_category c on s.category_id = c.id";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            Service s = new Service();
-            ServiceCategory category = new ServiceCategory();
             while(rs.next()){
+                Service s = new Service();
+                ServiceCategory category = new ServiceCategory();
                 s.setId(rs.getInt("id"));
                 s.setFullname(rs.getString("fullname"));
                 s.setOriginalPrice(rs.getFloat("original_price"));
                 s.setSalePrice(rs.getFloat("sale_price"));
                 s.setThumbnailLink(rs.getString("thumbnail_link"));
+                s.setDescription(rs.getString("description"));
                 s.setDetails(rs.getString("details"));
                 category.setId(rs.getInt("category_id"));
                 category.setName(rs.getString("name"));

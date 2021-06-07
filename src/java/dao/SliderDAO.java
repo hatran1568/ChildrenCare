@@ -24,8 +24,8 @@ public class SliderDAO extends BaseDAO{
             String sql = "Select id, title, image_link, backlink, status, notes from slider where status = 1";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            Slider s = new Slider();
             while(rs.next()){
+                Slider s = new Slider();
                 s.setId(rs.getInt("id"));
                 s.setTitle(rs.getString("title"));
                 s.setImageLink(rs.getString("image_link"));

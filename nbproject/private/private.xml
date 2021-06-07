@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/web/assets/css/style.css</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/src/java/ulti/EmailVerify.java</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/src/java/dao/ReservationDAO.java</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/src/java/controller/ReservationCompletionController.java</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/web/view/reservation/reservationcompletion.jsp</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Code/src/java/dao/BaseDAO.java</file>
+=======
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/responsive.css</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/post/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Slider.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/User.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/user/edit.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/slider.css</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/homepage.jsp</file>
+>>>>>>> 144164f82322ba2e3a05f5215aa4c7e0aa0e85e9
         </group>
     </open-files>
 </project-private>

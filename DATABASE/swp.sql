@@ -1,6 +1,10 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
+
+-- Host: localhost    Database: swp
+
 -- Host: 127.0.0.2    Database: swp
+
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -151,13 +155,17 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
 --
 -- Dumping data for table `post`
 --
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (31,'Content','Description','2001-01-01 00:00:00',NULL,'fgshjkla.caa',NULL,1,NULL,'Sketch Demo');
+INSERT INTO `post` VALUES (1,'Content','I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,2,NULL,'Lorem Ipsum'),(2,'Content','This is important to remember. ','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',5,3,NULL,'What have you noticed today?'),(3,'Content','What looked like stones in the pasture were actually rock candy','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'I am grateful for the distraction.'),(31,'Content','Description','2001-01-01 00:00:00',1,'assets/images/slider/slider-1.png',2,1,NULL,'Sketch Demo');
+
+
+
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,6 +222,7 @@ LOCK TABLES `presription_detail` WRITE;
 UNLOCK TABLES;
 
 --
+
 -- Table structure for table `receiver`
 --
 
@@ -243,6 +252,7 @@ LOCK TABLES `receiver` WRITE;
 UNLOCK TABLES;
 
 --
+
 -- Table structure for table `reservation`
 --
 
@@ -358,7 +368,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,NULL,1,'Service 1','Service 1'),(2,'Service 2',100000.00,100000.00,NULL,1,'Service 2','Service 2'),(3,'Service 3',200000.00,150000.00,NULL,2,'Service 3','Service 3');
+INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',1,'Service 1','Service 1'),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',1,'Service 2','Service 2'),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',2,'Service 3','Service 3');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,11 +433,11 @@ CREATE TABLE `slider` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `image_link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `backlink` varchar(0) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `backlink` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
   `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -436,6 +446,10 @@ CREATE TABLE `slider` (
 
 LOCK TABLES `slider` WRITE;
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
+
+INSERT INTO `slider` VALUES (1,'Lorem Ipsum','assets/images/slider/slider-1.png','#',1,'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi temporibus praesentium neque, voluptatum quam quibusdam.'),(2,'Ipsum','assets/images/slider/slider-1.png','#',1,'They rushed out the door, grabbing anything and everything they could think of they might need.'),(3,'Lorem','assets/images/slider/slider-1.png','#',1,'I\'m meant to be writing at this moment. What I mean is, I\'m meant to be writing something else at this moment.');
+
+
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -505,4 +519,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-06 16:08:26
+
+-- Dump completed on 2021-06-06 22:54:33
+
+
+
