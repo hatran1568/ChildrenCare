@@ -214,15 +214,15 @@ public class CartController extends HttpServlet {
                 int service_id = Integer.parseInt(request.getParameter("sid"));
                 User user = new User();
                 Service service = new Service();
-
-                cartDB.deleteCart(user, service);
+                CartItem c = new CartItem(service, user, 0);
+                list.remove(c);
             }
             request.getSession().setAttribute("cart", list);
         }
 
         response.sendRedirect("list");
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *

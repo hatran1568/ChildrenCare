@@ -191,7 +191,7 @@
                                     <td> <input onchange="ResetCart()" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
                                     <td>${list.service.salePrice * list.quantity} </td>
-                                    <td><a href="cart/delete?sid=${list.service.id}?uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><a href="delete?sid=${list.service.id}?uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
