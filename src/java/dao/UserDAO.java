@@ -272,4 +272,31 @@ public class UserDAO extends BaseDAO {
         }
         return null;
     }
+    public ArrayList<User> getStaff() {
+        ArrayList<User> staff = new ArrayList<>();
+        try {
+            String sql = "select * from user where role_id = 3";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User a = new User();
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getNString("role_name"));
+                a.setRole(r);
+                staff.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return staff;
+    }
 }

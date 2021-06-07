@@ -16,6 +16,15 @@ public class Receiver {
     private boolean gender;
     private String mobile;
     private String address;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public int getId() {
         return id;

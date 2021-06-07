@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.Receiver;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,17 +23,16 @@ import bean.Service;
 public class ReservationDAO extends BaseDAO {
     public void addReservation(Reservation r) {
         try {
-            String sql = "insert into reservation(customer_id, reservation_date, checkup_time, status,\n"
+            String sql = "insert into reservation(customer_id, reservation_date, status,\n"
                     + "            staff_id, number_of_person)\n"
                     + "            values(?, ?, ?, ?, ?, ?)";
             
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getCustomer().getId());
             stm.setDate(2, r.getReservation_date());
-            stm.setDate(3, r.getCheckup_time());
-            stm.setString(4, r.getStatus());
-            stm.setInt(5, r.getStaff().getId());
-            stm.setInt(6, r.getNumber_of_person());
+            stm.setString(3, r.getStatus());
+            stm.setInt(4, r.getStaff().getId());
+            stm.setInt(5, r.getNumber_of_person());
             
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -93,7 +93,7 @@ public class ReservationDAO extends BaseDAO {
                 services.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return services;
     }
@@ -123,23 +123,23 @@ public class ReservationDAO extends BaseDAO {
         }
     }
     
-//    public void sendMail(String msgRecipient, String msgSubject, String msgTxt) throws Exception {
-//        try {
-//            InitialContext ic = new InitialContext();
-//            String snName = "java:comp/env/mail/MyMailSession";
-//            Session session = (Session)ic.lookup(snName);
-//            Properties props = session.getProperties();
-//            props.put("mail.from", "minhhnhe151181@fpt.edu.vn");
-//            Message msg = new MimeMessage(session);
-//            msg.setSubject(msgSubject);
-//            msg.setSentDate(new Date());
-//            msg.setFrom();
-//            msg.setRecipients(Message.RecipientType.TO, 
-//               InternetAddress.parse(msgRecipient, false));
-//            msg.setText(msgTxt);
-//        } catch (NamingException ex) {
-//            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
+    public void addReservationService(Reservation r, Service s, Receiver rc) {
+        try {
+            String sql = "insert into reservation_service(reservation_id, service_id, prescription_id, receiver_id,\n"
+                    + "            datetime, unit_price)\n"
+                    + "            values(?, ?, ?, ?, ?, ?)";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            stm.setInt(2, s.getId());
+            stm.setInt(3, 0);
+            stm.setInt(4, rc.getId());
+            stm.setDate(5, r.getReservation_date());
+            stm.setFloat(6, s.getSalePrice());
+            
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
