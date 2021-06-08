@@ -94,11 +94,14 @@ public class CartController extends HttpServlet {
         this.doGet(request, response);
     }
 
+    //Show List service user added to cart
     protected void showCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Check if user login or not
         User u = (User) request.getSession().getAttribute("user");
         CartDAO cartDB = new CartDAO();
 
+        //If user logged in get data from Database
         if (u != null) {
 
             ArrayList<CartItem> list = new ArrayList<>();
@@ -117,6 +120,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("totalcost", totalcost);
             request.setAttribute("list", list);
 
+            //If user not logged in get data from session
         } else {
 
             ArrayList<CartItem> list = new ArrayList<>();
@@ -138,10 +142,12 @@ public class CartController extends HttpServlet {
         request.getRequestDispatcher("../view/cart/cart.jsp").forward(request, response);
     }
 
+    //Edit Function to edit quantity  from Database/Session
     protected void editCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u = (User) request.getSession().getAttribute("user");
         CartDAO cartDB = new CartDAO();
 
+        //If user logged in edit to Database
         if (u != null) {
 
             ArrayList<CartItem> list = new ArrayList<>();
@@ -165,6 +171,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("totalcost", totalcost);
             request.setAttribute("list", list);
 
+            //If user not logged in edit to Session
         } else {
 
             ArrayList<CartItem> list = new ArrayList<>();
@@ -192,10 +199,12 @@ public class CartController extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    //Delete Function to delete service  from Database/Session
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u = (User) request.getSession().getAttribute("user");
         CartDAO cartDB = new CartDAO();
 
+        //If user logged in edit to Database
         if (u != null) {
 
             int user_id = Integer.parseInt(request.getParameter("uid"));
@@ -206,14 +215,16 @@ public class CartController extends HttpServlet {
             cartDB.deleteCart(user, service);
         } else {
 
+            //If user not logged in edit to Session
             ArrayList<CartItem> list = new ArrayList<>();
             list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
 
             if (list != null) {
-                int user_id = Integer.parseInt(request.getParameter("uid"));
+
                 int service_id = Integer.parseInt(request.getParameter("sid"));
                 User user = new User();
                 Service service = new Service();
+                service.setId(service_id);
                 CartItem c = new CartItem(service, user, 0);
                 list.remove(c);
             }
@@ -222,7 +233,7 @@ public class CartController extends HttpServlet {
 
         response.sendRedirect("list");
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

@@ -21,25 +21,26 @@ import bean.Service;
  * @author HP
  */
 public class ReservationDAO extends BaseDAO {
+
     public void addReservation(Reservation r) {
         try {
             String sql = "insert into reservation(customer_id, reservation_date, status,\n"
                     + "            staff_id, number_of_person)\n"
-                    + "            values(?, ?, ?, ?, ?, ?)";
-            
+                    + "            values(?, ?, ?, ?, ?)";
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getCustomer().getId());
             stm.setDate(2, r.getReservation_date());
             stm.setString(3, r.getStatus());
             stm.setInt(4, r.getStaff().getId());
             stm.setInt(5, r.getNumber_of_person());
-            
+
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Reservation getReservationById(int id) {
         Reservation r = new Reservation();
         try {
@@ -60,7 +61,7 @@ public class ReservationDAO extends BaseDAO {
                 r.setReservation_date(rs.getDate("reservation_date"));
                 r.setStatus(rs.getString("status"));
                 r.setNumber_of_person(rs.getInt("number_of_person"));
-                
+
                 User staff = new User();
                 staff.setEmail(rs.getString("email"));
                 staff.setFullName(rs.getString("full_name"));
@@ -73,16 +74,16 @@ public class ReservationDAO extends BaseDAO {
         }
         return r;
     }
-    
+
     public ArrayList<Service> getReservationServices(int reservation_id) {
         ArrayList<Service> services = new ArrayList<>();
-        
+
         try {
             String sql = "select service.fullname, service.sale_price\n"
                     + "            from service left join reservation_service\n"
                     + "            on service.id = reservation_service.service_id\n"
                     + "   where reservation_id = ?";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, reservation_id);
             ResultSet rs = stm.executeQuery();
@@ -97,7 +98,7 @@ public class ReservationDAO extends BaseDAO {
         }
         return services;
     }
-    
+
     public void submitReservation(int reservation_id) {
         try {
             String sql = "update reservation set reservation.status = 'submitted'\n"
@@ -109,7 +110,7 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void changeStaffReservation(int reservation_id, int staff_id) {
         try {
             String sql = "update reservation set reservation.staff_id = ?\n"
@@ -122,13 +123,13 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void addReservationService(Reservation r, Service s, Receiver rc) {
         try {
             String sql = "insert into reservation_service(reservation_id, service_id, prescription_id, receiver_id,\n"
                     + "            datetime, unit_price)\n"
                     + "            values(?, ?, ?, ?, ?, ?)";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getId());
             stm.setInt(2, s.getId());
@@ -136,12 +137,13 @@ public class ReservationDAO extends BaseDAO {
             stm.setInt(4, rc.getId());
             stm.setDate(5, r.getReservation_date());
             stm.setFloat(6, s.getSalePrice());
-            
+
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public int countReservations(User staff) {
         try {
             String sql = "SELECT COUNT(*) as total FROM reservation WHERE staff_id = ?";
@@ -153,6 +155,25 @@ public class ReservationDAO extends BaseDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int returnNewestReservation() {
+        try {
+            int n = 0;
+            String sql = "SELECT MAX(id) AS 'Maximum'\n"
+                    + "FROM reservation";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                n = rs.getInt("Maximum");
+            }
+            return n;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }

@@ -102,7 +102,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../login" method="GET">
+                                            <form action="../login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -121,7 +121,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../register" method="GET">
+                                            <form action="../register" method="POST">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -177,7 +177,7 @@
                                 <td>Cost</td>
                                 <td ></td>
                                 <td class="total-cost" rowspan="${requestScope.number}"><h3>Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="#">More Service</a></button>
+                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact">Check Out</a></button></td>
                             </tr>
                         </thead>

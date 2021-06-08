@@ -57,7 +57,7 @@ public class EmailVerify {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         mailMessage = new MimeMessage(getMailSession);
 
-        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("hoangnhatminh.139@gmail.com")); //Thay abc bằng địa chỉ người nhận
+        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("giangtong09@gmail.com")); //Thay abc bằng địa chỉ người nhận
 
         // Bạn có thể chọn CC, BCC
 //    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
