@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: swp
+-- Host: localhost    Database: swplatest
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -349,6 +349,9 @@ CREATE TABLE `service` (
   `category_id` int DEFAULT NULL,
   `description` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
   `details` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
+  `updated_date` datetime DEFAULT NULL,
+  `featured` tinyint(1) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   CONSTRAINT `service_ibfk_1` FOREIGN KEY (`id`) REFERENCES `service_category` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
@@ -360,7 +363,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',1,'Service 1','Service 1'),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',1,'Service 2','Service 2'),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',2,'Service 3','Service 3');
+INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',1,'Service 1','Service 1',NULL,NULL,NULL),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',1,'Service 2','Service 2',NULL,NULL,NULL),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',2,'Service 3','Service 3',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,4 +511,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-07 23:02:32
+
+-- Dump completed on 2021-06-08  8:53:47
+

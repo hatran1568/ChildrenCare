@@ -9,13 +9,17 @@ import bean.CartItem;
 import bean.Service;
 import bean.User;
 import dao.CartDAO;
+import dao.ServiceDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,7 +66,8 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         switch (action) {
 
             case "/cart/list":
@@ -72,7 +77,13 @@ public class CartController extends HttpServlet {
             case "/cart/edit":
                 editCart(request, response);
                 break;
-
+            case "/cart/add":
+                if (user == null || user.getId() == -1) {
+                    addToCartSession(request, response);
+                } else {
+                    addToCartDB(request, response);
+                }
+                break;
             default:
                 showCart(request, response);
                 break;
@@ -225,8 +236,14 @@ public class CartController extends HttpServlet {
                 User user = new User();
                 Service service = new Service();
                 service.setId(service_id);
-                CartItem c = new CartItem(service, user, 0);
-                list.remove(c);
+                for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
+                    CartItem item = iterator.next();
+                    if (item.getService().getId()==(service_id)) {
+                        // Remove the current element from the iterator and the list.
+                        iterator.remove();
+                    }
+                }
+               
             }
             request.getSession().setAttribute("cart", list);
         }
@@ -244,4 +261,70 @@ public class CartController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public void addToCartDB(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        UserDAO userDB = new UserDAO();
+        User user = userDB.getUser(17);
+        session.setAttribute("user", user);
+
+        String r_serviceid = request.getParameter("serviceid");
+        if (r_serviceid == null) {
+            r_serviceid = "0";//validation
+        }
+
+        int serviceid = Integer.parseInt(r_serviceid);
+        ServiceDAO serviceDB = new ServiceDAO();
+        Service service = serviceDB.getService(serviceid);
+
+        CartDAO cartDB = new CartDAO();
+        cartDB.addToCart(user, service);
+
+        response.sendRedirect("../service/list");
+    }
+
+    public void addToCartSession(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
+        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new ArrayList<>();
+            session.setAttribute("cart", cart);
+        }
+
+        UserDAO userDB = new UserDAO();
+        User user = userDB.getUser(-1);
+
+        String r_serviceid = request.getParameter("serviceid");
+        if (r_serviceid == null) {
+            r_serviceid = "0";//validation
+        }
+
+        int serviceid = Integer.parseInt(r_serviceid);
+        ServiceDAO serviceDB = new ServiceDAO();
+        Service service = serviceDB.getService(serviceid);
+
+        boolean added = false;
+        for (CartItem cartitem : cart) {
+            if (cartitem.getService().getId() == serviceid) {
+                cartitem.setQuantity(cartitem.getQuantity() + 1);
+                added = true;
+            }
+            if (added) {
+                break;
+            }
+        }
+        if (!added) {
+            CartItem c = new CartItem();
+            c.setUser(user);
+            c.setService(service);
+            c.setQuantity(1);
+
+            cart.add(c);
+        }
+        session.setAttribute("cart", cart);
+        response.sendRedirect("../service/list");
+    }
 }

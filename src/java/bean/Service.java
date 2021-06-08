@@ -5,6 +5,8 @@
  */
 package bean;
 
+import java.sql.Date;
+
 /**
  *
  * @author Tran Thi Nguyet Ha
@@ -18,7 +20,10 @@ public class Service {
     private String description;
     private String thumbnailLink;
     private ServiceCategory category;
-
+    private Date updatedDate;
+    private boolean featured;   
+    private boolean status;
+    
     public String getDescription() {
         return description;
     }
@@ -82,5 +87,32 @@ public class Service {
     public void setCategory(ServiceCategory category) {
         this.category = category;
     }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    
+
+    public boolean isFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(boolean featured) {
+        this.featured = featured;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
     
 }
