@@ -128,7 +128,7 @@ public class ReservationCompletionController extends HttpServlet {
         //Sub-function 3: Send email to customer confirming reservation and payment guides
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
-            e.sendText(user, "UwU");
+            e.sendText(user, "");
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -137,6 +137,14 @@ public class ReservationCompletionController extends HttpServlet {
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
         request.setAttribute("receiverlist", receiverlist);
+        if (u == null)
+            request.removeAttribute("cart");
+        else {
+            ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
+            for (CartItem cartitem : cart) {
+                cartDB.deleteCart(u, cartitem.getService());
+            }
+        }
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
     }
 

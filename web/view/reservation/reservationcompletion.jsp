@@ -119,18 +119,11 @@
                                 <h3>Reservation Details</h3>
                                 <div>Reservation ID: ${requestScope.reservation.getId()}</div>
                                 <div>Reserved Date: ${requestScope.reservation.getReservation_date()}</span>
-                                <span>Checkup Time: ${requestScope.reservation.getCheckup_time()}</span>
                                 <div>Number of Patients: ${requestScope.reservation.getNumber_of_person()}</div>
                                 <div>Assigned Staff: ${requestScope.reservation.getStaff().getFullName()}</div>
                                 <div>Staff Contact Email: ${requestScope.reservation.getStaff().getEmail()}</div>
                                 <div>Staff Contact Number: ${requestScope.reservation.getStaff().getMobile()}</div>
                                 <img src="${requestScope.reservation.getStaff().getImageLink()}" alt="Profile Image">
-                                <h3>Reserved Services</h3>
-                                <c:forEach items="${requestScope.reservation_services}" var="rs">
-                                    <span style="margin-left: 30%; float: left">Service: ${rs.getFullname()}</span>
-                                    <span style="margin-right: 30%; float: right">Price: ${rs.getSalePrice()}</span>
-                                    <br>
-                                </c:forEach>
                             </div>
                         </div>
                     </div>
