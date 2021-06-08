@@ -262,7 +262,7 @@ public class UserDAO extends BaseDAO {
                 a.setAddress(rs.getString("address"));
                 Role r = new Role();
                 r.setId(rs.getInt("role_id"));
-                r.setName(rs.getNString("role_name"));
+                r.setName(rs.getString("role_name"));
                 a.setRole(r);
                 list.add(a);
             }
@@ -275,7 +275,7 @@ public class UserDAO extends BaseDAO {
     public ArrayList<User> getStaff() {
         ArrayList<User> staff = new ArrayList<>();
         try {
-            String sql = "select * from user where role_id = 3";
+            String sql = "select `user`.id,`user`.address,`user`.email,`user`.role_id,`user`.image_link,`user`.gender,`user`.full_name,`user`.mobile,`user`.`password`,`user`.`status`,role.`name` from user inner join role on user.role_id = role.id where user.role_id = 3";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -290,7 +290,7 @@ public class UserDAO extends BaseDAO {
                 a.setAddress(rs.getString("address"));
                 Role r = new Role();
                 r.setId(rs.getInt("role_id"));
-                r.setName(rs.getNString("role_name"));
+                r.setName(rs.getString("name"));
                 a.setRole(r);
                 staff.add(a);
             }

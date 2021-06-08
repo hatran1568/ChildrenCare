@@ -5,7 +5,6 @@
  */
 package controller;
 
-
 import bean.CartItem;
 import bean.Receiver;
 import java.io.IOException;
@@ -50,50 +49,58 @@ public class ReservationCompletionController extends HttpServlet {
         ReservationDAO reservationDB = new ReservationDAO();
         UserDAO userDB = new UserDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
-        
+
         //Sub-function 1: Receiver information are saved
         ArrayList<Receiver> receivers = new ArrayList<>();
         receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
-            //Check if receiver exists (If a receiver with the same email exists) and add them if not
+        //Check if receiver exists (If a receiver with the same email exists) and add them if not
         for (Receiver r : receivers) {
-            if (!receiverDB.checkExistingReceiver(r.getEmail()))
+            if (!receiverDB.checkExistingReceiver(r.getEmail())) {
                 receiverDB.addReceiver(r);
+            }
         }
-        
+
         //Sub-function 2: The reservation is submitted and assigned to a staff
         Reservation reservation = new Reservation();
-            //Set Customer
+        //Set Customer
         User u = (User) request.getSession().getAttribute("user");
-        if (u != null)
+        if (u != null) {
             reservation.setCustomer(u);
-        else 
-        {
+        } else {
             User guest = new User();
             guest.setId(0);
             reservation.setCustomer(guest);
         }
-            //Set Reservation date
-        Date d = null;
-        LocalDateTime now = LocalDateTime.ofInstant(d.toInstant(), ZoneId.systemDefault());
-        Date reservation_date = (Date) Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
-        reservation.setReservation_date(reservation_date);
-            //Set status
+        //Set Reservation date
+
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+
+        reservation.setReservation_date(date);
+        //Set status
         reservation.setStatus("Submitted");
-            //Set Staff
+        //Set Staff
         ArrayList<User> staff = userDB.getStaff();
         int minRes = 0;
         User assignStaff = new User();
         for (User s : staff) {
-            if (reservationDB.countReservations(s) < minRes) {
+            if (reservationDB.countReservations(s) <= minRes) {
                 minRes = reservationDB.countReservations(s);
                 assignStaff.setId(s.getId());
+                assignStaff.setFullName(s.getFullName());
+                assignStaff.setEmail(s.getEmail());
+                assignStaff.setMobile(s.getMobile());
+                assignStaff.setImageLink(s.getImageLink());
+                break;
             }
         }
         reservation.setStaff(assignStaff);
-            //Set numberofperson
+        //Set numberofperson
         reservation.setNumber_of_person(1);
-            //Submit reservation services
-            
+        reservation.setStatus("none");
+        //Submit reservation services
+        reservationDB.addReservation(reservation);
+        reservation.setId(reservationDB.returnNewestReservation());
         CartDAO cartDB = new CartDAO();
         ArrayList<Integer> receiverservice = new ArrayList<>();
         receiverservice = (ArrayList<Integer>) request.getSession().getAttribute("receiverIDs");
@@ -101,8 +108,7 @@ public class ReservationCompletionController extends HttpServlet {
         for (int i : receiverservice) {
             receiverlist.add(receivers.get(i));
         }
-        if (u == null)
-        {
+        if (u == null) {
             ArrayList<CartItem> cart = new ArrayList<>();
             cart = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
             int rcount = 0;
@@ -110,9 +116,7 @@ public class ReservationCompletionController extends HttpServlet {
                 reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
                 rcount++;
             }
-        }
-        else
-        {
+        } else {
             ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
             int rcount = 0;
             for (CartItem cartItem : cart) {
@@ -120,7 +124,7 @@ public class ReservationCompletionController extends HttpServlet {
                 rcount++;
             }
         }
-        
+
         //Sub-function 3: Send email to customer confirming reservation and payment guides
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
@@ -128,7 +132,7 @@ public class ReservationCompletionController extends HttpServlet {
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservation.getId());
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
@@ -145,7 +149,6 @@ public class ReservationCompletionController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

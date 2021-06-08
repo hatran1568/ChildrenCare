@@ -10,7 +10,7 @@ package bean;
  * @author ACER
  */
 public class CartItem {
-    
+
     private Service service;
     private User user;
     private int quantity;
@@ -44,6 +44,17 @@ public class CartItem {
         this.user = user;
         this.quantity = quantity;
     }
-    
-    
+
+    public boolean equals(CartItem obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getService().getId() != this.service.getId()) {
+            return false;
+        }
+        return true;
+    }
 }
