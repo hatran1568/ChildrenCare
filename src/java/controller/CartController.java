@@ -14,6 +14,7 @@ import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -235,8 +236,14 @@ public class CartController extends HttpServlet {
                 User user = new User();
                 Service service = new Service();
                 service.setId(service_id);
-                CartItem c = new CartItem(service, user, 0);
-                list.remove(c);
+                for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
+                    CartItem item = iterator.next();
+                    if (item.getService().getId()==(service_id)) {
+                        // Remove the current element from the iterator and the list.
+                        iterator.remove();
+                    }
+                }
+               
             }
             request.getSession().setAttribute("cart", list);
         }

@@ -278,7 +278,7 @@ public class UserController extends HttpServlet {
 
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
-            request.getRequestDispatcher("home").forward(request, response);
+            response.sendRedirect("home");
             return;
             
             
