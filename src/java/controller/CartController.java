@@ -265,9 +265,9 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        UserDAO userDB = new UserDAO();
-        User user = userDB.getUser(17);
-        session.setAttribute("user", user);
+    
+      
+      
 
         String r_serviceid = request.getParameter("serviceid");
         if (r_serviceid == null) {
@@ -279,7 +279,7 @@ public class CartController extends HttpServlet {
         Service service = serviceDB.getService(serviceid);
 
         CartDAO cartDB = new CartDAO();
-        cartDB.addToCart(user, service);
+        cartDB.addToCart((User) request.getSession().getAttribute("user"), service);
 
         response.sendRedirect("../service/list");
     }

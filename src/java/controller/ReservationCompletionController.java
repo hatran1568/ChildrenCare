@@ -81,7 +81,7 @@ public class ReservationCompletionController extends HttpServlet {
         reservation.setStatus("Submitted");
         //Set Staff
         ArrayList<User> staff = userDB.getStaff();
-        int minRes = 0;
+        int minRes = 5;
         User assignStaff = new User();
         for (User s : staff) {
             if (reservationDB.countReservations(s) <= minRes) {
@@ -132,8 +132,8 @@ public class ReservationCompletionController extends HttpServlet {
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservation.getId());
+        
+        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservationDB.returnNewestReservation());
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
         request.setAttribute("receiverlist", receiverlist);

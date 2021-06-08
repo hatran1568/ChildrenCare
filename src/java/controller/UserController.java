@@ -5,6 +5,7 @@
  */
 package controller;
 
+import bean.Receiver;
 import dao.RoleDAO;
 import dao.UserDAO;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.User;
+import dao.ReceiverDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -390,6 +392,20 @@ public class UserController extends HttpServlet {
         if (code.equals(actual)) {
             userDb.updateStatus(u, true);
             String alert = "Register Successfully!";
+            User user = new User();
+            ArrayList<User> list = new ArrayList<User>();
+            list = userDb.searchUserByEmail(email);
+            user = list.get(0);
+            ReceiverDAO receiverDb = new ReceiverDAO();
+            Receiver r = new Receiver();
+            r.setEmail(email);
+            r.setAddress(user.getAddress());
+            r.setFullName(user.getFullName());
+            r.setUser(user);
+            r.setGender(user.isGender());
+            r.setMobile(user.getMobile());
+            if(!receiverDb.checkExistingReceiver(email))
+            receiverDb.addReceiver(r);
             request.getSession().setAttribute("alert", alert);
             response.sendRedirect("home");
         
