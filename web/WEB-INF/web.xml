@@ -48,6 +48,10 @@
         <servlet-name>ReservationContactController</servlet-name>
         <servlet-class>controller.ReservationContactController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.ServiceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
@@ -126,6 +130,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
         <url-pattern>/cart/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -139,6 +147,14 @@
     <servlet-mapping>
         <servlet-name>ReservationContactController</servlet-name>
         <url-pattern>/reservation/contact/forward</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service/list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

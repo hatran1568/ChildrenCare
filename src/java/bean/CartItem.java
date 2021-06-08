@@ -57,4 +57,8 @@ public class CartItem {
         }
         return true;
     }
+    
+    public CartItem(){
+        
+    }
 }

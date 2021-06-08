@@ -91,4 +91,53 @@ public class CartDAO extends BaseDAO {
         }
         
     }
+    public void addToCart(User user, Service service) {
+        try {
+            int quantity = checkExistence(user, service);
+            String sql = "";
+            if (quantity > 0) {
+                sql = "update cart_item"
+                        + " set quantity = ?"
+                        + " where user_id = ? and service_id = ?";
+
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setInt(1, quantity + 1);
+                stm.setInt(2, user.getId());
+                stm.setInt(3, service.getId());
+
+                stm.executeUpdate();
+            } else {
+                sql = "INSERT INTO `swp`.`cart_item` (`user_id`, `service_id`, `quantity`) VALUES (?, ?, ?)";
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setInt(3, 1);
+                stm.setInt(1, user.getId());
+                stm.setInt(2, service.getId());
+
+                stm.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int checkExistence(User user, Service service) {
+        try {
+            String sql = "select user_id, service_id, quantity\n"
+                    + " from cart_item\n"
+                    + " where user_id = ? and service_id = ?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, user.getId());
+            stm.setInt(2, service.getId());
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("quantity");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }
