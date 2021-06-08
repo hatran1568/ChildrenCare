@@ -167,7 +167,7 @@
                                 <td class="col-md-2">Title</td>
                                 <td class="col-md-2">Price</td>
                                 <td class="col-md-5">Receiver</td>
-                                <td ></td>
+                                <td ><input hidden type="text" id="cur-row"></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,14 +178,14 @@
                                             <td>${list.service.id}</td>
                                             <td>${list.service.fullname}</td>
                                             <td>${list.service.salePrice}</td>
-                                            <td>Name: ${sessionScope.receivers[0].fullName}<br>
+                                            <td class="receiver-info">Name: ${sessionScope.receivers[0].fullName}<br>
                                                 Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receivers[0].gender == false}">Female</c:if><br>
                                                 Email: ${sessionScope.receivers[0].email}<br>
                                                 Mobile: ${sessionScope.receivers[0].mobile}<br>
                                                 Address: ${sessionScope.receivers[0].address}<br>
                                                 <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
                                             </td>   
-                                            <td><button type="button" class="btn" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
+                                            <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
                                         </tr>
                                     </c:if>
                                 </c:forEach>
@@ -195,18 +195,18 @@
                                 <td class="total-cost" rowspan="5"><h3>${requestScope.totalcost}</h3></td></tr>
                         </tbody>
                     </table>
-                        <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>  
+                    <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>  
                 </form>
-                        
+
             </c:if>
             <c:if test="${empty requestScope.list}">
                 <div class="container" style="height:800px;">
                     <h1>You have nothing in cart!</h1>
                 </div>
-                
+
             </c:if>
-                
+
             <!--            <h2>Total Cost:</h2>-->
         </div>
         <div class="modal fade" id="change-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -221,22 +221,23 @@
                     <form>
                         <div class="modal-body">
                             <c:forEach items="${sessionScope.receivers}" var="r">
-                                <button id="receiver-select-${r.id}" class="btn" onclick="changeReceiver()" style="width: 100%; margin: 10px 0px; text-align: left;">Name: ${r.fullName}<br>
-                                                Gender: <c:if test="${r.gender == true}">Male</c:if><c:if test="${r.gender == false}">Female</c:if><br>
-                                                Email: ${r.email}<br>
-                                                Mobile: ${r.mobile}<br>
-                                                Address: ${r.address}<br></button>
-                            </c:forEach>
+                                <button type="button" id="receiver-select-${r.id}" class="btn receiver-choice" style="width: 100%; margin: 10px 0px; text-align: left;">
+                                    Name: ${r.fullName}<br>
+                                    Gender: <c:if test="${r.gender == true}">Male</c:if><c:if test="${r.gender == false}">Female</c:if><br>
+                                    Email: ${r.email}<br>
+                                    Mobile: ${r.mobile}<br>
+                                    Address: ${r.address}<br></button>
+                                </c:forEach>
                         </div>
                         <div class="modal-footer border-top-0 d-flex justify-content-center">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-receiver">Add receiver</button>
-<!--                            <button type="submit" class="btn btn-success">Submit</button>-->
+                            <!--                            <button type="submit" class="btn btn-success">Submit</button>-->
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        
+
         <div class="modal fade" id="add-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -325,16 +326,22 @@
             <script src="../assets/js/images-loded.min.js"></script>
             <script src="../assets/js/custom.js"></script>
             <script>
-                function ResetCart() {
-                    document.getElementById("form").submit();
-                }
-                function changeReceiver() {
-                    var receiverID = $(this).attr('id').substr(15);
-                    var rowNum = $(this).parent().parent().index();
-                    var receiverInfo = $(this).html();
-                    receiverInfo += '<input hidden type="text" name="receiver" value="'+receiverID.toString()+'">';
-                    var x = document.getElementById("reservation-detail").rows[rowNum].cells[3].innerHTML = receiverInfo;
-                }
+                $(document).ready(function () {
+                    var rowNum;
+                    var curRow;
+                    $('.receiver-select').click(function () {
+                        curRow = this.closest('tr');
+                        rowNum = $('#reservation-detail tr').index(curRow) - 1;
+                    });
+                    $('.receiver-choice').click(function () {
+                        var receiverID = this.id.substr(16);
+                        var receiverInfo = this.innerHTML;
+                        receiverInfo += '<input hidden type="text" name="receiver" value="' + receiverID.toString() + '">';
+                        document.getElementsByClassName('receiver-info')[parseInt(rowNum)].innerHTML = receiverInfo;
+                        $('#change-receiver').modal('hide');
+                    });
+                });
+
 
             </script>
 
