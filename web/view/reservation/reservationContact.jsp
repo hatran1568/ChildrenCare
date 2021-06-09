@@ -188,6 +188,21 @@
                                             <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
                                         </tr>
                                     </c:if>
+                                    <c:if test="${empty sessionScope.user}">
+                                        <tr>
+                                            <td>${list.service.id}</td>
+                                            <td>${list.service.fullname}</td>
+                                            <td>${list.service.salePrice}</td>
+                                            <td class="receiver-info">Name: <br>
+                                                Gender: <br>
+                                                Email: <br>
+                                                Mobile: <br>
+                                                Address: <br>
+                                                <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
+                                            </td>   
+                                            <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                             </c:forEach>
                             <tr><td></td>

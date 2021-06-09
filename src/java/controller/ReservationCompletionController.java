@@ -138,7 +138,7 @@ public class ReservationCompletionController extends HttpServlet {
         request.setAttribute("reservation_services", reservation_services);
         request.setAttribute("receiverlist", receiverlist);
         if (u == null)
-            request.removeAttribute("cart");
+            request.getSession().removeAttribute("cart");
         else {
             ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
             for (CartItem cartitem : cart) {

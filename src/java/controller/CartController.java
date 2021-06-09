@@ -220,13 +220,16 @@ public class CartController extends HttpServlet {
 
         //If user logged in edit to Database
         if (u != null) {
+            String uid = request.getParameter("uid");
+            String sid = request.getParameter("sid");
 
-            int user_id = Integer.parseInt(request.getParameter("uid"));
-            int service_id = Integer.parseInt(request.getParameter("sid"));
-            User user = new User();
-            Service service = new Service();
-
-            cartDB.deleteCart(user, service);
+            int user_id = Integer.parseInt(uid);
+            int service_id = Integer.parseInt(sid);
+                        User user = new User();
+                                Service service = new Service();
+                                user.setId(user_id);
+                                service.setId(service_id);
+                                cartDB.deleteCart(user, service);
         } else {
 
             //If user not logged in edit to Session
@@ -241,12 +244,12 @@ public class CartController extends HttpServlet {
                 service.setId(service_id);
                 for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
                     CartItem item = iterator.next();
-                    if (item.getService().getId()==(service_id)) {
+                    if (item.getService().getId() == (service_id)) {
                         // Remove the current element from the iterator and the list.
                         iterator.remove();
                     }
                 }
-               
+
             }
             request.getSession().setAttribute("cart", list);
         }
@@ -267,10 +270,6 @@ public class CartController extends HttpServlet {
     public void addToCartDB(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-
-    
-      
-      
 
         String r_serviceid = request.getParameter("serviceid");
         if (r_serviceid == null) {
