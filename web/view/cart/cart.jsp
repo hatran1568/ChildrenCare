@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="../assets/css/responsive.css" />
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../assets/css/custom.css" />
-<!--        <link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>-->
+        <!--        <link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>-->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -191,7 +191,12 @@
                                     <td> <input onchange="ResetCart()" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
                                     <td>${list.service.salePrice * list.quantity} </td>
-                                    <td><a href="delete?sid=${list.service.id}?uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                    <c:if test="${not empty list.user.id}">
+                                        <td><a href="delete?sid=${list.service.id}&uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                            </c:if>
+                                            <c:if test="${ empty list.user.id}">
+                                        <td><a href="delete?sid=${list.service.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                            </c:if>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -202,6 +207,7 @@
             <c:if test="${empty requestScope.list}">
 
                 <h1>You have nothing in cart!</h1>
+                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
             </c:if>
 
             <!--            <h2>Total Cost:</h2>-->

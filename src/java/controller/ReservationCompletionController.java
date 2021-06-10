@@ -81,7 +81,7 @@ public class ReservationCompletionController extends HttpServlet {
         reservation.setStatus("Submitted");
         //Set Staff
         ArrayList<User> staff = userDB.getStaff();
-        int minRes = 0;
+        int minRes = 5;
         User assignStaff = new User();
         for (User s : staff) {
             if (reservationDB.countReservations(s) <= minRes) {
@@ -128,15 +128,23 @@ public class ReservationCompletionController extends HttpServlet {
         //Sub-function 3: Send email to customer confirming reservation and payment guides
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
-            e.sendText(user, "UwU");
+            e.sendText(user, "");
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservation.getId());
+        
+        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservationDB.returnNewestReservation());
         request.setAttribute("reservation", reservation);
         request.setAttribute("reservation_services", reservation_services);
         request.setAttribute("receiverlist", receiverlist);
+        if (u == null)
+            request.getSession().removeAttribute("cart");
+        else {
+            ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
+            for (CartItem cartitem : cart) {
+                cartDB.deleteCart(u, cartitem.getService());
+            }
+        }
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
     }
 

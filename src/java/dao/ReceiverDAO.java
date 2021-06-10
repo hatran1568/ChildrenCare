@@ -24,18 +24,18 @@ public class ReceiverDAO extends BaseDAO {
 
     public void addReceiver(Receiver r) {
         try {
-            String sql = "insert into receiver(id, user_id, full_name, gender,\n"
+            String sql = "insert into receiver(user_id, full_name, gender,\n"
                     + "            mobile, address, email)\n"
-                    + "            values(?, ?, ?, ?, ?, ?, ?)";
+                    + "            values(?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, r.getId());
-            stm.setInt(2, r.getUser().getId());
-            stm.setString(3, r.getFullName());
-            stm.setBoolean(4, r.isGender());
-            stm.setString(5, r.getMobile());
-            stm.setString(6, r.getAddress());
-            stm.setString(7, r.getEmail());
+           
+            stm.setInt(1, r.getUser().getId());
+            stm.setString(2, r.getFullName());
+            stm.setBoolean(3, r.isGender());
+            stm.setString(4, r.getMobile());
+            stm.setString(5, r.getAddress());
+            stm.setString(6, r.getEmail());
 
             stm.executeUpdate();
         } catch (SQLException ex) {

@@ -84,6 +84,9 @@ public class CartController extends HttpServlet {
                     addToCartDB(request, response);
                 }
                 break;
+            case "/cart/delete":
+                deleteCart(request, response);
+                break;
             default:
                 showCart(request, response);
                 break;
@@ -217,13 +220,16 @@ public class CartController extends HttpServlet {
 
         //If user logged in edit to Database
         if (u != null) {
+            String uid = request.getParameter("uid");
+            String sid = request.getParameter("sid");
 
-            int user_id = Integer.parseInt(request.getParameter("uid"));
-            int service_id = Integer.parseInt(request.getParameter("sid"));
-            User user = new User();
-            Service service = new Service();
-
-            cartDB.deleteCart(user, service);
+            int user_id = Integer.parseInt(uid);
+            int service_id = Integer.parseInt(sid);
+                        User user = new User();
+                                Service service = new Service();
+                                user.setId(user_id);
+                                service.setId(service_id);
+                                cartDB.deleteCart(user, service);
         } else {
 
             //If user not logged in edit to Session
@@ -238,12 +244,12 @@ public class CartController extends HttpServlet {
                 service.setId(service_id);
                 for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
                     CartItem item = iterator.next();
-                    if (item.getService().getId()==(service_id)) {
+                    if (item.getService().getId() == (service_id)) {
                         // Remove the current element from the iterator and the list.
                         iterator.remove();
                     }
                 }
-               
+
             }
             request.getSession().setAttribute("cart", list);
         }
@@ -265,10 +271,6 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        UserDAO userDB = new UserDAO();
-        User user = userDB.getUser(17);
-        session.setAttribute("user", user);
-
         String r_serviceid = request.getParameter("serviceid");
         if (r_serviceid == null) {
             r_serviceid = "0";//validation
@@ -279,7 +281,7 @@ public class CartController extends HttpServlet {
         Service service = serviceDB.getService(serviceid);
 
         CartDAO cartDB = new CartDAO();
-        cartDB.addToCart(user, service);
+        cartDB.addToCart((User) request.getSession().getAttribute("user"), service);
 
         response.sendRedirect("../service/list");
     }

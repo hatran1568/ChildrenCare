@@ -133,7 +133,7 @@ public class ReservationDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getId());
             stm.setInt(2, s.getId());
-            stm.setInt(3, 0);
+            stm.setInt(3, 1);
             stm.setInt(4, rc.getId());
             stm.setDate(5, r.getReservation_date());
             stm.setFloat(6, s.getSalePrice());
