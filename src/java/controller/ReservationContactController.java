@@ -115,36 +115,46 @@ public class ReservationContactController extends HttpServlet {
         CartDAO cartDB = new CartDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
 
-        ArrayList<Receiver> receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+        
         if (u == null) {
+            ArrayList<Receiver> receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
             ArrayList<CartItem> list = new ArrayList<>();
+            if (request.getSession().getAttribute("cart") != null){
             list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
             int numberofservice = list.size();
-            request.setAttribute("number", numberofservice);
-            request.setAttribute("list", list);
-            request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
-        }
-        if (u != null && receiverList == null) {
-            receiverList = receiverDB.getReceivers(u.getId());
-        }
-        ArrayList<CartItem> list = new ArrayList<>();
-        if (u != null) {
-
-            list = cartDB.getCartByUserId(u);
-
             float totalcost = 0;
 
             for (CartItem cartItem : list) {
                 totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
             }
+            request.setAttribute("number", numberofservice);
+            request.setAttribute("list", list);
+            request.setAttribute("totalcost", totalcost);
+            }
+            request.getSession().setAttribute("receivers", receiverList);
+            request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
+        }
+//        if (u != null && receiverList == null) {
+//            
+//        }
+        
+        if (u != null) {
+            ArrayList<Receiver> receiverList = receiverDB.getReceivers(u.getId());
+            ArrayList<CartItem> list = new ArrayList<>();
+            list = cartDB.getCartByUserId(u);
 
+            float totalcost = 0;
+            for (CartItem cartItem : list) {
+                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
+            }
             int numberofservice = list.size();
             request.setAttribute("receivers", receiverList);
             request.setAttribute("number", numberofservice);
             request.setAttribute("totalcost", totalcost);
             request.setAttribute("list", list);
+            request.getSession().setAttribute("receivers", receiverList);
         }
-        request.getSession().setAttribute("receivers", receiverList);
+        
         request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
     }
 

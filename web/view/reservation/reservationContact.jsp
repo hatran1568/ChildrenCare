@@ -63,9 +63,9 @@
                                     </button>
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
-                                            <li><a class="nav-link" href="#">Home</a></li>
+                                            <li><a class="nav-link" href="../home">Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#">Services</a></li>
+                                            <li><a class="nav-link" href="../service/list">Services</a></li>
                                             <li><a class="nav-link" href="">Blog</a></li>
                                             <li><a class="nav-link" href="user/list">Users</a></li>
                                         </ul>
@@ -159,7 +159,7 @@
         <div class="container" >
 
             <c:if test="${not empty requestScope.list}">
-                <form id="form" action="contact/forward" method="POST">
+                <form id="receiverSubmit" action="contact/forward" method="POST">
                     <table class="table" id="reservation-detail">
                         <thead  class="thead-dark">
                             <tr>
@@ -183,7 +183,7 @@
                                                 Email: ${sessionScope.receivers[0].email}<br>
                                                 Mobile: ${sessionScope.receivers[0].mobile}<br>
                                                 Address: ${sessionScope.receivers[0].address}<br>
-                                                <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
+                                                <input hidden type="text" name="receiver" class="receiver-id" value="${sessionScope.receivers[0].id}">
                                             </td>   
                                             <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
                                         </tr>
@@ -198,7 +198,7 @@
                                                 Email: <br>
                                                 Mobile: <br>
                                                 Address: <br>
-                                                <input hidden type="text" name="receiver" value="${sessionScope.receivers[0].id}">
+                                                <input hidden type="text" name="receiver" class="receiver-id" value="">
                                             </td>   
                                             <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
                                         </tr>
@@ -211,7 +211,7 @@
                         </tbody>
                     </table>
                     <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
-                    <button type="submit" class="btn btn-primary float-right">Submit</button>  
+                    <button type="button" onclick="submitReceiver()" class="btn btn-primary float-right">Submit</button>  
                 </form>
 
             </c:if>
@@ -356,7 +356,21 @@
                         $('#change-receiver').modal('hide');
                     });
                 });
-
+                
+                function submitReceiver() {
+                    var missingReceiver = false;
+                    var receiverID = document.getElementsByName("receiver");
+                    for (i=0; i<receiverID.length; i++){
+                        if(!receiverID[i].value){
+                            missingReceiver = true;
+                            alert("Please choose receivers for all your services!");
+                            break;
+                        }
+                    }
+                    if (!missingReceiver){
+                        document.getElementById("receiverSubmit").submit();
+                    }
+                }
 
             </script>
 
