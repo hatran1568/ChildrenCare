@@ -158,7 +158,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("../../view/account/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/user/list.jsp").forward(request, response);
     }
 
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -196,7 +196,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("user", user);
 //        request.setAttribute("uid", uid);
 
-        request.getRequestDispatcher("../view/account/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/user/edit.jsp").forward(request, response);
     }
 
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -214,7 +214,6 @@ public class UserController extends HttpServlet {
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
-
         UserDAO userDB = new UserDAO();
         userDB.update(u);
         response.sendRedirect("list");
@@ -235,7 +234,7 @@ public class UserController extends HttpServlet {
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
 
-        request.getRequestDispatcher("../view/account/add.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
     }
 
     

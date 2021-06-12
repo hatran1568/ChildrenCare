@@ -52,6 +52,10 @@
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SettingController</servlet-name>
+        <servlet-class>controller.SettingController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
@@ -155,6 +159,10 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingController</servlet-name>
+        <url-pattern>/admin/setting/list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

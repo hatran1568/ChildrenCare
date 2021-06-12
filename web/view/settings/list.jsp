@@ -1,7 +1,7 @@
 <%-- 
-    Document   : list
-    Created on : May 23, 2021, 7:16:08 PM
-    Author     : Tran Thi Nguyet Ha
+    Document   : Settings List
+    Created on : June 11, 2021, 5:32:04 AM
+    Author     : PieRow
 --%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Settings List</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,9 +29,9 @@
         <!-- Additional CSS Files -->
       
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
-        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
+        <link rel="stylesheet" href="../assets/css/fontawesome.css"/>
         <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+        <link rel="stylesheet" href="../assets/css/owl.css"/>
 
     </head>
 
@@ -79,13 +79,14 @@
                                 <tr>
                                     <td>Id</td>
                                     <td>Name</td>
-                                    <td>Gender</td>
+                                    <td>Title</td>
                                     <td>Mail</td>
                                     <td>Role</td>
 
 
 
                                 </tr>
+                                <%--
                                 <c:forEach items="${requestScope.accounts}" var="a">
                                     <tr>
                                         <td>${a.id}</td>
@@ -101,6 +102,7 @@
 
                                     </tr>
                                 </c:forEach>
+                                --%>
                             </table>
                             <div id="pagination" class="pagination"></div>
 
