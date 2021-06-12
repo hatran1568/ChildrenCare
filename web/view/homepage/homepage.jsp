@@ -64,17 +64,16 @@
                                         <ul class="navbar-nav">
                                             <li><a class="nav-link" href="#">Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#">Services</a></li>
-                                            <li><a class="nav-link" href="">Blog</a></li>
+                                            <li><a class="nav-link" href="service/list">Services</a></li>
+                                            <li><a class="nav-link" href="#">Blog</a></li>
                                             <li><a class="nav-link" href="user/list">Users</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </nav>
                             <div class="search-box">
-                                <input type="text" class="search-txt" placeholder="Search">
-                                <a class="search-btn">
-                                    <img src="assets/images/search_icon.png" alt="#" />
+                                <a href="cart/list" class="search-btn">
+                                    <img style="width: 70px;" src="assets/images/cart.png" alt="#" />
                                 </a>
                             </div> 
                             
@@ -230,14 +229,12 @@
                         </div>
                     </div>
                     </c:forEach>
-                    
-                    
                 </div>
                 <!-- Section Button -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="browse-btn2 text-center mt-50">
-                            <a href="#" class="btn">Find More Services</a>
+                            <a href="service/list" class="btn">Find More Services</a>
                         </div>
                     </div>
                 </div>
