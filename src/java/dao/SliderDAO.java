@@ -17,14 +17,15 @@ import java.util.logging.Logger;
  *
  * @author Tran Thi Nguyet Ha
  */
-public class SliderDAO extends BaseDAO{
-    public ArrayList<Slider> getActiveSliders(){
+public class SliderDAO extends BaseDAO {
+
+    public ArrayList<Slider> getActiveSliders() {
         ArrayList<Slider> slider = new ArrayList<>();
         try {
             String sql = "Select id, title, image_link, backlink, status, notes from slider where status = 1";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Slider s = new Slider();
                 s.setId(rs.getInt("id"));
                 s.setTitle(rs.getString("title"));
@@ -38,5 +39,52 @@ public class SliderDAO extends BaseDAO{
             Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return slider;
+    }
+
+    public ArrayList<Slider> getSliderPagination(int pageindex, int pagesize) {
+        try {
+            ArrayList<Slider> list = new ArrayList<Slider>();
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
+                    + "                    id,title,image_link,backlink,status,notes\n"
+                    + "                    from slider ) a\n"
+                    + "                    where rid >= (?-1)*?+1 and rid <= ?*?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Slider s = new Slider();
+                s.setId(rs.getInt("id"));
+                s.setTitle(rs.getString("title"));
+                s.setImageLink(rs.getString("image_link"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setBacklink(rs.getString("backlink"));
+                s.setNotes(rs.getString("notes"));
+                list.add(s);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public int count() {
+        try {
+            String sql = "SELECT COUNT(*) as total FROM slider";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }
