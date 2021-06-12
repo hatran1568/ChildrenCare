@@ -16,10 +16,10 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Settings List</title>
+        <title>Settings</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -29,9 +29,9 @@
         <!-- Additional CSS Files -->
       
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
-        <link rel="stylesheet" href="../assets/css/fontawesome.css"/>
+        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
         <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../assets/css/owl.css"/>
+        <link rel="stylesheet" href="../../assets/css/owl.css"/>
 
     </head>
 
@@ -65,12 +65,12 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
 
 
                             <div>
 
-                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New User</button>
+                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New Settings</button>
 
 
 
@@ -78,31 +78,24 @@
                             <table>
                                 <tr>
                                     <td>Id</td>
+                                    <td>Type</td>
                                     <td>Name</td>
-                                    <td>Title</td>
-                                    <td>Mail</td>
-                                    <td>Role</td>
-
-
+                                    <td>Status</td>
 
                                 </tr>
-                                <%--
-                                <c:forEach items="${requestScope.accounts}" var="a">
+                                <c:forEach items="${requestScope.settings}" var="s">
                                     <tr>
-                                        <td>${a.id}</td>
-                                        <td>${a.fullName}</td>
-                                        <td><c:if test="${a.gender == true}">Male</c:if>
-                                            <c:if test="${a.gender == false}">Female</c:if></td>
-                                        <td>${a.email}</td>
-                                        <td>${a.role.name}</td>
-                                        <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                        <td>${s.id}</td>
+                                        <td>${s.type}</td>
+                                        <td>${s.name}</td>
+                                        <td>${s.status}</td>
+                                        <td><a href="delete?sid=${s.id}"><i class="fas fa-trash-alt"></i></a></td>
 
-                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
+                                        <td><a href="edit?sid=${s.id}"><i class="fas fa-pen"></i></a></td>
 
 
                                     </tr>
                                 </c:forEach>
-                                --%>
                             </table>
                             <div id="pagination" class="pagination"></div>
 
@@ -194,14 +187,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <script>
                             function generatePagger(id, pageindex, totalpage, gap, page)
                             {

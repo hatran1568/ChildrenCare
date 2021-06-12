@@ -19,7 +19,7 @@
         <title>Ramayana - Free Bootstrap 4 CSS Template</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -88,17 +88,17 @@
                                 </tr>
                                 <c:forEach items="${requestScope.accounts}" var="a">
                                     <tr>
-                                        <td>${a.id}</td>
-                                        <td>${a.fullName}</td>
-                                        <td><c:if test="${a.gender == true}">Male</c:if>
-                                            <c:if test="${a.gender == false}">Female</c:if></td>
-                                        <td>${a.email}</td>
-                                        <td>${a.role.name}</td>
-                                        <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                        <c:if test="${a.id != -1}">
+                                            <td>${a.id}</td>
+                                            <td>${a.fullName}</td>
+                                            <td><c:if test="${a.gender == true}">Male</c:if>
+                                                <c:if test="${a.gender == false}">Female</c:if></td>
+                                            <td>${a.email}</td>
+                                            <td>${a.role.name}</td>
+                                            <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
 
-                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
-
-
+                                            <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                             </table>
@@ -192,14 +192,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <script>
                             function generatePagger(id, pageindex, totalpage, gap, page)
                             {
