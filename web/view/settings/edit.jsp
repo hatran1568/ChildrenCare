@@ -1,8 +1,9 @@
 <%-- 
-    Document   : list
-    Created on : May 23, 2021, 7:16:08 PM
-    Author     : Tran Thi Nguyet Ha
+    Document   : Settings Edit
+    Created on : June 11, 2021, 5:32:04 AM
+    Author     : PieRow
 --%>
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,25 +14,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Edit Settings</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
     https://templatemo.com/tm-529-ramayana
         -->
-      
+
         <!-- Additional CSS Files -->
-      
-        <link rel="stylesheet" href="../../assets/css/footer.css"/>
-        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
-        <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+        <link rel="stylesheet" href="../../assets/css/footer.css">
+        <link rel="stylesheet" href="../../assets/css/fontawesome.css">
+        <link rel="stylesheet" href="../../assets/css/templatemo-style.css">
+        <link rel="stylesheet" href="../../assets/css/owl.css">
 
     </head>
 
@@ -56,8 +55,6 @@
 
                                 </div>
                             </div>
-
-                        </div>
                     </header>
 
 
@@ -65,51 +62,59 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+                            <form action="user/edit" method="GET" >
+                                <div class="form-group">
+                                    <label for="id">User id</label>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="full-name">Full name</label>
+                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
+                                </div>
+                                
+                                    
+                                    <input type="text" class="form-control" name="password" value="${requestScope.user.password}" hidden>
+                                    <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <select class="form-control" name="gender">
+                                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
+                                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile</label>
+                                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="role">Role</label>
 
 
-                            <div>
+                                    
 
-                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New User</button>
+                                    <select class="form-control" name="role">
 
+                                        <c:forEach items="${requestScope.roles}" var="r">
+                                            <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
+                                        </c:forEach>
+                                    </select>
 
+                                </div>
 
-                            </div>
-                            <table>
-                                <tr>
-                                    <td>Id</td>
-                                    <td>Name</td>
-                                    <td>Gender</td>
-                                    <td>Mail</td>
-                                    <td>Role</td>
-
-
-
-                                </tr>
-                                <c:forEach items="${requestScope.accounts}" var="a">
-                                    <tr>
-                                        <c:if test="${a.id != -1}">
-                                            <td>${a.id}</td>
-                                            <td>${a.fullName}</td>
-                                            <td><c:if test="${a.gender == true}">Male</c:if>
-                                                <c:if test="${a.gender == false}">Female</c:if></td>
-                                            <td>${a.email}</td>
-                                            <td>${a.role.name}</td>
-                                            <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                            <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
-                                        </c:if>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                            <div id="pagination" class="pagination"></div>
-
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-                        <script>
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-                        </script>
-
                     </section>
 
                 </div>
@@ -132,9 +137,9 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                            <li><a href="#">Homepage</a></li>
+                           <li><a href="#">Homepage</a></li>
                             <li><a href="#">User</a></li>
-                            <li><a href="../post/list">Blog</a></li>
+                            <li><a href="#">Blog</a></li>
                             <li><a href="#">Chart</a></li>
                             <li><a href="#">Setting</a></li>
                             <li>
@@ -153,7 +158,6 @@
                                     <li><a href="#">Third Service</a></li>
                                 </ul>
                             </li>
-
 
                         </ul>
                     </nav>
@@ -192,45 +196,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="../../vendor/jquery/jquery.min.js"></script>
-        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="../../assets/js/browser.min.js"></script>
-        <script src="../../assets/js/breakpoints.min.js"></script>
-        <script src="../../assets/js/transition.js"></script>
-        <script src="../../assets/js/owl-carousel.js"></script>
-        <script src="../../assets/js/custom.js"></script>
-        <script>
-                            function generatePagger(id, pageindex, totalpage, gap, page)
-                            {
-                                var container = document.getElementById(id);
-                                if (pageindex > gap + 1)
-                                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-
-                                for (var i = pageindex - gap; i < pageindex; i++)
-                                {
-                                    if (i >= 1)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                                {
-                                    if (i <= totalpage)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                if (pageindex < totalpage - gap)
-                                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-                            }
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-        </script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/transition.js"></script>
+        <script src="assets/js/owl-carousel.js"></script>
+        <script src="assets/js/custom.js"></script>
         <style>
 
             .pagination{
@@ -284,5 +257,4 @@
 
         </style>
     </body>
-
 </html>

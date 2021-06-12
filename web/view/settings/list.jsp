@@ -1,7 +1,7 @@
 <%-- 
-    Document   : list
-    Created on : May 23, 2021, 7:16:08 PM
-    Author     : Tran Thi Nguyet Ha
+    Document   : Settings List
+    Created on : June 11, 2021, 5:32:04 AM
+    Author     : PieRow
 --%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Settings</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -65,12 +65,12 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
 
 
                             <div>
 
-                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New User</button>
+                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New Settings</button>
 
 
 
@@ -78,27 +78,22 @@
                             <table>
                                 <tr>
                                     <td>Id</td>
+                                    <td>Type</td>
                                     <td>Name</td>
-                                    <td>Gender</td>
-                                    <td>Mail</td>
-                                    <td>Role</td>
-
-
+                                    <td>Status</td>
 
                                 </tr>
-                                <c:forEach items="${requestScope.accounts}" var="a">
+                                <c:forEach items="${requestScope.settings}" var="s">
                                     <tr>
-                                        <c:if test="${a.id != -1}">
-                                            <td>${a.id}</td>
-                                            <td>${a.fullName}</td>
-                                            <td><c:if test="${a.gender == true}">Male</c:if>
-                                                <c:if test="${a.gender == false}">Female</c:if></td>
-                                            <td>${a.email}</td>
-                                            <td>${a.role.name}</td>
-                                            <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
+                                        <td>${s.id}</td>
+                                        <td>${s.type}</td>
+                                        <td>${s.name}</td>
+                                        <td>${s.status}</td>
+                                        <td><a href="delete?sid=${s.id}"><i class="fas fa-trash-alt"></i></a></td>
 
-                                            <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
-                                        </c:if>
+                                        <td><a href="edit?sid=${s.id}"><i class="fas fa-pen"></i></a></td>
+
+
                                     </tr>
                                 </c:forEach>
                             </table>

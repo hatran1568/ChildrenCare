@@ -6,7 +6,6 @@
 package controller;
 
 import bean.Receiver;
-import dao.RoleDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,21 +15,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import bean.Role;
+import bean.Setting;
 import bean.User;
 import dao.ReceiverDAO;
+import dao.SettingDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import ulti.EmailVerify;
 
-/**
- *
- * @author ACER
- */
-@WebServlet(name = "UserController", urlPatterns = {"/user"})
-public class UserController extends HttpServlet {
+@WebServlet(name = "SettingController", urlPatterns = {"/setting"})
+public class SettingController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,26 +70,26 @@ public class UserController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
-            case "/admin/user/new":
+            case "/admin/setting/new":
                 showAddForm(request, response);
                 break;
-            case "/admin/user/insert":
-                addUser(request, response);
+            case "/admin/setting/insert":
+                addSetting(request, response);
                 break;
-            case "/admin/user/delete":
-                deleteUser(request, response);
+            case "/admin/setting/delete":
+                deleteSetting(request, response);
                 break;
-            case "/admin/user/edit":
+            case "/admin/setting/edit":
                 showEditForm(request, response);
                 break;
-            case "/admin/user/update":
-                editUser(request, response);
+            case "/admin/setting/update":
+                editSetting(request, response);
                 break;
-            case "/admin/user/list":
-                showListUser(request, response);
+            case "/admin/setting/list":
+                showListSetting(request, response);
                 break;
             case "/login":
-                    login(request, response);
+                login(request, response);
                 break;
             case "/register":
                 register(request, response);
@@ -102,7 +98,7 @@ public class UserController extends HttpServlet {
                 try {
                     verify(request, response);
                 } catch (MessagingException ex) {
-                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SettingController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             break;
@@ -134,7 +130,7 @@ public class UserController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    protected void showListUser(HttpServletRequest request, HttpServletResponse response)
+    protected void showListSetting(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String r_pagesize = getServletContext().getInitParameter("pagesize");
@@ -146,93 +142,73 @@ public class UserController extends HttpServlet {
         }
         int pageindex = Integer.parseInt(r_pageindex);
 
-        UserDAO db = new UserDAO();
-        int count = db.count();
+        SettingDAO settingDB = new SettingDAO();
+        int count = settingDB.count();
         int totalpage = (count % pagesize == 0)
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
 
-        ArrayList<User> accounts = db.getUsers(pageindex, pagesize);
-        request.setAttribute("accounts", accounts);
+        ArrayList<Setting> settings = settingDB.getSettings(pageindex, pagesize);
+        request.setAttribute("settings", settings);
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("../../view/user/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/setting/list.jsp").forward(request, response);
     }
 
-    protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void addSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        User u = new User();
-        u.setId(Integer.parseInt(request.getParameter("id")));
-        u.setEmail(request.getParameter("email"));
-        u.setAddress(request.getParameter("address"));
-        u.setGender(request.getParameter("gender").equals("male"));
-        u.setFullName(request.getParameter("full-name"));
-        u.setImageLink(request.getParameter("image-link"));
-        u.setPassword("admin");
-        u.setMobile(request.getParameter("mobile"));
-        Role r = new Role();
-        r.setId(Integer.parseInt(request.getParameter("role")));
-        u.setRole(r);
+        Setting s = new Setting();
+        s.setType(request.getParameter("type"));
+        s.setName(request.getParameter("settingname"));
+        s.setValue(request.getParameter("value"));
+        s.setDescription(request.getParameter("description"));
+        s.setStatus(request.getParameter("status"));
 
-        UserDAO userDB = new UserDAO();
-        userDB.addUser(u, true);
+        SettingDAO settingDB = new SettingDAO();
+        settingDB.addSetting(s);
 
         response.sendRedirect("list");
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int sid = Integer.parseInt(request.getParameter("sid"));
 
-        RoleDAO roleDB = new RoleDAO();
-        ArrayList<Role> roles = roleDB.getRoles();
-        request.setAttribute("roles", roles);
+        SettingDAO settingDB = new SettingDAO();
+        Setting setting = settingDB.getSetting(sid);
 
-        int uid = Integer.parseInt(request.getParameter("id"));
-
-        UserDAO userDB = new UserDAO();
-        User user = userDB.getUser(uid);
-
-        request.setAttribute("user", user);
+        request.setAttribute("setting", setting);
 //        request.setAttribute("uid", uid);
 
-        request.getRequestDispatcher("../../view/user/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/setting/edit.jsp").forward(request, response);
     }
 
-    protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void editSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        User u = new User();
+        Setting s = new Setting();
 
-        u.setId(Integer.parseInt(request.getParameter("id")));
-        u.setEmail(request.getParameter("email"));
-        u.setAddress(request.getParameter("address"));
-        u.setGender(request.getParameter("gender").equals("male"));
-        u.setFullName(request.getParameter("full-name"));
-        u.setImageLink(request.getParameter("image-link"));
-        u.setPassword(request.getParameter("password"));
-        u.setMobile(request.getParameter("mobile"));
-        Role r = new Role();
-        r.setId(Integer.parseInt(request.getParameter("role")));
-        u.setRole(r);
-        UserDAO userDB = new UserDAO();
-        userDB.update(u);
+        s.setType(request.getParameter("type"));
+        s.setName(request.getParameter("settingname"));
+        s.setValue(request.getParameter("value"));
+        s.setDescription(request.getParameter("description"));
+        s.setStatus(request.getParameter("status"));
+        
+        SettingDAO settingDB = new SettingDAO();
+        settingDB.update(s);
         response.sendRedirect("list");
     }
 
-    protected void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void deleteSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        UserDAO db = new UserDAO();
-        db.delete(id);
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        SettingDAO settingDB = new SettingDAO();
+        settingDB.delete(sid);
         response.sendRedirect("list");
 
     }
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        RoleDAO roleDB = new RoleDAO();
-        ArrayList<Role> roles = roleDB.getRoles();
-        request.setAttribute("roles", roles);
 
         request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
     }
