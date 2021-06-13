@@ -1,5 +1,5 @@
 
-
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Add a User</title>
+        <title>User Information</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,54 +57,43 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
-
-                            <form action="../../user/list/insert" method="POST" >
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
+                            <img src="${requestScope.user.imageLink}" alt="User Avatar" width="15%" height="15%">
+                            <form>
                                 <div class="form-group">
-                                    <label for="id">User id</label>
-                                    <input type="text" class="form-control" name="id" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="full-name">Full name</label>
-                                    <input type="text" class="form-control" name="full-name" >
+                                    <label for="id">User ID</label>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
                                 </div>
                                 
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="full-name">Full name</label>
+                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
+                                </div>
                                     
-                                    <!--<input type="text" class="form-control" name="password">-->
-<!--                                    <input type="text" class="form-control" name="image-link" hidden>-->
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="male" >Male</option>
-                                        <option value="female" >Female</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile</label>
-                                        <input type="text" class="form-control" name="mobile" >
+                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">male</c:if><c:if test="${requestScope.user.gender==false}">female</c:if>" readonly>
                                 </div>
+                                
+                                <div class="form-group">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
+                                </div>
+                                
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address">
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="role">Role</label>
-
-                                    <select class="form-control" name="role">
-                                        <c:forEach items="${requestScope.roles}" var="r">
-                                            <option value="${r.id}" >${r.name}</option>
-                                        </c:forEach>
-                                    </select>
-
+                                    <label for="address">Role</label>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.role.name}" readonly>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </section>

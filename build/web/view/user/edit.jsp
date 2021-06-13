@@ -1,8 +1,3 @@
-<%-- 
-    Document   : detail
-    Created on : May 24, 2021, 5:41:06 PM
-    Author     : Tran Thi Nguyet Ha
---%>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,10 +11,10 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Edit User Info</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -57,17 +52,11 @@
                             </div>
                     </header>
 
-
-
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
                             <form action="user/edit" method="GET" >
-                                <div class="form-group">
-                                    <label for="id">User id</label>
-                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
-                                </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
@@ -99,17 +88,19 @@
 
                                 <div class="form-group">
                                     <label for="role">Role</label>
-
-
-                                    
-
                                     <select class="form-control" name="role">
-
                                         <c:forEach items="${requestScope.roles}" var="r">
                                             <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
-
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="0">Not Verified</option>
+                                        <option value="1">Verified</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -196,14 +187,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <style>
 
             .pagination{

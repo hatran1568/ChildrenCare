@@ -58,6 +58,38 @@ public class UserDAO extends BaseDAO {
         }
         return users;
     }
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n" +
+                        "        a.id, a.email, a.password, a.full_name,\n" +
+                        "        a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.role_id as role_id \n" +
+                        "        from user a left join Role r\n" +
+                        "        on a.role_id = r.id) as tbl";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User a = new User();
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getNString("role_name"));
+                a.setRole(r);
+                users.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
 
     public int count() {
         try {

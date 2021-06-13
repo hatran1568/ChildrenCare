@@ -92,8 +92,11 @@ public class UserController extends HttpServlet {
             case "/admin/user/list":
                 showListUser(request, response);
                 break;
+            case "/admin/user/details":
+                showUserDetails(request, response);
+                break;
             case "/login":
-                    login(request, response);
+                login(request, response);
                 break;
             case "/register":
                 register(request, response);
@@ -137,30 +140,40 @@ public class UserController extends HttpServlet {
     protected void showListUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String r_pagesize = getServletContext().getInitParameter("pagesize");
-        int pagesize = Integer.parseInt(r_pagesize);
-
-        String r_pageindex = request.getParameter("page");
-        if (r_pageindex == null) {
-            r_pageindex = "1";//validation
-        }
-        int pageindex = Integer.parseInt(r_pageindex);
-
-        UserDAO db = new UserDAO();
-        int count = db.count();
-        int totalpage = (count % pagesize == 0)
-                ? count / pagesize
-                : count / pagesize + 1;
-        String url = "list";
-
-        ArrayList<User> accounts = db.getUsers(pageindex, pagesize);
-        request.setAttribute("accounts", accounts);
-        request.setAttribute("totalpage", totalpage);
-        request.setAttribute("pageindex", pageindex);
-        request.setAttribute("paggerUrl", url);
+//        String r_pagesize = getServletContext().getInitParameter("pagesize");
+//        int pagesize = Integer.parseInt(r_pagesize);
+//
+//        String r_pageindex = request.getParameter("page");
+//        if (r_pageindex == null) {
+//            r_pageindex = "1";//validation
+//        }
+//        int pageindex = Integer.parseInt(r_pageindex);
+//
+//        UserDAO db = new UserDAO();
+//        int count = db.count();
+//        int totalpage = (count % pagesize == 0)
+//                ? count / pagesize
+//                : count / pagesize + 1;
+//        String url = "list";
+//        
+        UserDAO userDB = new UserDAO();
+        ArrayList<User> users = userDB.getAllUsers();
+        request.setAttribute("users", users);
+//        request.setAttribute("totalpage", totalpage);
+//        request.setAttribute("pageindex", pageindex);
+//        request.setAttribute("paggerUrl", url);
         request.getRequestDispatcher("../../view/user/list.jsp").forward(request, response);
     }
 
+    protected void showUserDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        UserDAO userDB = new UserDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userDB.getUser(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("../../view/user/details.jsp").forward(request, response);
+    }
+    
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         User u = new User();

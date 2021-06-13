@@ -425,7 +425,7 @@ section.contact-form {
 
 /* Tables */
 
-section.tables {
+/*section.tables {
     margin-top: 80px;
     border-top: 3px solid #eee!important;
     padding-top: 100px;
@@ -563,7 +563,7 @@ ul.table-pagination li a:hover,
 ul.table-pagination li.active a {
     background-color: #535ba0;
     color: #fff;
-}
+}*/
 
 
 /* Forms */

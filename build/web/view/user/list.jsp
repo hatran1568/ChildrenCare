@@ -1,8 +1,4 @@
-<%-- 
-    Document   : list
-    Created on : May 23, 2021, 7:16:08 PM
-    Author     : Tran Thi Nguyet Ha
---%>
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +12,11 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Users List</title>
+        
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
         <!-- Bootstrap core CSS -->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,12 +27,80 @@
         -->
       
         <!-- Additional CSS Files -->
-      
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
         <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
         <link rel="stylesheet" href="../../assets/css/owl.css"/>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            var sitetable = $('#users').DataTable({
+                "searching": true,
+                "paging": true, 
+                'columnDefs': [
+                    {'max-width': '10%', 'targets': 3},
+                    {'className': 'text-center', 'targets': 0},
+                    {'className': 'text-center', 'targets': 6},
+                    {'className': 'text-center', 'targets': 7},
+                    {'className': 'text-center', 'targets': 8},
+                    {'orderable': false, 'targets' : 2},
+                    {'orderable': false, 'targets' : 5},
+                    {'orderable': false, 'targets' : 6},
+                ],
+                columns: [
+                    null,
+                    null,
+                    { data: "Gender", title:"Gender", className: "dt-filter" },
+                    null,
+                    null,
+                    { data: "Role", title:"Role", className: "dt-filter" },
+                    { data: "Status", title:"Status", className: "dt-filter" },
+                ],
+//                initComplete: function () {
+//                    this.api().columns('.dt-filter').every( function () {
+//                        var column = this;
+//                        var select = $('<select multiple="multiple" class="mSelect"><option value=""></option></select>')
+//                            .appendTo( $(column.header()) )
+//                            .on( 'change', function () {
+//                                if ( $(this).val() == undefined) {
+//                                    val = "";
+//                                } else {
+//                                    var val = $.fn.dataTable.util.escapeRegex(
+//                                        $(this).val().join("zzz")
+//                                    );
+//                                    val = val.replace(/zzz/g,"|");
+//                                }
+//                                column
+//                                    .search( val ? '^' + val + '$'  : '' , true, false )
+//                                .draw();
+//                        } );
+//                        column.data().unique().sort().each( function ( d, j ) {
+//                                        select.append( '<option value="' +d+'">' +d+'</option>'  )
+//                        } );
+//                    } );
+//                }
+                initComplete: function () {
+                    this.api().columns('.dt-filter').every( function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo( $(column.header()))
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
 
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
+
+                        column.data().unique().sort().each( function ( d, j ) {
+                            select.append( '<option value="'+d+'">'+d+'</option>' )
+                        } );
+                    } );
+                }
+            });
+        });
+        </script>
     </head>
 
     <body class="is-preload">
@@ -67,48 +135,52 @@
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
 
-
                             <div>
-
                                 <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New User</button>
-
-
-
                             </div>
-                            <table>
-                                <tr>
-                                    <td>Id</td>
-                                    <td>Name</td>
-                                    <td>Gender</td>
-                                    <td>Mail</td>
-                                    <td>Role</td>
-
-
-
-                                </tr>
-                                <c:forEach items="${requestScope.accounts}" var="a">
+<!--                            <div style="margin-left: 3%">Filter:</div>
+                            <span id="filterGender" style="font-size: 15px; margin-left: 5%; margin-right: 1%"><b>Gender:</b></span>
+                            <span id="filterRole" style="font-size: 15px; margin-right: 1%"><b>Role:</b></span>
+                            <span id="filterStatus" style="font-size: 15px; margin-right: 1%"><b>Status:</b></span>-->
+                            <table id="users">
+                                <thead>
                                     <tr>
-                                        <c:if test="${a.id != -1}">
-                                            <td>${a.id}</td>
-                                            <td>${a.fullName}</td>
-                                            <td><c:if test="${a.gender == true}">Male</c:if>
-                                                <c:if test="${a.gender == false}">Female</c:if></td>
-                                            <td>${a.email}</td>
-                                            <td>${a.role.name}</td>
-                                            <td><a href="delete?id=${a.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                            <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
-                                        </c:if>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>View</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${requestScope.users}" var="a">
+                                    <tr>
+                                        <td>${a.id}</td>
+                                        <td>${a.fullName}</td>
+                                        <td><c:if test="${a.gender == true}">Male</c:if>
+                                            <c:if test="${a.gender == false}">Female</c:if></td>
+                                        <td>${a.email}</td>
+                                        <td>${a.mobile}</td>
+                                        <td>${a.role.name}</td>
+                                        <td><c:if test="${a.status == true}">Not Verified</c:if>
+                                            <c:if test="${a.status == false}">Verified</c:if></td>
+                                        <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
+                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
                                 </c:forEach>
+                                </tbody>
                             </table>
-                            <div id="pagination" class="pagination"></div>
+                            <!--<div id="pagination" class="pagination"></div>-->
 
                         </div>
-                        <script>
+<!--                        <script>
                             generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
 
-                        </script>
+                        </script>-->
 
                     </section>
 
@@ -192,7 +264,6 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="../../vendor/jquery/jquery.min.js"></script>
         <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <script src="../../assets/js/browser.min.js"></script>
@@ -200,7 +271,7 @@
         <script src="../../assets/js/transition.js"></script>
         <script src="../../assets/js/owl-carousel.js"></script>
         <script src="../../assets/js/custom.js"></script>
-        <script>
+<!--        <script>
                             function generatePagger(id, pageindex, totalpage, gap, page)
                             {
                                 var container = document.getElementById(id);
@@ -230,9 +301,15 @@
                             }
                             generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
 
-        </script>
+        </script>-->
         <style>
-
+            
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
             .pagination{
                 display: inline-block;
             }
