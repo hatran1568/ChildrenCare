@@ -1,8 +1,4 @@
-<%-- 
-    Document   : add
-    Created on : May 24, 2021, 8:41:00 PM
-    Author     : Tran Thi Nguyet Ha
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,10 +11,10 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Add a User</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -63,7 +59,7 @@
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
 
-                            <form action="../../user/list/add" method="POST" >
+                            <form action="../../user/list/insert" method="POST" >
                                 <div class="form-group">
                                     <label for="id">User id</label>
                                     <input type="text" class="form-control" name="id" >
@@ -192,14 +188,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <style>
 
             .pagination{

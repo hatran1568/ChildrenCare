@@ -101,6 +101,10 @@
         <url-pattern>/admin/user/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SettingController</servlet-name>
+        <url-pattern>/admin/user/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/admin/user/insert</url-pattern>
     </servlet-mapping>
@@ -193,12 +197,17 @@
         <url-pattern>/admin/setting/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>ManagerCustomerController</servlet-name>
         <url-pattern>/manager/customer/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerCustomerController</servlet-name>
         <url-pattern>/manager/customer/filter/status</url-pattern>
+
+        <servlet-name>SettingController</servlet-name>
+        <url-pattern>/admin/setting/details</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
