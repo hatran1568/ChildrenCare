@@ -154,7 +154,7 @@ public class SettingController extends HttpServlet {
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("../../view/setting/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/list.jsp").forward(request, response);
     }
 
     protected void addSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -181,7 +181,7 @@ public class SettingController extends HttpServlet {
         request.setAttribute("setting", setting);
 //        request.setAttribute("uid", uid);
 
-        request.getRequestDispatcher("../../view/setting/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/edit.jsp").forward(request, response);
     }
 
     protected void editSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -210,7 +210,7 @@ public class SettingController extends HttpServlet {
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/add.jsp").forward(request, response);
     }
 
     

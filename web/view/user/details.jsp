@@ -52,13 +52,14 @@
                             </div>
                     </header>
 
-
-
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
-                            <img src="${requestScope.user.imageLink}" alt="User Avatar" width="15%" height="15%">
+                            <div>
+                                <button onclick="window.location.href = 'edit'" class="btn-success" style="margin: 10px;" >Edit user Information</button>
+                            </div>
+                            <br><img src="${requestScope.user.imageLink}" alt="User Avatar" style="width: 15%;">
                             <form>
                                 <div class="form-group">
                                     <label for="id">User ID</label>
@@ -77,7 +78,7 @@
                                     
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">male</c:if><c:if test="${requestScope.user.gender==false}">female</c:if>" readonly>
+                                    <input type="text" class="form-control" name="gender" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
                                 </div>
                                 
                                 <div class="form-group">
@@ -118,11 +119,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                           <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>

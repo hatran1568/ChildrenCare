@@ -166,8 +166,8 @@
                                         <td>${a.email}</td>
                                         <td>${a.mobile}</td>
                                         <td>${a.role.name}</td>
-                                        <td><c:if test="${a.status == true}">Not Verified</c:if>
-                                            <c:if test="${a.status == false}">Verified</c:if></td>
+                                        <td><c:if test="${a.status == true}">Verified</c:if>
+                                            <c:if test="${a.status == false}">Not Verified</c:if></td>
                                         <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
@@ -204,11 +204,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                            <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
                             <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>
@@ -306,6 +306,9 @@
             
             table.dataTable td {
                 font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
             }
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;

@@ -97,7 +97,7 @@
         <url-pattern>/admin/user/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SettingController</servlet-name>
+        <servlet-name>UserController</servlet-name>
         <url-pattern>/admin/user/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
