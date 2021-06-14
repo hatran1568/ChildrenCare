@@ -341,39 +341,39 @@
             <script src="../assets/js/images-loded.min.js"></script>
             <script src="../assets/js/custom.js"></script>
             <script>
-                $(document).ready(function () {
-                    var rowNum;
-                    var curRow;
-                    $('.receiver-select').click(function () {
-                        curRow = this.closest('tr');
-                        rowNum = $('#reservation-detail tr').index(curRow) - 1;
-                    });
-                    $('.receiver-choice').click(function () {
-                        var receiverID = this.id.substr(16);
-                        var receiverInfo = this.innerHTML;
-                        receiverInfo += '<input hidden type="text" name="receiver" value="' + receiverID.toString() + '">';
-                        document.getElementsByClassName('receiver-info')[parseInt(rowNum)].innerHTML = receiverInfo;
-                        $('#change-receiver').modal('hide');
-                    });
-                });
-                
-                function submitReceiver() {
-                    var missingReceiver = false;
-                    var receiverID = document.getElementsByName("receiver");
-                    for (i=0; i<receiverID.length; i++){
-                        if(!receiverID[i].value){
-                            missingReceiver = true;
-                            alert("Please choose receivers for all your services!");
-                            break;
+                        $(document).ready(function () {
+                            var rowNum;
+                            var curRow;
+                            $('.receiver-select').click(function () {
+                                curRow = this.closest('tr');
+                                rowNum = $('#reservation-detail tr').index(curRow) - 1;
+                            });
+                            $('.receiver-choice').click(function () {
+                                var receiverID = this.id.substr(16);
+                                var receiverInfo = this.innerHTML;
+                                receiverInfo += '<input hidden type="text" name="receiver" value="' + receiverID.toString() + '">';
+                                document.getElementsByClassName('receiver-info')[parseInt(rowNum)].innerHTML = receiverInfo;
+                                $('#change-receiver').modal('hide');
+                            });
+                        });
+
+                        function submitReceiver() {
+                            var missingReceiver = false;
+                            var receiverID = document.getElementsByName("receiver");
+                            for (i = 0; i < receiverID.length; i++) {
+                                if (!receiverID[i].value) {
+                                    missingReceiver = true;
+                                    alert("Please choose receivers for all your services!");
+                                    break;
+                                }
+                            }
+                            if (!missingReceiver) {
+                                document.getElementById("receiverSubmit").submit();
+                            }
                         }
-                    }
-                    if (!missingReceiver){
-                        document.getElementById("receiverSubmit").submit();
-                    }
-                }
 
             </script>
-
+            
     </body>
 </html>
 

@@ -56,6 +56,10 @@
         <servlet-name>SettingController</servlet-name>
         <servlet-class>controller.SettingController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <servlet-class>controller.ManagerCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
@@ -187,6 +191,14 @@
     <servlet-mapping>
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/filter/status</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
