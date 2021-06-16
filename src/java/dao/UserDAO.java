@@ -58,6 +58,39 @@ public class UserDAO extends BaseDAO {
         }
         return users;
     }
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<>();
+        try {
+
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n" +
+                        "        a.id, a.email, a.password, a.full_name, a.status,\n" +
+                        "        a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.role_id as role_id \n" +
+                        "        from user a left join Role r\n" +
+                        "        on a.role_id = r.id) as tbl";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User a = new User();
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getNString("role_name"));
+                a.setRole(r);
+                a.setStatus(rs.getBoolean("status"));
+                users.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
 
     public int count() {
         try {
@@ -121,7 +154,7 @@ public class UserDAO extends BaseDAO {
         try {
 
             String sql = "select a.id, a.email, a.password, a.full_name,\n"
-                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.id as role_id ,a.status\n"
+                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, r.id as role_id , a.status\n"
                     + "                    from user a left join Role r \n"
                     + "                    on a.role_id = r.id\n"
                     + "                    where a.id = ?";
@@ -152,6 +185,41 @@ public class UserDAO extends BaseDAO {
         return null;
     }
 
+    public User getUserByEmail(String mail) {
+        User a = new User();
+        try {
+
+            String sql = "select a.id, a.email, a.password, a.full_name,\n"
+                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.id as role_id ,a.status\n"
+                    + "                    from user a left join Role r \n"
+                    + "                    on a.role_id = r.id\n"
+                    + "                    where a.email = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, mail);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getNString("role_name"));
+                a.setRole(r);
+                a.setStatus(rs.getBoolean("status"));
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public void update(User u) {
         try {
             String sql = "update user set email=?, password=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
@@ -168,6 +236,20 @@ public class UserDAO extends BaseDAO {
             stm.setInt(8, u.getRole().getId());
             stm.setInt(10, u.getId());
             stm.setBoolean(9, u.isStatus());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateByAdmin(User u) {
+        try {
+            String sql = "update user set role_id=?,status=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getRole().getId());
+            stm.setBoolean(2, u.isStatus());
+            stm.setInt(3, u.getId());
             stm.executeUpdate();
 
         } catch (SQLException ex) {

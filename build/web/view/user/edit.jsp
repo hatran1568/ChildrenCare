@@ -1,8 +1,3 @@
-<%-- 
-    Document   : detail
-    Created on : May 24, 2021, 5:41:06 PM
-    Author     : Tran Thi Nguyet Ha
---%>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,10 +11,10 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Ramayana - Free Bootstrap 4 CSS Template</title>
+        <title>Edit User Info</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -57,15 +52,13 @@
                             </div>
                     </header>
 
-
-
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="user/edit" method="GET" >
-                                <div class="form-group">
-                                    <label for="id">User id</label>
+                            <form action="../../admin/user/update" method="POST">
+                                <br><div class="form-group">
+                                    <label for="email">User ID</label>
                                     <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
                                 </div>
                                 <div class="form-group">
@@ -76,19 +69,12 @@
                                     <label for="full-name">Full name</label>
                                     <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
                                 </div>
-                                
-                                    
-                                    <input type="text" class="form-control" name="password" value="${requestScope.user.password}" hidden>
                                     <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
-                                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
+                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
+                                </div>
+                                <div class="form-group">
                                         <label for="mobile">Mobile</label>
                                         <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
                                 </div>
@@ -96,20 +82,20 @@
                                     <label for="address">Address</label>
                                     <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="role">Role</label>
-
-
-                                    
-
                                     <select class="form-control" name="role">
-
                                         <c:forEach items="${requestScope.roles}" var="r">
-                                            <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
+                                            <option <c:if test="${requestScope.user.role.id==r.id}">selected</c:if> value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
-
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" name="status">
+                                        <option <c:if test="${!requestScope.user.status}">selected</c:if> value="false">Not Verified</option>
+                                        <option <c:if test="${requestScope.user.status}">selected</c:if> value="true">Verified</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -137,11 +123,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                           <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>
@@ -196,14 +182,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <style>
 
             .pagination{

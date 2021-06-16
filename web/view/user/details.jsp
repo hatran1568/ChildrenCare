@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Settings List
-    Created on : June 11, 2021, 5:32:04 AM
-    Author     : PieRow
---%>
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,10 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Settings</title>
+        <title>User Information</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,13 +20,12 @@
     Ramayana CSS Template
     https://templatemo.com/tm-529-ramayana
         -->
-      
+
         <!-- Additional CSS Files -->
-      
-        <link rel="stylesheet" href="../../assets/css/footer.css"/>
-        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
-        <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+        <link rel="stylesheet" href="../../assets/css/footer.css">
+        <link rel="stylesheet" href="../../assets/css/fontawesome.css">
+        <link rel="stylesheet" href="../../assets/css/templatemo-style.css">
+        <link rel="stylesheet" href="../../assets/css/owl.css">
 
     </head>
 
@@ -56,55 +50,53 @@
 
                                 </div>
                             </div>
-
-                        </div>
                     </header>
-
-
 
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
-
-
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
                             <div>
-
-                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New Settings</button>
-
-
-
+                                <button onclick="window.location.href = 'edit'" class="btn-success" style="margin: 10px;" >Edit user Information</button>
                             </div>
-                            <table>
-                                <tr>
-                                    <td>Id</td>
-                                    <td>Type</td>
-                                    <td>Name</td>
-                                    <td>Status</td>
+                            <br><img src="${requestScope.user.imageLink}" alt="User Avatar" style="width: 15%;">
+                            <form>
+                                <div class="form-group">
+                                    <label for="id">User ID</label>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="full-name">Full name</label>
+                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
+                                </div>
+                                    
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <input type="text" class="form-control" name="gender" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
+                                </div>
 
-                                </tr>
-                                <c:forEach items="${requestScope.settings}" var="s">
-                                    <tr>
-                                        <td>${s.id}</td>
-                                        <td>${s.type}</td>
-                                        <td>${s.name}</td>
-                                        <td>${s.status}</td>
-                                        <td><a href="delete?sid=${s.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                        <td><a href="edit?sid=${s.id}"><i class="fas fa-pen"></i></a></td>
-
-
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                            <div id="pagination" class="pagination"></div>
-
+                                <div class="form-group">
+                                    <label for="address">Role</label>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.role.name}" readonly>
+                                </div>
+                            </form>
                         </div>
-                        <script>
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-                        </script>
-
                     </section>
 
                 </div>
@@ -127,11 +119,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                            <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
                             <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>
@@ -148,7 +140,6 @@
                                     <li><a href="#">Third Service</a></li>
                                 </ul>
                             </li>
-
 
                         </ul>
                     </nav>
@@ -195,37 +186,6 @@
         <script src="../../assets/js/transition.js"></script>
         <script src="../../assets/js/owl-carousel.js"></script>
         <script src="../../assets/js/custom.js"></script>
-        <script>
-                            function generatePagger(id, pageindex, totalpage, gap, page)
-                            {
-                                var container = document.getElementById(id);
-                                if (pageindex > gap + 1)
-                                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-
-                                for (var i = pageindex - gap; i < pageindex; i++)
-                                {
-                                    if (i >= 1)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                                {
-                                    if (i <= totalpage)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                if (pageindex < totalpage - gap)
-                                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-                            }
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-        </script>
         <style>
 
             .pagination{
@@ -279,5 +239,4 @@
 
         </style>
     </body>
-
 </html>
