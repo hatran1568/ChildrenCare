@@ -52,7 +52,17 @@
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
+    <servlet>
 
+        <servlet-name>SliderController</servlet-name>
+        <servlet-class>controller.SliderController</servlet-class>
+  </servlet>
+  
+   <servlet>
+        <servlet-name>SettingController</servlet-name>
+        <servlet-class>controller.SettingController</servlet-class>
+
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
@@ -158,13 +168,27 @@
         <url-pattern>/service/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+
         <servlet-name>SliderController</servlet-name>
         <url-pattern>/manager/slider/list</url-pattern>
-=======
+
+    </servlet-mapping>
+     <servlet-mapping>
+
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/search</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
+
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/change</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/list</url-pattern>
->>>>>>> e343d7b76f914a22bdf79d38a3751960608672b6
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

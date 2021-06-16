@@ -5,7 +5,6 @@ package controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import bean.Slider;
 import dao.SliderDAO;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class SliderController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SliderController</title>");            
+            out.println("<title>Servlet SliderController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SliderController at " + request.getContextPath() + "</h1>");
@@ -60,16 +59,22 @@ public class SliderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getServletPath();
-        
-        switch(action){
+
+        switch (action) {
             case "/manager/slider/list":
                 showListPagination(request, response);
                 break;
+            case "/manager/slider/change":
+                changeStatus(request, response);
+                break;
+            case"/manager/slider/search":
+                search(request, response);
+                break;
             default:
                 break;
-                
+
         }
     }
 
@@ -86,11 +91,12 @@ public class SliderController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
-    public void showListPagination(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String r_index= request.getParameter("page");
-        if(r_index == null)
-            r_index="1";
+
+    public void showListPagination(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String r_index = request.getParameter("page");
+        if (r_index == null) {
+            r_index = "1";
+        }
         int index = Integer.parseInt(r_index);
         SliderDAO sliderDB = new SliderDAO();
         ArrayList<Slider> list = new ArrayList<Slider>();
@@ -102,8 +108,68 @@ public class SliderController extends HttpServlet {
         request.setAttribute("list", list);
         request.setAttribute("totalPage", totalpage);
         request.setAttribute("index", index);
-        request.setAttribute("url","list");
+        request.setAttribute("url", "list");
         request.getRequestDispatcher("../../view/slider/list.jsp").forward(request, response);
+    }
+
+    public void changeStatus(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Slider s = new Slider();
+        SliderDAO sliderDB = new SliderDAO();
+        s = sliderDB.getSliderByID(id);
+        if (s.isStatus() == true) {
+            sliderDB.setStatus(false, s);
+        } else {
+            sliderDB.setStatus(true, s);
+        }
+
+    }
+    
+    public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String search = request.getParameter("search");
+        String status = request.getParameter("status");
+        String r_index = request.getParameter("page");
+        if (search==null){
+            search ="";
+        }
+        if (r_index == null) {
+            r_index = "1";
+        }
+        if(status.equals("none")){
+        int index = Integer.parseInt(r_index);
+        SliderDAO sliderDB = new SliderDAO();
+        ArrayList<Slider> list = new ArrayList<Slider>();
+        int count = sliderDB.count(search);
+        int totalpage = (count % 12 == 0)
+                ? count / 12
+                : count / 12 + 1;
+        list = sliderDB.searchSliderPagination(index, 12, search);
+        request.setAttribute("list", list);
+        request.setAttribute("totalPage", totalpage);
+        request.setAttribute("index", index);
+        request.setAttribute("url", "search");
+        request.setAttribute("search",search);
+        request.setAttribute("status", status);
+        request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+        }
+        else{
+        boolean sta = Boolean.parseBoolean(status);
+        int index = Integer.parseInt(r_index);
+        SliderDAO sliderDB = new SliderDAO();
+        ArrayList<Slider> list = new ArrayList<Slider>();
+        int count = sliderDB.count(search,sta);
+        int totalpage = (count % 12 == 0)
+                ? count / 12
+                : count / 12 + 1;
+        list = sliderDB.searchSliderPagination(index, 12, search,sta);
+        request.setAttribute("list", list);
+        request.setAttribute("totalPage", totalpage);
+        request.setAttribute("index", index);
+         request.setAttribute("search",search);
+        request.setAttribute("status", status);
+        request.setAttribute("url", "search");
+        request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+        }
     }
 
     /**

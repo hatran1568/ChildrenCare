@@ -87,4 +87,142 @@ public class SliderDAO extends BaseDAO {
         }
         return -1;
     }
+
+    public int count(String search,boolean status) {
+        try {
+            String sql = "SELECT COUNT(*) as total FROM slider\n"
+                    + "  where (title like '%"+search+"%' or backlink like '%"+search+"%') and status =? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+          
+            stm.setBoolean(1, status);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+    
+    public int count(String search) {
+        try {
+            String sql = "SELECT COUNT(*) as total FROM slider\n"
+                    + "  where (title like '%"+search+"%' or backlink like '%"+search+"%') ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+          
+            
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    public void setStatus(boolean status, Slider s) {
+        try {
+            String sql = "Update slider set status =? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setBoolean(1, status);
+            stm.setInt(2, s.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Slider getSliderByID(int id) {
+        try {
+            Slider s = new Slider();
+            String sql = "Select * from slider where id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                s.setId(rs.getInt("id"));
+                s.setTitle(rs.getString("title"));
+                s.setImageLink(rs.getString("image_link"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setBacklink(rs.getString("backlink"));
+                s.setNotes(rs.getString("notes"));
+            }
+            return s;
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+
+    public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search,boolean status) {
+        try {
+            ArrayList<Slider> list = new ArrayList<Slider>();
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
+                    + "                                       id,title,image_link,backlink,status,notes\n"
+                    + "                                      from slider ) a where (title like '%"+search+"%' or backlink like '%"+search+"%') and\n"
+                    + "                                     rid >= (?-1)*?+1 and rid <= ?*? and status =? ";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            stm.setBoolean(5, status);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Slider s = new Slider();
+                s.setId(rs.getInt("id"));
+                s.setTitle(rs.getString("title"));
+                s.setImageLink(rs.getString("image_link"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setBacklink(rs.getString("backlink"));
+                s.setNotes(rs.getString("notes"));
+                list.add(s);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+       public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search) {
+        try {
+            ArrayList<Slider> list = new ArrayList<Slider>();
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
+                    + "                                       id,title,image_link,backlink,status,notes\n"
+                    + "                                      from slider ) a where (title like '%"+search+"%' or backlink like '%"+search+"%') and\n"
+                    + "                                     rid >= (?-1)*?+1 and rid <= ?*? ";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            
+            stm.setInt(3, pageindex);
+            stm.setInt(4, pagesize);
+            stm.setInt(1, pageindex);
+            stm.setInt(2, pagesize);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Slider s = new Slider();
+                s.setId(rs.getInt("id"));
+                s.setTitle(rs.getString("title"));
+                s.setImageLink(rs.getString("image_link"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setBacklink(rs.getString("backlink"));
+                s.setNotes(rs.getString("notes"));
+                list.add(s);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

@@ -22,7 +22,7 @@
         <!-- Site Icons -->
         <link rel="shortcut icon" href="#" type="image/x-icon" />
         <link rel="apple-touch-icon" href="#" />
-
+        <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
         <!-- Pogo Slider CSS -->
@@ -89,6 +89,7 @@
         <!-- Start Banner -->
         <div class="section inner_page_banner">
             <div class="container" style="margin-right: 20px">
+
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test="${ empty sessionScope.user}">
@@ -156,24 +157,41 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content;">
-            <c:forEach begin="0" end="2" var="i">
-                <div class="row ">
-                    <div class="col-md-4">
-                        <div> <img class="sli" src="../../${requestScope.list[i*3+1].imageLink}">
-                            <span class="in-text">${requestScope.list[i*3+1].status}</span>
+            <nav class="navbar navbar-light bg-light">
+                <form method="GET" action="search" class="form-inline">
+
+                    <select style="margin: 0 200px;" name="status">
+                        <option value="none">All</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
+                    <div class="row">
+                         <c:forEach var="l" items="${requestScope.list}">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="full news_blog">
+                        <img class="img-responsive" src="../../${l.imageLink}" alt="#" />
+                        <c:if test="${l.status  eq true}">
+                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye fa-4x"></i></span></c:if>
+                            <c:if test="${l.status  eq false}">
+                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
+
+                            <div style="background: #7f93db;">
+                                <h2><a href="#">${l.title}</a></h2>
+                          
                         </div>
-                        <h3 style="text-align: center;">${requestScope.list[i*3+1].title}</h3>
+                      
+
                     </div>
-                    <div   class="col-md-4">
-                        <img class="sli" src="../../${requestScope.list[i*3+1].imageLink}">
-                        <h3 style="text-align: center;">${requestScope.list[i*3+2].title}</h3>
-                    </div>
-                    <div class="col-md-4">
-                        <img   class="sli"  src="../../${requestScope.list[i*3+1].imageLink}">
-                        <h3 style="text-align: center;">${requestScope.list[i*3+3].title}</h3>
-                    </div>
+
                 </div>
             </c:forEach>
+                    </div>
+           
         </div>
         <div id="pagination" class="pagination"></div>
 
@@ -256,6 +274,29 @@
                     container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
             }
             generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
+            function changeStatus(param) {
+                var id = param.id;
+                $.ajax({
+                    url: "change",
+                    type: "GET",
+                    data: {id: id},
+                    success:
+                            function (data) {
+                                if ($('#' + id.toString()).html() == '<i class="fas fa-eye fa-4x" aria-hidden="true"></i>') {
+                                    $('#' + id.toString()).html('<i class="fas fa-eye-slash fa-4x"></i>')
+
+                                } else {
+
+                                    $('#' + id.toString()).html('<i class="fas fa-eye fa-4x"></i>')
+
+                                }
+
+                            }
+
+                });
+
+            }
+
 
             </script>
             <style>
@@ -316,10 +357,31 @@
                     width: 300px;
                 }
                 .in-text{
-                    position: relative;
-                    right: 50px;
+                    position: absolute;
+                    top: 70px;
+                    left: 40%;
+                    visibility: hidden;
+
+                }
+                .news_blog:hover > .in-text{
+
+                    visibility: visible;
+
                 }
 
+                .in-text:hover{
+                    display: block;
+               }
+
+                .news_blog:hover{
+                    opacity: 0.4;
+                }
+                .btn{
+                    bottom: 0;
+                }
+                nav{
+
+                }
             </style>
 
     </body>
