@@ -15,20 +15,14 @@ import bean.Setting;
 
 public class SettingDAO extends BaseDAO {
 
-    public ArrayList<Setting> getSettings(int pageindex, int pagesize) {
+    public ArrayList<Setting> getSettings() {
         ArrayList<Setting> settings = new ArrayList<>();
         try {
 
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
                         + "s.id, s.type, s.name, s.value, s.description, s.status\n"
-                        + "from setting s ) as tbl\n"
-                        + "where rid >= (? - 1)*? + 1 and rid <= ? * ?";
+                        + "from setting s ) as tbl\n";
             PreparedStatement stm = connection.prepareStatement(sql);
-
-            stm.setInt(1, pageindex);
-            stm.setInt(2, pagesize);
-            stm.setInt(3, pageindex);
-            stm.setInt(4, pagesize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Setting s = new Setting();
