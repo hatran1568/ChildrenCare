@@ -154,7 +154,7 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 700px;">
+<!--        <div class="container" style="height: 700px;">
             <div class="banner_section">
             <div class="container-fluid padding_0">
                <div id="my_slider" class="carousel slide" data-ride="carousel">
@@ -175,7 +175,7 @@
                            </div>
                         </div>
                      </div>
-                     <c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">
+                     <%--<c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">--%>
                      <div class="carousel-item">
                         <div class="row">
                            <div class="col-md-6">
@@ -192,7 +192,7 @@
                            </div>
                         </div>
                      </div>
-                     </c:forEach>
+                     <%--</c:forEach>--%>
                   </div>
                   <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
                   <i class="fa fa-left fa-arrow-left"></i>
@@ -203,7 +203,7 @@
                </div>
             </div>
          </div>
-        </div>
+        </div>-->
         
         <!--Service list-->
         <div class="categories-area section-padding30">
@@ -242,10 +242,10 @@
         </div>
         <!--Post list-->
             <div class="site-section">
-      <div class="container">
+<!--      <div class="container">
           <div class="row justify-content-sm-center">
                     <div class="cl-xl-7 col-lg-8 col-md-10">
-                        <!-- Section Tittle -->
+                         Section Tittle 
                         <div class="section-tittle text-center">
                             <h1>Latest posts</h1>
                         </div> 
@@ -253,13 +253,13 @@
                 </div>
         <div class="row">
           <div class="col-lg-12">
-<!--            <div class="row">
+            <div class="row">
               <div class="col-12">
                 <div class="section-title">
                   <h2>Latest posts</h2>
                 </div>
               </div>
-            </div>-->
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <div class="post-entry-1">
@@ -274,7 +274,7 @@
               </div>
               
               <div class="col-md-6">
-                  <c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">
+                  <%--<c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">--%>
                 <div class="post-entry-2 d-flex bg-light">
                   <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
                   <div class="contents">
@@ -285,7 +285,7 @@
                     </div>
                   </div>
                 </div>
-                </c:forEach>
+                <%--</c:forEach>--%>
                   <p>
               <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
             </p>
@@ -294,7 +294,7 @@
           </div>
           
         </div>
-      </div>
+      </div>-->
     </div>
         <!-- end section -->
 
