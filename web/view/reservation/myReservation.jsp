@@ -157,51 +157,22 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content;">
-            <nav class="navbar navbar-light bg-light">
-                <form method="GET" action="search" class="form-inline">
-
-                    <select style="margin: 0 200px;" name="status">
-                        <option value="none">All</option>
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                    </select>
-                    <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                    <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
-            </nav>
-                    <div class="row">
-                         <c:forEach var="l" items="${requestScope.list}">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="../../${l.imageLink}" alt="#" />
-                        <c:if test="${l.status  eq true}">
-                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye fa-4x"></i></span></c:if>
-                            <c:if test="${l.status  eq false}">
-                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
-
-                            <div style="background: #7f93db;">
-                                <h2><a href="#">${l.title}</a></h2>
-                          
-                        </div>
-                      
-
-                    </div>
-
-                </div>
-            </c:forEach>
-                    </div>
+            
+            <table>
+                <tr>
+                    <td>Id</td>
+                    <td>Date</td>
+                    <td>Total Cost</td>
+                    <td>
+                </tr>
+            </table>
            
         </div>
-        <div id="pagination" class="pagination"></div>
+      
 
 
 
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-
-        </script>
+       
 
 
 

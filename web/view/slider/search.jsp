@@ -168,7 +168,9 @@
                         <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    
                 </form>
+                          <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
             </nav>
             <div class="row">
                 <c:forEach var="l" items="${requestScope.list}">

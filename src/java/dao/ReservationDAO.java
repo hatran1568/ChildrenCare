@@ -22,6 +22,41 @@ import bean.Service;
  */
 public class ReservationDAO extends BaseDAO {
 
+    public ArrayList<Reservation> getReservation(User u) {
+        try {
+            ArrayList<Reservation> list = new ArrayList<Reservation>();
+            String sql = "SELECT\n"
+                    + "reservation.id,\n"
+                    + "reservation.customer_id,\n"
+                    + "reservation.reservation_date,\n"
+                    + "reservation.`status`,\n"
+                    + "reservation.staff_id,\n"
+                    + "reservation.number_of_person\n"
+                    + "FROM\n"
+                    + "reservation\n"
+                    + "where customer_id =? ";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getId());
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Reservation r = new Reservation();
+                r.setId(rs.getInt("id"));
+                r.setCustomer(u);
+                r.setCheckup_time(rs.getDate("reservation_date"));
+                User staff = new User();
+                staff.setId(rs.getInt("staff_id"));
+                r.setStaff(staff);
+                r.setStatus(rs.getString("status"));
+                list.add(r);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public void addReservation(Reservation r) {
         try {
             String sql = "insert into reservation(customer_id, reservation_date, status,\n"
@@ -164,9 +199,9 @@ public class ReservationDAO extends BaseDAO {
             int n = 0;
             String sql = "SELECT MAX(id) AS 'Maximum'\n"
                     + "FROM reservation";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
-            
+
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 n = rs.getInt("Maximum");

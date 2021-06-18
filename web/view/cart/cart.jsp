@@ -268,7 +268,7 @@
                                                 success:
                                                         function(data){
                                                             var b = JSON.parse(JSON.stringify(data));
-                                                            let x = b["chao"];
+                                                            console.log(b);
                                                             
                                                         }
                                                 

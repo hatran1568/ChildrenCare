@@ -115,9 +115,9 @@ public class ReservationContactController extends HttpServlet {
         CartDAO cartDB = new CartDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
 
-        
+         ArrayList<Receiver> receiverList =  new ArrayList<>();
         if (u == null) {
-            ArrayList<Receiver> receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+            receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
             ArrayList<CartItem> list = new ArrayList<>();
             if (request.getSession().getAttribute("cart") != null){
             list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
@@ -139,7 +139,12 @@ public class ReservationContactController extends HttpServlet {
 //        }
         
         if (u != null) {
-            ArrayList<Receiver> receiverList = receiverDB.getReceivers(u.getId());
+            if(request.getSession().getAttribute("receivers") ==null){
+           receiverList = receiverDB.getReceivers(u.getId());
+            }
+            else{
+            receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+            }
             ArrayList<CartItem> list = new ArrayList<>();
             list = cartDB.getCartByUserId(u);
 
@@ -169,7 +174,7 @@ public class ReservationContactController extends HttpServlet {
         ArrayList<Receiver> receivers = new ArrayList<Receiver>();
         if (request.getSession().getAttribute("receivers") == null) {
             Receiver r = new Receiver();
-
+            r.setId(0);
             r.setFullName(name);
             r.setGender(gender);
             r.setAddress(address);
@@ -186,9 +191,13 @@ public class ReservationContactController extends HttpServlet {
             receivers.add(r);
         } else {
             receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
-
+            
             Receiver r = new Receiver();
-
+            
+            
+            
+            r.setId(receivers.size());
+            
             r.setFullName(name);
             r.setGender(gender);
             r.setAddress(address);

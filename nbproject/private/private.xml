@@ -3,32 +3,29 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml~</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/RoleDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReservationDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationContactController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/list.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/CartDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/CartItem.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/search.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/custom.css</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/DetailController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Reservation.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/MyReservationController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/myReservation.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/filter/Authorization.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SettingDAO.java</file>
-=======
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/web/view/user/edit.jsp</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/web/view/user/add.jsp</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/web/view/user/list.jsp</file>
-            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/Brand%20New%20Code/web/view/user/details.jsp</file>
->>>>>>> a2be920c32a3d6e8cb2f937fa4c3dd10a28299c5
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationCompletionController.java</file>
         </group>
     </open-files>
 </project-private>
