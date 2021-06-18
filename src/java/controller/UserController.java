@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.User;
 import dao.ReceiverDAO;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -196,7 +197,7 @@ public class UserController extends HttpServlet {
         u.setImageLink("None");
         u.setStatus(Boolean.parseBoolean(request.getParameter("status")));
         UserDAO userDB = new UserDAO();
-        userDB.addUser(u, u.isStatus());
+        userDB.addUser(u, u.isStatus(), -1);
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;
         try {
@@ -366,7 +367,7 @@ public class UserController extends HttpServlet {
             u.setGender(false);
         }
 
-        userDb.addCustomer(u, false);
+        userDb.addCustomer(u, false, -1);
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);
