@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-@WebServlet(name = "MyReservationController", urlPatterns = {"/reservation/my"})
+@WebServlet(name = "MyReservationController", urlPatterns = {"/customer/reservation/my"})
 public class MyReservationController extends HttpServlet {
 
     /**
@@ -62,7 +62,15 @@ public class MyReservationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getServletPath();
+        
+        switch(action){
+            case "/customer/reservation/my":
+                showMyreservation(request, response);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -85,6 +93,9 @@ public class MyReservationController extends HttpServlet {
         
         ReservationDAO reservationDB = new ReservationDAO();
         list = reservationDB.getReservation(u);
+        for (Reservation reservation : list) {
+            reservation.setTotal_cost(reservationDB.getTotalCost(reservation));
+        }
         
         request.setAttribute("list", list);
         request.getRequestDispatcher("../../view/reservation/myReservation.jsp").forward(request, response);

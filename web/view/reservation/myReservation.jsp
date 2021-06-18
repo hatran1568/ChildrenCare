@@ -156,24 +156,37 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content;">
+        <div class="container" style="height: 700px;">
             
-            <table>
-                <tr>
-                    <td>Id</td>
-                    <td>Date</td>
-                    <td>Total Cost</td>
-                    <td>
-                </tr>
-            </table>
-           
-        </div>
+           <table class="table" id="reservation-detail">
+                        <thead  class="thead-dark">
+                            <tr>
+                                <td class="col-md-1">Id</td>
+                                <td class="col-md-2">Date</td>
+                                <td class="col-md-2">Time to check up</td>
+                                <td class="col-md-2">Status</td>
+                                <td class="col-md-2">Total Cost</td>
+                                <td class="col-md-1">Information</td>
+                               
+                        </thead>
+                        <tbody>
+                            <c:forEach var="list" items="${requestScope.list}">
+                            <td class="col-md-1">${list.id}</td>
+                            <td class="col-md-2">${list.reservation_date}</td>
+                                <td class="col-md-2">${list.reservation_date}</td>
+                                <td class="col-md-2">${list.status}</td>
+                                <td class="col-md-3">${list.total_cost}</td>
+                                <td class="col-md-1"><a href="detail?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
+                            </c:forEach>
+                            
+                        </tbody>
+                    </table>
       
 
 
 
        
-
+        </div>
 
 
         <!-- Start Footer -->

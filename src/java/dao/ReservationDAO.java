@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Reservation;
+import bean.ReservationService;
 import bean.Service;
 
 /**
@@ -43,7 +44,7 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setCheckup_time(rs.getDate("reservation_date"));
+                r.setReservation_date(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
@@ -211,5 +212,26 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public float getTotalCost(Reservation r){
+        try {
+            String sql ="select sum(unit_price) as sum FROM reservation_service where reservation_id =  ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                return rs.getFloat("sum");
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return 0;
+    }
+    
+    public ReservationService getReservationServiceById(Reservation r){
+       return null;
+        
     }
 }
