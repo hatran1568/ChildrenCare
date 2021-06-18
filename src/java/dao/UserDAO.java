@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Role;
+import java.sql.Statement;
 
 /**
  *
@@ -153,7 +154,7 @@ public class UserDAO extends BaseDAO {
         try {
 
             String sql = "select a.id, a.email, a.password, a.full_name,\n"
-                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.id as role_id ,a.status\n"
+                    + "                    a.gender, a.mobile, a.address, a.image_link , r.name as role_name, a.role_id as role_id ,a.status\n"
                     + "                    from user a left join Role r \n"
                     + "                    on a.role_id = r.id\n"
                     + "                    where a.id = ?";
@@ -362,5 +363,27 @@ public class UserDAO extends BaseDAO {
         }
         return customers;
     }
+    public void updateWithoutPassword(User u) {
+        try {
+            String sql = "update user set email=?, password=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, u.getEmail());
+            stm.setString(2, u.getFullName());
+            stm.setBoolean(3, u.isGender());
+            stm.setString(4, u.getMobile());
+            stm.setString(5, u.getAddress());
+            stm.setString(6, u.getImageLink());
+            stm.setInt(7, u.getRole().getId());
+            stm.setInt(9, u.getId());
+            stm.setBoolean(8, u.isStatus());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }

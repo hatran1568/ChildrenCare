@@ -115,9 +115,9 @@ public class ReservationContactController extends HttpServlet {
         CartDAO cartDB = new CartDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
 
-        
+        ArrayList<Receiver> receiverList = new ArrayList<>();
         if (u == null) {
-            ArrayList<Receiver> receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+            receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
             ArrayList<CartItem> list = new ArrayList<>();
             if (request.getSession().getAttribute("cart") != null){
             list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
@@ -139,7 +139,12 @@ public class ReservationContactController extends HttpServlet {
 //        }
         
         if (u != null) {
-            ArrayList<Receiver> receiverList = receiverDB.getReceivers(u.getId());
+            if (request.getSession().getAttribute("receivers") == null){
+                 receiverList = receiverDB.getReceivers(u.getId());
+            }
+            else {
+                receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
+            }
             ArrayList<CartItem> list = new ArrayList<>();
             list = cartDB.getCartByUserId(u);
 
@@ -160,6 +165,7 @@ public class ReservationContactController extends HttpServlet {
 
     private void addReceiver(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Receiver> receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
         User u = (User) request.getSession().getAttribute("user");
         String name = request.getParameter("fullName");
         boolean gender = request.getParameter("gender").equals("male");
@@ -169,7 +175,7 @@ public class ReservationContactController extends HttpServlet {
         ArrayList<Receiver> receivers = new ArrayList<Receiver>();
         if (request.getSession().getAttribute("receivers") == null) {
             Receiver r = new Receiver();
-
+            r.setId(0);
             r.setFullName(name);
             r.setGender(gender);
             r.setAddress(address);
@@ -188,7 +194,7 @@ public class ReservationContactController extends HttpServlet {
             receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
 
             Receiver r = new Receiver();
-
+            r.setId(receiverList.size());
             r.setFullName(name);
             r.setGender(gender);
             r.setAddress(address);

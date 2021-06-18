@@ -197,17 +197,20 @@
         <url-pattern>/admin/setting/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ManagerCustomerController</servlet-name>
         <url-pattern>/manager/customer/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerCustomerController</servlet-name>
-        <url-pattern>/manager/customer/filter/status</url-pattern>
-
+        <url-pattern>/manager/customer/edit</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/details</url-pattern>
+    </servlet-mapping> 
+    <servlet-mapping>   
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/details</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>
