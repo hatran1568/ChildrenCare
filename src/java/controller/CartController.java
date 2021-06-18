@@ -8,6 +8,7 @@ package controller;
 import bean.CartItem;
 import bean.Service;
 import bean.User;
+import com.google.gson.Gson;
 import dao.CartDAO;
 import dao.ServiceDAO;
 import dao.UserDAO;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +78,7 @@ public class CartController extends HttpServlet {
                 break;
 
             case "/cart/edit":
-                editCart(request, response);
+                editOneItemCart(request, response);
                 break;
             case "/cart/add":
                 if (user == null || user.getId() == -1) {
@@ -213,6 +216,35 @@ public class CartController extends HttpServlet {
         response.sendRedirect("list");
     }
 
+    public void editOneItemCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User u = new User();
+        u = (User) request.getSession().getAttribute("user");
+        if (u != null) {
+            int uid = Integer.parseInt(request.getParameter("uid"));
+            int sid = Integer.parseInt(request.getParameter("sid"));
+            int param = Integer.parseInt(request.getParameter("param"));
+            User user = new User();
+            user.setId(uid);
+            Service service = new Service();
+            service.setId(sid);
+            CartDAO cartDB = new CartDAO();
+            cartDB.updateCart(user, service, param);
+            ArrayList<CartItem> item = new ArrayList<>();
+            item = cartDB.getCartByUserId(u);
+             float price = item.get(0).getService().getSalePrice();
+            Map<String ,Float> options = new LinkedHashMap<>();
+            options.put("chao", price*param);
+            
+          
+            String json = new Gson().toJson(options);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+
+    }
+
     //Delete Function to delete service  from Database/Session
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u = (User) request.getSession().getAttribute("user");
@@ -225,11 +257,11 @@ public class CartController extends HttpServlet {
 
             int user_id = Integer.parseInt(uid);
             int service_id = Integer.parseInt(sid);
-                        User user = new User();
-                                Service service = new Service();
-                                user.setId(user_id);
-                                service.setId(service_id);
-                                cartDB.deleteCart(user, service);
+            User user = new User();
+            Service service = new Service();
+            user.setId(user_id);
+            service.setId(service_id);
+            cartDB.deleteCart(user, service);
         } else {
 
             //If user not logged in edit to Session

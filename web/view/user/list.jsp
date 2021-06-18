@@ -42,9 +42,8 @@
                     {'className': 'text-center', 'targets': 6},
                     {'className': 'text-center', 'targets': 7},
                     {'className': 'text-center', 'targets': 8},
-                    {'orderable': false, 'targets' : 2},
-                    {'orderable': false, 'targets' : 5},
-                    {'orderable': false, 'targets' : 6},
+                    {'orderable': false, 'targets' : 7},
+                    {'orderable': false, 'targets' : 8},
                 ],
                 columns: [
                     null,
@@ -82,7 +81,7 @@
                     this.api().columns('.dt-filter').every( function () {
                         var column = this;
                         var select = $('<select><option value=""></option></select>')
-                            .appendTo( $(column.header()))
+                            .appendTo( $(column.footer()))
                             .on( 'change', function () {
                                 var val = $.fn.dataTable.util.escapeRegex(
                                     $(this).val()
@@ -156,6 +155,19 @@
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Filters:</th>
+                                        <th></th>
+                                        <th>Gender</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                                 <tbody>
                                 <c:forEach items="${requestScope.users}" var="a">
                                     <tr>
@@ -166,8 +178,8 @@
                                         <td>${a.email}</td>
                                         <td>${a.mobile}</td>
                                         <td>${a.role.name}</td>
-                                        <td><c:if test="${a.status == true}">Not Verified</c:if>
-                                            <c:if test="${a.status == false}">Verified</c:if></td>
+                                        <td><c:if test="${a.status == true}">Verified</c:if>
+                                            <c:if test="${a.status == false}">Not Verified</c:if></td>
                                         <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
@@ -204,11 +216,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                            <li><a href="#">Homepage</a></li>
-                            <li><a href="#">User</a></li>
+                            <li><a href="../../home">Homepage</a></li>
+                            <li><a href="../../admin/user/list">User</a></li>
                             <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>
@@ -303,9 +315,18 @@
 
         </script>-->
         <style>
-            
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tfoot th {
+                border-bottom: 2px solid #111;
+                text-align: center;
+            }
             table.dataTable td {
                 font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
             }
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;

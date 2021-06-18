@@ -74,6 +74,9 @@ public class UserController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
+            case "/admin/user/details":
+                showUserDetails(request, response);
+                break;
             case "/admin/user/new":
                 showAddForm(request, response);
                 break;
@@ -91,9 +94,6 @@ public class UserController extends HttpServlet {
                 break;
             case "/admin/user/list":
                 showListUser(request, response);
-                break;
-            case "/admin/user/details":
-                showUserDetails(request, response);
                 break;
             case "/login":
                 login(request, response);
@@ -175,23 +175,35 @@ public class UserController extends HttpServlet {
     }
     
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         User u = new User();
-        u.setId(Integer.parseInt(request.getParameter("id")));
         u.setEmail(request.getParameter("email"));
         u.setAddress(request.getParameter("address"));
-        u.setGender(request.getParameter("gender").equals("male"));
+        u.setGender(Boolean.parseBoolean(request.getParameter("gender")));
         u.setFullName(request.getParameter("full-name"));
         u.setImageLink(request.getParameter("image-link"));
-        u.setPassword("admin");
+            //Generate a random password with 9 numbers in the range of 0 to 9
+        int[] generatePassword = new int[10];
+        String password = "CRS";
+        for (int i = 0; i < 9; i++) {
+            generatePassword[i] = (int) (Math.random()*10);
+            password += Integer.toString(generatePassword[i]);
+        }
+        u.setPassword(password);
         u.setMobile(request.getParameter("mobile"));
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
-
+        u.setImageLink("None");
+        u.setStatus(Boolean.parseBoolean(request.getParameter("status")));
         UserDAO userDB = new UserDAO();
-        userDB.addUser(u, true);
-
+        userDB.addUser(u, u.isStatus());
+        EmailVerify e = new EmailVerify();
+        String emailContent = "Your password for the Children Care System: " + password;
+        try {
+            e.sendText(userDB.getUserByEmail(request.getParameter("email")), emailContent);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.sendRedirect("list");
     }
 
@@ -207,7 +219,6 @@ public class UserController extends HttpServlet {
         User user = userDB.getUser(uid);
 
         request.setAttribute("user", user);
-//        request.setAttribute("uid", uid);
 
         request.getRequestDispatcher("../../view/user/edit.jsp").forward(request, response);
     }
@@ -215,20 +226,13 @@ public class UserController extends HttpServlet {
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         User u = new User();
-
         u.setId(Integer.parseInt(request.getParameter("id")));
-        u.setEmail(request.getParameter("email"));
-        u.setAddress(request.getParameter("address"));
-        u.setGender(request.getParameter("gender").equals("male"));
-        u.setFullName(request.getParameter("full-name"));
-        u.setImageLink(request.getParameter("image-link"));
-        u.setPassword(request.getParameter("password"));
-        u.setMobile(request.getParameter("mobile"));
+        u.setStatus(Boolean.parseBoolean(request.getParameter("status")));
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
         UserDAO userDB = new UserDAO();
-        userDB.update(u);
+        userDB.updateByAdmin(u);
         response.sendRedirect("list");
     }
 
@@ -246,7 +250,7 @@ public class UserController extends HttpServlet {
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
-
+        
         request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
     }
 

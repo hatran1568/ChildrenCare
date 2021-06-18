@@ -53,8 +53,15 @@
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>SliderController</servlet-name>
+        <servlet-class>controller.SliderController</servlet-class>
+  </servlet>
+  
+   <servlet>
         <servlet-name>SettingController</servlet-name>
         <servlet-class>controller.SettingController</servlet-class>
+
     </servlet>
     <servlet>
         <servlet-name>ManagerCustomerController</servlet-name>
@@ -101,7 +108,7 @@
         <url-pattern>/admin/user/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SettingController</servlet-name>
+        <servlet-name>UserController</servlet-name>
         <url-pattern>/admin/user/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -169,8 +176,27 @@
         <url-pattern>/service/list</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/list</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
+
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/search</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
+
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/change</url-pattern>
+
+    </servlet-mapping>
+     <servlet-mapping>
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/list</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SettingController</servlet-name>

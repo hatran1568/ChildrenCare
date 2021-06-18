@@ -56,7 +56,11 @@
                     <section class="right-image">
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="user/edit" method="GET" >
+                            <form action="../../admin/user/update" method="POST">
+                                <br><div class="form-group">
+                                    <label for="email">User ID</label>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
+                                </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
@@ -65,19 +69,12 @@
                                     <label for="full-name">Full name</label>
                                     <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
                                 </div>
-                                
-                                    
-                                    <input type="text" class="form-control" name="password" value="${requestScope.user.password}" hidden>
                                     <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
                                 <div class="form-group">
                                     <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
-                                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
+                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
+                                </div>
+                                <div class="form-group">
                                         <label for="mobile">Mobile</label>
                                         <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
                                 </div>
@@ -85,21 +82,19 @@
                                     <label for="address">Address</label>
                                     <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="role">Role</label>
                                     <select class="form-control" name="role">
                                         <c:forEach items="${requestScope.roles}" var="r">
-                                            <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
+                                            <option <c:if test="${requestScope.user.role.id==r.id}">selected</c:if> value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" name="status">
-                                        <option value="0">Not Verified</option>
-                                        <option value="1">Verified</option>
+                                        <option <c:if test="${!requestScope.user.status}">selected</c:if> value="false">Not Verified</option>
+                                        <option <c:if test="${requestScope.user.status}">selected</c:if> value="true">Verified</option>
                                     </select>
                                 </div>
 
@@ -128,11 +123,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                           <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>

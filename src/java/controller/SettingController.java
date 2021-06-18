@@ -82,6 +82,9 @@ public class SettingController extends HttpServlet {
             case "/admin/setting/edit":
                 showEditForm(request, response);
                 break;
+            case "/admin/setting/details":
+                showSettingDetails(request, response);
+                break;
             case "/admin/setting/update":
                 editSetting(request, response);
                 break;
@@ -132,29 +135,20 @@ public class SettingController extends HttpServlet {
      */
     protected void showListSetting(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String r_pagesize = getServletContext().getInitParameter("pagesize");
-        int pagesize = Integer.parseInt(r_pagesize);
-
-        String r_pageindex = request.getParameter("page");
-        if (r_pageindex == null) {
-            r_pageindex = "1";//validation
-        }
-        int pageindex = Integer.parseInt(r_pageindex);
-
+        
         SettingDAO settingDB = new SettingDAO();
-        int count = settingDB.count();
-        int totalpage = (count % pagesize == 0)
-                ? count / pagesize
-                : count / pagesize + 1;
-        String url = "list";
-
-        ArrayList<Setting> settings = settingDB.getSettings(pageindex, pagesize);
+        ArrayList<Setting> settings = settingDB.getSettings();
         request.setAttribute("settings", settings);
-        request.setAttribute("totalpage", totalpage);
-        request.setAttribute("pageindex", pageindex);
-        request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("../../view/setting/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/list.jsp").forward(request, response);
+    }
+    
+    protected void showSettingDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        SettingDAO settingDB = new SettingDAO();
+        Setting setting = settingDB.getSetting(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("setting", setting);
+        request.getRequestDispatcher("../../view/settings/details.jsp").forward(request, response);
     }
 
     protected void addSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -181,7 +175,7 @@ public class SettingController extends HttpServlet {
         request.setAttribute("setting", setting);
 //        request.setAttribute("uid", uid);
 
-        request.getRequestDispatcher("../../view/setting/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/edit.jsp").forward(request, response);
     }
 
     protected void editSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -210,7 +204,7 @@ public class SettingController extends HttpServlet {
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/settings/add.jsp").forward(request, response);
     }
 
     
