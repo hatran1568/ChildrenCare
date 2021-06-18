@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Customer List</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -13,31 +13,30 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Site Metas -->
-        <title>HomePage</title>
+        
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="assets/css/footer.css" rel="stylesheet" type="text/css"/>
+        <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
         <link rel="shortcut icon" href="#" type="image/x-icon" />
         <link rel="apple-touch-icon" href="#" />
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
         <!-- Pogo Slider CSS -->
-        <link rel="stylesheet" href="assets/css/pogo-slider.min.css" />
-        <!-- owl carousel css -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
+        <link rel="stylesheet" href="../../assets/css/pogo-slider.min.css" />
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <!-- Site CSS -->
-        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="../../assets/css/style.css" />
         <!-- Responsive CSS -->
-        <link rel="stylesheet" href="assets/css/responsive.css" />
+        <link rel="stylesheet" href="../../assets/css/responsive.css" />
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="assets/css/custom.css" />
-        <link href="assets/css/slider.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -64,19 +63,15 @@
                                         <ul class="navbar-nav">
                                             <li><a class="nav-link" href="#">Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="service/list">Services</a></li>
+                                            <li><a class="nav-link" href="#">Services</a></li>
                                             <li><a class="nav-link" href="#">Blog</a></li>
-                                            <li><a class="nav-link" href="user/list">Users</a></li>
+                                            <li><a class="nav-link" href="#">Users</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </nav>
-                            <div class="search-box">
-                                <a href="cart/list" class="search-btn">
-                                    <img style="width: 70px;" src="assets/images/cart.png" alt="#" />
-                                </a>
-                            </div> 
                             
+
                         </div>
                     </div>
                 </div>
@@ -153,155 +148,47 @@
             </div>
         </div>
         <!-- End Banner -->
-        <!-- section -->
-<!--        <div class="container" style="height: 700px;">
-            <div class="banner_section">
-            <div class="container-fluid padding_0">
-               <div id="my_slider" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="padding_left_0">
-                                  <h1 class="retailer_text">${requestScope.sliders[0].title}</h1>
-                                  <p class="search_text">${requestScope.sliders[0].notes}</p>
-                                 <div class="btn_main">
-                                    <div class="more_bt"><a href="${requestScope.sliders[0].backlink}">Read More </a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                               <div><img src="${requestScope.sliders[0].imageLink}" class="image_1"/></div>
-                           </div>
-                        </div>
-                     </div>
-                     <%--<c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">--%>
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="padding_left_0">
-                                 <h1 class="retailer_text">${requestScope.sliders[i].title}</h1>
-                                 <p class="search_text">${requestScope.sliders[i].notes}</p>
-                                 <div class="btn_main">
-                                     <div class="more_bt"><a href="${requestScope.sliders[i].backlink}">Read More </a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                               <div><img src="${requestScope.sliders[i].imageLink}" class="image_1"/></div>
-                           </div>
-                        </div>
-                     </div>
-                     <%--</c:forEach>--%>
-                  </div>
-                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-                  <i class="fa fa-left fa-arrow-left"></i>
-                  </a>
-                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-                  <i class="fa fa-right fa-arrow-right"></i>
-                  </a>
-               </div>
-            </div>
-         </div>
-        </div>-->
-        
-        <!--Service list-->
-        <div class="categories-area section-padding30">
-            <div class="container">
-                <div class="row justify-content-sm-center">
-                    <div class="cl-xl-7 col-lg-8 col-md-10">
-                        <!-- Section Tittle -->
-                        <div class="section-tittle text-center">
-                            <h1>Our services</h1>
-                        </div> 
-                    </div>
-                </div>
-                <div class="row">
-                    <c:forEach items="${requestScope.services}" var="s">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-cat mb-50">
-                            <img src="${s.thumbnailLink}" alt="Image" class="img-fluid">
-                            <div class="cat-cap">
-                                <h5 class="service-title"><a  href="#">${s.fullname}</a></h5>
-                                <p>${s.description}</p>
-                                <a  href="#" class="read-more1">Read More ></a>
-                            </div>
-                        </div>
-                    </div>
+
+        <!-- Start section -->
+        <div class="container" style="height: 1000px; vertical-align: middle">
+            
+            <table id="customers" class="table" style="width:100%; ">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Fullname</td>
+                        <td>Gender</td>
+                        <td>Email</td>
+                        <td>Mobile</td>
+                        <td>Status</td>
+                        <th>View</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${requestScope.customers}" var="c">
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${c.fullName}</td>
+                            <td><c:if test="${c.gender == true}">Male</c:if>
+                                <c:if test="${c.gender == false}">Female</c:if></td>
+                            <td>${c.email}</td>
+                            <td>${c.mobile}</td>
+                            <td><c:if test="${c.status == true}">Not Verified</c:if>
+                                <c:if test="${c.status == false}">Verified</c:if></td>
+                            <td><a href="details?uid=${c.id}"><i class="fas fa-eye"></i></a></td>
+                            <td><a href="edit?uid=${c.id}"><i class="fas fa-pen"></i></a></td>
+                        </tr>
                     </c:forEach>
-                </div>
-                <!-- Section Button -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="browse-btn2 text-center mt-50">
-                            <a href="service/list" class="btn">Find More Services</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </tbody>
+            </table>
         </div>
-        <!--Post list-->
-            <div class="site-section">
-<!--      <div class="container">
-          <div class="row justify-content-sm-center">
-                    <div class="cl-xl-7 col-lg-8 col-md-10">
-                         Section Tittle 
-                        <div class="section-tittle text-center">
-                            <h1>Latest posts</h1>
-                        </div> 
-                    </div>
-                </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-12">
-                <div class="section-title">
-                  <h2>Latest posts</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="post-entry-1">
-                  <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
-                  <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
-                  <p>${requestScope.posts[0].description}</p>
-                  <div class="post-meta">
-                    <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
-                    
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                  <%--<c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">--%>
-                <div class="post-entry-2 d-flex bg-light">
-                  <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
-                  <div class="contents">
-                      <h2><a href="#">${requestScope.posts[i].title}</a></h2>
-                    <div class="post-meta">
-                      <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
-                      <span class="date-read">${requestScope.posts[i].description}</span>
-                    </div>
-                  </div>
-                </div>
-                <%--</c:forEach>--%>
-                  <p>
-              <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
-            </p>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>-->
-    </div>
         <!-- end section -->
 
         <!-- Start Footer -->
         <footer id="footer" class="site-footer">
 
-            <div class="container">
+            <div class="container" >
                 <div class="row">
                     <div class="col-md-8 col-sm-6 col-xs-12">
                         <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
@@ -332,6 +219,7 @@
             <!-- ALL PLUGINS -->
             <script src="assets/js/jquery.magnific-popup.min.js"></script>
             <script src="assets/js/jquery.pogo-slider.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
             <script src="assets/js/slider-index.js"></script>
             <script src="assets/js/smoothscroll.js"></script>
             <script src="assets/js/form-validator.min.js"></script>
@@ -339,35 +227,78 @@
             <script src="assets/js/isotope.min.js"></script>
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
+
             <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
                     $(document).ready(function () {
                         let note = "${sessionScope.alert}"
                         alert(note);
-                    
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
 
+                    });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
             </c:if>
-            </c:if>
-                <c:if test="${ not empty sessionScope.mess}">
-                     <script>
+            <c:if test="${ not empty sessionScope.mess}">
+                <script>
                     $(document).ready(function () {
                         let mess = "${sessionScope.mess}"
                         alert(mess);
-                    
+
                     });
                 </script>
                 <c:remove var="mess" scope="session" />
-                </c:if>
-                
+            </c:if>
+            <script>
+                $(document).ready(function () {
+                    $("#customers").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        columns: [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            {data: "Status", title: "Status", className: "dt-filter"},
+                            null,
+                            null,
+                        ],
+                        'columnDefs': [
+                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
+                            {'orderable': false, 'targets' : [4,5,6,7]},
+                        ],
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
+                });
+            </script> 
+       
     </body>
 </html>
 
-</body>
-</html>
 
-</body>
-</html>

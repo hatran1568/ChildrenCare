@@ -101,6 +101,10 @@ public class MyReservationController extends HttpServlet {
         request.getRequestDispatcher("../../view/reservation/myReservation.jsp").forward(request, response);
         
     }
+    
+    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response){
+        
+    }
     /**
      * Returns a short description of the servlet.
      *
