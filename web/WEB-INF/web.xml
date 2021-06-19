@@ -57,6 +57,11 @@
         <servlet-name>SliderController</servlet-name>
         <servlet-class>controller.SliderController</servlet-class>
   </servlet>
+   <servlet>
+
+        <servlet-name>MyReservationController</servlet-name>
+        <servlet-class>controller.MyReservationController</servlet-class>
+  </servlet>
   
    <servlet>
         <servlet-name>SettingController</servlet-name>
@@ -67,6 +72,10 @@
         <servlet-name>ManagerCustomerController</servlet-name>
         <servlet-class>controller.ManagerCustomerController</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>MyReservationController</servlet-name>
+        <url-pattern>/customer/reservation/details</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
@@ -166,6 +175,14 @@
     <servlet-mapping>
         <servlet-name>ReservationContactController</servlet-name>
         <url-pattern>/reservation/contact/forward</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contact/forwardedit</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contactedit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>

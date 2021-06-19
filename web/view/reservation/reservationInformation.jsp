@@ -156,43 +156,68 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 700px;">
-            
-           <table class="table" id="reservation-detail">
-                        <thead  class="thead-dark">
-                            <tr>
-                                <td class="col-md-1">Id</td>
-                                <td class="col-md-2">Date</td>
-                                <td class="col-md-2">Time to check up</td>
-                                <td class="col-md-2">Status</td>
-                                <td class="col-md-2">Total Cost</td>
-                                <td class="col-md-1">Information</td>
-                               
-                        </thead>
-                        <tbody>
-                            <c:forEach var="list" items="${requestScope.list}">
-                                <tr>
-                            <td class="col-md-1">${list.id}</td>
-                            <td class="col-md-2">${list.reservation_date}</td>
-                                <td class="col-md-2">${list.reservation_date}</td>
-                                <td class="col-md-2">${list.status}</td>
-                                <td class="col-md-2">${list.total_cost}</td>
-                                <td class="col-md-1"><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
-                                </tr>
-                            </c:forEach>
-                            
-                        </tbody>
-                    </table>
-      
+        <div class="container" style="height:100%   ; ">
+            <c:if test="${requestScope.res.status eq 'Submited'}">
+            <a  class="collapsebtn btn btn-primary" href="../../reservation/contactedit?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Edit Reservation  
+            </a>
+                 <a  class="collapsebtn btn btn-primary" data-toggle="collapse" href="../../reservation/my/delete?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Cancel Reservation 
+            </a>
+            </c:if>
+           
+                <div style="position: relative; top: -120px;">
+            <c:forEach items="${requestScope.list}" var="list">
+                <div style=" margin-bottom: 30px;display: flex; flex-wrap: wrap; justify-content: space-around; position: relative; top:200px; height: min-content; width: 100%; border: solid black 1px;" >
+                    <div style="display: block; flex: 4; text-align: center;">
+                        <h3>${list.s.fullname}</h3>
+                        <img style="width: 20vh;" src="../../${list.s.thumbnailLink}">
+                    </div>  
+
+                    <a  style="margin-top: 0;" class="collapsebtn btn btn-primary" data-toggle="collapse" href="#${list.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Receiver Information    
+                    </a>    
+
+
+                    <div  style=" flex-basis: 100%;
+                          height: 0;"class="break"></div> 
+                    <div style="width: 100%; text-align: center;" class="collapse"  id="${list.id}">
+                        <div class="card card-body">
+                            <h3> Full name:  ${list.re.fullName}</h3>
+
+                            <c:if test="${list.re.gender == true}">
+                                <h3>Gender: Male</h3>
+                            </c:if>
+                            <c:if test="${list.re.gender == false}">
+                                <h3>Gender: Female </h3>
+                            </c:if>
+
+                            <h3>Email:  ${list.re.email} </h3>
+                            <h3>Mobile:  ${list.re.mobile} </h3> 
+                            <h3>Address:    ${list.re.address} </h3> 
+
+                        </div>
+                    </div>
+
+                </div>
+            </c:forEach>
+                </div>
 
 
 
-       
+
+
+
+
+
+
+
+
         </div>
 
 
         <!-- Start Footer -->
-        <footer id="footer" class="site-footer">
+        <footer style="margin-top: 200px" id="footer"  class="site-footer">
 
             <div class="container">
                 <div class="row">
@@ -214,25 +239,25 @@
             </div>
             <!-- End Footer -->
 
+        </footer>
 
+        <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
-            <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
-
-            <!-- ALL JS FILES -->
-            <script src="../../assets/js/jquery.min.js"></script>
-            <script src="../../assets/js/popper.min.js"></script>
-            <script src="../../assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="../../assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="../../assets/js/slider-index.js"></script>
-            <script src="../../assets/js/smoothscroll.js"></script>
-            <script src="../../assets/js/form-validator.min.js"></script>
-            <script src="../../assets/js/contact-form-script.js"></script>
-            <script src="../../assets/js/isotope.min.js"></script>
-            <script src="../../assets/js/images-loded.min.js"></script>
-            <script src="../../assets/js/custom.js"></script>
-            <script>
+        <!-- ALL JS FILES -->
+        <script src="../../assets/js/jquery.min.js"></script>
+        <script src="../../assets/js/popper.min.js"></script>
+        <script src="../../assets/js/bootstrap.min.js"></script>
+        <!-- ALL PLUGINS -->
+        <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="../../assets/js/jquery.pogo-slider.min.js"></script>
+        <script src="../../assets/js/slider-index.js"></script>
+        <script src="../../assets/js/smoothscroll.js"></script>
+        <script src="../../assets/js/form-validator.min.js"></script>
+        <script src="../../assets/js/contact-form-script.js"></script>
+        <script src="../../assets/js/isotope.min.js"></script>
+        <script src="../../assets/js/images-loded.min.js"></script>
+        <script src="../../assets/js/custom.js"></script>
+        <script>
             function generatePagger(id, pageindex, totalpage, gap, page)
             {
                 var container = document.getElementById(id);
@@ -285,91 +310,107 @@
             }
 
 
-            </script>
-            <style>
+        </script>
+        <style>
 
-                .pagination{
-                    display: inline-block;
-                    margin: 0 auto;
-                    position: relative;
-                    left: 45%;
-                }
-                .pagination a {
-                    color: black;
-                    float: left;
-                    padding: 8px 16px;
-                    text-decoration: none;
-                }
+            .pagination{
+                display: inline-block;
+                margin: 0 auto;
+                position: relative;
+                left: 45%;
+            }
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
 
-                .pagination a.active {
-                    background-color: #4CAF50;
-                    color: white;
-                    border-radius: 5px;
-                }
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 5px;
+            }
 
-                .pagination a:hover:not(.active) {
-                    background-color: #ddd;
-                    border-radius: 5px;
-                }
-                .dropdown {
-                    color: white;
-                    margin-right: 150px;
-                    position: relative;
-                    display: inline-block;
-                }
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+                border-radius: 5px;
+            }
+            .dropdown {
+                color: white;
+                margin-right: 150px;
+                position: relative;
+                display: inline-block;
+            }
 
-                .dropdown-content {
+            .dropdown-content {
 
-                    text-align: center;
-                    display: none;
-                    position: absolute;
-                    background-color: #f9f9f9;
-                    min-width: 160px;
-                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                    padding: 12px 16px;
-                    z-index: 1;
-                }
+                text-align: center;
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
 
-                .dropdown:hover .dropdown-content {
-                    display: block;
-                }
-                .avatar{
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            .avatar{
 
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                }
-                .sli{
-                    margin: 0 auto;
-                    width: 300px;
-                }
-                .in-text{
-                    position: absolute;
-                    top: 70px;
-                    left: 40%;
-                    visibility: hidden;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .sli{
+                margin: 0 auto;
+                width: 300px;
+            }
+            .in-text{
+                position: absolute;
+                top: 70px;
+                left: 40%;
+                visibility: hidden;
 
-                }
-                .news_blog:hover > .in-text{
+            }
+            .news_blog:hover > .in-text{
 
-                    visibility: visible;
+                visibility: visible;
 
-                }
+            }
 
-                .in-text:hover{
-                    display: block;
-               }
+            .in-text:hover{
+                display: block;
+            }
 
-                .news_blog:hover{
-                    opacity: 0.4;
-                }
-                .btn{
-                    bottom: 0;
-                }
-                nav{
+            .news_blog:hover{
+                opacity: 0.4;
+            }
+            .btn{
+                bottom: 0;
+            }
+            nav{
 
-                }
-            </style>
+            }
+            table, td, th {
+                border: 1px solid black;
+            }
+
+            table {
+                position: relative;
+                top: 100px;
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .collapsebtn{
+                margin-left: 15px;
+                flex: 1;
+
+            }
+        </style>
 
     </body>
 </html>

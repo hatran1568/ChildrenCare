@@ -18,6 +18,15 @@ public class ReservationService {
     Precription p;
     Date dateTime;
     float unitprice;
+    Receiver re;
+
+    public Receiver getRe() {
+        return re;
+    }
+
+    public void setRe(Receiver re) {
+        this.re = re;
+    }
 
     public ReservationService() {
     }

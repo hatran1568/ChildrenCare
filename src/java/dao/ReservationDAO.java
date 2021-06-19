@@ -36,11 +36,11 @@ public class ReservationDAO extends BaseDAO {
                     + "FROM\n"
                     + "reservation\n"
                     + "where customer_id =? ";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, u.getId());
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
@@ -213,25 +213,84 @@ public class ReservationDAO extends BaseDAO {
         }
         return 0;
     }
-    
-    public float getTotalCost(Reservation r){
+
+    public float getTotalCost(Reservation r) {
         try {
-            String sql ="select sum(unit_price) as sum FROM reservation_service where reservation_id =  ?";
+            String sql = "select sum(unit_price) as sum FROM reservation_service where reservation_id =  ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getId());
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getFloat("sum");
             }
-          
+
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-          return 0;
+        return 0;
+    }
+
+    public ArrayList<ReservationService> getReservationServiceById(Reservation r) {
+        try {
+            ArrayList<ReservationService> ress = new ArrayList<>();
+            String sql = "SELECT a.id,a.receiver_id,a.service_id,a.prescription_id,a.reservation_id,a.datetime,a.unit_price,a.fullname,a.thumbnail_link,a.description,\n"
+                    + "r.email,r.full_name as receiverName,r.address,r.gender,r.mobile,r.user_id\n"
+                    + "from receiver r INNER join \n"
+                    + "(SELECT receiver_id,service_id,prescription_id,reservation_id,datetime,unit_price,rs.id,s.fullname,s.thumbnail_link,s.description\n"
+                    + "from reservation_service rs\n"
+                    + "INNER JOIN service s on rs.service_id = s.id) as a  on r.id=a.receiver_id where reservation_id = ?";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            ResultSet rs = stm.executeQuery();
+            
+            while (rs.next()) {
+                Receiver rei = new Receiver();
+                rei.setId(rs.getInt("receiver_id"));
+                rei.setAddress(rs.getString("address"));
+                rei.setFullName(rs.getString("receiverName"));
+                rei.setGender(rs.getBoolean("gender"));
+                rei.setMobile(rs.getString("mobile"));
+                rei.setEmail(rs.getString("email"));
+                ReservationService res = new ReservationService();
+                res.setRe(rei);
+                res.setR(r);
+                Service service = new Service();
+                service.setId(rs.getInt("service_id"));
+                service.setThumbnailLink(rs.getString("thumbnail_link"));
+                service.setDescription(rs.getString("description"));
+                service.setFullname(rs.getString("fullname"));
+                res.setS(service);
+                res.setId(rs.getInt("id"));
+                res.setDateTime(rs.getDate("datetime"));
+                res.setUnitprice(rs.getFloat("unit_price"));
+                ress.add(res);
+            }
+            return  ress;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public void deleteReservationService(Reservation r){
+        try {
+            String sql = "delete from reservation_service where reservation_id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public ReservationService getReservationServiceById(Reservation r){
-       return null;
-        
+    public void deleteReservation(Reservation r){
+        try {
+            String sql ="delete from reservation where id =?";
+            PreparedStatement stm =connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

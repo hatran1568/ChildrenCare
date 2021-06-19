@@ -98,7 +98,7 @@ public class ReservationCompletionController extends HttpServlet {
         reservation.setStaff(assignStaff);
         //Set numberofperson
         reservation.setNumber_of_person(1);
-        reservation.setStatus("none");
+        reservation.setStatus("Submited");
         //Submit reservation services
         reservationDB.addReservation(reservation);
         reservation.setId(reservationDB.returnNewestReservation());

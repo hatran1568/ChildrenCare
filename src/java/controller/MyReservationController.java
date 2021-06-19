@@ -6,6 +6,7 @@
 package controller;
 
 import bean.Reservation;
+import bean.ReservationService;
 import bean.User;
 import dao.ReservationDAO;
 import java.io.IOException;
@@ -68,6 +69,9 @@ public class MyReservationController extends HttpServlet {
             case "/customer/reservation/my":
                 showMyreservation(request, response);
                 break;
+            case "/customer/reservation/details":
+                showDetailsReservation(request, response);
+                break;
             default:
                 break;
         }
@@ -102,8 +106,18 @@ public class MyReservationController extends HttpServlet {
         
     }
     
-    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response){
-        
+    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        Reservation r = new Reservation();
+        int id = Integer.parseInt(request.getParameter("id")) ;
+        ArrayList<ReservationService> res = new ArrayList<>();
+        ReservationDAO redb = new ReservationDAO();
+        r.setId(id);
+        res = redb.getReservationServiceById(r);
+        Reservation rerser = new Reservation();
+        rerser = redb.getReservationById(id);
+        request.setAttribute("res", rerser);
+        request.setAttribute("list",res);
+        request.getRequestDispatcher("../../view/reservation/reservationInformation.jsp").forward(request, response);
     }
     /**
      * Returns a short description of the servlet.
