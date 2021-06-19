@@ -72,6 +72,9 @@ public class SliderController extends HttpServlet {
             case"/manager/slider/search":
                 search(request, response);
                 break;
+            case "/manager/slider/details":
+                showSliderDetails(request,response);
+                break;
             default:
                 break;
 
@@ -181,5 +184,14 @@ public class SliderController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void showSliderDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        SliderDAO sliderDB = new SliderDAO();
+        Slider s = sliderDB.getSliderByID(id);
+        request.setAttribute("slider", s);
+        request.getRequestDispatcher("../../view/slider/details.jsp").forward(request, response);
+    }
 
 }

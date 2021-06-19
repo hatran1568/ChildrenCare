@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -142,5 +143,24 @@ public class SettingDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<Setting> getSetting(String type){
+        ArrayList<Setting> settings = new ArrayList<>();
+        try{
+            String sql = "SELECT id, name from setting where type = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, type);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Setting s = new Setting();
+                s.setId(rs.getInt("id"));
+                s.setName(rs.getString("name"));
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return settings;
     }
 }

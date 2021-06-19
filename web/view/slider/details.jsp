@@ -157,50 +157,37 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content;">
-            <nav class="navbar navbar-light bg-light">
-                <form method="GET" action="search" class="form-inline">
-
-                    <select style="margin: 0 200px;" name="status">
-                        <option value="none">All</option>
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                    </select>
-                    <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </nav>
-                    <div class="row">
-                         <c:forEach var="l" items="${requestScope.list}">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="full news_blog">
-                        <img class="img-responsive" src="../../${l.imageLink}" alt="#" />
-                        <c:if test="${l.status  eq true}">
-                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye fa-4x"></i></span></c:if>
-                            <c:if test="${l.status  eq false}">
-                            <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
-
-                            <div style="background: #7f93db;">
-                                <h2><a href="details?id=${l.id}">${l.title}</a></h2>
-                          
-                        </div>
-                      
-
-                    </div>
-
-                </div>
-            </c:forEach>
-                    </div>
-           
+            <div style="text-align: center">
+                <img id="slider-image" src="../../${slider.imageLink}">
+            </div>
+            <table style="width: 100%">
+                <tr>
+                    <td>Title</td>
+                    <td>${slider.title}</td>
+                </tr>
+                <tr>
+                    <td>Backlink</td>
+                    <td>${requestScope.slider.backlink}</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td><c:if test="${requestScope.slider.status eq true}">Active</c:if>
+                        <c:if test="${requestScope.slider.status eq false}">Inactive</c:if>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Notes</td>
+                    <td>${requestScope.slider.notes}</td>
+                </tr>
+            </table>
+                
+                        <button id="edit-btn" class="btn pull-right" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
         </div>
-        <div id="pagination" class="pagination"></div>
+        
 
 
 
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-
-        </script>
+        
 
 
 
@@ -245,84 +232,27 @@
             <script src="../../assets/js/isotope.min.js"></script>
             <script src="../../assets/js/images-loded.min.js"></script>
             <script src="../../assets/js/custom.js"></script>
-            <script>
-            function generatePagger(id, pageindex, totalpage, gap, page)
-            {
-                var container = document.getElementById(id);
-                if (pageindex > gap + 1)
-                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-
-                for (var i = pageindex - gap; i < pageindex; i++)
-                {
-                    if (i >= 1)
-                    {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                    }
-                }
-
-                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                {
-                    if (i <= totalpage)
-                    {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                    }
-                }
-
-                if (pageindex < totalpage - gap)
-                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-            }
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-            function changeStatus(param) {
-                var id = param.id;
-                $.ajax({
-                    url: "change",
-                    type: "GET",
-                    data: {id: id},
-                    success:
-                            function (data) {
-                                if ($('#' + id.toString()).html() == '<i class="fas fa-eye fa-4x" aria-hidden="true"></i>') {
-                                    $('#' + id.toString()).html('<i class="fas fa-eye-slash fa-4x"></i>')
-
-                                } else {
-
-                                    $('#' + id.toString()).html('<i class="fas fa-eye fa-4x"></i>')
-
-                                }
-
-                            }
-
-                });
-
-            }
-
-
-            </script>
+            
             <style>
-
-                .pagination{
-                    display: inline-block;
-                    margin: 0 auto;
-                    position: relative;
-                    left: 45%;
+                #slider-image{
+                    max-height:600px;
+                    max-width:900px;
+                    height:auto;
+                    width:auto;
                 }
-                .pagination a {
-                    color: black;
-                    float: left;
-                    padding: 8px 16px;
-                    text-decoration: none;
+                
+                #edit-btn{
+                    margin: 20px 0px;
+                    
                 }
-
-                .pagination a.active {
-                    background-color: #4CAF50;
-                    color: white;
-                    border-radius: 5px;
+                
+                table tr td:first-child{
+                    font-weight: bold;
+                    width: 30%;
                 }
-
-                .pagination a:hover:not(.active) {
-                    background-color: #ddd;
-                    border-radius: 5px;
+                
+                table td{
+                    padding: 10px;
                 }
                 .dropdown {
                     color: white;
