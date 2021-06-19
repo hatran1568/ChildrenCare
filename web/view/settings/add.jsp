@@ -1,9 +1,5 @@
-<%-- 
-    Document   : Settings Add
-    Created on : June 11, 2021, 5:32:04 AM
-    Author     : PieRow
---%>
 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,10 +11,10 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Add Settings</title>
+        <title>Add a User</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!--
     Ramayana CSS Template
@@ -61,51 +57,37 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
 
-                            <form action="../../user/list/add" method="POST" >
+                            <form action="../../admin/setting/insert" method="POST" >
                                 <div class="form-group">
-                                    <label for="id">User id</label>
-                                    <input type="text" class="form-control" name="id" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email">
-                                </div>
-                                <div class="form-group">
-                                    <label for="full-name">Full name</label>
-                                    <input type="text" class="form-control" name="full-name" >
-                                </div>
-                                
-                                    
-                                    <!--<input type="text" class="form-control" name="password">-->
-<!--                                    <input type="text" class="form-control" name="image-link" hidden>-->
-                                <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="male" >Male</option>
-                                        <option value="female" >Female</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile</label>
-                                        <input type="text" class="form-control" name="mobile" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="role">Role</label>
-
-                                    <select class="form-control" name="role">
-                                        <c:forEach items="${requestScope.roles}" var="r">
-                                            <option value="${r.id}" >${r.name}</option>
+                                    <label for="type">Type</label>
+                                    <select class="form-control" name="type">
+                                        <c:forEach items="${requestScope.uniqueTypes}" var="r">
+                                            <option value="${r}">${r}</option>
                                         </c:forEach>
                                     </select>
-
+                                </div>
+                                <label for="or">Or</label>
+                                <div class="form-group">
+                                    <label for="name">New Type</label>
+                                    <input type="text" class="form-control" name="newtype" placeholder="Enter new Type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" name="settingname" placeholder="Enter Name">
+                                </div>
+                                <div class="form-group">
+                                        <label for="value">Value</label>
+                                        <input type="number" class="form-control" name="value" placeholder="Enter Value">
+                                </div>
+                                <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <input type="text" class="form-control" name="description" placeholder="Enter Description">
+                                </div>
+                                <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <input type="text" class="form-control" name="status" placeholder="Enter Status">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -133,11 +115,11 @@
                     <!-- Menu -->
                     <nav id="menu">
                         <ul>
-                           <li><a href="#">Homepage</a></li>
+                            <li><a href="../../home">Homepage</a></li>
                             <li><a href="#">User</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="../post/list">Blog</a></li>
                             <li><a href="#">Chart</a></li>
-                            <li><a href="#">Setting</a></li>
+                            <li><a href="../../admin/setting/list">Settings</a></li>
                             <li>
                                 <span class="opener">Service</span>
                                 <ul>
@@ -192,14 +174,14 @@
         </footer>
         <!-- Scripts -->
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/browser.min.js"></script>
-        <script src="assets/js/breakpoints.min.js"></script>
-        <script src="assets/js/transition.js"></script>
-        <script src="assets/js/owl-carousel.js"></script>
-        <script src="assets/js/custom.js"></script>
+        <script src="../../assets/js/browser.min.js"></script>
+        <script src="../../assets/js/breakpoints.min.js"></script>
+        <script src="../../assets/js/transition.js"></script>
+        <script src="../../assets/js/owl-carousel.js"></script>
+        <script src="../../assets/js/custom.js"></script>
         <style>
 
             .pagination{

@@ -21,7 +21,7 @@ public class RoleDAO extends BaseDAO{
     public ArrayList<Role> getRoles(){
         ArrayList<Role> list = new ArrayList<>();
         try {
-            String sql = "SELECT id,name FROM Role";
+            String sql = "SELECT id, `name` FROM Setting WHERE type = 'Role'";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while(rs.next())

@@ -57,7 +57,7 @@
                         <div class="container-fluid">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
                             <div>
-                                <button onclick="window.location.href = 'edit'" class="btn-success" style="margin: 10px;" >Edit user Information</button>
+                                <a href="edit?id=${requestScope.user.id}"><button class="btn-success" style="margin: 10px;" >Edit user Information</button></a>
                             </div>
                             <br><img src="${requestScope.user.imageLink}" alt="User Avatar" style="width: 15%;">
                             <form>

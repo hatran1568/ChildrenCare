@@ -11,7 +11,7 @@
         <meta name="author" content="">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Edit Setting Info</title>
+        <title>Setting Information</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,43 +55,35 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="../../admin/setting/update" method="POST">
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Setting Information</div>
+                            <div>
+                                <a href="edit?id=${requestScope.setting.id}"><button class="btn-success" style="margin: 10px;" >Edit Setting Information</button></a>
+                            </div>
+                            <form>
                                 <br><div class="form-group">
                                     <label for="id">Setting ID</label>
                                     <input type="text" class="form-control" name="id" value="${requestScope.setting.id}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="type">Type</label>
-                                    <select class="form-control" name="type">
-                                        <c:forEach items="${requestScope.uniqueTypes}" var="r">
-                                            <option <c:if test="${requestScope.setting.type == r}">selected</c:if> value="${r}">${r}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <label for="or">Or</label>
-                                <div class="form-group">
-                                    <label for="name">New Type</label>
-                                    <input type="text" class="form-control" name="newtype">
+                                    <input type="text" class="form-control" name="type" value="${requestScope.setting.type}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}">
+                                    <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}" readonly>
                                 </div>
                                 <div class="form-group">
                                         <label for="value">Value</label>
-                                        <input type="text" class="form-control" name="value" value="${requestScope.setting.value}">
+                                        <input type="text" class="form-control" name="value" value="${requestScope.setting.value}" readonly>
                                 </div>
                                 <div class="form-group">
                                         <label for="description">Description</label>
-                                        <input type="text" class="form-control" name="description" value="${requestScope.setting.description}">
+                                        <input type="text" class="form-control" name="description" value="${requestScope.setting.description}" readonly>
                                 </div>
                                 <div class="form-group">
                                         <label for="status">Status</label>
-                                        <input type="text" class="form-control" name="status" value="${requestScope.setting.status}">
+                                        <input type="text" class="form-control" name="status" value="${requestScope.setting.status}" readonly>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </section>

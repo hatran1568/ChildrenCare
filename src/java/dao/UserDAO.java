@@ -65,7 +65,7 @@ public class UserDAO extends BaseDAO {
 
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n" +
 "                    a.id, a.email, a.password, a.full_name, \n" +
-"                    a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id \n" +
+"                    a.gender, a.mobile, a.address, a.image_link, a.`status` , r.role_name, a.role_id \n" +
 "                    from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n" +
 "                    on a.role_id = r.role_id) as tbl";
             PreparedStatement stm = connection.prepareStatement(sql);
