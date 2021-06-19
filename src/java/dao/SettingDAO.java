@@ -30,7 +30,7 @@ public class SettingDAO extends BaseDAO {
                 s.setId(rs.getInt("id"));
                 s.setType(rs.getString("type"));
                 s.setName(rs.getString("name"));
-                s.setValue(rs.getString("value"));
+                s.setValue(rs.getInt("value"));
                 s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getString("status"));
                 settings.add(s);
@@ -64,7 +64,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
-            stm.setString(3, s.getValue());
+            stm.setInt(3, s.getValue());
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.executeUpdate();
@@ -89,7 +89,7 @@ public class SettingDAO extends BaseDAO {
                 s.setId(rs.getInt("id"));
                 s.setType(rs.getString("type"));
                 s.setName(rs.getString("name"));
-                s.setValue(rs.getString("value"));
+                s.setValue(rs.getInt("value"));
                 s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getString("status"));
                 return s;
@@ -108,9 +108,10 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
-            stm.setString(3, s.getValue());
+            stm.setInt(3, s.getValue());
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
+            stm.setInt(6, s.getId());
             stm.executeUpdate();
 
         } catch (SQLException ex) {
