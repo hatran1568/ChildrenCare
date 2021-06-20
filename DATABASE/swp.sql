@@ -283,7 +283,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',9,'Service 1','Service 1',NULL,NULL,NULL),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',10,'Service 2','Service 2',NULL,NULL,NULL),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',11,'Service 3','Service 3',NULL,NULL,NULL);
+INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/s1.jpg',9,'Service 1','Service 1',NULL,NULL,NULL),(2,'Service 2',100000.00,100000.00,'assets/images/service/s2.jpg',10,'Service 2','Service 2',NULL,NULL,NULL),(3,'Service 3',200000.00,150000.00,'assets/images/service/s3.png',11,'Service 3','Service 3',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,4 +419,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-18 23:04:57
+-- Dump completed on 2021-06-20 10:55:26
