@@ -63,7 +63,9 @@ public class ServiceController extends HttpServlet {
                 break;
             case "/register":
                 break;
-            
+            case "/service/details":
+                showServiceDetails(request, response);
+                break;
             default:
 
                 break;
@@ -116,9 +118,8 @@ public class ServiceController extends HttpServlet {
         }
         int category = Integer.parseInt(r_category);
 
-        
         ServiceDAO db = new ServiceDAO();
-        int count = db.count();
+        int count = db.count(category, search);
         int totalpage = (count % pagesize == 0)
                 ? count / pagesize
                 : count / pagesize + 1;
@@ -134,5 +135,22 @@ public class ServiceController extends HttpServlet {
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
         request.getRequestDispatcher("/view/service/list.jsp").forward(request, response);
+    }
+    
+    protected void showServiceDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        String r_id = request.getParameter("id");
+        if (r_id == null) {
+            r_id = "0";//validation
+        }
+        int id = Integer.parseInt(r_id);
+        ServiceDAO serviceDB = new ServiceDAO();
+        Service service = serviceDB.getService(id);
+        
+        ArrayList<ServiceCategory> categories = serviceDB.getCategories();
+        
+        request.setAttribute("categories", categories);
+        request.setAttribute("service", service);
+        request.getRequestDispatcher("/view/service/details.jsp").forward(request, response);
     }
 }

@@ -1,14 +1,5 @@
-<%-- 
-    Document   : AccountList
-    Created on : May 23, 2021, 8:23:45 PM
-    Author     : HP
---%>
-<%--  
-    View ref: 143
-    Edit ref: 144
-    Thumbnail: 141
-    Link to users list: 92
---%>
+
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,7 +34,7 @@
         <link rel="stylesheet" href="../assets/css/responsive.css" />
         <!-- Custom CSS -->
         <link rel="stylesheet" href="../assets/css/custom.css" />
-
+<link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -68,11 +59,11 @@
                                     </button>
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
-                                            <li><a class="nav-link" href="../home">Home</a></li>
+                                            <li><a class="nav-link" href="../home" >Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#" style="color: white;">Services</a></li>
+                                            <li><a class="nav-link" href=""style="color: white;">Services</a></li>
                                             <li><a class="nav-link" href="">Blog</a></li>
-                                            <li><a class="nav-link" href="../user/list">Users</a></li>
+                                            <li><a class="nav-link" href="">Users</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -82,6 +73,7 @@
                                     <img style="width: 70px;" src="../assets/images/cart.png" alt="#" />
                                 </a>
                             </div> 
+                            
                         </div>
                     </div>
                 </div>
@@ -92,12 +84,67 @@
 
         <!-- Start Banner -->
         <div class="section inner_page_banner">
-            <div class="container">
+            <div class="container" style="margin-right: 20px">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="banner_title">
-                            <h3>ChildrenCare</h3>
-                        </div>
+                        <c:if test="${ empty sessionScope.user}">
+
+                            <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
+
+                            <div id="login" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button data-dismiss="modal" class="close">&times;</button>
+                                            <h4>Login</h4>
+                                            <form action="login" method="POST">
+                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
+                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                <input class="login-trigger" type="submit" value="Login" />
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                            <a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Register</a>
+
+                            <div id="register" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <button data-dismiss="modal" class="close">&times;</button>
+                                            <h4>Register</h4>
+                                            <form action="register" method="GET">
+                                                <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
+                                                Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
+                                                Female <input type="radio" name="gender" value="female">
+                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
+                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
+                                                <input type="text" name="address" class="username form-control" placeholder="Address"/>
+                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                <input class="login-trigger" type="submit" value="Register" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+
+                        </c:if>
+                        <c:if test="${ not empty sessionScope.user}">
+                            <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                            <div class="dropdown ">
+                                <img class="avatar" src="${sessionScope.user.imageLink}">
+
+                                <div class="dropdown-content">
+                                    <p> <a href="#">Profile</a></p>
+                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="#">Log Out</a></p>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -107,18 +154,18 @@
 
         <div class="section layout_padding" style="width: 15%; padding-left: 3%;" >
             
-            <div style="padding-bottom: 100px; padding-top: 100px;">
+            <div style="padding-bottom: 50%; padding-top: 50%;">
                 <form action="list">
                     
-                </a>
-                    <input type="search" placeholder="Search" name="search">
+                
+                    <input type="search" placeholder="Search" name="search" style="width: 100%;">
                 
                 </form>
             </div> 
             <c:forEach items="${requestScope.categories}" var="c">
-                <div style="padding-bottom: 50px;"><h3><a href="?category=${c.id}">${c.name}</a></h3></div>
+                <div class="sider" ><h3><a href="?category=${c.id}">${c.name}</a></h3></div>
             </c:forEach>
-                <div style="padding-bottom: 50px; float: bottom;"><h3><a href="#">Static links</a></h3></div>
+                <div class="staticlink" ><h3><a href="#">Static links</a></h3></div>
         </div>
         <div class="section layout_padding" style="width: 85%;" >
             <div class="container" >
@@ -135,23 +182,29 @@
                 <div class="row">
                     <c:forEach items="${requestScope.services}" var="s">
                         <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="full news_blog">
-                                <img class="img-responsive" src="../assets/images/b3.png" alt="#" />
+                            <div class="full news_blog" style="border: #013582;">
+                                <img class="img-responsive" src="../${s.thumbnailLink}" alt="#" />
 
 
 
-                                <div style="background: #7f93db;">
-                                    <h2><a href="#">${s.id}. ${s.fullname}</a></h2>
-                                    <p>${s.description}</p>
+                                <div style="background: #7f93db; height: 100%;">
+                                    <h2><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h2>
+                                    <p><c:if test="${s.description.length() >= 41}">
+                                        ${s.description.substring(0, 40)}...
+                                    </c:if>
+                                        <c:if test="${s.description.length() < 41}">
+                                        ${s.description}
+                                    </c:if>
+                                        </p>
                                     <p>
                                         <span style="text-decoration: line-through;">${s.originalPrice}</span>
                                         <span style="text-decoration: white;">  -  ${s.salePrice}vnd</span>
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="../cart/add?serviceid=${s.id}">Add to Cart    |</a>
+                                    <button><a href="../cart/add?serviceid=${s.id}">Add to Cart</a></button>
                                     
-                                    <a href="#">Feedback</a>
+                                    <button><a href="#">Feedback</a></button>
                                 </div>
 
                             </div>
@@ -214,6 +267,29 @@
             <script src="../assets/js/isotope.min.js"></script>
             <script src="../assets/js/images-loded.min.js"></script>
             <script src="../assets/js/custom.js"></script>
+            <c:if test="${empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
+                    $(document).ready(function () {
+                        let note = "${sessionScope.alert}"
+                        alert(note);
+                    
+                    });
+                </script>
+                <c:remove var="alert" scope="session" />
+
+            </c:if>
+            </c:if>
+                <c:if test="${ not empty sessionScope.mess}">
+                     <script>
+                    $(document).ready(function () {
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
+                    
+                    });
+                </script>
+                <c:remove var="mess" scope="session" />
+                </c:if>
             <script>
                     function generatePagger(id, pageindex, totalpage, gap, page)
                     {
@@ -247,6 +323,17 @@
             </script>
             <style>
 
+                .staticlink{
+                    padding-bottom: 5%;
+                    padding-top: 40%;
+                    text-decoration: underline; 
+                    float: bottom;
+                }
+                .sider{
+                    padding-bottom: 5%; 
+                    padding-top: 20%; 
+                    border-bottom: dashed #013582;
+                }
                 .pagination{
                     display: inline-block;
                 }
