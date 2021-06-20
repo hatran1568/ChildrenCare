@@ -7,18 +7,24 @@ package controller;
  */
 import bean.Slider;
 import dao.SliderDAO;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author ACER
  */
+  @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+    maxFileSize = 1024 * 1024 * 50, // 50MB
+    maxRequestSize = 1024 * 1024 * 50,location="C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images") // 50MB
 public class SliderController extends HttpServlet {
 
     /**
@@ -69,8 +75,23 @@ public class SliderController extends HttpServlet {
             case "/manager/slider/change":
                 changeStatus(request, response);
                 break;
-            case"/manager/slider/search":
+            case "/manager/slider/search":
                 search(request, response);
+                break;
+            case "/manager/slider/details":
+                showSliderDetails(request, response);
+                break;
+            case "/manager/slider/add":
+                showFormAddSlider(request, response);
+                break;
+            case "/manager/slider/insert":
+                saveFile(request, response);
+                break;
+            case "/manager/slider/edit":
+                showEditForm(request, response);
+                break;
+            case "/manager/slider/update":
+                Update(request, response);
                 break;
             default:
                 break;
@@ -89,7 +110,7 @@ public class SliderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        this.doGet(request, response);
     }
 
     public void showListPagination(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -124,51 +145,57 @@ public class SliderController extends HttpServlet {
         }
 
     }
+
     
-    public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    
+
+    public void showFormAddSlider(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("../../view/slider/add.jsp").forward(request, response);
+}
+    
+    public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search");
         String status = request.getParameter("status");
         String r_index = request.getParameter("page");
-        if (search==null){
-            search ="";
+        if (search == null) {
+            search = "";
         }
         if (r_index == null) {
             r_index = "1";
         }
-        if(status.equals("none")){
-        int index = Integer.parseInt(r_index);
-        SliderDAO sliderDB = new SliderDAO();
-        ArrayList<Slider> list = new ArrayList<Slider>();
-        int count = sliderDB.count(search);
-        int totalpage = (count % 12 == 0)
-                ? count / 12
-                : count / 12 + 1;
-        list = sliderDB.searchSliderPagination(index, 12, search);
-        request.setAttribute("list", list);
-        request.setAttribute("totalPage", totalpage);
-        request.setAttribute("index", index);
-        request.setAttribute("url", "search");
-        request.setAttribute("search",search);
-        request.setAttribute("status", status);
-        request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
-        }
-        else{
-        boolean sta = Boolean.parseBoolean(status);
-        int index = Integer.parseInt(r_index);
-        SliderDAO sliderDB = new SliderDAO();
-        ArrayList<Slider> list = new ArrayList<Slider>();
-        int count = sliderDB.count(search,sta);
-        int totalpage = (count % 12 == 0)
-                ? count / 12
-                : count / 12 + 1;
-        list = sliderDB.searchSliderPagination(index, 12, search,sta);
-        request.setAttribute("list", list);
-        request.setAttribute("totalPage", totalpage);
-        request.setAttribute("index", index);
-         request.setAttribute("search",search);
-        request.setAttribute("status", status);
-        request.setAttribute("url", "search");
-        request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+        if (status.equals("none")) {
+            int index = Integer.parseInt(r_index);
+            SliderDAO sliderDB = new SliderDAO();
+            ArrayList<Slider> list = new ArrayList<Slider>();
+            int count = sliderDB.count(search);
+            int totalpage = (count % 12 == 0)
+                    ? count / 12
+                    : count / 12 + 1;
+            list = sliderDB.searchSliderPagination(index, 12, search);
+            request.setAttribute("list", list);
+            request.setAttribute("totalPage", totalpage);
+            request.setAttribute("index", index);
+            request.setAttribute("url", "search");
+            request.setAttribute("search", search);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+        } else {
+            boolean sta = Boolean.parseBoolean(status);
+            int index = Integer.parseInt(r_index);
+            SliderDAO sliderDB = new SliderDAO();
+            ArrayList<Slider> list = new ArrayList<Slider>();
+            int count = sliderDB.count(search, sta);
+            int totalpage = (count % 12 == 0)
+                    ? count / 12
+                    : count / 12 + 1;
+            list = sliderDB.searchSliderPagination(index, 12, search, sta);
+            request.setAttribute("list", list);
+            request.setAttribute("totalPage", totalpage);
+            request.setAttribute("index", index);
+            request.setAttribute("search", search);
+            request.setAttribute("status", status);
+            request.setAttribute("url", "search");
+            request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
         }
     }
 
@@ -181,5 +208,97 @@ public class SliderController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void showSliderDetails(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        SliderDAO sliderDB = new SliderDAO();
+        Slider s = sliderDB.getSliderByID(id);
+        request.setAttribute("slider", s);
+        request.getRequestDispatcher("../../view/slider/details.jsp").forward(request, response);
+    }
+  
+
+
+  protected void saveFile(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    Part part = request.getPart("file");
+      String fileName = extractFileName(part);
+      // refines the fileName in case it is an absolute path
+      fileName = new File(fileName).getName();
+      
+      part.write("/" + File.separator + fileName);
+    
+    String tilte = request.getParameter("title");
+    String backlink = request.getParameter("backlink");
+    String note = request.getParameter("note");
+    boolean status = Boolean.parseBoolean( request.getParameter("status"));
+    Slider s = new Slider();
+    s.setBacklink(backlink);
+    s.setImageLink("assets/images/"+fileName);
+    s.setNotes(note);
+    s.setStatus(status);
+    s.setTitle(tilte);
+    SliderDAO sliDB = new SliderDAO();
+    sliDB.insert(s);
+    response.sendRedirect("list");
+  
+  }
+  
+   protected void Update(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    Part part = request.getPart("file");
+      String fileName = extractFileName(part);
+      // refines the fileName in case it is an absolute path
+      fileName = new File(fileName).getName();
+      
+      part.write("/" + File.separator + fileName);
+    int id = Integer.parseInt(request.getParameter("rid")) ;
+    String tilte = request.getParameter("title");
+    String backlink = request.getParameter("backlink");
+    String note = request.getParameter("note");
+    boolean status = Boolean.parseBoolean( request.getParameter("status"));
+    Slider s = new Slider();
+    s.setId(id);
+    s.setBacklink(backlink);
+    s.setImageLink("assets/images/"+fileName);
+    s.setNotes(note);
+    s.setStatus(status);
+    s.setTitle(tilte);
+    SliderDAO sliDB = new SliderDAO();
+    sliDB.updateSlider(s);
+    response.sendRedirect("details?id="+id);
+  
+  }
+  /**
+   * Extracts file name from HTTP header content-disposition
+   */
+  private String extractFileName(Part part) {
+    String contentDisp = part.getHeader("content-disposition");
+    String[] items = contentDisp.split(";");
+    for (String s : items) {
+      if (s.trim().startsWith("filename")) {
+        return s.substring(s.indexOf("=") + 2, s.length() - 1);
+      }
+    }
+    return "";
+  }
+  public File getFolderUpload() {
+    File folderUpload = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images");
+    if (!folderUpload.exists()) {
+      folderUpload.mkdirs();
+    }
+    return folderUpload;
+  }
+  
+  protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+      int id = Integer.parseInt(request.getParameter("id"));
+      SliderDAO sliDB = new SliderDAO();
+      Slider s = new Slider();
+      s= sliDB.getSliderByID(id);
+      request.setAttribute("slider", s);
+      request.getRequestDispatcher("../../view/slider/edit.jsp").forward(request, response);
+  }
+
 
 }

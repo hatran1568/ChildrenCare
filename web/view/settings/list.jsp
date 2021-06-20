@@ -56,7 +56,7 @@
                 initComplete: function () {
                     this.api().columns('.dt-filter').every( function () {
                         var column = this;
-                        var select = $('<select><option value=""></option></select>')
+                        var select = $('<select style="width: 90%"><option value=""></option></select>')
                             .appendTo( $(column.footer()))
                             .on(
                                 'change', function () {
@@ -133,10 +133,10 @@
                                 <tfoot>
                                     <tr>
                                         <th>Filters:</th>
-                                        <th>Type</th>
+                                        <th>Type<br></th>
                                         <th></th>
                                         <th></th>
-                                        <th>Status</th>
+                                        <th>Status<br></th>
                                         <th></th>
                                         <th></th>
                                     </tr>

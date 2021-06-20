@@ -19,6 +19,8 @@ import bean.Setting;
 import bean.User;
 import dao.ReceiverDAO;
 import dao.SettingDAO;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -154,9 +156,11 @@ public class SettingController extends HttpServlet {
     protected void addSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Setting s = new Setting();
-        s.setType(request.getParameter("type"));
+        if (request.getParameter("newtype").isEmpty())
+            s.setType(request.getParameter("type"));
+        else s.setType(request.getParameter("newtype"));
         s.setName(request.getParameter("settingname"));
-        s.setValue(request.getParameter("value"));
+        s.setValue(Integer.parseInt(request.getParameter("value")));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
 
@@ -167,11 +171,16 @@ public class SettingController extends HttpServlet {
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int sid = Integer.parseInt(request.getParameter("sid"));
+        int sid = Integer.parseInt(request.getParameter("id"));
 
         SettingDAO settingDB = new SettingDAO();
         Setting setting = settingDB.getSetting(sid);
-
+        ArrayList<Setting> settings = settingDB.getSettings();
+        ArrayList<String> typeList = new ArrayList<>();
+        for (Setting s : settings) 
+            typeList.add(s.getType());
+        Set<String> uniqueTypes = new HashSet<String>(typeList);
+        request.setAttribute("uniqueTypes", uniqueTypes);
         request.setAttribute("setting", setting);
 //        request.setAttribute("uid", uid);
 
@@ -181,10 +190,12 @@ public class SettingController extends HttpServlet {
     protected void editSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Setting s = new Setting();
-
-        s.setType(request.getParameter("type"));
+        s.setId(Integer.parseInt(request.getParameter("id")));
+        if (request.getParameter("newtype").isEmpty())
+            s.setType(request.getParameter("type"));
+        else s.setType(request.getParameter("newtype"));
         s.setName(request.getParameter("settingname"));
-        s.setValue(request.getParameter("value"));
+        s.setValue(Integer.parseInt(request.getParameter("value")));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
         
@@ -203,7 +214,13 @@ public class SettingController extends HttpServlet {
     }
 
     protected void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        SettingDAO settingDB = new SettingDAO();
+        ArrayList<Setting> settings = settingDB.getSettings();
+        ArrayList<String> typeList = new ArrayList<>();
+        for (Setting s : settings) 
+            typeList.add(s.getType());
+        Set<String> uniqueTypes = new HashSet<String>(typeList);
+        request.setAttribute("uniqueTypes", uniqueTypes);
         request.getRequestDispatcher("../../view/settings/add.jsp").forward(request, response);
     }
 
@@ -243,7 +260,6 @@ public class SettingController extends HttpServlet {
             response.sendRedirect("home");
             return;
         
-            
          // if user was verify redirect to home page
         } else if (list.get(0).isStatus() == true) {
 
@@ -320,6 +336,7 @@ public class SettingController extends HttpServlet {
         }
 
         userDb.addCustomer(u, false,2);
+
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);

@@ -18,7 +18,22 @@ import java.util.logging.Logger;
  * @author Tran Thi Nguyet Ha
  */
 public class SliderDAO extends BaseDAO {
-
+    
+    public void updateSlider(Slider r){
+        try {
+            String sql = "Update slider set title =? , image_link=?,backlink = ? , status = ? ,notes = ? where id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, r.getTitle());
+            stm.setString(2, r.getImageLink());
+            stm.setString(3,r.getBacklink());
+            stm.setBoolean(4, r.isStatus());
+            stm.setString(5,r.getNotes());
+            stm.setInt(6, r.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public ArrayList<Slider> getActiveSliders() {
         ArrayList<Slider> slider = new ArrayList<>();
         try {
@@ -88,12 +103,12 @@ public class SliderDAO extends BaseDAO {
         return -1;
     }
 
-    public int count(String search,boolean status) {
+    public int count(String search, boolean status) {
         try {
             String sql = "SELECT COUNT(*) as total FROM slider\n"
-                    + "  where (title like '%"+search+"%' or backlink like '%"+search+"%') and status =? ";
+                    + "  where (title like '%" + search + "%' or backlink like '%" + search + "%') and status =? ";
             PreparedStatement stm = connection.prepareStatement(sql);
-          
+
             stm.setBoolean(1, status);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -105,14 +120,13 @@ public class SliderDAO extends BaseDAO {
         }
         return -1;
     }
-    
+
     public int count(String search) {
         try {
             String sql = "SELECT COUNT(*) as total FROM slider\n"
-                    + "  where (title like '%"+search+"%' or backlink like '%"+search+"%') ";
+                    + "  where (title like '%" + search + "%' or backlink like '%" + search + "%') ";
             PreparedStatement stm = connection.prepareStatement(sql);
-          
-            
+
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return rs.getInt("total");
@@ -159,16 +173,16 @@ public class SliderDAO extends BaseDAO {
 
     }
 
-    public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search,boolean status) {
+    public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search, boolean status) {
         try {
             ArrayList<Slider> list = new ArrayList<Slider>();
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
                     + "                                       id,title,image_link,backlink,status,notes\n"
-                    + "                                      from slider ) a where (title like '%"+search+"%' or backlink like '%"+search+"%') and\n"
+                    + "                                      from slider ) a where (title like '%" + search + "%' or backlink like '%" + search + "%') and\n"
                     + "                                     rid >= (?-1)*?+1 and rid <= ?*? and status =? ";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            
+
             stm.setInt(3, pageindex);
             stm.setInt(4, pagesize);
             stm.setInt(1, pageindex);
@@ -192,16 +206,17 @@ public class SliderDAO extends BaseDAO {
         }
         return null;
     }
-       public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search) {
+
+    public ArrayList<Slider> searchSliderPagination(int pageindex, int pagesize, String search) {
         try {
             ArrayList<Slider> list = new ArrayList<Slider>();
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
                     + "                                       id,title,image_link,backlink,status,notes\n"
-                    + "                                      from slider ) a where (title like '%"+search+"%' or backlink like '%"+search+"%') and\n"
+                    + "                                      from slider ) a where (title like '%" + search + "%' or backlink like '%" + search + "%') and\n"
                     + "                                     rid >= (?-1)*?+1 and rid <= ?*? ";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            
+
             stm.setInt(3, pageindex);
             stm.setInt(4, pagesize);
             stm.setInt(1, pageindex);
@@ -223,6 +238,24 @@ public class SliderDAO extends BaseDAO {
             Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void insert(Slider s) {
+        try {
+            String sql = "INSERT INTO\n"
+                    + "slider(title,image_link,backlink,status,notes)\n"
+                    + "VALUES(?,?,?,?,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, s.getTitle());
+            stm.setBoolean(4, s.isStatus());
+            stm.setString(2, s.getImageLink());
+            stm.setString(3, s.getBacklink());
+            stm.setString(5, s.getNotes());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

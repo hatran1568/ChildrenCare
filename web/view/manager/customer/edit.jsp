@@ -152,7 +152,8 @@
         <!-- Start section -->
         <div class="container">
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="user/edit" method="GET" >
+                            <form action="update" method="POST" >
+                                <input type="text" name="id" value="${requestScope.user.id}" hidden>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>

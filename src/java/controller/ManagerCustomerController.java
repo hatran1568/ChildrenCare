@@ -6,9 +6,11 @@
 package controller;
 
 import bean.Role;
+import bean.Setting;
 import bean.User;
 import com.google.gson.Gson;
 import dao.RoleDAO;
+import dao.SettingDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,6 +50,7 @@ public class ManagerCustomerController extends HttpServlet {
                 break;
             case "/manager/customer/update":
                 updateCustomer(request,response);
+                break;
             default:
                 getCustomerList(request,response);
                 break;
@@ -134,8 +137,8 @@ public class ManagerCustomerController extends HttpServlet {
         UserDAO userDB = new UserDAO();
         User user = userDB.getUser(uid);
         request.setAttribute("user", user);
-        RoleDAO roleDB = new RoleDAO();
-        ArrayList<Role> roles = roleDB.getRoles();
+        SettingDAO settingDB = new SettingDAO();
+        ArrayList<Setting> roles = settingDB.getSetting("Role");
         request.setAttribute("roles", roles);
         request.getRequestDispatcher("../../view/manager/customer/edit.jsp").forward(request, response);
     }
@@ -154,8 +157,10 @@ public class ManagerCustomerController extends HttpServlet {
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
         UserDAO userDB = new UserDAO();
+
         userDB.updateWithoutPassword(u, 2);
         response.sendRedirect("list");
+
     }
 
 }

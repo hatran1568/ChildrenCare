@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.Role;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,7 +30,7 @@ public class SettingDAO extends BaseDAO {
                 s.setId(rs.getInt("id"));
                 s.setType(rs.getString("type"));
                 s.setName(rs.getString("name"));
-                s.setValue(rs.getString("value"));
+                s.setValue(rs.getInt("value"));
                 s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getString("status"));
                 settings.add(s);
@@ -63,7 +64,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
-            stm.setString(3, s.getValue());
+            stm.setInt(3, s.getValue());
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.executeUpdate();
@@ -88,7 +89,7 @@ public class SettingDAO extends BaseDAO {
                 s.setId(rs.getInt("id"));
                 s.setType(rs.getString("type"));
                 s.setName(rs.getString("name"));
-                s.setValue(rs.getString("value"));
+                s.setValue(rs.getInt("value"));
                 s.setDescription(rs.getString("description"));
                 s.setStatus(rs.getString("status"));
                 return s;
@@ -107,9 +108,10 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
-            stm.setString(3, s.getValue());
+            stm.setInt(3, s.getValue());
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
+            stm.setInt(6, s.getId());
             stm.executeUpdate();
 
         } catch (SQLException ex) {
@@ -142,5 +144,24 @@ public class SettingDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public ArrayList<Setting> getSetting(String type){
+        ArrayList<Setting> settings = new ArrayList<>();
+        try{
+            String sql = "SELECT id, name from setting where type = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, type);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Setting s = new Setting();
+                s.setId(rs.getInt("id"));
+                s.setName(rs.getString("name"));
+                settings.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return settings;
     }
 }
