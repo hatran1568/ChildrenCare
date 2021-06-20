@@ -156,53 +156,47 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content;">
-            <nav class="navbar navbar-light bg-light">
-                <form id="search" method="GET" action="search" class="form-inline">
+        <div class="container" style="height: max-content; min-height: 700px;">
+            <form action="insert" method="POST" enctype="multipart/form-data">
+                
+                <table style="width: 100%">
+                     <tr>
+                        <td>Thumnail</td>
+                        <td> <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                            <img id="output"  > </td>
+                    </tr>
+                    <tr>
+                        <td>Title</td>
+                        <td><input style="width: 100%" type="text" name="title"></td>
+                    </tr>
+                    <tr>
+                        <td>Backlink</td>
+                        <td><input style="width: 100%" type="text" name="backlink"></td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td><select name="status">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
 
-                    <select onchange="submit()" style="margin: 0 200px;" name="status">
-                        <option <c:if test="${requestScope.status eq 'none'}"> selected="true"</c:if> value="none">All</option>
-                        <option  <c:if test="${requestScope.status eq 'true'}"> selected="true"</c:if>  value="true">Active</option>
-                        <option  <c:if test="${requestScope.status eq 'false'}"> selected="true"</c:if>  value="false">Inactive</option>
-                        </select>
-                        <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td><input style="width: 100%" type = "text" name="note"></td>
+                    </tr>
+                </table>
+                <input class="btn btn-secondary pull-right" type="submit" value="Submit">
+            </form>
 
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    
-                </form>
-                          <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
-            </nav>
-            <div class="row">
-                <c:forEach var="l" items="${requestScope.list}">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="full news_blog">
-                            <img class="img-responsive" src="../../${l.imageLink}" alt="#" />
-                            <c:if test="${l.status  eq true}">
-                                <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye fa-4x"></i></span></c:if>
-                                <c:if test="${l.status  eq false}">
-                                <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
-
-                                <div style="background: #7f93db;">
-                                    <h2><a href="#">${l.title}</a></h2>
-
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </c:forEach>
-            </div>
-
+            
         </div>
-        <div id="pagination" class="pagination"></div>
 
 
 
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
 
-        </script>
+
 
 
 
@@ -248,86 +242,35 @@
             <script src="../../assets/js/images-loded.min.js"></script>
             <script src="../../assets/js/custom.js"></script>
             <script>
-            function generatePagger(id, pageindex, totalpage, gap, page)
-            {
-                var container = document.getElementById(id);
-                if (pageindex > gap + 1)
-                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-
-                for (var i = pageindex - gap; i < pageindex; i++)
-                {
-                    if (i >= 1)
-                    {
-                        container.innerHTML += "<a href='" + page + "&page=" + i + "'>" + i + "</a>";
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
                     }
-                }
-
-                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                {
-                    if (i <= totalpage)
-                    {
-                        container.innerHTML += "<a href='" + page + "&page=" + i + "'>" + i + "</a>";
-                    }
-                }
-
-                if (pageindex < totalpage - gap)
-                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-            }
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}" + "?search=${requestScope.search}&status=${requestScope.status}");
-            function changeStatus(param) {
-                var id = param.id;
-                $.ajax({
-                    url: "change",
-                    type: "GET",
-                    data: {id: id},
-                    success:
-                            function (data) {
-                                if ($('#' + id.toString()).html() == '<i class="fas fa-eye fa-4x" aria-hidden="true"></i>') {
-                                    $('#' + id.toString()).html('<i class="fas fa-eye-slash fa-4x"></i>')
-
-                                } else {
-
-                                    $('#' + id.toString()).html('<i class="fas fa-eye fa-4x"></i>')
-
-                                }
-
-                            }
-
-                });
-
-            }
-            function submit(){
-                    document.getElementById("search").submit();
-                
-            }
-
+                };
             </script>
+
             <style>
-
-                .pagination{
-                    display: inline-block;
-                    margin: 0 auto;
-                    position: relative;
-                    left: 45%;
-                }
-                .pagination a {
-                    color: black;
-                    float: left;
-                    padding: 8px 16px;
-                    text-decoration: none;
+                #slider-image{
+                    max-height:600px;
+                    max-width:900px;
+                    height:auto;
+                    width:auto;
                 }
 
-                .pagination a.active {
-                    background-color: #4CAF50;
-                    color: white;
-                    border-radius: 5px;
+                #edit-btn{
+                    margin: 20px 0px;
+
                 }
 
-                .pagination a:hover:not(.active) {
-                    background-color: #ddd;
-                    border-radius: 5px;
+                table tr td:first-child{
+                    font-weight: bold;
+                    width: 30%;
+                }
+
+                table td{
+                    padding: 10px;
                 }
                 .dropdown {
                     color: white;

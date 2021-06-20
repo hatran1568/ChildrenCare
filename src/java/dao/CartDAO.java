@@ -91,7 +91,7 @@ public class CartDAO extends BaseDAO {
         }
         
     }
-    public void addToCart(User user, Service service) {
+        public void addToCart(User user, Service service) {
         try {
             int quantity = checkExistence(user, service);
             String sql = "";

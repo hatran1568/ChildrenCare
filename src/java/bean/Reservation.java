@@ -19,6 +19,7 @@ public class Reservation {
     private String status;
     private User staff;
     private int number_of_person;
+    private float total_cost;
 
     public int getId() {
         return id;
@@ -74,6 +75,14 @@ public class Reservation {
 
     public void setNumber_of_person(int number_of_person) {
         this.number_of_person = number_of_person;
+    }
+
+    public float getTotal_cost() {
+        return total_cost;
+    }
+
+    public void setTotal_cost(float total_cost) {
+        this.total_cost = total_cost;
     }
     
     

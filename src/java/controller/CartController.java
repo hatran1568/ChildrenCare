@@ -361,4 +361,8 @@ public class CartController extends HttpServlet {
         session.setAttribute("cart", cart);
         response.sendRedirect("../service/list");
     }
+    
+    protected void editReservation(HttpServletRequest request, HttpServletResponse response){
+        
+    }
 }

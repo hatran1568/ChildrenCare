@@ -63,9 +63,9 @@
                                     </button>
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
-                                            <li><a class="nav-link" href="#">Home</a></li>
+                                            <li><a class="nav-link" href="../home">Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#">Services</a></li>
+                                            <li><a class="nav-link" href="../service/list">Services</a></li>
                                             <li><a class="nav-link" href="">Blog</a></li>
                                             <li><a class="nav-link" href="user/list">Users</a></li>
                                         </ul>
@@ -89,7 +89,6 @@
         <!-- Start Banner -->
         <div class="section inner_page_banner">
             <div class="container" style="margin-right: 20px">
-                
                 <div class="row">
                     <div class="col-md-12">
                         <c:if test="${ empty sessionScope.user}">
@@ -137,7 +136,6 @@
                                     </div>
                                 </div>  
                             </div>
-
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
                             <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
@@ -151,67 +149,154 @@
 
                                 </div>
                             </div>
-
-
                         </c:if>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 1000px;">
+        <div class="container" >
 
             <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
+                <form id="receiverSubmit" action="contact/forwardedit?id=${requestScope.id}" method="POST">
+                    
+                    <table class="table" id="reservation-detail">
                         <thead  class="thead-dark">
-                            <tr >
-                                <td >Id</td>
-                                <td >Title</td>
-                                <td >Price</td>
-
-                                <td > Quantity</td>
-                                <td>Cost</td>
-                                <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3>Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact">Check Out</a></button></td>
+                            <tr>
+                                <td class="col-md-1">Id</td>
+                                <td class="col-md-2">Title</td>
+                                <td class="col-md-2">Price</td>
+                                <td class="col-md-5">Receiver</td>
+                                <td ><input hidden type="text" id="cur-row"></td>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="list" items="${requestScope.list}">
-                                <tr >
-                                    <td>${list.service.id}</td>
-                                    <td>${list.service.fullname}</td>
-                                    <td id =${list.service.id}>${list.service.salePrice}</td>
-
-                                    <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
-
-                                    <td id =${list.service.id}>${list.service.salePrice * list.quantity} </td>
-                                    <c:if test="${not empty list.user.id}">
-                                        <td><a href="delete?sid=${list.service.id}&uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
-                                            </c:if>
-                                            <c:if test="${ empty list.user.id}">
-                                        <td><a href="delete?sid=${list.service.id}"><i class="fas fa-trash-alt"></i></a></td>
-                                            </c:if>
-                                </tr>
+                                <c:forEach var="i" begin="1" end="${list.quantity}">
+                                    <c:if test="${ not empty sessionScope.user}">
+                                        <tr>
+                                            <td>${list.service.id}</td>
+                                            <td>${list.service.fullname}</td>
+                                            <td>${list.service.salePrice}</td>
+                                            <td class="receiver-info">Name: ${sessionScope.receivers[0].fullName}<br>
+                                                Gender: <c:if test="${sessionScope.receivers[0].gender == true}">Male</c:if><c:if test="${requestScope.receivers[0].gender == false}">Female</c:if><br>
+                                                Email: ${sessionScope.receivers[0].email}<br>
+                                                Mobile: ${sessionScope.receivers[0].mobile}<br>
+                                                Address: ${sessionScope.receivers[0].address}<br>
+                                                <input hidden type="text" name="receiver" class="receiver-id" value="${sessionScope.receivers[0].id}">
+                                            </td>   
+                                            <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="${empty sessionScope.user}">
+                                        <tr>
+                                            <td>${list.service.id}</td>
+                                            <td>${list.service.fullname}</td>
+                                            <td>${list.service.salePrice}</td>
+                                            <td class="receiver-info">Name: <br>
+                                                Gender: <br>
+                                                Email: <br>
+                                                Mobile: <br>
+                                                Address: <br>
+                                                <input hidden type="text" name="receiver" class="receiver-id" value="">
+                                            </td>   
+                                            <td><button type="button" class="btn receiver-select" data-toggle="modal" data-target="#change-receiver">Change receiver</button></td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
                             </c:forEach>
+                            <tr><td></td>
+                                <td>Total Cost : </td>
+                                <td class="total-cost" rowspan="5"><h3>${requestScope.totalcost}</h3></td></tr>
                         </tbody>
                     </table>
+                    <button type="button" class="btn btn-primary"><a href="../cart/list">Change</a></button>
+                    <button type="button" onclick="submitReceiver()" class="btn btn-primary float-right">Submit</button>  
                 </form>
 
             </c:if>
             <c:if test="${empty requestScope.list}">
+                <div class="container" style="height:800px;">
+                    <h1>You have nothing in cart!</h1>
+                </div>
 
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
-                </c:if>
+            </c:if>
 
-                <!--            <h2>Total Cost:</h2>-->
+            <!--            <h2>Total Cost:</h2>-->
+        </div>
+        <div class="modal fade" id="change-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose a receiver</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body">
+                            <c:forEach items="${sessionScope.receivers}" var="r">
+                                <button type="button" id="receiver-select-${r.id}" class="btn receiver-choice" style="width: 100%; margin: 10px 0px; text-align: left;">
+                                    Name: ${r.fullName}<br>
+                                    Gender: <c:if test="${r.gender == true}">Male</c:if><c:if test="${r.gender == false}">Female</c:if><br>
+                                    Email: ${r.email}<br>
+                                    Mobile: ${r.mobile}<br>
+                                    Address: ${r.address}<br></button>
+                                </c:forEach>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-receiver">Add receiver</button>
+                            <!--                            <button type="submit" class="btn btn-success">Submit</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="add-receiver" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Choose a receiver</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="contact/add" method="POST">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName">
+                            </div>
+                            <label>Gender</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender1" value="male">
+                                <label class="form-check-label" for="gender1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender2" value="female">
+                                <label class="form-check-label" for="gender2">Female</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">Mobile</label>
+                                <input type="text" class="form-control" id="mobile" name="mobile">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-top-0 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <!-- end section -->
 
@@ -257,32 +342,39 @@
             <script src="../assets/js/images-loded.min.js"></script>
             <script src="../assets/js/custom.js"></script>
             <script>
-                                        function ResetCart(param) {
-                                            var value = param.value;
-                                             var querry = param.name;
-                                             var u = ${sessionScope.user.id};
-                                            $.ajax({
-                                                url:"edit",
-                                                type:"GET",
-                                                data: {uid:u, sid:querry, param:value},
-                                                success:
-                                                        function(data){
-                                                            var b = JSON.parse(JSON.stringify(data));
-                                                            console.log(b);
-                                                            
-                                                        }
-                                                
-                                            });
-                                            
-                                        }
+                        $(document).ready(function () {
+                            var rowNum;
+                            var curRow;
+                            $('.receiver-select').click(function () {
+                                curRow = this.closest('tr');
+                                rowNum = $('#reservation-detail tr').index(curRow) - 1;
+                            });
+                            $('.receiver-choice').click(function () {
+                                var receiverID = this.id.substr(16);
+                                var receiverInfo = this.innerHTML;
+                                receiverInfo += '<input hidden type="text" name="receiver" value="' + receiverID.toString() + '">';
+                                document.getElementsByClassName('receiver-info')[parseInt(rowNum)].innerHTML = receiverInfo;
+                                $('#change-receiver').modal('hide');
+                            });
+                        });
 
-                                        $(document).ready(function () {
-                                            $("p").click(function () {
-                                                $(this).hide();
-                                            });
-                                        });
+                        function submitReceiver() {
+                            var missingReceiver = false;
+                            var receiverID = document.getElementsByName("receiver");
+                            for (i = 0; i < receiverID.length; i++) {
+                                if (!receiverID[i].value) {
+                                    missingReceiver = true;
+                                    alert("Please choose receivers for all your services!");
+                                    break;
+                                }
+                            }
+                            if (!missingReceiver) {
+                                document.getElementById("receiverSubmit").submit();
+                            }
+                        }
+
             </script>
-
+            
     </body>
 </html>
 

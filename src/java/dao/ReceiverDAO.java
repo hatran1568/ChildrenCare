@@ -145,5 +145,30 @@ public class ReceiverDAO extends BaseDAO {
         }
         return false;
     }
+    
+    public Receiver getReceiverByEmail(String Emaill){
+        try {
+            Receiver r = new Receiver();
+            String sql = "select * from receiver where email=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1,Emaill);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                r.setId(rs.getInt("id"));
+                r.setEmail(Emaill);
+                r.setFullName(rs.getString("full_name"));
+                User u = new User();
+                u.setId(rs.getInt("user_id"));
+                r.setUser(u);
+                r.setMobile(rs.getString("mobile"));
+                r.setAddress(rs.getString("address"));
+                
+            }
+            return r;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiverDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }

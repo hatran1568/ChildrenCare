@@ -57,6 +57,11 @@
         <servlet-name>SliderController</servlet-name>
         <servlet-class>controller.SliderController</servlet-class>
   </servlet>
+   <servlet>
+
+        <servlet-name>MyReservationController</servlet-name>
+        <servlet-class>controller.MyReservationController</servlet-class>
+  </servlet>
   
    <servlet>
         <servlet-name>SettingController</servlet-name>
@@ -68,6 +73,15 @@
         <servlet-class>controller.ManagerCustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
+        <servlet-name>MyReservationController</servlet-name>
+        <url-pattern>/customer/reservation/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyReservationController</servlet-name>
+        <url-pattern>/customer/reservation/my</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        
         <servlet-name>ListPostController</servlet-name>
         <url-pattern>/post/list</url-pattern>
     </servlet-mapping>
@@ -167,6 +181,14 @@
         <servlet-name>ReservationContactController</servlet-name>
         <url-pattern>/reservation/contact/forward</url-pattern>
     </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contact/forwardedit</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ReservationContactController</servlet-name>
+        <url-pattern>/reservation/contactedit</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service</url-pattern>
@@ -174,6 +196,14 @@
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/service/list</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service/add</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
@@ -194,6 +224,22 @@
      <servlet-mapping>
         <servlet-name>SliderController</servlet-name>
         <url-pattern>/manager/slider/change</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/add</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/insert</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/edit</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>SliderController</servlet-name>
+        <url-pattern>/manager/slider/update</url-pattern>
     </servlet-mapping>
      <servlet-mapping>
         <servlet-name>SettingController</servlet-name>

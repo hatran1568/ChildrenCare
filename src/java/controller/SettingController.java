@@ -335,7 +335,8 @@ public class SettingController extends HttpServlet {
             u.setGender(false);
         }
 
-        userDb.addCustomer(u, false, -1);
+        userDb.addCustomer(u, false,2);
+
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);

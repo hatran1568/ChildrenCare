@@ -49,7 +49,8 @@ public class ReservationCompletionController extends HttpServlet {
         ReservationDAO reservationDB = new ReservationDAO();
         UserDAO userDB = new UserDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
-
+       
+        
         //Sub-function 1: Receiver information are saved
         ArrayList<Receiver> receivers = new ArrayList<>();
         receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
@@ -97,7 +98,7 @@ public class ReservationCompletionController extends HttpServlet {
         reservation.setStaff(assignStaff);
         //Set numberofperson
         reservation.setNumber_of_person(1);
-        reservation.setStatus("none");
+        reservation.setStatus("Submited");
         //Submit reservation services
         reservationDB.addReservation(reservation);
         reservation.setId(reservationDB.returnNewestReservation());
@@ -108,11 +109,17 @@ public class ReservationCompletionController extends HttpServlet {
         for (int i : receiverservice) {
             receiverlist.add(receivers.get(i));
         }
+       for(int i =0 ; i<receiverlist.size();i++){
+           receiverlist.set(i,receiverDB.getReceiverByEmail(receiverlist.get(i).getEmail()) );
+       }
         if (u == null) {
             ArrayList<CartItem> cart = new ArrayList<>();
             cart = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
             int rcount = 0;
-            for (CartItem cartItem : cart) {
+            for(int i =0 ;i <cart.size();i++){
+                reservationDB.addReservationService(reservation, cart.get(i).getService(), receiverlist.get(receiverservice.get(i)));
+            }
+                for (CartItem cartItem : cart) {
                 reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
                 rcount++;
             }

@@ -156,54 +156,39 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content;">
-            <nav class="navbar navbar-light bg-light">
-                <form id="search" method="GET" action="search" class="form-inline">
-
-                    <select onchange="submit()" style="margin: 0 200px;" name="status">
-                        <option <c:if test="${requestScope.status eq 'none'}"> selected="true"</c:if> value="none">All</option>
-                        <option  <c:if test="${requestScope.status eq 'true'}"> selected="true"</c:if>  value="true">Active</option>
-                        <option  <c:if test="${requestScope.status eq 'false'}"> selected="true"</c:if>  value="false">Inactive</option>
-                        </select>
-                        <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    
-                </form>
-                          <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
-            </nav>
-            <div class="row">
-                <c:forEach var="l" items="${requestScope.list}">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="full news_blog">
-                            <img class="img-responsive" src="../../${l.imageLink}" alt="#" />
-                            <c:if test="${l.status  eq true}">
-                                <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye fa-4x"></i></span></c:if>
-                                <c:if test="${l.status  eq false}">
-                                <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
-
-                                <div style="background: #7f93db;">
-                                    <h2><a href="#">${l.title}</a></h2>
-
-                            </div>
+        <div class="container" style="height: 700px;">
+            
+           <table class="table" id="reservation-detail">
+                        <thead  class="thead-dark">
+                            <tr>
+                                <td class="col-md-1">Id</td>
+                                <td class="col-md-2">Date</td>
+                                <td class="col-md-2">Time to check up</td>
+                                <td class="col-md-2">Status</td>
+                                <td class="col-md-2">Total Cost</td>
+                                <td class="col-md-1">Information</td>
+                               
+                        </thead>
+                        <tbody>
+                            <c:forEach var="list" items="${requestScope.list}">
+                                <tr>
+                            <td class="col-md-1">${list.id}</td>
+                            <td class="col-md-2">${list.reservation_date}</td>
+                                <td class="col-md-2">${list.reservation_date}</td>
+                                <td class="col-md-2">${list.status}</td>
+                                <td class="col-md-2">${list.total_cost}</td>
+                                <td class="col-md-1"><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
+                                </tr>
+                            </c:forEach>
+                            
+                        </tbody>
+                    </table>
+      
 
 
-                        </div>
 
-                    </div>
-                </c:forEach>
-            </div>
-
+       
         </div>
-        <div id="pagination" class="pagination"></div>
-
-
-
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-
-        </script>
-
 
 
         <!-- Start Footer -->
@@ -258,7 +243,7 @@
                 {
                     if (i >= 1)
                     {
-                        container.innerHTML += "<a href='" + page + "&page=" + i + "'>" + i + "</a>";
+                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
                     }
                 }
 
@@ -268,14 +253,14 @@
                 {
                     if (i <= totalpage)
                     {
-                        container.innerHTML += "<a href='" + page + "&page=" + i + "'>" + i + "</a>";
+                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
                     }
                 }
 
                 if (pageindex < totalpage - gap)
                     container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
             }
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}" + "?search=${requestScope.search}&status=${requestScope.status}");
+            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
             function changeStatus(param) {
                 var id = param.id;
                 $.ajax({
@@ -298,10 +283,7 @@
                 });
 
             }
-            function submit(){
-                    document.getElementById("search").submit();
-                
-            }
+
 
             </script>
             <style>
@@ -376,7 +358,7 @@
 
                 .in-text:hover{
                     display: block;
-                }
+               }
 
                 .news_blog:hover{
                     opacity: 0.4;
