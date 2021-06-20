@@ -119,7 +119,6 @@
                                 <h3>Reservation Details</h3>
                                 <div>Reservation ID: ${requestScope.reservation.getId()}</div>
                                 <div>Reserved Date: ${requestScope.reservation.getReservation_date()}</span>
-                                <div>Number of Patients: ${requestScope.reservation.getNumber_of_person()}</div>
                                 <div>Assigned Staff: ${requestScope.reservation.getStaff().getFullName()}</div>
                                 <div>Staff Contact Email: ${requestScope.reservation.getStaff().getEmail()}</div>
                                 <div>Staff Contact Number: ${requestScope.reservation.getStaff().getMobile()}</div>

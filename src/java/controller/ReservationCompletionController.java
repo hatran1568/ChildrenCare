@@ -20,9 +20,6 @@ import dao.CartDAO;
 import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -44,6 +41,21 @@ public class ReservationCompletionController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         EmailVerify e = new EmailVerify();
         ReservationDAO reservationDB = new ReservationDAO();
@@ -99,8 +111,8 @@ public class ReservationCompletionController extends HttpServlet {
         //Set numberofperson
         reservation.setNumber_of_person(1);
         reservation.setStatus("Submited");
-        //Submit reservation services
         reservationDB.addReservation(reservation);
+        //Submit reservation services
         reservation.setId(reservationDB.returnNewestReservation());
         CartDAO cartDB = new CartDAO();
         ArrayList<Integer> receiverservice = new ArrayList<>();
@@ -109,26 +121,32 @@ public class ReservationCompletionController extends HttpServlet {
         for (int i : receiverservice) {
             receiverlist.add(receivers.get(i));
         }
-       for(int i =0 ; i<receiverlist.size();i++){
+        for(int i =0 ; i<receiverlist.size();i++){
            receiverlist.set(i,receiverDB.getReceiverByEmail(receiverlist.get(i).getEmail()) );
-       }
+        }
         if (u == null) {
             ArrayList<CartItem> cart = new ArrayList<>();
             cart = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
             int rcount = 0;
             for(int i =0 ;i <cart.size();i++){
-                reservationDB.addReservationService(reservation, cart.get(i).getService(), receiverlist.get(receiverservice.get(i)));
+                for (int j = 0; j < cart.get(i).getQuantity(); j++) {
+                    reservationDB.addReservationService(reservation, cart.get(i).getService(), receiverlist.get(receiverservice.get(i)));
+                }
             }
-                for (CartItem cartItem : cart) {
-                reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
-                rcount++;
+            for (CartItem cartItem : cart) {
+                for (int i = 0; i < cartItem.getQuantity(); i++) {
+                    reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
+                    rcount++;
+                }
             }
         } else {
             ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
             int rcount = 0;
             for (CartItem cartItem : cart) {
-                reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
-                rcount++;
+                for (int i = 0; i < cartItem.getQuantity(); i++) {
+                    reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
+                    rcount++;
+                }
             }
         }
 
@@ -152,22 +170,8 @@ public class ReservationCompletionController extends HttpServlet {
                 cartDB.deleteCart(u, cartitem.getService());
             }
         }
+        reservationDB.deleteReservation(reservationDB.returnNewestReservation());
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

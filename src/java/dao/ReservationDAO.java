@@ -283,11 +283,11 @@ public class ReservationDAO extends BaseDAO {
         }
     }
     
-    public void deleteReservation(Reservation r){
+    public void deleteReservation(int rid){
         try {
             String sql ="delete from reservation where id =?";
             PreparedStatement stm =connection.prepareStatement(sql);
-            stm.setInt(1, r.getId());
+            stm.setInt(1, rid);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
