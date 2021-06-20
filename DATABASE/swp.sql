@@ -203,6 +203,7 @@ CREATE TABLE `service`  (
   `featured` tinyint(1) NULL DEFAULT NULL,
   `status` tinyint(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
+
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -215,6 +216,7 @@ INSERT INTO `service` VALUES (3, 'Service 3', 200000.00, 150000.00, 'assets/imag
 -- ----------------------------
 -- Table structure for setting
 -- ----------------------------
+
 DROP TABLE IF EXISTS `setting`;
 CREATE TABLE `setting`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
@@ -335,21 +337,44 @@ INSERT INTO `user` VALUES (40, 'test@test', 'CRS294324825', '123123', 1, '342141
 -- Table structure for user_history
 -- ----------------------------
 DROP TABLE IF EXISTS `user_history`;
-CREATE TABLE `user_history`  (
-  `user_id` int(0) NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `gender` tinyint(1) NULL DEFAULT NULL,
-  `mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `status` tinyint(1) NULL DEFAULT NULL,
-  `updated_by` int(0) NULL DEFAULT NULL,
-  `updated_date` datetime(0) NOT NULL,
-  `role_id` int(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`, `updated_date`) USING BTREE,
-  INDEX `FK_updated_by_idx`(`updated_by`) USING BTREE,
-  CONSTRAINT `FK_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
-SET FOREIGN_KEY_CHECKS = 1;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_history` (
+  `user_id` int NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `full_name` varchar(255) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `updated_date` datetime NOT NULL,
+  `role_id` int DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`updated_date`),
+  KEY `FK_updated_by_idx` (`updated_by`),
+  CONSTRAINT `FK_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_history`
+--
+
+LOCK TABLES `user_history` WRITE;
+/*!40000 ALTER TABLE `user_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_history` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-06-20 10:55:26
+

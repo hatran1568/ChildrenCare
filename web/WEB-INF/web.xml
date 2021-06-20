@@ -206,6 +206,10 @@
         <url-pattern>/service/insert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/service/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SliderController</servlet-name>
         <url-pattern>/manager/slider/list</url-pattern>
     </servlet-mapping>

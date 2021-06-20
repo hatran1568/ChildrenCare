@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Role;
+import bean.UserHistory;
 import java.sql.Statement;
 
 /**
@@ -527,7 +528,7 @@ public class UserDAO extends BaseDAO {
     public void updateWithoutPassword(User u, int updatedBy){
         try {
             connection.setAutoCommit(false);
-            String sql = "update user set email=?, password=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
+            String sql = "update user set email=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
                     + "where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -571,5 +572,38 @@ public class UserDAO extends BaseDAO {
         }
     }
     
-    
+    public ArrayList<UserHistory> getUserHistory(int uid){
+        ArrayList<UserHistory> list = new ArrayList<>();
+        try {
+            String sql = "SELECT h.user_id, h.email, h.full_name, h.gender,h.status, h.mobile, h.address, u.full_name as updated_by, h.updated_date  \n" +
+"FROM swp.user_history as h left join user u\n" +
+"on h.updated_by = u.id\n" +
+"where h.user_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, uid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                UserHistory a = new UserHistory();
+                a.setId(rs.getInt("user_id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setMobile(rs.getString("mobile"));
+                a.setAddress(rs.getString("address"));
+                a.setStatus(rs.getBoolean("status"));
+                User u = new User();
+                u.setFullName(rs.getString("updated_by"));
+                a.setUpdatedBy(u);
+//                Role r = new Role();
+//                r.setId(rs.getInt("role_id"));
+//                r.setName(rs.getString("role_name"));
+//                a.setRole(r);
+                a.setUpdatedDate(new java.util.Date(rs.getTimestamp("updated_date").getTime()));
+                list.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 }

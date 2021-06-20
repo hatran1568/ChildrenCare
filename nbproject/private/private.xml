@@ -7,14 +7,19 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationContactController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/CartDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/add.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationInformation.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerCustomerController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Reservation.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/edit.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/myReservation.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/MyReservationController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/editReservationContact.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SettingController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Slider.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationCompletionController.java</file>
         </group>
     </open-files>
