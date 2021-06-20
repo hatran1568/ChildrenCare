@@ -258,16 +258,17 @@
                                                 <button id="edit-btn" class="btn pull-right" onclick="window.location.href = 'edit?uid=${requestScope.user.id}'">Edit</button>
                                         </div>
                                         <div class="tab-pane" id="historyOfChange" role="tabpanel" aria-labelledby="historyOfChange-tab">
+                                            <div class="row">
                                             <table class="table table-hover" style="margin-top: 10px">
                                                 <thead class="thead-dark">
                                                     <tr>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Full name</th>
-                                                        <th scope="col">Gender</th>
-                                                        <th scope="col">Mobile</th>
-                                                        <th scope="col">Address</th>
-                                                        <th scope="col">Updated by</th>
-                                                        <th scope="col">Updated date</th>
+                                                        <th class="col-md-2">Email</th>
+                                                        <th class="col-md-2">Full name</th>
+                                                        <th class="col-md-1">Gender</th>
+                                                        <th class="col-md-1">Mobile</th>
+                                                        <th class="col-md-2">Address</th>
+                                                        <th class="col-md-2">Updated by</th>
+                                                        <th class="col-md-2">Updated date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -286,6 +287,7 @@
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
