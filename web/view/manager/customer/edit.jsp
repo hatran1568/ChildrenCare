@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Site Metas -->
-        
+
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             </nav>
-                            
+
 
                         </div>
                     </div>
@@ -151,55 +151,55 @@
 
         <!-- Start section -->
         <div class="container">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="update" method="POST" >
-                                <input type="text" name="id" value="${requestScope.user.id}" hidden>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="full-name">Full name</label>
-                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}">
-                                </div>
-                                    <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
-                                <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
-                                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
-                                        </select>
+            <!--<div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>-->
+            <form action="update" method="POST" >
+                <input type="text" name="id" value="${requestScope.user.id}" hidden>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full name</label>
+                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}">
+                </div>
+                <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender">
+                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
+                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
+                    </select>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mobile">Mobile</label>
-                                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}">
-                                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
+                    </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}">
+                </div>
 
-                                <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <select class="form-control" name="role">
-                                        <c:forEach items="${requestScope.roles}" var="r">
-                                            <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control" name="status">
-                                        <option value="0">Not Verified</option>
-                                        <option value="1">Verified</option>
-                                    </select>
-                                </div>
+                <!--                                <div class="form-group">
+                                                    <label for="role">Role</label>
+                                                    <select class="form-control" name="role">
+                <%--<c:forEach items="${requestScope.roles}" var="r">--%>
+                    <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
+                <%--</c:forEach>--%>
+            </select>
+        </div>-->
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status">
+                        <option value="0">Not Verified</option>
+                        <option value="1">Verified</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
         <!-- end section -->
 
         <!-- Start Footer -->
@@ -248,11 +248,11 @@
             <c:if test="${empty sessionScope.mess}">
                 <c:if test="${ not empty sessionScope.alert}">
                     <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
 
-                    });
+                        });
                     </script>
                     <c:remove var="alert" scope="session" />
 

@@ -8,6 +8,7 @@ package controller;
 import bean.Role;
 import bean.Setting;
 import bean.User;
+import bean.UserHistory;
 import com.google.gson.Gson;
 import dao.RoleDAO;
 import dao.SettingDAO;
@@ -50,6 +51,9 @@ public class ManagerCustomerController extends HttpServlet {
                 break;
             case "/manager/customer/update":
                 updateCustomer(request,response);
+                break;
+            case "/manager/customer/add":
+                showFormAdd(request,response);
                 break;
             default:
                 getCustomerList(request,response);
@@ -128,6 +132,9 @@ public class ManagerCustomerController extends HttpServlet {
         UserDAO userDB = new UserDAO();
         User user = userDB.getUser(uid);
         request.setAttribute("user", user);
+        
+        ArrayList<UserHistory> history = userDB.getUserHistory(uid);
+        request.setAttribute("history", history);
         request.getRequestDispatcher("../../view/manager/customer/details.jsp").forward(request, response);
     }
 
@@ -154,11 +161,20 @@ public class ManagerCustomerController extends HttpServlet {
         u.setImageLink(request.getParameter("image-link"));
         u.setMobile(request.getParameter("mobile"));
         Role r = new Role();
-        r.setId(Integer.parseInt(request.getParameter("role")));
+        r.setId(4);
         u.setRole(r);
         UserDAO userDB = new UserDAO();
         userDB.updateWithoutPassword(u, u1.getId());
         response.sendRedirect("../customer/list");
     }
 
+    private void showFormAdd(HttpServletRequest request, HttpServletResponse response)
+           throws ServletException, IOException {
+        SettingDAO settingDB = new SettingDAO();
+        ArrayList<Setting> roles = settingDB.getSetting("Role");
+        request.setAttribute("roles", roles);
+        request.getRequestDispatcher("../../view/manager/customer/add.jsp").forward(request, response);
+    }
+    
+    
 }
