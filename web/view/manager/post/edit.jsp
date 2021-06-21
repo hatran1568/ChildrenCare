@@ -152,7 +152,7 @@
 
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
-                <form action="update" method="POST" enctype=multipart/form-data">
+                <form action="update" method="POST" enctype="multipart/form-data">
                     
                     <input type="text" value="${requestScope.post.id}" name="pid" hidden>
                     <div class="row">
