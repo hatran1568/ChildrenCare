@@ -197,7 +197,6 @@ public class ReservationContactController extends HttpServlet {
                 receiverList = receiverDB.getReceivers(u.getId());
             } else {
                 receiverList = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
-
             }
             ArrayList<CartItem> list = new ArrayList<>();
             for (ReservationService res : reslist) {

@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer List</title>
+        <title>Post Details</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -148,57 +148,54 @@
             </div>
         </div>
         <!-- End Banner -->
-
         <!-- Start section -->
-        <div class="container">
-            <!--<div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>-->
-            <form action="update" method="POST" >
-                <input type="text" name="id" value="${requestScope.user.id}" hidden>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="full-name">Full name</label>
-                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}">
-                </div>
-                <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="gender">
-                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
-                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
-                    </select>
 
+        <div class="section" id="main-body">
+            <div class="container" style="min-height: 600px">
+                <div class="row">
+                    <div class="col-md-3">Thumbnail</div>
+                    <div class="col-md-9">
+                        <img src="../../${requestScope.post.thumbnailLink}" style="max-width: 500px">
                     </div>
-                    <div class="form-group">
-                        <label for="mobile">Mobile</label>
-                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
+                </div>
+                    <hr />
+                <div class="row">
+                    <div class="col-md-3">Category</div>
+                    <div class="col-md-9">
+                        ${requestScope.post.category.name}
                     </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}">
+                </div> 
+                    <hr />
+                <div class="row">
+                    <div class="col-md-3">Title</div>
+                    <div class="col-md-9">
+                        ${requestScope.post.title}
+                    </div>
                 </div>
-
-                <!--                                <div class="form-group">
-                                                    <label for="role">Role</label>
-                                                    <select class="form-control" name="role">
-                <%--<c:forEach items="${requestScope.roles}" var="r">--%>
-                    <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
-                <%--</c:forEach>--%>
-            </select>
-        </div>-->
-
-                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" name="status">
-                        <option value="0" <c:if test="${requestScope.user.status==false}">selected</c:if>>Not Verified</option>
-                        <option value="1" <c:if test="${requestScope.user.status==true}">selected</c:if>>Verified</option>
-                    </select>
+                    <hr />
+                <div class="row">
+                    <div class="col-md-3">Description</div>
+                    <div class="col-md-9">
+                        ${requestScope.post.description}
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                    <hr />
+                <div class="row">
+                    <div class="col-md-3">Featured</div>
+                    <div class="col-md-9">
+                        <c:if test="${requestScope.post.featured eq true}">True</c:if>
+                        <c:if test="${requestScope.post.featured eq false}">False</c:if>
+                    </div>
+                </div>
+                    <hr />
+                <div class="row">
+                    <div class="col-md-3">Status</div>
+                    <div class="col-md-9">
+                        ${requestScope.post.status}
+                    </div>
+                </div>  
+                    <button type="button" class="btn btn-primary pull-right" onclick="window.location.href = 'edit?pid=${requestScope.post.id}'">Edit post</button>
+            </div>
         </div>
         <!-- end section -->
 
@@ -268,6 +265,21 @@
                 </script>
                 <c:remove var="mess" scope="session" />
             </c:if>
+                <style>
+                    #main-body .row{
+                        margin: 10px 0px;
+                        padding: 10px;
+                    }
+                    #main-body .row :first-child{
+                        font-weight: bold;
+                    }
+                    
+                    #main-body{
+                        margin: 10px 0px;
+                    }
+                    
+                    
+                </style>
     </body>
 </html>
 

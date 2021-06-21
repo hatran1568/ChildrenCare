@@ -4,6 +4,10 @@
         <param-name>pagesize</param-name>
         <param-value>10</param-value>
     </context-param>
+    <context-param>
+        <param-name>ImageDirectory</param-name>
+        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
+    </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
         <filter-class>filter.Authorization</filter-class>
@@ -69,8 +73,14 @@
         <servlet-class>controller.ManagerCustomerController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.DashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-class>controller.PostDetailsController</servlet-class>
+       
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -290,8 +300,22 @@
         <url-pattern>/manager/customer/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/admin/dashboard/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsController</servlet-name>
+        <url-pattern>/manager/post/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsController</servlet-name>
+        <url-pattern>/manager/post/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostDetailsController</servlet-name>
+        <url-pattern>/manager/post/update</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

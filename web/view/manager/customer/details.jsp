@@ -20,7 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        
+
         <link rel="apple-touch-icon" href="#" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
@@ -258,16 +258,17 @@
                                                 <button id="edit-btn" class="btn pull-right" onclick="window.location.href = 'edit?uid=${requestScope.user.id}'">Edit</button>
                                         </div>
                                         <div class="tab-pane" id="historyOfChange" role="tabpanel" aria-labelledby="historyOfChange-tab">
+                                            <div class="row">
                                             <table class="table table-hover" style="margin-top: 10px">
                                                 <thead class="thead-dark">
                                                     <tr>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Full name</th>
-                                                        <th scope="col">Gender</th>
-                                                        <th scope="col">Mobile</th>
-                                                        <th scope="col">Address</th>
-                                                        <th scope="col">Updated by</th>
-                                                        <th scope="col">Updated date</th>
+                                                        <th class="col-md-2">Email</th>
+                                                        <th class="col-md-2">Full name</th>
+                                                        <th class="col-md-1">Gender</th>
+                                                        <th class="col-md-1">Mobile</th>
+                                                        <th class="col-md-2">Address</th>
+                                                        <th class="col-md-2">Updated by</th>
+                                                        <th class="col-md-2">Updated date</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -275,10 +276,10 @@
                                                         <tr>
                                                             <td>${h.email}</td>
                                                             <td>${h.fullName}</td>
-                                                            <td><c:if test="${requestScope.user.gender eq true}">Male</c:if>
-                                                                <c:if test="${requestScope.user.gender eq false}">Female</c:if>
+                                                            <td><c:if test="${h.gender eq true}">Male</c:if>
+                                                                <c:if test="${h.gender eq false}">Female</c:if>
                                                                 </td>
-                                                                <td>${h.mobile}</td>
+                                                            <td>${h.mobile}</td>
                                                             <td>${h.address}</td>
                                                             <td>${h.updatedBy.fullName}</td>
                                                             <td>${h.updatedDate}</td>
@@ -286,6 +287,7 @@
                                                     </c:forEach>
                                                 </tbody>
                                             </table>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>

@@ -154,7 +154,7 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-<!--        <div class="container" style="height: 700px;">
+        <div class="container" style="height: 700px;">
             <div class="banner_section">
             <div class="container-fluid padding_0">
                <div id="my_slider" class="carousel slide" data-ride="carousel">
@@ -175,7 +175,7 @@
                            </div>
                         </div>
                      </div>
-                     <%--<c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">--%>
+                     <c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">
                      <div class="carousel-item">
                         <div class="row">
                            <div class="col-md-6">
@@ -192,7 +192,7 @@
                            </div>
                         </div>
                      </div>
-                     <%--</c:forEach>--%>
+                     </c:forEach>
                   </div>
                   <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
                   <i class="fa fa-left fa-arrow-left"></i>
@@ -203,7 +203,7 @@
                </div>
             </div>
          </div>
-        </div>-->
+        </div>
         
         <!--Service list-->
         <div class="categories-area section-padding30">
