@@ -23,7 +23,7 @@ import dao.UserDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
-import ulti.EmailVerify;
+import util.EmailVerify;
 
 /**
  *
