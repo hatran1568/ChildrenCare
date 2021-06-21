@@ -325,6 +325,11 @@
         <url-pattern>/manager/post/list</url-pattern>
 
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPostController</servlet-name>
+        <url-pattern>/manager/post/add</url-pattern>
+
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
