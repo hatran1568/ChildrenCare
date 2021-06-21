@@ -78,8 +78,10 @@
         <servlet-class>controller.DashboardController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>ManagerPostController</servlet-name>
         <servlet-class>controller.ManagerPostController</servlet-class>
+
        
     </servlet>
     <servlet-mapping>
@@ -306,6 +308,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
+
         <url-pattern>/manager/post/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

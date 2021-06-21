@@ -108,6 +108,20 @@ public class UserDAO extends BaseDAO {
         }
         return -1;
     }
+     public int countUser() {
+        try {
+            String sql = "SELECT COUNT(*) as total FROM user where role_id = 4";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     public void addUser(User u, boolean status, int updatedBy) {
         try {

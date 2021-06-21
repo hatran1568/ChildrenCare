@@ -305,4 +305,38 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+    
+    public int countReservation(String status){
+        try {
+            int a =0;
+            String sql = "SELECT count(status) as total from reservation where status =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, status);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                a = rs.getInt("total");
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+        
+    }
+    
+    public float getRevenue(Service s){
+        try {
+            String sql = "SELECT sum(unit_price) as total from reservation_service where service_id=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, s.getId());
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                return rs.getFloat("total");
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return 0;
+    }
 }
