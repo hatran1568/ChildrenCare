@@ -9,6 +9,7 @@ import bean.Service;
 import dao.FeedbackDAO;
 import dao.ReservationDAO;
 import dao.ServiceDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -75,6 +76,8 @@ public class DashboardController extends HttpServlet {
         ArrayList<Float> revernue = new ArrayList<>();
         ArrayList<Integer> avg_feed = new ArrayList<>();
         FeedbackDAO fbDB = new FeedbackDAO();
+        UserDAO userDB = new UserDAO();
+        int total_customer = userDB.countUser();
         int tostar = 0;
         int toSer = 0;
         for (Service s : list) {
@@ -99,6 +102,7 @@ public class DashboardController extends HttpServlet {
 
         request.setAttribute("Success", Success);
         request.setAttribute("Total", total);
+        request.setAttribute("Customer", total_customer);
         request.setAttribute("sum", sum);
 
         request.getRequestDispatcher("../../view/dashboard/dashboard.jsp").forward(request, response);

@@ -96,6 +96,7 @@
                                                     </li>
                                                 </c:forEach>
                                             </ul>
+
                                         </div>
 
 
@@ -107,11 +108,11 @@
                                         <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
                                             <h4 id="0" class="title">Total Revenue : </h4>
                                             <script>
-                                                        $(document).ready(function () {
-                                                            drawRate(${requestScope.tostar},0)
-                                                        });
-                                                       
-                                                    </script>
+                                                $(document).ready(function () {
+                                                    drawRate(${requestScope.tostar}, 0)
+                                                });
+
+                                            </script>
                                             <ul style="text-decoration: none">
                                                 <c:forEach items="${requestScope.service}" var="list">
                                                     <li id="${list.id}">
@@ -121,12 +122,34 @@
                                                         $(document).ready(function () {
                                                             drawRate(${star[list.id -1]},${list.id})
                                                         });
-                                                       
+
                                                     </script>
                                                 </c:forEach>
                                             </ul>
                                         </div>
 
+
+                                    </div>
+                                </div>
+                                <div  style="margin: 10px 0;" class=" col-md-6">
+                                    <div class="card">
+
+                                        <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
+
+                                            <h4>Total Customer : ${requestScope.Customer}</h4>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div  style="margin: 10px 0;" class=" col-md-12">
+                                    <div class="card">
+
+                                        <div style="text-align: center" class="header">
+                                            <h4 class="title">Trend</h4>
+
+                                            <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -224,32 +247,55 @@
 <script src="../../assets/js/owl-carousel.js"></script>
 <script src="../../assets/js/custom.js"></script>
 <script>
-                                            var xValues = ["Submited", "Cancel", "Success"];
-                                            var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success}];
-                                            var barColors = [
-                                                "#00aba9",
-                                                "#b91d47",
+                                                        var xValues = ["Submited", "Cancel", "Success"];
+                                                        var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success}];
+                                                        var barColors = [
+                                                            "#00aba9",
+                                                            "#b91d47",
 
-                                                "#2b5797",
-                                            ];
+                                                            "#2b5797",
+                                                        ];
 
-                                            new Chart("myChart", {
-                                                type: "pie",
-                                                data: {
-                                                    labels: xValues,
-                                                    datasets: [{
-                                                            backgroundColor: barColors,
-                                                            data: yValues
-                                                        }]
-                                                },
-                                                options: {
-                                                    title: {
-                                                        display: true,
-                                                        text: "World Wide Wine Production 2018"
-                                                    }
-                                                }
-                                            });
+                                                        new Chart("myChart", {
+                                                            type: "pie",
+                                                            data: {
+                                                                labels: xValues,
+                                                                datasets: [{
+                                                                        backgroundColor: barColors,
+                                                                        data: yValues
+                                                                    }]
+                                                            },
+                                                            options: {
+                                                                title: {
+                                                                    display: true,
+                                                                    text: "World Wide Wine Production 2018"
+                                                                }
+                                                            }
+                                                        });
+
+
 </script>
+<script>
+    var xValues = [1,2,3,4,5,6,7];
+
+    new Chart("Chart1", {
+        type: "line",
+        data: {
+            labels: xValues,
+            datasets: [{
+                    data: [2,11,5,6,2,1,2],
+                    borderColor: "green",
+                    fill: false
+                }, {
+                    data: [2,4,1,3,2,1,1],
+                    borderColor: "red",
+                    fill: false
+                }]
+        },
+        options: {
+            legend: {display: false}
+        }
+    });</script>
 
 <script>
     function drawRate(star, ele) {
