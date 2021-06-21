@@ -66,15 +66,19 @@ public class MyReservationController extends HttpServlet {
         String action = request.getServletPath();
         
         switch(action){
-            case "/customer/reservation/my":
+            case "/admin/reservation/my":
                 showMyreservation(request, response);
                 break;
             case "/customer/reservation/details":
                 showDetailsReservation(request, response);
                 break;
+            case "/customer/reservation/cancel":
+                cancelReservation(request, response);
+                break;
             default:
                 break;
         }
+       
     }
 
     /**
@@ -124,6 +128,16 @@ public class MyReservationController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    
+    public void cancelReservation(HttpServletRequest request, HttpServletResponse response) throws IOException{
+         Reservation r = new Reservation();
+        int id = Integer.parseInt(request.getParameter("id")) ;
+        ReservationDAO redb = new ReservationDAO();
+        r = redb.getReservationById(id);
+        redb.deleteReservationService(r);
+        redb.cancelReservation(r);
+        response.sendRedirect("my");
+    }
     @Override
     public String getServletInfo() {
         return "Short description";

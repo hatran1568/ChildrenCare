@@ -23,8 +23,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="../assets/css/footer.css" rel="stylesheet" type="text/css"/>
-        <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+        
         <link rel="apple-touch-icon" href="#" />
 
         <!-- Bootstrap CSS -->
@@ -119,7 +118,6 @@
                                 <h3>Reservation Details</h3>
                                 <div>Reservation ID: ${requestScope.reservation.getId()}</div>
                                 <div>Reserved Date: ${requestScope.reservation.getReservation_date()}</span>
-                                <div>Number of Patients: ${requestScope.reservation.getNumber_of_person()}</div>
                                 <div>Assigned Staff: ${requestScope.reservation.getStaff().getFullName()}</div>
                                 <div>Staff Contact Email: ${requestScope.reservation.getStaff().getEmail()}</div>
                                 <div>Staff Contact Number: ${requestScope.reservation.getStaff().getMobile()}</div>

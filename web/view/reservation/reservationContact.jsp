@@ -21,7 +21,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+        
         <link rel="apple-touch-icon" href="#" />
 
         <!-- Bootstrap CSS -->

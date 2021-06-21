@@ -259,6 +259,7 @@ public class ReservationDAO extends BaseDAO {
                 service.setId(rs.getInt("service_id"));
                 service.setThumbnailLink(rs.getString("thumbnail_link"));
                 service.setDescription(rs.getString("description"));
+                service.setSalePrice(rs.getFloat("unit_price"));
                 service.setFullname(rs.getString("fullname"));
                 res.setS(service);
                 res.setId(rs.getInt("id"));
@@ -283,14 +284,25 @@ public class ReservationDAO extends BaseDAO {
         }
     }
     
-    public void deleteReservation(Reservation r){
+    public void deleteReservation(int rid){
         try {
             String sql ="delete from reservation where id =?";
             PreparedStatement stm =connection.prepareStatement(sql);
-            stm.setInt(1, r.getId());
+            stm.setInt(1, rid);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void cancelReservation(Reservation r){
+        try {
+            String sql = "update reservation set status = 'Cancel' where id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
 }

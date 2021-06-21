@@ -23,7 +23,7 @@
         <meta name="author" content="">
 
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+      
         <link rel="apple-touch-icon" href="#" />
 
         <!-- Bootstrap CSS -->
