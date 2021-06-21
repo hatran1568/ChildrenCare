@@ -343,7 +343,7 @@
 
                 var items = $(".list-wrapper .list-group");
                 var numItems = items.length;
-                var perPage = 4;
+                var perPage = 5;
 
                 items.slice(perPage).hide();
 
