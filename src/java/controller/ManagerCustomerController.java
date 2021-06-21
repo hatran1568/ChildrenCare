@@ -165,7 +165,7 @@ public class ManagerCustomerController extends HttpServlet {
         u.setRole(r);
         UserDAO userDB = new UserDAO();
 
-        userDB.updateWithoutPassword(u, 2);
+        userDB.updateWithoutPassword(u, u1.getId());
         response.sendRedirect("list");
 
     }

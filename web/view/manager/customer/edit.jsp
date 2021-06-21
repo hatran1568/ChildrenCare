@@ -20,7 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+<!--        <link rel="shortcut icon" href="#" type="image/x-icon" />-->
         <link rel="apple-touch-icon" href="#" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
@@ -192,8 +192,8 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" name="status">
-                        <option value="0">Not Verified</option>
-                        <option value="1">Verified</option>
+                        <option value="0" <c:if test="${requestScope.user.status==false}">selected</c:if>>Not Verified</option>
+                        <option value="1" <c:if test="${requestScope.user.status==true}">selected</c:if>>Verified</option>
                     </select>
                 </div>
 
