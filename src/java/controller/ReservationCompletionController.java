@@ -177,7 +177,7 @@ public class ReservationCompletionController extends HttpServlet {
                 cartDB.deleteCart(u, cartitem.getService());
             }
         }
-        reservationDB.deleteReservation(reservationDB.returnNewestReservation());
+        
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
     }
 
