@@ -25,7 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
-import ulti.EmailVerify;
+import util.EmailVerify;
 
 @WebServlet(name = "SettingController", urlPatterns = {"/setting"})
 public class SettingController extends HttpServlet {

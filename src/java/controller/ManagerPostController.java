@@ -31,7 +31,7 @@ import javax.servlet.http.Part;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
         maxRequestSize = 1024 * 1024 * 50)
-public class PostDetailsController extends HttpServlet {
+public class ManagerPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,6 +54,9 @@ public class PostDetailsController extends HttpServlet {
                 break;
             case "/manager/post/update":
                 updatePost(request, response);
+                break;
+            case "/manager/post/list":
+                showListPost(request, response);
                 break;
             default:
                 break;
@@ -99,6 +102,20 @@ public class PostDetailsController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    protected void showListPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PostDAO postDB = new PostDAO();
+        ArrayList<Post> posts = postDB.getPosts();
+
+        ArrayList<PostCategory> categories = postDB.getCategories();
+        ArrayList<User> authors = postDB.getAuthors();
+
+        request.setAttribute("authors", authors);
+        request.setAttribute("categories", categories);
+        request.setAttribute("posts", posts);
+        request.getRequestDispatcher("../../view/manager/post/list.jsp").forward(request, response);
+    }
+
     private void showPostDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int pid = Integer.parseInt(request.getParameter("pid"));
         PostDAO postDB = new PostDAO();
@@ -126,18 +143,18 @@ public class PostDetailsController extends HttpServlet {
         fileName = new File(fileName).getName();
 
         part.write("/" + File.separator + fileName);
-        int pid = Integer.parseInt(request.getParameter("pid")) ;
-        int categoryID = Integer.parseInt(request.getParameter("postCategory")) ;
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        int categoryID = Integer.parseInt(request.getParameter("postCategory"));
         String tilte = request.getParameter("title");
         String description = request.getParameter("description");
         boolean featured = request.getParameter("featured").equals("true");
         boolean status = request.getParameter("status").equals("true");
-        
+
         PostDAO postDB = new PostDAO();
         Post oldPost = postDB.getPostById(pid);
-        
+
         Post p = new Post();
-        p.setThumbnailLink("assets/images/"+fileName);
+        p.setThumbnailLink("assets/images/" + fileName);
         p.setTitle(tilte);
         PostCategory pc = new PostCategory();
         pc.setId(categoryID);
@@ -150,9 +167,9 @@ public class PostDetailsController extends HttpServlet {
         p.setAuthor(a);
         p.setContent(oldPost.getContent());
         p.setId(pid);
-        
+
         postDB.updatePost(p);
-        response.sendRedirect("details?pid="+pid);
+        response.sendRedirect("details?pid=" + pid);
     }
 
     private String extractFileName(Part part) {

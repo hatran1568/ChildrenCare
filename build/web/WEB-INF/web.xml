@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value>D:\FPTU Materials\Ky5_SUM21\SWP\source-new\web\assets\images</param-value>
+        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
@@ -73,8 +73,14 @@
         <servlet-class>controller.ManagerCustomerController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PostDetailsController</servlet-name>
-        <servlet-class>controller.PostDetailsController</servlet-class>
+
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.DashboardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerPostController</servlet-name>
+        <servlet-class>controller.ManagerPostController</servlet-class>
+       
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -294,16 +300,27 @@
         <url-pattern>/manager/customer/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/admin/dashboard/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/update</url-pattern>
+
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPostController</servlet-name>
+        <url-pattern>/manager/post/list</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
