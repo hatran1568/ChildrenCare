@@ -21,7 +21,7 @@
         <meta name="author" content="">
         <link href="../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+        
         <link rel="apple-touch-icon" href="#" />
 
         <!-- Bootstrap CSS -->

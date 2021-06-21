@@ -20,7 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+       
         <link rel="apple-touch-icon" href="#" />
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->

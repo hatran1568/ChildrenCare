@@ -20,7 +20,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
-        <link rel="shortcut icon" href="#" type="image/x-icon" />
+        
         <link rel="apple-touch-icon" href="#" />
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->
@@ -161,7 +161,7 @@
             <a  class="collapsebtn btn btn-primary" href="../../reservation/contactedit?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Edit Reservation  
             </a>
-                 <a  class="collapsebtn btn btn-primary" data-toggle="collapse" href="../../reservation/my/delete?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                 <a  class="collapsebtn btn btn-primary"  href="../../customer/reservation/cancel?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Cancel Reservation 
             </a>
             </c:if>

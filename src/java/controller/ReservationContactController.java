@@ -83,10 +83,11 @@ public class ReservationContactController extends HttpServlet {
 
             case "/reservation/contactedit":
                getCartInfoFromDB(request, response);
+              
                 break;
             case "/reservation/contact/forwardedit":
             default:
-                getReservationInfoEdit(request, response);
+//                getReservationInfoEdit(request, response);
                 break;
         }
     }
@@ -177,6 +178,7 @@ public class ReservationContactController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Reservation rid = new Reservation();
         rid.setId(id);
+        request.getSession().setAttribute("reservationidedit", rid);
         User u = (User) request.getSession().getAttribute("user");
         CartDAO cartDB = new CartDAO();
         ReceiverDAO receiverDB = new ReceiverDAO();
@@ -198,7 +200,21 @@ public class ReservationContactController extends HttpServlet {
 
             }
             ArrayList<CartItem> list = new ArrayList<>();
-            list = cartDB.getCartByUserId(u);
+            for (ReservationService res : reslist) {
+                CartItem c = new CartItem();
+                c.setService(res.getS());
+                if(list.contains(c)){
+                    c = list.get(list.indexOf(c));
+                    c.setQuantity(c.getQuantity()+1);
+                    list.remove(c);
+                    list.add(c);
+                }
+                else{
+                    c.setQuantity(1);
+                    c.setUser(u);
+                    list.add(c);
+                }
+            }
 
             float totalcost = 0;
             for (CartItem cartItem : list) {
@@ -213,7 +229,7 @@ public class ReservationContactController extends HttpServlet {
             request.getSession().setAttribute("receivers", receiverList);
         }
         
-        request.getRequestDispatcher("../view/reservation/editReservationContact.jsp").forward(request, response);
+         response.sendRedirect("../cart/list");
     }
 
     private void addReceiver(HttpServletRequest request, HttpServletResponse response)
@@ -281,20 +297,20 @@ public class ReservationContactController extends HttpServlet {
         request.getSession().setAttribute("receiverIDs", receiverIDs);
         response.sendRedirect("../reservationcompletion");
     }
-    private void getReservationInfoEdit(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int id =Integer.parseInt(request.getParameter("id"));
-        Reservation r = new Reservation();
-        r.setId(id);
-        ReservationDAO reDB = new ReservationDAO();
-        reDB.deleteReservationService(r);
-        reDB.deleteReservation(r);
-        String[] raw_receiverid = request.getParameterValues("receiver");
-        ArrayList<Integer> receiverIDs = new ArrayList<>();
-        for (String s : raw_receiverid) {
-            receiverIDs.add(Integer.parseInt(s));
-        }
-        request.getSession().setAttribute("receiverIDs", receiverIDs);
-        response.sendRedirect("../reservationcompletion");
-    }
+//    private void getReservationInfoEdit(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        int id =Integer.parseInt(request.getParameter("id"));
+//        Reservation r = new Reservation();
+//        r.setId(id);
+//        ReservationDAO reDB = new ReservationDAO();
+//        reDB.deleteReservationService(r);
+//        reDB.deleteReservation(r);
+//        String[] raw_receiverid = request.getParameterValues("receiver");
+//        ArrayList<Integer> receiverIDs = new ArrayList<>();
+//        for (String s : raw_receiverid) {
+//            receiverIDs.add(Integer.parseInt(s));
+//        }
+//        request.getSession().setAttribute("receiverIDs", receiverIDs);
+//        response.sendRedirect("../reservationcompletion");
+//    }
 }

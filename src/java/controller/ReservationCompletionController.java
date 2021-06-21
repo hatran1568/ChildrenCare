@@ -111,6 +111,13 @@ public class ReservationCompletionController extends HttpServlet {
         //Set numberofperson
         reservation.setNumber_of_person(1);
         reservation.setStatus("Submited");
+        Reservation reservationedit = new Reservation();
+        reservationedit =(Reservation) request.getSession().getAttribute("reservationidedit");
+        if(reservationedit!=null){
+            reservationDB.deleteReservationService(reservationedit);
+            reservationDB.deleteReservation(reservationedit.getId());
+            request.getSession().removeAttribute("reservationidedit");
+        }
         reservationDB.addReservation(reservation);
         //Submit reservation services
         reservation.setId(reservationDB.returnNewestReservation());
