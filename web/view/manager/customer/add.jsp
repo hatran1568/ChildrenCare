@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Edit post</title>
+        <title>Add new customer</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -148,73 +148,57 @@
             </div>
         </div>
         <!-- End Banner -->
-        <!-- Start section -->
 
-        <div class="section" id="main-body">
-            <div class="container" style="min-height: 600px">
-                <form action="update" method="POST" enctype="multipart/form-data">
-                    
-                    <input type="text" value="${requestScope.post.id}" name="pid" hidden>
-                    <div class="row">
-                        <div class="col-md-3">Thumbnail</div>
-                        <div class="col-md-9">
-                            
-                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
-                            <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
-                        </div>
+        <!-- Start section -->
+        <div class="container">
+            <!--<div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>-->
+            <form action="new" method="POST" >
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="full-name">Full name</label>
+                    <input type="text" class="form-control" name="full-name" >
+                </div>
+                <input type="text" class="form-control" name="image-link" value="#" hidden>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender">
+                        <option value="male" >Male</option>
+                        <option value="female" >Female</option>
+                    </select>
+
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Category</div>
-                        <div class="col-md-9">
-                            <select class="" name="postCategory">
-                                <c:forEach items="${requestScope.categories}" var="c">
-                                    <option value="${c.id}" <c:if test="${c.id == requestScope.post.category.id}">selected</c:if>>${c.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div> 
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Title</div>
-                        <div class="col-md-9">
-                            <input  value="${requestScope.post.title}" style="width: 100%" type="text" name="title">
-                        </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" class="form-control" name="mobile">
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Description</div>
-                        <div class="col-md-9">
-                            <textarea style="width: 100%" type="text" name="description">${requestScope.post.description}</textarea>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Featured</div>
-                        <div class="col-md-9">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="featured"  value="true" <c:if test="${requestScope.post.featured eq true}">checked</c:if>>True
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="featured"  value="false" <c:if test="${requestScope.post.featured eq false}">checked</c:if>>False
-                            </div>
-                        </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-md-3">Status</div>
-                            <div class="col-md-9">
-                                <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status"  value="true" <c:if test="${requestScope.post.status eq true}">checked</c:if>>True
-                            </div>
-                            <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status"  value="false" <c:if test="${requestScope.post.status eq false}">checked</c:if>>False
-                            </div>
-                        </div>
-                    </div>  
-                            <input type="submit" class="btn btn-primary pull-right" value="Save">
-                </form>
-            </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" >
+                </div>
+
+                <!--                                <div class="form-group">
+                                                    <label for="role">Role</label>
+                                                    <select class="form-control" name="role">
+                <%--<c:forEach items="${requestScope.roles}" var="r">--%>
+                    <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
+                <%--</c:forEach>--%>
+            </select>
+        </div>-->
+
+<!--                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status">
+                        <option value="0" <c:if test="${requestScope.user.status==false}">selected</c:if>>Not Verified</option>
+                        <option value="1" <c:if test="${requestScope.user.status==true}">selected</c:if>>Verified</option>
+                    </select>
+                </div>-->
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
         <!-- end section -->
 
@@ -239,61 +223,51 @@
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- End Footer -->
+            <!-- End Footer -->
 
 
 
-        <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+            <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
-        <!-- ALL JS FILES -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- ALL PLUGINS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/jquery.pogo-slider.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/slider-index.js"></script>
-        <script src="assets/js/smoothscroll.js"></script>
-        <script src="assets/js/form-validator.min.js"></script>
-        <script src="assets/js/contact-form-script.js"></script>
-        <script src="assets/js/isotope.min.js"></script>
-        <script src="assets/js/images-loded.min.js"></script>
-        <script src="assets/js/custom.js"></script>
+            <!-- ALL JS FILES -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/popper.min.js"></script>
+            <script src="assets/js/bootstrap.min.js"></script>
+            <!-- ALL PLUGINS -->
+            <script src="assets/js/jquery.magnific-popup.min.js"></script>
+            <script src="assets/js/jquery.pogo-slider.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+            <script src="assets/js/slider-index.js"></script>
+            <script src="assets/js/smoothscroll.js"></script>
+            <script src="assets/js/form-validator.min.js"></script>
+            <script src="assets/js/contact-form-script.js"></script>
+            <script src="assets/js/isotope.min.js"></script>
+            <script src="assets/js/images-loded.min.js"></script>
+            <script src="assets/js/custom.js"></script>
 
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
+            <c:if test="${empty sessionScope.mess}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
+
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
+            </c:if>
+            <c:if test="${ not empty sessionScope.mess}">
                 <script>
                     $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
 
                     });
                 </script>
-                <c:remove var="alert" scope="session" />
-
+                <c:remove var="mess" scope="session" />
             </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
-            <script>
-                var loadFile = function (event) {
-                    var output = document.getElementById('output');
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                    output.onload = function () {
-                        URL.revokeObjectURL(output.src) // free memory
-                    }
-                };
-            </script>
     </body>
 </html>
 

@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
+        <param-value>D:\FPTU Materials\Ky5_SUM21\SWP\source-new\web\assets\images</param-value>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
@@ -294,6 +294,14 @@
         <url-pattern>/manager/customer/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/new</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/details</url-pattern>
     </servlet-mapping>
@@ -302,13 +310,11 @@
         <url-pattern>/manager/customer/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/admin/dashboard/view</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
-
         <url-pattern>/manager/post/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -318,12 +324,10 @@
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/update</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/list</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>

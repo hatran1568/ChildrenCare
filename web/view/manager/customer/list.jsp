@@ -173,14 +173,15 @@
                                 <c:if test="${c.gender == false}">Female</c:if></td>
                             <td>${c.email}</td>
                             <td>${c.mobile}</td>
-                            <td><c:if test="${c.status == true}">Not Verified</c:if>
-                                <c:if test="${c.status == false}">Verified</c:if></td>
+                            <td><c:if test="${c.status == true}">Verified</c:if>
+                                <c:if test="${c.status == false}">Not Verified</c:if></td>
                             <td><a href="details?uid=${c.id}"><i class="fas fa-eye"></i></a></td>
                             <td><a href="edit?uid=${c.id}"><i class="fas fa-pen"></i></a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+            <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
         </div>
         <!-- end section -->
 
