@@ -159,7 +159,7 @@
                         <div class="col-md-3">Thumbnail</div>
                         <div class="col-md-9">
                             
-                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
+                            <img src="../../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
                             <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                         </div>
                     </div>
