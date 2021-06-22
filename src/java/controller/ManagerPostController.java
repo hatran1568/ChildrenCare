@@ -138,7 +138,7 @@ public class ManagerPostController extends HttpServlet {
         request.setAttribute("authors", authors);
         request.setAttribute("categories", categories);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("../../view/manager/post/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/post/list2.jsp").forward(request, response);
     }
 
     private void showPostDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
