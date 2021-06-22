@@ -41,8 +41,9 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+        <link href="../../assets/css/simplePagination.css" rel="stylesheet" type="text/css"/>
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+        <script src="../../assets/js/jquery.simplePagination.js" type="text/javascript"></script>
         <script>
             function myFunction() {
                 // Declare variables
@@ -69,7 +70,7 @@
                 x.style.display = "none";
             }
 
-            
+
 
         </script>
 
@@ -103,7 +104,7 @@
                                     </div>
                                 </div>
                             </nav>
-                            
+
 
                         </div>
                     </div>
@@ -186,8 +187,11 @@
 
         <div class="section layout_padding">
 
+
             <div class="container">
                 
+                <div id="pagination-container"></div>
+                <div><button onclick="window.location.href = 'add'">Add Post</button></div>
                 <select class="category">
                     <option value="all">Category</option>
                     <c:forEach items="${requestScope.categories}" var="c">
@@ -202,39 +206,38 @@
                 <select class="author">
                     <option value="all">Author</option>
                     <c:forEach items="${requestScope.authors}" var="a">
-                        <option value="${a.fullName}">${a.fullName}</option>
+                        <option value="${a.id}">${a.fullName}</option>
                     </c:forEach>
                 </select>
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by title..">
 
-
-                <ul id="myUL">
-                    <c:forEach items="${requestScope.posts}" var="p">
-                        <li class="list-group gallery__item js-filterable"  data-color="yellow" data-id="${p.id}" data-category="${p.category.name}" data-author="${p.author.fullName}" data-status="${p.status}">
-                            <div class="card mb-3 " id="${p.id}" >
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: center;">
-                                        <img src="../../assets/images/service/s2.jpg" class="img-fluid rounded" alt="" />
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="card-body">
-                                            <h3 class="card-title"><a class="title" href="details?pid=${p.id}">${p.title}</a></h3>
-                                            <p class="card-text text-truncate" style="font-size: 100%;">${p.description} </p>
-                                            <p class="card-text"><small class="text-muted">Author: ${p.author.fullName}, Category: ${p.category.name}</small>
-                                                <br><small class="text-muted">Featured: ${p.featured}, Status: ${p.status}</small></p>
-                                            <p class="card-text">
-                                                <a style="float: right; color: white; margin: 0;" type="button" class="btn btn-secondary btn-sm" onclick="hide(${p.id})">Hide</a>
-                                                <a style="float: right; color: white; margin: 0;" type="button" class="btn btn-secondary btn-sm" onclick="hide(${p.id})">Edit</a>
-                                            </p>
+                <div class="list-wrapper">
+                    <ul id="myUL">
+                        <c:forEach items="${requestScope.posts}" var="p">
+                            <li class="list-group gallery__item js-filterable" data-id="${p.id}" data-category="${p.category.name}" data-author="${p.author.id}" data-status="${p.status}">
+                                <div class="card mb-3 " id="${p.id}" >
+                                    <div class="row">
+                                        <div class="col-md-3" style="text-align: center;">
+                                            <img src="../../assets/images/service/s2.jpg" class="img-fluid rounded" alt="" />
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h3 class="card-title"><a class="title" href="details?pid=${p.id}">${p.id}. ${p.title}</a></h3>
+                                                <p class="card-text text-truncate" style="font-size: 100%;">${p.description} </p>
+                                                <p class="card-text"><small class="text-muted">Author: ${p.author.fullName}, Category: ${p.category.name}</small>
+                                                    <br><small class="text-muted">Featured: ${p.featured}, Status: ${p.status}</small></p>
+                                                <p class="card-text">
+                                                    <a style="float: right; color: white; margin: 0;" type="button" class="btn btn-secondary btn-sm" onclick="hide(${p.id})">Hide</a>
+                                                    <a style="float: right; color: white; margin: 0;" type="button" class="btn btn-secondary btn-sm" onclick="hide(${p.id})">Edit</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </li>
+                            </li>
 
-                    </c:forEach></ul>
-
+                        </c:forEach></ul></div>
             </div></div>
         <!-- end section -->
 
@@ -282,11 +285,11 @@
             <c:if test="${empty sessionScope.mess}">
                 <c:if test="${ not empty sessionScope.alert}">
                     <script>
-                                                    $(document).ready(function () {
-                                                        let note = "${sessionScope.alert}"
-                                                        alert(note);
+                                                        $(document).ready(function () {
+                                                            let note = "${sessionScope.alert}"
+                                                            alert(note);
 
-                                                    });
+                                                        });
                     </script>
                     <c:remove var="alert" scope="session" />
 
@@ -303,18 +306,7 @@
                 <c:remove var="mess" scope="session" />
             </c:if>
             <script>
-                $('.js-filter').on('click', function () {
-
-                    var $color = $(this).attr('data-author');
-
-                    if ($color == 'all') {
-                        $('.js-filterable').removeClass('is-hidden');
-                    } else {
-                        $('.js-filterable').addClass('is-hidden');
-                        $('.js-filterable[data-author =' + $color + ']').removeClass('is-hidden');
-                    }
-
-                });
+                
 
                 $("select.category").change(function () {
                     var selectedCategory = $(this).children("option:selected").val();
@@ -345,13 +337,63 @@
                         $('.js-filterable').removeClass('is-hidden');
                     } else {
                         $('.js-filterable').addClass('is-hidden');
-                        $('.js-filterable[data-author =' + selectedAuthor + ']').removeClass('is-hidden');
+                        $('.js-filterable[data-status =' + selectedAuthor + ']').removeClass('is-hidden');
                     }
                 });
+
+                var items = $(".list-wrapper .list-group");
+                var numItems = items.length;
+                var perPage = 5;
+
+                items.slice(perPage).hide();
+
+                $('#pagination-container').pagination({
+                    items: numItems,
+                    itemsOnPage: perPage,
+                    prevText: "&laquo;",
+                    nextText: "&raquo;",
+                    onPageClick: function (pageNumber) {
+                        var showFrom = perPage * (pageNumber - 1);
+                        var showTo = showFrom + perPage;
+                        items.hide().slice(showFrom, showTo).show();
+                    }
+                });
+                
             </script>
 
             <style>
+                .simple-pagination ul {
+                    margin: 0 0 20px;
+                    padding: 0;
+                    list-style: none;
+                    text-align: center;
+                }
 
+                .simple-pagination li {
+                    display: inline-block;
+                    margin-right: 5px;
+                }
+
+                .simple-pagination li a,
+                .simple-pagination li span {
+                    color: #666;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    border: 1px solid #EEE;
+                    background-color: #FFF;
+                    box-shadow: 0px 0px 10px 0px #EEE;
+                }
+
+                .simple-pagination .current {
+                    color: #FFF;
+                    background-color: #FF7182;
+                    border-color: #FF7182;
+                }
+
+                .simple-pagination .prev.current,
+                .simple-pagination .next.current {
+                    background: #e04e60;
+                }
                 .staticlink{
                     padding-bottom: 5%;
                     padding-top: 40%;
