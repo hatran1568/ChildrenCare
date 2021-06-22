@@ -55,6 +55,9 @@ public class ManagerCustomerController extends HttpServlet {
             case "/manager/customer/add":
                 showFormAdd(request,response);
                 break;
+            case "/manager/customer/new":
+                addCustomer(request,response);
+                break;
             default:
                 getCustomerList(request,response);
                 break;
@@ -176,6 +179,26 @@ public class ManagerCustomerController extends HttpServlet {
         ArrayList<Setting> roles = settingDB.getSetting("Role");
         request.setAttribute("roles", roles);
         request.getRequestDispatcher("../../view/manager/customer/add.jsp").forward(request, response);
+    }
+
+    private void addCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         User u = new User();
+        User u1 = (User)request.getSession().getAttribute("user");
+        
+        u.setEmail(request.getParameter("email"));
+        u.setPassword("admin");
+        u.setAddress(request.getParameter("address"));
+        u.setGender(request.getParameter("gender").equals("male"));
+        u.setFullName(request.getParameter("full-name"));
+        u.setImageLink(request.getParameter("image-link"));
+        u.setMobile(request.getParameter("mobile"));
+        
+        Role r = new Role();
+        r.setId(4);
+        u.setRole(r);
+        UserDAO userDB = new UserDAO();
+        userDB.addCustomer(u, false, u1.getId());
+        response.sendRedirect("list");
     }
     
     

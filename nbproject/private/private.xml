@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/service/details.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/PostDetailsController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
@@ -43,6 +44,7 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationcompletion.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/add.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationContact.jsp</file>
+
         </group>
     </open-files>
 </project-private>

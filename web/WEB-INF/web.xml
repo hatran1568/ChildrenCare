@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
+        <param-value>D:\FPTU Materials\Ky5_SUM21\SWP\source-new\web\assets\images</param-value>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
@@ -23,22 +23,6 @@
     <servlet>
         <servlet-name>HomePageController</servlet-name>
         <servlet-class>controller.HomePageController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ListPostController</servlet-name>
-        <servlet-class>controller.ListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeletePostController</servlet-name>
-        <servlet-class>controller.DeleteController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddPostController</servlet-name>
-        <servlet-class>controller.AddController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DetailPostController</servlet-name>
-        <servlet-class>controller.DetailController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ReservationCompletionController</servlet-name>
@@ -73,14 +57,12 @@
         <servlet-class>controller.ManagerCustomerController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.DashboardController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PostDetailsController</servlet-name>
-        <servlet-class>controller.PostDetailsController</servlet-class>
-       
+        <servlet-name>ManagerPostController</servlet-name>
+        <servlet-class>controller.ManagerPostController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -90,22 +72,6 @@
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/my</url-pattern>
         <url-pattern>/customer/reservation/cancel</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ListPostController</servlet-name>
-        <url-pattern>/post/list</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeletePostController</servlet-name>
-        <url-pattern>/post/delete</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddPostController</servlet-name>
-        <url-pattern>/post/add</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DetailPostController</servlet-name>
-        <url-pattern>/post/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -292,6 +258,14 @@
         <url-pattern>/manager/customer/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerCustomerController</servlet-name>
+        <url-pattern>/manager/customer/new</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SettingController</servlet-name>
         <url-pattern>/admin/setting/details</url-pattern>
     </servlet-mapping>
@@ -300,22 +274,28 @@
         <url-pattern>/manager/customer/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/admin/dashboard/view</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PostDetailsController</servlet-name>
+        <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/update</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPostController</servlet-name>
+        <url-pattern>/manager/post/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerPostController</servlet-name>
+        <url-pattern>/manager/post/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer List</title>
+        <title>Add Post</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
         <!-- Site Metas -->
-        
+
         <meta name="keywords" content="">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -21,6 +21,7 @@
         <link href="../../assets/css/footer.css" rel="stylesheet" type="text/css"/>
         <!-- Site Icons -->
 
+        <link rel="apple-touch-icon" href="#" />
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
         <!-- Bootstrap CSS -->
@@ -60,16 +61,15 @@
                                     </button>
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
-                                            <li><a class="nav-link" href="#">Home</a></li>
+                                            <li><a class="nav-link" href="../../home">Home</a></li>
                                             <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#">Services</a></li>
-                                            <li><a class="nav-link" href="#">Blog</a></li>
-                                            <li><a class="nav-link" href="#">Users</a></li>
+                                            <li><a class="nav-link" href="../../service/list">Services</a></li>
+                                            <li><a class="nav-link" href="list">Blog</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </nav>
-                            
+
 
                         </div>
                     </div>
@@ -147,41 +147,81 @@
             </div>
         </div>
         <!-- End Banner -->
-
         <!-- Start section -->
-        <div class="container" style="height: 1000px; vertical-align: middle">
-            
-            <table id="customers" class="table" style="width:100%; ">
-                <thead>
-                    <tr>
-                        <td>ID</td>
-                        <td>Fullname</td>
-                        <td>Gender</td>
-                        <td>Email</td>
-                        <td>Mobile</td>
-                        <td>Status</td>
-                        <th>View</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.customers}" var="c">
-                        <tr>
-                            <td>${c.id}</td>
-                            <td>${c.fullName}</td>
-                            <td><c:if test="${c.gender == true}">Male</c:if>
-                                <c:if test="${c.gender == false}">Female</c:if></td>
-                            <td>${c.email}</td>
-                            <td>${c.mobile}</td>
-                            <td><c:if test="${c.status == true}">Verified</c:if>
-                                <c:if test="${c.status == false}">Not Verified</c:if></td>
-                            <td><a href="details?uid=${c.id}"><i class="fas fa-eye"></i></a></td>
-                            <td><a href="edit?uid=${c.id}"><i class="fas fa-pen"></i></a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-            <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
+
+        <div class="section" id="main-body">
+            <div class="container" style="min-height: 600px">
+                <form action="add" method="POST" enctype="multipart/form-data">
+                    
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Thumbnail</div>
+                        <div class="col-md-9">
+                            
+                            <img class="img-thumbnail" src="" id="output" style="max-width: 500px"><br>
+                            <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Category</div>
+                        <div class="col-md-9">
+                            <select class="form-control" name="postCategory" required="">
+                                
+                                <c:forEach items="${requestScope.categories}" var="c">
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div> 
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Title</div>
+                        <div class="col-md-9">
+                            <input  style="width: 100%" type="text" name="title">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Description</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%" type="text" name="description"></textarea>
+                        </div>
+                        
+                    </div><hr />
+                        <div class="row">
+                        <div class="col-md-3">Content</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%;" rows="10" type="text" name="content"></textarea>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Featured</div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="true">True
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="false">False
+                            </div>
+                        </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-3">Status</div>
+                            <div class="col-md-9">
+                                <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status"  value="true" >True
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status"  value="false">False
+                            </div>
+                        </div>
+                    </div>  
+                            <input type="submit" class="btn btn-primary pull-right" value="Save">
+                </form>
+            </div>
         </div>
         <!-- end section -->
 
@@ -206,98 +246,61 @@
                     </div>
                 </div>
             </div>
-            <!-- End Footer -->
+        </footer>
+        <!-- End Footer -->
 
 
 
-            <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+        <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
-            <!-- ALL JS FILES -->
-            <script src="assets/js/jquery.min.js"></script>
-            <script src="assets/js/popper.min.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-            <script src="assets/js/slider-index.js"></script>
-            <script src="assets/js/smoothscroll.js"></script>
-            <script src="assets/js/form-validator.min.js"></script>
-            <script src="assets/js/contact-form-script.js"></script>
-            <script src="assets/js/isotope.min.js"></script>
-            <script src="assets/js/images-loded.min.js"></script>
-            <script src="assets/js/custom.js"></script>
+        <!-- ALL JS FILES -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!-- ALL PLUGINS -->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/jquery.pogo-slider.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/slider-index.js"></script>
+        <script src="assets/js/smoothscroll.js"></script>
+        <script src="assets/js/form-validator.min.js"></script>
+        <script src="assets/js/contact-form-script.js"></script>
+        <script src="assets/js/isotope.min.js"></script>
+        <script src="assets/js/images-loded.min.js"></script>
+        <script src="assets/js/custom.js"></script>
 
-            <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
+        <c:if test="${empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
                     $(document).ready(function () {
                         let note = "${sessionScope.alert}"
                         alert(note);
 
                     });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
-                <script>
-                    $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
-
-                    });
                 </script>
-                <c:remove var="mess" scope="session" />
+                <c:remove var="alert" scope="session" />
+
             </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
             <script>
                 $(document).ready(function () {
-                    $("#customers").dataTable({
-                        retrieve: true,
-                        "searching": true,
-                        "paging": true,
-                        "sPaginationType": "full_numbers",
-                        "bJQueryUI": true,
-                        columns: [
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            {data: "Status", title: "Status", className: "dt-filter"},
-                            null,
-                            null,
-                        ],
-                        'columnDefs': [
-                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
-                            {'orderable': false, 'targets' : [4,5,6,7]},
-                        ],
-                        "sDom": 'W<"clear">Tlfrtip',
-                        initComplete: function () {
-                            this.api().columns('.dt-filter').every(function () {
-                                var column = this;
-                                var select = $('<select><option value=""></option></select>')
-                                        .appendTo($(column.header()))
-                                        .on('change', function () {
-                                            var val = $.fn.dataTable.util.escapeRegex(
-                                                    $(this).val()
-                                                    );
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
 
-                                            column
-                                                    .search(val ? '^' + val + '$' : '', true, false)
-                                                    .draw();
-                                        });
-
-                                column.data().unique().sort().each(function (d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>')
-                                });
-                            });
-                        }
-                    });
                 });
-            </script> 
-       
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
+            <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
+                    }
+                };
+            </script>
     </body>
 </html>
 
