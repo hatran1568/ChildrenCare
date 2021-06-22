@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/service/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/PostDetailsController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ServiceDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/search.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/details.jsp</file>
@@ -17,6 +18,7 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/myReservation.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SettingController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/list.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/js/images-loded.min.js</file>
@@ -41,20 +43,6 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationcompletion.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/add.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationContact.jsp</file>
-=======
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/CartController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/reservation/reservationContact.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/filter/Authorization.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/list.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/edit.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/homepage.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
->>>>>>> 49d605f685913d8ff0f97040173c4eb600d75a65
         </group>
     </open-files>
 </project-private>

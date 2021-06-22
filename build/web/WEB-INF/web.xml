@@ -88,7 +88,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
-        <url-pattern>/admin/reservation/my</url-pattern>
+        <url-pattern>/customer/reservation/my</url-pattern>
         <url-pattern>/customer/reservation/cancel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

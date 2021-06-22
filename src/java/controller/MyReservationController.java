@@ -66,7 +66,7 @@ public class MyReservationController extends HttpServlet {
         String action = request.getServletPath();
         
         switch(action){
-            case "/admin/reservation/my":
+            case "/customer/reservation/my":
                 showMyreservation(request, response);
                 break;
             case "/customer/reservation/details":
