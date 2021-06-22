@@ -159,7 +159,7 @@
                         <div class="col-md-3">Thumbnail</div>
                         <div class="col-md-9">
                             
-                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
+                            <img src="../../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
                             <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                         <div class="col-md-9">
                             <select class="" name="postCategory">
                                 <c:forEach items="${requestScope.categories}" var="c">
-                                    <option value="${c.id}">${c.name}</option>
+                                    <option value="${c.id}" <c:if test="${c.id == requestScope.post.category.id}">selected</c:if>>${c.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

@@ -32,9 +32,9 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\HP\\OneDrive\\Desktop\\merge\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50, location = "D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\assets\\images")
 public class ManagerPostController extends HttpServlet {
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

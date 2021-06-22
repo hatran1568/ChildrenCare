@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customer List</title>
+        <title>Customer Details</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -250,8 +250,8 @@
                                                     <label style="font-weight:bold;">Status</label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    <c:if test="${requestScope.user.status eq true}">Active</c:if>
-                                                    <c:if test="${requestScope.user.status eq false}">Inactive</c:if>
+                                                    <c:if test="${requestScope.user.status eq true}">Verified</c:if>
+                                                    <c:if test="${requestScope.user.status eq false}">Not verified</c:if>
                                                     </div>
                                                 </div>
                                                 <hr />
