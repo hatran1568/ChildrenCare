@@ -183,7 +183,7 @@
                                 <span id='${l.id}' onclick="changeStatus(this)" class="in-text"><i class="fas fa-eye-slash fa-4x"></i></span></c:if>
 
                                 <div style="background: #7f93db;">
-                                    <h2><a href="#">${l.title}</a></h2>
+                                    <h2><a href="details?id=${l.id}">${l.title}</a></h2>
 
                             </div>
 

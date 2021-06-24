@@ -12,7 +12,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Users List</title>
+        <title>Posts List</title>
         
         <script src="../../vendor/jquery/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
@@ -25,7 +25,7 @@
     Ramayana CSS Template
     https://templatemo.com/tm-529-ramayana
         -->
-      
+    <img src="../../../assets/images/service/Medical-logo-vector-lage.jpg" alt=""/>
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="../../assets/css/owl.css"/>
         <script type="text/javascript">
         $(document).ready(function () {
-            var sitetable = $('#users').DataTable({
+            var sitetable = $('#posts').DataTable({
                 "searching": true,
                 "paging": true, 
                 'columnDefs': [
@@ -47,36 +47,17 @@
                 ],
                 columns: [
                     null,
+                    { data: "Category", title:"Category", className: "dt-filter" },
                     null,
-                    { data: "Gender", title:"Gender", className: "dt-filter" },
                     null,
                     null,
-                    { data: "Role", title:"Role", className: "dt-filter" },
-                    { data: "Status", title:"Status", className: "dt-filter" },
+                    { data: "Author", title:"Author", className: "dt-filter" },
+                    null,
+                    { data: "Status", title:"Status", className: "dt-filter" }, 
+                    null,
+                    null,
                 ],
-//                initComplete: function () {
-//                    this.api().columns('.dt-filter').every( function () {
-//                        var column = this;
-//                        var select = $('<select multiple="multiple" class="mSelect"><option value=""></option></select>')
-//                            .appendTo( $(column.header()) )
-//                            .on( 'change', function () {
-//                                if ( $(this).val() == undefined) {
-//                                    val = "";
-//                                } else {
-//                                    var val = $.fn.dataTable.util.escapeRegex(
-//                                        $(this).val().join("zzz")
-//                                    );
-//                                    val = val.replace(/zzz/g,"|");
-//                                }
-//                                column
-//                                    .search( val ? '^' + val + '$'  : '' , true, false )
-//                                .draw();
-//                        } );
-//                        column.data().unique().sort().each( function ( d, j ) {
-//                                        select.append( '<option value="' +d+'">' +d+'</option>'  )
-//                        } );
-//                    } );
-//                }
+              
                 initComplete: function () {
                     this.api().columns('.dt-filter').every( function () {
                         var column = this;
@@ -115,7 +96,7 @@
                     <header id="header">
                         <div class="logo">
                             <div class="dropdown">
-                                <img class="avatar" src="${sessionScope.user.imageLink}"/>
+                                <img class="avatar" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQHBg0QEBIPEA4QEBEQFRgQDRcQExAaFhUWFiATFRUYHSggGB4lGxgWITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NFQ0NDy0ZFRkrLSs3Ky0tLisrKzctNy0rNystLS0rKysrKy0rLSsrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EADQQAQACAAMFBQcCBwEAAAAAAAABAgMEEQUSITFhQVFxgbETIlKRocHRFDQyQnKCkuHxJP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/TAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAHVKTiW0iJmegOX2I1nSOM9F2mzL25zWv1lo5fLVy9eEce2Z5yauMzC2de8cdKx15/KE9dld9p8qtITVZ07Kj4p/wAUd9l2jlaJ8Y0aoaMHFyl8LnWdO+OMIHpVTNZGuNEzHu2747fGDUxijvFwpwbzW0aT69YcKgAAAAAAAAAAAAAAAAAA3Mjl/YYMfFPGfwx8vTfzFI77Q9ClWACKAAAAAAgzmXjMYWn80cpYUxuzMTzjg9IyNq4W5jxaOVo+sLEqiAqAAAAAAAAAAAAAAAALOz41zlPP0luMPZv7yvn6S3EqwARQAAAAABS2rTeyuvwzE/b7rqttGf8Ax316esAwwGmQAAAAAAAAAAAAAAAFrZ37ynn6S22FkJ0zlPH7S3UqwARQAAAAABibStM5u0azpGmnHlwhtsHPTrnL+P2WCABWQAAAAAAAAAAAAAAAE+SiZzNJiJmItHZybyHJ03MtSI7on5pkrQAgAAAAAAMDNxP6m+sTGtp5xz4t9U2nTeylp7Y0mPmsGKArIAAAAAAAAAAAAAAADc2fffylOnD5LLN2PicL1/uj0/DSZaAAAAAAAAFLa193LafFMR8uK6ydr4m9jVr8MeqwUAFZAAAAAAAAABQAAAAAEmXxpwMWLR/1t5XH/UYMW005xprrowGnsfE4Xr/d9vwlGkAigAAAAAIM3mP02Frprx056MPExJxMSbTzmdWhti/GlfGft+Wa1EAAAAAAAAAAABAAAAAABNlMb2GPW3ZynwlCA9LE6wKWysSb5eYn+WdIXWWgAAAAFbaN5plLadI+YMrOYvtszaezlHhCAGkABAAAAAAAAAAAAAAAAAAGxsmNMtPW0+kLqts+m5k6ddZ+c6rLLQAAAArbRjXJ38p+sLKPMU38C8d9Zj6A88A0yAAAAAAAAAAAAAAAAAAOqV37xEc5nQpSb20iJmejVyGS9jO9b+L0FXaxu1iO6NH0GVAAAAAAefzWH7LMWjrrHhKJt57KfqK6xwtHLr0lj4mHOFbS0TEtRHAAgAAAAAAAAAAAAPsRvTpHGei9l9mzfjf3Y7o5/wChVGtd+2kRMz0X8vsybcbzpHdHP5tHBwK4NdKxEes+aRNMR4WDXBrpWIhICKAAAAAAAAOcTDjErpaImOroBmZjZnbSfKftLPxMOcO2lomJ6vRuMTDjFrpaImOq6jzo0cxszTjSdek/aVC9JpbSYmJ6qOQBAAAAAH2OMg+LeVyNsbjPu1+s+ELeSyG5EWvxt2R2R+ZX01cRYGXrgR7sce+eMz5pQRQAAAAAAAAAAAAAAABHjYNcaulo19Y80gDIzOzpw+Nfej6x+VF6VTzmRjHiZrwv9J8VlTGMOrVmlpieEw5VAABpbKy2vvz4V/LOrG9aIjnM6PRYVPZ4cVjlEaFWOgGVAAAAAAAAAAAAAAAAAAAAAAUdqZffw9+P4q8+sMh6WY1h57Hw/ZY1q90rEqMBUTZX9zh/1R6t8EqwARQAAAAAAAAAAAAAAAAAAAAABibS/eW8vSAWJVUBUf/Z">
                                 <div class="dropdown-content">
                                     <p>Profile</p>
                                     <p>Change Password</p>
@@ -132,24 +113,21 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
+                            
 
                             <div>
-                                <button onclick="window.location.href = 'new'" class="btn-success" style="margin: 10px;" >Add New User</button>
+                                <button onclick="window.location.href = 'add'" class="btn-success" style="margin: 10px;" >Add New Post</button>
                             </div>
-<!--                            <div style="margin-left: 3%">Filter:</div>
-                            <span id="filterGender" style="font-size: 15px; margin-left: 5%; margin-right: 1%"><b>Gender:</b></span>
-                            <span id="filterRole" style="font-size: 15px; margin-right: 1%"><b>Role:</b></span>
-                            <span id="filterStatus" style="font-size: 15px; margin-right: 1%"><b>Status:</b></span>-->
-                            <table id="users">
+                            <table id="posts">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Gender</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Role</th>
+                                        <th>Category</th>
+                                        <th>Thumbnail</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Author</th>
+                                        <th>Updated</th>
                                         <th>Status</th>
                                         <th>View</th>
                                         <th>Edit</th>
@@ -158,98 +136,46 @@
                                 <tfoot>
                                     <tr>
                                         <th>Filters:</th>
+                                        <th>Category</th>
                                         <th></th>
-                                        <th>Gender</th>
                                         <th></th>
                                         <th></th>
-                                        <th>Role</th>
+                                        <th>Author</th>
+                                        
+                                        <th></th>
                                         <th>Status</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                <c:forEach items="${requestScope.users}" var="a">
+                                <c:forEach items="${requestScope.posts}" var="p">
                                     <tr>
-                                        <td>${a.id}</td>
-                                        <td>${a.fullName}</td>
-                                        <td><c:if test="${a.gender == true}">Male</c:if>
-                                            <c:if test="${a.gender == false}">Female</c:if></td>
-                                        <td>${a.email}</td>
-                                        <td>${a.mobile}</td>
-                                        <td>${a.role.name}</td>
-                                        <td><c:if test="${a.status == true}">Verified</c:if>
-                                            <c:if test="${a.status == false}">Not Verified</c:if></td>
-                                        <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
-                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
+                                        <td>${p.id}</td>
+                                        <td>${p.category.name}</td>
+                                        <td><img class="rounded mx-auto d-block" src="../../${p.thumbnailLink}"></td>
+                                        <td>${p.title}</td>
+                                        <td class="">${p.description}</td>
+                                        <td>${p.author.fullName}</td>
+                                        <td>${p.updatedDate}</td>
+                                        <td><c:if test="${p.status == true}">True</c:if>
+                                            <c:if test="${p.status == false}">False</c:if></td>
+                                        <td><a href="details?pid=${p.id}"><i class="fas fa-eye"></i></a></td>
+                                        <td><a href="edit?pid=${p.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
                             </table>
-                            <!--<div id="pagination" class="pagination"></div>-->
 
                         </div>
-<!--                        <script>
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-                        </script>-->
-
+<!--                       
                     </section>
 
                 </div>
             </div>
 
             <!-- Sidebar -->
-            <div id="sidebar">
 
-                <div class="inner">
-
-                    <!-- Search Box -->
-                    <section id="search" class="alt">
-                        <div>
-
-                            <a class="icon-home" href="#">Children Care</a>
-
-                        </div>
-                    </section>
-
-                    <!-- Menu -->
-                    <nav id="menu">
-                        <ul>
-                            <li><a href="../../home">Homepage</a></li>
-                            <li><a href="../../admin/user/list">User</a></li>
-                            <li><a href="../post/list">Blog</a></li>
-                            <li><a href="#">Chart</a></li>
-                            <li><a href="../../admin/setting/list">Settings</a></li>
-                            <li>
-                                <span class="opener">Service</span>
-                                <ul>
-                                    <li><a href="#">Examination</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="opener">Other</span>
-                                <ul>
-                                    <li><a href="#">Se</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-
-
-                        </ul>
-                    </nav>
-
-
-
-
-                    <!-- Footer -->
-
-
-                </div>
-            </div>
             <!-- Site footer -->
 
         </div>
@@ -283,37 +209,7 @@
         <script src="../../assets/js/transition.js"></script>
         <script src="../../assets/js/owl-carousel.js"></script>
         <script src="../../assets/js/custom.js"></script>
-<!--        <script>
-                            function generatePagger(id, pageindex, totalpage, gap, page)
-                            {
-                                var container = document.getElementById(id);
-                                if (pageindex > gap + 1)
-                                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
 
-                                for (var i = pageindex - gap; i < pageindex; i++)
-                                {
-                                    if (i >= 1)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                                {
-                                    if (i <= totalpage)
-                                    {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                                    }
-                                }
-
-                                if (pageindex < totalpage - gap)
-                                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-                            }
-                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-        </script>-->
         <style>
             tfoot {
                 display: table-header-group;
