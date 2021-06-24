@@ -47,6 +47,7 @@
 
 
         <!-- Start header -->
+        <%--<c:if test="${requestScope.user.role.name==""}"></c:if>--%>
         <header class="top-header">
 
             <div class="header_bottom">
@@ -63,10 +64,10 @@
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
                                             <li><a class="nav-link" href="#">Home</a></li>
-                                            <li><a class="nav-link" href="#">About</a></li>
                                             <li><a class="nav-link" href="service/list">Services</a></li>
                                             <li><a class="nav-link" href="#">Blog</a></li>
-                                            <li><a class="nav-link" href="user/list">Users</a></li>
+                                            <li><a class="nav-link" href="#">Reservations</a></li>
+                                            <li><a class="nav-link" href="#">Customers</a></li>
                                         </ul>
                                     </div>
                                 </div>

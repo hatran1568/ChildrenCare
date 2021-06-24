@@ -3,25 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/BaseDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ServiceDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/edit.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Post.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/details.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/homepage.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
-=======
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/web/view/manager/post/add.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/web/view/manager/post/details.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/src/java/dao/PostDAO.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/src/java/controller/ManagerPostController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/merge/web/view/manager/post/edit.jsp</file>
->>>>>>> 1776f52cce87f7ccbd7cfb3d83bbcc573b5ccf49
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
         </group>
     </open-files>
 </project-private>
