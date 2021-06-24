@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 24/06/2021 09:40:25
+ Date: 24/06/2021 20:14:23
 */
 
 SET NAMES utf8mb4;
@@ -56,7 +56,12 @@ CREATE TABLE `medical_examination`  (
   `service_id` int(0) NOT NULL,
   `receiver_id` int(0) NOT NULL,
   `precription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  PRIMARY KEY (`reservation_id`, `service_id`, `receiver_id`) USING BTREE
+  PRIMARY KEY (`reservation_id`, `service_id`, `receiver_id`) USING BTREE,
+  INDEX `fk_service_exam`(`service_id`) USING BTREE,
+  INDEX `fk_recicever_exam`(`receiver_id`) USING BTREE,
+  CONSTRAINT `fk_reservation_exam` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_service_exam` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_recicever_exam` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -210,6 +215,12 @@ INSERT INTO `setting` VALUES (9, 'Service Category', 'Category_1', 1, NULL, '1')
 INSERT INTO `setting` VALUES (10, 'Service Category', 'Category_2', 2, NULL, '1');
 INSERT INTO `setting` VALUES (11, 'Service Category', 'Category_3', 3, NULL, '1');
 INSERT INTO `setting` VALUES (12, 'Service Category', 'Category_4', 4, NULL, '1');
+INSERT INTO `setting` VALUES (13, 'User Status', 'Not verified', 1, NULL, '1');
+INSERT INTO `setting` VALUES (14, 'User Status', 'Active', 2, NULL, '1');
+INSERT INTO `setting` VALUES (15, 'User Status', 'Contact', 3, NULL, '1');
+INSERT INTO `setting` VALUES (16, 'User Status', 'Potential', 4, NULL, '1');
+INSERT INTO `setting` VALUES (17, 'User Status', 'Customer', 5, NULL, '1');
+INSERT INTO `setting` VALUES (18, 'User Status', 'Inactive', 6, NULL, '1');
 
 -- ----------------------------
 -- Table structure for slider
@@ -275,44 +286,46 @@ CREATE TABLE `user`  (
   `status` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_roleid_idx`(`role_id`) USING BTREE,
-  CONSTRAINT `FK_roleid` FOREIGN KEY (`role_id`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `fk_status_user`(`status`) USING BTREE,
+  CONSTRAINT `FK_roleid` FOREIGN KEY (`role_id`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_status_user` FOREIGN KEY (`status`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (-1, 'Guest', 'Guest', 'Guest', 1, '0', '0', '0', 4, 1);
-INSERT INTO `user` VALUES (2, 'Fusce@loremipsum.ca', 'Rhona', 'Bo Yates', 0, '0559706307', '3852 Ridiculus Rd.', 'https://i.imgur.com/EFyvmxy.png', 1, 1);
-INSERT INTO `user` VALUES (4, 'magna@Nullatempor.co.uk', 'Sigourney', 'Guinevere Blackburn', 1, '0470342636', '4647 Tempor Rd.', '4', 1, 1);
-INSERT INTO `user` VALUES (5, 'cursus@Aliquamgravida.edu', 'Hermione', 'Debra Young', 1, '0196303756', '3259 Purus. Rd.', '5', 2, 1);
-INSERT INTO `user` VALUES (7, 'Cum.so@necmlandit.co.uk', 'Germane', 'Martina Rodgers', 0, '0662288538', '622-1528 Volutpat Av.', '7', 3, 1);
-INSERT INTO `user` VALUES (10, 'Integer.aliquam.adipi@vel.com', 'Rhonda', 'Linda Solis', 0, '0321248916', '6661 Neque Avenue', '10', 4, 1);
-INSERT INTO `user` VALUES (13, 'faucibus.id@egestasadui.net', 'Giselle', 'Cally Mckinney', 1, '0933925868', 'Ap #440-7242 Lobortis Road', '13', 3, 1);
-INSERT INTO `user` VALUES (15, 'ut.ipsum.ac@Proin.net', 'Mechelle', 'Ruth Glenn', 0, '0115225427', '791-3993 Diam Road', '15', 1, 1);
-INSERT INTO `user` VALUES (16, 'mollis.non.cursus@cursus.com', 'Gail', 'Sigourney Keller', 0, '0271628087', '289-5821 Ornare. Street', '16', 2, 1);
-INSERT INTO `user` VALUES (17, 'consequat.lectus@ipsum.edu', 'Althea', 'Jade Chang', 0, '0647998539', '410-9038 Semper Rd.', '17', 4, 1);
-INSERT INTO `user` VALUES (18, 'primis.in.ibus@euturpis.co.uk', 'Shoshana', 'Hollee Golden', 1, '0932558198', 'Ap #876-8951 Enim. Rd.', '18', 3, 1);
-INSERT INTO `user` VALUES (19, 'nonummy@Maecenas.net', 'Keelie', 'Maxine Mathis', 1, '0608159107', 'Ap #843-1727 Ac St.', '19', 3, 1);
-INSERT INTO `user` VALUES (20, 'amet.nulla.Donec@net', 'Leslie', 'Sybil Fuentes', 1, '0157666445', '129-2060 Adipiscing St.', '20', 1, 1);
-INSERT INTO `user` VALUES (21, 'ornare@egetmollislectus.com', 'Galena', 'Eden Grant', 0, '0135037341', 'P.O. Box 624, 8936 In St.', '21', 1, 1);
-INSERT INTO `user` VALUES (22, 'tempus.Donec@necante.net', 'Ivory', 'May Copeland', 1, '0837662391', '140-2049 Amet, St.', '22', 1, 1);
-INSERT INTO `user` VALUES (23, 'nec.cursus.a@Vestibulum.edu', 'Bo', 'Mara Dalton', 0, '0730490877', '146-6971 Elementum, Street', '23', 1, 1);
-INSERT INTO `user` VALUES (24, 'dui.Cras.pellene@lorem.com', 'Imani', 'Cailin Patel', 1, '0231918392', '7950 Tristique Rd.', '24', 3, 0);
-INSERT INTO `user` VALUES (25, 'vitae.diam@dui.ca', 'Eden', 'Kai Shaw', 1, '0721772746', 'P.O. Box 278, 9740 Quisque Street', '25', 3, 0);
-INSERT INTO `user` VALUES (26, 'egestas.henrit@merat.net', 'Wynne', 'Leilani Davis', 1, '0650286200', '115 Nulla Rd.', '26', 3, 1);
-INSERT INTO `user` VALUES (27, 'eu.lacus.Quisque@ligula.ca', 'Dara', 'Keiko Tucker', 0, '0617291317', 'Ap #549-5875 Posuere St.', '27', 1, 1);
-INSERT INTO `user` VALUES (28, 'Nam.ac@interdumSed.com', 'Caryn', 'Madeline Mckee', 0, '0915978706', '3222 Nec, Rd.', '28', 2, 1);
-INSERT INTO `user` VALUES (29, 'molestie@Proin.edu', 'Lillith', 'Kelsie Hogan', 1, '0655287977', '704-102 Magna. Road', '29', 2, 1);
-INSERT INTO `user` VALUES (30, 'et@ultriciesadigenim.edu', 'Angela', 'Meredith Newton', 0, '0436457125', 'Ap #724-7504 Eu St.', '30', 4, 1);
-INSERT INTO `user` VALUES (32, 'giangtong09@gmail.com', 'huepham1905', 'Chao', 1, '0974484610', '19', NULL, 4, 1);
-INSERT INTO `user` VALUES (33, 'admin', 'admin', 'Chaos', 0, '0974484610', '19', NULL, 4, 1);
-INSERT INTO `user` VALUES (34, 'sssss', 'admin', 'asd', 1, '0974484610', '19', NULL, 4, 1);
-INSERT INTO `user` VALUES (35, 'user', 'useer', 'DÆ°Æ¡ng', 1, 'ad', '30', NULL, 4, 0);
-INSERT INTO `user` VALUES (36, 'sad', 'sad', 'DÆ°Æ¡ng', 1, '0974484610', '30', NULL, 4, 1);
-INSERT INTO `user` VALUES (37, 'ysysuuueii@dwd', 'null0000000000', 'Gae', 1, '13253562', '2453245', 'None', 4, 1);
-INSERT INTO `user` VALUES (38, 'qwdqw@eee', 'null0000000000', 'Trrre', 0, '12354654', '12123123', 'None', 4, 0);
-INSERT INTO `user` VALUES (39, 'ysysuu1eeueii@dwd', 'CRS0000000000', 'qweqwe', 1, '123123', '12323', 'None', 1, 1);
-INSERT INTO `user` VALUES (40, 'test@test', 'CRS294324825', '123123', 1, '342141', '1324', 'None', 4, 1);
+INSERT INTO `user` VALUES (-1, 'Guest', 'Guest', 'Guest', 1, '0', '0', '0', 4, 14);
+INSERT INTO `user` VALUES (2, 'Fusce@loremipsum.ca', 'Rhona', 'Bo Yates', 0, '0559706307', '3852 Ridiculus Rd.', 'https://i.imgur.com/EFyvmxy.png', 1, 14);
+INSERT INTO `user` VALUES (4, 'magna@Nullatempor.co.uk', 'Sigourney', 'Guinevere Blackburn', 1, '0470342636', '4647 Tempor Rd.', '4', 1, 14);
+INSERT INTO `user` VALUES (5, 'cursus@Aliquamgravida.edu', 'Hermione', 'Debra Young', 1, '0196303756', '3259 Purus. Rd.', '5', 2, 14);
+INSERT INTO `user` VALUES (7, 'Cum.so@necmlandit.co.uk', 'Germane', 'Martina Rodgers', 0, '0662288538', '622-1528 Volutpat Av.', '7', 3, 14);
+INSERT INTO `user` VALUES (10, 'Integer.aliquam.adipi@vel.com', 'Rhonda', 'Linda Solis', 0, '0321248916', '6661 Neque Avenue', '10', 4, 14);
+INSERT INTO `user` VALUES (13, 'faucibus.id@egestasadui.net', 'Giselle', 'Cally Mckinney', 1, '0933925868', 'Ap #440-7242 Lobortis Road', '13', 3, 14);
+INSERT INTO `user` VALUES (15, 'ut.ipsum.ac@Proin.net', 'Mechelle', 'Ruth Glenn', 0, '0115225427', '791-3993 Diam Road', '15', 1, 14);
+INSERT INTO `user` VALUES (16, 'mollis.non.cursus@cursus.com', 'Gail', 'Sigourney Keller', 0, '0271628087', '289-5821 Ornare. Street', '16', 2, 14);
+INSERT INTO `user` VALUES (17, 'consequat.lectus@ipsum.edu', 'Althea', 'Jade Chang', 0, '0647998539', '410-9038 Semper Rd.', '17', 4, 16);
+INSERT INTO `user` VALUES (18, 'primis.in.ibus@euturpis.co.uk', 'Shoshana', 'Hollee Golden', 1, '0932558198', 'Ap #876-8951 Enim. Rd.', '18', 3, 14);
+INSERT INTO `user` VALUES (19, 'nonummy@Maecenas.net', 'Keelie', 'Maxine Mathis', 1, '0608159107', 'Ap #843-1727 Ac St.', '19', 3, 14);
+INSERT INTO `user` VALUES (20, 'amet.nulla.Donec@net', 'Leslie', 'Sybil Fuentes', 1, '0157666445', '129-2060 Adipiscing St.', '20', 1, 14);
+INSERT INTO `user` VALUES (21, 'ornare@egetmollislectus.com', 'Galena', 'Eden Grant', 0, '0135037341', 'P.O. Box 624, 8936 In St.', '21', 1, 14);
+INSERT INTO `user` VALUES (22, 'tempus.Donec@necante.net', 'Ivory', 'May Copeland', 1, '0837662391', '140-2049 Amet, St.', '22', 1, 14);
+INSERT INTO `user` VALUES (23, 'nec.cursus.a@Vestibulum.edu', 'Bo', 'Mara Dalton', 0, '0730490877', '146-6971 Elementum, Street', '23', 1, 14);
+INSERT INTO `user` VALUES (24, 'dui.Cras.pellene@lorem.com', 'Imani', 'Cailin Patel', 1, '0231918392', '7950 Tristique Rd.', '24', 3, 14);
+INSERT INTO `user` VALUES (25, 'vitae.diam@dui.ca', 'Eden', 'Kai Shaw', 1, '0721772746', 'P.O. Box 278, 9740 Quisque Street', '25', 3, 14);
+INSERT INTO `user` VALUES (26, 'egestas.henrit@merat.net', 'Wynne', 'Leilani Davis', 1, '0650286200', '115 Nulla Rd.', '26', 3, 14);
+INSERT INTO `user` VALUES (27, 'eu.lacus.Quisque@ligula.ca', 'Dara', 'Keiko Tucker', 0, '0617291317', 'Ap #549-5875 Posuere St.', '27', 1, 14);
+INSERT INTO `user` VALUES (28, 'Nam.ac@interdumSed.com', 'Caryn', 'Madeline Mckee', 0, '0915978706', '3222 Nec, Rd.', '28', 2, 14);
+INSERT INTO `user` VALUES (29, 'molestie@Proin.edu', 'Lillith', 'Kelsie Hogan', 1, '0655287977', '704-102 Magna. Road', '29', 2, 14);
+INSERT INTO `user` VALUES (30, 'et@ultriciesadigenim.edu', 'Angela', 'Meredith Newton', 0, '0436457125', 'Ap #724-7504 Eu St.', '30', 4, 16);
+INSERT INTO `user` VALUES (32, 'giangtong09@gmail.com', 'huepham1905', 'Chao', 1, '0974484610', '19', NULL, 4, 16);
+INSERT INTO `user` VALUES (33, 'admin', 'admin', 'Chaos', 0, '0974484610', '19', NULL, 4, 16);
+INSERT INTO `user` VALUES (34, 'sssss', 'admin', 'asd', 1, '0974484610', '19', NULL, 4, 16);
+INSERT INTO `user` VALUES (35, 'user', 'useer', 'DÆ°Æ¡ng', 1, 'ad', '30', NULL, 4, 15);
+INSERT INTO `user` VALUES (36, 'sad', 'sad', 'DÆ°Æ¡ng', 1, '0974484610', '30', NULL, 4, 16);
+INSERT INTO `user` VALUES (37, 'ysysuuueii@dwd', 'null0000000000', 'Gae', 1, '13253562', '2453245', 'None', 4, 15);
+INSERT INTO `user` VALUES (38, 'qwdqw@eee', 'null0000000000', 'Trrre', 0, '12354654', '12123123', 'None', 4, 15);
+INSERT INTO `user` VALUES (39, 'ysysuu1eeueii@dwd', 'CRS0000000000', 'qweqwe', 1, '123123', '12323', 'None', 1, 14);
+INSERT INTO `user` VALUES (40, 'test@test', 'CRS294324825', '123123', 1, '342141', '1324', 'None', 4, 15);
 
 -- ----------------------------
 -- Table structure for user_history
