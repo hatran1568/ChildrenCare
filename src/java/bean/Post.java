@@ -21,7 +21,7 @@ public class Post {
     private String thumbnailLink;
     private User author;
     private PostCategory category;
-    private boolean status;
+    private Setting status;
 
     public String getTitle() {
         return title;
@@ -97,13 +97,15 @@ public class Post {
         this.category = category;
     }
 
-    public boolean isStatus() {
+    public Setting getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Setting status) {
         this.status = status;
     }
+
+    
 
     
 

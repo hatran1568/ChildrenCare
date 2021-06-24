@@ -22,16 +22,9 @@ public class Service {
     private ServiceCategory category;
     private Date updatedDate;
     private boolean featured;   
-    private boolean status;
-    
-    public String getDescription() {
-        return description;
-    }
+    private Setting status;
+    private int quantity;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
     public int getId() {
         return id;
     }
@@ -72,6 +65,14 @@ public class Service {
         this.salePrice = salePrice;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getThumbnailLink() {
         return thumbnailLink;
     }
@@ -96,8 +97,6 @@ public class Service {
         this.updatedDate = updatedDate;
     }
 
-    
-
     public boolean isFeatured() {
         return featured;
     }
@@ -106,13 +105,23 @@ public class Service {
         this.featured = featured;
     }
 
-    public boolean isStatus() {
+    public Setting getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Setting status) {
         this.status = status;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    
     
     
 }

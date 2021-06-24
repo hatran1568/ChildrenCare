@@ -12,23 +12,34 @@ import java.util.Date;
  * @author Tran Thi Nguyet Ha
  */
 public class UserHistory {
-    private int id;
+    private User user;
     private String email;
     private String fullName;
     private boolean gender;
     private String mobile;
     private String address;
-    private Role role;
     private User updatedBy;
     private Date updatedDate;
-    private boolean status;
+    private Setting role;
+    
+    
+//    private int id;
+//    private String email;
+//    private String fullName;
+//    private boolean gender;
+//    private String mobile;
+//    private String address;
+//    private Role role;
+//    private User updatedBy;
+//    private Date updatedDate;
+//    private boolean status;
 
-    public int getId() {
-        return id;
+    public User getUser() {
+        return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getEmail() {
@@ -71,14 +82,6 @@ public class UserHistory {
         this.address = address;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public User getUpdatedBy() {
         return updatedBy;
     }
@@ -95,13 +98,14 @@ public class UserHistory {
         this.updatedDate = updatedDate;
     }
 
-    public boolean isStatus() {
-        return status;
+    public Setting getRole() {
+        return role;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setRole(Setting role) {
+        this.role = role;
     }
+
     
     
 }

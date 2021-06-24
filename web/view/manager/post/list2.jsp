@@ -25,7 +25,7 @@
     Ramayana CSS Template
     https://templatemo.com/tm-529-ramayana
         -->
-    <img src="../../../assets/images/service/Medical-logo-vector-lage.jpg" alt=""/>
+      
         <!-- Additional CSS Files -->
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
@@ -154,7 +154,7 @@
                                         <td>${p.id}</td>
                                         <td>${p.category.name}</td>
                                         <td><img class="rounded mx-auto d-block" src="../../${p.thumbnailLink}"></td>
-                                        <td>${p.title}</td>
+                                        <td style="font-weight: bold;">${p.title}</td>
                                         <td class="">${p.description}</td>
                                         <td>${p.author.fullName}</td>
                                         <td>${p.updatedDate}</td>

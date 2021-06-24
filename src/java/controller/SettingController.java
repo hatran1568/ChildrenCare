@@ -168,7 +168,6 @@ public class SettingController extends HttpServlet {
             }
         }
         s.setName(request.getParameter("settingname"));
-        s.setValue(Integer.parseInt(request.getParameter("value")));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
 
@@ -203,7 +202,6 @@ public class SettingController extends HttpServlet {
             s.setType(request.getParameter("type"));
         else s.setType(request.getParameter("newtype"));
         s.setName(request.getParameter("settingname"));
-        s.setValue(Integer.parseInt(request.getParameter("value")));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
         

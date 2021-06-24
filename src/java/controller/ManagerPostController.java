@@ -16,6 +16,7 @@ import dao.SliderDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.mail.Session;
 import javax.servlet.ServletException;
@@ -134,7 +135,9 @@ public class ManagerPostController extends HttpServlet {
 
         ArrayList<PostCategory> categories = postDB.getCategories();
         ArrayList<User> authors = postDB.getAuthors();
-
+        String pattern = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        request.setAttribute("simpleDateFormat", simpleDateFormat);
         request.setAttribute("authors", authors);
         request.setAttribute("categories", categories);
         request.setAttribute("posts", posts);
