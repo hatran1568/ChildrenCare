@@ -156,7 +156,7 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height:100%   ; ">
+       <div class="container" style="min-height: 700px; height: auto;">
             <c:if test="${requestScope.res.status eq 'Submited'}">
             <a  class="collapsebtn btn btn-primary" href="../../reservation/contactedit?id=${requestScope.list[0].r.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                 Edit Reservation  

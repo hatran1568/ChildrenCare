@@ -216,7 +216,7 @@
 
             </c:if>
             <c:if test="${empty requestScope.list}">
-                <div class="container" style="height:800px;">
+                <div class="container" style="min-height:800px; height:auto;">
                     <h1>You have nothing in cart!</h1>
                 </div>
 

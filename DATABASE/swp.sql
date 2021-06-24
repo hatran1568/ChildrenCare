@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: swp
+-- Host: localhost    Database: swpnew
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -14,33 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `cart_item`
---
-
-DROP TABLE IF EXISTS `cart_item`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `cart_item` (
-  `user_id` int NOT NULL,
-  `service_id` int NOT NULL,
-  `quantity` int DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`service_id`) USING BTREE,
-  KEY `serviceid_idx` (`service_id`) USING BTREE,
-  CONSTRAINT `serviceid` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cart_item`
---
-
-LOCK TABLES `cart_item` WRITE;
-/*!40000 ALTER TABLE `cart_item` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cart_item` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `feedback`
@@ -59,10 +32,13 @@ CREATE TABLE `feedback` (
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `service_id` int DEFAULT NULL,
   `image_link` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `service_id` (`service_id`) USING BTREE,
-  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  KEY `fk_feedback_user_idx` (`user_id`),
+  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_feedback_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,31 +47,38 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Yan',1,'Admin@a','032',3,'none',1,'#',NULL),(2,'Yan',1,'Admin@a','032',4,'none',2,'#',NULL),(3,'Yan',1,'Admin@a','032',3,'none',3,'#',NULL),(4,'Yan',1,'Admin@a','032',2,'none',1,'#',NULL),(5,'Yan',1,'Admin@a','032',3,'none',2,'#',NULL),(6,'Yan',1,'Admin@a','032',5,'none',1,'#',NULL),(7,'Yan',1,'Admin@a','032',3,'none',1,'#',NULL);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `medicine`
+-- Table structure for table `medical_examination`
 --
 
-DROP TABLE IF EXISTS `medicine`;
+DROP TABLE IF EXISTS `medical_examination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `medicine` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+CREATE TABLE `medical_examination` (
+  `reservation_id` int NOT NULL,
+  `service_id` int NOT NULL,
+  `receiver_id` int NOT NULL,
+  `precription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  PRIMARY KEY (`reservation_id`,`service_id`,`receiver_id`) USING BTREE,
+  KEY `fk_service_exam` (`service_id`) USING BTREE,
+  KEY `fk_recicever_exam` (`receiver_id`) USING BTREE,
+  CONSTRAINT `fk_recicever_exam` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_reservation_exam` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_service_exam` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `medicine`
+-- Dumping data for table `medical_examination`
 --
 
-LOCK TABLES `medicine` WRITE;
-/*!40000 ALTER TABLE `medicine` DISABLE KEYS */;
-INSERT INTO `medicine` VALUES (1,'Pepsi');
-/*!40000 ALTER TABLE `medicine` ENABLE KEYS */;
+LOCK TABLES `medical_examination` WRITE;
+/*!40000 ALTER TABLE `medical_examination` DISABLE KEYS */;
+/*!40000 ALTER TABLE `medical_examination` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -133,35 +116,6 @@ INSERT INTO `post` VALUES (32,NULL,'Shut out from mainstream medicine, some immi
 UNLOCK TABLES;
 
 --
--- Table structure for table `presription_detail`
---
-
-DROP TABLE IF EXISTS `presription_detail`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `presription_detail` (
-  `presription_id` int NOT NULL,
-  `medicine_id` int NOT NULL,
-  `quantity` int DEFAULT NULL,
-  `dosage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`presription_id`,`medicine_id`) USING BTREE,
-  KEY `medicine_id` (`medicine_id`) USING BTREE,
-  KEY `presription_id` (`presription_id`) USING BTREE,
-  CONSTRAINT `presription_detail_ibfk_1` FOREIGN KEY (`medicine_id`) REFERENCES `medicine` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `presription_detail`
---
-
-LOCK TABLES `presription_detail` WRITE;
-/*!40000 ALTER TABLE `presription_detail` DISABLE KEYS */;
-INSERT INTO `presription_detail` VALUES (1,1,2,'none');
-/*!40000 ALTER TABLE `presription_detail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `receiver`
 --
 
@@ -179,7 +133,7 @@ CREATE TABLE `receiver` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `FK_userid_idx` (`user_id`) USING BTREE,
   CONSTRAINT `FK_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,7 +142,7 @@ CREATE TABLE `receiver` (
 
 LOCK TABLES `receiver` WRITE;
 /*!40000 ALTER TABLE `receiver` DISABLE KEYS */;
-INSERT INTO `receiver` VALUES (1,2,'Bo Yates',0,'0559706307','3852 Ridiculus Rd.','Fusce@loremipsum.ca'),(2,2,'John Doe',1,'012345678','6661 Neque Avenue','egestas.drerit@mauriserat.net'),(7,36,'DÆ°Æ¡ng',1,'0974484610','30','sad'),(8,-1,'Tá»ng TrÆ°á»ng Giang',1,'0977659677','19','admin@a'),(9,-1,'DÆ°Æ¡ng',1,'0977659677','30','sad@a'),(10,-1,'turuek',0,'1425678','121323123','a@a');
+INSERT INTO `receiver` VALUES (1,2,'Bo Yates',0,'0559706307','3852 Ridiculus Rd.','Fusce@loremipsum.ca'),(2,2,'John Doe',1,'012345678','6661 Neque Avenue','egestas.drerit@mauriserat.net'),(7,36,'DÆ°Æ¡ng',1,'0974484610','30','sad'),(8,-1,'Tá»ng TrÆ°á»ng Giang',1,'0977659677','19','admin@a'),(9,-1,'DÆ°Æ¡ng',1,'0977659677','30','sad@a'),(10,-1,'turuek',0,'1425678','121323123','a@a'),(11,2,'Abc',1,'0977659677','30','asd@asd');
 /*!40000 ALTER TABLE `receiver` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -203,15 +157,18 @@ CREATE TABLE `reservation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int DEFAULT NULL,
   `reservation_date` datetime DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `status_id` int DEFAULT NULL,
   `staff_id` int DEFAULT NULL,
-  `number_of_person` int DEFAULT NULL,
+  `receiver_id` int DEFAULT NULL,
+  `checkup_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `customer_id` (`customer_id`) USING BTREE,
   KEY `staff_id` (`staff_id`) USING BTREE,
+  KEY `fk_receiver` (`receiver_id`) USING BTREE,
+  CONSTRAINT `fk_receiver` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +177,6 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (2,2,'2021-06-22 22:32:39','Cancel',26,1),(36,2,'2021-06-20 00:00:00','Submited',7,1),(37,2,'2021-06-20 00:00:00','Cancel',7,1);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,21 +190,13 @@ DROP TABLE IF EXISTS `reservation_service`;
 CREATE TABLE `reservation_service` (
   `reservation_id` int NOT NULL,
   `service_id` int NOT NULL,
-  `prescription_id` int DEFAULT NULL,
-  `receiver_id` int DEFAULT NULL,
-  `datetime` date DEFAULT NULL,
-  `unit_price` float(10,2) DEFAULT NULL,
-  `id` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `service_id` (`service_id`) USING BTREE,
-  KEY `prescription_id` (`prescription_id`) USING BTREE,
-  KEY `fk_receiverid_idx` (`receiver_id`) USING BTREE,
-  KEY `fk_reservation` (`reservation_id`) USING BTREE,
-  CONSTRAINT `fk_receiverid` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  `quantity` int DEFAULT NULL,
+  `unit_price` float(255,0) DEFAULT NULL,
+  PRIMARY KEY (`reservation_id`,`service_id`) USING BTREE,
+  KEY `fk_service` (`service_id`) USING BTREE,
   CONSTRAINT `fk_reservation` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `reservation_service_ibfk_3` FOREIGN KEY (`prescription_id`) REFERENCES `presription_detail` (`presription_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+  CONSTRAINT `fk_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,7 +205,6 @@ CREATE TABLE `reservation_service` (
 
 LOCK TABLES `reservation_service` WRITE;
 /*!40000 ALTER TABLE `reservation_service` DISABLE KEYS */;
-INSERT INTO `reservation_service` VALUES (36,1,1,2,'2021-06-20',90000.00,3),(36,2,1,1,'2021-06-20',100000.00,4);
 /*!40000 ALTER TABLE `reservation_service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,8 +226,11 @@ CREATE TABLE `service` (
   `details` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
   `updated_date` datetime DEFAULT NULL,
   `featured` tinyint(1) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  `status_id` int DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `fkservice_status_idx` (`status_id`),
+  CONSTRAINT `fkservice_status` FOREIGN KEY (`status_id`) REFERENCES `setting` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -290,7 +240,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',9,'Service 1','Service 1',NULL,NULL,NULL),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',10,'Service 2','Service 2',NULL,NULL,NULL),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',11,'Service 3','Service 3',NULL,NULL,NULL);
+INSERT INTO `service` VALUES (1,'Service 1',100000.00,90000.00,'assets/images/service/img_3.jpg',9,'Service 1','Service 1',NULL,NULL,NULL,NULL),(2,'Service 2',100000.00,100000.00,'assets/images/service/img_3.jpg',10,'Service 2','Service 2',NULL,NULL,NULL,NULL),(3,'Service 3',200000.00,150000.00,'assets/images/service/img_3.jpg',11,'Service 3','Service 3',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,11 +255,10 @@ CREATE TABLE `setting` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `value` int NOT NULL,
   `description` varchar(2048) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +267,7 @@ CREATE TABLE `setting` (
 
 LOCK TABLES `setting` WRITE;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
-INSERT INTO `setting` VALUES (1,'Role','Admin',1,NULL,'1'),(2,'Role','Manager',2,NULL,'1'),(3,'Role','Staff',3,NULL,'1'),(4,'Role','Customer',4,NULL,'1'),(5,'Post category','Category_1',1,NULL,'1'),(6,'Post category','Category_2',2,NULL,'1'),(7,'Post category','Category_3',3,NULL,'1'),(8,'Post category','Category_4',4,NULL,'1'),(9,'Service Category','Category_1',1,NULL,'1'),(10,'Service Category','Category_2',2,NULL,'1'),(11,'Service Category','Category_3',3,NULL,'1'),(12,'Service Category','Category_4',4,NULL,'1');
+INSERT INTO `setting` VALUES (1,'Role','Admin',NULL,'1'),(2,'Role','Manager',NULL,'1'),(3,'Role','Staff',NULL,'1'),(4,'Role','Customer',NULL,'1'),(5,'Post category','Category_1',NULL,'1'),(6,'Post category','Category_2',NULL,'1'),(7,'Post category','Category_3',NULL,'1'),(8,'Post category','Category_4',NULL,'1'),(9,'Service Category','Category_1',NULL,'1'),(10,'Service Category','Category_2',NULL,'1'),(11,'Service Category','Category_3',NULL,'1'),(12,'Service Category','Category_4',NULL,'1'),(13,'User Status','Not verified',NULL,'1'),(14,'User Status','Active',NULL,'1'),(15,'User Status','Contact',NULL,'1'),(16,'User Status','Potential',NULL,'1'),(17,'User Status','Customer',NULL,'1'),(18,'User Status','Inactive',NULL,'1');
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +286,7 @@ CREATE TABLE `slider` (
   `status` tinyint(1) DEFAULT NULL,
   `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +295,7 @@ CREATE TABLE `slider` (
 
 LOCK TABLES `slider` WRITE;
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
-INSERT INTO `slider` VALUES (1,'Chao1','assets/images/service/s1.jpg','#',1,'none'),(2,'Chao','assets/images/slider/slider.png','#',1,'none'),(4,'Chao','assets/images/tiktok-10x-chau-anh.jpg','#',1,'none'),(5,'Isum','assets/images/service/s2.jpg','#',0,'none'),(6,'navi','assets/images/slider/slider.png','#',1,'none'),(7,'CHao','assets/images/service/128283710.jpg','#',0,'none'),(8,'navi','assets/images/slider/slider.png','#',0,'none'),(9,'Hue','assets/images/service/dd7184.png','#',1,'none'),(10,'navi','assets/images/slider/slider.png','#',0,'none'),(11,'Ha','assets/images/service/s3.png','#',1,'none'),(12,'Chi','assets/images/slider/slider.png','#',1,'none'),(13,'ilgnd','assets/images/service/Medical-logo-vector-lage.jpg','#',1,'none'),(14,'navi','assets/images/slider/slider.png','#',0,'none'),(15,'navi','assets/images/slider/slider.png','#',0,'none'),(18,'navi','assets/images/UML.png','#',0,'none');
+INSERT INTO `slider` VALUES (1,'Chao1','assets/images/service/s1.jpg','#',1,'none'),(2,'Chao','assets/images/slider/slider.png','#',1,'none'),(4,'Chao','assets/images/tiktok-10x-chau-anh.jpg','#',1,'none'),(5,'Isum','assets/images/service/s2.jpg','#',0,'none'),(6,'navi','assets/images/slider/slider.png','#',1,'none'),(7,'CHao','assets/images/service/128283710.jpg','#',0,'none'),(8,'navi','assets/images/slider/slider.png','#',0,'none'),(9,'Hue','assets/images/service/dd7184.png','#',1,'none'),(10,'navi','assets/images/slider/slider.png','#',0,'none'),(11,'Ha','assets/images/service/s3.png','#',1,'none'),(12,'Chi','assets/images/slider/slider.png','#',1,'none'),(13,'ilgnd','assets/images/service/Medical-logo-vector-lage.jpg','#',1,'none'),(14,'navi','assets/images/slider/slider.png','#',0,'none'),(15,'navi','assets/images/slider/slider.png','#',0,'none'),(18,'navi','assets/images/UML.png','#',0,'none'),(19,'navi','assets/images/UML.png','#',1,'none'),(20,'navi','assets/images/UML.png','#',0,'none'),(21,'navi','assets/images/UML.png','#',0,'none'),(22,'navi','assets/images/UML.png','#',0,'none'),(23,'navi','assets/images/UML.png','#',0,'none'),(24,'navi','assets/images/UML.png','#',0,'none'),(25,'navi','assets/images/UML.png','#',0,'none'),(26,'navi','assets/images/UML.png','#',0,'none'),(28,'navi','assets/images/UML.png','#',0,'none'),(29,'navi','assets/images/UML.png','#',0,'none'),(30,'navi','assets/images/UML.png','#',0,'none'),(31,'navi','assets/images/UML.png','#',0,'none'),(32,'navi','assets/images/UML.png','#',0,'none'),(33,'Gate','assets/images/104322938_185802629520370_1926776226818429282_n.jpg','#',0,'none');
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,10 +316,12 @@ CREATE TABLE `user` (
   `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `image_link` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `role_id` int DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` int DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `FK_roleid_idx` (`role_id`) USING BTREE,
-  CONSTRAINT `FK_roleid` FOREIGN KEY (`role_id`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `fk_status_user` (`status`) USING BTREE,
+  CONSTRAINT `FK_roleid` FOREIGN KEY (`role_id`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_status_user` FOREIGN KEY (`status`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -380,7 +331,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (-1,'Guest','Guest','Guest',1,'0','0','0',4,1),(2,'Fusce@loremipsum.ca','Rhona','Bo Yates',0,'0559706307','3852 Ridiculus Rd.','https://i.imgur.com/EFyvmxy.png',1,1),(4,'magna@Nullatempor.co.uk','Sigourney','Guinevere Blackburn',1,'0470342636','4647 Tempor Rd.','4',1,1),(5,'cursus@Aliquamgravida.edu','Hermione','Debra Young',1,'0196303756','3259 Purus. Rd.','5',2,1),(7,'Cum.so@necmlandit.co.uk','Germane','Martina Rodgers',0,'0662288538','622-1528 Volutpat Av.','7',3,1),(10,'Integer.aliquam.adipi@vel.com','Rhonda','Linda Solis',0,'0321248916','6661 Neque Avenue','10',4,1),(13,'faucibus.id@egestasadui.net','Giselle','Cally Mckinney',1,'0933925868','Ap #440-7242 Lobortis Road','13',3,1),(15,'ut.ipsum.ac@Proin.net','Mechelle','Ruth Glenn',0,'0115225427','791-3993 Diam Road','15',1,1),(16,'mollis.non.cursus@cursus.com','Gail','Sigourney Keller',0,'0271628087','289-5821 Ornare. Street','16',2,1),(17,'consequat.lectus@ipsum.edu','Althea','Jade Chang',0,'0647998539','410-9038 Semper Rd.','17',4,1),(18,'primis.in.ibus@euturpis.co.uk','Shoshana','Hollee Golden',1,'0932558198','Ap #876-8951 Enim. Rd.','18',3,1),(19,'nonummy@Maecenas.net','Keelie','Maxine Mathis',1,'0608159107','Ap #843-1727 Ac St.','19',3,1),(20,'amet.nulla.Donec@net','Leslie','Sybil Fuentes',1,'0157666445','129-2060 Adipiscing St.','20',1,1),(21,'ornare@egetmollislectus.com','Galena','Eden Grant',0,'0135037341','P.O. Box 624, 8936 In St.','21',1,1),(22,'tempus.Donec@necante.net','Ivory','May Copeland',1,'0837662391','140-2049 Amet, St.','22',1,1),(23,'nec.cursus.a@Vestibulum.edu','Bo','Mara Dalton',0,'0730490877','146-6971 Elementum, Street','23',1,1),(24,'dui.Cras.pellene@lorem.com','Imani','Cailin Patel',1,'0231918392','7950 Tristique Rd.','24',3,0),(25,'vitae.diam@dui.ca','Eden','Kai Shaw',1,'0721772746','P.O. Box 278, 9740 Quisque Street','25',3,0),(26,'egestas.henrit@merat.net','Wynne','Leilani Davis',1,'0650286200','115 Nulla Rd.','26',3,1),(27,'eu.lacus.Quisque@ligula.ca','Dara','Keiko Tucker',0,'0617291317','Ap #549-5875 Posuere St.','27',1,1),(28,'Nam.ac@interdumSed.com','Caryn','Madeline Mckee',0,'0915978706','3222 Nec, Rd.','28',2,1),(29,'molestie@Proin.edu','Lillith','Kelsie Hogan',1,'0655287977','704-102 Magna. Road','29',2,1),(30,'et@ultriciesadigenim.edu','Angela','Meredith Newton',0,'0436457125','Ap #724-7504 Eu St.','30',4,1),(32,'giangtong09@gmail.com','huepham1905','Chao',1,'0974484610','19',NULL,4,1),(33,'admin','admin','Chaos',0,'0974484610','19',NULL,4,1),(34,'sssss','admin','asd',1,'0974484610','19',NULL,4,1),(35,'user','useer','DÆ°Æ¡ng',1,'ad','30',NULL,4,0),(36,'sad','sad','DÆ°Æ¡ng',1,'0974484610','30',NULL,4,1),(37,'ysysuuueii@dwd','null0000000000','Gae',1,'13253562','2453245','None',4,1),(38,'qwdqw@eee','null0000000000','Trrre',0,'12354654','12123123','None',4,0),(39,'ysysuu1eeueii@dwd','CRS0000000000','qweqwe',1,'123123','12323','None',1,1),(40,'test@test','CRS294324825','123123',1,'342141','1324','None',4,1);
+INSERT INTO `user` VALUES (-1,'Guest','Guest','Guest',1,'0','0','0',4,14),(2,'Fusce@loremipsum.ca','Rhona','Bo Yates',0,'0559706307','3852 Ridiculus Rd.','https://i.imgur.com/EFyvmxy.png',1,14),(4,'magna@Nullatempor.co.uk','Sigourney','Guinevere Blackburn',1,'0470342636','4647 Tempor Rd.','4',1,14),(5,'cursus@Aliquamgravida.edu','Hermione','Debra Young',1,'0196303756','3259 Purus. Rd.','5',2,14),(7,'Cum.so@necmlandit.co.uk','Germane','Martina Rodgers',0,'0662288538','622-1528 Volutpat Av.','7',3,14),(10,'Integer.aliquam.adipi@vel.com','Rhonda','Linda Solis',0,'0321248916','6661 Neque Avenue','10',4,14),(13,'faucibus.id@egestasadui.net','Giselle','Cally Mckinney',1,'0933925868','Ap #440-7242 Lobortis Road','13',3,14),(15,'ut.ipsum.ac@Proin.net','Mechelle','Ruth Glenn',0,'0115225427','791-3993 Diam Road','15',1,14),(16,'mollis.non.cursus@cursus.com','Gail','Sigourney Keller',0,'0271628087','289-5821 Ornare. Street','16',2,14),(17,'consequat.lectus@ipsum.edu','Althea','Jade Chang',0,'0647998539','410-9038 Semper Rd.','17',4,16),(18,'primis.in.ibus@euturpis.co.uk','Shoshana','Hollee Golden',1,'0932558198','Ap #876-8951 Enim. Rd.','18',3,14),(19,'nonummy@Maecenas.net','Keelie','Maxine Mathis',1,'0608159107','Ap #843-1727 Ac St.','19',3,14),(20,'amet.nulla.Donec@net','Leslie','Sybil Fuentes',1,'0157666445','129-2060 Adipiscing St.','20',1,14),(21,'ornare@egetmollislectus.com','Galena','Eden Grant',0,'0135037341','P.O. Box 624, 8936 In St.','21',1,14),(22,'tempus.Donec@necante.net','Ivory','May Copeland',1,'0837662391','140-2049 Amet, St.','22',1,14),(23,'nec.cursus.a@Vestibulum.edu','Bo','Mara Dalton',0,'0730490877','146-6971 Elementum, Street','23',1,14),(24,'dui.Cras.pellene@lorem.com','Imani','Cailin Patel',1,'0231918392','7950 Tristique Rd.','24',3,14),(25,'vitae.diam@dui.ca','Eden','Kai Shaw',1,'0721772746','P.O. Box 278, 9740 Quisque Street','25',3,14),(26,'egestas.henrit@merat.net','Wynne','Leilani Davis',1,'0650286200','115 Nulla Rd.','26',3,14),(27,'eu.lacus.Quisque@ligula.ca','Dara','Keiko Tucker',0,'0617291317','Ap #549-5875 Posuere St.','27',1,14),(28,'Nam.ac@interdumSed.com','Caryn','Madeline Mckee',0,'0915978706','3222 Nec, Rd.','28',2,14),(29,'molestie@Proin.edu','Lillith','Kelsie Hogan',1,'0655287977','704-102 Magna. Road','29',2,14),(30,'et@ultriciesadigenim.edu','Angela','Meredith Newton',0,'0436457125','Ap #724-7504 Eu St.','30',4,16),(32,'giangtong09@gmail.com','huepham1905','Chao',1,'0974484610','19',NULL,4,16),(33,'admin','admin','Chaos',0,'0974484610','19',NULL,4,16),(34,'sssss','admin','asd',1,'0974484610','19',NULL,4,16),(35,'user','useer','DÆ°Æ¡ng',1,'ad','30',NULL,4,15),(36,'sad','sad','DÆ°Æ¡ng',1,'0974484610','30',NULL,4,16),(37,'ysysuuueii@dwd','null0000000000','Gae',1,'13253562','2453245','None',4,15),(38,'qwdqw@eee','null0000000000','Trrre',0,'12354654','12123123','None',4,15),(39,'ysysuu1eeueii@dwd','CRS0000000000','qweqwe',1,'123123','12323','None',1,14),(40,'test@test','CRS294324825','123123',1,'342141','1324','None',4,15);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,20 +344,19 @@ DROP TABLE IF EXISTS `user_history`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_history` (
   `user_id` int NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `full_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `full_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `gender` tinyint(1) DEFAULT NULL,
-  `mobile` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `updated_by` int DEFAULT NULL,
   `updated_date` datetime NOT NULL,
   `role_id` int DEFAULT NULL,
-  PRIMARY KEY (`user_id`,`updated_date`),
-  KEY `FK_updated_by_idx` (`updated_by`),
-  CONSTRAINT `FK_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`user_id`,`updated_date`) USING BTREE,
+  KEY `FK_updated_by_idx` (`updated_by`) USING BTREE,
+  CONSTRAINT `FK_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -427,4 +377,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-22  8:30:49
+-- Dump completed on 2021-06-24 21:57:44

@@ -14,12 +14,11 @@ import java.sql.Date;
 public class Reservation {
     private int id;
     private User customer;
+    private User receiver;
     private Date reservation_date;
     private Date checkup_time;
-    private String status;
+    private Setting status;
     private User staff;
-    private int number_of_person;
-    private float total_cost;
 
     public int getId() {
         return id;
@@ -35,6 +34,14 @@ public class Reservation {
 
     public void setCustomer(User customer) {
         this.customer = customer;
+    }
+
+    public User getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(User receiver) {
+        this.receiver = receiver;
     }
 
     public Date getReservation_date() {
@@ -53,11 +60,11 @@ public class Reservation {
         this.checkup_time = checkup_time;
     }
 
-    public String getStatus() {
+    public Setting getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Setting status) {
         this.status = status;
     }
 
@@ -69,21 +76,7 @@ public class Reservation {
         this.staff = staff;
     }
 
-    public int getNumber_of_person() {
-        return number_of_person;
-    }
-
-    public void setNumber_of_person(int number_of_person) {
-        this.number_of_person = number_of_person;
-    }
-
-    public float getTotal_cost() {
-        return total_cost;
-    }
-
-    public void setTotal_cost(float total_cost) {
-        this.total_cost = total_cost;
-    }
+    
     
     
 }

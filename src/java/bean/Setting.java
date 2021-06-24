@@ -13,16 +13,8 @@ public class Setting {
     private int id;
     private String type;
     private String name;
-    private int value;
     private String description;
 
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
     private String status;
 
     public int getId() {

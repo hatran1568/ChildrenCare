@@ -63,7 +63,16 @@
                                     <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                                         <ul class="navbar-nav">
                                             <li><a class="nav-link" href="#">Home</a></li>
-                                            <li><a class="nav-link" href="#">About</a></li>
+                                            <li >
+                                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Separated link</a>
+                                                </div>
+                                            </li>
                                             <li><a class="nav-link" href="service/list">Services</a></li>
                                             <li><a class="nav-link" href="#">Blog</a></li>
                                             <li><a class="nav-link" href="user/list">Users</a></li>
@@ -76,7 +85,7 @@
                                     <img style="width: 70px;" src="assets/images/cart.png" alt="#" />
                                 </a>
                             </div> 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -156,55 +165,55 @@
         <!-- section -->
         <div class="container" style="height: 700px;">
             <div class="banner_section">
-            <div class="container-fluid padding_0">
-               <div id="my_slider" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="padding_left_0">
-                                  <h1 class="retailer_text">${requestScope.sliders[0].title}</h1>
-                                  <p class="search_text">${requestScope.sliders[0].notes}</p>
-                                 <div class="btn_main">
-                                    <div class="more_bt"><a href="${requestScope.sliders[0].backlink}">Read More </a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                               <div><img src="${requestScope.sliders[0].imageLink}" class="image_1"/></div>
-                           </div>
+                <div class="container-fluid padding_0">
+                    <div id="my_slider" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="padding_left_0">
+                                            <h1 class="retailer_text">${requestScope.sliders[0].title}</h1>
+                                            <p class="search_text">${requestScope.sliders[0].notes}</p>
+                                            <div class="btn_main">
+                                                <div class="more_bt"><a href="${requestScope.sliders[0].backlink}">Read More </a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div><img src="${requestScope.sliders[0].imageLink}" class="image_1"/></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="padding_left_0">
+                                                <h1 class="retailer_text">${requestScope.sliders[i].title}</h1>
+                                                <p class="search_text">${requestScope.sliders[i].notes}</p>
+                                                <div class="btn_main">
+                                                    <div class="more_bt"><a href="${requestScope.sliders[i].backlink}">Read More </a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div><img src="${requestScope.sliders[i].imageLink}" class="image_1"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
-                     </div>
-                     <c:forEach var="i" begin="1" end="${requestScope.sliders.size()-1}">
-                     <div class="carousel-item">
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="padding_left_0">
-                                 <h1 class="retailer_text">${requestScope.sliders[i].title}</h1>
-                                 <p class="search_text">${requestScope.sliders[i].notes}</p>
-                                 <div class="btn_main">
-                                     <div class="more_bt"><a href="${requestScope.sliders[i].backlink}">Read More </a></div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-md-6">
-                               <div><img src="${requestScope.sliders[i].imageLink}" class="image_1"/></div>
-                           </div>
-                        </div>
-                     </div>
-                     </c:forEach>
-                  </div>
-                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-                  <i class="fa fa-left fa-arrow-left"></i>
-                  </a>
-                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-                  <i class="fa fa-right fa-arrow-right"></i>
-                  </a>
-               </div>
+                        <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                            <i class="fa fa-left fa-arrow-left"></i>
+                        </a>
+                        <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                            <i class="fa fa-right fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-         </div>
         </div>
-        
+
         <!--Service list-->
         <div class="categories-area section-padding30">
             <div class="container">
@@ -218,16 +227,16 @@
                 </div>
                 <div class="row">
                     <c:forEach items="${requestScope.services}" var="s">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-cat mb-50">
-                            <img src="${s.thumbnailLink}" alt="Image" class="img-fluid">
-                            <div class="cat-cap">
-                                <h5 class="service-title"><a  href="#">${s.fullname}</a></h5>
-                                <p>${s.description}</p>
-                                <a  href="#" class="read-more1">Read More ></a>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="single-cat mb-50">
+                                <img src="${s.thumbnailLink}" alt="Image" class="img-fluid">
+                                <div class="cat-cap">
+                                    <h5 class="service-title"><a  href="#">${s.fullname}</a></h5>
+                                    <p>${s.description}</p>
+                                    <a  href="#" class="read-more1">Read More ></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </c:forEach>
                 </div>
                 <!-- Section Button -->
@@ -241,61 +250,61 @@
             </div>
         </div>
         <!--Post list-->
-            <div class="site-section">
-<!--      <div class="container">
-          <div class="row justify-content-sm-center">
-                    <div class="cl-xl-7 col-lg-8 col-md-10">
-                         Section Tittle 
-                        <div class="section-tittle text-center">
-                            <h1>Latest posts</h1>
-                        </div> 
-                    </div>
-                </div>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row">
-              <div class="col-12">
-                <div class="section-title">
-                  <h2>Latest posts</h2>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="post-entry-1">
-                  <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
-                  <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
-                  <p>${requestScope.posts[0].description}</p>
-                  <div class="post-meta">
-                    <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
-                    
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                  <%--<c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">--%>
-                <div class="post-entry-2 d-flex bg-light">
-                  <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
-                  <div class="contents">
-                      <h2><a href="#">${requestScope.posts[i].title}</a></h2>
-                    <div class="post-meta">
-                      <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
-                      <span class="date-read">${requestScope.posts[i].description}</span>
-                    </div>
-                  </div>
-                </div>
-                <%--</c:forEach>--%>
-                  <p>
-              <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
-            </p>
+        <div class="site-section">
+            <!--      <div class="container">
+                      <div class="row justify-content-sm-center">
+                                <div class="cl-xl-7 col-lg-8 col-md-10">
+                                     Section Tittle 
+                                    <div class="section-tittle text-center">
+                                        <h1>Latest posts</h1>
+                                    </div> 
+                                </div>
+                            </div>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="section-title">
+                              <h2>Latest posts</h2>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="post-entry-1">
+                              <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
+                              <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
+                              <p>${requestScope.posts[0].description}</p>
+                              <div class="post-meta">
+                                <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
+                                
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="col-md-6">
+            <%--<c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">--%>
+          <div class="post-entry-2 d-flex bg-light">
+            <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
+            <div class="contents">
+                <h2><a href="#">${requestScope.posts[i].title}</a></h2>
+              <div class="post-meta">
+                <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
+                <span class="date-read">${requestScope.posts[i].description}</span>
               </div>
             </div>
           </div>
-          
+            <%--</c:forEach>--%>
+              <p>
+          <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
+        </p>
+          </div>
         </div>
-      </div>-->
+      </div>
+      
     </div>
+  </div>-->
+        </div>
         <!-- end section -->
 
         <!-- Start Footer -->
@@ -340,30 +349,31 @@
             <script src="assets/js/images-loded.min.js"></script>
             <script src="assets/js/custom.js"></script>
             <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
 
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
             </c:if>
-            </c:if>
-                <c:if test="${ not empty sessionScope.mess}">
-                     <script>
+            <c:if test="${ not empty sessionScope.mess}">
+                <script>
                     $(document).ready(function () {
                         let mess = "${sessionScope.mess}"
                         alert(mess);
-                    
+
                     });
                 </script>
                 <c:remove var="mess" scope="session" />
-                </c:if>
-                
+            </c:if>
+
     </body>
+
 </html>
 
 </body>

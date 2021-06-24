@@ -12,81 +12,44 @@ import java.sql.Date;
  * @author ACER
  */
 public class ReservationService {
-    int id;
-    Reservation r;
-    Service s;
-    Precription p;
-    Date dateTime;
-    float unitprice;
-    Receiver re;
+    private Reservation reservation;
+    private Service service;
+    private int quantity;
+    private float unitPrice;
 
-    public Receiver getRe() {
-        return re;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setRe(Receiver re) {
-        this.re = re;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
-    public ReservationService() {
+    public Service getService() {
+        return service;
     }
 
-    public ReservationService(int id, Reservation r, Service s, Precription p, Date dateTime, float unitprice) {
-        this.id = id;
-        this.r = r;
-        this.s = s;
-        this.p = p;
-        this.dateTime = dateTime;
-        this.unitprice = unitprice;
+    public void setService(Service service) {
+        this.service = service;
     }
 
-    public int getId() {
-        return id;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public Reservation getR() {
-        return r;
+    public float getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setR(Reservation r) {
-        this.r = r;
+    public void setUnitPrice(float unitPrice) {
+        this.unitPrice = unitPrice;
     }
-
-    public Service getS() {
-        return s;
-    }
-
-    public void setS(Service s) {
-        this.s = s;
-    }
-
-    public Precription getP() {
-        return p;
-    }
-
-    public void setP(Precription p) {
-        this.p = p;
-    }
-
-    public Date getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public float getUnitprice() {
-        return unitprice;
-    }
-
-    public void setUnitprice(float unitprice) {
-        this.unitprice = unitprice;
-    }
+    
+    
     
     
 }
