@@ -156,7 +156,7 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: 700px;">
+        <div class="container" style="min-height: 700px; height: auto;">
             
            <table class="table" id="reservation-detail">
                         <thead  class="thead-dark">

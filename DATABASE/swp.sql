@@ -11,25 +11,11 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 22/06/2021 08:46:02
+ Date: 24/06/2021 08:59:47
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for cart_item
--- ----------------------------
-DROP TABLE IF EXISTS `cart_item`;
-CREATE TABLE `cart_item`  (
-  `user_id` int(0) NOT NULL,
-  `service_id` int(0) NOT NULL,
-  `quantity` int(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`, `service_id`) USING BTREE,
-  INDEX `serviceid_idx`(`service_id`) USING BTREE,
-  CONSTRAINT `serviceid` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for feedback
@@ -48,7 +34,7 @@ CREATE TABLE `feedback`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_id`(`service_id`) USING BTREE,
   CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of feedback
@@ -62,19 +48,16 @@ INSERT INTO `feedback` VALUES (6, 'Yan', 1, 'Admin@a', '032', 5, 'none', 1, '#')
 INSERT INTO `feedback` VALUES (7, 'Yan', 1, 'Admin@a', '032', 3, 'none', 1, '#');
 
 -- ----------------------------
--- Table structure for medicine
+-- Table structure for medical_examination
 -- ----------------------------
-DROP TABLE IF EXISTS `medicine`;
-CREATE TABLE `medicine`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of medicine
--- ----------------------------
-INSERT INTO `medicine` VALUES (1, 'Pepsi');
+DROP TABLE IF EXISTS `medical_examination`;
+CREATE TABLE `medical_examination`  (
+  `reservation_id` int(0) NOT NULL,
+  `service_id` int(0) NOT NULL,
+  `receiver_id` int(0) NOT NULL,
+  `precription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
+  PRIMARY KEY (`reservation_id`, `service_id`, `receiver_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for post
@@ -108,26 +91,6 @@ INSERT INTO `post` VALUES (37, 'Do you think you\'re living an ordinary life? Yo
 INSERT INTO `post` VALUES (39, '\"It was so great to hear from you today and it was such weird timing,\" he said. \"This is going to sound funny and a little strange, but you were in a dream I had just a couple of days ago. I\'d love to get together and tell you about it if you\'re up for a cup of coffee,\" he continued, laying the trap he\'d been planning for years.\r\nColors bounced around in her head. They mixed and threaded themselves together. Even colors that had no business being together. They were all one, yet distinctly separate at the same time. How was she going to explain this to the others?', '123', '2021-06-22 00:58:56', 1, 'assets/images/s1.jpg', 2, 6, 1, 'Project Scenario 2');
 
 -- ----------------------------
--- Table structure for presription_detail
--- ----------------------------
-DROP TABLE IF EXISTS `presription_detail`;
-CREATE TABLE `presription_detail`  (
-  `presription_id` int(0) NOT NULL,
-  `medicine_id` int(0) NOT NULL,
-  `quantity` int(0) NULL DEFAULT NULL,
-  `dosage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`presription_id`, `medicine_id`) USING BTREE,
-  INDEX `medicine_id`(`medicine_id`) USING BTREE,
-  INDEX `presription_id`(`presription_id`) USING BTREE,
-  CONSTRAINT `presription_detail_ibfk_1` FOREIGN KEY (`medicine_id`) REFERENCES `medicine` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of presription_detail
--- ----------------------------
-INSERT INTO `presription_detail` VALUES (1, 1, 2, 'none');
-
--- ----------------------------
 -- Table structure for receiver
 -- ----------------------------
 DROP TABLE IF EXISTS `receiver`;
@@ -142,7 +105,7 @@ CREATE TABLE `receiver`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_userid_idx`(`user_id`) USING BTREE,
   CONSTRAINT `FK_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of receiver
@@ -153,6 +116,7 @@ INSERT INTO `receiver` VALUES (7, 36, 'DÆ°Æ¡ng', 1, '0974484610', '30', 'sad
 INSERT INTO `receiver` VALUES (8, -1, 'Tá»ng TrÆ°á»ng Giang', 1, '0977659677', '19', 'admin@a');
 INSERT INTO `receiver` VALUES (9, -1, 'DÆ°Æ¡ng', 1, '0977659677', '30', 'sad@a');
 INSERT INTO `receiver` VALUES (10, -1, 'turuek', 0, '1425678', '121323123', 'a@a');
+INSERT INTO `receiver` VALUES (11, 2, 'Abc', 1, '0977659677', '30', 'asd@asd');
 
 -- ----------------------------
 -- Table structure for reservation
@@ -162,26 +126,18 @@ CREATE TABLE `reservation`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `customer_id` int(0) NULL DEFAULT NULL,
   `reservation_date` datetime(0) NULL DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `status_id` int(0) NULL DEFAULT NULL,
   `staff_id` int(0) NULL DEFAULT NULL,
-  `number_of_person` int(0) NULL DEFAULT NULL,
+  `receiver_id` int(0) NULL DEFAULT NULL,
+  `checkup_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `customer_id`(`customer_id`) USING BTREE,
   INDEX `staff_id`(`staff_id`) USING BTREE,
+  INDEX `fk_receiver`(`receiver_id`) USING BTREE,
   CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of reservation
--- ----------------------------
-INSERT INTO `reservation` VALUES (2, 2, '2021-06-22 22:32:39', 'Cancel', 26, 1);
-INSERT INTO `reservation` VALUES (36, 2, '2021-06-20 00:00:00', 'Submited', 7, 1);
-INSERT INTO `reservation` VALUES (37, 2, '2021-06-20 00:00:00', 'Cancel', 7, 1);
-INSERT INTO `reservation` VALUES (38, 2, '2021-06-21 08:41:06', 'Submited', 26, 1);
-INSERT INTO `reservation` VALUES (39, 2, '2021-06-21 08:41:32', 'Cancel', 27, 1);
-INSERT INTO `reservation` VALUES (40, 2, '2021-06-22 08:41:57', 'Successful', 7, 1);
-INSERT INTO `reservation` VALUES (41, 2, '2021-06-21 08:42:24', 'Cancel', 7, 1);
+  CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_receiver` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for reservation_service
@@ -190,33 +146,13 @@ DROP TABLE IF EXISTS `reservation_service`;
 CREATE TABLE `reservation_service`  (
   `reservation_id` int(0) NOT NULL,
   `service_id` int(0) NOT NULL,
-  `prescription_id` int(0) NULL DEFAULT NULL,
-  `receiver_id` int(0) NULL DEFAULT NULL,
-  `datetime` date NULL DEFAULT NULL,
-  `unit_price` float(10, 2) NULL DEFAULT NULL,
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `service_id`(`service_id`) USING BTREE,
-  INDEX `prescription_id`(`prescription_id`) USING BTREE,
-  INDEX `fk_receiverid_idx`(`receiver_id`) USING BTREE,
-  INDEX `fk_reservation`(`reservation_id`) USING BTREE,
-  CONSTRAINT `fk_receiverid` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  `quantity` int(0) NULL DEFAULT NULL,
+  `unit_price` float(255, 0) NULL DEFAULT NULL,
+  PRIMARY KEY (`reservation_id`, `service_id`) USING BTREE,
+  INDEX `fk_service`(`service_id`) USING BTREE,
   CONSTRAINT `fk_reservation` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `reservation_service_ibfk_3` FOREIGN KEY (`prescription_id`) REFERENCES `presription_detail` (`presription_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of reservation_service
--- ----------------------------
-INSERT INTO `reservation_service` VALUES (36, 1, 1, 2, '2021-06-20', 90000.00, 3);
-INSERT INTO `reservation_service` VALUES (36, 2, 1, 1, '2021-06-20', 100000.00, 4);
-INSERT INTO `reservation_service` VALUES (36, 2, 1, 1, '2021-06-20', 100000.00, 5);
-INSERT INTO `reservation_service` VALUES (38, 2, 1, 1, '2021-06-20', 100000.00, 7);
-INSERT INTO `reservation_service` VALUES (38, 2, 1, 1, '2021-06-20', 100000.00, 8);
-INSERT INTO `reservation_service` VALUES (40, 2, 1, 2, '2021-06-20', 100000.00, 9);
-INSERT INTO `reservation_service` VALUES (40, 2, 1, 2, '2021-06-20', 100000.00, 10);
-INSERT INTO `reservation_service` VALUES (40, 1, 1, 2, '2021-06-20', 90000.00, 11);
+  CONSTRAINT `fk_service` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for service
@@ -234,15 +170,16 @@ CREATE TABLE `service`  (
   `updated_date` datetime(0) NULL DEFAULT NULL,
   `featured` tinyint(1) NULL DEFAULT NULL,
   `status` tinyint(1) NULL DEFAULT NULL,
+  `quantity` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of service
 -- ----------------------------
-INSERT INTO `service` VALUES (1, 'Service 1', 100000.00, 90000.00, 'assets/images/service/img_3.jpg', 9, 'Service 1', 'Service 1', NULL, NULL, NULL);
-INSERT INTO `service` VALUES (2, 'Service 2', 100000.00, 100000.00, 'assets/images/service/img_3.jpg', 10, 'Service 2', 'Service 2', NULL, NULL, NULL);
-INSERT INTO `service` VALUES (3, 'Service 3', 200000.00, 150000.00, 'assets/images/service/img_3.jpg', 11, 'Service 3', 'Service 3', NULL, NULL, NULL);
+INSERT INTO `service` VALUES (1, 'Service 1', 100000.00, 90000.00, 'assets/images/service/img_3.jpg', 9, 'Service 1', 'Service 1', NULL, NULL, NULL, NULL);
+INSERT INTO `service` VALUES (2, 'Service 2', 100000.00, 100000.00, 'assets/images/service/img_3.jpg', 10, 'Service 2', 'Service 2', NULL, NULL, NULL, NULL);
+INSERT INTO `service` VALUES (3, 'Service 3', 200000.00, 150000.00, 'assets/images/service/img_3.jpg', 11, 'Service 3', 'Service 3', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for setting
@@ -286,7 +223,7 @@ CREATE TABLE `slider`  (
   `status` tinyint(1) NULL DEFAULT NULL,
   `notes` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of slider
@@ -319,6 +256,7 @@ INSERT INTO `slider` VALUES (29, 'navi', 'assets/images/UML.png', '#', 0, 'none'
 INSERT INTO `slider` VALUES (30, 'navi', 'assets/images/UML.png', '#', 0, 'none');
 INSERT INTO `slider` VALUES (31, 'navi', 'assets/images/UML.png', '#', 0, 'none');
 INSERT INTO `slider` VALUES (32, 'navi', 'assets/images/UML.png', '#', 0, 'none');
+INSERT INTO `slider` VALUES (33, 'Gate', 'assets/images/104322938_185802629520370_1926776226818429282_n.jpg', '#', 0, 'none');
 
 -- ----------------------------
 -- Table structure for user
@@ -334,7 +272,7 @@ CREATE TABLE `user`  (
   `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `image_link` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `role_id` int(0) NULL DEFAULT NULL,
-  `status` tinyint(1) NULL DEFAULT NULL,
+  `status` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `FK_roleid_idx`(`role_id`) USING BTREE,
   CONSTRAINT `FK_roleid` FOREIGN KEY (`role_id`) REFERENCES `setting` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
