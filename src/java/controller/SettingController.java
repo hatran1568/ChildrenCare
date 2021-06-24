@@ -156,15 +156,23 @@ public class SettingController extends HttpServlet {
     protected void addSetting(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Setting s = new Setting();
+        SettingDAO settingDB = new SettingDAO();
+        ArrayList<Setting> settings = settingDB.getSettings();
         if (request.getParameter("newtype").isEmpty())
             s.setType(request.getParameter("type"));
-        else s.setType(request.getParameter("newtype"));
+        else {
+            s.setType(request.getParameter("newtype"));
+            for (Setting setting : settings) {
+                if (setting.getType().equalsIgnoreCase(request.getParameter("newtype")))
+                    s.setType(setting.getType());
+            }
+        }
         s.setName(request.getParameter("settingname"));
         s.setValue(Integer.parseInt(request.getParameter("value")));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
 
-        SettingDAO settingDB = new SettingDAO();
+        
         settingDB.addSetting(s);
 
         response.sendRedirect("list");
