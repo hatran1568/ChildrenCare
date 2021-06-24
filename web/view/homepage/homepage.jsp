@@ -149,7 +149,7 @@
 
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
-                            <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
@@ -257,7 +257,6 @@
                   <div class="container">
                       <div class="row justify-content-sm-center">
                                 <div class="cl-xl-7 col-lg-8 col-md-10">
-                                     Section Tittle 
                                     <div class="section-tittle text-center">
                                         <h1>Latest posts</h1>
                                     </div> 
