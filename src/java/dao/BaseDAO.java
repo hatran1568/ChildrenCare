@@ -18,8 +18,6 @@ public class BaseDAO {
     {
         try {
 
-
-
             String user = "root";
 
             String pass = "123456";
