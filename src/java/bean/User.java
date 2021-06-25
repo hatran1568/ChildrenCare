@@ -19,15 +19,9 @@ public class User {
     private String address;
     private String imageLink;
     private Role role;
-    private boolean status;
+    private int status;
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
+  
 
     public int getId() {
         return id;
@@ -99,6 +93,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 

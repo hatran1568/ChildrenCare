@@ -8,6 +8,7 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ServiceDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/search.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/details.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
@@ -19,7 +20,9 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/details.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SettingController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/PostDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Setting.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/js/images-loded.min.js</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/service/list.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationCompletionController.java</file>
@@ -29,6 +32,7 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/list.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/User.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationInformation.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/settings/add.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/customer/list.jsp</file>
