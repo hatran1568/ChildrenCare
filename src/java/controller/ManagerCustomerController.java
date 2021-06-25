@@ -16,6 +16,7 @@ import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -186,7 +187,19 @@ public class ManagerCustomerController extends HttpServlet {
         User u1 = (User)request.getSession().getAttribute("user");
         
         u.setEmail(request.getParameter("email"));
-        u.setPassword("admin");
+        
+        
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int) (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String password = buffer.toString();
+        u.setPassword(password);
         u.setAddress(request.getParameter("address"));
         u.setGender(request.getParameter("gender").equals("male"));
         u.setFullName(request.getParameter("full-name"));

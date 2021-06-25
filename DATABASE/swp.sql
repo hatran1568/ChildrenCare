@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 24/06/2021 20:14:23
+ Date: 25/06/2021 16:29:53
 */
 
 SET NAMES utf8mb4;
@@ -59,9 +59,9 @@ CREATE TABLE `medical_examination`  (
   PRIMARY KEY (`reservation_id`, `service_id`, `receiver_id`) USING BTREE,
   INDEX `fk_service_exam`(`service_id`) USING BTREE,
   INDEX `fk_recicever_exam`(`receiver_id`) USING BTREE,
+  CONSTRAINT `fk_recicever_exam` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_reservation_exam` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_service_exam` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_recicever_exam` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_service_exam` FOREIGN KEY (`service_id`) REFERENCES `service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -142,7 +142,7 @@ CREATE TABLE `reservation`  (
   CONSTRAINT `fk_receiver` FOREIGN KEY (`receiver_id`) REFERENCES `receiver` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`staff_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for reservation_service
@@ -198,7 +198,7 @@ CREATE TABLE `setting`  (
   `description` varchar(2048) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of setting
@@ -221,6 +221,11 @@ INSERT INTO `setting` VALUES (15, 'User Status', 'Contact', 3, NULL, '1');
 INSERT INTO `setting` VALUES (16, 'User Status', 'Potential', 4, NULL, '1');
 INSERT INTO `setting` VALUES (17, 'User Status', 'Customer', 5, NULL, '1');
 INSERT INTO `setting` VALUES (18, 'User Status', 'Inactive', 6, NULL, '1');
+INSERT INTO `setting` VALUES (19, 'Reservation Status', 'Pending', 1, NULL, '1');
+INSERT INTO `setting` VALUES (20, 'Reservation Status', 'Submited', 2, NULL, '1');
+INSERT INTO `setting` VALUES (21, 'Reservation Status', 'Cancel', 3, NULL, '1');
+INSERT INTO `setting` VALUES (22, 'Reservation Status', 'Approved', 4, NULL, '1');
+INSERT INTO `setting` VALUES (23, 'Reservation Status', 'Rejected', 5, NULL, '1');
 
 -- ----------------------------
 -- Table structure for slider

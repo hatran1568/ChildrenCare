@@ -7,35 +7,19 @@ package bean;
 
 /**
  *
- * @author Tran Thi Nguyet Ha
+ * @author HP
  */
-public class User {
+public class Feedback {
     private int id;
-    private String email;
-    private String password;
     private String fullName;
     private boolean gender;
+    private String email;
     private String mobile;
-    private String address;
+    private int ratedStar;
+    private String content;
+    private Service service;
     private String imageLink;
-    private Role role;
-
-    private int status;
-
-  
-
- 
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-
-    
+    private User user;
 
     public int getId() {
         return id;
@@ -43,22 +27,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFullName() {
@@ -77,6 +45,14 @@ public class User {
         this.gender = gender;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getMobile() {
         return mobile;
     }
@@ -85,12 +61,28 @@ public class User {
         this.mobile = mobile;
     }
 
-    public String getAddress() {
-        return address;
+    public int getRatedStar() {
+        return ratedStar;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRatedStar(int ratedStar) {
+        this.ratedStar = ratedStar;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
     public String getImageLink() {
@@ -101,16 +93,13 @@ public class User {
         this.imageLink = imageLink;
     }
 
-    public Role getRole() {
-        return role;
+    public User getUser() {
+        return user;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-
-
     
- 
+    
 }

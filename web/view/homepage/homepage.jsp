@@ -47,6 +47,7 @@
 
 
         <!-- Start header -->
+        <%--<c:if test="${requestScope.user.role.name==""}"></c:if>--%>
         <header class="top-header">
 
             <div class="header_bottom">
@@ -73,9 +74,11 @@
                                                     <a class="dropdown-item" href="#">Separated link</a>
                                                 </div>
                                             </li>
+
                                             <li><a class="nav-link" href="service/list">Services</a></li>
                                             <li><a class="nav-link" href="#">Blog</a></li>
-                                            <li><a class="nav-link" href="user/list">Users</a></li>
+                                            <li><a class="nav-link" href="#">Reservations</a></li>
+                                            <li><a class="nav-link" href="#">Customers</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -146,7 +149,7 @@
 
                         </c:if>
                         <c:if test="${ not empty sessionScope.user}">
-                            <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
@@ -251,10 +254,9 @@
         </div>
         <!--Post list-->
         <div class="site-section">
-            <!--      <div class="container">
+                  <div class="container">
                       <div class="row justify-content-sm-center">
                                 <div class="cl-xl-7 col-lg-8 col-md-10">
-                                     Section Tittle 
                                     <div class="section-tittle text-center">
                                         <h1>Latest posts</h1>
                                     </div> 
@@ -283,7 +285,7 @@
                           </div>
                           
                           <div class="col-md-6">
-            <%--<c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">--%>
+            <c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">
           <div class="post-entry-2 d-flex bg-light">
             <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
             <div class="contents">
@@ -294,7 +296,7 @@
               </div>
             </div>
           </div>
-            <%--</c:forEach>--%>
+            </c:forEach>
               <p>
           <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
         </p>
@@ -303,7 +305,7 @@
       </div>
       
     </div>
-  </div>-->
+  </div>
         </div>
         <!-- end section -->
 

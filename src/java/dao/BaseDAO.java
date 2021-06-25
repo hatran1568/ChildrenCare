@@ -18,12 +18,10 @@ public class BaseDAO {
     {
         try {
 
+            String user = "root";
 
-
-            String user = "PieRow";
-
-            String pass = "38 Ly Nam De";
-            String url = "jdbc:mysql://localhost:3000/swp?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
+            String pass = "123456";
+            String url = "jdbc:mysql://localhost:3306/swp?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
 
 
             Class.forName("com.mysql.jdbc.Driver");
