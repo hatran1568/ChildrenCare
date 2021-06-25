@@ -137,24 +137,21 @@
                                 <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">My reservation</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Manage reservations</a>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Manage reservations</a></p>
+
                                     </div>
                                 </li>
 
                                 <li class="dropdown">
-                                    <a href="#" class="smoothScroll dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Customers</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Feedbacks</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Blogs</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Sliders</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Services</a>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Services</a></p>
+
                                     </div>
                                 </li>
                             </c:if>
@@ -162,14 +159,22 @@
                                 <li><a href="#top" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
                                 <li><a href="#team" class="smoothScroll">Blog</a></li>
-                                
-                                <!--<li class="appointment-btn"><a>Make a reservation</a></li>-->
+                               <li class="dropdown">
+                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
+
+                                    </div>
+                                </li>
+
+
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
                                 <li><a href="#top" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
                                 <li><a href="#team" class="smoothScroll">Blog</a></li>
-                                <li class="appointment-btn"><a>Make a reservation</a></li>
+
                             </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
@@ -577,11 +582,11 @@
         <script src="assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-}, function() {
-  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-});
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
     </body>
 </html>

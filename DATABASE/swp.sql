@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 25/06/2021 16:29:53
+ Date: 25/06/2021 19:32:30
 */
 
 SET NAMES utf8mb4;
@@ -302,7 +302,7 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (-1, 'Guest', 'Guest', 'Guest', 1, '0', '0', '0', 4, 14);
 INSERT INTO `user` VALUES (2, 'Fusce@loremipsum.ca', 'Rhona', 'Bo Yates', 0, '0559706307', '3852 Ridiculus Rd.', 'https://i.imgur.com/EFyvmxy.png', 1, 14);
 INSERT INTO `user` VALUES (4, 'magna@Nullatempor.co.uk', 'Sigourney', 'Guinevere Blackburn', 1, '0470342636', '4647 Tempor Rd.', '4', 1, 14);
-INSERT INTO `user` VALUES (5, 'cursus@Aliquamgravida.edu', 'Hermione', 'Debra Young', 1, '0196303756', '3259 Purus. Rd.', '5', 2, 14);
+INSERT INTO `user` VALUES (5, 'manager', 'sa', 'Debra Young', 1, '0196303756', '3259 Purus. Rd.', '5', 2, 14);
 INSERT INTO `user` VALUES (7, 'Cum.so@necmlandit.co.uk', 'Germane', 'Martina Rodgers', 0, '0662288538', '622-1528 Volutpat Av.', '7', 3, 14);
 INSERT INTO `user` VALUES (10, 'Integer.aliquam.adipi@vel.com', 'Rhonda', 'Linda Solis', 0, '0321248916', '6661 Neque Avenue', '10', 4, 14);
 INSERT INTO `user` VALUES (13, 'faucibus.id@egestasadui.net', 'Giselle', 'Cally Mckinney', 1, '0933925868', 'Ap #440-7242 Lobortis Road', '13', 3, 14);
@@ -331,6 +331,7 @@ INSERT INTO `user` VALUES (37, 'ysysuuueii@dwd', 'null0000000000', 'Gae', 1, '13
 INSERT INTO `user` VALUES (38, 'qwdqw@eee', 'null0000000000', 'Trrre', 0, '12354654', '12123123', 'None', 4, 15);
 INSERT INTO `user` VALUES (39, 'ysysuu1eeueii@dwd', 'CRS0000000000', 'qweqwe', 1, '123123', '12323', 'None', 1, 14);
 INSERT INTO `user` VALUES (40, 'test@test', 'CRS294324825', '123123', 1, '342141', '1324', 'None', 4, 15);
+INSERT INTO `user` VALUES (42, 'Ha2aasd', 'sa', 'ha', 0, '0974484610', 'asda', NULL, 4, 13);
 
 -- ----------------------------
 -- Table structure for user_history
@@ -352,5 +353,10 @@ CREATE TABLE `user_history`  (
   CONSTRAINT `FK_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_history
+-- ----------------------------
+INSERT INTO `user_history` VALUES (42, 'Ha2aasd', 'ha', 0, '0974484610', 'asda', 13, -1, '2021-06-25 17:04:18', 4);
 
 SET FOREIGN_KEY_CHECKS = 1;
