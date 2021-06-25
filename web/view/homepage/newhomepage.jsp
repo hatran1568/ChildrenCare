@@ -133,20 +133,15 @@
                         <ul class="nav navbar-nav navbar-right">
                             <c:if test="${sessionScope.user.role.name == 'Manager'}">
                                 <li class="dropdown"><a href="#top" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="#top" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
-                                <li class="dropdown">
-                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Manage reservations</a></p>
-
-                                    </div>
-                                </li>
+                                
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
@@ -171,10 +166,9 @@
 
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#team" class="smoothScroll">Blog</a></li>
-
+                                <li><a href="#" class="smoothScroll">Blog</a></li>
                             </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
@@ -588,5 +582,28 @@
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
         </script>
+        <c:if test="${empty sessionScope.mess}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
+
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
+            </c:if>
+            <c:if test="${ not empty sessionScope.mess}">
+                <script>
+                    $(document).ready(function () {
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
+
+                    });
+                </script>
+                <c:remove var="mess" scope="session" />
+            </c:if>
     </body>
 </html>
