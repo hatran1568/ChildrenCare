@@ -327,7 +327,7 @@ http://www.tooplate.com/view/2098-health
   }
 
   .navbar-default .navbar-nav li.appointment-btn a {
-    background: #a5c422;
+    background: #00aeef;
     border-radius: 3px;
     color: #ffffff;
     font-weight: 600;
@@ -336,7 +336,7 @@ http://www.tooplate.com/view/2098-health
   }
 
   .navbar-default .navbar-nav li.appointment-btn a:hover {
-    background: #4267b2;
+    background: #1a73e8;
     color: #ffffff !important;
   }
 
@@ -356,7 +356,7 @@ http://www.tooplate.com/view/2098-health
 
   .navbar-default .navbar-nav > li > a:hover,
   .navbar-default .navbar-nav > li > a:focus {
-    color: #555555;
+    /*color: #555555;*/
 
   }
 

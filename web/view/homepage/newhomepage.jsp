@@ -41,9 +41,9 @@
                     </div>
 
                     <div class="col-md-8 col-sm-7 text-align-right">
-                        <span class="phone-icon"><i class="fa fa-phone"></i> 010-060-0160</span>
-                        <span class="date-icon"><i class="fa fa-calendar-plus-o"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                        <span class="email-icon"><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
+                        <span class="phone-icon"><i style="color:#4267b2" class="fa fa-phone"></i> 010-060-0160</span>
+                        <span class="date-icon"><i style="color:#4267b2" class="fa fa-calendar"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
+                        <span class="email-icon"><i style="color:#4267b2" class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
                     </div>
 
                 </div>
@@ -72,8 +72,8 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#top" class="smoothScroll">Home</a></li>
                             <li><a href="#" class="smoothScroll">Services</a></li>
-                            <li><a href="#team" class="smoothScroll">Blog</a></li>
-
+                            <li><a href="#" class="smoothScroll">Blog</a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -132,11 +132,11 @@
                     <c:if test="${not empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
                             <c:if test="${sessionScope.user.role.name == 'Manager'}">
-                                <li class="dropdown"><a href="#top" class="smoothScroll">Home</a></li>
-                                <li class="dropdown"><a href="#top" class="smoothScroll">My reservation</a></li>
+                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
                                 
-
+                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
@@ -149,11 +149,12 @@
 
                                     </div>
                                 </li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Staff'}">
                                 <li><a href="#top" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#team" class="smoothScroll">Blog</a></li>
+                                <li><a href="#" class="smoothScroll">Blog</a></li>
                                <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
@@ -162,13 +163,14 @@
 
                                     </div>
                                 </li>
-
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
 
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
                                 <li><a href="#" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
                                 <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
