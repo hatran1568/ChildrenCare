@@ -65,16 +65,16 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PostDAO postDB = new PostDAO();
-        ArrayList<Post> posts = postDB.getPosts();
-        
-        SliderDAO sliderDB = new SliderDAO();
-        ArrayList<Slider> sliders = sliderDB.getActiveSliders();
-        ServiceDAO serviceDB = new ServiceDAO();
-        ArrayList<Service> services = serviceDB.getServices();
-        request.setAttribute("posts", posts);
-        request.setAttribute("sliders", sliders);
-        request.setAttribute("services", services);
+//        PostDAO postDB = new PostDAO();
+//        ArrayList<Post> posts = postDB.getPosts();
+//        
+//        SliderDAO sliderDB = new SliderDAO();
+//        ArrayList<Slider> sliders = sliderDB.getActiveSliders();
+//        ServiceDAO serviceDB = new ServiceDAO();
+//        ArrayList<Service> services = serviceDB.getServices();
+//        request.setAttribute("posts", posts);
+//        request.setAttribute("sliders", sliders);
+//        request.setAttribute("services", services);
         request.getRequestDispatcher("/view/homepage/newhomepage.jsp").forward(request, response);
     }
 

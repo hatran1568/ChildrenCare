@@ -243,7 +243,7 @@ public class PostDAO extends BaseDAO {
                 acc.setMobile(rs.getString("mobile"));
                 acc.setAddress(rs.getString("address"));
                 acc.setImageLink(rs.getString("image_link"));
-                acc.setStatus(rs.getBoolean("user_status"));
+                acc.setStatus(rs.getInt("user_status"));
                 Role r = new Role();
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getString("role_name"));

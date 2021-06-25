@@ -195,9 +195,10 @@ public class UserController extends HttpServlet {
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
         u.setImageLink("None");
-        u.setStatus(Boolean.parseBoolean(request.getParameter("status")));
+        u.setStatus(Integer.parseInt(request.getParameter("status")));
         UserDAO userDB = new UserDAO();
-        userDB.addUser(u, u.isStatus(), -1);
+        u.setStatus(13);
+        userDB.addUser(u, -1);
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;
         try {
@@ -228,7 +229,7 @@ public class UserController extends HttpServlet {
 
         User u = new User();
         u.setId(Integer.parseInt(request.getParameter("id")));
-        u.setStatus(Boolean.parseBoolean(request.getParameter("status")));
+        u.setStatus(Integer.parseInt(request.getParameter("status")));
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
@@ -293,7 +294,7 @@ public class UserController extends HttpServlet {
         
             
          // if user was verify redirect to home page
-        } else if (list.get(0).isStatus() == true) {
+        } else if (list.get(0).getStatus() != 13) {
 
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -366,8 +367,8 @@ public class UserController extends HttpServlet {
         } else {
             u.setGender(false);
         }
-
-        userDb.addCustomer(u, false, -1);
+        u.setStatus(13);
+        userDb.addCustomer(u, -1);
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);
