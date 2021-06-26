@@ -22,7 +22,7 @@ public class Service {
     private ServiceCategory category;
     private Date updatedDate;
     private boolean featured;   
-    private Setting status;
+    private boolean status;
     private int quantity;
 
     public int getId() {
@@ -105,13 +105,15 @@ public class Service {
         this.featured = featured;
     }
 
-    public Setting getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(Setting status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
+
+    
 
     public int getQuantity() {
         return quantity;

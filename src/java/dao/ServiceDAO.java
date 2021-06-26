@@ -54,7 +54,7 @@ public class ServiceDAO extends BaseDAO{
             if (search != null && search.length() != 0) {
                 search = " and fullname like '%" + search + "%' ";
             }else search = " ";
-            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,quantity\n"
                     + "s.id, fullname, description, details, original_price, sale_price, updated_date,  "
                     + "thumbnail_link, featured, status, "
                     + "s.category_id, c.name as category_name\n"
@@ -89,6 +89,7 @@ public class ServiceDAO extends BaseDAO{
                 category.setName(rs.getString("category_name"));
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
+                s.setQuantity(rs.getInt("quantity"));
                 s.setStatus(rs.getBoolean("status"));
                 services.add(s);
             }
@@ -118,7 +119,7 @@ public class ServiceDAO extends BaseDAO{
     public Service getService(int sid) {
         try {
             String sql = "select\n"
-                    + "s.id, fullname, description, details, original_price, sale_price,  updated_date,\n"
+                    + "s.id,quantity, fullname, description, details, original_price, sale_price,  updated_date,\n"
                     + "featured, status, thumbnail_link, s.category_id, c.name as category_name\n"
                     + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n" 
                     + "on s.category_id = c.category_id "
@@ -143,6 +144,7 @@ public class ServiceDAO extends BaseDAO{
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
                 s.setStatus(rs.getBoolean("status"));
+                s.setQuantity(rs.getInt("quantity"));
                 
                 
                 return s;

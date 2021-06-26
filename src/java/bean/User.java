@@ -19,19 +19,21 @@ public class User {
     private String address;
     private String imageLink;
     private Role role;
-    private int status;
+    private Setting status;
+
+    public Setting getStatus() {
+        return status;
+    }
+
+    public void setStatus(Setting status) {
+        this.status = status;
+    }
 
   
 
  
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+    
 
 
     
