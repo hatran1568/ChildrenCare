@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: localhost    Database: swpnew
+-- Host: localhost    Database: swp
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -293,7 +293,7 @@ CREATE TABLE `slider` (
 
 LOCK TABLES `slider` WRITE;
 /*!40000 ALTER TABLE `slider` DISABLE KEYS */;
-INSERT INTO `slider` VALUES (1,'Chao1','assets/images/service/s1.jpg','#',1,'none'),(2,'Chao','assets/images/slider/slider.png','#',1,'none'),(4,'Chao','assets/images/tiktok-10x-chau-anh.jpg','#',1,'none'),(5,'Isum','assets/images/service/s2.jpg','#',0,'none'),(6,'navi','assets/images/slider/slider.png','#',1,'none'),(7,'CHao','assets/images/service/128283710.jpg','#',0,'none'),(8,'navi','assets/images/slider/slider.png','#',0,'none'),(9,'Hue','assets/images/service/dd7184.png','#',1,'none'),(10,'navi','assets/images/slider/slider.png','#',0,'none'),(11,'Ha','assets/images/service/s3.png','#',1,'none'),(12,'Chi','assets/images/slider/slider.png','#',1,'none'),(13,'ilgnd','assets/images/service/Medical-logo-vector-lage.jpg','#',1,'none'),(14,'navi','assets/images/slider/slider.png','#',0,'none'),(15,'navi','assets/images/slider/slider.png','#',0,'none'),(18,'navi','assets/images/UML.png','#',0,'none'),(19,'navi','assets/images/UML.png','#',1,'none'),(20,'navi','assets/images/UML.png','#',0,'none'),(21,'navi','assets/images/UML.png','#',0,'none'),(22,'navi','assets/images/UML.png','#',0,'none'),(23,'navi','assets/images/UML.png','#',0,'none'),(24,'navi','assets/images/UML.png','#',0,'none'),(25,'navi','assets/images/UML.png','#',0,'none'),(26,'navi','assets/images/UML.png','#',0,'none'),(28,'navi','assets/images/UML.png','#',0,'none'),(29,'navi','assets/images/UML.png','#',0,'none'),(30,'navi','assets/images/UML.png','#',0,'none'),(31,'navi','assets/images/UML.png','#',0,'none'),(32,'navi','assets/images/UML.png','#',0,'none'),(33,'Gate','assets/images/104322938_185802629520370_1926776226818429282_n.jpg','#',0,'none');
+INSERT INTO `slider` VALUES (1,'A  Response Plan to counter Covid-19','assets/images/slider/slider_1_dad_and_girl.jpg','#',1,'Pushing the boundaries of what’s possible in children’s health.'),(2,'Medical Emergencies Always Come Unannounced!','assets/images/slider/Yuna-color-correction.jpg','#',1,'Get the most advanced emergency care anywhere in just minutes.'),(4,'Chao','assets/images/tiktok-10x-chau-anh.jpg','#',0,'none'),(5,'Isum','assets/images/service/s2.jpg','#',0,'none'),(6,'navi','assets/images/slider/slider.png','#',0,'none'),(7,'CHao','assets/images/service/128283710.jpg','#',0,'none'),(8,'navi','assets/images/slider/slider.png','#',0,'none'),(9,'Hue','assets/images/service/dd7184.png','#',0,'none'),(10,'navi','assets/images/slider/slider.png','#',0,'none'),(11,'Ha','assets/images/service/s3.png','#',0,'none'),(12,'Chi','assets/images/slider/slider.png','#',0,'none'),(13,'ilgnd','assets/images/service/Medical-logo-vector-lage.jpg','#',0,'none'),(14,'navi','assets/images/slider/slider.png','#',0,'none'),(15,'navi','assets/images/slider/slider.png','#',0,'none'),(18,'navi','assets/images/UML.png','#',0,'none'),(19,'navi','assets/images/UML.png','#',0,'none'),(20,'navi','assets/images/UML.png','#',0,'none'),(21,'navi','assets/images/UML.png','#',0,'none'),(22,'navi','assets/images/UML.png','#',0,'none'),(23,'navi','assets/images/UML.png','#',0,'none'),(24,'navi','assets/images/UML.png','#',0,'none'),(25,'navi','assets/images/UML.png','#',0,'none'),(26,'navi','assets/images/UML.png','#',0,'none'),(28,'navi','assets/images/UML.png','#',0,'none'),(29,'navi','assets/images/UML.png','#',0,'none'),(30,'navi','assets/images/UML.png','#',0,'none'),(31,'navi','assets/images/UML.png','#',0,'none'),(32,'navi','assets/images/UML.png','#',0,'none'),(33,'Gate','assets/images/104322938_185802629520370_1926776226818429282_n.jpg','#',0,'none');
 /*!40000 ALTER TABLE `slider` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,4 +377,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-26 22:06:31
+-- Dump completed on 2021-06-27  0:03:58

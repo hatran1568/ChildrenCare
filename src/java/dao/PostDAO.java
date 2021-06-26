@@ -27,8 +27,7 @@ public class PostDAO extends BaseDAO {
         ArrayList<Post> posts = new ArrayList<>();
 
         try {
-            String sql = "select * from setting\n"
-                    + "select * from post\n"
+            String sql =  "select * from post\n"
                     + "\n"
                     + "select * from\n"
                     + "(select * from\n"
@@ -379,4 +378,73 @@ public class PostDAO extends BaseDAO {
 //        }
 //        return users;
 //    }
+    
+    public ArrayList<Post> getFeaturedPosts() {
+        ArrayList<Post> posts = new ArrayList<>();
+
+        try {
+            String sql =  "select * from\n"
+                    + "(select * from\n"
+                    + "(select p.id, p.content, p.description, updated_date, featured, thumbnail_link, author_id, category_id, p.status_id as p_status, title,\n"
+                    + "s.name as category_name\n"
+                    + "from post p left join (select id, name from setting where type=\"Post category\") as s\n"
+                    + "on p.category_id = s.id) as x\n"
+                    + "left join (select id as stt_id, name as status_name, type as stt_type from setting where type = \"Post Status\") as stt\n"
+                    + "on x.p_status = stt.stt_id) as y\n"
+                    + "\n"
+                    + "left join (select a.id as user_id, a.email, a.password, a.full_name, \n"
+                    + "a.gender, a.mobile, a.address, a.image_link, a.status as user_status , r.role_name, a.role_id\n"
+                    + "from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n"
+                    + "on a.role_id = r.role_id) as tbl\n"
+                    + "on y.author_id = tbl.user_id"
+                    + " where featured=1";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            SettingDAO settingDB = new SettingDAO();
+            while (rs.next()) {
+                Post p = new Post();
+                p.setId(rs.getInt("id")); //done
+                p.setTitle(rs.getString("title")); //done
+                p.setContent(rs.getString("content"));//done
+                p.setDescription(rs.getString("description"));//done
+                p.setUpdatedDate(rs.getDate("updated_date"));//done
+                p.setFeatured(rs.getBoolean("featured"));//done
+                p.setThumbnailLink(rs.getString("thumbnail_link"));//done
+
+                User acc = new User();
+                acc.setId(rs.getInt("author_id"));//done
+                acc.setEmail(rs.getString("email"));//done
+                acc.setPassword(rs.getString("password"));//done
+                acc.setFullName(rs.getString("full_name"));
+                acc.setGender(rs.getBoolean("gender"));
+                acc.setMobile(rs.getString("mobile"));
+                acc.setAddress(rs.getString("address"));
+                acc.setImageLink(rs.getString("image_link"));
+                int user_status_id = rs.getInt("user_status");
+                Setting user_status = settingDB.getSetting(user_status_id);
+                acc.setStatus(user_status);
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getString("role_name"));
+                acc.setRole(r);
+                p.setAuthor(acc);
+
+                PostCategory pc = new PostCategory();
+                pc.setId(rs.getInt("category_id"));
+                pc.setName(rs.getString("category_name"));
+
+                p.setCategory(pc);
+                Setting s = new Setting();
+                s.setId(rs.getInt("p_status"));
+                s.setType(rs.getString("stt_type"));
+                s.setName(rs.getString("status_name"));
+                p.setStatus(s);
+                posts.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return posts;
+    }
 }

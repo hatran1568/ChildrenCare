@@ -254,58 +254,58 @@
         </div>
         <!--Post list-->
         <div class="site-section">
-                  <div class="container">
-                      <div class="row justify-content-sm-center">
-                                <div class="cl-xl-7 col-lg-8 col-md-10">
-                                    <div class="section-tittle text-center">
-                                        <h1>Latest posts</h1>
-                                    </div> 
+            <div class="container">
+                <div class="row justify-content-sm-center">
+                    <div class="cl-xl-7 col-lg-8 col-md-10">
+                        <div class="section-tittle text-center">
+                            <h1>Latest posts</h1>
+                        </div> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section-title">
+                                    <h2>Latest posts</h2>
                                 </div>
                             </div>
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="section-title">
-                              <h2>Latest posts</h2>
-                            </div>
-                          </div>
                         </div>
                         <div class="row">
-                          <div class="col-md-6">
-                            <div class="post-entry-1">
-                              <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
-                              <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
-                              <p>${requestScope.posts[0].description}</p>
-                              <div class="post-meta">
-                                <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
-                                
-                              </div>
+                            <div class="col-md-6">
+                                <div class="post-entry-1">
+                                    <a href="post-single.html"><img src="${requestScope.posts[0].thumbnailLink}" alt="Image" class="img-fluid"></a>
+                                    <h2><a href="blog-single.html">${requestScope.posts[0].title}</a></h2>
+                                    <p>${requestScope.posts[0].description}</p>
+                                    <div class="post-meta">
+                                        <span class="d-block"><a href="#">${requestScope.posts[0].author.fullName}</a> in <a href="#">${requestScope.posts[0].category.name}</a></span>
+
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                          
-                          <div class="col-md-6">
-            <c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">
-          <div class="post-entry-2 d-flex bg-light">
-            <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
-            <div class="contents">
-                <h2><a href="#">${requestScope.posts[i].title}</a></h2>
-              <div class="post-meta">
-                <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
-                <span class="date-read">${requestScope.posts[i].description}</span>
-              </div>
+
+                            <div class="col-md-6">
+                                <c:forEach var="i" begin="1" end="${requestScope.posts.size()-1}">
+                                    <div class="post-entry-2 d-flex bg-light">
+                                        <div class="thumbnail" style="background-image: url('${requestScope.posts[i].thumbnailLink}')"></div>
+                                        <div class="contents">
+                                            <h2><a href="#">${requestScope.posts[i].title}</a></h2>
+                                            <div class="post-meta">
+                                                <span class="d-block"><a href="#">${requestScope.posts[i].author.fullName}</a> in <a href="#">${requestScope.posts[i].category.name}</a></span>
+                                                <span class="date-read">${requestScope.posts[i].description}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                <p>
+                                    <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          </div>
-            </c:forEach>
-              <p>
-          <a href="#" class="more">See More Posts <span class="icon-keyboard_arrow_right"></span></a>
-        </p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
         </div>
         <!-- end section -->
 

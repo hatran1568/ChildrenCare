@@ -14,6 +14,7 @@ import dao.SliderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,16 +66,16 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        PostDAO postDB = new PostDAO();
-//        ArrayList<Post> posts = postDB.getPosts();
+        PostDAO postDB = new PostDAO();
+        List<Post> posts = postDB.getFeaturedPosts().subList(0, 3);
         
         SliderDAO sliderDB = new SliderDAO();
         ArrayList<Slider> sliders = sliderDB.getActiveSliders();
-//        ServiceDAO serviceDB = new ServiceDAO();
-//        ArrayList<Service> services = serviceDB.getServices();
-//        request.setAttribute("posts", posts);
+        ServiceDAO serviceDB = new ServiceDAO();
+        List<Service> services = serviceDB.getServices().subList(0, 3);
+        request.setAttribute("posts", posts);
         request.setAttribute("sliders", sliders);
-//        request.setAttribute("services", services);
+        request.setAttribute("services", services);
         request.getRequestDispatcher("/view/homepage/newhomepage.jsp").forward(request, response);
     }
 
