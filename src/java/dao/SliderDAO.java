@@ -33,7 +33,7 @@ public class SliderDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }    
     public ArrayList<Slider> getActiveSliders() {
         ArrayList<Slider> slider = new ArrayList<>();
         try {

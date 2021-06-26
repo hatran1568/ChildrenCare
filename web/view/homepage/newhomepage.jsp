@@ -195,37 +195,19 @@
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row">
-
                     <div class="owl-carousel owl-theme" id="my_slider">
-                        <div class="item carousel-item">
+                        <c:forEach items="${requestScope.sliders}" var="s">
+                            <div class="item carousel-item" style="background-image: url(${s.imageLink})">
                             <div class="caption">
                                 <div class="col-md-offset-1 col-md-10">
-                                    <h3>Let's make your life happier</h3>
-                                    <h1>Healthy Living</h1>
-                                    <a href="#team" class="section-btn btn btn-default smoothScroll">Meet Our Doctors</a>
+                                    
+                                    <h1>${s.title}</h1>
+                                    <h3>${s.notes}</h3>
+                                    <a href="${s.backlink}" class="section-btn btn btn-default smoothScroll">Read more</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="item carousel-item">
-                            <div class="caption">
-                                <div class="col-md-offset-1 col-md-10">
-                                    <h3>Aenean luctus lobortis tellus</h3>
-                                    <h1>New Lifestyle</h1>
-                                    <a href="#about" class="section-btn btn btn-default btn-gray smoothScroll">More About Us</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item carousel-item">
-                            <div class="caption">
-                                <div class="col-md-offset-1 col-md-10">
-                                    <h3>Pellentesque nec libero nisi</h3>
-                                    <h1>Your Health Benefits</h1>
-                                    <a href="#news" class="section-btn btn btn-default btn-blue smoothScroll">Read Stories</a>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
 
@@ -234,7 +216,7 @@
 
 
         <!-- ABOUT -->
-        <section id="about">
+<!--        <section id="about">
             <div class="container">
                 <div class="row">
 
@@ -257,11 +239,11 @@
 
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
         <!-- TEAM -->
-        <section id="team" data-stellar-background-ratio="1">
+<!--        <section id="team" data-stellar-background-ratio="1">
             <div class="container">
                 <div class="row">
 
@@ -336,7 +318,7 @@
 
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
         <!-- NEWS -->
@@ -347,7 +329,7 @@
                     <div class="col-md-12 col-sm-12">
                         <!-- SECTION TITLE -->
                         <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                            <h2>Latest News</h2>
+                            <h2>Our services</h2>
                         </div>
                     </div>
 
@@ -539,29 +521,12 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
+                    <div class="col-md-2 col-sm-2 text-align-center">
                             <div class="angle-up-btn"> 
                                 <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                             </div>
-                        </div>   
-                    </div>
+                        </div>
+
 
                 </div>
             </div>
