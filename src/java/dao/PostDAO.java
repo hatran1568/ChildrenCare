@@ -27,9 +27,7 @@ public class PostDAO extends BaseDAO {
         ArrayList<Post> posts = new ArrayList<>();
 
         try {
-            String sql =  "select * from post\n"
-                    + "\n"
-                    + "select * from\n"
+            String sql =  "select * from\n"
                     + "(select * from\n"
                     + "(select p.id, p.content, p.description, updated_date, featured, thumbnail_link, author_id, category_id, p.status_id as p_status, title,\n"
                     + "s.name as category_name\n"
