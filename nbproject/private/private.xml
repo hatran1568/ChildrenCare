@@ -3,17 +3,56 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/BaseDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Service.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Post.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/tooplate-style.css</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/bootstrap.min.css</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/newhomepage.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/custom.css</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/homepage.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/RoleDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/service/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/vendor/bootstrap/css/bootstrap.min.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/search.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SettingController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Post.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/service/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationCompletionController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/bootstrap.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/User.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/settings/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/customer/edit.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/customer/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/filter/Authorization.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/editReservationContact.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationcompletion.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/newhomepage.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ServiceDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerCustomerController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/homepage.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/myReservation.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/PostDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Setting.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/js/images-loded.min.js</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/verify.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReservationDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationContactController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationInformation.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/customer/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/UserHistory.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/custom.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/edit.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/MyReservationController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerPostController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/post/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationContact.jsp</file>
         </group>
     </open-files>
 </project-private>
