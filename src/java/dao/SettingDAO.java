@@ -63,6 +63,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
+            stm.setInt(3, 1);
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.executeUpdate();
@@ -105,6 +106,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
+            stm.setInt(3, 1);
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.setInt(6, s.getId());

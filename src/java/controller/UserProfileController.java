@@ -5,12 +5,8 @@
  */
 package controller;
 
-import bean.Post;
-import bean.Service;
-import bean.Slider;
-import dao.PostDAO;
-import dao.ServiceDAO;
-import dao.SliderDAO;
+import bean.Receiver;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,13 +15,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import bean.Setting;
+import bean.User;
+import dao.ReceiverDAO;
+import dao.SettingDAO;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
+import util.EmailVerify;
 
-/**
- *
- * @author ACER
- */
-@WebServlet(name = "HomePageController", urlPatterns = {"/home"})
-public class HomePageController extends HttpServlet {
+@WebServlet(name = "UserProfileController", urlPatterns = {"/userprofile"})
+public class UserProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +47,10 @@ public class HomePageController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomePageController</title>");            
+            out.println("<title>Servlet UserController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomePageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserController at " + request.getServletPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,17 +68,22 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        PostDAO postDB = new PostDAO();
-//        ArrayList<Post> posts = postDB.getPosts();
-//        
-//        SliderDAO sliderDB = new SliderDAO();
-//        ArrayList<Slider> sliders = sliderDB.getActiveSliders();
-//        ServiceDAO serviceDB = new ServiceDAO();
-//        ArrayList<Service> services = serviceDB.getServices();
-//        request.setAttribute("posts", posts);
-//        request.setAttribute("sliders", sliders);
-//        request.setAttribute("services", services);
-        request.getRequestDispatcher("/view/homepage/newhomepage.jsp").forward(request, response);
+
+        String action = request.getServletPath();
+
+        switch (action) {
+            case "/userprofile":
+                showUserProfile(request, response);
+                break;
+            case "/userprofile/edit":
+                showEditForm(request, response);
+                break;
+            case "/userprofile/update":
+                updateUserProfile(request, response);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -89,7 +97,7 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**
@@ -97,6 +105,30 @@ public class HomePageController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    protected void showUserProfile(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/view/homepage/userprofile.jsp").forward(request, response);
+    }
+
+    protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int uid = Integer.parseInt(request.getParameter("id"));
+
+        UserDAO userDB = new UserDAO();
+        User user = userDB.getUser(uid);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("/view/homepage/userprofileedit.jsp").forward(request, response);
+    }
+
+    protected void updateUserProfile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        User u = new User();
+        u.setId(Integer.parseInt(request.getParameter("id")));
+        u.setStatus(Integer.parseInt(request.getParameter("status")));
+        UserDAO userDB = new UserDAO();
+        userDB.updateByAdmin(u);
+        response.sendRedirect("../userprofile");
+    }
+    
     @Override
     public String getServletInfo() {
         return "Short description";

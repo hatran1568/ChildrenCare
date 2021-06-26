@@ -85,7 +85,7 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getBoolean("status"));
+                a.setStatus(rs.getInt("status"));
                 users.add(a);
             }
         } catch (SQLException ex) {
@@ -123,7 +123,7 @@ public class UserDAO extends BaseDAO {
         return 0;
     }
 
-    public void addUser(User u, boolean status, int updatedBy) {
+    public void addUser(User u, int updatedBy) {
         try {
             connection.setAutoCommit(false);
             // insert to user tbl
@@ -131,7 +131,7 @@ public class UserDAO extends BaseDAO {
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
 
-            stm.setBoolean(1, status);
+            stm.setInt(1, u.getStatus());
             stm.setString(2, u.getEmail());
             stm.setString(3, u.getPassword());
             stm.setString(4, u.getFullName());
@@ -156,7 +156,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, u.isGender());
             new_stm.setString(5, u.getMobile());
             new_stm.setString(6, u.getAddress());
-            new_stm.setBoolean(7, user.isStatus());
+            new_stm.setInt(7, user.getStatus());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -171,7 +171,7 @@ public class UserDAO extends BaseDAO {
         }
     }
 
-    public void addCustomer(User u, boolean status, int updatedBy){
+    public void addCustomer(User u, int updatedBy){
         try {
             connection.setAutoCommit(false);
             
@@ -179,7 +179,7 @@ public class UserDAO extends BaseDAO {
                     + "VALUES (?,?,?,?,?,?,?,?,4)";
             PreparedStatement stm = connection.prepareStatement(sql);
 
-            stm.setBoolean(1, status);
+            stm.setInt(1, u.getStatus());
             stm.setString(2, u.getEmail());
             stm.setString(3, u.getPassword());
             stm.setString(4, u.getFullName());
@@ -205,7 +205,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, u.isGender());
             new_stm.setString(5, u.getMobile());
             new_stm.setString(6, u.getAddress());
-            new_stm.setBoolean(7, user.isStatus());
+            new_stm.setInt(7, user.getStatus());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -247,7 +247,7 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getBoolean("status"));
+                a.setStatus(rs.getInt("status"));
                 return a;
             }
         } catch (SQLException ex) {
@@ -283,7 +283,7 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getBoolean("status"));
+                a.setStatus(rs.getInt("status"));
                 return a;
             }
         } catch (SQLException ex) {
@@ -307,7 +307,7 @@ public class UserDAO extends BaseDAO {
             stm.setString(7, u.getImageLink());
             stm.setInt(8, u.getRole().getId());
             stm.setInt(10, u.getId());
-            stm.setBoolean(9, u.isStatus());
+            stm.setInt(9, u.getStatus());
             stm.executeUpdate();
 
             // get newly inserted user
@@ -324,7 +324,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, user.isGender());
             new_stm.setString(5, user.getMobile());
             new_stm.setString(6, user.getAddress());
-            new_stm.setBoolean(7, user.isStatus());
+            new_stm.setInt(7, user.getStatus());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -345,7 +345,7 @@ public class UserDAO extends BaseDAO {
                     + "where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, u.getRole().getId());
-            stm.setBoolean(2, u.isStatus());
+            stm.setInt(2, u.getStatus());
             stm.setInt(3, u.getId());
             stm.executeUpdate();
 
@@ -381,7 +381,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, u.isGender());
             new_stm.setString(5, u.getMobile());
             new_stm.setString(6, u.getAddress());
-            new_stm.setBoolean(7, user.isStatus());
+            new_stm.setInt(7, user.getStatus());
             new_stm.setInt(8, 1);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -433,7 +433,7 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getBoolean("status"));
+                a.setStatus(rs.getInt("status"));
                 list.add(a);
             }
             return list;
@@ -469,8 +469,10 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getString("role_name"));
                 a.setRole(r);
+                a.setStatus(rs.getInt("status"));
                 list.add(a);
             }
+            
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -527,7 +529,7 @@ public class UserDAO extends BaseDAO {
                 a.setMobile(rs.getString("mobile"));
                 a.setImageLink(rs.getString("image_link"));
                 a.setAddress(rs.getString("address"));
-                a.setStatus(rs.getBoolean("status"));
+                a.setStatus(rs.getInt("status"));
                 Role r = new Role();
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getString("role_name"));
@@ -554,7 +556,7 @@ public class UserDAO extends BaseDAO {
             stm.setString(6, u.getImageLink());
             stm.setInt(7, u.getRole().getId());
             stm.setInt(9, u.getId());
-            stm.setBoolean(8, u.isStatus());
+            stm.setInt(8, u.getStatus());
             stm.executeUpdate();
 
             // get newly inserted user
@@ -571,7 +573,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, user.isGender());
             new_stm.setString(5, user.getMobile());
             new_stm.setString(6, user.getAddress());
-            new_stm.setBoolean(7, user.isStatus());
+            new_stm.setInt(7, user.getStatus());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -598,13 +600,15 @@ public class UserDAO extends BaseDAO {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 UserHistory a = new UserHistory();
-                a.setId(rs.getInt("user_id"));
+                User user = getUser(uid);
+                a.setUser(user);
+                
                 a.setEmail(rs.getString("email"));
                 a.setFullName(rs.getString("full_name"));
                 a.setGender(rs.getBoolean("gender"));
                 a.setMobile(rs.getString("mobile"));
                 a.setAddress(rs.getString("address"));
-                a.setStatus(rs.getBoolean("status"));
+               
                 User u = new User();
                 u.setFullName(rs.getString("updated_by"));
                 a.setUpdatedBy(u);
