@@ -14,7 +14,6 @@ public class Setting {
     private String type;
     private String name;
     private String description;
-
     private String status;
 
     public int getId() {

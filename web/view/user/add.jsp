@@ -97,8 +97,12 @@
                                 <div class="form-group">
                                     <label for="Status">Status</label>
                                     <select class="form-control" name="status">
-                                        <option value="true" >Verified</option>
-                                        <option value="false" >Not Verified</option>
+                                        <option value="13" >Not Verified</option>
+                                        <option value="14" >Active</option>
+                                        <option value="15" >Contact</option>
+                                        <option value="16" >Potential</option>
+                                        <option value="17" >Customer</option>
+                                        <option value="18" >Inactive</option>
                                         </select>
                                 </div>
 

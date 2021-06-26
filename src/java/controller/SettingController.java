@@ -198,14 +198,20 @@ public class SettingController extends HttpServlet {
 
         Setting s = new Setting();
         s.setId(Integer.parseInt(request.getParameter("id")));
+        SettingDAO settingDB = new SettingDAO();
+        ArrayList<Setting> settings = settingDB.getSettings();
         if (request.getParameter("newtype").isEmpty())
             s.setType(request.getParameter("type"));
-        else s.setType(request.getParameter("newtype"));
+        else {
+            s.setType(request.getParameter("newtype"));
+            for (Setting setting : settings) {
+                if (setting.getType().equalsIgnoreCase(request.getParameter("newtype")))
+                    s.setType(setting.getType());
+            }
+        }
         s.setName(request.getParameter("settingname"));
         s.setDescription(request.getParameter("description"));
         s.setStatus(request.getParameter("status"));
-        
-        SettingDAO settingDB = new SettingDAO();
         settingDB.update(s);
         response.sendRedirect("list");
     }
@@ -266,8 +272,9 @@ public class SettingController extends HttpServlet {
             response.sendRedirect("home");
             return;
         
+            
          // if user was verify redirect to home page
-        } else if (list.get(0).isStatus() == true) {
+        } else if (list.get(0).getStatus() != 13) {
 
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -340,9 +347,8 @@ public class SettingController extends HttpServlet {
         } else {
             u.setGender(false);
         }
-
-        userDb.addCustomer(u, false,2);
-
+        u.setStatus(13);
+        userDb.addCustomer(u, -1);
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);

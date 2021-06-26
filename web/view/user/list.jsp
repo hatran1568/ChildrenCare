@@ -178,8 +178,12 @@
                                         <td>${a.email}</td>
                                         <td>${a.mobile}</td>
                                         <td>${a.role.name}</td>
-                                        <td><c:if test="${a.status == true}">Verified</c:if>
-                                            <c:if test="${a.status == false}">Not Verified</c:if></td>
+                                        <td><c:if test="${a.status == 13}">Not Verified</c:if>
+                                            <c:if test="${a.status == 14}">Active</c:if>
+                                            <c:if test="${a.status == 15}">Contact</c:if>
+                                            <c:if test="${a.status == 16}">Potential</c:if>
+                                            <c:if test="${a.status == 17}">Customer</c:if>
+                                            <c:if test="${a.status == 18}">Inactive</c:if></td>
                                         <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
