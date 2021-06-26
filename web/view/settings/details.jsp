@@ -73,10 +73,6 @@
                                     <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}" readonly>
                                 </div>
                                 <div class="form-group">
-                                        <label for="value">Value</label>
-                                        <input type="text" class="form-control" name="value" value="${requestScope.setting.value}" readonly>
-                                </div>
-                                <div class="form-group">
                                         <label for="description">Description</label>
                                         <input type="text" class="form-control" name="description" value="${requestScope.setting.description}" readonly>
                                 </div>

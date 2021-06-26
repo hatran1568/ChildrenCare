@@ -64,6 +64,10 @@
         <servlet-name>ManagerPostController</servlet-name>
         <servlet-class>controller.ManagerPostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/details</url-pattern>
@@ -296,6 +300,10 @@
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userprofile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

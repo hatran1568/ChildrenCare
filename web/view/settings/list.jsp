@@ -40,14 +40,12 @@
                     {'className': 'text-center', 'targets': 0},
                     {'className': 'text-center', 'targets': 4},
                     {'className': 'text-center', 'targets': 5},
-                    {'className': 'text-center', 'targets': 6},
+                    {'orderable': false, 'targets' : 4},
                     {'orderable': false, 'targets' : 5},
-                    {'orderable': false, 'targets' : 6},
                 ],
                 columns: [
                     null,
                     { data: "Type", title:"Type", className: "dt-filter" },
-                    null,
                     null,
                     { data: "Status", title:"Status", className: "dt-filter" },
                     null,
@@ -124,7 +122,6 @@
                                         <th>Id</th>
                                         <th>Type</th>
                                         <th>Name</th>
-                                        <th>Value</th>
                                         <th>Status</th>
                                         <th>View</th>
                                         <th>Edit</th>
@@ -134,7 +131,6 @@
                                     <tr>
                                         <th>Filters:</th>
                                         <th>Type<br></th>
-                                        <th></th>
                                         <th></th>
                                         <th>Status<br></th>
                                         <th></th>
@@ -147,7 +143,6 @@
                                         <td>${s.id}</td>
                                         <td>${s.type}</td>
                                         <td>${s.name}</td>
-                                        <td>${s.value}</td>
                                         <td>${s.status}</td>
                                         <td><a href="details?id=${s.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?id=${s.id}"><i class="fas fa-pen"></i></a></td>

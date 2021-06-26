@@ -19,7 +19,6 @@ public class User {
     private String address;
     private String imageLink;
     private Role role;
-
     private int status;
 
   
