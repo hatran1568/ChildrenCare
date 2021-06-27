@@ -7,6 +7,7 @@ package dao;
 
 import bean.Service;
 import bean.ServiceCategory;
+import bean.Setting;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,22 +54,20 @@ public class ServiceDAO extends BaseDAO {
         try {
             String a = " ";
             if (cid != 0) {
-                a = "and s.category_id = " + String.valueOf(cid);
+                a = "and category_id = " + String.valueOf(cid);
             }
             if (search != null && search.length() != 0) {
-
+                search = " and fullname like '%" + search + "%' ";
             } else {
                 search = " ";
             }
-            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,quantity\n"
-                    + "s.id, fullname, description, details, original_price, sale_price, updated_date,  "
-                    + "thumbnail_link, featured, status, "
-                    + "s.category_id, c.name as category_name\n"
-                    + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n"
-                    + "on s.category_id = c.category_id "
-                    + "where (s.status is null or status = 1) " + a + search
-                    + " order by featured desc) as tbl\n"
-                    + "where rid >= (? - 1)*? + 1 and rid <= ? * ?";
+            String sql = "select *\n"
+                    + " from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n"
+                    + " id, fullname, original_price, sale_price, thumbnail_link, category_id, description, details, updated_date, featured, status, quantity\n"
+                    + " from service \n"
+                    + " where (status is null or status = 1) \n" + a + search
+                    + " order by featured desc) as x\n"
+                    + " where rid >= (? - 1)*? + 1 and rid <= ? * ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -79,7 +78,7 @@ public class ServiceDAO extends BaseDAO {
             stm.setInt(4, pagesize);
 
             ResultSet rs = stm.executeQuery();
-
+            SettingDAO settingDB = new SettingDAO();
             while (rs.next()) {
                 Service s = new Service();
                 s.setId(rs.getInt("id"));
@@ -90,15 +89,13 @@ public class ServiceDAO extends BaseDAO {
                 s.setDescription(rs.getString("description"));
                 s.setDetails(rs.getString("details"));
                 s.setUpdatedDate(rs.getDate("updated_date"));
-                ServiceCategory category = new ServiceCategory();
-                category.setId(rs.getInt("category_id"));
-                category.setName(rs.getString("category_name"));
-                s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
-
-                s.setQuantity(rs.getInt("quantity"));
                 s.setStatus(rs.getBoolean("status"));
+                s.setQuantity(rs.getInt("quantity"));
 
+                Setting category = settingDB.getSetting(rs.getInt("category_id"));
+                ServiceCategory sc = new ServiceCategory(category.getId(), category.getName());
+                s.setCategory(sc);
                 services.add(s);
             }
         } catch (SQLException ex) {

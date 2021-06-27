@@ -24,7 +24,7 @@ public class BaseDAO {
 
 
             String pass = "123456";
-            String url = "jdbc:mysql://localhost:3306/swp?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
+            String url = "jdbc:mysql://localhost:3306/swpnew?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
 
 
             Class.forName("com.mysql.jdbc.Driver");
