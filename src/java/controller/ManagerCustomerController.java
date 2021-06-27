@@ -9,12 +9,9 @@ import bean.Role;
 import bean.Setting;
 import bean.User;
 import bean.UserHistory;
-import com.google.gson.Gson;
-import dao.RoleDAO;
 import dao.SettingDAO;
 import dao.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.servlet.ServletException;
@@ -210,7 +207,7 @@ public class ManagerCustomerController extends HttpServlet {
         r.setId(4);
         u.setRole(r);
         UserDAO userDB = new UserDAO();
-        userDB.addCustomer(u, false, u1.getId());
+        userDB.addCustomer(u, u1.getId());
         response.sendRedirect("list");
     }
     

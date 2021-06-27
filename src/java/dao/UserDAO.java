@@ -528,83 +528,88 @@ public class UserDAO extends BaseDAO {
         return staff;
     }
 
-//    public ArrayList<User> getCustomers(){
-//        ArrayList<User> customers = new ArrayList<>();
-//        try {
-//            String sql = "select `user`.id,`user`.address,`user`.email,`user`.role_id,`user`.image_link,`user`.gender,`user`.full_name,`user`.mobile,`user`.`password`,`user`.`status`,r.`role_name`\n" +
-//"                   from user inner join (select id as role_id, `name` as role_name from setting where type = \"Role\") as r \n" +
-//"                   on `user`.role_id = r.role_id \n" +
-//"                   where r.role_name = \"Customer\" and id!=-1";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            ResultSet rs = stm.executeQuery();
-//            while (rs.next()) {
-//                User a = new User();
-//                a.setId(rs.getInt("id"));
-//                a.setEmail(rs.getString("email"));
-//                a.setFullName(rs.getString("full_name"));
-//                a.setGender(rs.getBoolean("gender"));
-//                a.setPassword(rs.getString("password"));
-//                a.setMobile(rs.getString("mobile"));
-//                a.setImageLink(rs.getString("image_link"));
-//                a.setAddress(rs.getString("address"));
-//                a.setStatus(rs.getInt("status"));
-//                Role r = new Role();
-//                r.setId(rs.getInt("role_id"));
-//                r.setName(rs.getString("role_name"));
-//                a.setRole(r);
-//                customers.add(a);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return customers;
-//    }
-//    public void updateWithoutPassword(User u, int updatedBy){
-//        try {
-//            connection.setAutoCommit(false);
-//            String sql = "update user set email=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
-//                    + "where id = ?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//
-//            stm.setString(1, u.getEmail());
-//            stm.setString(2, u.getFullName());
-//            stm.setBoolean(3, u.isGender());
-//            stm.setString(4, u.getMobile());
-//            stm.setString(5, u.getAddress());
-//            stm.setString(6, u.getImageLink());
-//            stm.setInt(7, u.getRole().getId());
-//            stm.setInt(9, u.getId());
-//            stm.setInt(8, u.getStatus());
-//            stm.executeUpdate();
-//
-//            // get newly inserted user
-//            User user = this.getUser(u.getId());
-//            // insert to history
-//            String new_sql = "INSERT INTO `swp`.`user_history`\n" +
-//                            "(`user_id`,`email`,`full_name`,`gender`,`mobile`,`address`,`status`,`updated_by`,`updated_date`,`role_id`)\n" +
-//                            "VALUES\n" +
-//                            "(?,?,?,?,?,?,?,?,now(),?);";
-//            PreparedStatement new_stm = connection.prepareStatement(new_sql);
-//            new_stm.setInt(1, user.getId());
-//            new_stm.setString(2, user.getEmail());
-//            new_stm.setString(3, user.getFullName());
-//            new_stm.setBoolean(4, user.isGender());
-//            new_stm.setString(5, user.getMobile());
-//            new_stm.setString(6, user.getAddress());
-//            new_stm.setInt(7, user.getStatus());
-//            new_stm.setInt(8, updatedBy);
-//            new_stm.setInt(9, user.getRole().getId());
-//            new_stm.executeUpdate();
-//            
-//            connection.commit();
-//        } catch (SQLException ex) {
-//            try {
-//                connection.rollback();
-//            } catch (SQLException ex1) {
-//                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex1);
-//            }
-//        }
-//    }
+    public ArrayList<User> getCustomers(){
+        ArrayList<User> customers = new ArrayList<>();
+        try {
+            String sql = "select a.id, a.email, a.password, a.full_name,\n" +
+"                a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id,a.status as status_id, s.name as status_name\n" +
+"                 from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r \n" +
+"                 on a.role_id = r.role_id\n" +
+"                 left join Setting s on a.status = s.id\n" +
+"                   where r.role_name = \"Customer\" and a.id!=-1";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                User a = new User();
+                a.setId(rs.getInt("id"));
+                a.setEmail(rs.getString("email"));
+                a.setFullName(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setPassword(rs.getString("password"));
+                a.setMobile(rs.getString("mobile"));
+                a.setImageLink(rs.getString("image_link"));
+                a.setAddress(rs.getString("address"));
+                Setting s = new Setting();
+                s.setId(rs.getInt("status_id"));
+                s.setName(rs.getString("status_name"));
+                a.setStatus(s);
+                Role r = new Role();
+                r.setId(rs.getInt("role_id"));
+                r.setName(rs.getString("role_name"));
+                a.setRole(r);
+                customers.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
+    }
+    public void updateWithoutPassword(User u, int updatedBy){
+        try {
+            connection.setAutoCommit(false);
+            String sql = "update user set email=?, full_name=?, gender=?, mobile=?, address=?, image_link=?, role_id=?,status=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+
+            stm.setString(1, u.getEmail());
+            stm.setString(2, u.getFullName());
+            stm.setBoolean(3, u.isGender());
+            stm.setString(4, u.getMobile());
+            stm.setString(5, u.getAddress());
+            stm.setString(6, u.getImageLink());
+            stm.setInt(7, u.getRole().getId());
+            stm.setInt(9, u.getId());
+            stm.setInt(8, u.getStatus().getId());
+            stm.executeUpdate();
+
+            // get newly inserted user
+            User user = this.getUser(u.getId());
+            // insert to history
+            String new_sql = "INSERT INTO `swp`.`user_history`\n" +
+                            "(`user_id`,`email`,`full_name`,`gender`,`mobile`,`address`,`status`,`updated_by`,`updated_date`,`role_id`)\n" +
+                            "VALUES\n" +
+                            "(?,?,?,?,?,?,?,?,now(),?);";
+            PreparedStatement new_stm = connection.prepareStatement(new_sql);
+            new_stm.setInt(1, user.getId());
+            new_stm.setString(2, user.getEmail());
+            new_stm.setString(3, user.getFullName());
+            new_stm.setBoolean(4, user.isGender());
+            new_stm.setString(5, user.getMobile());
+            new_stm.setString(6, user.getAddress());
+            new_stm.setInt(7, user.getStatus().getId());
+            new_stm.setInt(8, updatedBy);
+            new_stm.setInt(9, user.getRole().getId());
+            new_stm.executeUpdate();
+            
+            connection.commit();
+        } catch (SQLException ex) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }
     public ArrayList<UserHistory> getUserHistory(int uid) {
         ArrayList<UserHistory> list = new ArrayList<>();
         try {
