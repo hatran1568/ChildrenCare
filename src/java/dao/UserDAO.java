@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import bean.User;
 import bean.Role;
+import bean.Setting;
 import bean.UserHistory;
 import java.sql.Statement;
 
@@ -27,10 +28,11 @@ public class UserDAO extends BaseDAO {
         try {
 
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n" +
-"                    a.id, a.email, a.password, a.full_name, \n" +
-"                    a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id \n" +
-"                    from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n" +
-"                    on a.role_id = r.role_id) as tbl"
+"                    select a.id, a.email, a.password, a.full_name,\n" +
+"                a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id,a.status as status_id, s.name as status_name\n" +
+"                 from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r \n" +
+"                 on a.role_id = r.role_id\n" +
+"                 left join Setting s on a.status = s.id"
                     + "where rid >= (? - 1)*? + 1 and rid <= ? * ?";
             PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -64,11 +66,11 @@ public class UserDAO extends BaseDAO {
         ArrayList<User> users = new ArrayList<>();
         try {
 
-            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n" +
-"                    a.id, a.email, a.password, a.full_name, \n" +
-"                    a.gender, a.mobile, a.address, a.image_link, a.`status` , r.role_name, a.role_id \n" +
-"                    from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n" +
-"                    on a.role_id = r.role_id) as tbl";
+            String sql = "select a.id, a.email, a.password, a.full_name,\n" +
+"                a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id,a.status as status_id, s.name as status_name\n" +
+"                 from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r \n" +
+"                 on a.role_id = r.role_id\n" +
+"                 left join Setting s on a.status = s.id";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -85,7 +87,10 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getInt("status"));
+                Setting s = new Setting();
+                s.setId(rs.getInt("status_id"));
+                s.setName(rs.getString("status_name"));
+                a.setStatus(s);
                 users.add(a);
             }
         } catch (SQLException ex) {
@@ -131,7 +136,7 @@ public class UserDAO extends BaseDAO {
                     + "VALUES (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stm = connection.prepareStatement(sql);
 
-            stm.setInt(1, u.getStatus());
+            stm.setInt(1, u.getStatus().getId());
             stm.setString(2, u.getEmail());
             stm.setString(3, u.getPassword());
             stm.setString(4, u.getFullName());
@@ -156,7 +161,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, u.isGender());
             new_stm.setString(5, u.getMobile());
             new_stm.setString(6, u.getAddress());
-            new_stm.setInt(7, user.getStatus());
+            new_stm.setInt(7, user.getStatus().getId());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -178,8 +183,8 @@ public class UserDAO extends BaseDAO {
             String sql = "INSERT INTO `swp`.`user` (`status`,`email`, `password`, `full_name`, `gender`, `mobile`, `address`, `image_link`, `role_id`) \n"
                     + "VALUES (?,?,?,?,?,?,?,?,4)";
             PreparedStatement stm = connection.prepareStatement(sql);
-
-            stm.setInt(1, u.getStatus());
+            
+            stm.setInt(1, u.getStatus().getId());
             stm.setString(2, u.getEmail());
             stm.setString(3, u.getPassword());
             stm.setString(4, u.getFullName());
@@ -205,7 +210,7 @@ public class UserDAO extends BaseDAO {
             new_stm.setBoolean(4, u.isGender());
             new_stm.setString(5, u.getMobile());
             new_stm.setString(6, u.getAddress());
-            new_stm.setInt(7, user.getStatus());
+            new_stm.setInt(7, user.getStatus().getId());
             new_stm.setInt(8, updatedBy);
             new_stm.setInt(9, user.getRole().getId());
             new_stm.executeUpdate();
@@ -225,9 +230,10 @@ public class UserDAO extends BaseDAO {
         try {
 
             String sql = "select a.id, a.email, a.password, a.full_name,\n" +
-"                   a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id,a.status\n" +
-"                    from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n" +
-"                  on a.role_id = r.role_id\n" +
+"                a.gender, a.mobile, a.address, a.image_link , r.role_name, a.role_id,a.status as status_id, s.name as status_name\n" +
+"                 from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r \n" +
+"                 on a.role_id = r.role_id\n" +
+"                 left join Setting s on a.status = s.id" +
 "                  where a.id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
 
@@ -247,7 +253,11 @@ public class UserDAO extends BaseDAO {
                 r.setId(rs.getInt("role_id"));
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
-                a.setStatus(rs.getInt("status"));
+                Setting s = new Setting();
+                s.setId(rs.getInt("status_id"));
+                s.setName(rs.getString("status_name"));
+                a.setStatus(s);
+                
                 return a;
             }
         } catch (SQLException ex) {
