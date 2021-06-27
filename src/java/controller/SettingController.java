@@ -274,7 +274,7 @@ public class SettingController extends HttpServlet {
         
             
          // if user was verify redirect to home page
-        } else if (list.get(0).getStatus() != 13) {
+        } else if (list.get(0).getStatus().getId() != 13) {
 
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -309,7 +309,7 @@ public class SettingController extends HttpServlet {
         String fullnames = request.getParameter("fullname");
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
-
+        SettingDAO settingDB = new SettingDAO();
         UserDAO userDb = new UserDAO();
         
         //search if email was registed before
@@ -347,7 +347,7 @@ public class SettingController extends HttpServlet {
         } else {
             u.setGender(false);
         }
-        u.setStatus(13);
+        u.setStatus(settingDB.getSetting(13));
         userDb.addCustomer(u, -1);
         
         //Forward to verify page to verify via email

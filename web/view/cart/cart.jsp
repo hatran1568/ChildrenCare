@@ -131,7 +131,7 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
-                            <c:if test="${sessionScope.user.role.name == 'Manager'}">
+                            <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
                                 <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
                                 <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
@@ -140,25 +140,28 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/blog/list">Blogs</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
 
                                     </div>
                                 </li>
+                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                    <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="../home" class="smoothScroll">Home</a></li>
+                                <li><a href="../service/list" class="smoothScroll">Services</a></li>
+                                <li><a href="../post/list" class="smoothScroll">Blog</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/reservation/my">My reservation</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
 
                                     </div>
@@ -167,9 +170,9 @@
 
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="../home" class="smoothScroll">Home</a></li>
+                                <li><a href="../service/list" class="smoothScroll">Services</a></li>
+                                <li><a href="../post/list" class="smoothScroll">Blog</a></li>
                                 <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -214,8 +217,8 @@
                                 <td>Cost</td>
                                 <td ></td>
                                 <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="reservation/contact">Check Out</a></button></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
+                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
                         </thead>
                         <tbody>

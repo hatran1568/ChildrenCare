@@ -158,8 +158,7 @@
                                         <td class="">${p.description}</td>
                                         <td>${p.author.fullName}</td>
                                         <td>${p.updatedDate}</td>
-                                        <td><c:if test="${p.status == true}">True</c:if>
-                                            <c:if test="${p.status == false}">False</c:if></td>
+                                        <td>${p.status.name}</td>
                                         <td><a href="details?pid=${p.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?pid=${p.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
