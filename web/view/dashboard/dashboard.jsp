@@ -15,6 +15,7 @@
         <title>Users List</title>
 
         <script src="../../vendor/jquery/jquery.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
@@ -30,7 +31,7 @@
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
         <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
@@ -109,9 +110,8 @@
                                             <h4 id="0" class="title">Average Rating : </h4>
                                             <script>
                                                 $(document).ready(function () {
-                                                    drawRate(${requestScope.tostar}, 0)
+                                                drawRate(${requestScope.tostar}, 0)
                                                 });
-
                                             </script>
                                             <ul style="list-style-type: none;">
                                                 <c:forEach items="${requestScope.service}" var="list">
@@ -120,9 +120,8 @@
                                                     </li>
                                                     <script>
                                                         $(document).ready(function () {
-                                                            drawRate(${star[list.id -1]},${list.id})
+                                                        drawRate(${star[list.id -1]},${list.id})
                                                         });
-
                                                     </script>
                                                 </c:forEach>
                                             </ul>
@@ -158,8 +157,10 @@
 
                                         <div style="text-align: center" class="header">
                                             <h3 class="title">Trend</h3>
-                                            <input id="start" type="date" name="start">
-                                            <input id="end" type="date" name="end">
+                                            <form id="myForm" action="view" method="GET">
+                                                <input onchange="submit()" id="start" type="date" name="start" max="No">
+                                                <input id="end" onchange="submit()" type="date" name="end">
+                                            </form>
                                             <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
                                         </div>
 
@@ -251,6 +252,9 @@
 </footer>
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
+
+
+
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script src="../../assets/js/browser.min.js"></script>
@@ -258,77 +262,112 @@
 <script src="../../assets/js/transition.js"></script>
 <script src="../../assets/js/owl-carousel.js"></script>
 <script src="../../assets/js/custom.js"></script>
-<script>
-                                                        var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
-                                                        var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
-                                                        var barColors = [
-                                                            "#00aba9",
-                                                            "#b91d47",
-                                                            "#2b5797",
-                                                            "#f7ef02",
-                                                            "#0026ff",
-                                                            "#ff0000"
-                                                        ];
 
-                                                        new Chart("myChart", {
-                                                            type: "pie",
-                                                            data: {
-                                                                labels: xValues,
-                                                                datasets: [{
-                                                                        backgroundColor: barColors,
-                                                                        data: yValues
-                                                                    }]
-                                                            },
-                                                            options: {
-                                                                title: {
-                                                                    display: true,
-                                                                    text: "World Wide Wine Production 2018"
-                                                                }
-                                                            }
-                                                        });
+
+<script>
+                                                       
 
 
 </script>
 <script>
-    var xValues = [1, 2, 3, 4, 5, 6, 7];
-
-    new Chart("Chart1", {
-        type: "line",
-        data: {
+    var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
+    var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
+    var barColors = [
+            "#00aba9",
+            "#b91d47",
+            "#2b5797",
+            "#f7ef02",
+            "#0026ff",
+            "#ff0000"
+    ];
+    new Chart("myChart", {
+    type: "pie",
+            data: {
             labels: xValues,
-            datasets: [{
-                    data: [2, 11, 5, 6, 2, 1, 2],
-                    borderColor: "green",
-                    fill: false
-                }, {
-                    data: [2, 4, 1, 3, 2, 1, 1],
-                    borderColor: "red",
-                    fill: false
-                }]
-        },
-        options: {
-            legend: {display: false}
-        }
+                    datasets: [{
+                    backgroundColor: barColors,
+                            data: yValues
+                    }]
+            },
+            options: {
+            title: {
+            display: true,
+                    text: "World Wide Wine Production 2018"
+            }
+            }
     });</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+
+    });
+    var xValues = [<c:forEach var = "i" begin="1" end="${requestScope.listre.size()}">
+        ${i},
+    </c:forEach>];
+    new Chart("Chart1", {
+    type: "line",
+            data: {
+            labels: xValues,
+                    datasets: [{
+                    data: [<c:forEach var = "i" items="${requestScope.listre}">
+        ${i},
+    </c:forEach>],
+                            borderColor: "green",
+                            fill: false
+                    }, {
+                    data: [<c:forEach var = "i" items="${requestScope.listre}">
+        ${i},
+    </c:forEach>],
+                            borderColor: "red",
+                            fill: false
+                    }]
+            },
+            options: {
+            legend: {display: false}
+            }
+    });
+    function submit(){
+        document.getElementById("myForm").submit();
+    }
+    </script>
 
 <script>
     function drawRate(star, ele) {
 
-        for (var i = 0; i < star; i++) {
-            document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
-        }
-        for (var i = 0; i < 5 - star; i++) {
-            document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
-        }
+    for (var i = 0; i < star; i++) {
+    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
     }
-    $(document).ready(function () {
-        var date = new Date();
-       document.getElementById("end").valueAsDate = date;
-        ;
-         date.setDate(date.getDate() - 7);
-        document.getElementById("start").valueAsDate = date
-    });
-</script>
+    for (var i = 0; i < 5 - star; i++) {
+    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
+    }
+    }
+
+
+   
+    var date = new Date();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10){
+    dd = '0' + dd
+    }
+    if (mm < 10){
+    mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("end").valueAsDate = date;
+    ;
+    date.setDate(date.getDate() - 7);
+    document.getElementById("start").valueAsDate = date
+            document.getElementById("start").setAttribute("max", today);
+                        document.getElementById("end").setAttribute("max", today);
+
+   </script>
+
+
 <style>
     tfoot {
         display: table-header-group;
