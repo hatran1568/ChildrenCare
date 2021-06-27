@@ -13,6 +13,9 @@ public class ServiceCategory {
     private int id;
     private String name;
 
+    public ServiceCategory() {
+    }
+
     public int getId() {
         return id;
     }
@@ -26,6 +29,11 @@ public class ServiceCategory {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public ServiceCategory(int id, String name) {
+        this.id = id;
         this.name = name;
     }
     

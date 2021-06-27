@@ -134,11 +134,9 @@ public class ManagerPostController extends HttpServlet {
         ArrayList<Post> posts = postDB.getPosts();
 
         ArrayList<PostCategory> categories = postDB.getCategories();
-        ArrayList<User> authors = postDB.getAuthors();
         String pattern = "dd-MM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         request.setAttribute("simpleDateFormat", simpleDateFormat);
-        request.setAttribute("authors", authors);
         request.setAttribute("categories", categories);
         request.setAttribute("posts", posts);
         request.getRequestDispatcher("../../view/manager/post/list2.jsp").forward(request, response);
@@ -188,7 +186,7 @@ public class ManagerPostController extends HttpServlet {
         pc.setId(categoryID);
         p.setCategory(pc);
         p.setDescription(description);
-        p.setStatus(status);
+        //p.setStatus(status);
         p.setFeatured(featured);
         User a = new User();
         a.setId(oldPost.getAuthor().getId());
@@ -240,7 +238,7 @@ public class ManagerPostController extends HttpServlet {
         
         p.setDescription(description);
         p.setContent(content);
-        p.setStatus(status);
+        //p.setStatus(status);
         p.setFeatured(featured);
         p.setAuthor(user);
         postDB.addPost(p);
