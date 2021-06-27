@@ -56,11 +56,11 @@ public class ServiceDAO extends BaseDAO {
                 a = "and s.category_id = " + String.valueOf(cid);
             }
             if (search != null && search.length() != 0) {
-                search = " and fullname like '%" + search + "%' ";
+
             } else {
                 search = " ";
             }
-            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,\n"
+            String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,quantity\n"
                     + "s.id, fullname, description, details, original_price, sale_price, updated_date,  "
                     + "thumbnail_link, featured, status, "
                     + "s.category_id, c.name as category_name\n"
@@ -95,7 +95,10 @@ public class ServiceDAO extends BaseDAO {
                 category.setName(rs.getString("category_name"));
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
-               
+
+                s.setQuantity(rs.getInt("quantity"));
+                s.setStatus(rs.getBoolean("status"));
+
                 services.add(s);
             }
         } catch (SQLException ex) {
@@ -123,6 +126,7 @@ public class ServiceDAO extends BaseDAO {
 
     public Service getService(int sid) {
         try {
+
             String sql = "SELECT\n"
                     + "service.id,\n"
                     + "service.fullname,\n"
@@ -139,6 +143,7 @@ public class ServiceDAO extends BaseDAO {
                     + "FROM\n"
                     + "service\n"
                     + "where id = ?";
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sid);
             ResultSet rs = stm.executeQuery();
@@ -158,8 +163,8 @@ public class ServiceDAO extends BaseDAO {
                 category.setName(settingDB.getSettingById(rs.getInt("category_id")).getName());
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
-                
-                s.setStatus(settingDB.getSettingById(rs.getInt("status")));
+                s.setStatus(rs.getBoolean("status"));
+                s.setQuantity(rs.getInt("quantity"));
 
                 return s;
             }

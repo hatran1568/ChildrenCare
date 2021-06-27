@@ -29,7 +29,7 @@ public class ReceiverDAO extends BaseDAO {
                     + "            values(?, ?, ?, ?, ?, ?)";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-           
+
             stm.setInt(1, r.getUser().getId());
             stm.setString(2, r.getFullName());
             stm.setBoolean(3, r.isGender());
@@ -78,7 +78,8 @@ public class ReceiverDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
-            r.setId(rs.getInt("id"));
+            if (rs.next()) {
+                 r.setId(rs.getInt("id"));
             User u = new User();
             u.setId(rs.getInt("user_id"));
             r.setUser(u);
@@ -87,6 +88,8 @@ public class ReceiverDAO extends BaseDAO {
             r.setMobile(rs.getString("mobile"));
             r.setAddress(rs.getString("address"));
             r.setEmail(rs.getString("email"));
+            }
+           
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,15 +148,15 @@ public class ReceiverDAO extends BaseDAO {
         }
         return false;
     }
-    
-    public Receiver getReceiverByEmail(String Emaill){
+
+    public Receiver getReceiverByEmail(String Emaill) {
         try {
             Receiver r = new Receiver();
             String sql = "select * from receiver where email=?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1,Emaill);
+            stm.setString(1, Emaill);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 r.setId(rs.getInt("id"));
                 r.setEmail(Emaill);
                 r.setFullName(rs.getString("full_name"));
@@ -162,7 +165,7 @@ public class ReceiverDAO extends BaseDAO {
                 r.setUser(u);
                 r.setMobile(rs.getString("mobile"));
                 r.setAddress(rs.getString("address"));
-                
+
             }
             return r;
         } catch (SQLException ex) {

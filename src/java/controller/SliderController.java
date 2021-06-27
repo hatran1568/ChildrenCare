@@ -133,7 +133,7 @@ public class SliderController extends HttpServlet {
         request.setAttribute("totalPage", totalpage);
         request.setAttribute("index", index);
         request.setAttribute("url", "list");
-        request.getRequestDispatcher("../../view/slider/newlist.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/slider/list.jsp").forward(request, response);
     }
 
     public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -118,7 +118,7 @@
                             <c:if test="${ not empty sessionScope.user}">
                                 <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p> <a href="admin/setting/list">Profile</a></p>
@@ -229,7 +229,7 @@
                 <tbody>
                     <c:forEach items="${requestScope.list}" var ="list">
                         <tr>
-                            <td > <img style="width: 50px;" src="../../${list.imageLink}"></td>
+                            <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
                             <td>${list.id}</td>
                             <td>${list.title}</td>
                             <td>${list.backlink}</td>
@@ -255,7 +255,7 @@
 
 
         <!-- FOOTER -->
-        <footer data-stellar-background-ratio="5">
+       <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
 
@@ -272,7 +272,7 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <div class="footer-thumb"> 
+<!--                        <div class="footer-thumb"> 
                             <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
                             <div class="latest-stories">
                                 <div class="stories-image">
@@ -293,7 +293,7 @@
                                     <span>February 20, 2018</span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -312,29 +312,12 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
+                    <div class="col-md-2 col-sm-2 text-align-center">
                             <div class="angle-up-btn"> 
                                 <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                             </div>
-                        </div>   
-                    </div>
+                        </div>
+
 
                 </div>
             </div>

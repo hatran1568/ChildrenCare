@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.User;
 import dao.ReceiverDAO;
+import dao.SettingDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -293,7 +294,7 @@ public class UserController extends HttpServlet {
         
             
          // if user was verify redirect to home page
-        } else if (list.get(0).getStatus() != 13) {
+        } else if (list.get(0).getStatus().getId() != 13) {
 
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -320,7 +321,7 @@ public class UserController extends HttpServlet {
     //Register Function
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        
+        SettingDAO settingDB = new SettingDAO();
         //Get user information from Client
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
@@ -366,8 +367,8 @@ public class UserController extends HttpServlet {
         } else {
             u.setGender(false);
         }
-        u.setStatus(13);
-        userDb.addCustomer(u, -1);
+        u.setStatus(settingDB.getSettingById(13));
+        userDb.addCustomer(u,-1);
         
         //Forward to verify page to verify via email
         request.setAttribute("email", email);

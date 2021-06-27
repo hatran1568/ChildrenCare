@@ -392,6 +392,8 @@ http://www.tooplate.com/view/2098-health
     color: #ffffff;
     padding-bottom: 10px;
     margin-top: 0;
+    font-size: 45px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   }
 
   #home h3 {
@@ -401,7 +403,8 @@ http://www.tooplate.com/view/2098-health
     line-height: inherit;
     letter-spacing: 3px;
     text-transform: uppercase;
-    margin: 0;
+    margin: 20px 0px;
+    
   }
 
   .slider .container {
@@ -512,6 +515,7 @@ http://www.tooplate.com/view/2098-health
 
   .team-info {
     padding: 20px 30px 0 30px;
+    text-align: center;
   }
 
   .team-contact-info {
@@ -796,6 +800,7 @@ http://www.tooplate.com/view/2098-health
   footer {
     padding-top: 80px;
     padding-bottom: 40px;
+    background-color: currentColor;
   }
 
   footer h4 {

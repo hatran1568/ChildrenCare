@@ -6,13 +6,22 @@
 package controller;
 
 import bean.Service;
+import bean.Setting;
+import bean.User;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import dao.FeedbackDAO;
 import dao.ReservationDAO;
 import dao.ServiceDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -62,10 +71,44 @@ public class DashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+       
         ReservationDAO resDB = new ReservationDAO();
-        int submit = resDB.countReservation("Submited");
-        int cancel = resDB.countReservation("Cancel");
-        int success = resDB.countReservation("Success");
+        String r_start = request.getParameter("start");
+        String r_end = request.getParameter("end");
+        if (r_start != null && r_end != null) {
+            Date start = Date.valueOf(r_start);
+            Date end = Date.valueOf(r_end);
+            List<LocalDate> dates = new ArrayList<>();
+            dates = getDatesBetweenUsingJava8(start.toLocalDate(), end.toLocalDate());
+            ArrayList<Date> date = new ArrayList<>();
+            for (LocalDate date1 : dates) {
+                date.add(Date.valueOf(date1));
+            }
+            ArrayList<Integer> reservationSuccessList = new ArrayList<>();
+            ArrayList<Integer> reservationList = new ArrayList<>();
+
+            for (Date date1 : date) {
+                reservationSuccessList.add(resDB.countReservation(27, date1));
+                reservationList.add(resDB.countReservation(date1));
+
+            }
+        }
+
+        if (r_start == null || r_end == null) {
+            long millis=System.currentTimeMillis();
+            Date start =  new Date(millis);
+            Date end =  new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
+        
+        }
+
+        int submit = resDB.countReservation(20);
+        int cancel = resDB.countReservation(21);
+        int success = resDB.countReservation(27);
+        int pending = resDB.countReservation(19);
+        int approve = resDB.countReservation(22);
+        int reject = resDB.countReservation(23);
+
         float total = submit + success + cancel;
         float Submit = submit / total * 100;
         float Cancel = cancel / total * 100;
@@ -83,15 +126,31 @@ public class DashboardController extends HttpServlet {
         for (Service s : list) {
             toSer += fbDB.getService(s);
             tostar += fbDB.getRatingStar(s);
-            avg_feed.add(fbDB.getRatingStar(s)/fbDB.getService(s));
+            avg_feed.add(fbDB.getRatingStar(s) / fbDB.getService(s));
         }
+        ArrayList<User> listPotential = new ArrayList<>();
+        ArrayList<User> listCustomer = new ArrayList<>();
+        Setting set = new Setting();
+        set.setId(16);
+        listPotential = userDB.getUserByStatus(set);
+        set.setId(17);
+        listCustomer = userDB.getUserByStatus(set);
+        int registed = 0;
+        int reserved = 0;
+        if (listPotential != null) {
+            registed = listPotential.size();
+        }
+        if (listCustomer != null) {
+            reserved = listCustomer.size();
+        }
+
         float sum = 0;
         for (Service s : list) {
             revernue.add(resDB.getRevenue(s));
-            
+
             sum += resDB.getRevenue(s);
         }
-        tostar = tostar/toSer;
+        tostar = tostar / toSer;
         request.setAttribute("service", list);
         request.setAttribute("star", avg_feed);
         request.setAttribute("tostar", tostar);
@@ -99,11 +158,16 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("revernue", revernue);
         request.setAttribute("Submit", Submit);
         request.setAttribute("Cancel", Cancel);
+        request.setAttribute("Success", Success);
+        request.setAttribute("Approvel", approve);
+        request.setAttribute("Reject", reject);
 
         request.setAttribute("Success", Success);
         request.setAttribute("Total", total);
         request.setAttribute("Customer", total_customer);
         request.setAttribute("sum", sum);
+        request.setAttribute("registed", registed);
+        request.setAttribute("reserved", reserved);
 
         request.getRequestDispatcher("../../view/dashboard/dashboard.jsp").forward(request, response);
     }
@@ -132,4 +196,13 @@ public class DashboardController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public static List<LocalDate> getDatesBetweenUsingJava8(
+            LocalDate startDate, LocalDate endDate) {
+
+        long numOfDaysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+        return IntStream.iterate(0, i -> i + 1)
+                .limit(numOfDaysBetween)
+                .mapToObj(i -> startDate.plusDays(i))
+                .collect(Collectors.toList());
+    }
 }

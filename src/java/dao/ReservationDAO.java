@@ -16,6 +16,7 @@ import bean.User;
 import bean.Reservation;
 import bean.ReservationService;
 import bean.Service;
+import java.sql.Date;
 
 /**
  *
@@ -54,6 +55,7 @@ public class ReservationDAO extends BaseDAO {
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
+                r.setCheckup_time(rs.getDate("checkup_time"));
                 r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
@@ -126,6 +128,7 @@ public class ReservationDAO extends BaseDAO {
                 s.setStatus(settingDB.getSetting(rs.getInt("status_id")));
                 s.setCustomer(userDB.getUser(rs.getInt("customer_id")));
                 s.setStaff(userDB.getUser(rs.getInt("staff_id")));
+                s.setReceiver(receiverDB.getReceiversById(rs.getInt("receiver_id")));
                 return s;
 
             }
@@ -392,12 +395,48 @@ public class ReservationDAO extends BaseDAO {
         }
     }
 
-    public int countReservation(String status) {
+    public int countReservation(int status) {
         try {
             int a = 0;
-            String sql = "SELECT count(status) as total from reservation where status =?";
+            String sql = "SELECT count(status_id) as total from reservation where status_id =?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, status);
+            stm.setInt(1, status);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt("total");
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+     public int countReservation(Date date) {
+        try {
+            int a = 0;
+            String sql = "SELECT count(status_id) as total from reservation where  reservation_date=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, date);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt("total");
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+    
+      public int countReservation(int status,Date date) {
+        try {
+            int a = 0;
+            String sql = "SELECT count(status_id) as total from reservation where status_id =? and reservation_date=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setDate(2, date);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 a = rs.getInt("total");
