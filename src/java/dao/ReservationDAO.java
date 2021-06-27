@@ -16,12 +16,18 @@ import bean.User;
 import bean.Reservation;
 import bean.ReservationService;
 import bean.Service;
+import java.sql.Date;
 
 /**
  *
  * @author HP
  */
 public class ReservationDAO extends BaseDAO {
+
+    private UserDAO userDB = new UserDAO();
+    private ServiceDAO serviceDB = new ServiceDAO();
+    private SettingDAO settingDB = new SettingDAO();
+    private ReceiverDAO receiverDB = new ReceiverDAO();
 
     public ArrayList<Reservation> getReservation(User u) {
         try {
@@ -30,12 +36,13 @@ public class ReservationDAO extends BaseDAO {
                     + "reservation.id,\n"
                     + "reservation.customer_id,\n"
                     + "reservation.reservation_date,\n"
-                    + "reservation.`status`,\n"
+                    + "reservation.status_id,\n"
                     + "reservation.staff_id,\n"
-                    + "reservation.number_of_person\n"
+                    + "reservation.receiver_id,\n"
+                    + "reservation.checkup_time\n"
                     + "FROM\n"
                     + "reservation\n"
-                    + "where customer_id =? ";
+                    + "WHERE customer_id =?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, u.getId());
@@ -48,7 +55,8 @@ public class ReservationDAO extends BaseDAO {
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
-                r.setStatus(rs.getString("status"));
+                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
             return list;
@@ -58,81 +66,192 @@ public class ReservationDAO extends BaseDAO {
         return null;
     }
 
-    public void addReservation(Reservation r) {
+    public ArrayList<Reservation> getReservation(User u, int status) {
         try {
-            String sql = "insert into reservation(customer_id, reservation_date, status,\n"
-                    + "            staff_id, number_of_person)\n"
-                    + "            values(?, ?, ?, ?, ?)";
+            ArrayList<Reservation> list = new ArrayList<Reservation>();
+            String sql = "SELECT\n"
+                    + "reservation.id,\n"
+                    + "reservation.customer_id,\n"
+                    + "reservation.reservation_date,\n"
+                    + "reservation.status_id,\n"
+                    + "reservation.staff_id,\n"
+                    + "reservation.receiver_id,\n"
+                    + "reservation.checkup_time\n"
+                    + "FROM\n"
+                    + "reservation\n"
+                    + "WHERE customer_id =? and status_id = ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, r.getCustomer().getId());
-            stm.setDate(2, r.getReservation_date());
-            stm.setString(3, r.getStatus());
-            stm.setInt(4, r.getStaff().getId());
-            stm.setInt(5, r.getNumber_of_person());
-
-            stm.executeUpdate();
+            stm.setInt(1, u.getId());
+            stm.setInt(2, status);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation();
+                r.setId(rs.getInt("id"));
+                r.setCustomer(u);
+                r.setReservation_date(rs.getDate("reservation_date"));
+                User staff = new User();
+                staff.setId(rs.getInt("staff_id"));
+                r.setStaff(staff);
+                r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
+                list.add(r);
+            }
+            return list;
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     public Reservation getReservationById(int id) {
-        Reservation r = new Reservation();
         try {
-            String sql = "select reservation.id, reservation.customer_id, reservation.reservation_date,\n"
-                    + "            reservation.status, reservation.number_of_person,\n"
-                    + "            user.email, user.full_name, user.mobile, user.image_link  \n"
-                    + "            from reservation left join user\n"
-                    + "            on reservation.staff_id = user.id\n"
-                    + "where reservation.id = ?";
+            String sql = "SELECT\n"
+                    + "reservation.id,\n"
+                    + "reservation.customer_id,\n"
+                    + "reservation.reservation_date,\n"
+                    + "reservation.status_id,\n"
+                    + "reservation.staff_id,\n"
+                    + "reservation.receiver_id,\n"
+                    + "reservation.checkup_time\n"
+                    + "FROM\n"
+                    + "reservation\n"
+                    + "WHERE id =?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                r.setId(rs.getInt("id"));
-                User customer = new User();
-                customer.setId(rs.getInt("customer_id"));
-                r.setCustomer(customer);
-                r.setReservation_date(rs.getDate("reservation_date"));
-                r.setStatus(rs.getString("status"));
-                r.setNumber_of_person(rs.getInt("number_of_person"));
+            while (rs.next()) {
 
-                User staff = new User();
-                staff.setEmail(rs.getString("email"));
-                staff.setFullName(rs.getString("full_name"));
-                staff.setMobile(rs.getString("mobile"));
-                staff.setImageLink(rs.getString("image_link"));
-                r.setStaff(staff);
+                Reservation s = new Reservation();
+                s.setId(id);
+                s.setCheckup_time(rs.getDate("checkup_time"));
+                s.setReservation_date(rs.getDate("reservation_date"));
+                s.setStatus(settingDB.getSetting(rs.getInt("status_id")));
+                s.setCustomer(userDB.getUser(rs.getInt("customer_id")));
+                s.setStaff(userDB.getUser(rs.getInt("staff_id")));
+                s.setReceiver(receiverDB.getReceiversById(rs.getInt("receiver_id")));
+                return s;
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return r;
+        return null;
+
     }
 
-    public ArrayList<Service> getReservationServices(int reservation_id) {
-        ArrayList<Service> services = new ArrayList<>();
+//    public void addReservation(Reservation r) {
+//        try {
+//            String sql = "insert into reservation(customer_id, reservation_date, status,\n"
+//                    + "            staff_id, number_of_person)\n"
+//                    + "            values(?, ?, ?, ?, ?)";
+//
+//            PreparedStatement stm = connection.prepareStatement(sql);
+//            stm.setInt(1, r.getCustomer().getId());
+//            stm.setDate(2, r.getReservation_date());
+//            stm.setString(3, r.getStatus());
+//            stm.setInt(4, r.getStaff().getId());
+//            stm.setInt(5, r.getNumber_of_person());
+//
+//            stm.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//
+//    public Reservation getReservationById(int id) {
+//        Reservation r = new Reservation();
+//        try {
+//            String sql = "select reservation.id, reservation.customer_id, reservation.reservation_date,\n"
+//                    + "            reservation.status, reservation.number_of_person,\n"
+//                    + "            user.email, user.full_name, user.mobile, user.image_link  \n"
+//                    + "            from reservation left join user\n"
+//                    + "            on reservation.staff_id = user.id\n"
+//                    + "where reservation.id = ?";
+//            PreparedStatement stm = connection.prepareStatement(sql);
+//            stm.setInt(1, id);
+//            ResultSet rs = stm.executeQuery();
+//            if (rs.next()) {
+//                r.setId(rs.getInt("id"));
+//                User customer = new User();
+//                customer.setId(rs.getInt("customer_id"));
+//                r.setCustomer(customer);
+//                r.setReservation_date(rs.getDate("reservation_date"));
+//                r.setStatus(settingDB.getSettingById(rs.getInt("status")));
+//                
+//
+//                User staff = new User();
+//                staff.setEmail(rs.getString("email"));
+//                staff.setFullName(rs.getString("full_name"));
+//                staff.setMobile(rs.getString("mobile"));
+//                staff.setImageLink(rs.getString("image_link"));
+//                r.setStaff(staff);
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return r;
+//    }
+    public ArrayList<ReservationService> getReservationServices(Reservation reservation) {
+        ArrayList<ReservationService> services = new ArrayList<>();
 
         try {
-            String sql = "select service.fullname, service.sale_price\n"
-                    + "            from service left join reservation_service\n"
-                    + "            on service.id = reservation_service.service_id\n"
-                    + "   where reservation_id = ?";
+            String sql = "SELECT\n"
+                    + "reservation_service.reservation_id,\n"
+                    + "reservation_service.service_id,\n"
+                    + "reservation_service.quantity,\n"
+                    + "reservation_service.unit_price\n"
+                    + "FROM\n"
+                    + "reservation_service\n"
+                    + "WHERE reservation_id=?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, reservation_id);
+            stm.setInt(1, reservation.getId());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Service s = new Service();
-                s.setFullname(rs.getString("fullname"));
-                s.setSalePrice(rs.getInt("sale_price"));
-                services.add(s);
+                ReservationService rerserReservationService = new ReservationService();
+                rerserReservationService.setReservation(reservation);
+                rerserReservationService.setService(serviceDB.getService(rs.getInt("service_id")));
+                rerserReservationService.setQuantity(rs.getInt("quantity"));
+                rerserReservationService.setUnitPrice(rs.getFloat("unit_price"));
+                services.add(rerserReservationService);
             }
+            return services;
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return services;
+        return null;
+    }
+
+    public ArrayList<ReservationService> getReservationServices(Reservation reservation, Service service) {
+        ArrayList<ReservationService> services = new ArrayList<>();
+
+        try {
+            String sql = "SELECT\n"
+                    + "reservation_service.reservation_id,\n"
+                    + "reservation_service.service_id,\n"
+                    + "reservation_service.quantity,\n"
+                    + "reservation_service.unit_price\n"
+                    + "FROM\n"
+                    + "reservation_service\n"
+                    + "WHERE reservation_id=? and service_id =?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, reservation.getId());
+            stm.setInt(2, service.getId());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                ReservationService rerserReservationService = new ReservationService();
+                rerserReservationService.setReservation(reservation);
+                rerserReservationService.setService(serviceDB.getService(rs.getInt("service_id")));
+                rerserReservationService.setQuantity(rs.getInt("quantity"));
+                rerserReservationService.setUnitPrice(rs.getFloat("unit_price"));
+                services.add(rerserReservationService);
+            }
+            return services;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void submitReservation(int reservation_id) {
@@ -230,50 +349,7 @@ public class ReservationDAO extends BaseDAO {
         return 0;
     }
 
-    public ArrayList<ReservationService> getReservationServiceById(Reservation r) {
-        try {
-            ArrayList<ReservationService> ress = new ArrayList<>();
-            String sql = "SELECT a.id,a.receiver_id,a.service_id,a.prescription_id,a.reservation_id,a.datetime,a.unit_price,a.fullname,a.thumbnail_link,a.description,\n"
-                    + "r.email,r.full_name as receiverName,r.address,r.gender,r.mobile,r.user_id\n"
-                    + "from receiver r INNER join \n"
-                    + "(SELECT receiver_id,service_id,prescription_id,reservation_id,datetime,unit_price,rs.id,s.fullname,s.thumbnail_link,s.description\n"
-                    + "from reservation_service rs\n"
-                    + "INNER JOIN service s on rs.service_id = s.id) as a  on r.id=a.receiver_id where reservation_id = ?";
-            
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, r.getId());
-            ResultSet rs = stm.executeQuery();
-            
-            while (rs.next()) {
-                Receiver rei = new Receiver();
-                rei.setId(rs.getInt("receiver_id"));
-                rei.setAddress(rs.getString("address"));
-                rei.setFullName(rs.getString("receiverName"));
-                rei.setGender(rs.getBoolean("gender"));
-                rei.setMobile(rs.getString("mobile"));
-                rei.setEmail(rs.getString("email"));
-                ReservationService res = new ReservationService();
-                res.setRe(rei);
-                res.setR(r);
-                Service service = new Service();
-                service.setId(rs.getInt("service_id"));
-                service.setThumbnailLink(rs.getString("thumbnail_link"));
-                service.setDescription(rs.getString("description"));
-                service.setSalePrice(rs.getFloat("unit_price"));
-                service.setFullname(rs.getString("fullname"));
-                res.setS(service);
-                res.setId(rs.getInt("id"));
-                res.setDateTime(rs.getDate("datetime"));
-                res.setUnitprice(rs.getFloat("unit_price"));
-                ress.add(res);
-            }
-            return  ress;
-        } catch (SQLException ex) {
-            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    public void deleteReservationService(Reservation r){
+    public void deleteReservationService(Reservation r) {
         try {
             String sql = "delete from reservation_service where reservation_id =?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -283,19 +359,32 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void deleteReservation(int rid){
+
+    public void deleteReservationService(int rid, int sid) {
         try {
-            String sql ="delete from reservation where id =?";
-            PreparedStatement stm =connection.prepareStatement(sql);
+            String sql = "delete from reservation_service where reservation_id =? and service_id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, rid);
+            stm.setInt(2, sid);
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteReservation(int rid) {
+        try {
+            String sql = "delete from reservation where id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, rid);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void cancelReservation(Reservation r){
+
+    public void cancelReservation(Reservation r) {
         try {
             String sql = "update reservation set status = 'Cancel' where id =?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -304,16 +393,16 @@ public class ReservationDAO extends BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
-    
-    public int countReservation(String status){
+    }
+
+    public int countReservation(int status) {
         try {
-            int a =0;
-            String sql = "SELECT count(status) as total from reservation where status =?";
+            int a = 0;
+            String sql = "SELECT count(status_id) as total from reservation where status_id =?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, status);
+            stm.setInt(1, status);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 a = rs.getInt("total");
                 return a;
             }
@@ -321,24 +410,72 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
-        
+
+    }
+     public int countReservation(Date date) {
+        try {
+            int a = 0;
+            String sql = "SELECT count(status_id) as total from reservation where  reservation_date=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, date);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt("total");
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
     }
     
-    public float getRevenue(Service s){
+      public int countReservation(int status,Date date) {
+        try {
+            int a = 0;
+            String sql = "SELECT count(status_id) as total from reservation where status_id =? and reservation_date=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setDate(2, date);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt("total");
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+
+    public float getRevenue(Service s) {
         try {
             String sql = "SELECT sum(unit_price) as total from reservation_service where service_id=? ";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, s.getId());
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs.getFloat("total");
             }
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-         return 0;
+        return 0;
     }
-    
-   
+
+    public void editReservationService(int rid, int sid, int quantity) {
+        try {
+            String sql = "UPDATE reservation_service set quantity = ? where reservation_id =? and service_id=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, quantity);
+            stm.setInt(2, rid);
+            stm.setInt(3, sid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

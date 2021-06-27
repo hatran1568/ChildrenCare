@@ -14,18 +14,20 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+public class ServiceDAO extends BaseDAO {
 
-public class ServiceDAO extends BaseDAO{
-    public ArrayList<Service> getServices(){
+    SettingDAO settingDB = new SettingDAO();
+
+    public ArrayList<Service> getServices() {
         ArrayList<Service> list = new ArrayList<>();
         try {
-            String sql = "SELECT s.id, s.fullname, s.details, s.original_price, \n" +
-"                    s.sale_price, s.thumbnail_link, s.description, s.category_id, c.name \n" +
-"                    from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n" +
-"                    on s.category_id = c.category_id";
+            String sql = "SELECT s.id, s.fullname, s.details, s.original_price, \n"
+                    + "                    s.sale_price, s.thumbnail_link, s.description, s.category_id, c.name \n"
+                    + "                    from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n"
+                    + "                    on s.category_id = c.category_id";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Service s = new Service();
                 ServiceCategory category = new ServiceCategory();
                 s.setId(rs.getInt("id"));
@@ -45,20 +47,24 @@ public class ServiceDAO extends BaseDAO{
         }
         return list;
     }
-    
+
     public ArrayList<Service> getServices(int pageindex, int pagesize, int cid, String search) {
         ArrayList<Service> services = new ArrayList<>();
         try {
             String a = " ";
-            if(cid != 0) a = "and s.category_id = " + String.valueOf(cid);
+            if (cid != 0) {
+                a = "and s.category_id = " + String.valueOf(cid);
+            }
             if (search != null && search.length() != 0) {
-                search = " and fullname like '%" + search + "%' ";
-            }else search = " ";
+
+            } else {
+                search = " ";
+            }
             String sql = "select * from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid,quantity\n"
                     + "s.id, fullname, description, details, original_price, sale_price, updated_date,  "
                     + "thumbnail_link, featured, status, "
                     + "s.category_id, c.name as category_name\n"
-                    + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n" 
+                    + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n"
                     + "on s.category_id = c.category_id "
                     + "where (s.status is null or status = 1) " + a + search
                     + " order by featured desc) as tbl\n"
@@ -89,8 +95,10 @@ public class ServiceDAO extends BaseDAO{
                 category.setName(rs.getString("category_name"));
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
+
                 s.setQuantity(rs.getInt("quantity"));
                 s.setStatus(rs.getBoolean("status"));
+
                 services.add(s);
             }
         } catch (SQLException ex) {
@@ -118,12 +126,24 @@ public class ServiceDAO extends BaseDAO{
 
     public Service getService(int sid) {
         try {
-            String sql = "select\n"
-                    + "s.id,quantity, fullname, description, details, original_price, sale_price,  updated_date,\n"
-                    + "featured, status, thumbnail_link, s.category_id, c.name as category_name\n"
-                    + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n" 
-                    + "on s.category_id = c.category_id "
-                    + "where s.id = ?";
+
+            String sql = "SELECT\n"
+                    + "service.id,\n"
+                    + "service.fullname,\n"
+                    + "service.original_price,\n"
+                    + "service.sale_price,\n"
+                    + "service.thumbnail_link,\n"
+                    + "service.category_id,\n"
+                    + "service.description,\n"
+                    + "service.details,\n"
+                    + "service.updated_date,\n"
+                    + "service.featured,\n"
+                    + "service.`status`,\n"
+                    + "service.quantity\n"
+                    + "FROM\n"
+                    + "service\n"
+                    + "where id = ?";
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sid);
             ResultSet rs = stm.executeQuery();
@@ -139,34 +159,33 @@ public class ServiceDAO extends BaseDAO{
                 s.setDetails(rs.getString("details"));
                 s.setUpdatedDate(rs.getDate("updated_date"));
                 ServiceCategory category = new ServiceCategory();
-                category.setId(rs.getInt("category_id"));
-                category.setName(rs.getString("category_name"));
+                category.setId(settingDB.getSettingById(rs.getInt("category_id")).getId());
+                category.setName(settingDB.getSettingById(rs.getInt("category_id")).getName());
                 s.setCategory(category);
                 s.setFeatured(rs.getBoolean("featured"));
                 s.setStatus(rs.getBoolean("status"));
                 s.setQuantity(rs.getInt("quantity"));
-                
-                
+
                 return s;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
-    public ArrayList<ServiceCategory> getCategories(){
+
+    public ArrayList<ServiceCategory> getCategories() {
         ArrayList<ServiceCategory> categories = new ArrayList<>();
         try {
             String sql = "select id, name from setting where type=\"Service category\"";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ServiceCategory sc = new ServiceCategory();
                 sc.setId(rs.getInt("id"));
                 sc.setName((rs.getString("name")));
-                
+
                 categories.add(sc);
             }
         } catch (SQLException ex) {
@@ -174,10 +193,9 @@ public class ServiceDAO extends BaseDAO{
         }
         return categories;
     }
-    
-    
+
     public int count(int cid, String search) {
-        
+
         try {
             String a = " ";
             if (cid != 0) {
@@ -188,16 +206,16 @@ public class ServiceDAO extends BaseDAO{
             } else {
                 search = " ";
             }
-            
+
             String sql = "SELECT COUNT(*) as total \n"
                     + "from service s left join (select id as category_id, name from setting where type=\"Service category\") as c\n"
                     + "on s.category_id = c.category_id\n"
                     + "where (s.status is null or status = 1 )\n"
                     + a + search
                     + " order by featured desc";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
-            
+
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 return rs.getInt("total");

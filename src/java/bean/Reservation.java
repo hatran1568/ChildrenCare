@@ -6,6 +6,7 @@
 package bean;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,11 +15,21 @@ import java.sql.Date;
 public class Reservation {
     private int id;
     private User customer;
-    private User receiver;
+    private Receiver receiver;
     private Date reservation_date;
     private Date checkup_time;
     private Setting status;
     private User staff;
+    private float total_cost;
+    private ArrayList<Service> listService;
+
+    public ArrayList<Service> getListService() {
+        return listService;
+    }
+
+    public void setListService(ArrayList<Service> listService) {
+        this.listService = listService;
+    }
 
     public int getId() {
         return id;
@@ -36,13 +47,16 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public User getReceiver() {
+    public Receiver getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
     }
+
+  
+
 
     public Date getReservation_date() {
         return reservation_date;
@@ -74,6 +88,14 @@ public class Reservation {
 
     public void setStaff(User staff) {
         this.staff = staff;
+    }
+
+    public float getTotal_cost() {
+        return total_cost;
+    }
+
+    public void setTotal_cost(float total_cost) {
+        this.total_cost = total_cost;
     }
 
     

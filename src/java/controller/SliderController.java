@@ -6,11 +6,14 @@ package controller;
  * and open the template in the editor.
  */
 import bean.Slider;
+import com.google.gson.Gson;
 import dao.SliderDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -22,9 +25,9 @@ import javax.servlet.http.Part;
  *
  * @author ACER
  */
-  @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-    maxFileSize = 1024 * 1024 * 50, // 50MB
-    maxRequestSize = 1024 * 1024 * 50,location="C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images") // 50MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 50, // 50MB
+        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images") // 50MB
 public class SliderController extends HttpServlet {
 
     /**
@@ -133,7 +136,7 @@ public class SliderController extends HttpServlet {
         request.getRequestDispatcher("../../view/slider/list.jsp").forward(request, response);
     }
 
-    public void changeStatus(HttpServletRequest request, HttpServletResponse response) {
+    public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Slider s = new Slider();
         SliderDAO sliderDB = new SliderDAO();
@@ -143,16 +146,22 @@ public class SliderController extends HttpServlet {
         } else {
             sliderDB.setStatus(true, s);
         }
+        s=sliderDB.getSliderByID(id);
+        Map<String, Boolean> options = new LinkedHashMap<>();
+       
+        options.put("status", s.isStatus());
+        String json = new Gson().toJson(options);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 
-    
-    
-
-    public void showFormAddSlider(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void showFormAddSlider(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("../../view/slider/add.jsp").forward(request, response);
-}
-    
+    }
+
     public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search");
         String status = request.getParameter("status");
@@ -217,88 +226,91 @@ public class SliderController extends HttpServlet {
         request.setAttribute("slider", s);
         request.getRequestDispatcher("../../view/slider/details.jsp").forward(request, response);
     }
-  
 
+    protected void saveFile(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        // refines the fileName in case it is an absolute path
+        fileName = new File(fileName).getName();
 
-  protected void saveFile(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    Part part = request.getPart("file");
-      String fileName = extractFileName(part);
-      // refines the fileName in case it is an absolute path
-      fileName = new File(fileName).getName();
-      
-      part.write("/" + File.separator + fileName);
-    
-    String tilte = request.getParameter("title");
-    String backlink = request.getParameter("backlink");
-    String note = request.getParameter("note");
-    boolean status = Boolean.parseBoolean( request.getParameter("status"));
-    Slider s = new Slider();
-    s.setBacklink(backlink);
-    s.setImageLink("assets/images/"+fileName);
-    s.setNotes(note);
-    s.setStatus(status);
-    s.setTitle(tilte);
-    SliderDAO sliDB = new SliderDAO();
-    sliDB.insert(s);
-    response.sendRedirect("list");
-  
-  }
-  
-   protected void Update(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    Part part = request.getPart("file");
-      String fileName = extractFileName(part);
-      // refines the fileName in case it is an absolute path
-      fileName = new File(fileName).getName();
-      
-      part.write("/" + File.separator + fileName);
-    int id = Integer.parseInt(request.getParameter("rid")) ;
-    String tilte = request.getParameter("title");
-    String backlink = request.getParameter("backlink");
-    String note = request.getParameter("note");
-    boolean status = Boolean.parseBoolean( request.getParameter("status"));
-    Slider s = new Slider();
-    s.setId(id);
-    s.setBacklink(backlink);
-    s.setImageLink("assets/images/"+fileName);
-    s.setNotes(note);
-    s.setStatus(status);
-    s.setTitle(tilte);
-    SliderDAO sliDB = new SliderDAO();
-    sliDB.updateSlider(s);
-    response.sendRedirect("details?id="+id);
-  
-  }
-  /**
-   * Extracts file name from HTTP header content-disposition
-   */
-  private String extractFileName(Part part) {
-    String contentDisp = part.getHeader("content-disposition");
-    String[] items = contentDisp.split(";");
-    for (String s : items) {
-      if (s.trim().startsWith("filename")) {
-        return s.substring(s.indexOf("=") + 2, s.length() - 1);
-      }
+        String tilte = request.getParameter("title");
+        String backlink = request.getParameter("backlink");
+        String note = request.getParameter("note");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        Slider s = new Slider();
+        s.setBacklink(backlink);
+        s.setImageLink("assets/images/" + fileName);
+        s.setNotes(note);
+        s.setStatus(status);
+        s.setTitle(tilte);
+        SliderDAO sliDB = new SliderDAO();
+        sliDB.insert(s);
+        response.sendRedirect("list");
+
     }
-    return "";
-  }
-  public File getFolderUpload() {
-    File folderUpload = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images");
-    if (!folderUpload.exists()) {
-      folderUpload.mkdirs();
-    }
-    return folderUpload;
-  }
-  
-  protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-      int id = Integer.parseInt(request.getParameter("id"));
-      SliderDAO sliDB = new SliderDAO();
-      Slider s = new Slider();
-      s= sliDB.getSliderByID(id);
-      request.setAttribute("slider", s);
-      request.getRequestDispatcher("../../view/slider/edit.jsp").forward(request, response);
-  }
 
+    protected void Update(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        // refines the fileName in case it is an absolute path
+        fileName = new File(fileName).getName();
+
+        part.write("/" + File.separator + fileName);
+
+        int id = Integer.parseInt(request.getParameter("rid"));
+
+        String tilte = request.getParameter("title");
+        String backlink = request.getParameter("backlink");
+        String note = request.getParameter("note");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        Slider s = new Slider();
+        s.setId(id);
+        s.setBacklink(backlink);
+        s.setImageLink("assets/images/" + fileName);
+        s.setNotes(note);
+        s.setStatus(status);
+        s.setTitle(tilte);
+        SliderDAO sliDB = new SliderDAO();
+        sliDB.getSliderByID(id);
+        
+        File file = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\" + sliDB.getSliderByID(id).getImageLink());
+        file.delete();
+        sliDB.updateSlider(s);
+        response.sendRedirect("details?id=" + id);
+
+    }
+
+    /**
+     * Extracts file name from HTTP header content-disposition
+     */
+    private String extractFileName(Part part) {
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items) {
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=") + 2, s.length() - 1);
+            }
+        }
+        return "";
+    }
+
+    public File getFolderUpload() {
+        File folderUpload = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images");
+        if (!folderUpload.exists()) {
+            folderUpload.mkdirs();
+        }
+        return folderUpload;
+    }
+
+    protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        SliderDAO sliDB = new SliderDAO();
+        Slider s = new Slider();
+        s = sliDB.getSliderByID(id);
+        request.setAttribute("slider", s);
+        request.getRequestDispatcher("../../view/slider/edit.jsp").forward(request, response);
+    }
 
 }

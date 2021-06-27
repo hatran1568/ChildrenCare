@@ -2,103 +2,81 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <!-- Mobile Metas -->
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Children Care</title>
 
-        <!-- Site Metas -->
-        <title>HomePage</title>
-        <meta name="keywords" content="">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="Tooplate">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link href="../assets/css/footer.css" rel="stylesheet" type="text/css"/>
-        <!-- Site Icons -->
-       
-        <link rel="apple-touch-icon" href="#" />
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-        <!-- Pogo Slider CSS -->
-        <link rel="stylesheet" href="../assets/css/pogo-slider.min.css" />
-        <!-- owl carousel css -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4//assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4//assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-        <!-- Site CSS -->
-        <link rel="stylesheet" href="../assets/css/style.css" />
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="../assets/css/responsive.css" />
-        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/animate.css">
+        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../assets/css/custom.css" />
-        <!--        <link href="../assets/css/slider.css" rel="stylesheet" type="text/css"/>-->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
     </head>
-    <body id="inner_page" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+        <!-- PRE LOADER -->
 
 
-        <!-- Start header -->
-        <header class="top-header">
 
-            <div class="header_bottom">
-                <div class="container">
-                    <div class="col-sm-12">
-                        <div class="menu_orange_section" style="background: #013582;">
-                            <nav class="navbar header-nav navbar-expand-lg"> 
-                                <div class="menu_section">
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </button>
-                                    <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
-                                        <ul class="navbar-nav">
-                                            <li><a class="nav-link" href="#">Home</a></li>
-                                            <li><a class="nav-link" href="#">About</a></li>
-                                            <li><a class="nav-link" href="#">Services</a></li>
-                                            <li><a class="nav-link" href="">Blog</a></li>
-                                            <li><a class="nav-link" href="user/list">Users</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </nav>
-                            <div class="search-box">
-                                <input type="text" class="search-txt" placeholder="Search">
-                                <a class="search-btn">
-                                    <img src="../assets/images/search_icon.png" alt="#" />
-                                </a>
-                            </div> 
-                        </div>
+        <!-- HEADER -->
+        <header>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-5">
+                        <p>Welcome to a Professional Health Care</p>
                     </div>
+
+                    <div class="col-md-8 col-sm-7 text-align-right">
+                        <span class="phone-icon"><i style="color:#4267b2" class="fa fa-phone"></i> 010-060-0160</span>
+                        <span class="date-icon"><i style="color:#4267b2" class="fa fa-calendar"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
+                        <span class="email-icon"><i style="color:#4267b2" class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
+                    </div>
+
                 </div>
             </div>
-
         </header>
-        <!-- End header -->
 
-        <!-- Start Banner -->
-        <div class="section inner_page_banner">
-            <div class="container" style="margin-right: 20px">
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <c:if test="${ empty sessionScope.user}">
 
-                            <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a>
+        <!-- MENU -->
+        <section class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
 
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                        <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="#" class="navbar-brand">Children Care</a>
+                </div>
+
+                <!-- MENU LINKS -->
+                <div class="collapse navbar-collapse">
+                    <c:if test="${ empty sessionScope.user}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#top" class="smoothScroll">Home</a></li>
+                            <li><a href="#" class="smoothScroll">Services</a></li>
+                            <li><a href="#" class="smoothScroll">Blog</a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
-
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
@@ -113,16 +91,16 @@
                                     </div>
                                 </div>  
                             </div>
-                            <a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Register</a>
 
+                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
 
                                     <div class="modal-content">
-                                        <div class="modal-body">
+                                        <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../register" method="POST">
+                                            <form action="../register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -131,16 +109,70 @@
                                                 <input type="text" name="address" class="username form-control" placeholder="Address"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Register" />
-
                                             </form>
                                         </div>
                                     </div>
                                 </div>  
                             </div>
 
-                        </c:if>
-                        <c:if test="${ not empty sessionScope.user}">
-                            <h2 class="dropdown-name ">${sessionScope.user.fullName}</h2>
+                            <c:if test="${ not empty sessionScope.user}">
+                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                                <div class="dropdown ">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+
+                                    <div class="dropdown-content">
+                                        <p> <a href="admin/setting/list">Profile</a></p>
+                                        <p> <a href="#">Change Password</a></p>
+                                        <p> <a href="#">Log Out</a></p>
+                                    </div>
+                                </div>
+                            </c:if>
+                        </ul>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.user}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <c:if test="${sessionScope.user.role.name == 'Manager'}">
+                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
+                                <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
+
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Services</a></p>
+
+                                    </div>
+                                </li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
+                                <li><a href="#top" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Services</a></li>
+                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
+
+                                    </div>
+                                </li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+
+                            </c:if>
+                            <c:if test="${sessionScope.user.role.name == 'Customer'}">
+                                <li><a href="#" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Services</a></li>
+                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:if>
+                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
@@ -148,21 +180,25 @@
                                     <p> <a href="#">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
                                     <p> <a href="#">Log Out</a></p>
-
                                 </div>
                             </div>
 
-
-                        </c:if>
-
-
-
-                    </div>
+                        </ul>
+                    </c:if>
                 </div>
+
             </div>
-        </div>
-        <!-- End Banner -->
-        <!-- section -->
+        </section>
+
+
+        <!-- HOME -->
+
+
+
+        <!-- ABOUT -->
+
+
+        <!-- TEAM -->
         <div class="container" style="height: 1000px;">
 
             <c:if test="${not empty requestScope.list}">
@@ -177,9 +213,9 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3>Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact">Check Out</a></button></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a></button>
+                                    <button type="button" class="button btn btn-outline-primary"><a href="reservation/contact">Check Out</a></button></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -187,17 +223,13 @@
                                 <tr >
                                     <td>${list.service.id}</td>
                                     <td>${list.service.fullname}</td>
-                                    <td id =${list.service.id}>${list.service.salePrice}</td>
+                                    <td id =${list.service.id}>${list.unitPrice}</td>
 
                                     <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
-                                    <td id =${list.service.id}>${list.service.salePrice * list.quantity} </td>
-                                    <c:if test="${not empty list.user.id}">
-                                        <td><a href="delete?sid=${list.service.id}&uid=${list.user.id}"><i class="fas fa-trash-alt"></i></a></td>
-                                            </c:if>
-                                            <c:if test="${ empty list.user.id}">
-                                        <td><a href="delete?sid=${list.service.id}"><i class="fas fa-trash-alt"></i></a></td>
-                                            </c:if>
+                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
+                                    <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
+
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -208,86 +240,164 @@
             <c:if test="${empty requestScope.list}">
 
                 <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
+                <button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a>
                 </c:if>
 
                 <!--            <h2>Total Cost:</h2>-->
         </div>
-        <!-- end section -->
 
-        <!-- Start Footer -->
-        <footer id="footer" class="site-footer">
 
+
+
+        <!-- FOOTER -->
+        <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                            <a href="#">Giangtt</a>.
-                        </p>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-thumb"> 
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
+                            <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+
+                            <div class="contact-info">
+                                <p><i class="fa fa-phone"></i> 010-070-0170</p>
+                                <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
+                    <div class="col-md-4 col-sm-4"> 
+                        <div class="footer-thumb"> 
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                            <div class="latest-stories">
+                                <div class="stories-image">
+                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                </div>
+                                <div class="stories-info">
+                                    <a href="#"><h5>Amazing Technology</h5></a>
+                                    <span>March 08, 2018</span>
+                                </div>
+                            </div>
+
+                            <div class="latest-stories">
+                                <div class="stories-image">
+                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                </div>
+                                <div class="stories-info">
+                                    <a href="#"><h5>New Healing Process</h5></a>
+                                    <span>February 20, 2018</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="col-md-4 col-sm-4"> 
+                        <div class="footer-thumb">
+                            <div class="opening-hours">
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
+                                <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
+                                <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
+                                <p>Sunday <span>Closed</span></p>
+                            </div> 
+
+                            <ul class="social-icon">
+                                <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-instagram"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 border-top">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="copyright-text"> 
+                                <p>Copyright &copy; 2018 Your Company 
+
+                                    | Design: Tooplate</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="footer-link"> 
+                                <a href="#">Laboratory Tests</a>
+                                <a href="#">Departments</a>
+                                <a href="#">Insurance Policy</a>
+                                <a href="#">Careers</a>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 text-align-center">
+                            <div class="angle-up-btn"> 
+                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
+                            </div>
+                        </div>   
+                    </div>
+
                 </div>
             </div>
-            <!-- End Footer -->
+        </footer>
 
-
-
-            <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
-
-            <!-- ALL JS FILES -->
-            <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/js/popper.min.js"></script>
-            <script src="../assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="../assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="../assets/js/slider-index.js"></script>
-            <script src="../assets/js/smoothscroll.js"></script>
-            <script src="../assets/js/form-validator.min.js"></script>
-            <script src="../assets/js/contact-form-script.js"></script>
-            <script src="../assets/js/isotope.min.js"></script>
-            <script src="../assets/js/images-loded.min.js"></script>
-            <script src="../assets/js/custom.js"></script>
-            <script>
+        <!-- SCRIPTS -->
+        <script src="../assets/js/jquery.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.sticky.js"></script>
+        <script src="../assets/js/jquery.stellar.min.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/smoothscroll.js"></script>
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/custom-new.js"></script>
+        <script>
                                         function ResetCart(param) {
                                             var value = param.value;
-                                             var querry = param.name;
-                                             var u = ${sessionScope.user.id};
+                                            var querry = param.name;
+
                                             $.ajax({
-                                                url:"edit",
-                                                type:"GET",
-                                                data: {uid:u, sid:querry, param:value},
+                                                url: "edit",
+                                                type: "GET",
+                                                data: {rid:${requestScope.list[0].reservation.id}, sid: querry, quantity: value},
                                                 success:
-                                                        function(data){
+                                                        function (data) {
                                                             var b = JSON.parse(JSON.stringify(data));
-                                                            console.log(b);
-                                                            
+                                                            console.log(b)
+                                                             document.getElementById(querry.toString()).innerHTML=b["price"] 
+                                                             document.getElementById("total").innerHTML="Total Cost:" +b["total"]
+
                                                         }
-                                                
+
                                             });
-                                            
+
                                         }
 
-                                        $(document).ready(function () {
-                                            $("p").click(function () {
-                                                $(this).hide();
-                                            });
+                                       
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+                                        $('ul.nav li.dropdown').hover(function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                        }, function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                                         });
+        </script>
+        <c:if test="${empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
+                    $(document).ready(function () {
+                        let note = "${sessionScope.alert}"
+                        alert(note);
+
+                    });
+                </script>
+                <c:remove var="alert" scope="session" />
+
+            </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+
+                });
             </script>
-
+            <c:remove var="mess" scope="session" />
+        </c:if>
     </body>
-</html>
-
-</body>
-</html>
-
-</body>
-</html>
+</html> 

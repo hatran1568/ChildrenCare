@@ -67,14 +67,14 @@
                     <!-- Right Image -->
                     <section class="right-image">
                         <div class="container-fluid">
-
+                            <table class="table"></table> 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div style="margin-bottom: 10px;" class="col-md-6">
                                     <div class="card">
 
                                         <div style="text-align: center" class="header">
-                                            <h4 class="title">Email Statistics</h4>
-                                            <p class="category">Last Campaign Performance</p>
+                                            <h3 class="title">Reservation Statistics</h3>
+
                                             <canvas id="myChart" style=" width:100%;max-width:700px;height: 300px;"></canvas>
                                         </div>
 
@@ -84,12 +84,12 @@
                                     </div>
                                 </div>  
 
-                                <div  style="margin: 10px 0;" class=" col-md-6">
+                                <div  style="margin-bottom: 10px;" class=" col-md-6">
                                     <div class="card">
 
                                         <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
                                             <h4 class="title">Total Revenue ${requestScope.sum}</h4>
-                                            <ul style="text-decoration: none">
+                                            <ul style="list-style-type: none;">
                                                 <c:forEach items="${requestScope.service}" var="list">
                                                     <li>
                                                         ${list.fullname} : ${requestScope.revernue[list.id -1]}
@@ -102,18 +102,18 @@
 
                                     </div>
                                 </div>
-                                <div  class="col-md-6">
+                                <div style="margin-bottom: 10px;" class="col-md-6">
                                     <div class="card">
 
                                         <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
-                                            <h4 id="0" class="title">Total Revenue : </h4>
+                                            <h4 id="0" class="title">Average Rating : </h4>
                                             <script>
                                                 $(document).ready(function () {
                                                     drawRate(${requestScope.tostar}, 0)
                                                 });
 
                                             </script>
-                                            <ul style="text-decoration: none">
+                                            <ul style="list-style-type: none;">
                                                 <c:forEach items="${requestScope.service}" var="list">
                                                     <li id="${list.id}">
                                                         ${list.fullname} : 
@@ -131,12 +131,23 @@
 
                                     </div>
                                 </div>
-                                <div  style="margin: 10px 0;" class=" col-md-6">
+                                <div  style="margin-bottom: 10px;" class=" col-md-6">
                                     <div class="card">
 
                                         <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
 
                                             <h4>Total Customer : ${requestScope.Customer}</h4>
+                                            <ul style="list-style-type: none;">
+
+                                                <li id="${list.id}">
+                                                    Newly Registed  : ${requestScope.registed} : 
+                                                </li>
+
+                                                Newly Reserved : ${requestScope.reserved} : 
+                                                </li>
+
+
+                                            </ul>
                                         </div>
 
 
@@ -146,8 +157,9 @@
                                     <div class="card">
 
                                         <div style="text-align: center" class="header">
-                                            <h4 class="title">Trend</h4>
-
+                                            <h3 class="title">Trend</h3>
+                                            <input id="start" type="date" name="start">
+                                            <input id="end" type="date" name="end">
                                             <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
                                         </div>
 
@@ -247,13 +259,15 @@
 <script src="../../assets/js/owl-carousel.js"></script>
 <script src="../../assets/js/custom.js"></script>
 <script>
-                                                        var xValues = ["Submited", "Cancel", "Success"];
-                                                        var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success}];
+                                                        var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
+                                                        var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
                                                         var barColors = [
                                                             "#00aba9",
                                                             "#b91d47",
-
                                                             "#2b5797",
+                                                            "#f7ef02",
+                                                            "#0026ff",
+                                                            "#ff0000"
                                                         ];
 
                                                         new Chart("myChart", {
@@ -276,18 +290,18 @@
 
 </script>
 <script>
-    var xValues = [1,2,3,4,5,6,7];
+    var xValues = [1, 2, 3, 4, 5, 6, 7];
 
     new Chart("Chart1", {
         type: "line",
         data: {
             labels: xValues,
             datasets: [{
-                    data: [2,11,5,6,2,1,2],
+                    data: [2, 11, 5, 6, 2, 1, 2],
                     borderColor: "green",
                     fill: false
                 }, {
-                    data: [2,4,1,3,2,1,1],
+                    data: [2, 4, 1, 3, 2, 1, 1],
                     borderColor: "red",
                     fill: false
                 }]
@@ -307,6 +321,13 @@
             document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
         }
     }
+    $(document).ready(function () {
+        var date = new Date();
+       document.getElementById("end").valueAsDate = date;
+        ;
+         date.setDate(date.getDate() - 7);
+        document.getElementById("start").valueAsDate = date
+    });
 </script>
 <style>
     tfoot {
@@ -376,7 +397,12 @@
     .checked {
         color: orange;
     }
-</style>
+    .card{
+        min-height: 430px;
+    }
+    h4{
+        margin-top: 30% !important;
+    </style>
 </body>
 
 </html>

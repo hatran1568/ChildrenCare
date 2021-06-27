@@ -7,10 +7,13 @@ package controller;
 
 import bean.Reservation;
 import bean.ReservationService;
+import bean.Service;
 import bean.User;
 import dao.ReservationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +45,7 @@ public class MyReservationController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyReservationController</title>");            
+            out.println("<title>Servlet MyReservationController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MyReservationController at " + request.getContextPath() + "</h1>");
@@ -64,8 +67,8 @@ public class MyReservationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
-        
-        switch(action){
+
+        switch (action) {
             case "/customer/reservation/my":
                 showMyreservation(request, response);
                 break;
@@ -78,7 +81,7 @@ public class MyReservationController extends HttpServlet {
             default:
                 break;
         }
-       
+
     }
 
     /**
@@ -95,49 +98,66 @@ public class MyReservationController extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void showMyreservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void showMyreservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Reservation> list = new ArrayList<Reservation>();
         User u = (User) request.getSession().getAttribute("user");
-        
+
         ReservationDAO reservationDB = new ReservationDAO();
         list = reservationDB.getReservation(u);
+
         for (Reservation reservation : list) {
+           
+            ArrayList<ReservationService> listservice = new ArrayList<>();
+            listservice = reservationDB.getReservationServices(reservation);
+            float total = 0;
+            ArrayList<Service> servicelist = new ArrayList<>();
+            for (ReservationService reservationService : listservice) {
+                total += reservationService.getUnitPrice();
+                servicelist.add(reservationService.getService());
+
+            }
+            reservation.setListService(servicelist);
             reservation.setTotal_cost(reservationDB.getTotalCost(reservation));
         }
-        
+
         request.setAttribute("list", list);
         request.getRequestDispatcher("../../view/reservation/myReservation.jsp").forward(request, response);
-        
+
     }
-    
-    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Reservation r = new Reservation();
-        int id = Integer.parseInt(request.getParameter("id")) ;
+        int id = Integer.parseInt(request.getParameter("id"));
         ArrayList<ReservationService> res = new ArrayList<>();
         ReservationDAO redb = new ReservationDAO();
         r.setId(id);
-        res = redb.getReservationServiceById(r);
+       
         Reservation rerser = new Reservation();
+        
         rerser = redb.getReservationById(id);
-        request.setAttribute("res", rerser);
-        request.setAttribute("list",res);
+        rerser.setTotal_cost(redb.getTotalCost(rerser));
+        res = redb.getReservationServices(rerser);
+        request.setAttribute("reservation", rerser);
+        request.setAttribute("list", res);
         request.getRequestDispatcher("../../view/reservation/reservationInformation.jsp").forward(request, response);
     }
+
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    
-    public void cancelReservation(HttpServletRequest request, HttpServletResponse response) throws IOException{
-         Reservation r = new Reservation();
-        int id = Integer.parseInt(request.getParameter("id")) ;
+
+    public void cancelReservation(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Reservation r = new Reservation();
+        int id = Integer.parseInt(request.getParameter("id"));
         ReservationDAO redb = new ReservationDAO();
         r = redb.getReservationById(id);
         redb.deleteReservationService(r);
         redb.cancelReservation(r);
         response.sendRedirect("my");
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";
