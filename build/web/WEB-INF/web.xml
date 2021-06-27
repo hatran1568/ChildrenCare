@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value>D:\FPTU Materials\Ky5_SUM21\SWP\source-new\web\assets\images</param-value>
+        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
@@ -63,6 +63,10 @@
     <servlet>
         <servlet-name>ManagerPostController</servlet-name>
         <servlet-class>controller.ManagerPostController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -296,6 +300,10 @@
     <servlet-mapping>
         <servlet-name>ManagerPostController</servlet-name>
         <url-pattern>/manager/post/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userprofile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

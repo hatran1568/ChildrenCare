@@ -197,7 +197,6 @@ public class UserController extends HttpServlet {
         u.setImageLink("None");
         u.setStatus(Integer.parseInt(request.getParameter("status")));
         UserDAO userDB = new UserDAO();
-        u.setStatus(13);
         userDB.addUser(u, -1);
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;

@@ -78,10 +78,6 @@
                                     <input type="text" class="form-control" name="settingname" placeholder="Enter Name">
                                 </div>
                                 <div class="form-group">
-                                        <label for="value">Value</label>
-                                        <input type="number" class="form-control" name="value" placeholder="Enter Value">
-                                </div>
-                                <div class="form-group">
                                         <label for="description">Description</label>
                                         <input type="text" class="form-control" name="description" placeholder="Enter Description">
                                 </div>

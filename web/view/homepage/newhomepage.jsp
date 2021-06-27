@@ -121,7 +121,7 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="#">Profile</a></p>
+                                        <p> <a href="../../admin/setting/list">Profile</a></p>
                                         <p> <a href="#">Change Password</a></p>
                                         <p> <a href="#">Log Out</a></p>
                                     </div>

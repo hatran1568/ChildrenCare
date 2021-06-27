@@ -13,17 +13,17 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../assets/css/animate.css">
-        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="../assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="../assets/css/custom.css" />
+        <link rel="stylesheet" href="assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="assets/css/custom.css" />
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -81,7 +81,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../login" method="POST">
+                                            <form action="login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -100,7 +100,7 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../register" method="GET">
+                                            <form action="register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -121,7 +121,7 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="admin/setting/list">Profile</a></p>
+                                        <p> <a href="#">Profile</a></p>
                                         <p> <a href="#">Change Password</a></p>
                                         <p> <a href="#">Log Out</a></p>
                                     </div>
@@ -135,8 +135,8 @@
                                 <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
                                 <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
-
-
+                                
+                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
@@ -150,12 +150,12 @@
                                     </div>
                                 </li>
                                 <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
+                            </c:if>
+                            <c:if test="${sessionScope.user.role.name == 'Staff'}">
                                 <li><a href="#top" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
                                 <li><a href="#" class="smoothScroll">Blog</a></li>
-                                <li class="dropdown">
+                               <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
@@ -171,7 +171,7 @@
                                 <li><a href="#" class="smoothScroll">Services</a></li>
                                 <li><a href="#" class="smoothScroll">Blog</a></li>
                                 <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </c:if>
+                            </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
@@ -192,61 +192,97 @@
 
 
         <!-- HOME -->
+        <section id="home" class="slider" data-stellar-background-ratio="0.5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2" style="padding-top: 0%; float: left; margin-left: 20%; margin-top: 5%">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <img src="${sessionScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+<!--                                <div class="middle">
+                                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                    <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content ml-1" id="myTabContent" style="margin-left: 32%; margin-top: 5% ">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Full Name</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                ${sessionScope.user.fullName}
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top: -12.5%">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Gender</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <c:if test="${sessionScope.user.gender eq true}">Male</c:if>
+                                <c:if test="${sessionScope.user.gender eq false}">Female</c:if>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row" style="margin-top: -6%">
+                                <div class="col-sm-3 col-md-2 col-5">
+                                    <label style="font-weight:bold;">Email</label>
+                                </div>
+                                <div class="col-md-8 col-6">
+                                ${sessionScope.user.email}
+                            </div>
+                        </div>
+                        <hr />
+
+
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Mobile</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                ${sessionScope.user.mobile}
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Address</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                ${sessionScope.user.address}
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Status</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <c:if test="${sessionScope.user.status eq 13}">Not Verified</c:if>
+                                <c:if test="${sessionScope.user.status eq 14}">Active</c:if>
+                                <c:if test="${sessionScope.user.status eq 15}">Contact</c:if>
+                                <c:if test="${sessionScope.user.status eq 16}">Potential</c:if>
+                                <c:if test="${sessionScope.user.status eq 17}">Customer</c:if>
+                                <c:if test="${sessionScope.user.status eq 18}">Inactive</c:if>
+                                </div>
+                            </div>
+                            <hr />
+                            <button style="margin-right: 15%" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Profile</button>
+                    </div>
+                        </table>
+                            </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
 
 
 
-        <!-- ABOUT -->
-
-
-        <!-- TEAM -->
-        <div class="container" style="height: 1000px;">
-
-            <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
-                        <thead  class="thead-dark">
-                            <tr >
-                                <td >Id</td>
-                                <td >Title</td>
-                                <td >Price</td>
-
-                                <td > Quantity</td>
-                                <td>Cost</td>
-                                <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="reservation/contact">Check Out</a></button></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="list" items="${requestScope.list}">
-                                <tr >
-                                    <td>${list.service.id}</td>
-                                    <td>${list.service.fullname}</td>
-                                    <td id =${list.service.id}>${list.unitPrice}</td>
-
-                                    <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
-
-                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
-                                    <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </form>
-
-            </c:if>
-            <c:if test="${empty requestScope.list}">
-
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a>
-                </c:if>
-
-                <!--            <h2>Total Cost:</h2>-->
-        </div>
-
-
+        
 
 
         <!-- FOOTER -->
@@ -336,68 +372,44 @@
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="../assets/js/jquery.js"></script>
-        <script src="../assets/js/bootstrap.min.js"></script>
-        <script src="../assets/js/jquery.sticky.js"></script>
-        <script src="../assets/js/jquery.stellar.min.js"></script>
-        <script src="../assets/js/wow.min.js"></script>
-        <script src="../assets/js/smoothscroll.js"></script>
-        <script src="../assets/js/owl.carousel.min.js"></script>
-        <script src="../assets/js/custom-new.js"></script>
-        <script>
-                                        function ResetCart(param) {
-                                            var value = param.value;
-                                            var querry = param.name;
-
-                                            $.ajax({
-                                                url: "edit",
-                                                type: "GET",
-                                                data: {rid:${requestScope.list[0].reservation.id}, sid: querry, quantity: value},
-                                                success:
-                                                        function (data) {
-                                                            var b = JSON.parse(JSON.stringify(data));
-                                                            console.log(b)
-                                                             document.getElementById(querry.toString()).innerHTML=b["price"] 
-                                                             document.getElementById("total").innerHTML="Total Cost:" +b["total"]
-
-                                                        }
-
-                                            });
-
-                                        }
-
-                                       
-        </script>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.sticky.js"></script>
+        <script src="assets/js/jquery.stellar.min.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/smoothscroll.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                        $('ul.nav li.dropdown').hover(function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                        }, function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                        });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
+
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
+            </c:if>
+            <c:if test="${ not empty sessionScope.mess}">
                 <script>
                     $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
 
                     });
                 </script>
-                <c:remove var="alert" scope="session" />
-
+                <c:remove var="mess" scope="session" />
             </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
     </body>
-</html> 
+</html>

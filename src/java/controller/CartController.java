@@ -5,11 +5,13 @@
  */
 package controller;
 
-import bean.CartItem;
+import bean.Reservation;
+import bean.ReservationService;
 import bean.Service;
 import bean.User;
 import com.google.gson.Gson;
 import dao.CartDAO;
+import dao.ReservationDAO;
 import dao.ServiceDAO;
 import dao.UserDAO;
 import java.io.IOException;
@@ -80,13 +82,13 @@ public class CartController extends HttpServlet {
             case "/cart/edit":
                 editOneItemCart(request, response);
                 break;
-            case "/cart/add":
-                if (user == null || user.getId() == -1) {
-                    addToCartSession(request, response);
-                } else {
-                    addToCartDB(request, response);
-                }
-                break;
+//            case "/cart/add":
+//                if (user == null || user.getId() == -1) {
+//                    addToCartSession(request, response);
+//                } else {
+//                    addToCartDB(request, response);
+//                }
+//                break;
             case "/cart/delete":
                 deleteCart(request, response);
                 break;
@@ -116,253 +118,226 @@ public class CartController extends HttpServlet {
 
         //Check if user login or not
         User u = (User) request.getSession().getAttribute("user");
-        CartDAO cartDB = new CartDAO();
+        ReservationDAO reservationDB = new ReservationDAO();
 
-        //If user logged in get data from Database
-        if (u != null) {
+        String r_rid = request.getParameter("rid");
+        if (r_rid == null || r_rid.length() == 0) {
+            if (u != null) {
 
-            ArrayList<CartItem> list = new ArrayList<>();
-
-            list = cartDB.getCartByUserId(u);
-
-            float totalcost = 0;
-
-            for (CartItem cartItem : list) {
-                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
-            }
-
-            int numberofservice = list.size();
-
-            request.setAttribute("number", numberofservice);
-            request.setAttribute("totalcost", totalcost);
-            request.setAttribute("list", list);
-
-            //If user not logged in get data from session
-        } else {
-
-            ArrayList<CartItem> list = new ArrayList<>();
-            list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
-
-            if (list != null) {
-
-                float totalcost = 0;
-
-                for (CartItem cartItem : list) {
-                    totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
+                if (reservationDB.getReservation(u, 19).size() != 0) {
+                    Reservation reservation = reservationDB.getReservation(u, 19).get(0);
+                    ArrayList<ReservationService> reservationServices = new ArrayList<>();
+                    reservationServices = reservationDB.getReservationServices(reservation);
+                    float total = 0;
+                    for (ReservationService reservationService : reservationServices) {
+                        total += reservationService.getQuantity() * reservationService.getUnitPrice();
+                    }
+                    request.setAttribute("totalcost", total);
+                    request.setAttribute("list", reservationServices);
                 }
 
-                request.setAttribute("totalcost", totalcost);
-                request.setAttribute("list", list);
+                //If user not logged in get data from session
+            } else {
+                Reservation reservation = new Reservation();
+                if (request.getSession().getAttribute("reservation_id") != null) {
+                    int rid = Integer.parseInt(request.getSession().getAttribute("reservation_id").toString());
 
+                    reservation = reservationDB.getReservationById(rid);
+
+                    ArrayList<ReservationService> reservationServices = new ArrayList<>();
+                    reservationServices = reservationDB.getReservationServices(reservation);
+                    float total = 0;
+                    for (ReservationService reservationService : reservationServices) {
+                        total += reservationService.getQuantity() * reservationService.getUnitPrice();
+                    }
+                    request.setAttribute("totalcost", total);
+                    request.setAttribute("list", reservationServices);
+                }
             }
+
+        } else {
+            int rid = Integer.parseInt(r_rid);
+            Reservation reservation = new Reservation();
+            reservation = reservationDB.getReservationById(rid);
+
+            ArrayList<ReservationService> reservationServices = new ArrayList<>();
+            reservationServices = reservationDB.getReservationServices(reservation);
+            float total = 0;
+            for (ReservationService reservationService : reservationServices) {
+                total += reservationService.getQuantity() * reservationService.getUnitPrice();
+            }
+            request.setAttribute("totalcost", total);
+            request.setAttribute("list", reservationServices);
         }
+
         request.getRequestDispatcher("../view/cart/cart.jsp").forward(request, response);
     }
 
     //Edit Function to edit quantity  from Database/Session
-    protected void editCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User u = (User) request.getSession().getAttribute("user");
-        CartDAO cartDB = new CartDAO();
-
-        //If user logged in edit to Database
-        if (u != null) {
-
-            ArrayList<CartItem> list = new ArrayList<>();
-
-            list = cartDB.getCartByUserId(u);
-
-            float totalcost = 0;
-
-            for (CartItem cartItem : list) {
-                int id = cartItem.getService().getId();
-                String param = Integer.toString(id);
-                int quantity = Integer.parseInt(request.getParameter(param));
-                cartItem.setQuantity(quantity);
-                cartDB.updateCart(cartItem.getUser(), cartItem.getService(), quantity);
-                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
-            }
-
-            int numberofservice = list.size();
-
-            request.setAttribute("number", numberofservice);
-            request.setAttribute("totalcost", totalcost);
-            request.setAttribute("list", list);
-
-            //If user not logged in edit to Session
-        } else {
-
-            ArrayList<CartItem> list = new ArrayList<>();
-            list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
-
-            if (list != null) {
-
-                float totalcost = 0;
-
-                for (CartItem cartItem : list) {
-                    int id = cartItem.getService().getId();
-                    String param = Integer.toString(id);
-                    int quantity = Integer.parseInt(request.getParameter(param));
-                    cartItem.setQuantity(quantity);
-
-                    totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
-                }
-
-                request.getSession().setAttribute("cart", list);
-                request.setAttribute("totalcost", totalcost);
-                request.setAttribute("list", list);
-
-            }
-        }
-        response.sendRedirect("list");
-    }
-
+//    protected void editCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        User u = (User) request.getSession().getAttribute("user");
+//        CartDAO cartDB = new CartDAO();
+//
+//        //If user logged in edit to Database
+//        if (u != null) {
+//
+//            ArrayList<CartItem> list = new ArrayList<>();
+//
+//            list = cartDB.getCartByUserId(u);
+//
+//            float totalcost = 0;
+//
+//            for (CartItem cartItem : list) {
+//                int id = cartItem.getService().getId();
+//                String param = Integer.toString(id);
+//                int quantity = Integer.parseInt(request.getParameter(param));
+//                cartItem.setQuantity(quantity);
+//                cartDB.updateCart(cartItem.getUser(), cartItem.getService(), quantity);
+//                totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
+//            }
+//
+//            int numberofservice = list.size();
+//
+//            request.setAttribute("number", numberofservice);
+//            request.setAttribute("totalcost", totalcost);
+//            request.setAttribute("list", list);
+//
+//            //If user not logged in edit to Session
+//        } else {
+//
+//            ArrayList<CartItem> list = new ArrayList<>();
+//            list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
+//
+//            if (list != null) {
+//
+//                float totalcost = 0;
+//
+//                for (CartItem cartItem : list) {
+//                    int id = cartItem.getService().getId();
+//                    String param = Integer.toString(id);
+//                    int quantity = Integer.parseInt(request.getParameter(param));
+//                    cartItem.setQuantity(quantity);
+//
+//                    totalcost += cartItem.getService().getSalePrice() * cartItem.getQuantity();
+//                }
+//
+//                request.getSession().setAttribute("cart", list);
+//                request.setAttribute("totalcost", totalcost);
+//                request.setAttribute("list", list);
+//
+//            }
+//        }
+//        response.sendRedirect("list");
+//    }
     public void editOneItemCart(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User u = new User();
-        u = (User) request.getSession().getAttribute("user");
-        if (u != null) {
-            int uid = Integer.parseInt(request.getParameter("uid"));
-            int sid = Integer.parseInt(request.getParameter("sid"));
-            int param = Integer.parseInt(request.getParameter("param"));
-            User user = new User();
-            user.setId(uid);
-            Service service = new Service();
-            service.setId(sid);
-            CartDAO cartDB = new CartDAO();
-            cartDB.updateCart(user, service, param);
-            ArrayList<CartItem> item = new ArrayList<>();
-            item = cartDB.getCartByUserId(u);
-             float price = item.get(0).getService().getSalePrice();
-            Map<String ,Float> options = new LinkedHashMap<>();
-            options.put("chao", price*param);
-            
-          
-            String json = new Gson().toJson(options);
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+        ReservationDAO reservationDAO = new ReservationDAO();
+        reservationDAO.editReservationService(rid, sid, quantity);
+        ArrayList<ReservationService> list = new ArrayList<>();
+        list = reservationDAO.getReservationServices(reservationDAO.getReservationById(rid));
+        ServiceDAO serviceDAO = new ServiceDAO();
+        float price = reservationDAO.getReservationServices(reservationDAO.getReservationById(rid), serviceDAO.getService(sid)).get(0).getUnitPrice();
+        float total = 0;
+        for (ReservationService reservationService : list) {
+            total += reservationService.getQuantity() * reservationService.getUnitPrice();
         }
+        Map<String, Float> options = new LinkedHashMap<>();
+        options.put("price", price * quantity);
+        options.put("total", total);
+        String json = new Gson().toJson(options);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 
     //Delete Function to delete service  from Database/Session
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User u = (User) request.getSession().getAttribute("user");
-        CartDAO cartDB = new CartDAO();
-
-        //If user logged in edit to Database
-        if (u != null) {
-            String uid = request.getParameter("uid");
-            String sid = request.getParameter("sid");
-
-            int user_id = Integer.parseInt(uid);
-            int service_id = Integer.parseInt(sid);
-            User user = new User();
-            Service service = new Service();
-            user.setId(user_id);
-            service.setId(service_id);
-            cartDB.deleteCart(user, service);
-        } else {
-
-            //If user not logged in edit to Session
-            ArrayList<CartItem> list = new ArrayList<>();
-            list = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
-
-            if (list != null) {
-
-                int service_id = Integer.parseInt(request.getParameter("sid"));
-                User user = new User();
-                Service service = new Service();
-                service.setId(service_id);
-                for (Iterator<CartItem> iterator = list.iterator(); iterator.hasNext();) {
-                    CartItem item = iterator.next();
-                    if (item.getService().getId() == (service_id)) {
-                        // Remove the current element from the iterator and the list.
-                        iterator.remove();
-                    }
-                }
-
-            }
-            request.getSession().setAttribute("cart", list);
-        }
-
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        int sid = Integer.parseInt(request.getParameter("rid"));
+        ReservationDAO reservationDAO = new ReservationDAO();
+        reservationDAO.deleteReservationService(rid, sid);
         response.sendRedirect("list");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
-    public void addToCartDB(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        String r_serviceid = request.getParameter("serviceid");
-        if (r_serviceid == null) {
-            r_serviceid = "0";//validation
-        }
-
-        int serviceid = Integer.parseInt(r_serviceid);
-        ServiceDAO serviceDB = new ServiceDAO();
-        Service service = serviceDB.getService(serviceid);
-
-        CartDAO cartDB = new CartDAO();
-        cartDB.addToCart((User) request.getSession().getAttribute("user"), service);
-
-        response.sendRedirect("../service/list");
-    }
-
-    public void addToCartSession(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new ArrayList<>();
-            session.setAttribute("cart", cart);
-        }
-
-        UserDAO userDB = new UserDAO();
-        User user = userDB.getUser(-1);
-
-        String r_serviceid = request.getParameter("serviceid");
-        if (r_serviceid == null) {
-            r_serviceid = "0";//validation
-        }
-
-        int serviceid = Integer.parseInt(r_serviceid);
-        ServiceDAO serviceDB = new ServiceDAO();
-        Service service = serviceDB.getService(serviceid);
-
-        boolean added = false;
-        for (CartItem cartitem : cart) {
-            if (cartitem.getService().getId() == serviceid) {
-                cartitem.setQuantity(cartitem.getQuantity() + 1);
-                added = true;
-            }
-            if (added) {
-                break;
-            }
-        }
-        if (!added) {
-            CartItem c = new CartItem();
-            c.setUser(user);
-            c.setService(service);
-            c.setQuantity(1);
-
-            cart.add(c);
-        }
-        session.setAttribute("cart", cart);
-        response.sendRedirect("../service/list");
-    }
-    
-    protected void editReservation(HttpServletRequest request, HttpServletResponse response){
-        
-    }
+//
+//    /**
+//     * Returns a short description of the servlet.
+//     *
+//     * @return a String containing servlet description
+//     */
+//    @Override
+//    public String getServletInfo() {
+//        return "Short description";
+//    }// </editor-fold>
+//
+//    public void addToCartDB(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        HttpSession session = request.getSession();
+//
+//        String r_serviceid = request.getParameter("serviceid");
+//        if (r_serviceid == null) {
+//            r_serviceid = "0";//validation
+//        }
+//
+//        int serviceid = Integer.parseInt(r_serviceid);
+//        ServiceDAO serviceDB = new ServiceDAO();
+//        Service service = serviceDB.getService(serviceid);
+//
+//        CartDAO cartDB = new CartDAO();
+//        cartDB.addToCart((User) request.getSession().getAttribute("user"), service);
+//
+//        response.sendRedirect("../service/list");
+//    }
+//
+//    public void addToCartSession(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        HttpSession session = request.getSession();
+//
+//        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
+//        if (cart == null) {
+//            cart = new ArrayList<>();
+//            session.setAttribute("cart", cart);
+//        }
+//
+//        UserDAO userDB = new UserDAO();
+//        User user = userDB.getUser(-1);
+//
+//        String r_serviceid = request.getParameter("serviceid");
+//        if (r_serviceid == null) {
+//            r_serviceid = "0";//validation
+//        }
+//
+//        int serviceid = Integer.parseInt(r_serviceid);
+//        ServiceDAO serviceDB = new ServiceDAO();
+//        Service service = serviceDB.getService(serviceid);
+//
+//        boolean added = false;
+//        for (CartItem cartitem : cart) {
+//            if (cartitem.getService().getId() == serviceid) {
+//                cartitem.setQuantity(cartitem.getQuantity() + 1);
+//                added = true;
+//            }
+//            if (added) {
+//                break;
+//            }
+//        }
+//        if (!added) {
+//            CartItem c = new CartItem();
+//            c.setUser(user);
+//            c.setService(service);
+//            c.setQuantity(1);
+//
+//            cart.add(c);
+//        }
+//        session.setAttribute("cart", cart);
+//        response.sendRedirect("../service/list");
+//    }
+//    
+//    protected void editReservation(HttpServletRequest request, HttpServletResponse response){
+//        
+//    }
 }

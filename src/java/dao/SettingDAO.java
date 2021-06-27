@@ -63,6 +63,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
+            stm.setInt(3, 1);
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.executeUpdate();
@@ -105,6 +106,7 @@ public class SettingDAO extends BaseDAO {
 
             stm.setString(1, s.getType());
             stm.setString(2, s.getName());
+            stm.setInt(3, 1);
             stm.setString(4, s.getDescription());
             stm.setString(5, s.getStatus());
             stm.setInt(6, s.getId());
@@ -159,5 +161,24 @@ public class SettingDAO extends BaseDAO {
             Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return settings;
+    }
+    
+    public Setting getSettingById(int id){
+        try {
+            String sql ="SELECT id ,`name` FROM setting where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                Setting s = new Setting();
+                s.setId(rs.getInt("id"));
+                s.setName(rs.getString("Name"));
+                return s;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 }
