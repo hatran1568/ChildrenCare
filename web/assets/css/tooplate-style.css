@@ -306,6 +306,8 @@ http://www.tooplate.com/view/2098-health
   -----------------------------------------*/
 
   .navbar-default {
+    display: flex;
+    flex-wrap: nowrap;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(0,0,0,.075);
     border: none;

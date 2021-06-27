@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Customer list</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -14,24 +14,16 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+        
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -40,23 +32,7 @@
 
 
         <!-- HEADER -->
-        <header>
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-4 col-sm-5">
-                        <p>Welcome to a Professional Health Care</p>
-                    </div>
-
-                    <div class="col-md-8 col-sm-7 text-align-right">
-                        <span class="phone-icon"><i style="color:#4267b2" class="fa fa-phone"></i> 010-060-0160</span>
-                        <span class="date-icon"><i style="color:#4267b2" class="fa fa-calendar"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
-                        <span class="email-icon"><i style="color:#4267b2" class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
-                    </div>
-
-                </div>
-            </div>
-        </header>
+        
 
 
         <!-- MENU -->
@@ -204,7 +180,39 @@
 
         <!-- End Banner -->
         <!-- section -->
-        
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
+            
+            <table id="customers" class="table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Fullname</td>
+                        <td>Gender</td>
+                        <td>Email</td>
+                        <td>Mobile</td>
+                        <td>Status</td>
+                        <th>View</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${requestScope.customers}" var="c">
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${c.fullName}</td>
+                            <td><c:if test="${c.gender == true}">Male</c:if>
+                                <c:if test="${c.gender == false}">Female</c:if></td>
+                            <td>${c.email}</td>
+                            <td>${c.mobile}</td>
+                            <td>${c.status.name}</td>
+                            <td><a href="details?uid=${c.id}"><i class="fas fa-eye"></i></a></td>
+                            <td><a href="edit?uid=${c.id}"><i class="fas fa-pen"></i></a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
+        </div>
 
 
         <!-- Start Footer -->
@@ -263,6 +271,7 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             $('ul.nav li.dropdown').hover(function () {
@@ -292,5 +301,52 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+        <script>
+                $(document).ready(function () {
+                    $("#customers").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        columns: [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            {data: "Status", title: "Status", className: "dt-filter"},
+                            null,
+                            null,
+                        ],
+                        'columnDefs': [
+                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
+                            {'orderable': false, 'targets' : [4,5,6,7]},
+                        ],
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
+                });
+            </script> 
+            
     </body>
 </html> 
