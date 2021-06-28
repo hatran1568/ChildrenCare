@@ -15,6 +15,7 @@
         <title>Users List</title>
 
         <script src="../../vendor/jquery/jquery.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
@@ -30,7 +31,7 @@
         <link rel="stylesheet" href="../../assets/css/footer.css"/>
         <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
         <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+
 
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
@@ -50,7 +51,7 @@
                     <header id="header">
                         <div class="logo">
                             <div class="dropdown">
-                                <img class="avatar" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQHBg0QEBIPEA4QEBEQFRgQDRcQExAaFhUWFiATFRUYHSggGB4lGxgWITEhJSkrLi4uFx8zODMsNygtLisBCgoKDQ0NFQ0NDy0ZFRkrLSs3Ky0tLisrKzctNy0rNystLS0rKysrKy0rLSsrKysrKysrKysrKysrKysrKysrK//AABEIAOEA4QMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EADQQAQACAAMFBQcCBwEAAAAAAAABAgMEEQUSITFhQVFxgbETIlKRocHRFDQyQnKCkuHxJP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A/TAGkAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAHVKTiW0iJmegOX2I1nSOM9F2mzL25zWv1lo5fLVy9eEce2Z5yauMzC2de8cdKx15/KE9dld9p8qtITVZ07Kj4p/wAUd9l2jlaJ8Y0aoaMHFyl8LnWdO+OMIHpVTNZGuNEzHu2747fGDUxijvFwpwbzW0aT69YcKgAAAAAAAAAAAAAAAAAA3Mjl/YYMfFPGfwx8vTfzFI77Q9ClWACKAAAAAAgzmXjMYWn80cpYUxuzMTzjg9IyNq4W5jxaOVo+sLEqiAqAAAAAAAAAAAAAAAALOz41zlPP0luMPZv7yvn6S3EqwARQAAAAABS2rTeyuvwzE/b7rqttGf8Ax316esAwwGmQAAAAAAAAAAAAAAAFrZ37ynn6S22FkJ0zlPH7S3UqwARQAAAAABibStM5u0azpGmnHlwhtsHPTrnL+P2WCABWQAAAAAAAAAAAAAAAE+SiZzNJiJmItHZybyHJ03MtSI7on5pkrQAgAAAAAAMDNxP6m+sTGtp5xz4t9U2nTeylp7Y0mPmsGKArIAAAAAAAAAAAAAAADc2fffylOnD5LLN2PicL1/uj0/DSZaAAAAAAAAFLa193LafFMR8uK6ydr4m9jVr8MeqwUAFZAAAAAAAAABQAAAAAEmXxpwMWLR/1t5XH/UYMW005xprrowGnsfE4Xr/d9vwlGkAigAAAAAIM3mP02Frprx056MPExJxMSbTzmdWhti/GlfGft+Wa1EAAAAAAAAAAABAAAAAABNlMb2GPW3ZynwlCA9LE6wKWysSb5eYn+WdIXWWgAAAAFbaN5plLadI+YMrOYvtszaezlHhCAGkABAAAAAAAAAAAAAAAAAAGxsmNMtPW0+kLqts+m5k6ddZ+c6rLLQAAAArbRjXJ38p+sLKPMU38C8d9Zj6A88A0yAAAAAAAAAAAAAAAAAAOqV37xEc5nQpSb20iJmejVyGS9jO9b+L0FXaxu1iO6NH0GVAAAAAAefzWH7LMWjrrHhKJt57KfqK6xwtHLr0lj4mHOFbS0TEtRHAAgAAAAAAAAAAAAPsRvTpHGei9l9mzfjf3Y7o5/wChVGtd+2kRMz0X8vsybcbzpHdHP5tHBwK4NdKxEes+aRNMR4WDXBrpWIhICKAAAAAAAAOcTDjErpaImOroBmZjZnbSfKftLPxMOcO2lomJ6vRuMTDjFrpaImOq6jzo0cxszTjSdek/aVC9JpbSYmJ6qOQBAAAAAH2OMg+LeVyNsbjPu1+s+ELeSyG5EWvxt2R2R+ZX01cRYGXrgR7sce+eMz5pQRQAAAAAAAAAAAAAAABHjYNcaulo19Y80gDIzOzpw+Nfej6x+VF6VTzmRjHiZrwv9J8VlTGMOrVmlpieEw5VAABpbKy2vvz4V/LOrG9aIjnM6PRYVPZ4cVjlEaFWOgGVAAAAAAAAAAAAAAAAAAAAAAUdqZffw9+P4q8+sMh6WY1h57Hw/ZY1q90rEqMBUTZX9zh/1R6t8EqwARQAAAAAAAAAAAAAAAAAAAAABibS/eW8vSAWJVUBUf/Z">
+                                <img class="avatar" src="../../${sessionScope.user.imageLink}">
                                 <div class="dropdown-content">
                                     <p>Profile</p>
                                     <p>Change Password</p>
@@ -109,9 +110,8 @@
                                             <h4 id="0" class="title">Average Rating : </h4>
                                             <script>
                                                 $(document).ready(function () {
-                                                    drawRate(${requestScope.tostar}, 0)
+                                                drawRate(${requestScope.tostar}, 0)
                                                 });
-
                                             </script>
                                             <ul style="list-style-type: none;">
                                                 <c:forEach items="${requestScope.service}" var="list">
@@ -120,9 +120,8 @@
                                                     </li>
                                                     <script>
                                                         $(document).ready(function () {
-                                                            drawRate(${star[list.id -1]},${list.id})
+                                                        drawRate(${star[list.id -1]},${list.id})
                                                         });
-
                                                     </script>
                                                 </c:forEach>
                                             </ul>
@@ -158,8 +157,10 @@
 
                                         <div style="text-align: center" class="header">
                                             <h3 class="title">Trend</h3>
-                                            <input id="start" type="date" name="start">
-                                            <input id="end" type="date" name="end">
+                                            <form id="myForm" action="view" method="GET">
+                                                <input onchange="submit()" id="start" type="date" name="start" max="No">
+                                                <input id="end" onchange="submit()" type="date" name="end">
+                                            </form>
                                             <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
                                         </div>
 
@@ -190,25 +191,11 @@
                         <ul>
                             <li><a href="../../home">Homepage</a></li>
                             <li><a href="../../admin/user/list">User</a></li>
-                            <li><a href="../post/list">Blog</a></li>
+                            
                             <li><a href="#">Chart</a></li>
                             <li><a href="../../admin/setting/list">Settings</a></li>
-                            <li>
-                                <span class="opener">Service</span>
-                                <ul>
-                                    <li><a href="#">Examination</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="opener">Other</span>
-                                <ul>
-                                    <li><a href="#">Se</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
+                           
+                           
 
 
                         </ul>
@@ -251,6 +238,9 @@
 </footer>
 <!-- Scripts -->
 <!-- Bootstrap core JavaScript -->
+
+
+
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script src="../../assets/js/browser.min.js"></script>
@@ -258,77 +248,112 @@
 <script src="../../assets/js/transition.js"></script>
 <script src="../../assets/js/owl-carousel.js"></script>
 <script src="../../assets/js/custom.js"></script>
-<script>
-                                                        var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
-                                                        var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
-                                                        var barColors = [
-                                                            "#00aba9",
-                                                            "#b91d47",
-                                                            "#2b5797",
-                                                            "#f7ef02",
-                                                            "#0026ff",
-                                                            "#ff0000"
-                                                        ];
 
-                                                        new Chart("myChart", {
-                                                            type: "pie",
-                                                            data: {
-                                                                labels: xValues,
-                                                                datasets: [{
-                                                                        backgroundColor: barColors,
-                                                                        data: yValues
-                                                                    }]
-                                                            },
-                                                            options: {
-                                                                title: {
-                                                                    display: true,
-                                                                    text: "World Wide Wine Production 2018"
-                                                                }
-                                                            }
-                                                        });
+
+<script>
+                                                       
 
 
 </script>
 <script>
-    var xValues = [1, 2, 3, 4, 5, 6, 7];
-
-    new Chart("Chart1", {
-        type: "line",
-        data: {
+    var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
+    var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
+    var barColors = [
+            "#00aba9",
+            "#b91d47",
+            "#2b5797",
+            "#f7ef02",
+            "#0026ff",
+            "#ff0000"
+    ];
+    new Chart("myChart", {
+    type: "pie",
+            data: {
             labels: xValues,
-            datasets: [{
-                    data: [2, 11, 5, 6, 2, 1, 2],
-                    borderColor: "green",
-                    fill: false
-                }, {
-                    data: [2, 4, 1, 3, 2, 1, 1],
-                    borderColor: "red",
-                    fill: false
-                }]
-        },
-        options: {
-            legend: {display: false}
-        }
+                    datasets: [{
+                    backgroundColor: barColors,
+                            data: yValues
+                    }]
+            },
+            options: {
+            title: {
+            display: true,
+                    text: "World Wide Wine Production 2018"
+            }
+            }
     });</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+
+    });
+    var xValues = [<c:forEach var = "i" begin="1" end="${requestScope.listre.size()}">
+        ${i},
+    </c:forEach>];
+    new Chart("Chart1", {
+    type: "line",
+            data: {
+            labels: xValues,
+                    datasets: [{
+                    data: [<c:forEach var = "i" items="${requestScope.listre}">
+        ${i},
+    </c:forEach>],
+                            borderColor: "green",
+                            fill: false
+                    }, {
+                    data: [<c:forEach var = "i" items="${requestScope.listre}">
+        ${i},
+    </c:forEach>],
+                            borderColor: "red",
+                            fill: false
+                    }]
+            },
+            options: {
+            legend: {display: false}
+            }
+    });
+    function submit(){
+        document.getElementById("myForm").submit();
+    }
+    </script>
 
 <script>
     function drawRate(star, ele) {
 
-        for (var i = 0; i < star; i++) {
-            document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
-        }
-        for (var i = 0; i < 5 - star; i++) {
-            document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
-        }
+    for (var i = 0; i < star; i++) {
+    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
     }
-    $(document).ready(function () {
-        var date = new Date();
-       document.getElementById("end").valueAsDate = date;
-        ;
-         date.setDate(date.getDate() - 7);
-        document.getElementById("start").valueAsDate = date
-    });
-</script>
+    for (var i = 0; i < 5 - star; i++) {
+    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
+    }
+    }
+
+
+   
+    var date = new Date();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10){
+    dd = '0' + dd
+    }
+    if (mm < 10){
+    mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("end").valueAsDate = date;
+    ;
+    date.setDate(date.getDate() - 7);
+    document.getElementById("start").valueAsDate = date
+            document.getElementById("start").setAttribute("max", today);
+                        document.getElementById("end").setAttribute("max", today);
+
+   </script>
+
+
 <style>
     tfoot {
         display: table-header-group;

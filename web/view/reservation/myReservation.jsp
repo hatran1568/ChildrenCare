@@ -126,7 +126,7 @@
                             <c:if test="${ not empty sessionScope.user}">
                                 <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p> <a href="admin/setting/list">Profile</a></p>
@@ -139,34 +139,37 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
-                            <c:if test="${sessionScope.user.role.name == 'Manager'}">
-                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
-                                <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
+                            <c:if test="${sessionScope.user.role.name == 'Manager'|| sessionScope.user.role.name == 'Admin'}">
+                                <li class="dropdown"><a href="../../home" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="my" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
 
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/blog/list">Blogs</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
 
                                     </div>
                                 </li>
+                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="../../home" class="smoothScroll">Home</a></li>
+                                <li><a href="../../service/list" class="smoothScroll">Services</a></li>
+                                <li><a href="../../post/list" class="smoothScroll">Blog</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="my">My reservation</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
 
                                     </div>
@@ -175,9 +178,9 @@
 
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="../../home" class="smoothScroll">Home</a></li>
+                                <li><a href="../../service/list" class="smoothScroll">Services</a></li>
+                                <li><a href="../../post/list" class="smoothScroll">Blog</a></li>
                                 <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -260,7 +263,7 @@
                                                     <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
                                                     <div class="latest-stories">
                                                         <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                                <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
                                                         </div>
                                                         <div class="stories-info">
                                                             <a href="#"><h5>Amazing Technology</h5></a>

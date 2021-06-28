@@ -69,6 +69,7 @@
                                 </div>
                             </nav>
                             <div class="search-box">
+                                
                                 <a href="../cart/list" class="search-btn">
                                     <img style="width: 70px;" src="../assets/images/cart.png" alt="#" />
                                 </a>

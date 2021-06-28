@@ -72,8 +72,9 @@ public class DashboardController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         long DAY_IN_MS = 1000 * 60 * 60 * 24;
-       
-        ReservationDAO resDB = new ReservationDAO();
+        ArrayList<Integer> reservationSuccessList = new ArrayList<>();
+        ArrayList<Integer> reservationList = new ArrayList<>();
+       ReservationDAO resDB = new ReservationDAO();
         String r_start = request.getParameter("start");
         String r_end = request.getParameter("end");
         if (r_start != null && r_end != null) {
@@ -85,8 +86,6 @@ public class DashboardController extends HttpServlet {
             for (LocalDate date1 : dates) {
                 date.add(Date.valueOf(date1));
             }
-            ArrayList<Integer> reservationSuccessList = new ArrayList<>();
-            ArrayList<Integer> reservationList = new ArrayList<>();
 
             for (Date date1 : date) {
                 reservationSuccessList.add(resDB.countReservation(27, date1));
@@ -96,10 +95,22 @@ public class DashboardController extends HttpServlet {
         }
 
         if (r_start == null || r_end == null) {
-            long millis=System.currentTimeMillis();
-            Date start =  new Date(millis);
-            Date end =  new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
-        
+            long millis = System.currentTimeMillis();
+            Date end = new Date(millis);
+            Date start = new Date(System.currentTimeMillis() - (7 * DAY_IN_MS));
+            List<LocalDate> dates = new ArrayList<>();
+            dates = getDatesBetweenUsingJava8(start.toLocalDate(), end.toLocalDate());
+            ArrayList<Date> date = new ArrayList<>();
+            for (LocalDate date1 : dates) {
+                date.add(Date.valueOf(date1));
+            }
+
+            for (Date date1 : date) {
+                reservationSuccessList.add(resDB.countReservation(27, date1));
+                reservationList.add(resDB.countReservation(date1));
+
+            }
+
         }
 
         int submit = resDB.countReservation(20);
@@ -168,8 +179,12 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("sum", sum);
         request.setAttribute("registed", registed);
         request.setAttribute("reserved", reserved);
+        request.setAttribute("listSuccessre", reservationSuccessList);
+        request.setAttribute("listre", reservationList);
 
+       
         request.getRequestDispatcher("../../view/dashboard/dashboard.jsp").forward(request, response);
+
     }
 
     /**
