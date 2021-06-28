@@ -13,7 +13,11 @@ import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -69,14 +73,9 @@ public class ReservationContactController extends HttpServlet {
             case "/reservation/contact":
                 getReservationInfo(request,response);
                 break;
-//            case "/reservation/contact":
-//                getCartInfo(request, response);
-//                break;
-//
-//            case "/reservation/contact/add":
-//                addReceiver(request, response);
-//                break;
-//
+            case "/reservation/contact/addreceiver":
+                getReceiverInfo(request,response);
+                break;
 //            case "/reservation/contact/forward":
 //                getReservationInfo(request, response);
 //                break;
@@ -315,7 +314,53 @@ public class ReservationContactController extends HttpServlet {
 
     private void getReservationInfo(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
-        int reservationID = Integer.parseInt((String) request.getSession().getAttribute("reservationID"));
+        int rid = Integer.parseInt(request.getParameter("reservation_id"));
+        ReservationDAO reservationDB = new ReservationDAO();
+        Reservation reservation = reservationDB.getReservationById(rid);
+        ArrayList<ReservationService> reservationServices  = reservationDB.getReservationServices(reservation);
+        double totalCost = 0;
+        for(ReservationService rs: reservationServices){
+            totalCost += rs.getQuantity()*rs.getUnitPrice();
+        }
+        User u = (User) request.getSession().getAttribute("user");
+        request.setAttribute("reservation", reservation);
+        request.setAttribute("services", reservationServices);
+        request.setAttribute("user", u);
+        request.setAttribute("totalCost", totalCost);
+        request.getRequestDispatcher("../view/reservation/reservationContact.jsp").forward(request, response);
+    }
+
+    private void getReceiverInfo(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+        User u = (User) request.getSession().getAttribute("user");
+        Receiver r = new Receiver();
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        ReservationDAO reservationDB = new ReservationDAO();
+        Reservation reservation = reservationDB.getReservationById(rid);
+        ReceiverDAO receiverDB = new ReceiverDAO();
+        String email = request.getParameter("email");
+        r.setEmail(email);
+        r.setFullName(request.getParameter("name"));
+        r.setUser(u);
+        r.setGender(request.getParameter("gender").equals("male"));
+        r.setMobile(request.getParameter("mobile"));
+        r.setAddress(request.getParameter("address"));
+        if (!receiverDB.checkExistingReceiver(email)){
+            receiverDB.addReceiver(r);
+            Receiver newReceiver = receiverDB.getReceiverByEmail(email);
+            reservationDB.editReceiver(rid, newReceiver.getId());
+        } else{
+            reservationDB.editReceiver(rid, receiverDB.getReceiverByEmail(email).getId());
+        }
         
+        String checkupTime = request.getParameter("checkup-time");
+        try {
+            java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(checkupTime);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ReservationContactController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.sendRedirect("../reservationcompletion");
     }
 }

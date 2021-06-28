@@ -477,5 +477,15 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public void editReceiver(int reservationID, int receiverID){
+        try{
+            String sql = "update reservation set receiver_id = ? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, receiverID);
+            stm.setInt(2, reservationID);
+            stm.executeUpdate();
+        }catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

@@ -155,19 +155,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ReservationContactController</servlet-name>
-        <url-pattern>/reservation/contact/add</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReservationContactController</servlet-name>
-        <url-pattern>/reservation/contact/forward</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReservationContactController</servlet-name>
-        <url-pattern>/reservation/contact/forwardedit</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReservationContactController</servlet-name>
-        <url-pattern>/reservation/contactedit</url-pattern>
+        <url-pattern>/reservation/contact/addreceiver</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
