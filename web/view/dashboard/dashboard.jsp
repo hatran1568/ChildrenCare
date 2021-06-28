@@ -426,7 +426,8 @@
         min-height: 430px;
     }
     h4{
-        margin-top: 30% !important;
+        margin-top: 30% !important
+    }
     </style>
 </body>
 

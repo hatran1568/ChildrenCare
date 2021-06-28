@@ -140,9 +140,14 @@
                     </c:if>
                     <c:if test="${not empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#top" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Services</a></li>
+                                <li><a href="#" class="smoothScroll">Posts</a></li>
+                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <c:if test="${sessionScope.user.role.name == 'Manager'|| sessionScope.user.role.name == 'Admin'}">
                                <li class="dropdown"><a href="../../home" class="smoothScroll">Home</a></li>
                                 <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                                
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
 
 
@@ -164,9 +169,7 @@
                                 <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Posts</a></li>
+                                
                                 <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
@@ -179,9 +182,7 @@
 
                             </c:if>
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                
                                 <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                     </c:if>
                             
