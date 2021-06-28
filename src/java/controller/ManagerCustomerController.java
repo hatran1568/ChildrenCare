@@ -161,6 +161,9 @@ public class ManagerCustomerController extends HttpServlet {
         u.setFullName(request.getParameter("full-name"));
         u.setImageLink(request.getParameter("image-link"));
         u.setMobile(request.getParameter("mobile"));
+        Setting s = new Setting();
+        s.setId(Integer.parseInt(request.getParameter("status")));
+        u.setStatus(s);
         Role r = new Role();
         r.setId(4);
         u.setRole(r);

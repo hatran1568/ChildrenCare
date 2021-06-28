@@ -3,42 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/list.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/tooplate-style.css</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/bootstrap.min.css</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/newhomepage.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/newhomepage.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReservationDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Service.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/userprofile.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/dashboard/dashboard.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationInformation.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReceiverDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/list.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/DashboardController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/homepage.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/vendor/jquery/jquery.js</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/MyReservationController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SliderDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/myReservation.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/editReservationContact.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/reservation/reservationContact.jsp</file>
-=======
-            <file>file:/C:/Users/HP/OneDrive/Desktop/newdao/src/java/dao/SettingDAO.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/newdao/src/java/dao/ServiceDAO.java</file>
->>>>>>> 645595c89b844b3cc15ce516f1da31cf2f5349a5
->>>>>>> 004128871385e8888f751e8d1f2e90331b036a0f
         </group>
     </open-files>
 </project-private>

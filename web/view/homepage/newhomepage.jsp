@@ -143,7 +143,7 @@
                                         <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/blog/list">Blogs</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
 
@@ -157,7 +157,7 @@
                             <c:if test="${sessionScope.user.role.name == 'Staff'}">
                                 <li><a href="#top" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="#" class="smoothScroll">Posts</a></li>
                                <li class="dropdown">
                                     <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
                                     <div class="dropdown-menu">
@@ -172,10 +172,10 @@
                             <c:if test="${sessionScope.user.role.name == 'Customer'}">
                                 <li><a href="#" class="smoothScroll">Home</a></li>
                                 <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a href="#" class="smoothScroll">Blogs</a></li>
                                 <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             </c:if>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                            
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
@@ -185,7 +185,7 @@
                                     <p> <a href="#">Log Out</a></p>
                                 </div>
                             </div>
-
+                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </ul>
                     </c:if>
                 </div>
