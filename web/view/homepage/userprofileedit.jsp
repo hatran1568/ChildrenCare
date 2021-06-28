@@ -209,7 +209,7 @@
                     <form action="update" method="POST" enctype="multipart/form-data">
                     <div class="tab-content ml-1" id="myTabContent" style="margin-left: 32%; margin-top: 5% ">
                         <b>Change Profile Picture</b>
-                        <input type="file" name="imageLink" accept="image/*,.jpg" style="margin-top: "/><br>
+                        <input onchange="loadFile(event)" type="file" name="imageLink" accept="image/*,.jpg" style="margin-top: "/><br>
                         <div class="row">
                             <div class="col-sm-3 col-md-2 col-5">
                                 <label style="font-weight:bold;">Full Name</label>
