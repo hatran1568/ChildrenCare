@@ -14,10 +14,14 @@ import dao.UserDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.EmailVerify;
 
 /**
  *
@@ -210,6 +214,13 @@ public class ManagerCustomerController extends HttpServlet {
         r.setId(4);
         u.setRole(r);
         UserDAO userDB = new UserDAO();
+        EmailVerify e = new EmailVerify();
+        String emailContent = "Your password for the Children Care System: " + password;
+        try {
+            e.sendText(userDB.getUserByEmail(request.getParameter("email")), emailContent);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         userDB.addCustomer(u, u1.getId());
         response.sendRedirect("list");
     }
