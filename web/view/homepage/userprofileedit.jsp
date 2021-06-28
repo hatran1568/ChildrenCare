@@ -13,17 +13,17 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link href="../assets/css/mobile-style.css" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/css/animate.css">
+        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../assets/css/custom.css" />
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -174,7 +174,7 @@
                             </c:if>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                             <div class="dropdown ">
-                                <img class="avatar" src="${sessionScope.user.imageLink}">
+                                <img class="avatar" src="../${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
                                     <p> <a href="#">Profile</a></p>
@@ -198,7 +198,7 @@
                     <div class="col-2" style="padding-top: 0%; float: left; margin-left: 20%; margin-top: 5%">
                         <div class="d-flex justify-content-start">
                             <div class="image-container">
-                                <img src="${sessionScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+                                <img src="../${sessionScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
 <!--                                <div class="middle">
                                     <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
                                     <input type="file" style="display: none;" id="profilePicture" name="file" />
@@ -206,71 +206,66 @@
                             </div>
                         </div>
                     </div>
+                    <form action="update" method="POST" enctype="multipart/form-data">
                     <div class="tab-content ml-1" id="myTabContent" style="margin-left: 32%; margin-top: 5% ">
+                        <b>Change Profile Picture</b>
+                        <input type="file" name="imageLink" accept="image/*,.jpg" style="margin-top: "/><br>
                         <div class="row">
                             <div class="col-sm-3 col-md-2 col-5">
                                 <label style="font-weight:bold;">Full Name</label>
                             </div>
                             <div class="col-md-8 col-6">
-                                ${sessionScope.user.fullName}
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="fullName" value="${requestScope.user.fullName}">
                             </div>
                         </div>
                         <hr />
-                        <div class="row" style="margin-top: -12.5%">
+                        <div class="row" style="margin-top: -5%">
                             <div class="col-sm-3 col-md-2 col-5">
                                 <label style="font-weight:bold;">Gender</label>
                             </div>
                             <div class="col-md-8 col-6">
-                                <c:if test="${sessionScope.user.gender eq true}">Male</c:if>
-                                <c:if test="${sessionScope.user.gender eq false}">Female</c:if>
+                                <select class="form-control" name="gender" style="max-width: 50%; margin-top:-1%">
+                                        <option <c:if test="${sessionScope.user.gender eq true}">selected</c:if> value="true">Male</option>
+                                        <option <c:if test="${sessionScope.user.gender eq false}">selected</c:if> value="false">Female</option>
+                                </select>
                                 </div>
                             </div>
                             <hr />
 
-                            <div class="row" style="margin-top: -6%">
+                            <div class="row" style="margin-top: -1%">
                                 <div class="col-sm-3 col-md-2 col-5">
                                     <label style="font-weight:bold;">Email</label>
                                 </div>
                                 <div class="col-md-8 col-6">
-                                ${sessionScope.user.email}
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                            
                             </div>
                         </div>
                         <hr />
 
 
-                        <div class="row">
+                        <div class="row" style="margin-top: -1%">
                             <div class="col-sm-3 col-md-2 col-5">
                                 <label style="font-weight:bold;">Mobile</label>
                             </div>
                             <div class="col-md-8 col-6">
-                                ${sessionScope.user.mobile}
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
+                            
                             </div>
                         </div>
                         <hr />
-                        <div class="row">
+                        <div class="row" style="margin-top: -1%">
                             <div class="col-sm-3 col-md-2 col-5">
                                 <label style="font-weight:bold;">Address</label>
                             </div>
                             <div class="col-md-8 col-6">
-                                ${sessionScope.user.address}
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="address" value="${requestScope.user.address}">
+                            
                             </div>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <div class="col-sm-3 col-md-2 col-5">
-                                <label style="font-weight:bold;">Status</label>
-                            </div>
-                            <div class="col-md-8 col-6">
-                                <c:if test="${sessionScope.user.status.id eq 13}">Not Verified</c:if>
-                                <c:if test="${sessionScope.user.status.id eq 14}">Active</c:if>
-                                <c:if test="${sessionScope.user.status.id eq 15}">Contact</c:if>
-                                <c:if test="${sessionScope.user.status.id eq 16}">Potential</c:if>
-                                <c:if test="${sessionScope.user.status.id eq 17}">Customer</c:if>
-                                <c:if test="${sessionScope.user.status.id eq 18}">Inactive</c:if>
-                                </div>
                         </div><br>
-                            <button style="margin-right: 15%" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Information</button>
+                            <button type="submit" style="margin-right: 15%" class="btn btn-primary">Submit</button>
                     </div>
+                    </form>
                         </table>
                             </div>
                     
@@ -371,14 +366,14 @@
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.sticky.js"></script>
-        <script src="assets/js/jquery.stellar.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/smoothscroll.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/custom-new.js"></script>
+        <script src="../assets/js/jquery.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.sticky.js"></script>
+        <script src="../assets/js/jquery.stellar.min.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/smoothscroll.js"></script>
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             $('ul.nav li.dropdown').hover(function () {
@@ -386,6 +381,15 @@
             }, function () {
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
+        </script>
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            };
         </script>
         <c:if test="${empty sessionScope.mess}">
                 <c:if test="${ not empty sessionScope.alert}">

@@ -305,6 +305,18 @@
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/userprofile</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userprofile/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userprofile/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/userprofile/login</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

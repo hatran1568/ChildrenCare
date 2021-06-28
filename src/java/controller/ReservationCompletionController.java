@@ -5,7 +5,6 @@
  */
 package controller;
 
-import bean.CartItem;
 import bean.Receiver;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.User;
 import bean.Reservation;
 import bean.Service;
-import dao.CartDAO;
+import bean.Setting;
 import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
@@ -91,7 +90,9 @@ public class ReservationCompletionController extends HttpServlet {
 
         reservation.setReservation_date(date);
         //Set status
-        reservation.setStatus("Submitted");
+        Setting set = new Setting();
+        set.setId(20);
+        reservation.setStatus(set);
         //Set Staff
         ArrayList<User> staff = userDB.getStaff();
         int minRes = 5;
@@ -109,8 +110,7 @@ public class ReservationCompletionController extends HttpServlet {
         }
         reservation.setStaff(assignStaff);
         //Set numberofperson
-        reservation.setNumber_of_person(1);
-        reservation.setStatus("Submited");
+        reservation.setStatus(set);
         Reservation reservationedit = new Reservation();
         reservationedit =(Reservation) request.getSession().getAttribute("reservationidedit");
         if(reservationedit!=null){

@@ -93,12 +93,12 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" name="status">
-                                        <option <c:if test="${requestScope.user.status==13}">selected</c:if> value="13">Not Verified</option>
-                                        <option <c:if test="${requestScope.user.status==14}">selected</c:if> value="14">Active</option>
-                                        <option <c:if test="${requestScope.user.status==15}">selected</c:if> value="15">Contact</option>
-                                        <option <c:if test="${requestScope.user.status==16}">selected</c:if> value="16">Potential</option>
-                                        <option <c:if test="${requestScope.user.status==17}">selected</c:if> value="17">Customer</option>
-                                        <option <c:if test="${requestScope.user.status==18}">selected</c:if> value="18">Inactive</option>
+                                        <option <c:if test="${requestScope.user.status.id==13}">selected</c:if> value="13">Not Verified</option>
+                                        <option <c:if test="${requestScope.user.status.id==14}">selected</c:if> value="14">Active</option>
+                                        <option <c:if test="${requestScope.user.status.id==15}">selected</c:if> value="15">Contact</option>
+                                        <option <c:if test="${requestScope.user.status.id==16}">selected</c:if> value="16">Potential</option>
+                                        <option <c:if test="${requestScope.user.status.id==17}">selected</c:if> value="17">Customer</option>
+                                        <option <c:if test="${requestScope.user.status.id==18}">selected</c:if> value="18">Inactive</option>
                                     </select>
                                 </div>
 

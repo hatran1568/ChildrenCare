@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bean.Role;
+import bean.Setting;
 import bean.User;
 import dao.ReceiverDAO;
 import dao.SettingDAO;
@@ -196,7 +197,9 @@ public class UserController extends HttpServlet {
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
         u.setImageLink("None");
-        u.setStatus(Integer.parseInt(request.getParameter("status")));
+        Setting set = new Setting();
+        set.setId(Integer.parseInt(request.getParameter("status")));
+        u.setStatus(set);
         UserDAO userDB = new UserDAO();
         userDB.addUser(u, -1);
         EmailVerify e = new EmailVerify();
@@ -229,7 +232,9 @@ public class UserController extends HttpServlet {
 
         User u = new User();
         u.setId(Integer.parseInt(request.getParameter("id")));
-        u.setStatus(Integer.parseInt(request.getParameter("status")));
+        Setting set = new Setting();
+        set.setId(Integer.parseInt(request.getParameter("status")));
+        u.setStatus(set);
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
@@ -408,7 +413,7 @@ public class UserController extends HttpServlet {
         
         //Check if user input true code and set status to true
         if (code.equals(actual)) {
-            userDb.updateStatus(u, true);
+            userDb.updateStatus(u, 14);
             String alert = "Register Successfully!";
             User user = new User();
             ArrayList<User> list = new ArrayList<User>();
