@@ -361,6 +361,6 @@ public class ReservationContactController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(ReservationContactController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("../reservationcompletion");
+        response.sendRedirect("../reservationcompletion?rid=" + rid);
     }
 }

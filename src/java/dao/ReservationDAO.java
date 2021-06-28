@@ -256,10 +256,11 @@ public class ReservationDAO extends BaseDAO {
 
     public void submitReservation(int reservation_id) {
         try {
-            String sql = "update reservation set reservation.status = 'submitted'\n"
+            String sql = "update reservation set reservation.status_id = ?\n"
                     + "where reservation.id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, reservation_id);
+            stm.setInt(1, 20);
+            stm.setInt(2, reservation_id);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
