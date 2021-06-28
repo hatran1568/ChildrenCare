@@ -115,7 +115,7 @@
                     <header id="header">
                         <div class="logo">
                             <div class="dropdown">
-                                <img class="avatar" src="${sessionScope.user.imageLink}"/>
+                                <img class="avatar" src="../../${sessionScope.user.imageLink}"/>
                                 <div class="dropdown-content">
                                     <p>Profile</p>
                                     <p>Change Password</p>
@@ -178,12 +178,12 @@
                                         <td>${a.email}</td>
                                         <td>${a.mobile}</td>
                                         <td>${a.role.name}</td>
-                                        <td><c:if test="${a.status == 13}">Not Verified</c:if>
-                                            <c:if test="${a.status == 14}">Active</c:if>
-                                            <c:if test="${a.status == 15}">Contact</c:if>
-                                            <c:if test="${a.status == 16}">Potential</c:if>
-                                            <c:if test="${a.status == 17}">Customer</c:if>
-                                            <c:if test="${a.status == 18}">Inactive</c:if></td>
+                                        <td><c:if test="${a.status.id == 13}">Not Verified</c:if>
+                                            <c:if test="${a.status.id == 14}">Active</c:if>
+                                            <c:if test="${a.status.id == 15}">Contact</c:if>
+                                            <c:if test="${a.status.id == 16}">Potential</c:if>
+                                            <c:if test="${a.status.id == 17}">Customer</c:if>
+                                            <c:if test="${a.status.id == 18}">Inactive</c:if></td>
                                         <td><a href="details?id=${a.id}"><i class="fas fa-eye"></i></a></td>
                                         <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                                     </tr>
@@ -222,27 +222,8 @@
                         <ul>
                             <li><a href="../../home">Homepage</a></li>
                             <li><a href="../../admin/user/list">User</a></li>
-                            <li><a href="../post/list">Blog</a></li>
-                            <li><a href="#">Chart</a></li>
+                            <li><a href="../../admin/dashboard/view">Chart</a></li>
                             <li><a href="../../admin/setting/list">Settings</a></li>
-                            <li>
-                                <span class="opener">Service</span>
-                                <ul>
-                                    <li><a href="#">Examination</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="opener">Other</span>
-                                <ul>
-                                    <li><a href="#">Se</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-
-
                         </ul>
                     </nav>
 

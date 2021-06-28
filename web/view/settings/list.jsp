@@ -35,7 +35,7 @@
         $(document).ready(function () {
             $('#settings').DataTable({
                 "searching": true,
-                "paging": false,
+                "paging": true,
                 'columnDefs': [
                     {'className': 'text-center', 'targets': 0},
                     {'className': 'text-center', 'targets': 4},

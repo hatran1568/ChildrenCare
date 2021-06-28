@@ -256,10 +256,11 @@ public class ReservationDAO extends BaseDAO {
 
     public void submitReservation(int reservation_id) {
         try {
-            String sql = "update reservation set reservation.status = 'submitted'\n"
+            String sql = "update reservation set reservation.status_id = ?\n"
                     + "where reservation.id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, reservation_id);
+            stm.setInt(1, 20);
+            stm.setInt(2, reservation_id);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -485,6 +486,100 @@ public class ReservationDAO extends BaseDAO {
             stm.setInt(2, reservationID);
             stm.executeUpdate();
         }catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public int getPendingReservation(User customer) {
+        int i = 0;
+        try {
+            String sql = "select id \n"
+                    + "from reservation r join (select id as stt_id, name as stt_name from setting where type = \"Reservation Status\" and name = \"Pending\") as s\n"
+                    + "on r.status_id = s.stt_id\n"
+                    + "where customer_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, customer.getId());
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                i = rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return i;
+    }
+
+    public int addPendingReservation(User customer) {
+        int id = 0;
+        try {
+            String sql = "INSERT INTO `swp`.`reservation` (`customer_id`, `status_id`) VALUES (?, ?);";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, customer.getId());
+            stm.setInt(2, 19);
+            stm.executeUpdate();
+            sql = "SELECT LAST_INSERT_ID() as id";
+            stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public int checkReservationServiceExists(Reservation r, Service s) {
+        int quantity = 0;
+        try {
+            String sql = "select * from reservation_service where reservation_id = ? and service_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, r.getId());
+            stm.setInt(2, s.getId());
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                quantity = rs.getInt("quantity");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return quantity;
+    }
+
+    public void addReservationService(Reservation r, Service s, int quantity) {
+        try {
+            int current_quantity = checkReservationServiceExists(r, s);
+            String sql = "select * from reservation_service";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            if (current_quantity == 0) {
+                sql = "INSERT INTO `swp`.`reservation_service`\n"
+                        + "(`reservation_id`,\n"
+                        + "`service_id`,\n"
+                        + "`quantity`,\n"
+                        + "`unit_price`)\n"
+                        + "VALUES\n"
+                        + "(?,\n"
+                        + "?,\n"
+                        + "?,\n"
+                        + "?);";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, r.getId());
+                stm.setInt(2, s.getId());
+                stm.setInt(3, quantity);
+                stm.setFloat(4, s.getSalePrice());
+            } else if (current_quantity > 0) {
+                sql = "UPDATE `swp`.`reservation_service`\n"
+                        + "SET\n"
+                        + "`quantity` = ?\n"
+                        + "WHERE `reservation_id` = ? AND `service_id` = ?";
+                stm = connection.prepareStatement(sql);
+                stm.setInt(1, current_quantity + quantity);
+                stm.setInt(2, r.getId());
+                stm.setInt(3, s.getId());
+            }
+            stm.executeUpdate();
+        } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

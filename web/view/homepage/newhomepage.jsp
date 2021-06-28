@@ -113,10 +113,12 @@
                                     </div>
                                 </div>  
                             </div>
+
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
                             <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My reservation</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">

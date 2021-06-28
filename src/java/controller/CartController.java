@@ -82,13 +82,9 @@ public class CartController extends HttpServlet {
             case "/cart/edit":
                 editOneItemCart(request, response);
                 break;
-//            case "/cart/add":
-//                if (user == null || user.getId() == -1) {
-//                    addToCartSession(request, response);
-//                } else {
-//                    addToCartDB(request, response);
-//                }
-//                break;
+            case "/cart/add":
+                addToCart(request, response);
+                break;
             case "/cart/delete":
                 deleteCart(request, response);
                 break;
@@ -263,81 +259,48 @@ public class CartController extends HttpServlet {
         reservationDAO.deleteReservationService(rid, sid);
         response.sendRedirect("list");
     }
-//
-//    /**
-//     * Returns a short description of the servlet.
-//     *
-//     * @return a String containing servlet description
-//     */
-//    @Override
-//    public String getServletInfo() {
-//        return "Short description";
-//    }// </editor-fold>
-//
-//    public void addToCartDB(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//
-//        String r_serviceid = request.getParameter("serviceid");
-//        if (r_serviceid == null) {
-//            r_serviceid = "0";//validation
-//        }
-//
-//        int serviceid = Integer.parseInt(r_serviceid);
-//        ServiceDAO serviceDB = new ServiceDAO();
-//        Service service = serviceDB.getService(serviceid);
-//
-//        CartDAO cartDB = new CartDAO();
-//        cartDB.addToCart((User) request.getSession().getAttribute("user"), service);
-//
-//        response.sendRedirect("../service/list");
-//    }
-//
-//    public void addToCartSession(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//
-//        ArrayList<CartItem> cart = (ArrayList<CartItem>) session.getAttribute("cart");
-//        if (cart == null) {
-//            cart = new ArrayList<>();
-//            session.setAttribute("cart", cart);
-//        }
-//
-//        UserDAO userDB = new UserDAO();
-//        User user = userDB.getUser(-1);
-//
-//        String r_serviceid = request.getParameter("serviceid");
-//        if (r_serviceid == null) {
-//            r_serviceid = "0";//validation
-//        }
-//
-//        int serviceid = Integer.parseInt(r_serviceid);
-//        ServiceDAO serviceDB = new ServiceDAO();
-//        Service service = serviceDB.getService(serviceid);
-//
-//        boolean added = false;
-//        for (CartItem cartitem : cart) {
-//            if (cartitem.getService().getId() == serviceid) {
-//                cartitem.setQuantity(cartitem.getQuantity() + 1);
-//                added = true;
-//            }
-//            if (added) {
-//                break;
-//            }
-//        }
-//        if (!added) {
-//            CartItem c = new CartItem();
-//            c.setUser(user);
-//            c.setService(service);
-//            c.setQuantity(1);
-//
-//            cart.add(c);
-//        }
-//        session.setAttribute("cart", cart);
-//        response.sendRedirect("../service/list");
-//    }
-//    
-//    protected void editReservation(HttpServletRequest request, HttpServletResponse response){
-//        
-//    }
+
+    protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = (User) request.getSession().getAttribute("user");
+        String reservation_id = "";
+        if(request.getSession().getAttribute("reservation_id") == null) 
+            reservation_id = (String) request.getSession().getAttribute("reservation_id");
+        else reservation_id = request.getSession().getAttribute("reservation_id").toString();
+        int rid;
+        int service_id = Integer.parseInt(request.getParameter("service_id"));
+        ReservationDAO reservationDB = new ReservationDAO();
+        ServiceDAO serviceDB = new ServiceDAO();
+        if (user == null) {
+            user = new User();
+            user.setId(-1);
+            request.getSession().setAttribute("user", user);
+            if (reservation_id == null) {
+                rid = reservationDB.addPendingReservation(user);
+                Reservation reservation = reservationDB.getReservationById(rid);
+                Service service = serviceDB.getService(service_id);
+                reservationDB.addReservationService(reservation, service, 1);
+                request.getSession().setAttribute("reservation_id", rid);
+            }
+        } else if (user.getId() == -1) {
+            rid = Integer.parseInt(reservation_id);
+            Reservation reservation = reservationDB.getReservationById(rid);
+            Service service = serviceDB.getService(service_id);
+            reservationDB.addReservationService(reservation, service, 1);
+        } else if(user.getId() > 0){
+            int pr_id = reservationDB.getPendingReservation(user);
+            if(pr_id == 0){
+                rid = reservationDB.addPendingReservation(user);
+                Reservation reservation = reservationDB.getReservationById(rid);
+                Service service = serviceDB.getService(service_id);
+                reservationDB.addReservationService(reservation, service, 1);
+                request.getSession().setAttribute("reservation_id", rid);
+            } else if(pr_id > 0){
+                rid = pr_id;
+                Reservation reservation = reservationDB.getReservationById(rid);
+                Service service = serviceDB.getService(service_id);
+                reservationDB.addReservationService(reservation, service, 1);
+                request.getSession().setAttribute("reservation_id", rid);
+            }
+        }
+        response.sendRedirect("../service/list");}
 }
