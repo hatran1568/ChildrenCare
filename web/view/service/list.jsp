@@ -203,7 +203,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <button><a href="../cart/add?serviceid=${s.id}">Add to Cart</a></button>
+                                    <button><a href="../cart/add?service_id=${s.id}">Add to Cart</a></button>
                                     
                                     <button><a href="#">Feedback</a></button>
                                 </div>
