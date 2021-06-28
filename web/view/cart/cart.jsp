@@ -70,9 +70,9 @@
                 <div class="collapse navbar-collapse">
                     <c:if test="${ empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#top" class="smoothScroll">Home</a></li>
-                            <li><a href="#" class="smoothScroll">Services</a></li>
-                            <li><a href="#" class="smoothScroll">Blog</a></li>
+                            <li><a href="../home" class="smoothScroll">Home</a></li>
+                            <li><a href="../service/list" class="smoothScroll">Services</a></li>
+                            <li><a href="../post/list" class="smoothScroll">Blog</a></li>
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -133,8 +133,8 @@
                     <c:if test="${not empty sessionScope.user}">
                         <ul class="nav navbar-nav navbar-right">
                             <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
-                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
-                                <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
+                                <li class="dropdown"><a href="../home" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="../customer/my" class="smoothScroll">My reservation</a></li>
                                 <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
 
 
@@ -227,7 +227,7 @@
                                 <tr >
                                     <td>${list.service.id}</td>
                                     <td>${list.service.fullname}</td>
-                                    <td id =${list.service.id}>${list.unitPrice}</td>
+                                    <td >${list.unitPrice}</td>
 
                                     <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
@@ -338,7 +338,8 @@
                                                         function (data) {
                                                             var b = JSON.parse(JSON.stringify(data));
                                                             console.log(b)
-                                                             document.getElementById(querry.toString()).innerHTML=b["price"] 
+                                                            var c = querry.toString();
+                                                             document.getElementById(c).innerHTML=b["price"] 
                                                              document.getElementById("total").innerHTML="Total Cost:" +b["total"]
 
                                                         }
