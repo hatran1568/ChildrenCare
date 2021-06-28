@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Customer list</title>
+        <title>${requestScope.user.fullName}</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
