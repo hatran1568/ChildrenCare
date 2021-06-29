@@ -103,7 +103,7 @@ public class MyReservationController extends HttpServlet {
         User u = (User) request.getSession().getAttribute("user");
 
         ReservationDAO reservationDB = new ReservationDAO();
-        list = reservationDB.getReservation(u);
+        list = reservationDB.getReservationWithoutPending(u);
 
         for (Reservation reservation : list) {
            

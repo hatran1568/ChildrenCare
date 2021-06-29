@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value>C:\Users\ACER\Desktop\SWP\web\assets\images</param-value>
+        <param-value></param-value>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>

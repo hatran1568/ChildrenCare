@@ -66,6 +66,43 @@ public class ReservationDAO extends BaseDAO {
         return null;
     }
 
+    public ArrayList<Reservation> getReservationWithoutPending(User u) {
+        try {
+            ArrayList<Reservation> list = new ArrayList<Reservation>();
+            String sql = "SELECT\n"
+                    + "reservation.id,\n"
+                    + "reservation.customer_id,\n"
+                    + "reservation.reservation_date,\n"
+                    + "reservation.status_id,\n"
+                    + "reservation.staff_id,\n"
+                    + "reservation.receiver_id,\n"
+                    + "reservation.checkup_time\n"
+                    + "FROM\n"
+                    + "reservation\n"
+                    + "WHERE customer_id =? and status_id!=19";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getId());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation();
+                r.setId(rs.getInt("id"));
+                r.setCustomer(u);
+                r.setReservation_date(rs.getDate("reservation_date"));
+                User staff = new User();
+                staff.setId(rs.getInt("staff_id"));
+                r.setStaff(staff);
+                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
+                list.add(r);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<Reservation> getReservation(User u, int status) {
         try {
             ArrayList<Reservation> list = new ArrayList<Reservation>();
@@ -413,7 +450,8 @@ public class ReservationDAO extends BaseDAO {
         return 0;
 
     }
-     public int countReservation(Date date) {
+
+    public int countReservation(Date date) {
         try {
             int a = 0;
             String sql = "SELECT count(status_id) as total from reservation where  reservation_date=?";
@@ -430,8 +468,8 @@ public class ReservationDAO extends BaseDAO {
         return 0;
 
     }
-    
-      public int countReservation(int status,Date date) {
+
+    public int countReservation(int status, Date date) {
         try {
             int a = 0;
             String sql = "SELECT count(status_id) as total from reservation where status_id =? and reservation_date=?";
@@ -478,14 +516,15 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void editReceiver(int reservationID, int receiverID){
-        try{
+
+    public void editReceiver(int reservationID, int receiverID) {
+        try {
             String sql = "update reservation set receiver_id = ? where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, receiverID);
             stm.setInt(2, reservationID);
             stm.executeUpdate();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -500,8 +539,8 @@ public class ReservationDAO extends BaseDAO {
         }catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    } 
+
     public int getPendingReservation(User customer) {
         int i = 0;
         try {
