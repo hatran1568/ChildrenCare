@@ -5,7 +5,6 @@
  */
 package controller;
 
-import bean.CartItem;
 import bean.Receiver;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import bean.User;
 import bean.Reservation;
 import bean.Service;
-import dao.CartDAO;
+import bean.Setting;
 import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
@@ -60,41 +59,14 @@ public class ReservationCompletionController extends HttpServlet {
         EmailVerify e = new EmailVerify();
         ReservationDAO reservationDB = new ReservationDAO();
         UserDAO userDB = new UserDAO();
-        ReceiverDAO receiverDB = new ReceiverDAO();
-       
-        
-        //Sub-function 1: Receiver information are saved
-        ArrayList<Receiver> receivers = new ArrayList<>();
-        receivers = (ArrayList<Receiver>) request.getSession().getAttribute("receivers");
-        //Check if receiver exists (If a receiver with the same email exists) and add them if not
-        for (Receiver r : receivers) {
-            if (!receiverDB.checkExistingReceiver(r.getEmail())) {
-                receiverDB.addReceiver(r);
-            }
-        }
-
+        int rid = Integer.parseInt(request.getParameter("rid"));
         //Sub-function 2: The reservation is submitted and assigned to a staff
-        Reservation reservation = new Reservation();
-        //Set Customer
-        User u = (User) request.getSession().getAttribute("user");
-        if (u != null) {
-            reservation.setCustomer(u);
-        } else {
-            User guest = new User();
-            guest.setId(0);
-            reservation.setCustomer(guest);
-        }
-        //Set Reservation date
-
-        long millis = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(millis);
-
-        reservation.setReservation_date(date);
-        //Set status
-        reservation.setStatus("Submitted");
+        Reservation reservation = reservationDB.getReservationById(rid);
+        //Set status to submitted
+        reservationDB.submitReservation(rid);
         //Set Staff
         ArrayList<User> staff = userDB.getStaff();
-        int minRes = 5;
+        int minRes = 900;
         User assignStaff = new User();
         for (User s : staff) {
             if (reservationDB.countReservations(s) <= minRes) {
@@ -104,80 +76,35 @@ public class ReservationCompletionController extends HttpServlet {
                 assignStaff.setEmail(s.getEmail());
                 assignStaff.setMobile(s.getMobile());
                 assignStaff.setImageLink(s.getImageLink());
-                break;
             }
         }
-        reservation.setStaff(assignStaff);
-        //Set numberofperson
-        reservation.setNumber_of_person(1);
-        reservation.setStatus("Submited");
-        Reservation reservationedit = new Reservation();
-        reservationedit =(Reservation) request.getSession().getAttribute("reservationidedit");
-        if(reservationedit!=null){
-            reservationDB.deleteReservationService(reservationedit);
-            reservationDB.deleteReservation(reservationedit.getId());
-            request.getSession().removeAttribute("reservationidedit");
-        }
-        reservationDB.addReservation(reservation);
-        //Submit reservation services
-        reservation.setId(reservationDB.returnNewestReservation());
-        CartDAO cartDB = new CartDAO();
-        ArrayList<Integer> receiverservice = new ArrayList<>();
-        receiverservice = (ArrayList<Integer>) request.getSession().getAttribute("receiverIDs");
-        ArrayList<Receiver> receiverlist = new ArrayList<>();
-        for (int i : receiverservice) {
-            receiverlist.add(receivers.get(i));
-        }
-        for(int i =0 ; i<receiverlist.size();i++){
-           receiverlist.set(i,receiverDB.getReceiverByEmail(receiverlist.get(i).getEmail()) );
-        }
-        if (u == null) {
-            ArrayList<CartItem> cart = new ArrayList<>();
-            cart = (ArrayList<CartItem>) request.getSession().getAttribute("cart");
-            int rcount = 0;
-            for(int i =0 ;i <cart.size();i++){
-                for (int j = 0; j < cart.get(i).getQuantity(); j++) {
-                    reservationDB.addReservationService(reservation, cart.get(i).getService(), receiverlist.get(receiverservice.get(i)));
-                }
-            }
-            for (CartItem cartItem : cart) {
-                for (int i = 0; i < cartItem.getQuantity(); i++) {
-                    reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
-                    rcount++;
-                }
-            }
-        } else {
-            ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
-            int rcount = 0;
-            for (CartItem cartItem : cart) {
-                for (int i = 0; i < cartItem.getQuantity(); i++) {
-                    reservationDB.addReservationService(reservation, cartItem.getService(), receiverlist.get(rcount));
-                    rcount++;
-                }
-            }
-        }
+        reservationDB.changeStaffReservation(rid, assignStaff.getId());
+        
+//        Reservation reservationedit = new Reservation();
+//        reservationedit =(Reservation) request.getSession().getAttribute("reservationidedit");
+//        if(reservationedit!=null){
+//            reservationDB.deleteReservationService(reservationedit);
+//            reservationDB.deleteReservation(reservationedit.getId());
+//            request.getSession().removeAttribute("reservationidedit");
+//        }
 
         //Sub-function 3: Send email to customer confirming reservation and payment guides
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
-            e.sendText(user, "");
+            String content = "Your reservation has been submitted. Your doctor is Dr. " + assignStaff.getFullName() + ". Email: " + assignStaff.getEmail() + ". Mobile: " + assignStaff.getMobile() + ". Please complete the transaction by transfering the fees to the following bank account: ";
+            e.sendText(user, content);
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ArrayList<Service> reservation_services = reservationDB.getReservationServices(reservationDB.returnNewestReservation());
+        ReceiverDAO rdao = new ReceiverDAO();
+        Receiver receiver = rdao.getReceiversById(reservation.getCustomer().getId());
         request.setAttribute("reservation", reservation);
-        request.setAttribute("reservation_services", reservation_services);
-        request.setAttribute("receiverlist", receiverlist);
-        if (u == null)
-            request.getSession().removeAttribute("cart");
-        else {
-            ArrayList<CartItem> cart = cartDB.getCartByUserId(u);
-            for (CartItem cartitem : cart) {
-                cartDB.deleteCart(u, cartitem.getService());
-            }
-        }
+        request.setAttribute("receiver", receiver);
+        request.setAttribute("staff", assignStaff);
         
+        User u = (User) request.getSession().getAttribute("user");
+        request.getSession().removeAttribute("cart");
         request.getRequestDispatcher("../view/reservation/reservationcompletion.jsp").forward(request, response);
     }
 

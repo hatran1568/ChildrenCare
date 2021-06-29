@@ -336,7 +336,6 @@ public class ReservationContactController extends HttpServlet {
         Receiver r = new Receiver();
         int rid = Integer.parseInt(request.getParameter("rid"));
         ReservationDAO reservationDB = new ReservationDAO();
-        Reservation reservation = reservationDB.getReservationById(rid);
         ReceiverDAO receiverDB = new ReceiverDAO();
         String email = request.getParameter("email");
         r.setEmail(email);
@@ -361,6 +360,6 @@ public class ReservationContactController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(ReservationContactController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("../reservationcompletion");
+        response.sendRedirect("../reservationcompletion?rid=" + rid);
     }
 }

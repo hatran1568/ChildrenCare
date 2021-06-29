@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+        
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -261,16 +261,15 @@
                                 <label style="font-weight:bold;">Status</label>
                             </div>
                             <div class="col-md-8 col-6">
-                                <c:if test="${sessionScope.user.status eq 13}">Not Verified</c:if>
-                                <c:if test="${sessionScope.user.status eq 14}">Active</c:if>
-                                <c:if test="${sessionScope.user.status eq 15}">Contact</c:if>
-                                <c:if test="${sessionScope.user.status eq 16}">Potential</c:if>
-                                <c:if test="${sessionScope.user.status eq 17}">Customer</c:if>
-                                <c:if test="${sessionScope.user.status eq 18}">Inactive</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 13}">Not Verified</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 14}">Active</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 15}">Contact</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 16}">Potential</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 17}">Customer</c:if>
+                                <c:if test="${sessionScope.user.status.id eq 18}">Inactive</c:if>
                                 </div>
-                            </div>
-                            <hr />
-                            <button style="margin-right: 15%" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Profile</button>
+                        </div><br>
+                            <button style="margin-right: 15%" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Information</button>
                     </div>
                         </table>
                             </div>
@@ -279,7 +278,7 @@
                 </div>
             </div>
         </section>
-
+        <br>
 
 
         

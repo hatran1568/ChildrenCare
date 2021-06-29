@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
+
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -13,7 +13,7 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+        <link href="../assets/css/mobile-style.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
@@ -118,7 +118,7 @@
                             <c:if test="${ not empty sessionScope.user}">
                                 <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="../${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p> <a href="#">Profile</a></p>
@@ -195,18 +195,80 @@
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row">
-                    <div class="tab-content ml-1" id="myTabContent" style="">
-                        <div class="row" style="text-align: center">
-                            <h1 style="margin-top:5%">Reservation Details</h1>
-                            <h2 style="margin-top:5%">Your reservation has been submitted</h2>
-                            <div style="font-size:20px; margin-bottom: 2% ">Reservation ID: ${requestScope.reservation.getId()}</div>
-                            <div style="font-size:20px; margin-bottom: 2% ">Reserved Date: ${requestScope.reservation.getReservation_date()}</div>
-                            <div style="font-size:20px; margin-bottom: 2% ">Assigned Staff: ${requestScope.staff.getFullName()}</div>
-                            <div style="font-size:20px; margin-bottom: 2% ">Staff Contact Email: ${requestScope.staff.getEmail()}</div>
-                            <div style="font-size:20px; margin-bottom: 2% ">Staff Contact Number: ${requestScope.staff.getMobile()}</div>
-                            <img src="../../${requestScope.staff.getImageLink()}" alt="Staffs Image">
-                            <div>An email has been sent to your email with the details of your reservation, as well as the payment methods.</div>
+                    <div class="col-2" style="padding-top: 0%; float: left; margin-left: 20%; margin-top: 5%">
+                        <div class="d-flex justify-content-start">
+                            <div class="image-container">
+                                <img src="../${sessionScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
+<!--                                <div class="middle">
+                                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                                    <input type="file" style="display: none;" id="profilePicture" name="file" />
+                                </div>-->
+                            </div>
                         </div>
+                    </div>
+                    <form action="update" method="POST" enctype="multipart/form-data">
+                    <div class="tab-content ml-1" id="myTabContent" style="margin-left: 32%; margin-top: 5% ">
+                        <b>Change Profile Picture</b>
+                        <input onchange="loadFile(event)" type="file" name="imageLink" accept="image/*,.jpg" style="margin-top: "/><br>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Full Name</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="fullName" value="${requestScope.user.fullName}">
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top: -5%">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Gender</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <select class="form-control" name="gender" style="max-width: 50%; margin-top:-1%">
+                                        <option <c:if test="${sessionScope.user.gender eq true}">selected</c:if> value="true">Male</option>
+                                        <option <c:if test="${sessionScope.user.gender eq false}">selected</c:if> value="false">Female</option>
+                                </select>
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row" style="margin-top: -1%">
+                                <div class="col-sm-3 col-md-2 col-5">
+                                    <label style="font-weight:bold;">Email</label>
+                                </div>
+                                <div class="col-md-8 col-6">
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                            
+                            </div>
+                        </div>
+                        <hr />
+
+
+                        <div class="row" style="margin-top: -1%">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Mobile</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
+                            
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top: -1%">
+                            <div class="col-sm-3 col-md-2 col-5">
+                                <label style="font-weight:bold;">Address</label>
+                            </div>
+                            <div class="col-md-8 col-6">
+                                <input style="max-width: 50%; margin-top:-1%" type="text" class="form-control" name="address" value="${requestScope.user.address}">
+                            
+                            </div>
+                        </div><br>
+                            <button type="submit" style="margin-right: 15%" class="btn btn-primary">Submit</button>
+                    </div>
+                    </form>
+                        </table>
+                            </div>
+                    
                     </div>
                 </div>
             </div>
@@ -319,6 +381,15 @@
             }, function () {
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
+        </script>
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            };
         </script>
         <c:if test="${empty sessionScope.mess}">
                 <c:if test="${ not empty sessionScope.alert}">

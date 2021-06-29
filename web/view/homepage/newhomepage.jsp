@@ -68,11 +68,11 @@
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    <c:if test="${ empty sessionScope.user}">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#top" class="smoothScroll">Home</a></li>
-                            <li><a href="#" class="smoothScroll">Services</a></li>
-                            <li><a href="#" class="smoothScroll">Blog</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" class="smoothScroll dropdown">Home</a></li>
+                        <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
+                        <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
+                        <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -91,7 +91,6 @@
                                     </div>
                                 </div>  
                             </div>
-
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -115,79 +114,48 @@
                                 </div>  
                             </div>
 
-                            <c:if test="${ not empty sessionScope.user}">
-                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                                <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                        </c:if>
+                        <c:if test="${not empty sessionScope.user}">
+                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
-                                    <div class="dropdown-content">
-                                        <p> <a href="../../admin/setting/list">Profile</a></p>
-                                        <p> <a href="#">Change Password</a></p>
-                                        <p> <a href="#">Log Out</a></p>
-                                    </div>
-                                </div>
-                            </c:if>
-                        </ul>
-                    </c:if>
-                    <c:if test="${not empty sessionScope.user}">
-                        <ul class="nav navbar-nav navbar-right">
-                            <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
-                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
-                                <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My reservation</a></li>
-                                <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
-                                
-                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="manager/feedback/list">Feedbacks</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
-
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
                                     <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    </c:if>
                                 </c:if>
-                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Posts</a></li>
-                               <li class="dropdown">
-                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
+                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
-                                    </div>
+                                <li class="dropdown">
+                                    <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
 
                             </c:if>
-                            <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blogs</a></li>
-                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            </c:if>
-                            
+
+                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="#">Profile</a></p>
+                                    <p> <a href="userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
                                     <p> <a href="#">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                        </ul>
-                    </c:if>
+                        </c:if>
+                    </ul>
+
                 </div>
 
             </div>
@@ -201,15 +169,15 @@
                     <div class="owl-carousel owl-theme" id="my_slider">
                         <c:forEach items="${requestScope.sliders}" var="s">
                             <div class="item carousel-item" style="background-image: url(${s.imageLink})">
-                            <div class="caption">
-                                <div class="col-md-offset-1 col-md-10">
-                                    
-                                    <h1>${s.title}</h1>
-                                    <h3>${s.notes}</h3>
-                                    <a href="${s.backlink}" class="section-btn btn btn-default smoothScroll">Read more</a>
+                                <div class="caption">
+                                    <div class="col-md-offset-1 col-md-10">
+
+                                        <h1>${s.title}</h1>
+                                        <h3>${s.notes}</h3>
+                                        <a href="${s.backlink}" class="section-btn btn btn-default smoothScroll">Read more</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div>
@@ -223,26 +191,26 @@
         <section id="team" data-stellar-background-ratio="1">
             <div class="container">
                 <div class="col-md-12 col-sm-12" style="text-align: center">
-                         <!--SECTION TITLE--> 
-                        <div>
-                            <h2>Our services</h2>
-                        </div>
+                    <!--SECTION TITLE--> 
+                    <div>
+                        <h2>Our services</h2>
+                    </div>
                 </div>
                 <div class="row" style="display: flex">
-                    
+
                     <c:forEach items="${requestScope.services}" var="s">
-                    <div class="col-md-4 col-sm-6" style="padding: 15px; flex: 1">
-                        <div>
-                            <img src="${s.thumbnailLink}" class="img-responsive" alt="">
+                        <div class="col-md-4 col-sm-6" style="padding: 15px; flex: 1">
+                            <div>
+                                <img src="${s.thumbnailLink}" class="img-responsive" alt="">
 
-                            <div class="team-info">
-                                <h3><a href="#">${s.fullname}</a></h3>
-                                <p>${s.description}</p>
-                                
+                                <div class="team-info">
+                                    <h3><a href="#">${s.fullname}</a></h3>
+                                    <p>${s.description}</p>
+
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
                     </c:forEach>
                     <div class="clearfix"></div>
                 </div>
@@ -254,33 +222,33 @@
         <section id="news" data-stellar-background-ratio="2.5">
             <div class="container">
                 <div class="col-md-12 col-sm-12">
-                        <!-- SECTION TITLE -->
-                        <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                            <h2>Latest posts</h2>
-                        </div>
+                    <!-- SECTION TITLE -->
+                    <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                        <h2>Latest posts</h2>
                     </div>
+                </div>
                 <div class="row">
-                    
+
                     <c:forEach items="${requestScope.posts}" var="p">
-                    <div class="col-md-4 col-sm-6">
-                        <!-- NEWS THUMB -->
-                        <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
-                            <a href="">
-                                <img src="${p.thumbnailLink}" class="img-responsive" alt="">
-                            </a>
-                            <div class="news-info">
-                                <span>${s.updatedDate}</span>
-                                
-                                <h3><a href="post/details?id=${p.id}">${p.title}</a></h3>
-                                <p>${p.description}</p>
-                                <div class="author">
-                                    <div class="author-info">
-                                        <h5>${p.author.fullName}</h5>
+                        <div class="col-md-4 col-sm-6">
+                            <!-- NEWS THUMB -->
+                            <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
+                                <a href="">
+                                    <img src="${p.thumbnailLink}" class="img-responsive" alt="">
+                                </a>
+                                <div class="news-info">
+                                    <span>${s.updatedDate}</span>
+
+                                    <h3><a href="post/details?id=${p.id}">${p.title}</a></h3>
+                                    <p>${p.description}</p>
+                                    <div class="author">
+                                        <div class="author-info">
+                                            <h5>${p.author.fullName}</h5>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </c:forEach>   
                 </div>
             </div>
@@ -288,7 +256,7 @@
 
 
         <!-- MAKE AN APPOINTMENT -->
-        
+
 
 
 
@@ -311,28 +279,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-<!--                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -352,10 +320,10 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
+                    </div>
 
 
                 </div>
@@ -380,27 +348,27 @@
             });
         </script>
         <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
-                        $(document).ready(function () {
-                            let note = "${sessionScope.alert}"
-                            alert(note);
-
-                        });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
                 <script>
                     $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
+                        let note = "${sessionScope.alert}"
+                        alert(note);
 
                     });
                 </script>
-                <c:remove var="mess" scope="session" />
+                <c:remove var="alert" scope="session" />
+
             </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
     </body>
 </html>

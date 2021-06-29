@@ -388,7 +388,7 @@ public class SettingController extends HttpServlet {
         
         //Check if user input true code and set status to true
         if (code.equals(actual)) {
-            userDb.updateStatus(u, true);
+            userDb.updateStatus(u, 14);
             String alert = "Register Successfully!";
             User user = new User();
             ArrayList<User> list = new ArrayList<User>();

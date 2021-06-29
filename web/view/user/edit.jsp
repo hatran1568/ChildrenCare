@@ -42,7 +42,7 @@
                     <header id="header">
                         <div class="logo">
                             <div class="dropdown">
-                                <img class="avatar" src="${sessionScope.user.imageLink}"/>
+                                <img class="avatar" src="../../${sessionScope.user.imageLink}"/>
                                 <div class="dropdown-content">
                                     <p>Profile</p>
                                     <p>Change Password</p>
@@ -93,12 +93,12 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select class="form-control" name="status">
-                                        <option <c:if test="${requestScope.user.status==13}">selected</c:if> value="13">Not Verified</option>
-                                        <option <c:if test="${requestScope.user.status==14}">selected</c:if> value="14">Active</option>
-                                        <option <c:if test="${requestScope.user.status==15}">selected</c:if> value="15">Contact</option>
-                                        <option <c:if test="${requestScope.user.status==16}">selected</c:if> value="16">Potential</option>
-                                        <option <c:if test="${requestScope.user.status==17}">selected</c:if> value="17">Customer</option>
-                                        <option <c:if test="${requestScope.user.status==18}">selected</c:if> value="18">Inactive</option>
+                                        <option <c:if test="${requestScope.user.status.id==13}">selected</c:if> value="13">Not Verified</option>
+                                        <option <c:if test="${requestScope.user.status.id==14}">selected</c:if> value="14">Active</option>
+                                        <option <c:if test="${requestScope.user.status.id==15}">selected</c:if> value="15">Contact</option>
+                                        <option <c:if test="${requestScope.user.status.id==16}">selected</c:if> value="16">Potential</option>
+                                        <option <c:if test="${requestScope.user.status.id==17}">selected</c:if> value="17">Customer</option>
+                                        <option <c:if test="${requestScope.user.status.id==18}">selected</c:if> value="18">Inactive</option>
                                     </select>
                                 </div>
 
@@ -128,27 +128,9 @@
                     <nav id="menu">
                         <ul>
                             <li><a href="../../home">Homepage</a></li>
-                            <li><a href="#">User</a></li>
-                            <li><a href="../post/list">Blog</a></li>
-                            <li><a href="#">Chart</a></li>
+                            <li><a href="../../admin/user/list">User</a></li>
+                            <li><a href="../../admin/dashboard/view">Chart</a></li>
                             <li><a href="../../admin/setting/list">Settings</a></li>
-                            <li>
-                                <span class="opener">Service</span>
-                                <ul>
-                                    <li><a href="#">Examination</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <span class="opener">Other</span>
-                                <ul>
-                                    <li><a href="#">Se</a></li>
-                                    <li><a href="#">Second Service</a></li>
-                                    <li><a href="#">Third Service</a></li>
-                                </ul>
-                            </li>
-
                         </ul>
                     </nav>
 

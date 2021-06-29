@@ -94,8 +94,7 @@ public class UserDAO extends BaseDAO {
                 r.setName(rs.getNString("role_name"));
                 a.setRole(r);
                 Setting s = new Setting();
-                s.setId(rs.getInt("status_id"));
-                s.setName(rs.getString("status_name"));
+                s.setId(rs.getInt("status"));
                 a.setStatus(s);
                 users.add(a);
             }
@@ -355,20 +354,52 @@ public class UserDAO extends BaseDAO {
 //        }
 //    }
 //    
-//    public void updateByAdmin(User u) {
-//        try {
-//            String sql = "update user set role_id=?,status=?\n"
-//                    + "where id = ?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setInt(1, u.getRole().getId());
-//            stm.setInt(2, u.getStatus());
-//            stm.setInt(3, u.getId());
-//            stm.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public void updateUser(User u) {
+        try {
+            String sql = "update user set full_name=?,gender=?,mobile=?,address=?, image_link=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, u.getFullName());
+            stm.setBoolean(2, u.isGender());
+            stm.setString(3, u.getMobile());
+            stm.setString(4, u.getAddress());
+            stm.setString(5, u.getImageLink());
+            stm.setInt(6, u.getId());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateByAdmin(User u) {
+        try {
+            String sql = "update user set role_id=?,status=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getRole().getId());
+            stm.setInt(2, u.getStatus().getId());
+            stm.setInt(3, u.getId());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void updateStatus(User u, int sid) {
+        try {
+            String sql = "update user set role_id=?,status=?\n"
+                    + "where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, u.getRole().getId());
+            stm.setInt(2, sid);
+            stm.setInt(3, u.getId());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 //
 //    public void updateStatus(User u, boolean status) {
 //        try {
@@ -412,17 +443,17 @@ public class UserDAO extends BaseDAO {
 //        }
 //    }
 //
-//    public void delete(int uid) {
-//        try {
-//            String sql = "DELETE FROM user WHERE id = ?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setInt(1, uid);
-//            stm.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
+    public void delete(int uid) {
+        try {
+            String sql = "DELETE FROM user WHERE id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, uid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     public ArrayList<User> searchUserByEmailAndPass(String email, String pass) {
         try {
