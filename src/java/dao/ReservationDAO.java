@@ -490,6 +490,17 @@ public class ReservationDAO extends BaseDAO {
         }
     }
     
+    public void editCheckupTime(int reservationID, Date checkupTime){
+        try{
+            String sql = "update reservation set checkup_time = ? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, checkupTime);
+            stm.setInt(2, reservationID);
+            stm.executeUpdate();
+        }catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public int getPendingReservation(User customer) {
         int i = 0;

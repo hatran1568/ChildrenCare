@@ -205,56 +205,67 @@
         <!-- section -->
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
-                <div class="row">
-                    <div class="col-md-3">Thumbnail</div>
-                    <div class="col-md-9">
-                        <img src="../../${requestScope.post.thumbnailLink}" style="max-width: 500px">
+                <form id="form" action="update" method="POST" enctype="multipart/form-data">
+                    
+                    <input type="text" value="${requestScope.post.id}" name="pid" hidden>
+                    <div class="row">
+                        <div class="col-md-3">Thumbnail</div>
+                        <div class="col-md-9">
+                            
+                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
+                            <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                        </div>
                     </div>
-                </div>
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Category</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.category.name}
-                    </div>
-                </div> 
+                    <div class="row">
+                        <div class="col-md-3">Category</div>
+                        <div class="col-md-9">
+                            <select class="" name="postCategory">
+                                <c:forEach items="${requestScope.categories}" var="c">
+                                    <option value="${c.id}" <c:if test="${c.id == requestScope.post.category.id}">selected</c:if>>${c.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div> 
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Title</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.title}
+                    <div class="row">
+                        <div class="col-md-3">Title</div>
+                        <div class="col-md-9">
+                            <input  value="${requestScope.post.title}" style="width: 100%" type="text" name="title">
+                        </div>
                     </div>
-                </div>
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Description</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.description}
+                    <div class="row">
+                        <div class="col-md-3">Description</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%" type="text" name="description">${requestScope.post.description}</textarea>
+                        </div>
                     </div>
-                </div>
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Content</div>
-                    <div style="white-space: pre-line" class="col-md-9">
-                        ${requestScope.post.content}
+                    <div class="row">
+                        <div class="col-md-3">Content</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%; height: 300px" type="text" name="content">${requestScope.post.content}</textarea>
+                        </div>
                     </div>
-                </div>
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Featured</div>
-                    <div class="col-md-9">
-                        <c:if test="${requestScope.post.featured eq true}">True</c:if>
-                        <c:if test="${requestScope.post.featured eq false}">False</c:if>
-                    </div>
-                </div>
-                    <hr />
-                <div class="row">
-                    <div class="col-md-3">Status</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.status.name}
-                    </div>
-                </div>  
-                    <button type="button" class="btn btn-primary pull-right" onclick="window.location.href = 'edit?pid=${requestScope.post.id}'">Edit post</button>
+                    <div class="row">
+                        <div class="col-md-3">Featured</div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="true" <c:if test="${requestScope.post.featured eq true}">checked</c:if>>True
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="false" <c:if test="${requestScope.post.featured eq false}">checked</c:if>>False
+                            </div>
+                        </div>
+                        </div>
+                        <hr />
+                        <input type="text" value="" id="status" name="status" hidden>
+                      
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveDraftPost()" id="saveDraft">Save draft</button>
+                            <button type="button" class="btn btn-primary pull-right" onclick="savePost()" id="save">Save</button>
+                </form>
             </div>
         </div>
 
@@ -342,7 +353,24 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-        
+        <script>
+            
+             function savePost(){
+                 document.getElementById("status").value = "24";
+
+                    
+                    document.getElementById('form').submit();
+                    
+                }
+                
+        </script>
+        <script>
+            function saveDraftPost(){
+                document.getElementById("status").value = "25";
+                    
+                    document.getElementById('form').submit();
+                }
+        </script>
      <script>
                 var loadFile = function (event) {
                     var output = document.getElementById('output');
@@ -383,21 +411,16 @@
             <c:remove var="mess" scope="session" />
         </c:if>
             <style>
-                
-                    #main-body .row{
-                        margin: 10px 0px;
-                        padding: 10px;
-                    }
-                    #main-body .row :first-child{
-                        font-weight: bold;
-                    }
-                    
-                    #main-body{
-                        margin: 10px 0px;
-                    }
-                    
-                    
-                
+                #main-body{
+                    margin-top: 50px;
+                    margin-bottom: 50px;
+                }
+                #save{
+                    margin: 20px;
+                }
+                #saveDraft{
+                    margin: 20px;
+                }
             </style>
     </body>
 </html> 

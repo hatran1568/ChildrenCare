@@ -356,6 +356,7 @@ public class ReservationContactController extends HttpServlet {
         try {
             java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(checkupTime);
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            reservationDB.editCheckupTime(rid, sqlDate);
 
         } catch (ParseException ex) {
             Logger.getLogger(ReservationContactController.class.getName()).log(Level.SEVERE, null, ex);
