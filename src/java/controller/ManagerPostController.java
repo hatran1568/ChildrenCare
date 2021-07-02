@@ -159,7 +159,7 @@ public class ManagerPostController extends HttpServlet {
         SettingDAO settingDB = new SettingDAO();
         ArrayList<Setting> postCategories = settingDB.getSetting("Post category");
         request.setAttribute("categories", postCategories);
-        request.getRequestDispatcher("../../view/manager/post/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/post/edit2.jsp").forward(request, response);
     }
 
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -173,9 +173,11 @@ public class ManagerPostController extends HttpServlet {
         int categoryID = Integer.parseInt(request.getParameter("postCategory"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
+        String content = request.getParameter("content");
         boolean featured = request.getParameter("featured").equals("true");
-        boolean status = request.getParameter("status").equals("true");
-
+        Setting status = new Setting();
+        status.setId(Integer.parseInt(request.getParameter("status")));
+        
         PostDAO postDB = new PostDAO();
         Post oldPost = postDB.getPostById(pid);
 
@@ -186,14 +188,16 @@ public class ManagerPostController extends HttpServlet {
         pc.setId(categoryID);
         p.setCategory(pc);
         p.setDescription(description);
-        //p.setStatus(status);
+        p.setStatus(status);
         p.setFeatured(featured);
+        p.setContent(content);
         User a = new User();
         a.setId(oldPost.getAuthor().getId());
         p.setAuthor(a);
-        p.setContent(oldPost.getContent());
+        p.setContent(content);
         p.setId(pid);
-
+        File file = new File("D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\" + oldPost.getThumbnailLink());
+        file.delete();
         postDB.updatePost(p);
         response.sendRedirect("details?pid=" + pid);
     }

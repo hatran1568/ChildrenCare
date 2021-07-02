@@ -336,7 +336,6 @@ public class ReservationContactController extends HttpServlet {
         Receiver r = new Receiver();
         int rid = Integer.parseInt(request.getParameter("rid"));
         ReservationDAO reservationDB = new ReservationDAO();
-        Reservation reservation = reservationDB.getReservationById(rid);
         ReceiverDAO receiverDB = new ReceiverDAO();
         String email = request.getParameter("email");
         r.setEmail(email);
@@ -357,6 +356,7 @@ public class ReservationContactController extends HttpServlet {
         try {
             java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(checkupTime);
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            reservationDB.editCheckupTime(rid, sqlDate);
 
         } catch (ParseException ex) {
             Logger.getLogger(ReservationContactController.class.getName()).log(Level.SEVERE, null, ex);

@@ -29,11 +29,11 @@
         <script>
 
 
-          
+
 
         </script>
     </head>
-    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
         <!-- PRE LOADER -->
 
@@ -76,11 +76,11 @@
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                            <c:if test="${ empty sessionScope.user}">
+                    <c:if test="${ empty sessionScope.user}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#top" class="smoothScroll">Home</a></li>
+                            <li><a href="#" class="smoothScroll">Services</a></li>
+                            <li><a href="#" class="smoothScroll">Blog</a></li>
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -89,7 +89,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../../login" method="POST">
+                                            <form action="../login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -99,6 +99,7 @@
                                     </div>
                                 </div>  
                             </div>
+
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -107,7 +108,7 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../../register" method="GET">
+                                            <form action="../register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -122,120 +123,160 @@
                                 </div>  
                             </div>
 
-                        </c:if>
-                        <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
-                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+                            <c:if test="${ not empty sessionScope.user}">
+                                
+                                <div class="dropdown ">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
+
+                                    <div class="dropdown-content">
+                                        <p> <a href="admin/setting/list">Profile</a></p>
+                                        <p> <a href="#">Change Password</a></p>
+                                        <p> <a href="#">Log Out</a></p>
+                                    </div>
+                                </div>
+                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                            </c:if>
+                        </ul>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.user}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <c:if test="${sessionScope.user.role.name == 'Manager'|| sessionScope.user.role.name == 'Admin'}">
+                               <li class="dropdown"><a href="../../home" class="smoothScroll">Home</a></li>
+                                <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                                <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
+
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
+                                       <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
+
                                     </div>
                                 </li>
-                                <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                  <c:if test="${sessionScope.user.role.name == 'Admin'}">
                                     <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
-                                    </c:if>
                                 </c:if>
-                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
-
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
+                                <li><a href="#top" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Services</a></li>
+                                <li><a href="#" class="smoothScroll">Posts</a></li>
                                 <li class="dropdown">
-                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
+
+                                    </div>
                                 </li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
 
                             </c:if>
-
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <c:if test="${sessionScope.user.role.name == 'Customer'}">
+                                <li><a href="#" class="smoothScroll">Home</a></li>
+                                <li><a href="#" class="smoothScroll">Services</a></li>
+                                <li><a href="#" class="smoothScroll">Blog</a></li>
+                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </c:if>
+                            
                             <div class="dropdown ">
-                                <img class="avatar" src="${sessionScope.user.imageLink}">
+                                <img  class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="../../userprofile">Profile</a></p>
+                                    <p> <a href="#">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
                                     <p> <a href="#">Log Out</a></p>
                                 </div>
                             </div>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                        </c:if>
-                    </ul>
-
+                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                        </ul>
+                    </c:if>
                 </div>
 
             </div>
         </section>
-
-
-        <!-- HOME -->
-
-
-
-        <!-- ABOUT -->
-
-
-        <!-- TEAM -->
-        <div class="container" style="height: max-content; min-height: 700px;">
-            <nav class="navbar navbar-light bg-light">
-                <form id="myForm" method="GET" action="search" class="form-inline">
-
-                    <select onchange="submit()" style="margin: 0 200px;" name="status">
-                        <option value="none">All</option>
-                        <option value="true">Active</option>
-                        <option value="false">Inactive</option>
-                    </select>
-                    <input value="${requestScope.search}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <!-- End Banner -->
+        <!-- section -->
+        <div class="section" id="main-body">
+            <div class="container" style="min-height: 600px">
+                <form id="form" action="update" method="POST" enctype="multipart/form-data">
+                    
+                    <input type="text" value="${requestScope.post.id}" name="pid" hidden>
+                    <div class="row">
+                        <div class="col-md-3">Thumbnail</div>
+                        <div class="col-md-9">
+                            
+                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
+                            <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Category</div>
+                        <div class="col-md-9">
+                            <select class="" name="postCategory">
+                                <c:forEach items="${requestScope.categories}" var="c">
+                                    <option value="${c.id}" <c:if test="${c.id == requestScope.post.category.id}">selected</c:if>>${c.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div> 
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Title</div>
+                        <div class="col-md-9">
+                            <input  value="${requestScope.post.title}" style="width: 100%" type="text" name="title">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Description</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%" type="text" name="description">${requestScope.post.description}</textarea>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Content</div>
+                        <div class="col-md-9">
+                            <textarea style="width: 100%; height: 300px" type="text" name="content">${requestScope.post.content}</textarea>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3">Featured</div>
+                        <div class="col-md-9">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="true" <c:if test="${requestScope.post.featured eq true}">checked</c:if>>True
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="featured"  value="false" <c:if test="${requestScope.post.featured eq false}">checked</c:if>>False
+                            </div>
+                        </div>
+                        </div>
+                        <hr />
+                        <input type="text" value="" id="status" name="status" hidden>
+                      
+                            <button type="button" class="btn btn-primary pull-right" onclick="saveDraftPost()" id="saveDraft">Save draft</button>
+                            <button type="button" class="btn btn-primary pull-right" onclick="savePost()" id="save">Save</button>
                 </form>
-                <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
-            </nav>
-
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Back Link</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.list}" var ="list">
-                        <tr>
-                            <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
-                            <td>${list.id}</td>
-                            <td>${list.title}</td>
-                            <td>${list.backlink}</td>
-                            <td id="${list.id}" onclick="changeStatus(this)" ><c:if test="${list.status =='true'}"><i  class="fas fa-eye icon-change " aria-hidden="true"></i></c:if> <c:if test="${list.status =='false'}"><i  class="fas fa-eye-slash icon-change" aria-hidden="true"></i></c:if></td>
-                            <td><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
-                            </tr>
-                    </c:forEach>
-
-
-                </tbody>
-            </table>      
+            </div>
         </div>
 
-        <div id="pagination" class="pagination"></div>
-
-
-
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-        </script>
 
 
 
 
 
-        <!-- FOOTER -->
-       <footer data-stellar-background-ratio="5">
+
+
+        <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
 
@@ -301,7 +342,7 @@
 
                 </div>
             </div>
-        </footer>
+        </footer> 
 
         <!-- SCRIPTS -->
         <script src="../../assets/js/jquery.js"></script>
@@ -313,75 +354,40 @@
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
         <script>
-            function generatePagger(id, pageindex, totalpage, gap, page)
-            {
-                var container = document.getElementById(id);
-                if (pageindex > gap + 1)
-                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-                for (var i = pageindex - gap; i < pageindex; i++)
-                {
-                    if (i >= 1)
-                    {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                    }
+            
+             function savePost(){
+                 document.getElementById("status").value = "24";
+
+                    
+                    document.getElementById('form').submit();
+                    
                 }
-
-                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-                for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                {
-                    if (i <= totalpage)
-                    {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                    }
-                }
-
-                if (pageindex < totalpage - gap)
-                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-            }
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
-              function changeStatus(param) {
-                var id = param.id;
-                $.ajax({
-                    url: "change",
-                    type: "GET",
-                    data: {id: id},
-                    success:
-                            function (data) {
-                               
-                                    var b = JSON.parse(JSON.stringify(data));
-                                   
-                                    if(b["status"] == false){
-                                        console.log(b["status"])
-                                            param.innerHTML = '<i  class="fas fa-eye-slash icon-change" aria-hidden="true"></i>';
-                                        
-                                    }
-                                    if(b["status"]==true){
-                                        
-                                        console.log(b["status"])
-                                            param.innerHTML = '<i  class="fas fa-eye icon-change   " aria-hidden="true"></i>';
-                                    }
-
-                                
-
-
-                            }
-
-                });
-
-            }
-             function submit(){
-                    document.getElementById("myForm").submit();
                 
-            }
-
         </script>
+        <script>
+            function saveDraftPost(){
+                document.getElementById("status").value = "25";
+                    
+                    document.getElementById('form').submit();
+                }
+        </script>
+     <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
+                    }
+                };
+               
+            </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+                            $('ul.nav li.dropdown').hover(function () {
+                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                            }, function () {
+                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                            });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -404,80 +410,17 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-        <style>
-
-            .pagination{
-                display: inline-block;
-                margin: 0 auto;
-                position: relative;
-                left: 45%;
-            }
-            .pagination a {
-                color: black;
-                float: left;
-                padding: 8px 16px;
-                text-decoration: none;
-            }
-
-            .pagination a.active {
-                background-color: #4CAF50;
-                color: white;
-                border-radius: 5px;
-            }
-
-            .pagination a:hover:not(.active) {
-                background-color: #ddd;
-                border-radius: 5px;
-            }
-
-            .avatar{
-
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-            }
-            .sli{
-                margin: 0 auto;
-                width: 300px;
-            }
-            .in-text{
-                position: absolute;
-                top: 70px;
-                left: 40%;
-                visibility: hidden;
-
-            }
-            .news_blog:hover > .in-text{
-
-                visibility: visible;
-
-            }
-
-            .in-text:hover{
-                display: block;
-            }
-
-            .news_blog:hover{
-                opacity: 0.4;
-            }
-            .btn{
-                bottom: 0;
-            }
-            nav{
-
-            }
-            table,th,td{
-                text-align: center;
-                
-            }
-            td{
-                min-height: 120px;
-            }
-            .icon-change{
-
-                cursor: pointer;
-            }
-        </style>
-
+            <style>
+                #main-body{
+                    margin-top: 50px;
+                    margin-bottom: 50px;
+                }
+                #save{
+                    margin: 20px;
+                }
+                #saveDraft{
+                    margin: 20px;
+                }
+            </style>
     </body>
 </html> 

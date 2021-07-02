@@ -5,11 +5,15 @@
  */
 package controller;
 
+import bean.MedicalExamination;
+import bean.Receiver;
 import bean.Reservation;
 import bean.ReservationService;
 import bean.Service;
 import bean.User;
+import dao.ReceiverDAO;
 import dao.ReservationDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -25,8 +29,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-@WebServlet(name = "MyReservationController", urlPatterns = {"/customer/reservation/my"})
-public class MyReservationController extends HttpServlet {
+@WebServlet(name = "MyPrescriptionController", urlPatterns = {"/customer/myprescription/exams"})
+public class MyPrescriptionController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,14 +73,11 @@ public class MyReservationController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
-            case "/customer/reservation/my":
-                showMyreservation(request, response);
+            case "/customer/myprescription/exams":
+                showExams(request, response);
                 break;
-            case "/customer/reservation/details":
-                showDetailsReservation(request, response);
-                break;
-            case "/customer/reservation/cancel":
-                cancelReservation(request, response);
+            case "/customer/myprescription/prescription":
+                showPrescription(request, response);
                 break;
             default:
                 break;
@@ -98,48 +99,39 @@ public class MyReservationController extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void showMyreservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Reservation> list = new ArrayList<Reservation>();
-        User u = (User) request.getSession().getAttribute("user");
-
+    protected void showExams(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        
+            //get checkuptime
         ReservationDAO reservationDB = new ReservationDAO();
-        list = reservationDB.getReservationWithoutPending(u);
+        Reservation reservation = reservationDB.getReservationById(rid);
+            //get receiver info
+        ReceiverDAO receiverDB = new ReceiverDAO();
+        Receiver receiver = receiverDB.getReceiversById(rid);
+            //get medexam: prescription and service name
+        ArrayList<MedicalExamination> medexam = new ArrayList<>();
+        medexam = reservationDB.getMedExamByReservation(reservation.getId());
 
-        for (Reservation reservation : list) {
-           
-            ArrayList<ReservationService> listservice = new ArrayList<>();
-            listservice = reservationDB.getReservationServices(reservation);
-            float total = 0;
-            ArrayList<Service> servicelist = new ArrayList<>();
-            for (ReservationService reservationService : listservice) {
-                total += reservationService.getUnitPrice();
-                servicelist.add(reservationService.getService());
-
-            }
-            reservation.setListService(servicelist);
-            reservation.setTotal_cost(reservationDB.getTotalCost(reservation));
-        }
-
-        request.setAttribute("list", list);
-        request.getRequestDispatcher("../../view/reservation/myReservation.jsp").forward(request, response);
-
+        request.setAttribute("reservation", reservation);
+        request.setAttribute("receiver", receiver);
+        request.setAttribute("medexam", medexam);
+        request.getRequestDispatcher("../../view/reservation/myExams.jsp").forward(request, response);
     }
 
-    protected void showDetailsReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Reservation r = new Reservation();
-        int id = Integer.parseInt(request.getParameter("id"));
-        ArrayList<ReservationService> res = new ArrayList<>();
-        ReservationDAO redb = new ReservationDAO();
-        r.setId(id);
+    protected void showPrescription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-        Reservation rerser = new Reservation();
+        int rid = Integer.parseInt(request.getParameter("rid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
+        ReservationDAO reservationDB = new ReservationDAO();
+            //get receiver info
+        ReceiverDAO receiverDB = new ReceiverDAO();
+        Receiver receiver = receiverDB.getReceiversById(rid);
+        MedicalExamination medexam = reservationDB.getMedExamByReservationService(rid, sid);
         
-        rerser = redb.getReservationById(id);
-        rerser.setTotal_cost(redb.getTotalCost(rerser));
-        res = redb.getReservationServices(rerser);
-        request.setAttribute("reservation", rerser);
-        request.setAttribute("list", res);
-        request.getRequestDispatcher("../../view/reservation/reservationInformation.jsp").forward(request, response);
+        request.setAttribute("medexam", medexam);
+        request.setAttribute("receiver", receiver);
+        request.getRequestDispatcher("../../view/reservation/myPrescription.jsp").forward(request, response);
     }
 
     /**
@@ -147,16 +139,6 @@ public class MyReservationController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-
-    public void cancelReservation(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Reservation r = new Reservation();
-        int id = Integer.parseInt(request.getParameter("id"));
-        ReservationDAO redb = new ReservationDAO();
-        r = redb.getReservationById(id);
-        redb.deleteReservationService(r);
-        redb.cancelReservation(r);
-        response.sendRedirect("my");
-    }
 
     @Override
     public String getServletInfo() {

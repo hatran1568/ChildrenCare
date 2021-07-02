@@ -176,7 +176,7 @@ public class UserController extends HttpServlet {
         request.setAttribute("user", user);
         request.getRequestDispatcher("../../view/user/details.jsp").forward(request, response);
     }
-    
+
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User u = new User();
         u.setEmail(request.getParameter("email"));
@@ -184,11 +184,11 @@ public class UserController extends HttpServlet {
         u.setGender(Boolean.parseBoolean(request.getParameter("gender")));
         u.setFullName(request.getParameter("full-name"));
         u.setImageLink(request.getParameter("image-link"));
-            //Generate a random password with 9 numbers in the range of 0 to 9
+        //Generate a random password with 9 numbers in the range of 0 to 9
         int[] generatePassword = new int[10];
         String password = "CRS";
         for (int i = 0; i < 9; i++) {
-            generatePassword[i] = (int) (Math.random()*10);
+            generatePassword[i] = (int) (Math.random() * 10);
             password += Integer.toString(generatePassword[i]);
         }
         u.setPassword(password);
@@ -257,14 +257,13 @@ public class UserController extends HttpServlet {
         RoleDAO roleDB = new RoleDAO();
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
-        
+
         request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
     }
 
-    
     //Login function using session
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
+
         //check if there is any alert from system
         String message = request.getParameter("message");
 
@@ -282,32 +281,31 @@ public class UserController extends HttpServlet {
 
         UserDAO userDb = new UserDAO();
         ArrayList<User> list = new ArrayList<User>();
-        
+
         //get email and pass from client
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        
+
         //search result in Database
         list = userDb.searchUserByEmailAndPass(email, pass);
-        
+
         //if user not exist alert wrong email or password
         if (list.size() == 0) {
             String alert = "Wrong email or password";
             request.getSession().setAttribute("alert", alert);
             response.sendRedirect("home");
             return;
-        
-            
-         // if user was verify redirect to home page
-        } else if (list.get(0).getStatus().getId() != 13) {
 
+            // if user was verify redirect to home page
+        } else if (list.get(0).getStatus().getId() != 13) {
+            String alert = "Login Successfully";
+            request.getSession().setAttribute("alert", alert);
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
             response.sendRedirect("home");
             return;
-            
-            
-        //if user was not verify alert that verify needed and forward to verify page
+
+            //if user was not verify alert that verify needed and forward to verify page
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
@@ -321,11 +319,10 @@ public class UserController extends HttpServlet {
         }
 
     }
-    
-    
+
     //Register Function
     protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         SettingDAO settingDB = new SettingDAO();
         //Get user information from Client
         String email = request.getParameter("email");
@@ -336,11 +333,11 @@ public class UserController extends HttpServlet {
         String gender = request.getParameter("gender");
 
         UserDAO userDb = new UserDAO();
-        
+
         //search if email was registed before
         ArrayList<User> list = new ArrayList<User>();
         list = userDb.searchUserByEmail(email);
-        
+
         //if some field input was empty alert and redirect to homepage
         if (email.length() == 0 || pass.length() == 0 || phone.length() == 0 || fullnames.length() == 0 || address.length() == 0 || gender == null) {
             String alert = "Please Enter all field!";
@@ -349,7 +346,7 @@ public class UserController extends HttpServlet {
             return;
 
         }
-        
+
         //if email was existed in system alert and redirect to homepage
         if (list.size() > 0) {
             String alert = "Email had been registed! Please enter another Email!";
@@ -358,7 +355,7 @@ public class UserController extends HttpServlet {
             return;
 
         }
-        
+
         //if email not exist insert user to Database with status false
         User u = new User();
         u.setAddress(address);
@@ -373,31 +370,29 @@ public class UserController extends HttpServlet {
             u.setGender(false);
         }
         u.setStatus(settingDB.getSettingById(13));
-        userDb.addCustomer(u,-1);
-        
+        userDb.addCustomer(u, -1);
+
         //Forward to verify page to verify via email
         request.setAttribute("email", email);
         request.getRequestDispatcher("verify").forward(request, response);
     }
 
-    
     //Send email to verify
     protected void verify(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, MessagingException {
-        
+
         //Generate verify code
         String code = EmailVerify.getInstance().getRandom();
         String email = (String) request.getAttribute("email");
         User u = new User();
         u.setEmail(email);
-        
+
         //Send email with verify code and forward to verify page
         EmailVerify.getInstance().sendText(u, code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
         request.getRequestDispatcher("/view/homepage/verify.jsp").forward(request, response);
     }
-    
-    
+
     //Check user input verify code
     protected void verifying(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String email = (String) request.getParameter("email");
@@ -410,7 +405,7 @@ public class UserController extends HttpServlet {
         String actual = request.getParameter("actualcode");
 
         UserDAO userDb = new UserDAO();
-        
+
         //Check if user input true code and set status to true
         if (code.equals(actual)) {
             userDb.updateStatus(u, 14);
@@ -427,12 +422,13 @@ public class UserController extends HttpServlet {
             r.setUser(user);
             r.setGender(user.isGender());
             r.setMobile(user.getMobile());
-            if(!receiverDb.checkExistingReceiver(email))
-            receiverDb.addReceiver(r);
+            if (!receiverDb.checkExistingReceiver(email)) {
+                receiverDb.addReceiver(r);
+            }
             request.getSession().setAttribute("alert", alert);
             response.sendRedirect("home");
-        
-        //If code is wrong back to verify page
+
+            //If code is wrong back to verify page
         } else {
             request.setAttribute("email", email);
             request.getRequestDispatcher("verify").forward(request, response);
