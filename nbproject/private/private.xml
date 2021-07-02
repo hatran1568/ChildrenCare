@@ -3,17 +3,43 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/list.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/BaseDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/slider/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/slider/edit.jsp</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/ReservationCompletionController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/web/view/homepage/newhomepage.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/ReservationContactController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/web/view/homepage/userprofileedit.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/web/view/homepage/userprofile.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/UserProfileController.java</file>
+=======
+<<<<<<< HEAD
+>>>>>>> 757a9901844fbbf480bcecb86ba33f66a80d7548
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/homepage/newhomepage.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/SliderController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/list2.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReservationDAO.java</file>
+<<<<<<< HEAD
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
+=======
+=======
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/newhomepage.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/homepage.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+>>>>>>> f86d3b712a4b349352747149643e2cd638d73c26
+>>>>>>> c7d4e4dc70b7ab64ab8f9beebcb26a6dbb9dfbe4
+>>>>>>> 757a9901844fbbf480bcecb86ba33f66a80d7548
         </group>
     </open-files>
 </project-private>
