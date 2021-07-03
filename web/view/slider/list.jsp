@@ -227,7 +227,7 @@
 
 
         <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
+            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2,search);
         </script>
 
 
@@ -317,12 +317,12 @@
             {
                 var container = document.getElementById(id);
                 if (pageindex > gap + 1)
-                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
+                    container.innerHTML += "<a href='" + page + "?page=1&status=${param.statush}&search=${param.search}'>First</a>";
                 for (var i = pageindex - gap; i < pageindex; i++)
                 {
                     if (i >= 1)
                     {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                        container.innerHTML += "<a href='" + page + "?page=" + i+"&status=${param.statush}&search=${param.search}" + "'>" + i + "</a>";
                     }
                 }
 
@@ -331,12 +331,12 @@
                 {
                     if (i <= totalpage)
                     {
-                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                        container.innerHTML += "<a href='" + page + "?page=" + i +"&status=${param.statush}&search=${param.search}"+ "'>" + i + "</a>";
                     }
                 }
 
                 if (pageindex < totalpage - gap)
-                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
+                    container.innerHTML += "<a href='" + page + "?page="+totalpage +"&status=${param.status}&search=${param.search}" +  "'>Last</a>"
             }
             generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2, "${requestScope.url}");
               function changeStatus(param) {

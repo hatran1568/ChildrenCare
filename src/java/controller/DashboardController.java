@@ -170,7 +170,7 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("Submit", Submit);
         request.setAttribute("Cancel", Cancel);
         request.setAttribute("Success", Success);
-        request.setAttribute("Approvel", approve);
+        request.setAttribute("Approve", approve);
         request.setAttribute("Reject", reject);
 
         request.setAttribute("Success", Success);
