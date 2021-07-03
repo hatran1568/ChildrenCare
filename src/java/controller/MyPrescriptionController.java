@@ -100,21 +100,12 @@ public class MyPrescriptionController extends HttpServlet {
     }
 
     protected void showExams(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        int rid = Integer.parseInt(request.getParameter("rid"));
-        
-            //get checkuptime
+        User user = (User) request.getSession().getAttribute("user");
         ReservationDAO reservationDB = new ReservationDAO();
-        Reservation reservation = reservationDB.getReservationById(rid);
-            //get receiver info
-        ReceiverDAO receiverDB = new ReceiverDAO();
-        Receiver receiver = receiverDB.getReceiversById(rid);
             //get medexam: prescription and service name
         ArrayList<MedicalExamination> medexam = new ArrayList<>();
-        medexam = reservationDB.getMedExamByReservation(reservation.getId());
-
-        request.setAttribute("reservation", reservation);
-        request.setAttribute("receiver", receiver);
+        medexam = reservationDB.getMedExamOfUser(user.getId());
+        
         request.setAttribute("medexam", medexam);
         request.getRequestDispatcher("../../view/reservation/myExams.jsp").forward(request, response);
     }
@@ -124,13 +115,9 @@ public class MyPrescriptionController extends HttpServlet {
         int rid = Integer.parseInt(request.getParameter("rid"));
         int sid = Integer.parseInt(request.getParameter("sid"));
         ReservationDAO reservationDB = new ReservationDAO();
-            //get receiver info
-        ReceiverDAO receiverDB = new ReceiverDAO();
-        Receiver receiver = receiverDB.getReceiversById(rid);
         MedicalExamination medexam = reservationDB.getMedExamByReservationService(rid, sid);
         
         request.setAttribute("medexam", medexam);
-        request.setAttribute("receiver", receiver);
         request.getRequestDispatcher("../../view/reservation/myPrescription.jsp").forward(request, response);
     }
 

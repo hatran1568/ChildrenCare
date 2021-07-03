@@ -175,7 +175,7 @@
         <div class="container" style="min-height: 700px; height: auto;">
 
             <table class="table" id="reservation-detail">
-                <thead  class="thead-dark">
+                <thead class="thead-dark">
                     <tr>
                         <td class="col-md-1">Id</td>
                         <td class="col-md-2">Date</td>
@@ -184,13 +184,13 @@
                         <td class="col-md-2">Total Cost</td>
                         <td class="col-md-2">Service</td>
                         <td class="col-md-1">Information</td>
-
+                        <td class="col-md-1">Prescriptions</td>
                 </thead>
                 <tbody>
                     <c:forEach var="list" items="${requestScope.list}">
                         <tr>
                             <td class="col-md-1">${list.id}</td>
-                            <td  class="col-md-2"> <p><input  class="date" type="date" value="${list.reservation_date}" readonly="true"></p></td>
+                            <td class="col-md-2"> <p><input  class="date" type="date" value="${list.reservation_date}" readonly="true"></p></td>
                             <td class="col-md-2"><input class="date" type="date" value="${list.checkup_time}" readonly="true"></td>
                             <td class="col-md-2">${list.status.name}</td>
                             <td class="col-md-2">${list.total_cost}</td>  
