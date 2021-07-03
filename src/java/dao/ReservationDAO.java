@@ -638,7 +638,7 @@ public class ReservationDAO extends BaseDAO {
     public ArrayList<MedicalExamination> getMedExamByReservation(int rid) {
         try {
             ArrayList<MedicalExamination> list = new ArrayList<MedicalExamination>();
-            String sql = "select m.reservation_id, m.service_id, s.fullname, m.receiver_id, m.precription\n" +
+            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n" +
                         "from medical_examination m INNER JOIN service s\n" +
                         "on m.service_id = s.id\n" +
                         "where reservation_id = ?";
@@ -655,12 +655,13 @@ public class ReservationDAO extends BaseDAO {
                 Service s = new Service();
                 s.setId(rs.getInt("service_id"));
                 s.setFullname(rs.getString("fullname"));
+                s.setThumbnailLink(rs.getString("thumbnail_link"));
                 r.setService(s);
                 m.setReservationService(r);
                 Receiver receiver = new Receiver();
                 receiver.setId(rs.getInt("receiver_id"));
                 m.setReceiver(receiver);
-                m.setPrescription(rs.getString("precription"));
+                m.setPrescription(rs.getString("prescription"));
                 list.add(m);
             }
             return list;
@@ -671,7 +672,7 @@ public class ReservationDAO extends BaseDAO {
     }
     public MedicalExamination getMedExamByReservationService(int rid, int sid) {
         try {
-            String sql = "select m.reservation_id, m.service_id, s.fullname, m.receiver_id, m.precription\n" +
+            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n" +
                         "from medical_examination m INNER JOIN service s\n" +
                         "on m.service_id = s.id\n" +
                         "where reservation_id = ? and service_id = ?";
@@ -688,12 +689,13 @@ public class ReservationDAO extends BaseDAO {
                 Service s = new Service();
                 s.setId(rs.getInt("service_id"));
                 s.setFullname(rs.getString("fullname"));
+                s.setThumbnailLink(rs.getString("thumbnail_link"));
                 r.setService(s);
                 m.setReservationService(r);
                 Receiver receiver = new Receiver();
                 receiver.setId(rs.getInt("receiver_id"));
                 m.setReceiver(receiver);
-                m.setPrescription(rs.getString("precription"));
+                m.setPrescription(rs.getString("prescription"));
             }
             return m;
         } catch (SQLException ex) {
