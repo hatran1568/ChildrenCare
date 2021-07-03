@@ -196,15 +196,16 @@
                 <h1 style="margin-top: 3%">Your Prescription</h1>
                 <div style="font-size: 15px;">
                     <h2 style="margin-bottom: -1%; font-size: 20px">Receiver Information</h2><br>
-                    Full Name: ${requestScope.receiver.getFullName()}<br>
-                    Gender: <c:if test="${requestScope.receiver.isGender()}">Male</c:if>
-                            <c:if test="${!requestScope.receiver.isGender()}">Female</c:if><br>
-                    Mobile: ${requestScope.receiver.getMobile()}<br>
-                    Address: ${requestScope.receiver.getAddress()}<br>
-                    Email: ${requestScope.receiver.getEmail()}
+                    Full Name: ${requestScope.medexam.receiver.getFullName()}<br>
+                    Gender: <c:if test="${requestScope.medexam.receiver.isGender()}">Male</c:if>
+                            <c:if test="${!requestScope.medexam.receiver.isGender()}">Female</c:if><br>
+                    Mobile: ${requestScope.medexam.receiver.getMobile()}<br>
+                    Address: ${requestScope.medexam.receiver.getAddress()}<br>
+                    Email: ${requestScope.medexam.receiver.getEmail()}<br>
+                    Checkup Time: ${requestScope.medexam.getReservationService().reservation.getCheckup_time()}
                 </div>
             </div>
-            <div class="container" style="min-height: 700px; height: auto; max-width: 80%">
+            <div class="container" style="height: auto; max-width: 80%">
             <table class="table" id="myExams">
                 <thead class="thead-dark">
                     <tr>

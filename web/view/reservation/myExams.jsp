@@ -194,16 +194,6 @@
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
             <div class="container" style="text-align: center;">
                 <h1 style="margin-top: 3%">Your Prescriptions</h1>
-                <div style="font-size: 15px;">    
-                    <h2 style="margin-bottom: -1%; font-size: 20px">Receiver Information</h2><br>
-                    Full Name: ${requestScope.receiver.getFullName()}<br>
-                    Gender: <c:if test="${requestScope.receiver.isGender()}">Male</c:if>
-                            <c:if test="${!requestScope.receiver.isGender()}">Female</c:if><br>
-                    Mobile: ${requestScope.receiver.getMobile()}<br>
-                    Address: ${requestScope.receiver.getAddress()}<br>
-                    Email: ${requestScope.receiver.getEmail()}<br>
-                    Checkup Time: ${requestScope.reservation.getCheckup_time()}
-                </div>
             </div>
             <div class="container" style="min-height: 700px; height: auto; max-width: 80%">
             <table class="table" id="myExams">
@@ -212,6 +202,8 @@
                         <td class="col-md-1">Reservation ID</td>
                         <td class="col-md-2">Service</td>
                         <td class="col-md-2">Service Name</td>
+                        <td class="col-md-1">Receiver</td>
+                        <td class="col-md-1">Checkup Time</td>
                         <td class="col-md-2">Details</td>
                 </thead>
                 <tbody>
@@ -220,6 +212,11 @@
                             <td class="col-md-1">${list.getReservationService().reservation.id}</td>
                             <td><img src="../../${list.getReservationService().service.thumbnailLink}" id="serviceThumbnail" style="width: 300px; height: 150px" class="img-thumbnail" /></td>
                             <td class="col-md-2">${list.getReservationService().service.getFullname()}</td>
+                            <td class="col-md-1">
+                                ${list.receiver.getFullName()}<br>
+                                ${list.receiver.getMobile()}
+                            </td>
+                            <td class="col-md-1">${list.getReservationService().reservation.getCheckup_time()}</td>
                             <td class="col-md-1">
                                 <a href="prescription?rid=${list.getReservationService().reservation.id}&sid=${list.getReservationService().service.id}">
                                     Prescription

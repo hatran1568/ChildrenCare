@@ -635,31 +635,27 @@ public class ReservationDAO extends BaseDAO {
         }
     }
     
-    public ArrayList<MedicalExamination> getMedExamByReservation(int rid) {
+    public ArrayList<MedicalExamination> getMedExamOfUser(int uid) {
         try {
             ArrayList<MedicalExamination> list = new ArrayList<MedicalExamination>();
             String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n" +
                         "from medical_examination m INNER JOIN service s\n" +
                         "on m.service_id = s.id\n" +
-                        "where reservation_id = ?";
+                        "INNER JOIN receiver r ON r.id = m.receiver_id\n" +
+                        "WHERE r.user_id = ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, rid);
+            stm.setInt(1, uid);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 MedicalExamination m = new MedicalExamination();
                 ReservationService r = new ReservationService();
-                Reservation re = new Reservation();
-                re.setId(rid);
+                Reservation re = getReservationById(rs.getInt("reservation_id"));
                 r.setReservation(re);
-                Service s = new Service();
-                s.setId(rs.getInt("service_id"));
-                s.setFullname(rs.getString("fullname"));
-                s.setThumbnailLink(rs.getString("thumbnail_link"));
+                Service s = serviceDB.getService(rs.getInt("service_id"));
                 r.setService(s);
                 m.setReservationService(r);
-                Receiver receiver = new Receiver();
-                receiver.setId(rs.getInt("receiver_id"));
+                Receiver receiver = receiverDB.getReceiversById(rs.getInt("receiver_id"));
                 m.setReceiver(receiver);
                 m.setPrescription(rs.getString("prescription"));
                 list.add(m);
@@ -683,17 +679,12 @@ public class ReservationDAO extends BaseDAO {
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 ReservationService r = new ReservationService();
-                Reservation re = new Reservation();
-                re.setId(rid);
+                Reservation re = getReservationById(rs.getInt("reservation_id"));
                 r.setReservation(re);
-                Service s = new Service();
-                s.setId(rs.getInt("service_id"));
-                s.setFullname(rs.getString("fullname"));
-                s.setThumbnailLink(rs.getString("thumbnail_link"));
+                Service s = serviceDB.getService(rs.getInt("service_id"));
                 r.setService(s);
                 m.setReservationService(r);
-                Receiver receiver = new Receiver();
-                receiver.setId(rs.getInt("receiver_id"));
+                Receiver receiver = receiverDB.getReceiversById(rs.getInt("receiver_id"));
                 m.setReceiver(receiver);
                 m.setPrescription(rs.getString("prescription"));
             }

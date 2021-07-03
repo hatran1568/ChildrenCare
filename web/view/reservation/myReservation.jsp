@@ -196,7 +196,6 @@
                             <td class="col-md-2">${list.total_cost}</td>  
                             <td class="col-md-2"><c:forEach items="${list.listService}" var="s">${s.fullname} <br></c:forEach></td>
                             <td class="col-md-1"><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
-                            <td class="col-md-1"><a href="../../customer/myprescription/exams?rid=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
                         </tr>
                     </c:forEach>
 
