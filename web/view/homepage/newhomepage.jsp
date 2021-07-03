@@ -116,7 +116,8 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My Reservation</a></li>
+                            <li class="dropdown"><a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
