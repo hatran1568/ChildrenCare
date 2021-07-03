@@ -49,6 +49,10 @@
         <servlet-class>controller.MyReservationController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>MyPrescriptionController</servlet-name>
+        <servlet-class>controller.MyPrescriptionController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SettingController</servlet-name>
         <servlet-class>controller.SettingController</servlet-class>
     </servlet>
@@ -76,6 +80,11 @@
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/my</url-pattern>
         <url-pattern>/customer/reservation/cancel</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MyPrescriptionController</servlet-name>
+        <url-pattern>/customer/myprescription/exams</url-pattern>
+        <url-pattern>/customer/myprescription/prescription</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
