@@ -14,18 +14,18 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/rating.min.js" integrity="sha512-GKPaQJKsw7I5CTRr27RvbXXpv/kulDkVilCQmqQen2doK07UxhEQLnSe2ozB/8yTJ8x6ofF63FXfIpYnETz9Jw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -186,94 +186,93 @@
 
 
         <!-- TEAM -->
-        <section id="team" data-stellar-background-ratio="1">
 
-        </section><!--
 
-        
+
         <!-- NEWS -->
-        <div class="container" style="height: max-content; min-height: 700px;">
-            <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
+        <div class="container" style="margin-top: 20px; height: max-content; min-height: 700px;">
+            <form id="form" enctype="multipart/form-data" action="update" method="POST" class="ui form">
+
+                <div class="two  fields">
+                    <div class="twelve wide   field">
+                        <label>Image</label>
+                        <br>
+                        <div>
+                            <img src="../../${requestScope.f.imageLink}" style="  box-sizing: border-box;
+                                 width: 50%; height: auto; 
+                                 " id="output"  > 
+                        </div>
+                    </div>
+                    <div id="star" class="four wide field">
+                        <label>Rated Star</label>
+
+                    </div>
+
+
+                </div>
+
                 <h4 class="ui dividing header">Contact Information</h4>
                 <div class="two fields">
                     <div class="twelve wide  field">
                         <label>Name</label>
 
-                        <input type="text" name="fullname" placeholder="Bo Yates">
+                        <input readonly="true" value="${requestScope.f.fullName}" type="text" name="fullname" placeholder="Bo Yates">
 
                     </div>
                     <div class="four wide  field">
                         <label>Gender</label>
 
-                        <select name="gender">
-                            <option selected="true" value="true">Male</option>
-                            <option value="false">Female</option>
-                          
-
-                        </select>
+                        <select readonly="true" name="gender">
+                            <option <c:if test="${requestScope.f.gender eq 'true'}"> selected="true"</c:if> value="true">Male</option>
+                            <option <c:if test="${requestScope.f.gender eq 'false'}"> selected="true"</c:if>  value="false">Female</option>
 
 
+                            </select>
+
+
+                        </div>
                     </div>
-                </div>
 
-                <div class="two fields">
-                    <div class="field">
-                        <label>Email</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Email</label>
 
-                        <input type="text" name="email" placeholder="Email@abc.com">
+                            <input readonly="true" value="${requestScope.f.email}" type="text" name="email" placeholder="Email@abc.com">
 
                     </div>
                     <div class="field">
                         <label>Mobile</label>
 
-                        <input type="text" name="mobile" placeholder="01234456789">
+                        <input readonly="true" value="${requestScope.f.mobile}" type="text" name="mobile" placeholder="01234456789">
 
                     </div>
                 </div>
 
                 <div class="two fields">
-                    <div class="four wide field">
-                        <label>Image</label>
-                        <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
-                        <img style="  box-sizing: border-box;
-                             width: 100%; height: auto; 
-                             " id="output"  > 
-                    </div>
+
                     <div class="twelve wide field">
                         <label>Feedback</label>
-                        <textarea name="note"></textarea>
-                        <input hidden="true" id="star" type="text" name="star">
-                        <input hidden="true" value="${requestScope.id}"  type="text" name="sid">
+                        <textarea readonly="true" name="note">${requestScope.f.content}</textarea>
+
+
                     </div>
-                </div>
+                    <div class="four wide field">
+                        <label>Status</label>
+                        <select name="status">
+                            <c:forEach items="${requestScope.Status}" var="s">
+                                <option <c:if test="$${s.id == requestScope.f.status.id}"></c:if> value="${s.id}">${s.name}</option>
+                            </c:forEach>
+                        </select>
 
-                <div class="two fields">
+
+                    </div>
+                </div><div class="two fields"> 
                     <div class="twelve wide field">
-                        <label>Rating</label>
-                        <div class="card-body text-center"> 
-
-                            <fieldset style="text-align: left" class="rating"> 
-                                <input type="radio" id="star5" name="rating" value="5" />
-                                <label class="full" for="star5" title="Awesome - 5 stars"></label> 
-
-                                <input type="radio" id="star4" name="rating" value="4" />
-                                <label class="full" for="star4" title="Pretty good - 4 stars"></label>
-
-                                <input type="radio" id="star3" name="rating" value="3" />
-                                <label class="full" for="star3" title="Meh - 3 stars"></label> 
-
-                                <input type="radio" id="star2" name="rating" value="2" />
-                                <label class="full" for="star2" title="Kinda bad - 2 stars"></label> 
-
-                                <input type="radio" id="star1" name="rating" value="1" />
-                                <label class="full" for="star1" title="Sucks big time - 1 star"></label>
-
-                                <input type="radio" class="reset-option" name="rating" value="reset" /> </fieldset>
-                        </div>
+                        <input type="text" hidden="true" name="fid" value="${requestScope.f.id}">
                     </div>
                     <div class="four wide field">
                         <label></label>
-                        <div onclick="submit()" class="ui button" tabindex="0">Submit Feedback</div>
+                        <div onclick="submit()" class="ui button" tabindex="0">Submit Feedback</div>  
                     </div>
                 </div>
 
@@ -281,7 +280,11 @@
             </form>
         </div>
 
+        <script>
 
+
+
+        </script>
 
 
         <!-- FOOTER -->
@@ -333,37 +336,37 @@
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.sticky.js"></script>
-        <script src="assets/js/jquery.stellar.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/smoothscroll.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/custom-new.js"></script>
+        <script src="../../assets/js/jquery.js"></script>
+        <script src="../../assets/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/jquery.sticky.js"></script>
+        <script src="../../assets/js/jquery.stellar.min.js"></script>
+        <script src="../../assets/js/wow.min.js"></script>
+        <script src="../../assets/js/smoothscroll.js"></script>
+        <script src="../../assets/js/owl.carousel.min.js"></script>
+        <script src="../../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                            $('ul.nav li.dropdown').hover(function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                            }, function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                            });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
 
-                            $(document).ready(function () {
+            $(document).ready(function () {
 
-                                $("input[type='radio']").click(function () {
-                                    var sim = $("input[type='radio']:checked").val();
-                                    $("#star").val(sim)
+                $("input[type='radio']").click(function () {
+                    var sim = $("input[type='radio']:checked").val();
+                    $("#star").val(sim)
 
+                    drawRate(${requestScope.f.ratedStar}, 'star')
 
+                });
+            });
+            function submit() {
+                document.getElementById("form").submit();
 
-                                });
-                            });
-                            function submit(){
-                                 document.getElementById("form").submit();
-                                
-                            }
-                           
+            }
+
 
         </script>
         <script>
@@ -374,6 +377,16 @@
                     URL.revokeObjectURL(output.src) // free memory
                 }
             };
+            function drawRate(star, ele) {
+
+                for (var i = 0; i < star; i++) {
+                    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star fa-3x checked'></span>"
+                }
+                for (var i = 0; i < 5 - star; i++) {
+                    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star fa-3x'></span>"
+                }
+            }
+            drawRate(${requestScope.f.ratedStar}, 'star')
         </script>
         <style>
             .rating {
@@ -480,6 +493,9 @@
 
             .btn:hover {
                 background-color: #D32F2F !important
+            }
+            .checked{
+                color: orange;
             }
         </style>
 

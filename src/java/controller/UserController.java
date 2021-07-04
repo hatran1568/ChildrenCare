@@ -104,6 +104,9 @@ public class UserController extends HttpServlet {
             case "/register":
                 register(request, response);
                 break;
+            case "/logout":
+                logout(request, response);
+                break;
             case "/verify": {
                 try {
                     verify(request, response);
@@ -439,6 +442,11 @@ public class UserController extends HttpServlet {
             request.setAttribute("email", email);
             request.getRequestDispatcher("verify").forward(request, response);
         }
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("user");
+        response.sendRedirect("home");
     }
 
     @Override
