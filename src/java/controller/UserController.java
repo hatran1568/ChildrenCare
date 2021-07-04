@@ -104,6 +104,9 @@ public class UserController extends HttpServlet {
             case "/register":
                 register(request, response);
                 break;
+            case "/logout":
+                logout(request, response);
+                break;
             case "/verify": {
                 try {
                     verify(request, response);
@@ -302,7 +305,13 @@ public class UserController extends HttpServlet {
             request.getSession().setAttribute("alert", alert);
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
-            response.sendRedirect("home");
+            if (list.get(0).getRole().getName().equals("Admin")) {
+                response.sendRedirect("admin/dashboard/view");
+            } else {
+                session.setAttribute("user", list.get(0));
+                response.sendRedirect("home");
+            }
+
             return;
 
             //if user was not verify alert that verify needed and forward to verify page
@@ -433,6 +442,11 @@ public class UserController extends HttpServlet {
             request.setAttribute("email", email);
             request.getRequestDispatcher("verify").forward(request, response);
         }
+    }
+
+    protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("user");
+        response.sendRedirect("home");
     }
 
     @Override

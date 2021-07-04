@@ -141,7 +141,6 @@
                                         <th></th>
                                         <th></th>
                                         <th>Author</th>
-                                        
                                         <th></th>
                                         <th>Status</th>
                                         <th></th>

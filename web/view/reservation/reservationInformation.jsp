@@ -211,20 +211,20 @@
             <h3>Receiver</h3>
 
             <div style="display: flex;" >
-                <h4 style="flex-grow: 1;min-width: 260px">Name : </h4>
-                <h4 style="flex-grow: 4">${requestScope.reservation.receiver.fullName}</h4>
+                <h5 style="flex-grow: 1;min-width: 260px">Name : </h5>
+                <h5 style="flex-grow: 4">${requestScope.reservation.receiver.fullName}</h5>
             </div>
             <div style="display: flex;" >
-                <h4 style="flex-grow: 1;min-width: 260px">Gender : </h4>
-                <h4 style="flex-grow: 4"> <c:if test="${requestScope.reservation.receiver.gender eq 'true'}">Male</c:if><c:if test="${requestScope.reservation.receiver.gender eq 'false'}">Female</c:if></h4>
+                <h5 style="flex-grow: 1;min-width: 260px">Gender : </h5>
+                <h5 style="flex-grow: 4"> <c:if test="${requestScope.reservation.receiver.gender eq 'true'}">Male</c:if><c:if test="${requestScope.reservation.receiver.gender eq 'false'}">Female</c:if></h5>
                 </div>
                 <div style="display: flex;" >
-                    <h4 style="flex-grow: 1;min-width:  260px">Email : </h4>
-                        <h4 style="flex-grow: 4">${requestScope.reservation.receiver.email}</h4>
+                    <h5 style="flex-grow: 1;min-width:  260px">Email : </h5>
+                        <h5 style="flex-grow: 4">${requestScope.reservation.receiver.email}</h5>
             </div>
             <div style="display: flex;" >
-                <h4 style="flex-grow: 1;min-width: 260px">Mobile : </h4>
-                <h4 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h4>
+                <h5 style="flex-grow: 1;min-width: 260px">Mobile : </h4>
+                <h5 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h5>
             </div>
 
             <h3>Service</h3> 
@@ -542,7 +542,7 @@
             -webkit-appearance: none;
             display: none;
         }
-        h4{
+        h5{
             text-align: center;
             color: black;
         }

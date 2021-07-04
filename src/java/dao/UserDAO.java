@@ -678,7 +678,7 @@ public class UserDAO extends BaseDAO {
         return list;
     }
 
-    public ArrayList<User> getUserByStatus(Setting s) {
+        public ArrayList<User> getUserByStatus(Setting s) {
         try {
             ArrayList<User> list = new ArrayList<>();
             String sql = "Select * from user where status = ?";
@@ -695,10 +695,9 @@ public class UserDAO extends BaseDAO {
                 a.setMobile(rs.getString("mobile"));
                 a.setImageLink(rs.getString("image_link"));
                 a.setAddress(rs.getString("address"));
-                Role r = new Role();
-                r.setId(rs.getInt("role_id"));
-                r.setName(rs.getString("role_name"));
-                a.setRole(r);
+               
+               
+                
                 
                 list.add(a);
                         }
