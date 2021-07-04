@@ -52,11 +52,11 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
-                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setCheckupTime(rs.getDate("checkup_time"));
                 r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
@@ -89,11 +89,11 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
-                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setCheckupTime(rs.getDate("checkup_time"));
                 r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
@@ -127,7 +127,7 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
@@ -161,8 +161,8 @@ public class ReservationDAO extends BaseDAO {
 
                 Reservation s = new Reservation();
                 s.setId(id);
-                s.setCheckup_time(rs.getDate("checkup_time"));
-                s.setReservation_date(rs.getDate("reservation_date"));
+                s.setCheckupTime(rs.getDate("checkup_time"));
+                s.setReservationDate(rs.getDate("reservation_date"));
                 s.setStatus(settingDB.getSetting(rs.getInt("status_id")));
                 s.setCustomer(userDB.getUser(rs.getInt("customer_id")));
                 s.setStaff(userDB.getUser(rs.getInt("staff_id")));
@@ -329,7 +329,7 @@ public class ReservationDAO extends BaseDAO {
             stm.setInt(2, s.getId());
             stm.setInt(3, 1);
             stm.setInt(4, rc.getId());
-            stm.setDate(5, r.getReservation_date());
+            stm.setDate(5, r.getReservationDate());
             stm.setFloat(6, s.getSalePrice());
 
             stm.executeUpdate();

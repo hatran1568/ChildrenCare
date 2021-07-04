@@ -117,7 +117,7 @@ public class MyReservationController extends HttpServlet {
 
             }
             reservation.setListService(servicelist);
-            reservation.setTotal_cost(reservationDB.getTotalCost(reservation));
+            reservation.setTotalCost(reservationDB.getTotalCost(reservation));
         }
 
         request.setAttribute("list", list);
@@ -135,7 +135,7 @@ public class MyReservationController extends HttpServlet {
         Reservation rerser = new Reservation();
         
         rerser = redb.getReservationById(id);
-        rerser.setTotal_cost(redb.getTotalCost(rerser));
+        rerser.setTotalCost(redb.getTotalCost(rerser));
         res = redb.getReservationServices(rerser);
         request.setAttribute("reservation", rerser);
         request.setAttribute("list", res);

@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>ImageDirectory</param-name>
-        <param-value></param-value>
+        <param-value/>
     </context-param>
     <filter>
         <filter-name>Authorization</filter-name>
@@ -71,6 +71,14 @@
     <servlet>
         <servlet-name>UserProfileController</servlet-name>
         <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffReservationController</servlet-name>
+        <servlet-class>controller.StaffReservationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffExaminationController</servlet-name>
+        <servlet-class>controller.StaffExaminationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -313,6 +321,22 @@
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
         <url-pattern>/userprofile/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffReservationController</servlet-name>
+        <url-pattern>/staff/reservation/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffExaminationController</servlet-name>
+        <url-pattern>/staff/examination/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffExaminationController</servlet-name>
+        <url-pattern>/staff/examination/new</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffExaminationController</servlet-name>
+        <url-pattern>/staff/examination/checkemail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
