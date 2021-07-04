@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Win64 (x86_64)
 --
--- Host: 127.0.0.2    Database: swp
+-- Host: localhost    Database: swp
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -75,7 +75,7 @@ CREATE TABLE `medical_examination` (
 
 LOCK TABLES `medical_examination` WRITE;
 /*!40000 ALTER TABLE `medical_examination` DISABLE KEYS */;
-INSERT INTO `medical_examination` VALUES (3,1,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(3,2,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(3,3,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.'),(4,2,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.'),(4,3,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.');
+INSERT INTO `medical_examination` VALUES (1,1,2,'Yes'),(1,1,11,'500mg of Amoxicillin, three times a day for seven days'),(1,2,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(1,2,2,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(1,3,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(3,1,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(3,2,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch'),(4,2,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.'),(4,3,1,'Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.Cyanide: 3 times a day; Beta Blockers: 1 after lunch. Cyanide: 3 times a day; Beta Blockers: 1 after lunch.');
 /*!40000 ALTER TABLE `medical_examination` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-04 11:36:33
+-- Dump completed on 2021-07-04 22:35:30
