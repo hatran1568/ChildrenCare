@@ -10,6 +10,7 @@ package bean;
  * @author HP
  */
 public class Feedback {
+
     private int id;
     private String fullName;
     private boolean gender;
@@ -19,7 +20,7 @@ public class Feedback {
     private String content;
     private Service service;
     private String imageLink;
-    private User user;
+    private Setting status;
 
     public int getId() {
         return id;
@@ -93,13 +94,12 @@ public class Feedback {
         this.imageLink = imageLink;
     }
 
-    public User getUser() {
-        return user;
+    public Setting getStatus() {
+        return status;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setStatus(Setting status) {
+        this.status = status;
     }
-    
-    
+
 }

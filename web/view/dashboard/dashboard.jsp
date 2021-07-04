@@ -191,11 +191,11 @@
                         <ul>
                             <li><a href="../../home">Homepage</a></li>
                             <li><a href="../../admin/user/list">User</a></li>
-                            
+
                             <li><a href="#">Chart</a></li>
                             <li><a href="../../admin/setting/list">Settings</a></li>
-                           
-                           
+
+
 
 
                         </ul>
@@ -278,7 +278,7 @@
             options: {
             title: {
             display: true,
-                    text: "World Wide Wine Production 2018"
+                    text: ""
             }
             }
     });</script>
@@ -299,13 +299,13 @@
                     data: [<c:forEach var = "i" items="${requestScope.listre}">
         ${i},
     </c:forEach>],
-                            borderColor: "green",
+                            borderColor: "red",
                             fill: false
                     }, {
-                    data: [<c:forEach var = "i" items="${requestScope.listre}">
+                    data: [<c:forEach var = "i" items="${requestScope.listSuccessre}">
         ${i},
     </c:forEach>],
-                            borderColor: "red",
+                            borderColor: "green",
                             fill: false
                     }]
             },
@@ -314,9 +314,9 @@
             }
     });
     function submit(){
-        document.getElementById("myForm").submit();
+    document.getElementById("myForm").submit();
     }
-    </script>
+</script>
 
 <script>
     function drawRate(star, ele) {
@@ -330,7 +330,7 @@
     }
 
 
-   
+
     var date = new Date();
     var today = new Date();
     var dd = today.getDate();
@@ -349,9 +349,7 @@
     date.setDate(date.getDate() - 7);
     document.getElementById("start").valueAsDate = date
             document.getElementById("start").setAttribute("max", today);
-                        document.getElementById("end").setAttribute("max", today);
-
-   </script>
+    document.getElementById("end").setAttribute("max", today);</script>
 
 
 <style>
@@ -428,7 +426,16 @@
     h4{
         margin-top: 30% !important;
     }
-    </style>
+</style>
+<c:if test="${ not empty sessionScope.mess}">
+    <script>
+        $(document).ready(function () {
+        let mess = "${sessionScope.mess}"
+                alert(mess);
+        });
+    </script>
+    <c:remove var="mess" scope="session" />
+</c:if>
 </body>
 
 </html>
