@@ -18,6 +18,7 @@
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Service.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/MedicalExamination.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/StaffReservationController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReservationDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/staff/examination/list.jsp</file>
         </group>
