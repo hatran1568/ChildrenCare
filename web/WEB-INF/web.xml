@@ -355,6 +355,10 @@
         <url-pattern>/staff/reservation/details</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>StaffReservationController</servlet-name>
+        <url-pattern>/staff/reservation/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>StaffExaminationController</servlet-name>
         <url-pattern>/staff/examination/add</url-pattern>
     </servlet-mapping>

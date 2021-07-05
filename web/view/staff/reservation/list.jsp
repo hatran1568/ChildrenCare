@@ -37,24 +37,15 @@
                     "searching": true,
                     "paging": true,
                     'columnDefs': [
-
-                        {'className': 'text-center', 'targets': 6},
-                        {'className': 'text-center', 'targets': 5},
-                        {'max-width': '5%', 'targets': 6},
-                        {'max-width': '5%', 'targets': 5},
-                        {'orderable': false, 'targets': 6},
-                        {'orderable': false, 'targets': 5},
-                        {'orderable': false, 'targets': 3},
+                            {'orderable': false, 'targets': 3},
                     ],
                     columns: [
                         null,
-                        {data: "Service", title: "Service", className: "dt-filter"},
+                        {data: "ReservationDate", title: "ReservationDate", className: "dt-filter"},
                         null,
                         null,
-                        {data: "Star", title: "Star", className: "dt-filter"},
-                        {data: "Status", title: "Status", className: "dt-filter"},
                         null,
-                        null
+                        {data: "Status", title: "Status", className: "dt-filter"}
                     ],
 
                     initComplete: function () {
@@ -129,7 +120,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../post/list" class="smoothScroll dropdown">Blog</a></li>
+                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                             <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
@@ -221,55 +212,45 @@
         <section>
             <div class="container">
 
-                <h2 style="text-align: center; margin: 3%; color: blue;">Feedbacks List</h2>
+                <h2 style="text-align: center; margin: 3%; color: blue;">Reservations List</h2>
                 <table id="posts">
 
                     <thead>
                         <tr>
-                            <th>Full Name</th>
-                            <th>Service</th>
-                            <th>Content</th>
-                            <th style="display: none;">Star</th>
-                            <th>Rated Star</th>
+                            <th>ID</th>
+                            <th>Reservation Date</th>
+                            <th>Customer</th>
+                            <th>Service(s)</th>
+                            <th>Total Cost</th>
                             <th>Status</th>
 
-                            <th class="col-1">View</th>
-                            <th class="col-1">Edit</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Filters:</th>
-                            <th>Service </th>
+                            <th>Reservation Date </th>
                             <th></th>
-                            <th style="display: none;">Star</th>
-                            <th>Rated Star </th>
+                            <th></th>
+                            <th></th>
                             <th>Status </th>
-                            <th></th>
-                            <th></th>
+                            
                         </tr>
                     </tfoot>
                     <tbody>
-                        <c:forEach items="${requestScope.feedbacks}" var="f">
+                        <c:forEach items="${requestScope.reservations}" var="r">
                             <tr>
-                                <td>${f.fullName}</td>
-                                <td>${f.service.fullname}</td>
-                                <td class="text-truncate">${f.content}</td>
-                                <td style="display: none;">${f.ratedStar}</td>
-                                <td value="${f.ratedStar}">${f.ratedStar} 
-                                    <c:forEach var = "i" begin = "1" end = "5">
-                                        <c:if test="${i <= f.ratedStar}">
-                                            <span class='fa fa-star fa-1x checked'></span>
-                                        </c:if>
-                                        <c:if test="${i > f.ratedStar}">
-                                            <span class='fa fa-star fa-1x'></span>
-                                        </c:if>
+                                <td><a href="details?rid=${r.id}">${r.id}</a></td>
+                                <td>${r.reservationDate}</td>
+                                <td>${r.customer.fullName}</td>
+                                <td>${f.ratedStar} 
+                                    <c:forEach items="${r.listReservationService}" var="s">
+                                        ${s.service.fullname} - ${s.quantity} <br>
                                     </c:forEach>
                                 </td>
-                                <td>${f.status.name}</td>
+                                <td>${r.totalCost}</td>
+                                <td>${r.status.name}</td>
 
-                                <td><a href="details?id=${f.id}"><i class="fas fa-eye"></i></a></td>
-                                <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

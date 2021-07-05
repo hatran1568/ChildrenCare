@@ -22,6 +22,17 @@ public class Reservation {
     private User staff;
     private float totalCost;
     private ArrayList<Service> listService;
+    private ArrayList<ReservationService> listReservationService;
+
+    public ArrayList<ReservationService> getListReservationService() {
+        return listReservationService;
+    }
+
+    public void setListReservationService(ArrayList<ReservationService> listReservationService) {
+        this.listReservationService = listReservationService;
+    }
+    
+    
 
     public ArrayList<Service> getListService() {
         return listService;
