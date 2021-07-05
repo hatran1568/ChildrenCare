@@ -86,6 +86,9 @@ public class FeedbackController extends HttpServlet {
             case "/manager/feedback/update":
                 updateStatus(request, response);
                 break;
+            case "/manager/feedback/list":
+                showFeedbackList(request, response);
+                break;
             default:
                 break;
         }
@@ -202,6 +205,14 @@ public class FeedbackController extends HttpServlet {
         Setting s = new Setting();
         s.setId(fid);
         feedbackDB.updateStatus(fid, s);
+    }
+
+    protected void showFeedbackList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        FeedbackDAO feedbackDB = new FeedbackDAO();
+        ArrayList<Feedback> feedbacks = feedbackDB.getFeedbacks();
+        request.setAttribute("feedbacks", feedbacks);
+        request.getRequestDispatcher("../../view/feedback/list.jsp").forward(request, response);
     }
 
     @Override

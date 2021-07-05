@@ -374,6 +374,10 @@
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/blog/details</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedbackController</servlet-name>
+        <url-pattern>/manager/feedback/list</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
