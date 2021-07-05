@@ -32,7 +32,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\HP\\OneDrive\\Desktop\\ite3\\web\\assets\\images")
 @WebServlet(name = "FeedbackController", urlPatterns = {"/feedback"})
 public class FeedbackController extends HttpServlet {
 
