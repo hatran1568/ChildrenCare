@@ -170,109 +170,35 @@
         </section>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="margin-top: 75px">
-            <h3 style="text-align: center">Reservation info</h3>
-
-            <div class="col-md-6">
-                <table class="table table-borderless">
+        <div class="container" style="margin: 75px auto">
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <td>Reservation ID:</td>
-                        <td>${requestScope.reservation.id}</td>
-                    </tr>
-                    <tr>
-                        <td>Total cost:</td>
-                        <td>${requestScope.reservation.totalCost}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Reservation date:</td>
-                        <td>${requestScope.reservation.reservationDate}</td>
-                    </tr>
-                    <tr>
-                        <td>Status:</td>
-                        <td>${requestScope.reservation.status.name}</td>
-                    </tr>
-                </table>
-            </div>
-            <h3 style="text-align: center">Receiver info</h3>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Full name:</td>
-                        <td>${requestScope.reservation.receiver.fullName}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>${requestScope.reservation.receiver.email}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Gender:</td>
-                        <td><c:if test="${requestScope.reservation.receiver.gender eq true}">Male</c:if>
-                            <c:if test="${requestScope.reservation.receiver.gender eq false}">Female</c:if></td>
-                        </tr>
-                        <tr>
-                            <td>Mobile:</td>
-                            <td>${requestScope.reservation.receiver.mobile}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-12">
-                <table style="margin-top: 0px;" class="table table-borderless">
-                    <tr>
-
-                    <tr>
-                        <td>Address</td>
-                        <td>${requestScope.reservation.receiver.address}</td>
-                    </tr>
-
-                </table>
-
-            </div>
-            <h3 style="text-align: center">Service info</h3>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='../examination/list?rid=${requestScope.reservation.id}'">View prescription list</button>
-            
-            <table class="table thead-dark" id="reservation-detail">
-                <thead  class="thead-dark">
-                    <tr>
-                        <td style="width: 300px">Thumbnail</td>
-                        <td >Title</td>
-                        <td>Category</td>
-                        <td >Unit price</td>
-                        <td >Quantity</td>
-                        <td>Number of exam done</td>
-                        <td>Cost</td>
+                        <td>Service</td>
+                        <td>Receiver name</td>
+                        <td>Gender</td>
+                        <td>Email</td>
+                        <td style="width:250px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">Prescription</td>
                         <td></td>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="i" begin="0" end="${requestScope.services.size()-1}">
+                    <c:forEach items="${requestScope.exams}" var="e">
                         <tr>
-                            <td><img class="img-responsive" src="../../${requestScope.services[i].service.thumbnailLink}" alt="#" /></td>
-                            <td>${requestScope.services[i].service.fullname}</td>
-                            <td>${requestScope.services[i].service.category.name}</td>
-                            <td>${requestScope.services[i].unitPrice}</td>
-                            <td>${requestScope.services[i].quantity}</td>
-                            <td>${requestScope.examinationCount[i]}</td>
-                            <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
-                            <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
-                                    <button class="btn" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
-                                </c:if></td>
+                            <td>${e.reservationService.service.fullname}</td>
+                            <td>${e.receiver.fullName}</td>
+                            <td><c:if test="${e.receiver.gender eq true}">Male</c:if>
+                                <c:if test="${e.receiver.gender eq false}">Female</c:if></td>
+                            <td>${e.receiver.email}</td>
+                            <td style="width:250px; overflow: hidden; display:block; white-space: nowrap; text-overflow: ellipsis;">${e.prescription}</td>
+                            <td><a href="details?resid=${e.reservationService.reservation.id}&sid=${e.reservationService.service.id}&recid=${e.receiver.id}"><i class="fas fa-eye"></i></a></td>
                         </tr>
                     </c:forEach>
-                    <tr>
-                        <td colspan="5" style="text-align: right">Total cost</td>
-                        <td style="font-size: 18px">${requestScope.reservation.totalCost}</td>
-                    </tr>
                 </tbody>
             </table>
+            
         </div>
+        
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">

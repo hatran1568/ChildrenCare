@@ -16,10 +16,14 @@ import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.EmailVerify;
 
 /**
  *
@@ -42,6 +46,12 @@ public class StaffExaminationController extends HttpServlet {
         switch (action) {
             case "/staff/examination/new":
                 showFormAddExamination(request,response);
+                break;
+            case "/staff/examination/list":
+                showPrescriptionList(request,response);
+                break;
+            case "/staff/examination/details":
+                showPrescriptionDetails(request,response);
                 break;
             case "/staff/examination/add":
                 addPrescription(request,response);
@@ -148,6 +158,75 @@ public class StaffExaminationController extends HttpServlet {
             exam.setReceiver(newReceiver);
             examinationDB.addExamination(exam);
         }
+        
+        boolean completed = true;
+        ArrayList<ReservationService> services = reservationDB.getReservationServices(reservationDB.getReservationById(reservationID));
+        for(ReservationService iter: services){
+            if(iter.getQuantity()!=examinationDB.countExamination(iter.getReservation().getId(), iter.getService().getId()))
+                completed=false;
+        }
+        if(completed){
+            reservationDB.changeReservationStatus(reservationID, 27);
+        }
+        
+        // send email with prescription info
+        EmailVerify emailSender = new EmailVerify();
+        try {
+            String emailContent = "<h3 style=\"text-align: center\">Examination details</h3>\n" +
+"                <div class=\"row\">\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Reservation ID: </strong>\n" +
+"                        <span>"+exam.getReservationService().getReservation().getId()+"</span>\n" +
+"                    </p>\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Checkup date:</strong>\n" +
+"                        <span>"+exam.getReservationService().getReservation().getCheckupTime()+"</span>\n" +
+"                    </p>\n" +
+"                </div>\n" +
+"                    \n" +
+"                   <h3 style=\"text-align: center\">Receiver info</h3> \n" +
+"                <div class=\"row\">\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Service ID:</strong>\n" +
+"                        <span>"+exam.getReservationService().getService().getId()+"</span>\n" +
+"                    </p>\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Service name:</strong>\n" +
+"                        <span>"+exam.getReservationService().getService().getFullname()+"</span>\n" +
+"                    </p>\n" +
+"                </div>\n" +
+"                <div class=\"row\">\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Receiver name:</strong>\n" +
+"                        <span>"+exam.getReceiver().getFullName()+"</span>\n" +
+"                    </p>\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Gender:</strong>\n" +
+"                        <span>"+((exam.getReceiver().isGender())?"Male":"Female")+"</span>\n" +
+"                        </p>\n" +
+"                </div>\n" +
+"                <div class=\"row\">\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong> Email:</strong>\n" +
+"                        <span>"+exam.getReceiver().getEmail()+"</span>\n" +
+"                    </p>\n" +
+"                    <p class=\"col-md-6\">\n" +
+"                        <strong>Mobile</strong>\n" +
+"                        <span>"+exam.getReceiver().getMobile()+"</span>\n" +
+"                    </p>\n" +
+"                </div>\n" +
+"                    <p>\n" +
+"                        <strong>Address</strong>\n" +
+"                        <span>"+exam.getReceiver().getAddress()+"</span>\n" +
+"                    </p>\n" +
+"                    <p style=\"margin-top: 30px;\">\n" +
+"                        <strong>Prescription:</strong>\n" +
+"                        <span>"+exam.getPrescription()+ "</span>\n" +
+"            </div>";
+            emailSender.sendText(email, emailContent);
+        } catch (MessagingException ex) {
+            Logger.getLogger(StaffExaminationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.sendRedirect("../reservation/details?rid="+reservationID);
         
     }
@@ -160,6 +239,30 @@ public class StaffExaminationController extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
+    }
+
+    private void showPrescriptionList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        ExaminationDAO examDB = new ExaminationDAO();
+        int reservationID = Integer.parseInt(request.getParameter("rid"));
+        ArrayList<MedicalExamination> exams = examDB.getExamsByReservation(reservationID);
+        request.setAttribute("exams", exams);
+        request.getRequestDispatcher("../../view/staff/examination/list.jsp").forward(request, response);
+    }
+
+    private void showPrescriptionDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int reservationID = Integer.parseInt(request.getParameter("resid"));
+        int serviceID = Integer.parseInt(request.getParameter("sid"));
+        int receiverID = Integer.parseInt(request.getParameter("recid"));
+        ExaminationDAO examDB = new ExaminationDAO();
+        MedicalExamination exam = examDB.getAnExamination(reservationID, serviceID, receiverID);
+        ReservationDAO reservationDB = new ReservationDAO();
+        Reservation res = reservationDB.getReservationById(reservationID);
+        request.setAttribute("reservation", res);
+        request.setAttribute("exam", exam);
+        request.getRequestDispatcher("../../view/staff/examination/details.jsp").forward(request, response);
+        
+        
     }
     
     

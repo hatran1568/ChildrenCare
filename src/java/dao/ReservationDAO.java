@@ -489,6 +489,18 @@ public class ReservationDAO extends BaseDAO {
 
     }
 
+    public void changeReservationStatus(int rid, int status){
+        try {
+            String sql = "UPDATE reservation set status_id = ? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setInt(2, rid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public float getRevenue(Service s) {
         try {
             String sql = "SELECT sum(unit_price) as total from reservation_service where service_id=? ";

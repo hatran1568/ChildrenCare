@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Prescription details</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -170,109 +170,64 @@
         </section>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="margin-top: 75px">
-            <h3 style="text-align: center">Reservation info</h3>
+        <div class="container" style="margin: 75px auto">
+            <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
+                <h3 style="text-align: center">Examination details</h3>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Reservation ID: </strong>
+                        <span>${requestScope.exam.reservationService.reservation.id}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Checkup date:</strong>
+                        <span>${requestScope.reservation.checkupTime}</span>
+                    </p>
+                </div>
+                    
+                   <h3 style="text-align: center">Receiver info</h3> 
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Service ID:</strong>
+                        <span>${requestScope.exam.reservationService.service.id}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Service name:</strong>
+                        <span>${requestScope.exam.reservationService.service.fullname}</span>
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Receiver name:</strong>
+                        <span>${requestScope.exam.receiver.fullName}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Gender:</strong>
+                        <span><c:if test="${requestScope.exam.receiver.gender eq true}">Male</c:if>
+                            <c:if test="${requestScope.exam.receiver.gender eq false}">Female</c:if></span>
+                        </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong> Email:</strong>
+                        <span>${requestScope.exam.receiver.email}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Mobile</strong>
+                        <span>${requestScope.exam.receiver.mobile}</span>
+                    </p>
+                </div>
+                    <p>
+                        <strong>Address</strong>
+                        <span>${requestScope.exam.receiver.address}</span>
+                    </p>
+                    <p style="margin-top: 30px;">
+                        <strong>Prescription:</strong>
+                        <span>${requestScope.exam.prescription}</span>
+                    </p>
+            </div>
 
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Reservation ID:</td>
-                        <td>${requestScope.reservation.id}</td>
-                    </tr>
-                    <tr>
-                        <td>Total cost:</td>
-                        <td>${requestScope.reservation.totalCost}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Reservation date:</td>
-                        <td>${requestScope.reservation.reservationDate}</td>
-                    </tr>
-                    <tr>
-                        <td>Status:</td>
-                        <td>${requestScope.reservation.status.name}</td>
-                    </tr>
-                </table>
-            </div>
-            <h3 style="text-align: center">Receiver info</h3>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Full name:</td>
-                        <td>${requestScope.reservation.receiver.fullName}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>${requestScope.reservation.receiver.email}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Gender:</td>
-                        <td><c:if test="${requestScope.reservation.receiver.gender eq true}">Male</c:if>
-                            <c:if test="${requestScope.reservation.receiver.gender eq false}">Female</c:if></td>
-                        </tr>
-                        <tr>
-                            <td>Mobile:</td>
-                            <td>${requestScope.reservation.receiver.mobile}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-12">
-                <table style="margin-top: 0px;" class="table table-borderless">
-                    <tr>
-
-                    <tr>
-                        <td>Address</td>
-                        <td>${requestScope.reservation.receiver.address}</td>
-                    </tr>
-
-                </table>
-
-            </div>
-            <h3 style="text-align: center">Service info</h3>
-            <button type="button" class="btn btn-primary" onclick="window.location.href='../examination/list?rid=${requestScope.reservation.id}'">View prescription list</button>
-            
-            <table class="table thead-dark" id="reservation-detail">
-                <thead  class="thead-dark">
-                    <tr>
-                        <td style="width: 300px">Thumbnail</td>
-                        <td >Title</td>
-                        <td>Category</td>
-                        <td >Unit price</td>
-                        <td >Quantity</td>
-                        <td>Number of exam done</td>
-                        <td>Cost</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="i" begin="0" end="${requestScope.services.size()-1}">
-                        <tr>
-                            <td><img class="img-responsive" src="../../${requestScope.services[i].service.thumbnailLink}" alt="#" /></td>
-                            <td>${requestScope.services[i].service.fullname}</td>
-                            <td>${requestScope.services[i].service.category.name}</td>
-                            <td>${requestScope.services[i].unitPrice}</td>
-                            <td>${requestScope.services[i].quantity}</td>
-                            <td>${requestScope.examinationCount[i]}</td>
-                            <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
-                            <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
-                                    <button class="btn" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
-                                </c:if></td>
-                        </tr>
-                    </c:forEach>
-                    <tr>
-                        <td colspan="5" style="text-align: right">Total cost</td>
-                        <td style="font-size: 18px">${requestScope.reservation.totalCost}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
+
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
@@ -353,11 +308,11 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                    $('ul.nav li.dropdown').hover(function () {
-                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                    }, function () {
-                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -380,26 +335,14 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-        <style>
-            .table{
-                margin-top: 40px;
-                border: none;
-
-            }
-            #reservation-detail{
-                width:100%; 
-                margin-top: 50px; 
-/*                margin-left: 10%;
-                margin-right: 10%;*/
-            }
-            .img-responsive{
-                max-width: 300px;
-                height: auto;
-            }
-            thead{
-                font-weight: bold;
-                font-size: 16px;
-            }
-        </style>
+            <style>
+                p strong,span{
+                    font-size: 16px;
+                    color:black;
+                }
+                #Info h3{
+                    margin: 20px;
+                }
+            </style>
     </body>
 </html> 
