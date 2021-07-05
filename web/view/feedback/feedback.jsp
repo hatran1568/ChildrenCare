@@ -65,13 +65,13 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="home" class="navbar-brand">Children Care</a>
+                    <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="home" class="smoothScroll dropdown">Home</a></li>
+                        <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
                             <c:if test="${ empty sessionScope.user}">
