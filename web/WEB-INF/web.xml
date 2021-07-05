@@ -77,17 +77,16 @@
         <servlet-class>controller.UserProfileController</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>StaffReservationController</servlet-name>
         <servlet-class>controller.StaffReservationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>StaffExaminationController</servlet-name>
         <servlet-class>controller.StaffExaminationController</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>BlogController</servlet-name>
         <servlet-class>controller.BlogController</servlet-class>
->>>>>>> 6b6fd79ff44707d4d2d067dde925a41858323e10
     </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
@@ -366,7 +365,7 @@
     <servlet-mapping>
         <servlet-name>StaffExaminationController</servlet-name>
         <url-pattern>/staff/examination/checkemail</url-pattern>
-    =</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/blog/list</url-pattern>
