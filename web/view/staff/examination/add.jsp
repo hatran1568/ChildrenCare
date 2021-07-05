@@ -314,7 +314,7 @@
         </style>
         <script>
             $(document).ready(function (){
-                
+                $("#male").prop("checked", true);
             });
             function checkExistingEmail(){
                 $.ajax({

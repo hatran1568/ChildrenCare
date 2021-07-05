@@ -368,8 +368,18 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffExaminationController</servlet-name>
+        <url-pattern>/staff/examination/details</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffExaminationController</servlet-name>
         <url-pattern>/staff/examination/checkemail</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StaffExaminationController</servlet-name>
+        <url-pattern>/staff/examination/list</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/blog/list</url-pattern>
