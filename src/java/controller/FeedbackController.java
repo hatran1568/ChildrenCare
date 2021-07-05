@@ -6,10 +6,12 @@
 package controller;
 
 import bean.Feedback;
+import bean.Post;
 import bean.Service;
 import bean.Setting;
 import bean.Slider;
 import dao.FeedbackDAO;
+import dao.PostDAO;
 import dao.SettingDAO;
 import dao.SliderDAO;
 import java.io.File;
@@ -212,6 +214,9 @@ public class FeedbackController extends HttpServlet {
         FeedbackDAO feedbackDB = new FeedbackDAO();
         ArrayList<Feedback> feedbacks = feedbackDB.getFeedbacks();
         request.setAttribute("feedbacks", feedbacks);
+        PostDAO postDB = new PostDAO();
+        ArrayList<Post> posts = postDB.getPosts();
+        request.setAttribute("posts", posts);
         request.getRequestDispatcher("../../view/feedback/list.jsp").forward(request, response);
     }
 

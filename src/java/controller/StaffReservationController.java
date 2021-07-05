@@ -40,7 +40,9 @@ public class StaffReservationController extends HttpServlet {
             case "/staff/reservation/details":
                 getReservationDetails(request,response);
                 break;
-            
+            case "/staff/reservation/list":
+                showReservationList(request,response);
+                break;
             default:
                 break;
         }
@@ -111,6 +113,16 @@ public class StaffReservationController extends HttpServlet {
             request.getRequestDispatcher("../../view/staff/reservation/details.jsp").forward(request, response);
         }
         
+    }
+    
+    private void showReservationList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        User user = (User) request.getSession().getAttribute("user");
+        ReservationDAO reservationDB = new ReservationDAO();
+        ArrayList<Reservation> reservations = reservationDB.getReservationsByStaff(user.getId());
+        request.setAttribute("reservations", reservations);
+        
+        request.getRequestDispatcher("../../view/staff/reservation/list.jsp").forward(request, response);
     }
 
 }
