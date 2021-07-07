@@ -107,16 +107,16 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    <c:if test="${ empty sessionScope.user}">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#top" class="smoothScroll">Home</a></li>
-                            <li><a href="#" class="smoothScroll">Services</a></li>
-                            <li><a href="#" class="smoothScroll">Blog</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
+                        <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
+                        <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                        <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -135,7 +135,6 @@
                                     </div>
                                 </div>  
                             </div>
-
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -144,7 +143,7 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="register" method="GET">
+                                            <form action="../register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -159,78 +158,47 @@
                                 </div>  
                             </div>
 
-                            <c:if test="${ not empty sessionScope.user}">
-                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                                <div class="dropdown ">
-                                    <img class="avatar" src="../${sessionScope.user.imageLink}">
+                        </c:if>
+                        <c:if test="${not empty sessionScope.user}">
+                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
+                            <li class="dropdown"><a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
-                                    <div class="dropdown-content">
-                                        <p> <a href="#">Profile</a></p>
-                                        <p> <a href="#">Change Password</a></p>
-                                        <p> <a href="#">Log Out</a></p>
-                                    </div>
-                                </div>
-                            </c:if>
-                        </ul>
-                    </c:if>
-                    <c:if test="${not empty sessionScope.user}">
-                        <ul class="nav navbar-nav navbar-right">
-                            <c:if test="${sessionScope.user.role.name == 'Manager'}">
-                                <li class="dropdown"><a href="#" class="smoothScroll">Home</a></li>
-                                <li class="dropdown"><a href="#" class="smoothScroll">My reservation</a></li>
-                                <!--<li><a href="#" class="smoothScroll">Services</a></li>-->
-                                
-                                
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Blogs</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">Services</a></p>
-
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/feedback/list">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/post/list">Posts</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
                                     </div>
                                 </li>
-                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li><a href="#top" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
-                               <li class="dropdown">
-                                    <a href="#" class="smoothScroll dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" >Reservations</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="#">My reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="#">reservations List</a></p>
+                                <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                    <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
-                                    </div>
+                                <li class="dropdown">
+                                    <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-                                <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-
                             </c:if>
-                            <c:if test="${sessionScope.user.role.name == 'Customer'}">
-                                <li><a href="#" class="smoothScroll">Home</a></li>
-                                <li><a href="#" class="smoothScroll">Services</a></li>
-                                <li><a href="#" class="smoothScroll">Blog</a></li>
-                                <li><a style="font-size: 25px;color: #4267b2" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            </c:if>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="../${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="#">Profile</a></p>
+                                    <p> <a href="../userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../logout">Log Out</a></p>
                                 </div>
                             </div>
-
-                        </ul>
-                    </c:if>
+                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                        </c:if>
+                    </ul>
                 </div>
-
             </div>
         </section>
 
@@ -411,55 +379,6 @@
                 border-top: none;
                 border-bottom: 1px solid  #111;
             }
-            .pagination{
-                display: inline-block;
-            }
-            .pagination a {
-                color: black;
-                float: left;
-                padding: 8px 16px;
-                text-decoration: none;
-            }
-
-            .pagination a.active {
-                background-color: #4CAF50;
-                color: white;
-                border-radius: 5px;
-            }
-
-            .pagination a:hover:not(.active) {
-                background-color: #ddd;
-                border-radius: 5px;
-            }
-            .dropdown {
-                color: white;
-                margin-right: 150px;
-                position: relative;
-                display: inline-block;
-            }
-
-            .dropdown-content {
-
-                text-align: center;
-                display: none;
-                position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                padding: 12px 16px;
-                z-index: 1;
-            }
-
-            .dropdown:hover .dropdown-content {
-                display: block;
-            }
-            .avatar{
-
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-            }
-
         </style>
     </body>
 </html>
