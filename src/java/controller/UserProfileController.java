@@ -130,7 +130,7 @@ public class UserProfileController extends HttpServlet {
      */
     protected void showUserProfile(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/view/homepage/userprofile.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/homepage/userprofile.jsp").forward(request, response);
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -139,7 +139,7 @@ public class UserProfileController extends HttpServlet {
         UserDAO userDB = new UserDAO();
         User user = userDB.getUser(uid);
         request.setAttribute("user", user);
-        request.getRequestDispatcher("/view/homepage/userprofileedit.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/homepage/userprofileedit.jsp").forward(request, response);
     }
 
     protected void updateUserProfile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -300,7 +300,7 @@ public class UserProfileController extends HttpServlet {
         EmailVerify.getInstance().sendText(u, code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
-        request.getRequestDispatcher("/view/homepage/verify.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/homepage/verify.jsp").forward(request, response);
     }
     
     

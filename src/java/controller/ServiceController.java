@@ -133,7 +133,7 @@ public class ServiceController extends HttpServlet {
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("/view/service/list.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/service/list.jsp").forward(request, response);
     }
     
     protected void showServiceDetails(HttpServletRequest request, HttpServletResponse response)
@@ -150,6 +150,6 @@ public class ServiceController extends HttpServlet {
         
         request.setAttribute("categories", categories);
         request.setAttribute("service", service);
-        request.getRequestDispatcher("/view/service/details.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/service/details.jsp").forward(request, response);
     }
 }

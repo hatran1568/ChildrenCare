@@ -183,7 +183,7 @@ public class DashboardController extends HttpServlet {
         request.setAttribute("listre", reservationList);
 
        
-        request.getRequestDispatcher("../../view/dashboard/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/admin/dashboard/dashboard.jsp").forward(request, response);
 
     }
 
