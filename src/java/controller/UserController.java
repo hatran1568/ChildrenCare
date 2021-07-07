@@ -74,53 +74,75 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getServletPath();
+        try {
+            String action = request.getServletPath();
 
-        switch (action) {
-            case "/admin/user/details":
-                showUserDetails(request, response);
-                break;
-            case "/admin/user/new":
-                showAddForm(request, response);
-                break;
-            case "/admin/user/insert":
-                addUser(request, response);
-                break;
-            case "/admin/user/delete":
-                deleteUser(request, response);
-                break;
-            case "/admin/user/edit":
-                showEditForm(request, response);
-                break;
-            case "/admin/user/update":
-                editUser(request, response);
-                break;
-            case "/admin/user/list":
-                showListUser(request, response);
-                break;
-            case "/login":
-                login(request, response);
-                break;
-            case "/register":
-                register(request, response);
-                break;
-            case "/logout":
-                logout(request, response);
-                break;
-            case "/verify": {
-                try {
-                    verify(request, response);
-                } catch (MessagingException ex) {
-                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            switch (action) {
+                case "/admin/user/details":
+                    showUserDetails(request, response);
+                    break;
+                case "/admin/user/new":
+                    showAddForm(request, response);
+                    break;
+                case "/admin/user/insert":
+                    addUser(request, response);
+                    break;
+                case "/admin/user/delete":
+                    deleteUser(request, response);
+                    break;
+                case "/admin/user/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/admin/user/update":
+                    editUser(request, response);
+                    break;
+                case "/admin/user/list":
+                    showListUser(request, response);
+                    break;
+                case "/login":
+                    login(request, response);
+                    break;
+                case "/register":
+                    register(request, response);
+                    break;
+                case "/logout":
+                    logout(request, response);
+                    break;
+                case "/customer/changepassword":
+                    showChangePasswordForm(request, response);
+                    break;
+                case "/customer/change":
+                    changePassword(request, response);
+                    break;
+                case "/resetpassword":
+                    showResetPasswordForm(request, response);
+                    break;
+                case "/resetoldpassword":
+                    showNewPasswordForm(request, response);
+                    break;
+                case "/resetoldpassword/change":
+                    showInputNewPassword(request, response);
+                    break;
+                case "/resetoldpassword/update":
+                    updatePassword(request, response);
+                    break;
+                case "/verify": {
+                    try {
+                        verify(request, response);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
-            break;
-            case "/verifying":
-                verifying(request, response);
                 break;
-            default:
+                case "/verifying":
+                    verifying(request, response);
+                    break;
+                default:
 
-                break;
+                    break;
+            }
+        } catch (MessagingException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -447,6 +469,82 @@ public class UserController extends HttpServlet {
     protected void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("user");
         response.sendRedirect("home");
+    }
+
+    public void showChangePasswordForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User u = (User) request.getSession().getAttribute("user");
+        request.setAttribute("user", u);
+        request.getRequestDispatcher("../view/user/changepassword.jsp").forward(request, response);
+    }
+
+    public void showResetPasswordForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.getRequestDispatcher("view/user/resetpassword.jsp").forward(request, response);
+    }
+
+    protected void showNewPasswordForm(HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
+        String email = request.getParameter("email");
+        UserDAO userDb = new UserDAO();
+        if (userDb.getUserByEmail(email) == null) {
+            request.getSession().setAttribute("mess", "Email not resigsted");
+            response.sendRedirect("resetpassword");
+        } else {
+            User u = userDb.getUserByEmail(email);
+            String content = "<!DOCTYPE html>\n"
+                    + "<html lang=\"en\">\n"
+                    + "<head>\n"
+                    + "    <meta charset=\"UTF-8\">\n"
+                    + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+                    + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                    + "    <title>Document</title>\n"
+                    + "</head><body><form action='" + request.getRequestURL() + "/change' method ='POST'><input style=\"display: none\"  type ='text' name ='user' value ='" + u.getId() + "'><input type='submit' value = 'click here to set new password'></form></body></html>";
+            EmailVerify.getInstance().sendHTML(u, content);
+            response.sendRedirect("home");
+        }
+    }
+
+    protected void showInputNewPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("user"));
+        UserDAO userDb = new UserDAO();
+        User u = userDb.getUser(id);
+        request.setAttribute("user", u);
+        request.getRequestDispatcher("../view/user/newpassword.jsp").forward(request, response);
+    }
+
+    protected void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User u = (User) request.getSession().getAttribute("user");
+        String oPass = request.getParameter("oPass");
+        String nPass = request.getParameter("nPass");
+        String cPass = request.getParameter("cPass");
+        if (oPass.length() == 0 || nPass.length() == 0 || cPass.length() == 0) {
+            request.getSession().setAttribute("mess", "Please fill all fileds");
+            response.sendRedirect("changepassword");
+        } else {
+            if (!oPass.equals(u.getPassword())) {
+                request.getSession().setAttribute("mess", "Wrong password");
+                response.sendRedirect("changepassword");
+            }
+            if (!nPass.equals(cPass)) {
+                request.getSession().setAttribute("mess", "Wrong password");
+                response.sendRedirect("changepassword");
+            }
+            UserDAO userDb = new UserDAO();
+            userDb.changePassword(u, cPass);
+            response.sendRedirect("../logout");
+        }
+
+    }
+
+    protected void updatePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+
+        String nPass = request.getParameter("nPass");
+        String cPass = request.getParameter("cPass");
+
+        UserDAO userDb = new UserDAO();
+        User u = userDb.getUserByEmail(email);
+        userDb.changePassword(u, cPass);
+        response.sendRedirect("../home");
     }
 
     @Override

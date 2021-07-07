@@ -707,4 +707,16 @@ public class UserDAO extends BaseDAO {
         }
         return null;
     }
+        
+        public void changePassword(User u,String password){
+        try {
+            String sql = "Update User set password = ? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, password);
+            stm.setInt(2, u.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
 }
