@@ -166,7 +166,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("list", reservationServices);
         }
 
-        request.getRequestDispatcher("../view/cart/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/public/cart/cart.jsp").forward(request, response);
     }
 
     //Edit Function to edit quantity  from Database/Session

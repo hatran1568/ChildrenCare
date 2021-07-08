@@ -37,22 +37,7 @@ public class MyReservationController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MyReservationController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MyReservationController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -95,7 +80,6 @@ public class MyReservationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     protected void showMyreservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -121,7 +105,7 @@ public class MyReservationController extends HttpServlet {
         }
 
         request.setAttribute("list", list);
-        request.getRequestDispatcher("../../view/reservation/myReservation.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/customer/reservation/myReservation.jsp").forward(request, response);
 
     }
 
@@ -139,7 +123,7 @@ public class MyReservationController extends HttpServlet {
         res = redb.getReservationServices(rerser);
         request.setAttribute("reservation", rerser);
         request.setAttribute("list", res);
-        request.getRequestDispatcher("../../view/reservation/reservationInformation.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/customer/reservation/reservationInformation.jsp").forward(request, response);
     }
 
     /**
