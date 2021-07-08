@@ -196,10 +196,10 @@
 
                     <tr>
                         <td class="col-md-1">${reservation.id}</td>
-                        <td  class="col-md-2"> <p><input  class="date" type="date" value="${reservation.reservation_date}" readonly="true"></p></td>
-                        <td class="col-md-2"><input class="date" type="date" value="${reservation.checkup_time}" readonly="true"></td>
+                        <td  class="col-md-2"> <p><input  class="date" type="date" value="${reservation.reservationDate}" readonly="true"></p></td>
+                        <td class="col-md-2"><input class="date" type="date" value="${reservation.checkupTime}" readonly="true"></td>
                         <td class="col-md-2">${reservation.status.name}</td>
-                        <td class="col-md-2">${reservation.total_cost}</td>  
+                        <td class="col-md-2">${reservation.totalCost}</td>  
 
 
                     </tr>

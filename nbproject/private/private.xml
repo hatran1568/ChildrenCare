@@ -14,13 +14,13 @@
         <group>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/StaffExaminationController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Reservation.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/staff/examination/details.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/util/EmailVerify.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Service.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/MedicalExamination.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/StaffReservationController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReservationDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/staff/examination/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/reservation/myExams.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
         </group>
     </open-files>
 </project-private>
