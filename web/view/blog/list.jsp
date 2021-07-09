@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+        
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -13,14 +13,18 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
+
+        <script src="../assets/js/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+        
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
         <link rel="stylesheet" href="../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../assets/css/custom.css" />
@@ -48,6 +52,46 @@
 
                 </div>
             </div>
+            <script type="text/javascript">
+            $(document).ready(function () {
+                $('#posts').DataTable({
+                    "searching": true,
+                    "paging": true, 
+                    "order": [[ 4, "desc" ]],
+                    'columnDefs': [ 
+                        {"targets": [0, 1, 2, 3, 5], "orderable": false}
+                    ],
+                    columns: [
+                        null,
+                        null,
+                        null,
+                        {data: "SortBy", title:"Sort By:",},
+                        {data: "Date", title:"Updated Date",},
+                        null,
+                    ],
+                    initComplete: function () {
+                        this.api().columns(5).every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo('#catfilter')
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                        } );
+                    }
+                });
+            });
+            </script>
         </header>
 
 
@@ -63,7 +107,7 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
@@ -72,7 +116,7 @@
                         <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                            <c:if test="${ empty sessionScope.user}">
+                        <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -116,7 +160,8 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
+                            <li class="dropdown"><a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -137,84 +182,49 @@
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-
                             </c:if>
-
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
-                                <img class="avatar" src="${sessionScope.user.imageLink}">
+                                <img class="avatar" src="../${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
                                     <p> <a href="../userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </c:if>
                     </ul>
-
                 </div>
-
             </div>
         </section>
 
-
-        <!-- ABOUT -->
-
-
-        <!-- TEAM -->
-        <div class="container" style="height: 1000px;">
-
-            <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
-                        <thead  class="thead-dark">
-                            <tr >
-                                <td >Id</td>
-                                <td >Title</td>
-                                <td >Price</td>
-
-                                <td > Quantity</td>
-                                <td>Cost</td>
-                                <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
+        <!-- HOME -->
+        <section id="home" class="slider" data-stellar-background-ratio="0.5">
+            <div class="container" style="width: 85%">
+                <br><div id="catfilter" style="font-size: 15px"><b>Filter by Category: </b></div><br>
+                <table id="posts">  
+                    <tbody>
+                    <c:forEach items="${requestScope.posts}" var="p">
+                        <c:if test="${p.getStatus().id == 25}">
+                            <tr onclick="window.location.href='details?pid=${p.id}'">
+                                <td><img class="rounded mx-auto d-block" src="../${p.thumbnailLink}" style="width: 200px; height: 200px"></td>
+                                <td style="font-weight: bold;">${p.title}</td>
+                                <td class="">${p.description}</td>
+                                <td style="text-align: center"><b>Author</b><br>${p.author.fullName}</td>
+                                <td>${p.updatedDate}</td>
+                                <td style="display: none">${p.category.name}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="list" items="${requestScope.list}">
-                                <tr >
-                                    <td>${list.service.id}</td>
-                                    <td>${list.service.fullname}</td>
-                                    <td >${list.unitPrice}</td>
-
-                                    <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
-
-                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
-                                    <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </form>
-
-            </c:if>
-            <c:if test="${empty requestScope.list}">
-
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
-                </c:if>
-
-                <!--            <h2>Total Cost:</h2>-->
-        </div>
-
-
-
+                        </c:if>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <br>
 
         <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
@@ -233,7 +243,30 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4 col-sm-4"> 
+                        <div class="footer-thumb"> 
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                            <div class="latest-stories">
+                                <div class="stories-image">
+                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                </div>
+                                <div class="stories-info">
+                                    <a href="#"><h5>Amazing Technology</h5></a>
+                                    <span>March 08, 2018</span>
+                                </div>
+                            </div>
 
+                            <div class="latest-stories">
+                                <div class="stories-image">
+                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                </div>
+                                <div class="stories-info">
+                                    <a href="#"><h5>New Healing Process</h5></a>
+                                    <span>February 20, 2018</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-4 col-sm-4"> 
                         <div class="footer-thumb">
@@ -280,7 +313,6 @@
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="../assets/js/jquery.js"></script>
         <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/jquery.sticky.js"></script>
         <script src="../assets/js/jquery.stellar.min.js"></script>
@@ -288,61 +320,65 @@
         <script src="../assets/js/smoothscroll.js"></script>
         <script src="../assets/js/owl.carousel.min.js"></script>
         <script src="../assets/js/custom-new.js"></script>
-        <script>
-                                        function ResetCart(param) {
-                                            var value = param.value;
-                                            var querry = param.name;
-
-                                            $.ajax({
-                                                url: "edit",
-                                                type: "GET",
-                                                data: {rid:${requestScope.list[0].reservation.id}, sid: querry, quantity: value},
-                                                success:
-                                                        function (data) {
-                                                            var b = JSON.parse(JSON.stringify(data));
-                                                            console.log(b)
-                                                            var c = querry.toString();
-                                                            document.getElementById(c).innerHTML = b["price"]
-                                                            document.getElementById("total").innerHTML = "Total Cost:" + b["total"]
-
-                                                        }
-
-                                            });
-
-                                        }
-
-
-        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                        $('ul.nav li.dropdown').hover(function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                        }, function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                        });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
+
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
+
+                </c:if>
+            </c:if>
+            <c:if test="${ not empty sessionScope.mess}">
                 <script>
                     $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
 
                     });
                 </script>
-                <c:remove var="alert" scope="session" />
-
+                <c:remove var="mess" scope="session" />
             </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
+                
+        <style>
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tfoot th {
+                text-align: center;
+            }
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+            table.dataTable.no-footer {
+                border-bottom: 0 !important;
+            }
+            table.dataTable thead th {
+                border-bottom: none;
+            }
 
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+            table.dataTable tfoot th {
+                border-top: none;
+                border-bottom: 1px solid  #111;
+            }
+        </style>
     </body>
-</html> 
+</html>

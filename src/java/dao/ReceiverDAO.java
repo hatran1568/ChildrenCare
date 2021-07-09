@@ -174,4 +174,27 @@ public class ReceiverDAO extends BaseDAO {
         return null;
     }
 
+    public void updateReceiverInfo(Receiver r){
+        try {
+            String sql = "UPDATE `swp`.`receiver`\n" +
+                    "SET\n" +
+                    "`full_name` = ?,\n" +
+                    "`gender` = ?,\n" +
+                    "`mobile` = ?,\n" +
+                    "`address` = ?,\n" +
+                    "`email` = ?\n" +
+                    "WHERE `id` = ?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, r.getFullName());
+            stm.setBoolean(2, r.isGender());
+            stm.setString(3, r.getMobile());
+            stm.setString(4, r.getAddress());
+            stm.setString(5, r.getEmail());
+            stm.setInt(6, r.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReceiverDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

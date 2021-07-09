@@ -38,7 +38,7 @@ public class ReservationDAO extends BaseDAO {
                     + "reservation.customer_id,\n"
                     + "reservation.reservation_date,\n"
                     + "reservation.status_id,\n"
-                    + "reservation.staff_id,\n"     
+                    + "reservation.staff_id,\n"
                     + "reservation.receiver_id,\n"
                     + "reservation.checkup_time\n"
                     + "FROM\n"
@@ -52,11 +52,11 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
-                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setCheckupTime(rs.getDate("checkup_time"));
                 r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
@@ -89,11 +89,11 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
-                r.setCheckup_time(rs.getDate("checkup_time"));
+                r.setCheckupTime(rs.getDate("checkup_time"));
                 r.setStatus(settingDB.getSettingById(rs.getInt("status_id")));
                 list.add(r);
             }
@@ -127,7 +127,7 @@ public class ReservationDAO extends BaseDAO {
                 Reservation r = new Reservation();
                 r.setId(rs.getInt("id"));
                 r.setCustomer(u);
-                r.setReservation_date(rs.getDate("reservation_date"));
+                r.setReservationDate(rs.getDate("reservation_date"));
                 User staff = new User();
                 staff.setId(rs.getInt("staff_id"));
                 r.setStaff(staff);
@@ -161,8 +161,8 @@ public class ReservationDAO extends BaseDAO {
 
                 Reservation s = new Reservation();
                 s.setId(id);
-                s.setCheckup_time(rs.getDate("checkup_time"));
-                s.setReservation_date(rs.getDate("reservation_date"));
+                s.setCheckupTime(rs.getDate("checkup_time"));
+                s.setReservationDate(rs.getDate("reservation_date"));
                 s.setStatus(settingDB.getSetting(rs.getInt("status_id")));
                 s.setCustomer(userDB.getUser(rs.getInt("customer_id")));
                 s.setStaff(userDB.getUser(rs.getInt("staff_id")));
@@ -177,58 +177,6 @@ public class ReservationDAO extends BaseDAO {
 
     }
 
-//    public void addReservation(Reservation r) {
-//        try {
-//            String sql = "insert into reservation(customer_id, reservation_date, status,\n"
-//                    + "            staff_id, number_of_person)\n"
-//                    + "            values(?, ?, ?, ?, ?)";
-//
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setInt(1, r.getCustomer().getId());
-//            stm.setDate(2, r.getReservation_date());
-//            stm.setString(3, r.getStatus());
-//            stm.setInt(4, r.getStaff().getId());
-//            stm.setInt(5, r.getNumber_of_person());
-//
-//            stm.executeUpdate();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    public Reservation getReservationById(int id) {
-//        Reservation r = new Reservation();
-//        try {
-//            String sql = "select reservation.id, reservation.customer_id, reservation.reservation_date,\n"
-//                    + "            reservation.status, reservation.number_of_person,\n"
-//                    + "            user.email, user.full_name, user.mobile, user.image_link  \n"
-//                    + "            from reservation left join user\n"
-//                    + "            on reservation.staff_id = user.id\n"
-//                    + "where reservation.id = ?";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setInt(1, id);
-//            ResultSet rs = stm.executeQuery();
-//            if (rs.next()) {
-//                r.setId(rs.getInt("id"));
-//                User customer = new User();
-//                customer.setId(rs.getInt("customer_id"));
-//                r.setCustomer(customer);
-//                r.setReservation_date(rs.getDate("reservation_date"));
-//                r.setStatus(settingDB.getSettingById(rs.getInt("status")));
-//                
-//
-//                User staff = new User();
-//                staff.setEmail(rs.getString("email"));
-//                staff.setFullName(rs.getString("full_name"));
-//                staff.setMobile(rs.getString("mobile"));
-//                staff.setImageLink(rs.getString("image_link"));
-//                r.setStaff(staff);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return r;
-//    }
     public ArrayList<ReservationService> getReservationServices(Reservation reservation) {
         ArrayList<ReservationService> services = new ArrayList<>();
 
@@ -329,7 +277,7 @@ public class ReservationDAO extends BaseDAO {
             stm.setInt(2, s.getId());
             stm.setInt(3, 1);
             stm.setInt(4, rc.getId());
-            stm.setDate(5, r.getReservation_date());
+            stm.setDate(5, r.getReservationDate());
             stm.setFloat(6, s.getSalePrice());
 
             stm.executeUpdate();
@@ -374,7 +322,7 @@ public class ReservationDAO extends BaseDAO {
 
     public float getTotalCost(Reservation r) {
         try {
-            String sql = "select sum(unit_price) as sum FROM reservation_service where reservation_id =  ?";
+            String sql = "select sum(unit_price*quantity) as sum FROM reservation_service where reservation_id =   ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, r.getId());
             ResultSet rs = stm.executeQuery();
@@ -489,6 +437,18 @@ public class ReservationDAO extends BaseDAO {
 
     }
 
+    public void changeReservationStatus(int rid, int status){
+        try {
+            String sql = "UPDATE reservation set status_id = ? where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setInt(2, rid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public float getRevenue(Service s) {
         try {
             String sql = "SELECT sum(unit_price) as total from reservation_service where service_id=? ";
@@ -529,18 +489,18 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void editCheckupTime(int reservationID, Date checkupTime){
-        try{
+
+    public void editCheckupTime(int reservationID, Date checkupTime) {
+        try {
             String sql = "update reservation set checkup_time = ? where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setDate(1, checkupTime);
             stm.setInt(2, reservationID);
             stm.executeUpdate();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } 
+    }
 
     public int getPendingReservation(User customer) {
         int i = 0;
@@ -634,15 +594,15 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public ArrayList<MedicalExamination> getMedExamOfUser(int uid) {
         try {
             ArrayList<MedicalExamination> list = new ArrayList<MedicalExamination>();
-            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n" +
-                        "from medical_examination m INNER JOIN service s\n" +
-                        "on m.service_id = s.id\n" +
-                        "INNER JOIN receiver r ON r.id = m.receiver_id\n" +
-                        "WHERE r.user_id = ?";
+            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n"
+                    + "from medical_examination m INNER JOIN service s\n"
+                    + "on m.service_id = s.id\n"
+                    + "INNER JOIN receiver r ON r.id = m.receiver_id\n"
+                    + "WHERE r.user_id = ?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, uid);
@@ -666,12 +626,13 @@ public class ReservationDAO extends BaseDAO {
         }
         return null;
     }
+
     public MedicalExamination getMedExamByReservationService(int rid, int sid) {
         try {
-            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n" +
-                        "from medical_examination m INNER JOIN service s\n" +
-                        "on m.service_id = s.id\n" +
-                        "where reservation_id = ? and service_id = ?";
+            String sql = "select m.reservation_id, m.service_id, s.fullname, s.thumbnail_link, m.receiver_id, m.prescription\n"
+                    + "from medical_examination m INNER JOIN service s\n"
+                    + "on m.service_id = s.id\n"
+                    + "where reservation_id = ? and service_id = ?";
             MedicalExamination m = new MedicalExamination();
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, rid);
@@ -693,5 +654,71 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public float getTotalCost(int id) {
+        try {
+            String sql = "select sum(unit_price*quantity) as sum FROM reservation_service where reservation_id =   ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getFloat("sum");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public ArrayList<ReservationService> getReservationServices(int rid) {
+        ArrayList<ReservationService> list = new ArrayList<>();
+        try {
+            String sql = "select reservation_id, service_id, quantity, unit_price\n"
+                    + "from reservation_service where reservation_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, rid);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                ReservationService s = new ReservationService();
+                s.setReservation(getReservationById(rid));
+                s.setService(serviceDB.getService(rs.getInt("service_id")));
+                s.setQuantity(rs.getInt("quantity"));
+                s.setUnitPrice(rs.getFloat("unit_price"));
+                
+                list.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public ArrayList<Reservation> getReservationsByStaff(int id) {
+        ArrayList<Reservation> list = new ArrayList<>();
+        try {
+            String sql = "select id, customer_id, reservation_date, status_id, staff_id, receiver_id, checkup_time from reservation where staff_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation();
+                r.setId(rs.getInt("id"));
+                r.setCustomer(userDB.getUser(rs.getInt("customer_id")));
+                r.setReservationDate(rs.getDate("reservation_date"));
+                r.setStatus(settingDB.getSetting(rs.getInt("status_id")));
+                r.setStaff(userDB.getUser(id));
+                r.setReceiver(receiverDB.getReceiversById(rs.getInt("receiver_id")));
+                r.setCheckupTime(rs.getDate("checkup_time"));
+                r.setTotalCost(getTotalCost(rs.getInt("id")));
+                r.setListReservationService(getReservationServices(rs.getInt("id")));
+               
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 }

@@ -42,7 +42,9 @@ public class EmailVerify {
     }
 
     //send email to the user email
-    public void sendText(User u, String msg) throws AddressException, MessagingException {
+  
+    
+    public void sendText(String recipientEmail, String msg) throws AddressException, MessagingException {
         Properties mailServerProperties;
         Session getMailSession;
         MimeMessage mailMessage;
@@ -57,12 +59,12 @@ public class EmailVerify {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         mailMessage = new MimeMessage(getMailSession);
 
-        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("giangtong199@gmail.com")); //Thay abc bằng địa chỉ người nhận
+        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail)); //Thay abc bằng địa chỉ người nhận
 
         // Bạn có thể chọn CC, BCC
 //    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
         mailMessage.setSubject("Send email from Java");
-        mailMessage.setText(msg);
+        mailMessage.setContent(msg,"text/html");
 
         // Step3: Send mail
         Transport transport = getMailSession.getTransport("smtp");
@@ -73,6 +75,9 @@ public class EmailVerify {
         transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
         transport.close();
     }
+ 
+
+
 
     public void sendHTML(User u, String msg) throws AddressException, MessagingException {
         Properties mailServerProperties;

@@ -1,31 +1,79 @@
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        
-        <title>Children Care</title>
 
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="description" content="">
-        <meta name="keywords" content="">
-        <meta name="author" content="Tooplate">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Tooplate">
+        <meta name="author" content="">
 
-        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../../assets/css/animate.css">
-        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
+        <title>Feedbacks List</title>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- MAIN CSS -->
-        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="../../assets/css/custom.css" />
+
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+
+        <!-- Bootstrap core CSS -->
+        
+
+
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" href="../../assets/css/footer.css"/>
+        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
+        <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
+        <link rel="stylesheet" href="../../assets/css/owl.css"/>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var sitetable = $('#posts').DataTable({
+                    "searching": true,
+                    "paging": true,
+                    'columnDefs': [
+                            {'orderable': false, 'targets': 3},
+                    ],
+                    columns: [
+                        null,
+                        {data: "ReservationDate", title: "ReservationDate", className: "dt-filter"},
+                        null,
+                        null,
+                        null,
+                        {data: "Status", title: "Status", className: "dt-filter"}
+                    ],
+
+                    initComplete: function () {
+                        this.api().columns('.dt-filter').every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                    .appendTo($(column.footer()))
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                                $(this).val()
+                                                );
+
+                                        column
+                                                .search(val ? '^' + val + '$' : '', true, false)
+                                                .draw();
+                                    });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    }
+                });
+            });
+        </script>
     </head>
-    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+    <body class="is-preload">
 
         <!-- PRE LOADER -->
 
@@ -63,16 +111,17 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
+                    
+                    <a href="home" class="navbar-brand">Children Care</a>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
+                            <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -81,7 +130,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../../login" method="POST">
+                                            <form action="login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -99,7 +148,7 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../../register" method="GET">
+                                            <form action="register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -116,39 +165,39 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My Reservation</a></li>
+                            <li class="dropdown"><a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../feedback/list">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../post/list">Posts</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../service/list">Services</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
                             </c:if>
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
-                                <img class="avatar" src="../../${sessionScope.user.imageLink}">
+                                <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="../../userprofile">Profile</a></p>
+                                    <p> <a href="userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="../../logout">Log Out</a></p>
+                                    <p> <a href="logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -158,42 +207,67 @@
             </div>
         </section>
 
+
         <!-- HOME -->
-        <section id="home" class="slider" data-stellar-background-ratio="0.5">
-            <div class="container" style="text-align: center;">
-                <h1 style="margin-top: 3%">Your Prescription</h1>
-                <div style="font-size: 15px;">
-                    <h2 style="margin-bottom: -1%; font-size: 20px">Receiver Information</h2><br>
-                    Full Name: ${requestScope.medexam.receiver.getFullName()}<br>
-                    Gender: <c:if test="${requestScope.medexam.receiver.isGender()}">Male</c:if>
-                            <c:if test="${!requestScope.medexam.receiver.isGender()}">Female</c:if><br>
-                    Mobile: ${requestScope.medexam.receiver.getMobile()}<br>
-                    Address: ${requestScope.medexam.receiver.getAddress()}<br>
-                    Email: ${requestScope.medexam.receiver.getEmail()}<br>
-                    Checkup Time: ${requestScope.medexam.getReservationService().reservation.getCheckupTime()}
-                </div>
-            </div>
-            <div class="container" style="height: auto; max-width: 80%">
-            <table class="table" id="myExams">
-                <thead class="thead-dark">
-                    <tr>
-                        <td class="col-md-1">Reservation ID</td>
-                        <td class="col-md-2">Service</td>
-                        <td class="col-md-2">Service Name</td>
-                        <td class="col-md-2">Prescription</td>
-                </thead>
-                <tbody>
+        <section>
+            <div class="container">
+
+                <h2 style="text-align: center; margin: 3%; color: blue;">Reservations List</h2>
+                <table id="posts">
+
+                    <thead>
                         <tr>
-                            <td class="col-md-1">${requestScope.medexam.getReservationService().reservation.id}</td>
-                            <td><img src="../../${requestScope.medexam.getReservationService().service.thumbnailLink}" id="serviceThumbnail" style="width: 300px; height: 150px" class="img-thumbnail" /></td>
-                            <td class="col-md-2">${requestScope.medexam.getReservationService().service.getFullname()}</td>
-                            <td class="col-md-2">${requestScope.medexam.getPrescription()}</td>
+                            <th>ID</th>
+                            <th>Reservation Date</th>
+                            <th>Customer</th>
+                            <th>Service(s)</th>
+                            <th>Total Cost</th>
+                            <th>Status</th>
+
                         </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Filters:</th>
+                            <th>Reservation Date </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Status </th>
+                            
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <c:forEach items="${requestScope.reservations}" var="r">
+                            <tr>
+                                <td><a href="details?rid=${r.id}">${r.id}</a></td>
+                                <td>${r.reservationDate}</td>
+                                <td>${r.customer.fullName}</td>
+                                <td>${f.ratedStar} 
+                                    <c:forEach items="${r.listReservationService}" var="s">
+                                        ${s.service.fullname} - ${s.quantity} <br>
+                                    </c:forEach>
+                                </td>
+                                <td>${r.totalCost}</td>
+                                <td>${r.status.name}</td>
+
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+
             </div>
         </section>
-        <br>
+
+
+
+
+
+
+
+
+
+
 
         <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
@@ -213,28 +287,6 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -253,36 +305,18 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
-                        </div>   
                     </div>
+
 
                 </div>
             </div>
         </footer>
-
-        <!-- SCRIPTS -->
-        <script src="../../assets/js/jquery.js"></script>
+        <!-- Scripts -->
+        <!-- Bootstrap core JavaScript -->
         <script src="../../assets/js/bootstrap.min.js"></script>
         <script src="../../assets/js/jquery.sticky.js"></script>
         <script src="../../assets/js/jquery.stellar.min.js"></script>
@@ -291,35 +325,71 @@
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+    $('ul.nav li.dropdown').hover(function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+    }, function () {
+        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+    });
         </script>
         <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
-                        $(document).ready(function () {
-                            let note = "${sessionScope.alert}"
-                            alert(note);
-
-                        });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
                 <script>
                     $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
+                        let note = "${sessionScope.alert}"
+                        alert(note);
 
                     });
                 </script>
-                <c:remove var="mess" scope="session" />
+                <c:remove var="alert" scope="session" />
+
             </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
+        <style>
+            .checked{
+                color: orange;
+            }
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tfoot th {
+                border-bottom: 2px solid #111;
+                text-align: left;
+            }
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+            
+
+        </style>
+        
+        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../assets/css/animate.css">
+        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
     </body>
+
 </html>

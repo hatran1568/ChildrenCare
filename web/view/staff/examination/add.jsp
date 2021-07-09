@@ -14,16 +14,24 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../assets/css/animate.css">
-        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../assets/css/animate.css">
+        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="../assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="../assets/css/custom.css" />
+        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
+        <script>
+
+
+
+
+        </script>
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -63,15 +71,15 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                        <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
+                        <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
+                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                             <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
@@ -81,7 +89,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="../login" method="POST">
+                                            <form action="../../login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -89,7 +97,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
@@ -99,45 +107,51 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="../register" method="GET">
+                                            <form action="../../register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
+                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>
                                                 <input type="text" name="address" class="username form-control" placeholder="Address"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Register" />
                                             </form>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
 
                             </c:if>
@@ -147,9 +161,9 @@
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="../userprofile">Profile</a></p>
+                                    <p> <a href="../../userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -160,69 +174,64 @@
 
             </div>
         </section>
+        <!-- End Banner -->
+        <!-- section -->
+        <div class="container" style="margin: 75px auto">
+            <h3 style="text-align: center">Patient info</h3>
+            <div style="margin-top: 40px"  class="row justify-content-md-center">
+                <div style="margin-left: auto; margin-right: auto; float: none" class="col-md-8">
+                    <form action="add" method="post">
+                        <input type="text" name="rid" value="${requestScope.rid}" hidden>
+                        <input type="text" name="sid" value="${requestScope.sid}" hidden>
+                        <div class="form-row">
+                            <div style="padding-left: 0" class="form-group col-md-6">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="gender">Gender</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="gender" type="radio" id="male" value="male">
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="gender" type="radio" id="female" value="female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div style="padding-left: 0" class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="mobile">Mobile</label>
+                                <input type="text"  class="form-control" id="mobile" name="mobile">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="checkEmail" onclick="checkExistingEmail()">Check existing email</button>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="prescription">Prescription</label>
+                            <textarea style="height: 150px" class="form-control" name="prescription" id="prescription"></textarea>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Add prescription">
+                    </form>
+                </div>
+            </div>
 
-
-        <!-- ABOUT -->
-
-
-        <!-- TEAM -->
-        <div class="container" style="height: 1000px;">
-
-            <c:if test="${not empty requestScope.list}">
-                <form id="form" action="edit" method="POST">
-                    <table class="table">
-                        <thead  class="thead-dark">
-                            <tr >
-                                <td >Id</td>
-                                <td >Title</td>
-                                <td >Price</td>
-
-                                <td > Quantity</td>
-                                <td>Cost</td>
-                                <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="list" items="${requestScope.list}">
-                                <tr >
-                                    <td>${list.service.id}</td>
-                                    <td>${list.service.fullname}</td>
-                                    <td >${list.unitPrice}</td>
-
-                                    <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
-
-                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
-                                    <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
-
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </form>
-
-            </c:if>
-            <c:if test="${empty requestScope.list}">
-
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
-                </c:if>
-
-                <!--            <h2>Total Cost:</h2>-->
         </div>
 
-
-
-
-        <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
 
                     <div class="col-md-4 col-sm-4">
-                        <div class="footer-thumb"> 
+                        <div class="footer-thumb">
                             <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
                             <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
 
@@ -233,16 +242,18 @@
                         </div>
                     </div>
 
+                    <div class="col-md-4 col-sm-4">
+                       
+                    </div>
 
-
-                    <div class="col-md-4 col-sm-4"> 
+                    <div class="col-md-4 col-sm-4">
                         <div class="footer-thumb">
                             <div class="opening-hours">
                                 <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
                                 <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
                                 <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
                                 <p>Sunday <span>Closed</span></p>
-                            </div> 
+                            </div>
 
                             <ul class="social-icon">
                                 <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
@@ -251,75 +262,35 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn">
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
-                        </div>   
                     </div>
+
 
                 </div>
             </div>
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="../assets/js/jquery.js"></script>
-        <script src="../assets/js/bootstrap.min.js"></script>
-        <script src="../assets/js/jquery.sticky.js"></script>
-        <script src="../assets/js/jquery.stellar.min.js"></script>
-        <script src="../assets/js/wow.min.js"></script>
-        <script src="../assets/js/smoothscroll.js"></script>
-        <script src="../assets/js/owl.carousel.min.js"></script>
-        <script src="../assets/js/custom-new.js"></script>
-        <script>
-                                        function ResetCart(param) {
-                                            var value = param.value;
-                                            var querry = param.name;
+        <script src="../../assets/js/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="../../assets/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/jquery.sticky.js"></script>
+        <script src="../../assets/js/jquery.stellar.min.js"></script>
+        <script src="../../assets/js/wow.min.js"></script>
+        <script src="../../assets/js/smoothscroll.js"></script>
+        <script src="../../assets/js/owl.carousel.min.js"></script>
+        <script src="../../assets/js/custom-new.js"></script>
 
-                                            $.ajax({
-                                                url: "edit",
-                                                type: "GET",
-                                                data: {rid:${requestScope.list[0].reservation.id}, sid: querry, quantity: value},
-                                                success:
-                                                        function (data) {
-                                                            var b = JSON.parse(JSON.stringify(data));
-                                                            console.log(b)
-                                                            var c = querry.toString();
-                                                            document.getElementById(c).innerHTML = b["price"]
-                                                            document.getElementById("total").innerHTML = "Total Cost:" + b["total"]
-
-                                                        }
-
-                                            });
-
-                                        }
-
-
-        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                        $('ul.nav li.dropdown').hover(function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                        }, function () {
-                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                        });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -327,7 +298,6 @@
                     $(document).ready(function () {
                         let note = "${sessionScope.alert}"
                         alert(note);
-
                     });
                 </script>
                 <c:remove var="alert" scope="session" />
@@ -339,10 +309,36 @@
                 $(document).ready(function () {
                     let mess = "${sessionScope.mess}"
                     alert(mess);
-
                 });
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+        <style>
+            .form-control{
+                margin: 0;
+            }
+        </style>
+        <script>
+            $(document).ready(function (){
+                $("#male").prop("checked", true);
+            });
+            function checkExistingEmail(){
+                $.ajax({
+                   url: "checkemail" ,
+                   method: "post",
+                   data: { email : $("#email").val()},
+                   success: function(data) {
+                       $("#name").val(data.fullName);
+                       if (data.gender === true){
+                           $("#male").prop("checked", true);
+                       } else if(data.gender === false){
+                           $("#female").prop("checked", true);
+                       }
+                       $("#mobile").val(data.mobile);
+                       $("#address").val(data.address);
+                }
+                });
+            }
+        </script>
     </body>
-</html> 
+</html>

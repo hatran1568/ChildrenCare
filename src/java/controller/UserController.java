@@ -230,7 +230,7 @@ public class UserController extends HttpServlet {
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;
         try {
-            e.sendText(userDB.getUserByEmail(request.getParameter("email")), emailContent);
+            e.sendText(userDB.getUserByEmail(request.getParameter("email")).getEmail(), emailContent);
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -418,7 +418,7 @@ public class UserController extends HttpServlet {
         u.setEmail(email);
 
         //Send email with verify code and forward to verify page
-        EmailVerify.getInstance().sendText(u, code);
+        EmailVerify.getInstance().sendText(u.getEmail(), code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
         request.getRequestDispatcher("/view/homepage/verify.jsp").forward(request, response);

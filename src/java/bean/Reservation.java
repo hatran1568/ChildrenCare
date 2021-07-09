@@ -16,12 +16,23 @@ public class Reservation {
     private int id;
     private User customer;
     private Receiver receiver;
-    private Date reservation_date;
-    private Date checkup_time;
+    private Date reservationDate;
+    private Date checkupTime;
     private Setting status;
     private User staff;
-    private float total_cost;
+    private float totalCost;
     private ArrayList<Service> listService;
+    private ArrayList<ReservationService> listReservationService;
+
+    public ArrayList<ReservationService> getListReservationService() {
+        return listReservationService;
+    }
+
+    public void setListReservationService(ArrayList<ReservationService> listReservationService) {
+        this.listReservationService = listReservationService;
+    }
+    
+    
 
     public ArrayList<Service> getListService() {
         return listService;
@@ -58,20 +69,20 @@ public class Reservation {
   
 
 
-    public Date getReservation_date() {
-        return reservation_date;
+    public Date getReservationDate() {
+        return reservationDate;
     }
 
-    public void setReservation_date(Date reservation_date) {
-        this.reservation_date = reservation_date;
+    public void setReservationDate(Date reservationDate) {
+        this.reservationDate = reservationDate;
     }
 
-    public Date getCheckup_time() {
-        return checkup_time;
+    public Date getCheckupTime() {
+        return checkupTime;
     }
 
-    public void setCheckup_time(Date checkup_time) {
-        this.checkup_time = checkup_time;
+    public void setCheckupTime(Date checkupTime) {
+        this.checkupTime = checkupTime;
     }
 
     public Setting getStatus() {
@@ -90,12 +101,12 @@ public class Reservation {
         this.staff = staff;
     }
 
-    public float getTotal_cost() {
-        return total_cost;
+    public float getTotalCost() {
+        return totalCost;
     }
 
-    public void setTotal_cost(float total_cost) {
-        this.total_cost = total_cost;
+    public void setTotalCost(float totalCost) {
+        this.totalCost = totalCost;
     }
 
     

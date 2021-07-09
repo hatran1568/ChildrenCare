@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
+
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -13,17 +13,25 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+        <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
+        <script>
+
+
+
+
+        </script>
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -72,7 +80,7 @@
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
+                            <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -116,8 +124,13 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -138,12 +151,14 @@
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
+
                             </c:if>
+
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
-                                <img class="avatar" src="../../${sessionScope.user.imageLink}">
+                                <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
@@ -154,48 +169,116 @@
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </c:if>
                     </ul>
+
                 </div>
+
             </div>
         </section>
+        <!-- End Banner -->
+        <!-- section -->
+        <div class="container" style="margin-top: 75px">
+            <h3 style="text-align: center">Reservation info</h3>
 
-        <!-- HOME -->
-        <section id="home" class="slider" data-stellar-background-ratio="0.5">
-            <div class="container" style="text-align: center;">
-                <h1 style="margin-top: 3%">Your Prescription</h1>
-                <div style="font-size: 15px;">
-                    <h2 style="margin-bottom: -1%; font-size: 20px">Receiver Information</h2><br>
-                    Full Name: ${requestScope.medexam.receiver.getFullName()}<br>
-                    Gender: <c:if test="${requestScope.medexam.receiver.isGender()}">Male</c:if>
-                            <c:if test="${!requestScope.medexam.receiver.isGender()}">Female</c:if><br>
-                    Mobile: ${requestScope.medexam.receiver.getMobile()}<br>
-                    Address: ${requestScope.medexam.receiver.getAddress()}<br>
-                    Email: ${requestScope.medexam.receiver.getEmail()}<br>
-                    Checkup Time: ${requestScope.medexam.getReservationService().reservation.getCheckupTime()}
-                </div>
-            </div>
-            <div class="container" style="height: auto; max-width: 80%">
-            <table class="table" id="myExams">
-                <thead class="thead-dark">
+            <div class="col-md-6">
+                <table class="table table-borderless">
                     <tr>
-                        <td class="col-md-1">Reservation ID</td>
-                        <td class="col-md-2">Service</td>
-                        <td class="col-md-2">Service Name</td>
-                        <td class="col-md-2">Prescription</td>
+                        <td>Reservation ID:</td>
+                        <td>${requestScope.reservation.id}</td>
+                    </tr>
+                    <tr>
+                        <td>Total cost:</td>
+                        <td>${requestScope.reservation.totalCost}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Reservation date:</td>
+                        <td>${requestScope.reservation.reservationDate}</td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>${requestScope.reservation.status.name}</td>
+                    </tr>
+                </table>
+            </div>
+            <h3 style="text-align: center">Receiver info</h3>
+            <div class="col-md-6">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Full name:</td>
+                        <td>${requestScope.reservation.receiver.fullName}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>${requestScope.reservation.receiver.email}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Gender:</td>
+                        <td><c:if test="${requestScope.reservation.receiver.gender eq true}">Male</c:if>
+                            <c:if test="${requestScope.reservation.receiver.gender eq false}">Female</c:if></td>
+                        </tr>
+                        <tr>
+                            <td>Mobile:</td>
+                            <td>${requestScope.reservation.receiver.mobile}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <table style="margin-top: 0px;" class="table table-borderless">
+                    <tr>
+
+                    <tr>
+                        <td>Address</td>
+                        <td>${requestScope.reservation.receiver.address}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <h3 style="text-align: center">Service info</h3>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='../examination/list?rid=${requestScope.reservation.id}'">View prescription list</button>
+            
+            <table class="table thead-dark" id="reservation-detail">
+                <thead  class="thead-dark">
+                    <tr>
+                        <td style="width: 300px">Thumbnail</td>
+                        <td >Title</td>
+                        <td>Category</td>
+                        <td >Unit price</td>
+                        <td >Quantity</td>
+                        <td>Number of exam done</td>
+                        <td>Cost</td>
+                        <td></td>
+                    </tr>
                 </thead>
                 <tbody>
+                    <c:forEach var="i" begin="0" end="${requestScope.services.size()-1}">
                         <tr>
-                            <td class="col-md-1">${requestScope.medexam.getReservationService().reservation.id}</td>
-                            <td><img src="../../${requestScope.medexam.getReservationService().service.thumbnailLink}" id="serviceThumbnail" style="width: 300px; height: 150px" class="img-thumbnail" /></td>
-                            <td class="col-md-2">${requestScope.medexam.getReservationService().service.getFullname()}</td>
-                            <td class="col-md-2">${requestScope.medexam.getPrescription()}</td>
+                            <td><img class="img-responsive" src="../../${requestScope.services[i].service.thumbnailLink}" alt="#" /></td>
+                            <td>${requestScope.services[i].service.fullname}</td>
+                            <td>${requestScope.services[i].service.category.name}</td>
+                            <td>${requestScope.services[i].unitPrice}</td>
+                            <td>${requestScope.services[i].quantity}</td>
+                            <td>${requestScope.examinationCount[i]}</td>
+                            <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
+                            <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
+                                    <button class="btn" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
+                                </c:if></td>
                         </tr>
+                    </c:forEach>
+                    <tr>
+                        <td colspan="5" style="text-align: right">Total cost</td>
+                        <td style="font-size: 18px">${requestScope.reservation.totalCost}</td>
+                    </tr>
                 </tbody>
             </table>
-            </div>
-        </section>
-        <br>
-
-        <!-- FOOTER -->
+        </div>
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
@@ -213,28 +296,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -253,33 +336,16 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
-                        </div>   
                     </div>
+
 
                 </div>
             </div>
-        </footer>
+        </footer> 
 
         <!-- SCRIPTS -->
         <script src="../../assets/js/jquery.js"></script>
@@ -290,36 +356,56 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+                                    $('ul.nav li.dropdown').hover(function () {
+                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                    }, function () {
+                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                                    });
         </script>
         <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
-                        $(document).ready(function () {
-                            let note = "${sessionScope.alert}"
-                            alert(note);
-
-                        });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
                 <script>
                     $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
-
+                        let note = "${sessionScope.alert}"
+                        alert(note);
                     });
                 </script>
-                <c:remove var="mess" scope="session" />
+                <c:remove var="alert" scope="session" />
+
             </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
+        <style>
+            .table{
+                margin-top: 40px;
+                border: none;
+
+            }
+            #reservation-detail{
+                width:100%; 
+                margin-top: 50px; 
+/*                margin-left: 10%;
+                margin-right: 10%;*/
+            }
+            .img-responsive{
+                max-width: 300px;
+                height: auto;
+            }
+            thead{
+                font-weight: bold;
+                font-size: 16px;
+            }
+        </style>
     </body>
-</html>
+</html> 

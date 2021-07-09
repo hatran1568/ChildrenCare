@@ -47,7 +47,7 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->

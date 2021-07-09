@@ -6,11 +6,13 @@
 package controller;
 
 import bean.Feedback;
+import bean.Post;
 import bean.Service;
 import bean.Setting;
 import bean.Slider;
 import bean.User;
 import dao.FeedbackDAO;
+import dao.PostDAO;
 import dao.SettingDAO;
 import dao.SliderDAO;
 import java.io.File;
@@ -31,7 +33,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\HP\\OneDrive\\Desktop\\ite3\\web\\assets\\images")
 @WebServlet(name = "FeedbackController", urlPatterns = {"/feedback"})
 public class FeedbackController extends HttpServlet {
 
@@ -87,6 +89,9 @@ public class FeedbackController extends HttpServlet {
                 break;
             case "/manager/feedback/update":
                 updateStatus(request, response);
+                break;
+            case "/manager/feedback/list":
+                showFeedbackList(request, response);
                 break;
             default:
                 break;
@@ -204,6 +209,17 @@ public class FeedbackController extends HttpServlet {
         Setting s = new Setting();
         s.setId(fid);
         feedbackDB.updateStatus(fid, s);
+    }
+
+    protected void showFeedbackList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        FeedbackDAO feedbackDB = new FeedbackDAO();
+        ArrayList<Feedback> feedbacks = feedbackDB.getFeedbacks();
+        request.setAttribute("feedbacks", feedbacks);
+        PostDAO postDB = new PostDAO();
+        ArrayList<Post> posts = postDB.getPosts();
+        request.setAttribute("posts", posts);
+        request.getRequestDispatcher("../../view/feedback/list.jsp").forward(request, response);
     }
 
     @Override

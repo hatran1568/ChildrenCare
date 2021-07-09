@@ -14,6 +14,7 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/details.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/cart/cart.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/newpassword.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerCustomerController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Feedback.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/feedback/feedback.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/changepassword.jsp</file>
@@ -22,7 +23,9 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/util/EmailVerify.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/homepage/verify.jsp</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserProfileController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/StaffReservationController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/FeedbackController.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/slider/add.jsp</file>
