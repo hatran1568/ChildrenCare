@@ -105,7 +105,7 @@ public class ReservationCompletionController extends HttpServlet {
         
         User u = (User) request.getSession().getAttribute("user");
         request.getSession().removeAttribute("cart");
-        request.getRequestDispatcher("../view/customer/reservation/reservationcompletion.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/customer/reservation/reservationCompletion.jsp").forward(request, response);
     }
 
     /**
