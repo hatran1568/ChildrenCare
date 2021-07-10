@@ -290,6 +290,7 @@
                             {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
                             {'orderable': false, 'targets' : [4,5,6,7]},
                         ],
+                        "bInfo" : false,
                         "sDom": 'W<"clear">Tlfrtip',
                         initComplete: function () {
                             this.api().columns('.dt-filter').every(function () {

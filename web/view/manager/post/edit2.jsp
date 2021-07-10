@@ -124,7 +124,13 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -316,20 +322,17 @@
         <script src="../../assets/js/bootstrap.min.js"></script>
         <script src="../../assets/js/jquery.sticky.js"></script>
         <script src="../../assets/js/jquery.stellar.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
         <script src="../../assets/js/wow.min.js"></script>
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
+        
         <script>
-            
              function savePost(){
                  document.getElementById("status").value = "24";
-
-                    
                     document.getElementById('form').submit();
-                    
                 }
-                
         </script>
         <script>
             function saveDraftPost(){
@@ -337,6 +340,9 @@
                     
                     document.getElementById('form').submit();
                 }
+        </script>
+        <script>
+            CKEDITOR.replace( 'content' );
         </script>
      <script>
                 var loadFile = function (event) {
@@ -377,6 +383,8 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+            
+
             <style>
                 #main-body{
                     margin-top: 50px;
