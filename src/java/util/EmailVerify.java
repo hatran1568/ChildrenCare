@@ -42,37 +42,7 @@ public class EmailVerify {
     }
 
     //send email to the user email
-    public void sendText(User u, String msg) throws AddressException, MessagingException {
-        Properties mailServerProperties;
-        Session getMailSession;
-        MimeMessage mailMessage;
-
-        // Step1: setup Mail Server
-        mailServerProperties = System.getProperties();
-        mailServerProperties.put("mail.smtp.port", "587");
-        mailServerProperties.put("mail.smtp.auth", "true");
-        mailServerProperties.put("mail.smtp.starttls.enable", "true");
-
-        // Step2: get Mail Session
-        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-        mailMessage = new MimeMessage(getMailSession);
-
-        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("hoangnhatminh.139@gmail.com")); //Thay abc bằng địa chỉ người nhận
-
-        // Bạn có thể chọn CC, BCC
-//    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
-        mailMessage.setSubject("Send email from Java");
-        mailMessage.setText(msg);
-
-        // Step3: Send mail
-        Transport transport = getMailSession.getTransport("smtp");
-
-        // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
-        //Email của Giang "giangtong09@gmail.com" "huepham1905"
-        transport.connect("smtp.gmail.com", "giangtong09@gmail.com", "huepham1905");
-        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
-        transport.close();
-    }
+  
     
     public void sendText(String recipientEmail, String msg) throws AddressException, MessagingException {
         Properties mailServerProperties;
@@ -106,5 +76,39 @@ public class EmailVerify {
         transport.close();
     }
  
-}
 
+
+
+    public void sendHTML(User u, String msg) throws AddressException, MessagingException {
+        Properties mailServerProperties;
+        Session getMailSession;
+        MimeMessage mailMessage;
+
+        // Step1: setup Mail Server
+        mailServerProperties = System.getProperties();
+        mailServerProperties.put("mail.smtp.port", "587");
+        mailServerProperties.put("mail.smtp.auth", "true");
+        mailServerProperties.put("mail.smtp.starttls.enable", "true");
+
+        // Step2: get Mail Session
+        getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+        mailMessage = new MimeMessage(getMailSession);
+
+        mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("giangtong199@gmail.com")); //Thay abc bằng địa chỉ người nhận
+
+        // Bạn có thể chọn CC, BCC
+//    generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@gmail.com")); //Địa chỉ cc gmail
+        mailMessage.setSubject("Send email from Java");
+        mailMessage.setText(msg,"UTF-8", "html");
+
+        // Step3: Send mail
+        Transport transport = getMailSession.getTransport("smtp");
+
+        // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
+        //Email của Giang "giangtong09@gmail.com" "huepham1905"
+        transport.connect("smtp.gmail.com", "giangtong09@gmail.com", "huepham1905");
+        transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
+        transport.close();
+    }
+
+}

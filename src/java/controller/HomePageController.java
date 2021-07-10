@@ -48,7 +48,7 @@ public class HomePageController extends HttpServlet {
             out.println("<title>Servlet HomePageController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomePageController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet HomePageController at " + request.getRequestURL() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,6 +66,7 @@ public class HomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         PostDAO postDB = new PostDAO();
         List<Post> posts = postDB.getFeaturedPosts().subList(0, 3);
         

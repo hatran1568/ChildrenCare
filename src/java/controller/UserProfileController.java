@@ -297,7 +297,7 @@ public class UserProfileController extends HttpServlet {
         u.setEmail(email);
         
         //Send email with verify code and forward to verify page
-        EmailVerify.getInstance().sendText(u, code);
+        EmailVerify.getInstance().sendText(u.getEmail(), code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
         request.getRequestDispatcher("/view/public/homepage/verify.jsp").forward(request, response);
