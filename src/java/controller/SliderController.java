@@ -133,7 +133,7 @@ public class SliderController extends HttpServlet {
         request.setAttribute("totalPage", totalpage);
         request.setAttribute("index", index);
         request.setAttribute("url", "list");
-        request.getRequestDispatcher("../../view/slider/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/slider/list.jsp").forward(request, response);
     }
 
     public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -204,7 +204,7 @@ public class SliderController extends HttpServlet {
             request.setAttribute("search", search);
             request.setAttribute("status", status);
             request.setAttribute("url", "search");
-            request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+            request.getRequestDispatcher("../../view/manager/slider/search.jsp").forward(request, response);
         }
     }
 
@@ -224,7 +224,7 @@ public class SliderController extends HttpServlet {
         SliderDAO sliderDB = new SliderDAO();
         Slider s = sliderDB.getSliderByID(id);
         request.setAttribute("slider", s);
-        request.getRequestDispatcher("../../view/slider/details.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/slider/details.jsp").forward(request, response);
     }
 
     protected void saveFile(HttpServletRequest request, HttpServletResponse response)
@@ -310,7 +310,7 @@ public class SliderController extends HttpServlet {
         Slider s = new Slider();
         s = sliDB.getSliderByID(id);
         request.setAttribute("slider", s);
-        request.getRequestDispatcher("../../view/slider/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/slider/edit.jsp").forward(request, response);
     }
 
 }

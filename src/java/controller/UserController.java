@@ -190,7 +190,7 @@ public class UserController extends HttpServlet {
 //        request.setAttribute("totalpage", totalpage);
 //        request.setAttribute("pageindex", pageindex);
 //        request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("../../view/user/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/admin/user/list.jsp").forward(request, response);
     }
 
     protected void showUserDetails(HttpServletRequest request, HttpServletResponse response)
@@ -199,7 +199,7 @@ public class UserController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userDB.getUser(id);
         request.setAttribute("user", user);
-        request.getRequestDispatcher("../../view/user/details.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/admin/user/details.jsp").forward(request, response);
     }
 
     protected void addUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -250,7 +250,7 @@ public class UserController extends HttpServlet {
 
         request.setAttribute("user", user);
 
-        request.getRequestDispatcher("../../view/user/edit.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/admin/user/edit.jsp").forward(request, response);
     }
 
     protected void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -283,7 +283,7 @@ public class UserController extends HttpServlet {
         ArrayList<Role> roles = roleDB.getRoles();
         request.setAttribute("roles", roles);
 
-        request.getRequestDispatcher("../../view/user/add.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/admin/user/add.jsp").forward(request, response);
     }
 
     //Login function using session

@@ -117,7 +117,7 @@ public class BlogController extends HttpServlet {
         request.setAttribute("simpleDateFormat", simpleDateFormat);
         request.setAttribute("categories", categories);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("../view/blog/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/public/blog/list.jsp").forward(request, response);
     }
 
     private void showBlogDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -126,6 +126,6 @@ public class BlogController extends HttpServlet {
         Post p = postDB.getPostById(pid);
         request.setAttribute("post", p);
 
-        request.getRequestDispatcher("../view/blog/details.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/public/blog/details.jsp").forward(request, response);
     }
 }

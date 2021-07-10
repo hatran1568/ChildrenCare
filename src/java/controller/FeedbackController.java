@@ -128,7 +128,7 @@ public class FeedbackController extends HttpServlet {
         }
 
         request.setAttribute("id", id);
-        request.getRequestDispatcher("view/feedback/feedback.jsp").forward(request, response);
+        request.getRequestDispatcher("view/public/feedback/feedback.jsp").forward(request, response);
     }
 
     protected void insertFeedBack(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -198,7 +198,7 @@ public class FeedbackController extends HttpServlet {
         list = settingDB.getSetting("Feedback Status");
         request.setAttribute("Status", list);
         request.setAttribute("f", f);
-        request.getRequestDispatcher("../../view/feedback/details.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/feedback/details.jsp").forward(request, response);
     }
 
     protected void updateStatus(HttpServletRequest request, HttpServletResponse response) {
@@ -219,7 +219,7 @@ public class FeedbackController extends HttpServlet {
         PostDAO postDB = new PostDAO();
         ArrayList<Post> posts = postDB.getPosts();
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("../../view/feedback/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/feedback/list.jsp").forward(request, response);
     }
 
     @Override

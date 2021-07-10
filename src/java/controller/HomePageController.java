@@ -77,7 +77,7 @@ public class HomePageController extends HttpServlet {
         request.setAttribute("posts", posts);
         request.setAttribute("sliders", sliders);
         request.setAttribute("services", services);
-        request.getRequestDispatcher("/view/homepage/newhomepage.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/homepage/newhomepage.jsp").forward(request, response);
     }
 
     /**
