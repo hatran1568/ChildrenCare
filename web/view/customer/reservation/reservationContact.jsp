@@ -158,7 +158,7 @@
 
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
                                     <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
