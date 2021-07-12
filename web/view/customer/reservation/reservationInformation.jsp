@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -124,8 +126,14 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
-                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                <div class="dropdown-menu">
+                                    <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                    <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                </div>
+                            </li>
+                            <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
@@ -150,14 +158,14 @@
 
                             </c:if>
 
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
+                                    <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -168,9 +176,12 @@
 
             </div>
         </section>
+
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="min-height: 700px; height: auto;">
+
+        <div class="container" style=" margin-top: 25px;min-height: 700px; height: auto;">
+
             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
                 <a  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Edit Reservation  
@@ -179,6 +190,101 @@
                     Cancel Reservation 
                 </a>
             </c:if>
+
+            <div class="ui grid">
+
+                <div class="eight wide column">
+                    <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
+                        <h3 class="ui dividing header">Contact Information</h3>
+                        <div class="two fields">
+                            <div class="twelve wide  field">
+                                <label>Name</label>
+
+                                <input readonly="true" value="" type="text" name="fullname" placeholder="Bo Yates">
+
+                            </div>
+                            <div class="four wide  field">
+                                <label>Gender</label>
+
+                                <select name="gender">
+                                    <option selected="true" value="true">Male</option>
+                                    <option value="false">Female</option>
+
+
+                                </select>
+
+
+                            </div>
+                        </div>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Email</label>
+
+                                <input  type="text" name="email" placeholder="Email@abc.com">
+
+                            </div>
+                            <div class="field">
+                                <label>Mobile</label>
+
+                                <input  type="text" name="mobile" placeholder="01234456789">
+
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+                <div class="eight wide column">
+                    <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
+                        <h3 class="ui dividing header">Contact Information</h3>
+                        <div class="two fields">
+                            <div class="twelve wide  field">
+                                <label>Name</label>
+
+                                <input readonly="true" value="${requestScope.reservation.receiver.fullName}" type="text" name="fullname" placeholder="Bo Yates">
+
+                            </div>
+                            <div class="four wide  field">
+                                <label>Gender</label>
+
+                                <select disabled="disabled" name="gender">
+                                    <option <c:if test="${requestScope.reservation.receiver.gender eq 'true'}">selected="true</c:if>" value="true">Male</option>
+                                    <option <c:if test="${requestScope.reservation.receiver.gender eq 'false'}">selected="true</c:if>" value="false">Female</option>
+
+
+                                    </select>
+
+
+                                </div>
+                            </div>
+
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Email</label>
+
+                                    <input value="${requestScope.reservation.receiver.email}" readonly="true" type="text" name="email" placeholder="Email@abc.com">
+
+                            </div>
+                            <div class="field">
+                                <label>Mobile</label>
+
+                                <input readonly="true" value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
+
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+
+
+            </div>
+
             <h3>Reservation</h3>
             <table class="table" id="reservation-detail">
                 <thead  class="thead-dark">
@@ -224,7 +330,9 @@
             </div>
             <div style="display: flex;" >
                 <h5 style="flex-grow: 1;min-width: 260px">Mobile : </h4>
-                <h5 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h5>
+
+                    <h5 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h5>
+
             </div>
 
             <h3>Service</h3> 
