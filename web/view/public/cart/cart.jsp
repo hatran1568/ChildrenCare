@@ -63,7 +63,7 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
@@ -148,8 +148,8 @@
 
                                 <div class="dropdown-content">
                                     <p> <a href="../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../customer/changepassword">Change Password</a></p>
+                                    <p> <a href="../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>

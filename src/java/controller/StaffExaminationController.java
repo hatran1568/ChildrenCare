@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import dao.ExaminationDAO;
 import dao.ReceiverDAO;
 import dao.ReservationDAO;
+import dao.ServiceDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -243,9 +244,20 @@ public class StaffExaminationController extends HttpServlet {
 
     private void showPrescriptionList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
+        ServiceDAO serviceDB = new ServiceDAO();
+        ArrayList<Service> services = serviceDB.getServices();
+        request.setAttribute("services", services);
         ExaminationDAO examDB = new ExaminationDAO();
         int reservationID = Integer.parseInt(request.getParameter("rid"));
-        ArrayList<MedicalExamination> exams = examDB.getExamsByReservation(reservationID);
+        String selectedService = request.getParameter("service");
+        ArrayList<MedicalExamination> exams = new ArrayList<>();
+        if (selectedService == null || selectedService.equals("all")){
+            exams = examDB.getExamsByReservation(reservationID);
+        } else{
+            int serviceID = Integer.parseInt(selectedService);
+            exams = examDB.getExamsByReservationService(reservationID, serviceID);
+        }
+        request.setAttribute("rid", reservationID);
         request.setAttribute("exams", exams);
         request.getRequestDispatcher("../../view/staff/examination/list.jsp").forward(request, response);
     }
