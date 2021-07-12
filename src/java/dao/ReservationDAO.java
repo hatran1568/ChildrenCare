@@ -167,6 +167,8 @@ public class ReservationDAO extends BaseDAO {
                 s.setCustomer(userDB.getUser(rs.getInt("customer_id")));
                 s.setStaff(userDB.getUser(rs.getInt("staff_id")));
                 s.setReceiver(receiverDB.getReceiversById(rs.getInt("receiver_id")));
+                s.setListService(getServices(id));
+                s.setListReservationService(getReservationServices(id));
                 return s;
 
             }
@@ -437,7 +439,7 @@ public class ReservationDAO extends BaseDAO {
 
     }
 
-    public void changeReservationStatus(int rid, int status){
+    public void changeReservationStatus(int rid, int status) {
         try {
             String sql = "UPDATE reservation set status_id = ? where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -448,7 +450,7 @@ public class ReservationDAO extends BaseDAO {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public float getRevenue(Service s) {
         try {
             String sql = "SELECT sum(unit_price) as total from reservation_service where service_id=? ";
@@ -680,13 +682,12 @@ public class ReservationDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, rid);
             ResultSet rs = stm.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 ReservationService s = new ReservationService();
-                s.setReservation(getReservationById(rid));
                 s.setService(serviceDB.getService(rs.getInt("service_id")));
                 s.setQuantity(rs.getInt("quantity"));
                 s.setUnitPrice(rs.getFloat("unit_price"));
-                
+
                 list.add(s);
             }
         } catch (SQLException ex) {
@@ -713,12 +714,73 @@ public class ReservationDAO extends BaseDAO {
                 r.setCheckupTime(rs.getDate("checkup_time"));
                 r.setTotalCost(getTotalCost(rs.getInt("id")));
                 r.setListReservationService(getReservationServices(rs.getInt("id")));
-               
+
                 list.add(r);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
+    }
+
+    public ArrayList<Service> getServices(int id) {
+        ArrayList<Service> list = new ArrayList<>();
+        try {
+            String sql = "select service_id from reservation_service where reservation_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Service s = serviceDB.getService(rs.getInt("service_id"));
+                list.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public ArrayList<Reservation> getSubmittedReservations() {
+        ArrayList<Reservation> list = new ArrayList<>();
+        try {
+            String sql = "select id, customer_id, reservation_date, status_id, staff_id, receiver_id, checkup_time from reservation where status_id in (20, 22, 23);";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Reservation r = new Reservation();
+                r.setId(rs.getInt("id"));
+                r.setCustomer(userDB.getUser(rs.getInt("customer_id")));
+                r.setReservationDate(rs.getDate("reservation_date"));
+                r.setStatus(settingDB.getSetting(rs.getInt("status_id")));
+                r.setStaff(userDB.getUser(rs.getInt("staff_id")));
+                r.setReceiver(receiverDB.getReceiversById(rs.getInt("receiver_id")));
+                r.setCheckupTime(rs.getDate("checkup_time"));
+                r.setTotalCost(getTotalCost(rs.getInt("id")));
+                r.setListReservationService(getReservationServices(rs.getInt("id")));
+                r.setListService(getServices(rs.getInt("id")));
+                list.add(r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public void setReservationStatus(int rid, String status ) {
+        try {
+            int status_id = 0;
+            String sql = "UPDATE `swp`.`reservation`\n"
+                    + "SET\n"
+                    + "`status_id` = ? \n"
+                    + "WHERE `id` = ?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            status_id = (status.equals("Approved"))?22:20;
+            status_id = (status.equals("Rejected"))?23:20;
+            stm.setInt(1, 22);
+            stm.setInt(2, rid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

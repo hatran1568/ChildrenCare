@@ -223,4 +223,19 @@ public class ServiceDAO extends BaseDAO {
         }
         return -1;
     }
+
+    public void substractServiceQuantity(int id, int quantity) {
+        try {
+            Service s = getService(id);
+            String sql = "UPDATE `swp`.`service`\n"
+                    + "SET\n"
+                    + "`quantity` = ?\n"
+                    + "WHERE `id` =?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, s.getQuantity() - quantity);
+            stm.setInt(2, id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

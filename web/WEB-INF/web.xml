@@ -88,6 +88,10 @@
         <servlet-name>BlogController</servlet-name>
         <servlet-class>controller.BlogController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerReservationController</servlet-name>
+        <servlet-class>controller.ManagerReservationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/details</url-pattern>
@@ -286,7 +290,7 @@
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/manager/feedback/details</url-pattern>
     </servlet-mapping>
-      <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/manager/feedback/update</url-pattern>
     </servlet-mapping>
@@ -374,12 +378,10 @@
         <servlet-name>StaffExaminationController</servlet-name>
         <url-pattern>/staff/examination/checkemail</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>StaffExaminationController</servlet-name>
         <url-pattern>/staff/examination/list</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/blog/list</url-pattern>
@@ -391,6 +393,18 @@
     <servlet-mapping>
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/manager/feedback/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerReservationController</servlet-name>
+        <url-pattern>/manager/reservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerReservationController</servlet-name>
+        <url-pattern>/manager/reservation/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerReservationController</servlet-name>
+        <url-pattern>/manager/reservation/approve</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

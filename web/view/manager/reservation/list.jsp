@@ -38,6 +38,7 @@
                     "paging": true,
                     'columnDefs': [
                             {'orderable': false, 'targets': 3},
+                            {'orderable': false, 'targets': 6},
                     ],
                     columns: [
                         null,
@@ -45,7 +46,8 @@
                         null,
                         null,
                         null,
-                        {data: "Status", title: "Status", className: "dt-filter"}
+                        {data: "Status", title: "Status", className: "dt-filter"},
+                        null
                     ],
 
                     initComplete: function () {
@@ -134,7 +136,7 @@
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">Forget Password</a>
                                             </form>
                                         </div>
                                     </div>
@@ -223,7 +225,7 @@
                             <th>Service(s)</th>
                             <th>Total Cost</th>
                             <th>Status</th>
-
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -234,7 +236,7 @@
                             <th></th>
                             <th></th>
                             <th>Status </th>
-                            
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -250,7 +252,10 @@
                                 </td>
                                 <td>${r.totalCost}</td>
                                 <td>${r.status.name}</td>
-
+                                <td><c:if test="${r.status.name == 'Submitted'}">
+                                    <button onclick="window.location.href='approve?id=${r.id}'">Approve</button>
+                                    </c:if>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
