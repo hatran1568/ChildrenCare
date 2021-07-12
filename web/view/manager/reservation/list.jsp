@@ -13,7 +13,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
         <title>Reservations List</title>
-
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -22,7 +21,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
         <!-- Bootstrap core CSS -->
-        
+
 
 
         <!-- Additional CSS Files -->
@@ -37,8 +36,9 @@
                     "searching": true,
                     "paging": true,
                     'columnDefs': [
-                            {'orderable': false, 'targets': 3},
-                            {'orderable': false, 'targets': 6},
+                        {'orderable': false, 'targets': 3},
+                        {'orderable': false, 'targets': 6},
+                        {'orderable': false, 'targets': 7},
                     ],
                     columns: [
                         null,
@@ -47,7 +47,7 @@
                         null,
                         null,
                         {data: "Status", title: "Status", className: "dt-filter"},
-                        null
+                        null, null
                     ],
 
                     initComplete: function () {
@@ -117,7 +117,7 @@
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    
+
                     <a href="home" class="navbar-brand">Children Care</a>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
@@ -226,6 +226,7 @@
                             <th>Total Cost</th>
                             <th>Status</th>
                             <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -237,6 +238,7 @@
                             <th></th>
                             <th>Status </th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -247,13 +249,18 @@
                                 <td>${r.customer.fullName}</td>
                                 <td>${f.ratedStar} 
                                     <c:forEach items="${r.listReservationService}" var="s">
-                                        ${s.service.fullname} - ${s.quantity} <br>
+                                        <a href="../service/edit?sid=${s.service.id}">${s.service.fullname}</a> - ${s.quantity} <br>
                                     </c:forEach>
                                 </td>
                                 <td>${r.totalCost}</td>
                                 <td>${r.status.name}</td>
                                 <td><c:if test="${r.status.name == 'Submitted'}">
-                                    <button onclick="window.location.href='approve?id=${r.id}'">Approve</button>
+                                        <button id="${r.id}" <c:if test="${r.enough == true}">onclick="changeStatus(this)"</c:if><c:if test="${r.enough == false}">onclick="display_lowquantity(${r.id});"</c:if>>Approve</button>
+                                    </c:if>
+                                    
+                                </td>
+                                <td><c:if test="${r.status.name == 'Submitted'}">
+                                        <button onclick="display_modal(${r.id});">Reject</button>
                                     </c:if>
                                 </td>
                             </tr>
@@ -262,9 +269,103 @@
                 </table>
 
             </div>
+            
         </section>
 
+<div id="id01" class="container modal modal-dialog-centered">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-dialog-centered container" id="body" action="">
+    <div class="b1">
+        <div id="head-modal"><h4>Reject Reservation?</h4></div>
+      <p>Are you sure you want to reject this reservation?</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="reject()" class="deletebtn">Reject</button>
+      </div>
+    </div>
+  </form>
+</div>
+        
+<div id="notenough" class="container modal modal-dialog-centered">
+  <form class="modal-dialog-centered container" id="body" action="">
+    <div class="b1">
+        <div id="head-modal"><h3>!</h3><h4>Low Quantity</h4></div>
+      <p>The services supply is not enough for this reservation!</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('notenough').style.display='none'" class="deletebtn">OK</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Button trigger modal -->
+<style>
 
+    #body{
+        width: 40%;
+    }
+    .b1{
+        background-color: white;
+        text-align: center;
+        padding-top: 0;
+        padding-bottom: 30px;
+        border: #535ba0 solid;
+        margin-top: 40%;
+        border-top: white;
+    }
+    .b1 h4, p{
+        padding: 10px;
+        
+    }
+    
+    #notenough h3, h4{
+        display: inline-block;
+    }
+    #notenough h3{
+        color: red;
+    }
+    #head-modal{
+        background-color: #535ba0;
+        margin: 0;
+        border-top: #535ba0 solid;
+    }
+    h4{
+        text-color: black;
+    }
+    
+</style>
+<script>
+    function reject(){
+        document.getElementById('id01').style.display='none';
+        window.location.href='reject?id='.concat(current_rs);
+    }
+    var current_rs = 0;
+    function display_modal(id){
+        current_rs = id;
+        document.getElementById('id01').style.display='block';
+    }
+    
+    function display_lowquantity(id){
+        current_rs = id;
+        document.getElementById('notenough').style.display='block';
+    }
+    
+    function changeStatus(param) {
+                var id = param.id;
+                $.ajax({
+                    url: "approve",
+                    data: {id: id},
+                    success: function () {
+                        setInterval('location.reload()', 100); 
+                    }
+                            
+
+                });
+
+            }
+    
+</script>
 
 
 
@@ -331,13 +432,13 @@
         <script src="../../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        
+
         <script>
-    $('ul.nav li.dropdown').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-    }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-    });
+                                        $('ul.nav li.dropdown').hover(function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                        }, function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                                        });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -385,7 +486,7 @@
             
 
         </style>
-        
+
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
@@ -395,6 +496,12 @@
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
+        
+        <style>
+            a:hover{
+        color: blue;
+    }
+        </style>
     </body>
 
 </html>

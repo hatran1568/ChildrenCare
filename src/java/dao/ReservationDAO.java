@@ -774,9 +774,9 @@ public class ReservationDAO extends BaseDAO {
                     + "`status_id` = ? \n"
                     + "WHERE `id` = ?;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            status_id = (status.equals("Approved"))?22:20;
-            status_id = (status.equals("Rejected"))?23:20;
-            stm.setInt(1, 22);
+            if(status.equals("Approved")) status_id = 22;
+            if(status.equals("Rejected")) status_id = 23;
+            stm.setInt(1, status_id);
             stm.setInt(2, rid);
             stm.executeUpdate();
         } catch (SQLException ex) {

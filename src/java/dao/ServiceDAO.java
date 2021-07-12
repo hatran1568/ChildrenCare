@@ -334,7 +334,7 @@ public class ServiceDAO extends BaseDAO {
 
     }
 
-    public void substractServiceQuantity(int id, int quantity) {
+    public void subtractServiceQuantity(int id, int quantity) {
         try {
             Service s = getService(id);
             String sql = "UPDATE `swp`.`service`\n"
@@ -342,7 +342,8 @@ public class ServiceDAO extends BaseDAO {
                     + "`quantity` = ?\n"
                     + "WHERE `id` =?;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, s.getQuantity() - quantity);
+            int remaining = s.getQuantity() - quantity;
+            stm.setInt(1, remaining);
             stm.setInt(2, id);
             stm.executeUpdate();
         } catch (SQLException ex) {

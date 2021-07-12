@@ -436,6 +436,10 @@
         <url-pattern>/manager/reservation/approve</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ManagerReservationController</servlet-name>
+        <url-pattern>/manager/reservation/reject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ManagerServiceController</servlet-name>
         <url-pattern>/manager/service/list</url-pattern>
     </servlet-mapping>

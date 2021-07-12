@@ -34,8 +34,6 @@ public class ManagerReservationController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -55,6 +53,9 @@ public class ManagerReservationController extends HttpServlet {
                 break;
             case "/manager/reservation/approve":
                 approveReservation(request, response);
+                break;
+            case "/manager/reservation/reject":
+                rejectReservation(request, response);
                 break;
             default:
                 break;
@@ -85,47 +86,60 @@ public class ManagerReservationController extends HttpServlet {
     }// </editor-fold>
 
     private void showReservationList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         ReservationDAO reservationDB = new ReservationDAO();
         ArrayList<Reservation> reservations = reservationDB.getSubmittedReservations();
         request.setAttribute("reservations", reservations);
-        
+        for (Reservation reservation : reservations) {
+            reservation.setEnough(true);
+            ArrayList<ReservationService> re_services = reservation.getListReservationService();
+            for (ReservationService re_service : re_services) {
+                if(re_service.getQuantity() > re_service.getService().getQuantity()){
+                    reservation.setEnough(false);
+                    break;
+                }
+                
+            }
+        }
         request.getRequestDispatcher("../../view/manager/reservation/list.jsp").forward(request, response);
     }
-    
-    private void approveReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    private void approveReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("id"));
         ServiceDAO serviceDB = new ServiceDAO();
         ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(rid);
         ArrayList<ReservationService> re_services = reservation.getListReservationService();
-        
-        for (ReservationService rs : re_services) {
-            serviceDB.substractServiceQuantity(rs.getService().getId(), rs.getQuantity());
-        }
+
+        re_services.forEach((rs) -> {
+            serviceDB.subtractServiceQuantity(rs.getService().getId(), rs.getQuantity());
+        });
         reservationDB.setReservationStatus(rid, "Approved");
-        response.sendRedirect("list");
-        
+
     }
-    private void rejectReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        int rid = Integer.parseInt(request.getParameter("rid"));
+
+    private void rejectReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int rid = Integer.parseInt(request.getParameter("id"));
         ServiceDAO serviceDB = new ServiceDAO();
         ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(rid);
         reservationDB.setReservationStatus(rid, "Rejected");
-        
+
         response.sendRedirect("list");
-        
+
     }
-    private int checkQuantity(int rid) throws ServletException, IOException{
-        
+
+    private int checkQuantity(int rid) throws ServletException, IOException {
+
         ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(rid);
         ArrayList<ReservationService> re_services = reservation.getListReservationService();
         for (ReservationService rs : re_services) {
-            if(rs.getQuantity() < rs.getService().getQuantity()) return rs.getService().getId();
+            if (rs.getQuantity() < rs.getService().getQuantity()) {
+                return rs.getService().getId();
+            }
         }
-        
+
         return -1;
     }
 }
