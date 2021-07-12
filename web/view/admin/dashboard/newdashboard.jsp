@@ -66,13 +66,6 @@
                             Homepage
                         </div>
                     </a>
-
-                    <a href="#" class="item">
-                        <div>
-                            <i class="icon calendar alternate"></i>
-                            Calendar
-                        </div>
-                    </a>
                 </div>
             </div>
 
@@ -119,14 +112,10 @@
                 <div class="ui dropdown item">
                     <i class="user cirlce icon"></i>
                     <div class="menu">
-                        <a href="#" class="item">
+                        <a href="../../userprofile" class="item">
                             <i class="info circle icon"></i> Profile</a
                         >
-                        <a href="#" class="item">
-                            <i class="wrench icon"></i>
-                            Settings</a
-                        >
-                        <a href="#" class="item">
+                        <a href="../../logout" class="item">
                             <i class="sign-out icon"></i>
                             Logout
                         </a>
@@ -145,12 +134,10 @@
                         >
                         <div class="ui fluid card">
                             <div class="content">
-                                <div class="ui right floated header red">
-                                    <i class="icon shopping cart"></i>
-                                </div>
+                                
 
                                 <div style="text-align: center" class="header">
-                                    <h3 class="title">Reservation Statistics</h3>
+                                    <h4 style="margin-top: 0;" class="title">Reservation Statistics</h4>
 
                                     <canvas id="myChart" style=" width:100%;max-width:700px;height: 300px;"></canvas>
                                 </div>
