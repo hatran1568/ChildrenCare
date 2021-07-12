@@ -158,7 +158,7 @@
 
                             </c:if>
 
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
@@ -176,9 +176,12 @@
 
             </div>
         </section>
+
         <!-- End Banner -->
         <!-- section -->
+
         <div class="container" style=" margin-top: 25px;min-height: 700px; height: auto;">
+
             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
                 <a  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Edit Reservation  
@@ -241,34 +244,34 @@
                             <div class="twelve wide  field">
                                 <label>Name</label>
 
-                                <input readonly="true" value="${requestScope.reservation.receiver.fullNam}" type="text" name="fullname" placeholder="Bo Yates">
+                                <input readonly="true" value="${requestScope.reservation.receiver.fullName}" type="text" name="fullname" placeholder="Bo Yates">
 
                             </div>
                             <div class="four wide  field">
                                 <label>Gender</label>
 
-                                <select name="gender">
+                                <select disabled="disabled" name="gender">
                                     <option <c:if test="${requestScope.reservation.receiver.gender eq 'true'}">selected="true</c:if>" value="true">Male</option>
                                     <option <c:if test="${requestScope.reservation.receiver.gender eq 'false'}">selected="true</c:if>" value="false">Female</option>
 
 
-                                </select>
+                                    </select>
 
 
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="two fields">
-                            <div class="field">
-                                <label>Email</label>
+                            <div class="two fields">
+                                <div class="field">
+                                    <label>Email</label>
 
-                                <input value="${requestScope.reservation.receiver.email}" readonly="true" type="text" name="email" placeholder="Email@abc.com">
+                                    <input value="${requestScope.reservation.receiver.email}" readonly="true" type="text" name="email" placeholder="Email@abc.com">
 
                             </div>
                             <div class="field">
                                 <label>Mobile</label>
 
-                                <input value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
+                                <input readonly="true" value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
 
                             </div>
                         </div>
@@ -327,7 +330,9 @@
             </div>
             <div style="display: flex;" >
                 <h5 style="flex-grow: 1;min-width: 260px">Mobile : </h4>
+
                     <h5 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h5>
+
             </div>
 
             <h3>Service</h3> 

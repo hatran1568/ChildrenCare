@@ -197,6 +197,7 @@
                             </div>
                             <div class="extra content">
                                 <div onclick="window.location.href='../../manager/customer/list'" class="ui two buttons">
+
                                     <div class="ui teal button">More Info</div>
                                 </div>
                             </div>

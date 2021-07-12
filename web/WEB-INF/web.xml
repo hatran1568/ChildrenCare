@@ -88,6 +88,12 @@
         <servlet-name>BlogController</servlet-name>
         <servlet-class>controller.BlogController</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <servlet-class>controller.ManagerServiceController</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/details</url-pattern>
@@ -416,6 +422,24 @@
         <servlet-name>FeedbackController</servlet-name>
         <url-pattern>/manager/feedback/list</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/details</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
