@@ -1,0 +1,168 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 5, 2021, 6:43:17 PM
+    Author     : Tran Thi Nguyet Ha
+*/
+
+.banner_section {
+    width: 100%;
+    float: left;
+    padding-top: 50px;
+    padding-bottom: 90px;
+}
+
+.retailer_text {
+    width: 100%;
+    float: left;
+    font-size: 60px;
+    color: #470005;
+    padding-top: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.search_text {
+    width: 490px;
+    float: left;
+    font-size: 16px;
+    color: #0e0e0e;
+    margin-left: 0px;
+}
+
+.more_bt a {
+    width: 40%;
+    float: left;
+    font-size: 16px;
+    color: #fffdfd;
+    background-color: #470005;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 40px;
+}
+
+#my_slider .carousel-control-prev, #my_slider .carousel-control-next {
+    width: 65px;
+    height: 65px;
+    background: #1d1c24;
+    opacity: 1;
+    font-size: 30px;
+    color: #ffffff;
+    border-radius: 100%;
+}
+
+.image_1 {
+    width: 576px;
+    float: right;
+    height: 576px;
+    padding-right: 10px;
+}
+
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+    font-family: "Cabin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.section-title h2 {
+    font-size: 20px;
+    font-weight: 400;
+    border-bottom: 1px solid #222;
+    position: relative;
+    display: inline-block;
+}
+
+.post-entry-2 {
+    margin: 20px 0px;
+}
+
+.more {
+    text-transform: uppercase;
+    font-size: .83rem;
+}
+.post-entry-2 .contents {
+    width: 70%;
+    padding: 10px 20px;
+}
+.post-entry-2 .thumbnail {
+    background-size: cover;
+    background-position: center;
+    width: 30%;
+}
+.post-entry-2 .contents h2 {
+    font-size: 15px;
+}
+.post-meta {
+    font-size: .8rem;
+}
+
+.section-padding30 {
+    padding-top: 195px;
+    padding-bottom: 150px;
+}
+.categories-area .single-cat {
+    border: 1px solid #ddd;
+    padding: 52px 50px;
+    -webkit-transition: all .4s ease-out 0s;
+    -moz-transition: all .4s ease-out 0s;
+    -ms-transition: all .4s ease-out 0s;
+    -o-transition: all .4s ease-out 0s;
+    transition: all .4s ease-out 0s;
+    z-index: 1;
+    background: #ffff;
+    text-align: center;
+}
+.categories-area .single-cat .cat-cap p {
+    margin-bottom: 24px;
+    color: #57667e;
+    font-size: 16px;
+    -webkit-transition: all .2s ease-out 0s;
+    -moz-transition: all .2s ease-out 0s;
+    -ms-transition: all .2s ease-out 0s;
+    -o-transition: all .2s ease-out 0s;
+    transition: all .2s ease-out 0s;
+}
+.btn {
+    background: #2d3092;
+    padding: 27px 44px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 0px;
+    -moz-user-select: none;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-bottom: 0;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    z-index: 1;
+    border: 0;
+    overflow: hidden;
+    margin: 0;
+    margin-top: 60px;
+}
+
+.service-title{
+    font-size: 23px;
+    font-family: 'Roboto', sans-serif;
+    margin: 10px 0px;
+}
+
+h1{
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.site-section{
+    margin-bottom: 50px;
+}
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
