@@ -149,35 +149,44 @@
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
-
                                 <li class="dropdown">
-                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-
                             </c:if>
-
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
-
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
                                     <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </c:if>
                     </ul>
-
                 </div>
-
             </div>
         </section>
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin: 75px auto">
-            <table class="table">
+            <nav class="navbar navbar-light bg-light" style="margin: 0px 100px">
+                <form id="myForm" method="GET" action="list" class="form-inline">
+                    <input name="rid" value="${requestScope.rid}" hidden>
+                    Service:
+                    
+                    <select onchange="submit()" name="service">
+                        <option value="all">All</option>
+                        <c:forEach items="${requestScope.services}" var="s">
+                            <option value="${s.id}">${s.fullname}</option>
+                        </c:forEach>
+                    </select>
+                </form>
+                
+            </nav>
+            
+            <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
                         <td>Service</td>
@@ -315,7 +324,7 @@
         <style>
             .table{
                 margin-top: 40px;
-                border: none;
+                
 
             }
             #reservation-detail{
@@ -328,10 +337,18 @@
                 max-width: 300px;
                 height: auto;
             }
+            tr:hover{
+                background-color: lightgray;
+            }
             thead{
                 font-weight: bold;
                 font-size: 16px;
+                background-color: darkgrey !important;
             }
+            thead:hover{
+                background-color: darkgrey !important;
+            }
+            
         </style>
     </body>
 </html> 

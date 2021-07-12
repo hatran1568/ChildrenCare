@@ -73,7 +73,7 @@
                         <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
                         <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -116,8 +116,13 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -147,7 +152,7 @@
 
                                 <div class="dropdown-content">
                                     <p> <a href="userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="customer/changepassword">Change Password</a></p>
                                     <p> <a href="logout">Log Out</a></p>
                                 </div>
                             </div>

@@ -92,7 +92,7 @@ public class ReservationCompletionController extends HttpServlet {
         User user = userDB.getUser(reservation.getCustomer().getId());
         try {
             String content = "Your reservation has been submitted. Your doctor is Dr. " + assignStaff.getFullName() + ". Email: " + assignStaff.getEmail() + ". Mobile: " + assignStaff.getMobile() + ". Please complete the transaction by transfering the fees to the following bank account: ";
-            e.sendText(user, content);
+            e.sendText(user.getEmail(), content);
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +105,7 @@ public class ReservationCompletionController extends HttpServlet {
         
         User u = (User) request.getSession().getAttribute("user");
         request.getSession().removeAttribute("cart");
-        request.getRequestDispatcher("../view/customer/reservation/reservationcompletion.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/customer/reservation/reservationCompletion.jsp").forward(request, response);
     }
 
     /**

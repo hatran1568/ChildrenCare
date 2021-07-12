@@ -224,6 +224,116 @@ public class ServiceDAO extends BaseDAO {
         return -1;
     }
 
+    public void insert(Service s) {
+        try {
+            String sql = "INSERT INTO `swp`.`service`\n"
+                    + "(fullname,original_price,sale_price,thumbnail_link,category_id,description,details,updated_date,featured,status,quantity)\n"
+                    + "VALUES(?,?,?,?,?,?,?,NOW(),?,?,?);";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, s.getFullname());
+            stm.setFloat(2, s.getOriginalPrice());
+            stm.setFloat(3, s.getSalePrice());
+            stm.setString(4, s.getThumbnailLink());
+            stm.setInt(5, s.getCategory().getId());
+            stm.setString(6, s.getDescription());
+            stm.setString(7, s.getDetails());
+
+            stm.setBoolean(8, s.isFeatured());
+            stm.setBoolean(9, s.isStatus());
+            stm.setInt(10, s.getQuantity());
+
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void update(Service s) {
+        try {
+            String sql = "UPDATE `swp`.`service`\n"
+                    + "SET\n"
+                    + "fullname = ?,\n"
+                    + "original_price = ?,\n"
+                    + "sale_price = ?,\n"
+                    + "thumbnail_link = ?,\n"
+                    + "category_id= ?,\n"
+                    + "description = ?,\n"
+                    + "details= ?,\n"
+                    + "updated_date = now(),\n"
+                    + "featured = ?,\n"
+                    + "status = ?,\n"
+                    + "quantity=?\n"
+                    + "WHERE id = ?;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, s.getFullname());
+            stm.setFloat(2, s.getOriginalPrice());
+            stm.setFloat(3, s.getSalePrice());
+            stm.setString(4, s.getThumbnailLink());
+            stm.setInt(5, s.getCategory().getId());
+            stm.setString(6, s.getDescription());
+            stm.setString(7, s.getDetails());
+
+            stm.setBoolean(8, s.isFeatured());
+            stm.setBoolean(9, s.isStatus());
+            stm.setInt(10, s.getQuantity());
+            stm.setInt(11, s.getId());
+
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delete(int id) {
+        try {
+            String sql = "DELETE FROM service\n"
+                    + "WHERE id= ?;";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ArrayList<Service> getAllServices() {
+        ArrayList<Service> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * \n"
+                    + "FROM swp.service;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Service s = new Service();
+                ServiceCategory category = new ServiceCategory();
+                s.setId(rs.getInt("id"));
+                s.setFullname(rs.getString("fullname"));
+                s.setOriginalPrice(rs.getFloat("original_price"));
+                s.setSalePrice(rs.getFloat("sale_price"));
+                s.setThumbnailLink(rs.getString("thumbnail_link"));
+                category.setId(rs.getInt("category_id"));
+                s.setDescription(rs.getString("description"));
+                s.setDetails(rs.getString("details"));
+                s.setFeatured(rs.getBoolean("featured"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setQuantity(rs.getInt("quantity"));
+
+                s.setCategory(category);
+                list.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+
+    }
+
     public void substractServiceQuantity(int id, int quantity) {
         try {
             Service s = getService(id);
@@ -234,6 +344,7 @@ public class ServiceDAO extends BaseDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, s.getQuantity() - quantity);
             stm.setInt(2, id);
+            stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

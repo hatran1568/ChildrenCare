@@ -92,6 +92,11 @@
         <servlet-name>ManagerReservationController</servlet-name>
         <servlet-class>controller.ManagerReservationController</servlet-class>
     </servlet>
+
+    <servlet>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <servlet-class>controller.ManagerServiceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyReservationController</servlet-name>
         <url-pattern>/customer/reservation/details</url-pattern>
@@ -144,7 +149,31 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
+        <url-pattern>/customer/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/customer/change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/resetpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/resetoldpassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/resetoldpassword/change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/resetoldpassword/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -406,6 +435,23 @@
         <servlet-name>ManagerReservationController</servlet-name>
         <url-pattern>/manager/reservation/approve</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerServiceController</servlet-name>
+        <url-pattern>/manager/service/details</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

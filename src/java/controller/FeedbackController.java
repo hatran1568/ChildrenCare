@@ -10,6 +10,7 @@ import bean.Post;
 import bean.Service;
 import bean.Setting;
 import bean.Slider;
+import bean.User;
 import dao.FeedbackDAO;
 import dao.PostDAO;
 import dao.SettingDAO;
@@ -59,6 +60,7 @@ public class FeedbackController extends HttpServlet {
             out.println("<h1>Servlet FeedbackController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
+           
         }
     }
 

@@ -163,12 +163,9 @@ public class ManagerPostController extends HttpServlet {
     }
 
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part part = request.getPart("file");
-        String fileName = extractFileName(part);
-        // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-
-        part.write("/" + File.separator + fileName);
+        Post p = new Post();
+        
+        
         int pid = Integer.parseInt(request.getParameter("pid"));
         int categoryID = Integer.parseInt(request.getParameter("postCategory"));
         String title = request.getParameter("title");
@@ -181,8 +178,19 @@ public class ManagerPostController extends HttpServlet {
         PostDAO postDB = new PostDAO();
         Post oldPost = postDB.getPostById(pid);
 
-        Post p = new Post();
-        p.setThumbnailLink("assets/images/" + fileName);
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        // refines the fileName in case it is an absolute path
+        fileName = new File(fileName).getName();
+        if (fileName.trim().length()==0){
+            p.setThumbnailLink(oldPost.getThumbnailLink());
+        }else{
+            part.write("/" + File.separator + fileName);
+            p.setThumbnailLink("assets/images/" + fileName);
+            File file = new File("D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\" + oldPost.getThumbnailLink());
+            file.delete();
+        }
+        
         p.setTitle(title);
         PostCategory pc = new PostCategory();
         pc.setId(categoryID);
@@ -196,8 +204,7 @@ public class ManagerPostController extends HttpServlet {
         p.setAuthor(a);
         p.setContent(content);
         p.setId(pid);
-        File file = new File("D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\" + oldPost.getThumbnailLink());
-        file.delete();
+        
         postDB.updatePost(p);
         response.sendRedirect("details?pid=" + pid);
     }

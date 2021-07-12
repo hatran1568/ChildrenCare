@@ -97,7 +97,7 @@
                                             </form>
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
                             </div>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
                             <div id="register" class="modal fade" role="dialog">
@@ -112,14 +112,14 @@
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>
+                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
                                                 <input type="text" name="address" class="username form-control" placeholder="Address"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Register" />
                                             </form>
                                         </div>
                                     </div>
-                                </div>
+                                </div>  
                             </div>
 
                         </c:if>
@@ -149,29 +149,23 @@
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
-
                                 <li class="dropdown">
-                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-
                             </c:if>
-
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
-
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
                                     <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </c:if>
                     </ul>
-
                 </div>
-
             </div>
         </section>
         <!-- End Banner -->

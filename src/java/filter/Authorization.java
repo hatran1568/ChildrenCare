@@ -46,10 +46,12 @@ public class Authorization implements Filter {
                     chain.doFilter(Servletrequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                    return;
                 }
 
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+                return;
             }
 
         } //Manager Function
@@ -62,10 +64,12 @@ public class Authorization implements Filter {
                     chain.doFilter(Servletrequest, servletResponse);
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                    return;
                 }
 
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+                return;
             }
         } //Staff Function
         else if (url.startsWith("/staff")) {
@@ -75,12 +79,15 @@ public class Authorization implements Filter {
 
                 if (u.getRole().getName().equals("Manager") || u.getRole().getName().equals("Admin") || u.getRole().getName().equals("Staff")) {
                     chain.doFilter(Servletrequest, servletResponse);
+                    return;
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                    return;
                 }
 
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+                return;
             }
         } //Customer Function
         else if (url.startsWith("/customer")) {
@@ -90,17 +97,21 @@ public class Authorization implements Filter {
 
                 if (u.getRole().getName().equals("Manager") || u.getRole().getName().equals("Admin") || u.getRole().getName().equals("Staff") || u.getRole().getName().equals("Customer")) {
                     chain.doFilter(Servletrequest, servletResponse);
+                    return;
                 } else {
                     response.sendRedirect(request.getContextPath() + "/login?message=notpermission");
+                    return;
                 }
 
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?message=notlogin");
+                return;
             }
         } 
         //Public Function
         else {
             chain.doFilter(Servletrequest, servletResponse);
+            return;
         }
     }
 
