@@ -12,46 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/StaffExaminationController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Reservation.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/BaseDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/util/EmailVerify.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Service.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/MedicalExamination.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
-=======
-            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/FeedbackDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/tooplate-style.css</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/CartController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/newpassword.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerCustomerController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Feedback.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/DashboardController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/changepassword.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SettingDAO.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SettingController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/style.css</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/util/EmailVerify.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ReservationCompletionController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserProfileController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/StaffReservationController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/FeedbackController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/newdashboard.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/filter/Authorization.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/user/resetpassword.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/dashboard.jsp</file>
->>>>>>> e15b2a062e38ee3d72cca617047a3ec98aaaa3de
         </group>
     </open-files>
 </project-private>

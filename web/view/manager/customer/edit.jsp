@@ -34,7 +34,23 @@
 
         <!-- HEADER -->
 
+        <header>
+            <div class="container">
+                <div class="row">
 
+                    <div class="col-md-4 col-sm-5">
+                        <p>Welcome to a Professional Health Care</p>
+                    </div>
+
+                    <div class="col-md-8 col-sm-7 text-align-right">
+                        <span class="phone-icon"><i style="color:#4267b2" class="fa fa-phone"></i> 010-060-0160</span>
+                        <span class="date-icon"><i style="color:#4267b2" class="fa fa-calendar"></i> 6:00 AM - 10:00 PM (Mon-Fri)</span>
+                        <span class="email-icon"><i style="color:#4267b2" class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></span>
+                    </div>
+
+                </div>
+            </div>
+        </header>
 
         <!-- MENU -->
         <section class="navbar navbar-default navbar-static-top" role="navigation">
@@ -58,7 +74,7 @@
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                         <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -127,14 +143,14 @@
 
                             </c:if>
 
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
+                                    <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
