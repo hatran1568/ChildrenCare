@@ -23,6 +23,17 @@ public class Reservation {
     private float totalCost;
     private ArrayList<Service> listService;
     private ArrayList<ReservationService> listReservationService;
+    private boolean enough;
+
+    public boolean isEnough() {
+        return enough;
+    }
+
+    public void setEnough(boolean enough) {
+        this.enough = enough;
+    }
+    
+    
 
     public ArrayList<ReservationService> getListReservationService() {
         return listReservationService;

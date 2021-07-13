@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
             <url>src/java/controller/StaffExaminationController.java</url>
@@ -21,6 +22,7 @@
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/staff/reservation/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/homepage/homepage.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
+
         </group>
     </open-files>
 </project-private>
