@@ -263,7 +263,7 @@
                     </div>
                     <div class="four wide field">
                         <label></label>
-                        <div onclick="submit()" class="ui button" tabindex="0">Submit Feedback</div>  
+                        <div onclick="submit()" class="ui button" tabindex="0">Save</div>  
                     </div>
                 </div>
 

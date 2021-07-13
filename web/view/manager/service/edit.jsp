@@ -177,6 +177,7 @@
         <br>
         <br>
         <!-- Start  -->
+
         <div class="container" style="height: max-content; min-height: 700px;">
             <form action="edit" method="POST">
                 <input type="text" name="id" value="${requestScope.service.id}" hidden>
@@ -262,7 +263,16 @@
 
         <!-- End Footer -->
 
+
+
+
+
+        <!-- Start Footer -->
+
+        <!-- End Footer -->
+
         <footer id="footer" class="site-footer">
+
 
             <div class="container" >
                 <div class="row">

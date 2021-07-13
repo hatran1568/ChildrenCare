@@ -19,8 +19,6 @@ public class ServiceDAO extends BaseDAO {
 
     SettingDAO settingDB = new SettingDAO();
 
-
-
     public ArrayList<Service> getServices() {
         ArrayList<Service> list = new ArrayList<>();
         try {
@@ -334,5 +332,22 @@ public class ServiceDAO extends BaseDAO {
         }
         return list;
 
+    }
+
+    public void subtractServiceQuantity(int id, int quantity) {
+        try {
+            Service s = getService(id);
+            String sql = "UPDATE `swp`.`service`\n"
+                    + "SET\n"
+                    + "`quantity` = ?\n"
+                    + "WHERE `id` =?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            int remaining = s.getQuantity() - quantity;
+            stm.setInt(1, remaining);
+            stm.setInt(2, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

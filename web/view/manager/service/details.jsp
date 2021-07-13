@@ -269,87 +269,87 @@
                 </div>
             </div>
         </div>
-                    <hr />
+        <hr />
 
-                    <!-- end section -->
+        <!-- end section -->
 
-                    <!-- Start Footer -->
-                    <footer id="footer" class="site-footer">
+        <!-- Start Footer -->
+        <footer id="footer" class="site-footer">
 
-                        <div class="container" >
-                            <div class="row">
-                                <div class="col-md-8 col-sm-6 col-xs-12">
-                                    <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                                        <a href="#">Giangtt</a>.
-                                    </p>
-                                </div>
+            <div class="container" >
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
+                            <a href="#">Giangtt</a>.
+                        </p>
+                    </div>
 
-                                <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <ul class="social-icons">
-                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End Footer -->
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <ul class="social-icons">
+                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
 
 
 
-                    <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
+        <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
 
-                    <!-- ALL JS FILES -->
-                    <script src="assets/js/jquery.min.js"></script>
-                    <script src="assets/js/popper.min.js"></script>
-                    <script src="assets/js/bootstrap.min.js"></script>
-                    <!-- ALL PLUGINS -->
-                    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-                    <script src="assets/js/jquery.pogo-slider.min.js"></script>
-                    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-                    <script src="assets/js/slider-index.js"></script>
-                    <script src="assets/js/smoothscroll.js"></script>
-                    <script src="assets/js/form-validator.min.js"></script>
-                    <script src="assets/js/contact-form-script.js"></script>
-                    <script src="assets/js/isotope.min.js"></script>
-                    <script src="assets/js/images-loded.min.js"></script>
-                    <script src="assets/js/custom.js"></script>
+        <!-- ALL JS FILES -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!-- ALL PLUGINS -->
+        <script src="assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="assets/js/jquery.pogo-slider.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/slider-index.js"></script>
+        <script src="assets/js/smoothscroll.js"></script>
+        <script src="assets/js/form-validator.min.js"></script>
+        <script src="assets/js/contact-form-script.js"></script>
+        <script src="assets/js/isotope.min.js"></script>
+        <script src="assets/js/images-loded.min.js"></script>
+        <script src="assets/js/custom.js"></script>
 
-                    <c:if test="${empty sessionScope.mess}">
-                        <c:if test="${ not empty sessionScope.alert}">
-                            <script>
-        $(document).ready(function () {
-            let note = "${sessionScope.alert}"
-            alert(note);
+        <c:if test="${empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
+$(document).ready(function () {
+    let note = "${sessionScope.alert}"
+    alert(note);
 
-        });
-                            </script>
-                            <c:remove var="alert" scope="session" />
+});
+                </script>
+                <c:remove var="alert" scope="session" />
 
-                        </c:if>
-                    </c:if>
-                    <c:if test="${ not empty sessionScope.mess}">
-                        <script>
-                            $(document).ready(function () {
-                                let mess = "${sessionScope.mess}"
-                                alert(mess);
+            </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
 
-                            });
-                        </script>
-                        <c:remove var="mess" scope="session" />
-                    </c:if>
-                    <script>
-                        var loadFile = function (event) {
-                            var output = document.getElementById('output');
-                            output.src = URL.createObjectURL(event.target.files[0]);
-                            output.onload = function () {
-                                URL.revokeObjectURL(output.src) // free memory
-                            }
-                        };
-                    </script>
-                    </body>
-                    </html>
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
+        <script>
+            var loadFile = function (event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function () {
+                    URL.revokeObjectURL(output.src) // free memory
+                }
+            };
+        </script>
+    </body>
+</html>
 
 

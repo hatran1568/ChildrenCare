@@ -41,23 +41,6 @@ public class CartController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CartController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CartController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -263,9 +246,11 @@ public class CartController extends HttpServlet {
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         String reservation_id = "";
-        if(request.getSession().getAttribute("reservation_id") == null) 
+        if (request.getSession().getAttribute("reservation_id") == null) {
             reservation_id = (String) request.getSession().getAttribute("reservation_id");
-        else reservation_id = request.getSession().getAttribute("reservation_id").toString();
+        } else {
+            reservation_id = request.getSession().getAttribute("reservation_id").toString();
+        }
         int rid;
         int service_id = Integer.parseInt(request.getParameter("service_id"));
         ReservationDAO reservationDB = new ReservationDAO();
@@ -273,28 +258,32 @@ public class CartController extends HttpServlet {
         if (user == null) {
             user = new User();
             user.setId(-1);
-            request.getSession().setAttribute("user", user);
             if (reservation_id == null) {
                 rid = reservationDB.addPendingReservation(user);
                 Reservation reservation = reservationDB.getReservationById(rid);
                 Service service = serviceDB.getService(service_id);
                 reservationDB.addReservationService(reservation, service, 1);
                 request.getSession().setAttribute("reservation_id", rid);
+            } else if (reservation_id != null) {
+                rid = Integer.parseInt(reservation_id);
+                Reservation reservation = reservationDB.getReservationById(rid);
+                Service service = serviceDB.getService(service_id);
+                reservationDB.addReservationService(reservation, service, 1);
             }
         } else if (user.getId() == -1) {
             rid = Integer.parseInt(reservation_id);
             Reservation reservation = reservationDB.getReservationById(rid);
             Service service = serviceDB.getService(service_id);
             reservationDB.addReservationService(reservation, service, 1);
-        } else if(user.getId() > 0){
+        } else if (user.getId() > 0) {
             int pr_id = reservationDB.getPendingReservation(user);
-            if(pr_id == 0){
+            if (pr_id == 0) {
                 rid = reservationDB.addPendingReservation(user);
                 Reservation reservation = reservationDB.getReservationById(rid);
                 Service service = serviceDB.getService(service_id);
                 reservationDB.addReservationService(reservation, service, 1);
                 request.getSession().setAttribute("reservation_id", rid);
-            } else if(pr_id > 0){
+            } else if (pr_id > 0) {
                 rid = pr_id;
                 Reservation reservation = reservationDB.getReservationById(rid);
                 Service service = serviceDB.getService(service_id);
@@ -302,5 +291,6 @@ public class CartController extends HttpServlet {
                 request.getSession().setAttribute("reservation_id", rid);
             }
         }
-        response.sendRedirect("../service/list");}
+        response.sendRedirect("../service/list");
+    }
 }
