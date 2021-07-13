@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-
-
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ServiceController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/slider/list.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/ServiceDAO.java</file>
             <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/SliderController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/service/list.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/cart/cart.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/BlogController.java</file>
             <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/service/list2.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/UserProfileController.java</file>
-
-            
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ManagerReservationController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/PostDAO.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/ReservationDAO.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ManagerServiceController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/reservation/list.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/index.html</file>
         </group>
     </open-files>
 </project-private>

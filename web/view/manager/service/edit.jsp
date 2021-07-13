@@ -203,11 +203,7 @@
                 <td><input type="text" name="details" value="${requestScope.service.details}"</td>
 
             </tr>
-            <tr>
-                <td>Updated date </td>
-                <td><input type="date" name="updateddate" value="${requestScope.service.updatedDate}"</td>
-
-            </tr>
+            
             <tr>
                 <td>Featured </td>
                 <td><input type="text" name="featured"value="${requestScope.service.featured}" placeholder="Status"                
