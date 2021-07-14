@@ -269,7 +269,7 @@
                                 <td>${f.status.name}</td>
 
                                 <td><a href="details?id=${f.id}"><i class="fas fa-eye"></i></a></td>
-                                <td><a href="edit?id=${a.id}"><i class="fas fa-pen"></i></a></td>
+                                <td><a href="details?id=${f.id}"><i class="fas fa-pen"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

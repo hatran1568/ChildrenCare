@@ -33,7 +33,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\HP\\OneDrive\\Desktop\\ite3\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
 @WebServlet(name = "FeedbackController", urlPatterns = {"/feedback"})
 public class FeedbackController extends HttpServlet {
 
@@ -201,7 +201,7 @@ public class FeedbackController extends HttpServlet {
         request.getRequestDispatcher("../../view/manager/feedback/details.jsp").forward(request, response);
     }
 
-    protected void updateStatus(HttpServletRequest request, HttpServletResponse response) {
+    protected void updateStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("fid");
         int fid = Integer.parseInt(id);
         FeedbackDAO feedbackDB = new FeedbackDAO();
@@ -209,6 +209,7 @@ public class FeedbackController extends HttpServlet {
         Setting s = new Setting();
         s.setId(fid);
         feedbackDB.updateStatus(fid, s);
+        response.sendRedirect("list");
     }
 
     protected void showFeedbackList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
