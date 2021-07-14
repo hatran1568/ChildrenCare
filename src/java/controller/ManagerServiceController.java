@@ -204,13 +204,12 @@ public class ManagerServiceController extends HttpServlet {
             throws ServletException, IOException {
         int id= Integer.parseInt(request.getParameter("sid"));
         String fullname= request.getParameter("fullname");
-        float originalprice= Integer.parseInt(request.getParameter("originalprice")) ;
-        float saleprice= Integer.parseInt(request.getParameter("saleprice")) ;
+        float originalprice= Float.parseFloat(request.getParameter("originalprice")) ;
+        float saleprice= Float.parseFloat(request.getParameter("saleprice")) ;
         String thumbnaillink= request.getParameter("thumbnaillink");
         int categoryid= Integer.parseInt(request.getParameter("categoryid")) ;
         String description= request.getParameter("description");
         String details= request.getParameter("details");
-        Date updateddate= Date.valueOf(request.getParameter("updateddate"));
         boolean featured=Boolean.parseBoolean(request.getParameter("featured")) ;
         boolean status= Boolean.parseBoolean(request.getParameter("status")) ;
         int quantity= Integer.parseInt(request.getParameter("quantity"));
@@ -225,7 +224,6 @@ public class ManagerServiceController extends HttpServlet {
         ServiceCategory sc= new ServiceCategory();
         sc.setId(categoryid);
         
-        s.setUpdatedDate(updateddate);
         s.setStatus(status);
         s.setFullname(fullname);
         s.setQuantity(quantity);
