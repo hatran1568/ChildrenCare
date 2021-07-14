@@ -248,7 +248,8 @@ public class SliderController extends HttpServlet {
         File storeFile = new File(pathName);
         fileOutputStream  = new FileOutputStream(pathName);
         fileOutputStream.write(b);
-
+        inputStream.close();
+        fileOutputStream.close();
         String tilte = request.getParameter("title");
         String backlink = request.getParameter("backlink");
         String note = request.getParameter("note");
@@ -284,7 +285,8 @@ public class SliderController extends HttpServlet {
         File storeFile = new File(pathName);
         fileOutputStream  = new FileOutputStream(pathName);
         fileOutputStream.write(b);
-
+        inputStream.close();
+        fileOutputStream.close();
         int id = Integer.parseInt(request.getParameter("rid"));
 
         String tilte = request.getParameter("title");
