@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
         <file>
             <url>src/java/controller/StaffExaminationController.java</url>
@@ -15,14 +14,6 @@
         <group>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/BaseDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/StaffExaminationController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReceiverDAO.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/staff/reservation/details.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/homepage/homepage.jsp</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
-
         </group>
     </open-files>
 </project-private>
