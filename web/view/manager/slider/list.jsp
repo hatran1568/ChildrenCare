@@ -19,6 +19,9 @@
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" integrity="sha512-BMbq2It2D3J17/C7aRklzOODG1IQ3+MHw3ifzBHMBwGO/0yUqYmsStgBjI0z5EYlaDEFnvYV7gNYdD3vFLRKsA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -26,12 +29,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        <script>
-
-
-          
-
-        </script>
+ 
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -194,7 +192,7 @@
                 <button type="button" class="btn btn-success"><a href="add">Add Slider </a> </button>
             </nav>
 
-            <table class="table table-striped">
+                    <table id="myTable"class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Image</th>
@@ -206,7 +204,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${requestScope.list}" var ="list">
+                    <c:forEach items="${requestScope.all}" var ="list">
                         <tr>
                             <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
                             <td>${list.id}</td>
@@ -222,14 +220,11 @@
             </table>      
         </div>
 
-        <div id="pagination" class="pagination"></div>
+       
 
 
 
-        <script>
-            generatePagger("pagination",${requestScope.index},${requestScope.totalPage}, 2,search);
-        </script>
-
+    
 
 
 
@@ -312,7 +307,55 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
+<script>
+                $(document).ready(function () {
+                    $("#myTable").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        columns: [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            {data: "Status", title: "Status", className: "dt-filter"},
+                            null,
+                            null,
+                        ],
+                        'columnDefs': [
+                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
+                            {'orderable': false, 'targets' : [4,5,6,7]},
+                        ],
+                        "bInfo" : false,
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
+                });
+            </script> 
         <script>
+            
             function generatePagger(id, pageindex, totalpage, gap, page)
             {
                 var container = document.getElementById(id);

@@ -58,7 +58,7 @@ public class SliderController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+   
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -131,11 +131,14 @@ public class SliderController extends HttpServlet {
                 ? count / 12
                 : count / 12 + 1;
         list = sliderDB.getSliderPagination(index, 12);
+        ArrayList<Slider> allList = new ArrayList<Slider>();
+        allList = sliderDB.getAllSliders();
+        request.setAttribute("all", allList);
         request.setAttribute("list", list);
         request.setAttribute("totalPage", totalpage);
         request.setAttribute("index", index);
         request.setAttribute("url", "list");
-        request.getRequestDispatcher("../../view/manager/slider/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/slider/newlist.jsp").forward(request, response);
     }
 
     public void changeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -245,7 +248,7 @@ public class SliderController extends HttpServlet {
         File test = getFolderUpload();
         String pathName = getFolderUpload()+"\\" + fileName;
         System.out.println(fileName);
-        File storeFile = new File(pathName);
+        
         fileOutputStream  = new FileOutputStream(pathName);
         fileOutputStream.write(b);
         inputStream.close();
@@ -302,7 +305,7 @@ public class SliderController extends HttpServlet {
         s.setTitle(tilte);
         SliderDAO sliDB = new SliderDAO();
         sliDB.getSliderByID(id);
-
+        
         File file = new File(getFolderUpload()+"\\"  + sliDB.getSliderByID(id).getImageLink());
         file.delete();
         sliDB.updateSlider(s);

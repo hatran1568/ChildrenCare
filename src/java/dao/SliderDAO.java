@@ -55,6 +55,28 @@ public class SliderDAO extends BaseDAO {
         }
         return slider;
     }
+    
+     public ArrayList<Slider> getAllSliders() {
+        ArrayList<Slider> slider = new ArrayList<>();
+        try {
+            String sql = "Select id, title, image_link, backlink, status, notes from slider S";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Slider s = new Slider();
+                s.setId(rs.getInt("id"));
+                s.setTitle(rs.getString("title"));
+                s.setImageLink(rs.getString("image_link"));
+                s.setBacklink(rs.getString("backlink"));
+                s.setStatus(rs.getBoolean("status"));
+                s.setNotes(rs.getString("notes"));
+                slider.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SliderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return slider;
+    }
 
     public ArrayList<Slider> getSliderPagination(int pageindex, int pagesize) {
         try {

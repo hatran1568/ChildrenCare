@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Dashboard</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -101,7 +101,7 @@
                     <i class="sidebar icon"></i>
                 </a>
                 <a href="#" class="header item">
-                    Semantic UI
+                    ChildrenCare
                 </a>
             </div>
 
@@ -139,7 +139,7 @@
                                 <div style="text-align: center" class="header">
                                     <h4 style="margin-top: 0;" class="title">Reservation Statistics</h4>
 
-                                    <canvas id="myChart" style=" width:100%;max-width:700px;height: 300px;"></canvas>
+                                    <canvas id="myChart" style=" width:100%;max-width:700px;height: 315px;"></canvas>
                                 </div>
                             </div>
                             <div class="extra content">
@@ -157,12 +157,14 @@
                                                                <div style="height: max-content; min-height: 350px ;text-align: center" class="header">
                                     <h4 class="title">Total Revenue ${requestScope.sum}</h4>
                                     <ul style="list-style-type: none;">
+                                        <li><br></li>
                                         <c:forEach items="${requestScope.service}" var="list">
                                             <li>
                                                 ${list.fullname} : ${requestScope.revernue[list.id -1]}
                                             </li>
                                         </c:forEach>
                                     </ul>
+                                    
 
                                 </div>
                             </div>
@@ -332,6 +334,7 @@
                     }
                     }
             });</script>
+ 
         <script>
             $(document).ready(function () {
 
