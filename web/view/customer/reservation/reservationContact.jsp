@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
@@ -175,7 +175,7 @@
                     <label for="name">Full name</label>
                     <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}" required>
                     <div class="invalid-feedback">
-                        Please choose a username.
+                        Please enter your name.
                     </div>
                 </div>
                 <div class="form-group">
@@ -188,18 +188,27 @@
                         <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
                         <label class="form-check-label" for="inlineRadio2">Female</label>
                     </div>
+                    <div class="invalid-feedback">
+                        Please choose a gender.
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}">
+                            <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}" required>
+                        </div>
+                        <div class="invalid-feedback">
+                        Please enter your email.
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}">
+                            <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}" required>
+                        </div>
+                        <div class="invalid-feedback">
+                        Please enter your phone number.
                         </div>
                     </div>
                 </div>
@@ -207,6 +216,9 @@
                     <label for="address">Address</label>
                     <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}" required>
                 </div>
+                <div class="invalid-feedback">
+                        Please enter your address.
+                        </div>
                 <div class="form-group">
                     <label for="checkup-time">Checkup time</label>
                     <input type="date" name="checkup-time" id="datepicker" width="276" required />

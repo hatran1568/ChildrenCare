@@ -206,7 +206,7 @@ public class UserController extends HttpServlet {
         User u = new User();
         u.setEmail(request.getParameter("email"));
         u.setAddress(request.getParameter("address"));
-        u.setGender(Boolean.parseBoolean(request.getParameter("gender")));
+        u.setGender(request.getParameter("gender").equals("male"));
         u.setFullName(request.getParameter("full-name"));
         u.setImageLink(request.getParameter("image-link"));
         //Generate a random password with 9 numbers in the range of 0 to 9
@@ -230,7 +230,7 @@ public class UserController extends HttpServlet {
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;
         try {
-            e.sendText(userDB.getUserByEmail(request.getParameter("email")).getEmail(), emailContent);
+            e.sendText(u.getEmail(), emailContent);
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }

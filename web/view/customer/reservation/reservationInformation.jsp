@@ -180,7 +180,7 @@
         <!-- End Banner -->
         <!-- section -->
 
-        <div class="container" style=" margin-top: 25px;min-height: 700px; height: auto;">
+        <div class="container" style=" margin-top: 25px;margin-bottom: 25px;min-height: 700px; height: auto;">
 
             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
                 <a  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -191,53 +191,9 @@
                 </a>
             </c:if>
 
-            <div class="ui grid">
+            <div style="margin-top:25px; " class="ui grid">
 
-                <div class="eight wide column">
-                    <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
-                        <h3 class="ui dividing header">Contact Information</h3>
-                        <div class="two fields">
-                            <div class="twelve wide  field">
-                                <label>Name</label>
-
-                                <input readonly="true" value="" type="text" name="fullname" placeholder="Bo Yates">
-
-                            </div>
-                            <div class="four wide  field">
-                                <label>Gender</label>
-
-                                <select name="gender">
-                                    <option selected="true" value="true">Male</option>
-                                    <option value="false">Female</option>
-
-
-                                </select>
-
-
-                            </div>
-                        </div>
-
-                        <div class="two fields">
-                            <div class="field">
-                                <label>Email</label>
-
-                                <input  type="text" name="email" placeholder="Email@abc.com">
-
-                            </div>
-                            <div class="field">
-                                <label>Mobile</label>
-
-                                <input  type="text" name="mobile" placeholder="01234456789">
-
-                            </div>
-                        </div>
-
-
-
-
-                    </form>
-                </div>
-                <div class="eight wide column">
+                <div style="margin: 0 auto" class="twelve wide column">
                     <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
                         <h3 class="ui dividing header">Contact Information</h3>
                         <div class="two fields">
@@ -284,57 +240,54 @@
 
 
             </div>
+             <div style="margin-top:25px;" class="ui grid">
 
-            <h3>Reservation</h3>
-            <table class="table" id="reservation-detail">
-                <thead  class="thead-dark">
-                    <tr>
-                        <td class="col-md-1">Id</td>
-                        <td class="col-md-2">Date</td>
-                        <td class="col-md-2">Time to check up</td>
-                        <td class="col-md-2">Status</td>
-                        <td class="col-md-2">Total Cost</td>
+                <div style="margin: 0 auto" class="twelve wide column">
+                    <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
+                        <h3 class="ui dividing header">Contact Information</h3>
+                        <div class="two fields">
+                            <div class="twelve wide  field">
+                                <label>Reservation Date</label>
 
+                                <input readonly="true" value="${reservation.reservationDate}" type="text" name="fullname" placeholder="Bo Yates">
 
-
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td class="col-md-1">${reservation.id}</td>
-                        <td  class="col-md-2"> <p><input  class="date" type="date" value="${reservation.reservationDate}" readonly="true"></p></td>
-                        <td class="col-md-2"><input class="date" type="date" value="${reservation.checkupTime}" readonly="true"></td>
-                        <td class="col-md-2">${reservation.status.name}</td>
-                        <td class="col-md-2">${reservation.totalCost}</td>  
+                            </div>
+                            <div class="four wide  field">
+                                <label>Status</label>
+                                <input readonly="true" value="${reservation.status.name}" type="text" name="fullname" placeholder="Bo Yates">
+                               
 
 
-                    </tr>
+                            </div>
+                        </div>
+
+                        <div class="two fields">
+                            <div class="field">
+                                <label>Checkup Time</label>
+
+                                 <input readonly="true" value="${reservation.checkupTime}" type="text" name="fullname" placeholder="Bo Yates">
+
+                            </div>
+                            <div class="field">
+                                <label>Total Cost</label>
+
+                                <input value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
+
+                            </div>
+                        </div>
 
 
-                </tbody>
-            </table>
 
-            <h3>Receiver</h3>
 
-            <div style="display: flex;" >
-                <h5 style="flex-grow: 1;min-width: 260px">Name : </h5>
-                <h5 style="flex-grow: 4">${requestScope.reservation.receiver.fullName}</h5>
-            </div>
-            <div style="display: flex;" >
-                <h5 style="flex-grow: 1;min-width: 260px">Gender : </h5>
-                <h5 style="flex-grow: 4"> <c:if test="${requestScope.reservation.receiver.gender eq 'true'}">Male</c:if><c:if test="${requestScope.reservation.receiver.gender eq 'false'}">Female</c:if></h5>
-                </div>
-                <div style="display: flex;" >
-                    <h5 style="flex-grow: 1;min-width:  260px">Email : </h5>
-                        <h5 style="flex-grow: 4">${requestScope.reservation.receiver.email}</h5>
-            </div>
-            <div style="display: flex;" >
-                <h5 style="flex-grow: 1;min-width: 260px">Mobile : </h4>
+                    </form>
+                
+                
 
-                    <h5 style="flex-grow: 4">${requestScope.reservation.receiver.mobile}</h5>
 
             </div>
+            </div>
 
+           
             <h3>Service</h3> 
 
 

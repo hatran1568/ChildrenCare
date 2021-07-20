@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Settings List</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -191,7 +191,7 @@
             <div class="main-content">
                 <div class="container-fluid">
                     <br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
 
                             <div>
                                 <button onclick="window.location.href = 'new'" style="margin: 10px; color: #d4d4d4; background-color: #333333; border-radius: 10px; width: 15%; font-size: 15px">Add New Settings</button>

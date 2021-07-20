@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Setting Details</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -194,30 +194,30 @@
             <div class="main-content">
                 <div class="container-fluid">
                             <br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Setting Information</div>
+                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Details</div>
                             <div>
                                 <a href="edit?id=${requestScope.setting.id}"><button style="margin: 10px; color: #d4d4d4; background-color: #333333; border-radius: 10px; width: 15%; font-size: 15px">Edit Setting Information</button></a>
                             </div>
                             <form>
                                 <br><div class="form-group">
-                                    <label for="id">Setting ID</label>
-                                    <input type="text" class="form-control" name="id" value="${requestScope.setting.id}" readonly>
+                                    <div for="id">Setting ID</div>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.setting.id}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <input type="text" class="form-control" name="type" value="${requestScope.setting.type}" readonly>
+                                    <div for="type">Type</div>
+                                    <input type="text" class="form-control" name="type" value="${requestScope.setting.type}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}" readonly>
+                                    <div for="name">Name</div>
+                                    <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" class="form-control" name="description" value="${requestScope.setting.description}" readonly>
+                                    <div for="description">Description</div>
+                                    <input type="text" class="form-control" name="description" value="${requestScope.setting.description}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" class="form-control" name="status" value="${requestScope.setting.status}" readonly>
+                                    <div for="status">Status</div>
+                                    <input type="text" class="form-control" name="status" value="${requestScope.setting.status}" readonly style="width: 35%; display: inline">
                                 </div>
                             </form>
                         </div>

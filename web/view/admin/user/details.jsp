@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>User Details</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -198,41 +198,41 @@
                             <div>
                                 <a href="edit?id=${requestScope.user.id}"><button style="margin: 10px; color: #d4d4d4; background-color: #333333; border-radius: 10px; width: 15%; font-size: 15px">Edit user Information</button></a>
                             </div>
-                            <br><img src="${requestScope.user.imageLink}" alt="User Avatar" style="width: 15%;">
+                            <br><img src="../../${requestScope.user.imageLink}" alt="User Avatar" style="width: 15%;">
                             <form>
                                 <div class="form-group">
-                                    <label for="id">User ID</label>
-                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
+                                    <div for="id">User ID</div>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly style="width: 35%; display: inline">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                                    <div for="email">Email</div>
+                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly style="width: 35%; display: inline">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="full-name">Full name</label>
-                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
+                                    <div for="full-name">Full name</div>
+                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly style="width: 35%; display: inline">
                                 </div>
                                     
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <input type="text" class="form-control" name="gender" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
+                                    <div for="gender">Gender</div>
+                                    <input type="text" class="form-control" name="gender" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly style="width: 35%; display: inline">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="mobile">Mobile</label>
-                                    <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
+                                    <div for="mobile">Mobile</div>
+                                    <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly style="width: 35%; display: inline">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
+                                    <div for="address">Address</div>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly style="width: 35%; display: inline">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="address">Role</label>
-                                    <input type="text" class="form-control" name="address" value="${requestScope.user.role.name}" readonly>
+                                    <div for="address">Role</div>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.role.name}" readonly style="width: 35%; display: inline">
                                 </div>
                             </form>
                         </div>
