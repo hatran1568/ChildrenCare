@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Customer list</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -14,23 +14,16 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        
-        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../assets/css/animate.css">
-        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../assets/css/animate.css">
+        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="../assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+        <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="../../assets/css/custom.css" />
+        
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -39,6 +32,7 @@
 
 
         <!-- HEADER -->
+        
         <header>
             <div class="container">
                 <div class="row">
@@ -57,19 +51,21 @@
             </div>
         </header>
 
-
         <!-- MENU -->
         <section class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container">
+
                 <div class="navbar-header">
                     <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
                         <span class="icon icon-bar"></span>
                     </button>
+
                     <!-- lOGO TEXT HERE -->
                     <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
+
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -120,13 +116,7 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
-                                    </div>
-                                </li>
+                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -158,8 +148,8 @@
 
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
-                                    <p> <a href="../../logout">Log Out</a></p>
+                                    <p> <a href="#">Change Password</a></p>
+                                    <p> <a href="#">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -169,97 +159,44 @@
 
             </div>
         </section>
+
+
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="margin-top: 70px">
-            <h3 style="text-align: center">Receiver info</h3>
-            <form action="contact/addreceiver" method="POST" id="receiver-info">
-                <input type="text" name="rid" value="${requestScope.reservation.id}" hidden>
-                <div class="form-group">
-                    <label for="name">Full name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}">
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender:    </label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if>>
-                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if>>
-                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" value="${requestScope.user.email}">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}">
-                </div>
-                <div class="form-group">
-                    <label for="checkup-time">Checkup time</label>
-                    <input type="date" name="checkup-time" id="datepicker" width="276" />
-                </div>
-            </form>
-            <br>
-            <h3 style="text-align: center">Service info</h3>
-            <c:if test="${not empty requestScope.services}">
-
-                <table class="table" id="reservation-detail">
-                    <thead  class="thead-dark">
-                        <tr >
-                            <td >Id</td>
-                            <td >Title</td>
-                            <td >Unit price</td>
-                            <td > Quantity</td>
-                            <td>Cost</td>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="list" items="${requestScope.services}">
-                            <tr >
-                                <td>${list.service.id}</td>
-                                <td>${list.service.fullname}</td>
-                                <td>${list.unitPrice}</td>
-                                <td>${list.quantity}</td>
-                                <td>${list.unitPrice * list.quantity} </td>
-
-                            </tr>
-                        </c:forEach>
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
+               <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new Slider</button>
+            <table id="customers" class="table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <td>Image</td>
+                        <td>ID</td>
+                        <td>Title</td>
+                        <td>BackLink</td>
+                        <td >Status</td>
+                      
+                        <td>Details</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${requestScope.all}" var="list">
                         <tr>
-                            <td colspan="4" style="text-align: right">Total cost</td>
-                            <td style="font-size: 18px">${requestScope.totalCost}</td>
+                            <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
+                            <td>${list.id}</td>
+                            <td>${list.title}</td>
+                            <td>${list.backlink}</td>
+                            <td >${list.status}</td>
+                          
+                            <td><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
                         </tr>
-                    </tbody>
-                </table>
-
-
-            </c:if>
-            <c:if test="${empty requestScope.services}">
-
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="service/list">More Service</a>
-                </c:if>
-                <button type="button" class="btn btn-primary pull-left" onclick="window.location.href = '../cart/list?rid=${requestScope.reservation.id}'">Change</button>
-
-                <button type="button" class="btn btn-primary pull-right" onclick="submitReceiver()">Submit</button>
-
+                    </c:forEach>
+                </tbody>
+            </table>
+         
         </div>
 
 
+        <!-- Start Footer -->
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
@@ -304,7 +241,7 @@
 
                 </div>
             </div>
-        </footer> 
+        </footer>
 
         <!-- SCRIPTS -->
         <script src="../../assets/js/jquery.js"></script>
@@ -315,14 +252,14 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                    $('ul.nav li.dropdown').hover(function () {
-                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                    }, function () {
-                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -346,20 +283,49 @@
             <c:remove var="mess" scope="session" />
         </c:if>
         <script>
-            $('#datepicker').datepicker();
-        </script>
-        <style>
-            #reservation-detail{
-                width:80%; 
-                margin-top: 50px; 
-                margin-left: 10%;
-                margin-right: 10%;
-            }
-        </style>
-        <script>
-            function submitReceiver() {
-                document.getElementById("receiver-info").submit();
-            }
-        </script>
+                $(document).ready(function () {
+                    $("#customers").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        "bLengthChange": false,
+                        columns: [
+                            null,
+                            null,
+                            null,
+                           null,
+                            {data: "Status", title: "Status", className: "dt-filter"},
+                            
+                            null,
+                            
+                        ],
+                        "bInfo" : false,
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
+                });
+            </script> 
+            
     </body>
 </html> 

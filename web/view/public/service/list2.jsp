@@ -13,8 +13,8 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-alpha2/css/bootstrap-grid.min.css" integrity="sha512-Jn+RkWIYxM5Cn3mfAWyV7CgxFnDFxe3EBh93974boKdhcAUE9TSr7qJTJNlzt+J2wG6a3sLYnEyRF+1/o01u9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
         <script src="../assets/js/jquery.js"></script>
         
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
