@@ -226,7 +226,7 @@
 
                         <div class="form-group">
                             <label for="checkup-time">Checkup time</label>
-                            <input type="text" class="form-control" name="checkup-time" id="datepicker" required/>
+                            <input type="text" data-date-format="dd/mm/yyyy" class="form-control" name="checkup-time" id="datepicker" autocomplete="off" required/>
                             <div class="invalid-feedback">
                                 Please enter your preferred checkup time.
                             </div>
@@ -345,7 +345,10 @@
                     }, function () {
                         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                     });
-                    $('.datepicker').datepicker();
+                    
+                    $('.datepicker').datepicker({
+                        format: 'dd/mm/yyyy'
+                    });
 
         </script>
         <c:if test="${empty sessionScope.mess}">
