@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Add a new User</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -198,42 +198,40 @@
                             <br>
                             <form action="../../admin/user/insert" method="POST" >
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" placeholder="email@domain">
+                                    <label for="email">Email</label><br>
+                                    <input type="email" class="form-control" name="email" placeholder="email@domain" style="width: 35%; display: inline;">
                                 </div>
                                 <div class="form-group">
-                                    <label for="full-name">Full Name</label>
-                                    <input type="text" class="form-control" name="full-name" placeholder="Enter name">
+                                    <label for="full-name">Full Name</label><br>
+                                    <input type="text" class="form-control" name="full-name" placeholder="Enter name" style="width: 35%; display: inline;">
                                 </div>
                                     <!--<input type="text" class="form-control" name="password">-->
 <!--                                    <input type="text" class="form-control" name="image-link" hidden>-->
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" name="gender">
-                                        <option value="true" >Male</option>
-                                        <option value="false" >Female</option>
-                                        </select>
+                                    <label for="gender" style="margin-right: 3%">Gender</label>
+                                    Male <input type="radio" name="gender" value="male" style="margin-right: 3%">
+                                    Female <input type="radio" name="gender" value="female">
                                 </div>
                                 <div class="form-group">
-                                        <label for="mobile">Mobile</label>
-                                        <input type="text" class="form-control" name="mobile" placeholder="123-45-678">
+                                        <label for="mobile">Mobile</label><br>
+                                        <input type="text" class="form-control" name="mobile" placeholder="123-45-678" style="width: 35%; display: inline;">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" placeholder="Enter Address">
+                                    <label for="address">Address</label><br>
+                                    <input type="text" class="form-control" name="address" placeholder="Enter Address" style="width: 35%; display: inline;">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <select class="form-control" name="role">
+                                    <label for="role">Role</label><br>
+                                    <select class="form-control" name="role" style="width: 35%; height: 7%; display: inline">
                                         <c:forEach items="${requestScope.roles}" var="r">
                                             <option value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Status">Status</label>
-                                    <select class="form-control" name="status">
+                                    <label for="Status">Status</label><br>
+                                    <select class="form-control" name="status" style="width: 35%; height: 7%; display: inline">
                                         <option value="13" >Not Verified</option>
                                         <option value="14" >Active</option>
                                         <option value="15" >Contact</option>
