@@ -182,14 +182,7 @@
 
         <div class="container" style=" margin-top: 25px;margin-bottom: 25px;min-height: 700px; height: auto;">
 
-            <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
-                <a  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Edit Reservation  
-                </a>
-                <a  class="collapsebtn btn btn-primary"  href="../../customer/reservation/cancel?id=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
-                    Cancel Reservation 
-                </a>
-            </c:if>
+           
 
             <div style="margin-top:25px; " class="ui grid">
 
@@ -227,7 +220,7 @@
                             <div class="field">
                                 <label>Mobile</label>
 
-                                <input readonly="true" value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
+                                <input readonly="true" value="${reservation.receiver.mobile}" type="text" name="mobile" placeholder="01234456789">
 
                             </div>
                         </div>
@@ -244,15 +237,15 @@
 
                 <div style="margin: 0 auto" class="twelve wide column">
                     <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
-                        <h3 class="ui dividing header">Contact Information</h3>
+                        <h3 class="ui dividing header">Reservation Information</h3>
                         <div class="two fields">
-                            <div class="twelve wide  field">
+                            <div class="eight wide  field">
                                 <label>Reservation Date</label>
 
-                                <input readonly="true" value="${reservation.reservationDate}" type="text" name="fullname" placeholder="Bo Yates">
+                                <input readonly="true" value="${reservation.reservationDate}" type="date" name="fullname" placeholder="Bo Yates">
 
                             </div>
-                            <div class="four wide  field">
+                            <div class="eight wide  field">
                                 <label>Status</label>
                                 <input readonly="true" value="${reservation.status.name}" type="text" name="fullname" placeholder="Bo Yates">
                                
@@ -265,13 +258,13 @@
                             <div class="field">
                                 <label>Checkup Time</label>
 
-                                 <input readonly="true" value="${reservation.checkupTime}" type="text" name="fullname" placeholder="Bo Yates">
+                                <input readonly="true" value="${reservation.checkupTime}" type="date" name="fullname" placeholder="Bo Yates">
 
                             </div>
                             <div class="field">
                                 <label>Total Cost</label>
 
-                                <input value="${reservation.totalCost}" type="text" name="mobile" placeholder="01234456789">
+                                <input value="${reservation.totalCost}" readonly="true" type="text" name="mobile" placeholder="01234456789">
 
                             </div>
                         </div>
@@ -286,7 +279,7 @@
 
             </div>
             </div>
-
+                                
            
             <h3>Service</h3> 
 
@@ -324,6 +317,14 @@
 
                 </tbody>
             </table>      
+             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
+                 <a style="float:right; margin-left: 5px;"  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Edit Reservation  
+                </a>
+                <a style="float:right" class="collapsebtn btn btn-primary"  href="../../customer/reservation/cancel?id=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Cancel Reservation 
+                </a>
+            </c:if>
         </div>
     </div>
 
@@ -489,27 +490,7 @@
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
     </script>
-    <c:if test="${empty sessionScope.mess}">
-        <c:if test="${ not empty sessionScope.alert}">
-            <script>
-                $(document).ready(function () {
-                    let note = "${sessionScope.alert}"
-                    alert(note);
-                });
-            </script>
-            <c:remove var="alert" scope="session" />
-
-        </c:if>
-    </c:if>
-    <c:if test="${ not empty sessionScope.mess}">
-        <script>
-            $(document).ready(function () {
-                let mess = "${sessionScope.mess}"
-                alert(mess);
-            });
-        </script>
-        <c:remove var="mess" scope="session" />
-    </c:if>
+   
     <style>
 
         .pagination{
