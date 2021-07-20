@@ -226,7 +226,10 @@
 
                         <div class="form-group">
                             <label for="checkup-time">Checkup time</label>
-                            <input type="date" name="checkup-time" id="datepicker" width="276" required />
+                            <input type="text" class="form-control" name="checkup-time" id="datepicker" required/>
+                            <div class="invalid-feedback">
+                                Please enter your preferred checkup time.
+                            </div>
                         </div>
                         <input id="submit_handle" type="submit" style="display: none">
                     </form>
@@ -342,6 +345,7 @@
                     }, function () {
                         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                     });
+                    $('.datepicker').datepicker();
 
         </script>
         <c:if test="${empty sessionScope.mess}">
@@ -383,6 +387,7 @@
             }
         </style>
         <script>
+            
             function submitReceiver() {
                 $('#submit_handle').click();
             }
