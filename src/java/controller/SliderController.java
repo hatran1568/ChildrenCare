@@ -279,10 +279,8 @@ public class SliderController extends HttpServlet {
         inputStream.read(b);
         fileName = extractFileName(part);
         
-        File test = getFolderUpload();
         String pathName = getFolderUpload()+"\\" + fileName;
         System.out.println(fileName);
-        File storeFile = new File(pathName);
         fileOutputStream  = new FileOutputStream(pathName);
         fileOutputStream.write(b);
         inputStream.close();

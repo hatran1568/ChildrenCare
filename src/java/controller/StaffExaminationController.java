@@ -56,7 +56,7 @@ public class StaffExaminationController extends HttpServlet {
                 showPrescriptionDetails(request,response);
                 break;
             case "/staff/examination/add":
-                addPrescription(request,response);
+                addExamination(request,response);
                 break;
             case "/staff/examination/checkemail":
                 checkExistingReceiver(request,response);
@@ -115,7 +115,7 @@ public class StaffExaminationController extends HttpServlet {
 
     }
 
-    private void addPrescription(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void addExamination(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ExaminationDAO examinationDB = new ExaminationDAO();
         ReservationDAO reservationDB = new ReservationDAO();
         int reservationID = Integer.parseInt(request.getParameter("rid"));

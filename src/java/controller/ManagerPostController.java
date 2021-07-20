@@ -198,7 +198,6 @@ public class ManagerPostController extends HttpServlet {
         p.setDescription(description);
         p.setStatus(status);
         p.setFeatured(featured);
-        p.setContent(content);
         User a = new User();
         a.setId(oldPost.getAuthor().getId());
         p.setAuthor(a);
