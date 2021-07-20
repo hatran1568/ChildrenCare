@@ -19,18 +19,11 @@
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
-        <link rel="stylesheet" href="../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+        
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -68,16 +61,16 @@
                         <span class="icon icon-bar"></span>
                     </button>
                     <!-- lOGO TEXT HERE -->
-                    <a href="../../home" class="navbar-brand">Children Care</a>
+                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                        <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
+                        <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
+                        <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                         <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -123,8 +116,8 @@
                             <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
@@ -132,34 +125,34 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/feedback/list">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/post/list">Posts</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
 
                             </c:if>
 
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
-                                    <p> <a href="../../logout">Log Out</a></p>
+                                    <p> <a href="../userprofile">Profile</a></p>
+                                    <p> <a href="../customer/changepassword">Change Password</a></p>
+                                    <p> <a href="../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -173,20 +166,26 @@
         <!-- section -->
         <div class="container" style="margin-top: 70px">
             <h3 style="text-align: center">Receiver info</h3>
-            <form action="contact/addreceiver" method="POST" id="receiver-info">
+            <div class="row">
+                <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form action="contact/addreceiver" class="needs-validation" novalidate method="POST" id="receiver-info">
                 <input type="text" name="rid" value="${requestScope.reservation.id}" hidden>
                 <div class="form-group">
                     <label for="name">Full name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}">
+                    <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}" required>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender:    </label>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if>>
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if> required>
                         <label class="form-check-label" for="inlineRadio1">Male</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if>>
+                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
                         <label class="form-check-label" for="inlineRadio2">Female</label>
                     </div>
                 </div>
@@ -194,7 +193,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" value="${requestScope.user.email}">
+                            <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -206,13 +205,16 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}">
+                    <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}" required>
                 </div>
                 <div class="form-group">
                     <label for="checkup-time">Checkup time</label>
-                    <input type="date" name="checkup-time" id="datepicker" width="276" />
+                    <input type="date" name="checkup-time" id="datepicker" width="276" required />
                 </div>
+                <input id="submit_handle" type="submit" style="display: none">
             </form>
+                </div>
+                </div>
             <br>
             <h3 style="text-align: center">Service info</h3>
             <c:if test="${not empty requestScope.services}">
@@ -223,7 +225,7 @@
                             <td >Id</td>
                             <td >Title</td>
                             <td >Unit price</td>
-                            <td > Quantity</td>
+                            <td >Quantity</td>
                             <td>Cost</td>
 
                         </tr>
@@ -307,22 +309,23 @@
         </footer> 
 
         <!-- SCRIPTS -->
-        <script src="../../assets/js/jquery.js"></script>
-        <script src="../../assets/js/bootstrap.min.js"></script>
-        <script src="../../assets/js/jquery.sticky.js"></script>
-        <script src="../../assets/js/jquery.stellar.min.js"></script>
-        <script src="../../assets/js/wow.min.js"></script>
-        <script src="../../assets/js/smoothscroll.js"></script>
-        <script src="../../assets/js/owl.carousel.min.js"></script>
-        <script src="../../assets/js/custom-new.js"></script>
+        <script src="../assets/js/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.sticky.js"></script>
+        <script src="../assets/js/jquery.stellar.min.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/smoothscroll.js"></script>
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                    $('ul.nav li.dropdown').hover(function () {
-                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                    }, function () {
-                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+                                                    
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -355,11 +358,40 @@
                 margin-left: 10%;
                 margin-right: 10%;
             }
+            .modal-backdrop.in{
+                opacity: 0 !important;
+            }
+            .modal-backdrop {
+                z-index: 0;
+            }
         </style>
         <script>
             function submitReceiver() {
-                document.getElementById("receiver-info").submit();
+                $('#submit_handle').click();
             }
         </script>
+        <script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
     </body>
 </html> 

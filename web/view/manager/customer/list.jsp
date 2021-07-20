@@ -164,7 +164,7 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
-            
+            <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
                     <tr>
@@ -194,7 +194,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
+            
         </div>
 
 
@@ -284,6 +284,7 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+           
         <script>
                 $(document).ready(function () {
                     $("#customers").dataTable({
@@ -307,6 +308,7 @@
                             {'orderable': false, 'targets' : [4,5,6,7]},
                         ],
                         "bInfo" : false,
+                        "bLengthChange": false,
                         "sDom": 'W<"clear">Tlfrtip',
                         initComplete: function () {
                             this.api().columns('.dt-filter').every(function () {
@@ -317,12 +319,10 @@
                                             var val = $.fn.dataTable.util.escapeRegex(
                                                     $(this).val()
                                                     );
-
                                             column
                                                     .search(val ? '^' + val + '$' : '', true, false)
                                                     .draw();
                                         });
-
                                 column.data().unique().sort().each(function (d, j) {
                                     select.append('<option value="' + d + '">' + d + '</option>')
                                 });
@@ -331,6 +331,23 @@
                     });
                 });
             </script> 
-            
+           <style>
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tfoot th {
+                border-bottom: 2px solid #111;
+                text-align: center;
+            }
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+        </style> 
     </body>
 </html> 

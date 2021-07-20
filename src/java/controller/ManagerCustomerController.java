@@ -217,7 +217,7 @@ public class ManagerCustomerController extends HttpServlet {
         EmailVerify e = new EmailVerify();
         String emailContent = "Your password for the Children Care System: " + password;
         try {
-            e.sendText(userDB.getUserByEmail(request.getParameter("email")).getEmail(), emailContent);
+            e.sendText(request.getParameter("email"), emailContent);
         } catch (MessagingException ex) {
             Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
         }

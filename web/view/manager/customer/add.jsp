@@ -164,15 +164,18 @@
         
         <div class="container">
             <!--<div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>-->
-            <form action="new" method="POST" >
+            <form action="new" method="POST" novalidate class="needs-validation">
                 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email">
+                    <input type="email" class="form-control" name="email" required>
                 </div>
                 <div class="form-group">
                     <label for="full-name">Full name</label>
-                    <input type="text" class="form-control" name="full-name" >
+                    <input type="text" class="form-control" name="full-name" required>
+                    <div class="invalid-feedback">
+                        Please choose a username.
+                    </div>
                 </div>
                 <input type="text" class="form-control" name="image-link" value="#" hidden>
                 <div class="form-group">
@@ -185,11 +188,11 @@
                     </div>
                     <div class="form-group">
                         <label for="mobile">Mobile</label>
-                        <input type="text" class="form-control" name="mobile">
+                        <input type="text" class="form-control" name="mobile" required>
                     </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" >
+                    <input type="text" class="form-control" name="address" required>
                 </div>
 
                 <!--                                <div class="form-group">
@@ -299,6 +302,28 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-            
+          <script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>  
     </body>
 </html> 
