@@ -134,12 +134,10 @@
                         >
                         <div class="ui fluid card">
                             <div class="content">
-                                <div class="ui right floated header red">
-                                    <i class="icon shopping cart"></i>
-                                </div>
+                                
 
                                 <div style="text-align: center" class="header">
-                                    <h3 class="title">Reservation Statistics</h3>
+                                    <h4 style="margin-top: 0;" class="title">Reservation Statistics</h4>
 
                                     <canvas id="myChart" style=" width:100%;max-width:700px;height: 300px;"></canvas>
                                 </div>
@@ -198,7 +196,8 @@
                                 </div>
                             </div>
                             <div class="extra content">
-                                <div onclick="window.location.href='../user/list'" class="ui two buttons">
+                                <div onclick="window.location.href='../../manager/customer/list'" class="ui two buttons">
+
                                     <div class="ui teal button">More Info</div>
                                 </div>
                             </div>

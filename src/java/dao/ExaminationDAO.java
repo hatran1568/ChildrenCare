@@ -84,7 +84,38 @@ public class ExaminationDAO extends BaseDAO{
         }
         return list;
     }
-    
+    public ArrayList<MedicalExamination> getExamsByReservationService(int rid, int sid){
+        ArrayList<MedicalExamination> list = new ArrayList<>();
+        try {
+            String sql = "select m.reservation_id, m.service_id, s.fullname as service_name, m.receiver_id, r.full_name as receiver_name,\n" +
+                        "r.gender, r.email, m.prescription\n" +
+                        " from medical_examination m INNER JOIN service s\n" +
+                        " on m.service_id = s.id\n" +
+                        " join receiver r on m.receiver_id = r.id\n" +
+                         "where reservation_id = ? and service_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ReservationDAO reservationDB = new ReservationDAO();
+            stm.setInt(1, rid);
+            stm.setInt(2, sid);
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                MedicalExamination m = new MedicalExamination();
+                ReservationService r = new ReservationService();
+                Reservation re = reservationDB.getReservationById(rs.getInt("reservation_id"));
+                r.setReservation(re);
+                Service s = serviceDB.getService(rs.getInt("service_id"));
+                r.setService(s);
+                m.setReservationService(r);
+                Receiver receiver = receiverDB.getReceiversById(rs.getInt("receiver_id"));
+                m.setReceiver(receiver);
+                m.setPrescription(rs.getString("prescription"));
+                list.add(m);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ExaminationDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     public MedicalExamination getAnExamination(int rid,int sid, int recid){
         
         try {

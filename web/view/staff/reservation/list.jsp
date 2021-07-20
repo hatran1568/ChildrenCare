@@ -12,7 +12,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Feedbacks List</title>
+        <title>Reservations List</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,7 +33,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                var sitetable = $('#posts').DataTable({
+                var sitetable = $('#reservations').DataTable({
                     "searching": true,
                     "paging": true,
                     'columnDefs': [
@@ -197,7 +197,7 @@
                                 <div class="dropdown-content">
                                     <p> <a href="userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="logout">Log Out</a></p>
+                                    <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -213,7 +213,7 @@
             <div class="container">
 
                 <h2 style="text-align: center; margin: 3%; color: blue;">Reservations List</h2>
-                <table id="posts">
+                <table id="reservations">
 
                     <thead>
                         <tr>

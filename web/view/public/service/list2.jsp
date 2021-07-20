@@ -1,11 +1,10 @@
-
-
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -14,10 +13,9 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <script src="../assets/js/jquery.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
         
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
@@ -29,11 +27,15 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../assets/css/custom.css" />
+        
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
+        <!-- PRE LOADER -->
 
-        <!-- Start header -->
+
+
+        <!-- HEADER -->
         <header>
             <div class="container">
                 <div class="row">
@@ -52,7 +54,7 @@
             </div>
             
         </header>
-        <!-- End header -->
+
 
         <!-- MENU -->
         <section class="navbar navbar-default navbar-static-top" role="navigation">
@@ -66,17 +68,18 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                    
+                    <a href="../home" class="navbar-brand">Children Care</a>
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li><a href="../home">Home</a></li>
+                        <li><a href="../service/list">Services</a></li>
+                        <li><a href="../blog/list">Blog</a></li>
                         <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
@@ -88,7 +91,7 @@
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">Forget Password</a>
                                             </form>
                                         </div>
                                     </div>
@@ -119,8 +122,8 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                            <li><a href="../customer/reservation/my" >My Reservation</a></li>
+                            <li><a href="../customer/myprescription/exams">My Prescriptions</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -144,7 +147,7 @@
                                     <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
                             </c:if>
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="../${sessionScope.user.imageLink}">
 
@@ -160,35 +163,27 @@
                 </div>
             </div>
         </section>
-        <!-- section -->
-        <section id="home" class="slider" data-stellar-background-ratio="0.5">
-        <div class="container row">
-        <div class="col-2">
+
+        <!-- HOME -->
+        <section data-stellar-background-ratio="0.5">
+            <div class="container" style="text-align: center;"><h2>Services List</h2></div>
+            <div class="container row">
+        <div class="col-3">
             
             <div>
                 <form action="list">
                     
                 
-                    <input type="search" placeholder="Search" name="search">
-                
+                    <input type="search" class="form-control rounded" placeholder="Search" name="search">
                 </form>
             </div> 
             <c:forEach items="${requestScope.categories}" var="c">
-                <div><h3><a href="?category=${c.id}">${c.name}</a></h3></div>
+                <div><h3 style="color: gray;"><a href="?category=${c.id}">${c.name}</a></h3></div>
             </c:forEach>
                 <div><h3><a href="#">Static links</a></h3></div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="container" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="full">
-                            <div class="heading_main text_align_center">
-                                <h2><span class="theme_color"></span>Services List</h2>    
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div>Results: ${requestScope.services.size()}</div>
                 <div class="row">
                     <c:forEach items="${requestScope.services}" var="s">
@@ -198,14 +193,10 @@
 
 
 
-                                <div style="background: #7f93db; height: 100%;">
-                                    <h2><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h2>
-                                    <p><c:if test="${s.description.length() >= 41}">
-                                        ${s.description.substring(0, 40)}...
-                                    </c:if>
-                                        <c:if test="${s.description.length() < 41}">
+                                <div style="height: 100%;">
+                                    <h4><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h4>
+                                    <p class="text-truncate">
                                         ${s.description}
-                                    </c:if>
                                         </p>
                                     <p>
                                         <span style="text-decoration: line-through;">${s.originalPrice}</span>
@@ -213,9 +204,9 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <button><a href="../cart/add?service_id=${s.id}">Add to Cart</a></button>
+                                    <button class="btn btn-outline-info" onclick="window.location.href='../cart/add?service_id=${s.id}'" style="border-color: #17a2b8">Add to Cart</button>
                                     
-                                    <button><a href="../feedback?id=${s.id}">Feedback</a></button>
+                                    <button class="btn btn-outline-warning" onclick="window.location.href='../feedback?id=${s.id}'" style="border-color:#ffc107">Feedback</button>
                                 </div>
 
                             </div>
@@ -234,10 +225,11 @@
 
 
             </div>
-        </div></div></section>
-        <!-- end section -->
+        </div></div>
+        </section>
+        <br>
 
-        <!-- Start Footer -->
+        <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
@@ -322,27 +314,48 @@
                 </div>
             </div>
         </footer>
-            <!-- End Footer -->
 
+        <!-- SCRIPTS -->
+        <script src="../assets/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.sticky.js"></script>
+        <script src="../assets/js/jquery.stellar.min.js"></script>
+        <script src="../assets/js/wow.min.js"></script>
+        <script src="../assets/js/smoothscroll.js"></script>
+        <script src="../assets/js/owl.carousel.min.js"></script>
+        <script src="../assets/js/custom-new.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+        </script>
+        <c:if test="${empty sessionScope.mess}">
+                <c:if test="${ not empty sessionScope.alert}">
+                    <script>
+                        $(document).ready(function () {
+                            let note = "${sessionScope.alert}"
+                            alert(note);
 
+                        });
+                    </script>
+                    <c:remove var="alert" scope="session" />
 
-            <!-- ALL JS FILES -->
-            <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/js/popper.min.js"></script>
-            <script src="../assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="../assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="../assets/js/slider-index.js"></script>
-            <script src="../assets/js/smoothscroll.js"></script>
-            <script src="../assets/js/form-validator.min.js"></script>
-            <script src="../assets/js/contact-form-script.js"></script>
-            <script src="../assets/js/isotope.min.js"></script>
-            <script src="../assets/js/images-loded.min.js"></script>
-            <script src="../assets/js/custom.js"></script>
-            
-             
-            <script>
+                </c:if>
+            </c:if>
+            <c:if test="${ not empty sessionScope.mess}">
+                <script>
+                    $(document).ready(function () {
+                        let mess = "${sessionScope.mess}"
+                        alert(mess);
+
+                    });
+                </script>
+                <c:remove var="mess" scope="session" />
+            </c:if>
+                
+        <script>
                     function generatePagger(id, pageindex, totalpage, gap, page)
                     {
                         var container = document.getElementById(id);
@@ -425,72 +438,5 @@
                 }
 
             </style>
-            <script src="../assets/js/bootstrap.min.js"></script>
-        <script src="../assets/js/jquery.sticky.js"></script>
-        <script src="../assets/js/jquery.stellar.min.js"></script>
-        <script src="../assets/js/wow.min.js"></script>
-        <script src="../assets/js/smoothscroll.js"></script>
-        <script src="../assets/js/owl.carousel.min.js"></script>
-        <script src="../assets/js/custom-new.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
-        </script>
-        <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
-                        $(document).ready(function () {
-                            let note = "${sessionScope.alert}"
-                            alert(note);
-
-                        });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
-                <script>
-                    $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
-
-                    });
-                </script>
-                <c:remove var="mess" scope="session" />
-            </c:if>
-                
-        <style>
-            tfoot {
-                display: table-header-group;
-            }
-            table.dataTable tfoot th {
-                text-align: center;
-            }
-            table.dataTable td {
-                font-size: 15px;
-            }
-            table.dataTable th {
-                font-size: 16px;
-            }
-            table.dataTable tbody tr:hover {
-                background-color: #c7c7c7;
-            }
-            table.dataTable.no-footer {
-                border-bottom: 0 !important;
-            }
-            table.dataTable thead th {
-                border-bottom: none;
-            }
-
-            table.dataTable tfoot th {
-                border-top: none;
-                border-bottom: 1px solid  #111;
-            }
-        </style>
     </body>
 </html>

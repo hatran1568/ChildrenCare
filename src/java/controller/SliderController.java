@@ -9,7 +9,9 @@ import bean.Slider;
 import com.google.gson.Gson;
 import dao.SliderDAO;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -27,7 +29,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images") // 50MB
+        maxRequestSize = 1024 * 1024 * 50, location = "swp\\") // 50MB
 public class SliderController extends HttpServlet {
 
     /**
@@ -146,9 +148,9 @@ public class SliderController extends HttpServlet {
         } else {
             sliderDB.setStatus(true, s);
         }
-        s=sliderDB.getSliderByID(id);
+        s = sliderDB.getSliderByID(id);
         Map<String, Boolean> options = new LinkedHashMap<>();
-       
+
         options.put("status", s.isStatus());
         String json = new Gson().toJson(options);
 
@@ -159,7 +161,7 @@ public class SliderController extends HttpServlet {
     }
 
     public void showFormAddSlider(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("../../view/slider/add.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/slider/add.jsp").forward(request, response);
     }
 
     public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -187,7 +189,7 @@ public class SliderController extends HttpServlet {
             request.setAttribute("url", "search");
             request.setAttribute("search", search);
             request.setAttribute("status", status);
-            request.getRequestDispatcher("../../view/slider/search.jsp").forward(request, response);
+            request.getRequestDispatcher("../../view/manager/slider/search.jsp").forward(request, response);
         } else {
             boolean sta = Boolean.parseBoolean(status);
             int index = Integer.parseInt(r_index);
@@ -230,10 +232,24 @@ public class SliderController extends HttpServlet {
     protected void saveFile(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Part part = request.getPart("file");
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
+        inputStream = request.getPart(part.getName()).getInputStream();
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        File test = getFolderUpload();
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        File storeFile = new File(pathName);
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
         String tilte = request.getParameter("title");
         String backlink = request.getParameter("backlink");
         String note = request.getParameter("note");
@@ -253,12 +269,24 @@ public class SliderController extends HttpServlet {
     protected void Update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Part part = request.getPart("file");
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
+        inputStream = request.getPart(part.getName()).getInputStream();
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-
-        part.write("/" + File.separator + fileName);
-
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        File test = getFolderUpload();
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        File storeFile = new File(pathName);
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
         int id = Integer.parseInt(request.getParameter("rid"));
 
         String tilte = request.getParameter("title");
@@ -274,8 +302,8 @@ public class SliderController extends HttpServlet {
         s.setTitle(tilte);
         SliderDAO sliDB = new SliderDAO();
         sliDB.getSliderByID(id);
-        
-        File file = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\" + sliDB.getSliderByID(id).getImageLink());
+
+        File file = new File(getFolderUpload()+"\\"  + sliDB.getSliderByID(id).getImageLink());
         file.delete();
         sliDB.updateSlider(s);
         response.sendRedirect("details?id=" + id);
@@ -297,7 +325,7 @@ public class SliderController extends HttpServlet {
     }
 
     public File getFolderUpload() {
-        File folderUpload = new File("C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images");
+        File folderUpload = new File(getServletContext().getRealPath("/") + "..\\..\\web\\assets\\images");
         if (!folderUpload.exists()) {
             folderUpload.mkdirs();
         }

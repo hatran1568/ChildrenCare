@@ -12,8 +12,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Feedbacks List</title>
-
+        <title>Reservations List</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -22,7 +21,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
         <!-- Bootstrap core CSS -->
-        
+
 
 
         <!-- Additional CSS Files -->
@@ -33,28 +32,22 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                var sitetable = $('#posts').DataTable({
+                var sitetable = $('#reservations').DataTable({
                     "searching": true,
                     "paging": true,
                     'columnDefs': [
-
-                        {'className': 'text-center', 'targets': 6},
-                        {'className': 'text-center', 'targets': 5},
-                        {'max-width': '5%', 'targets': 6},
-                        {'max-width': '5%', 'targets': 5},
-                        {'orderable': false, 'targets': 6},
-                        {'orderable': false, 'targets': 5},
                         {'orderable': false, 'targets': 3},
+                        {'orderable': false, 'targets': 6},
+                        {'orderable': false, 'targets': 7},
                     ],
                     columns: [
                         null,
-                        {data: "Service", title: "Service", className: "dt-filter"},
+                        {data: "ReservationDate", title: "ReservationDate", className: "dt-filter"},
                         null,
                         null,
-                        {data: "Star", title: "Star", className: "dt-filter"},
+                        null,
                         {data: "Status", title: "Status", className: "dt-filter"},
-                        null,
-                        null
+                        null, null
                     ],
 
                     initComplete: function () {
@@ -124,12 +117,12 @@
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-                    
+
                     <a href="home" class="navbar-brand">Children Care</a>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../post/list" class="smoothScroll dropdown">Blog</a></li>
+                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                             <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
@@ -143,7 +136,7 @@
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">Forget Password</a>
                                             </form>
                                         </div>
                                     </div>
@@ -206,7 +199,7 @@
                                 <div class="dropdown-content">
                                     <p> <a href="userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="logout">Log Out</a></p>
+                                    <p> <a href="../../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -221,64 +214,158 @@
         <section>
             <div class="container">
 
-                <h2 style="text-align: center; margin: 3%; color: blue;">Feedbacks List</h2>
-                <table id="posts">
+                <h2 style="text-align: center; margin: 3%; color: blue;">Reservations List</h2>
+                <table id="reservations">
 
                     <thead>
                         <tr>
-                            <th>Full Name</th>
-                            <th>Service</th>
-                            <th>Content</th>
-                            <th style="display: none;">Star</th>
-                            <th>Rated Star</th>
+                            <th>ID</th>
+                            <th>Reservation Date</th>
+                            <th>Customer</th>
+                            <th>Service(s)</th>
+                            <th>Total Cost</th>
                             <th>Status</th>
-
-                            <th class="col-1">View</th>
-                            <th class="col-1">Edit</th>
+                            <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Filters:</th>
-                            <th>Service </th>
+                            <th>Reservation Date </th>
                             <th></th>
-                            <th style="display: none;">Star</th>
-                            <th>Rated Star </th>
+                            <th></th>
+                            <th></th>
                             <th>Status </th>
                             <th></th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <c:forEach items="${requestScope.feedbacks}" var="f">
+                        <c:forEach items="${requestScope.reservations}" var="r">
                             <tr>
-                                <td>${f.fullName}</td>
-                                <td>${f.service.fullname}</td>
-                                <td class="text-truncate">${f.content}</td>
-                                <td style="display: none;">${f.ratedStar}</td>
-                                <td value="${f.ratedStar}">${f.ratedStar} 
-                                    <c:forEach var = "i" begin = "1" end = "5">
-                                        <c:if test="${i <= f.ratedStar}">
-                                            <span class='fa fa-star fa-1x checked'></span>
-                                        </c:if>
-                                        <c:if test="${i > f.ratedStar}">
-                                            <span class='fa fa-star fa-1x'></span>
-                                        </c:if>
+                                <td><a href="details?rid=${r.id}">${r.id}</a></td>
+                                <td>${r.reservationDate}</td>
+                                <td>${r.customer.fullName}</td>
+                                <td>${f.ratedStar} 
+                                    <c:forEach items="${r.listReservationService}" var="s">
+                                        <a href="../service/edit?sid=${s.service.id}">${s.service.fullname}</a> - ${s.quantity} <br>
                                     </c:forEach>
                                 </td>
-                                <td>${f.status.name}</td>
-
-                                <td><a href="details?id=${f.id}"><i class="fas fa-eye"></i></a></td>
-                                <td><a href="details?id=${f.id}"><i class="fas fa-pen"></i></a></td>
+                                <td>${r.totalCost}</td>
+                                <td>${r.status.name}</td>
+                                <td><c:if test="${r.status.name == 'Submitted'}">
+                                        <button id="${r.id}" <c:if test="${r.enough == true}">onclick="changeStatus(this)"</c:if><c:if test="${r.enough == false}">onclick="display_lowquantity(${r.id});"</c:if>>Approve</button>
+                                    </c:if>
+                                    
+                                </td>
+                                <td><c:if test="${r.status.name == 'Submitted'}">
+                                        <button onclick="display_modal(${r.id});">Reject</button>
+                                    </c:if>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
 
             </div>
+            
         </section>
 
+<div id="id01" class="container modal modal-dialog-centered">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+  <form class="modal-dialog-centered container" id="body" action="">
+    <div class="b1">
+        <div id="head-modal"><h4>Reject Reservation?</h4></div>
+      <p>Are you sure you want to reject this reservation?</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="reject()" class="deletebtn">Reject</button>
+      </div>
+    </div>
+  </form>
+</div>
+        
+<div id="notenough" class="container modal modal-dialog-centered">
+  <form class="modal-dialog-centered container" id="body" action="">
+    <div class="b1">
+        <div id="head-modal"><h3>!</h3><h4>Low Quantity</h4></div>
+      <p>The services supply is not enough for this reservation!</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('notenough').style.display='none'" class="deletebtn">OK</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Button trigger modal -->
+<style>
 
+    #body{
+        width: 40%;
+    }
+    .b1{
+        background-color: white;
+        text-align: center;
+        padding-top: 0;
+        padding-bottom: 30px;
+        border: #535ba0 solid;
+        margin-top: 40%;
+        border-top: white;
+    }
+    .b1 h4, p{
+        padding: 10px;
+        
+    }
+    
+    #notenough h3, h4{
+        display: inline-block;
+    }
+    #notenough h3{
+        color: red;
+    }
+    #head-modal{
+        background-color: #535ba0;
+        margin: 0;
+        border-top: #535ba0 solid;
+    }
+    h4{
+        text-color: black;
+    }
+    
+</style>
+<script>
+    function reject(){
+        document.getElementById('id01').style.display='none';
+        window.location.href='reject?id='.concat(current_rs);
+    }
+    var current_rs = 0;
+    function display_modal(id){
+        current_rs = id;
+        document.getElementById('id01').style.display='block';
+    }
+    
+    function display_lowquantity(id){
+        current_rs = id;
+        document.getElementById('notenough').style.display='block';
+    }
+    
+    function changeStatus(param) {
+                var id = param.id;
+                $.ajax({
+                    url: "approve",
+                    data: {id: id},
+                    success: function () {
+                        setInterval('location.reload()', 100); 
+                    }
+                            
+
+                });
+
+            }
+    
+</script>
 
 
 
@@ -345,13 +432,13 @@
         <script src="../../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        
+
         <script>
-    $('ul.nav li.dropdown').hover(function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-    }, function () {
-        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-    });
+                                        $('ul.nav li.dropdown').hover(function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                        }, function () {
+                                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                                        });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -399,7 +486,7 @@
             
 
         </style>
-        
+
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
@@ -409,6 +496,12 @@
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
+        
+        <style>
+            a:hover{
+        color: blue;
+    }
+        </style>
     </body>
 
 </html>

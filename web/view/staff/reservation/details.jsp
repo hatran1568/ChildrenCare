@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Reservation details</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -171,71 +171,64 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin-top: 75px">
-            <h3 style="text-align: center">Reservation info</h3>
-
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Reservation ID:</td>
-                        <td>${requestScope.reservation.id}</td>
-                    </tr>
-                    <tr>
-                        <td>Total cost:</td>
-                        <td>${requestScope.reservation.totalCost}</td>
-                    </tr>
-                </table>
+            <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
+                <h3 style="text-align: center">Reservation info</h3>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Reservation ID: </strong>
+                        <span>${requestScope.reservation.id}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Reservation date:</strong>
+                        <span>${requestScope.reservation.reservationDate}</span>
+                    </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Total cost: </strong>
+                        <span>${requestScope.reservation.totalCost}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Checkup time:</strong>
+                        <span>${requestScope.reservation.checkupTime}</span>
+                    </p>
+                </div> 
+                
+                        <strong>Status: </strong>
+                        <span>${requestScope.reservation.status.name}</span>
+                
+                   <h3 style="text-align: center">Receiver info</h3> 
+                
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong>Receiver name:</strong>
+                        <span>${requestScope.reservation.receiver.fullName}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Gender:</strong>
+                        <span><c:if test="${requestScope.reservation.receiver.gender eq true}">Male</c:if>
+                            <c:if test="${requestScope.reservation.receiver.gender eq false}">Female</c:if></span>
+                        </p>
+                </div>
+                <div class="row">
+                    <p class="col-md-6">
+                        <strong> Email:</strong>
+                        <span>${requestScope.reservation.receiver.email}</span>
+                    </p>
+                    <p class="col-md-6">
+                        <strong>Mobile</strong>
+                        <span>${requestScope.reservation.receiver.mobile}</span>
+                    </p>
+                </div>
+                    <p>
+                        <strong>Address</strong>
+                        <span>${requestScope.reservation.receiver.address}</span>
+                    </p>
+                    
             </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Reservation date:</td>
-                        <td>${requestScope.reservation.reservationDate}</td>
-                    </tr>
-                    <tr>
-                        <td>Status:</td>
-                        <td>${requestScope.reservation.status.name}</td>
-                    </tr>
-                </table>
-            </div>
-            <h3 style="text-align: center">Receiver info</h3>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Full name:</td>
-                        <td>${requestScope.reservation.receiver.fullName}</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>${requestScope.reservation.receiver.email}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <table class="table table-borderless">
-                    <tr>
-                        <td>Gender:</td>
-                        <td><c:if test="${requestScope.reservation.receiver.gender eq true}">Male</c:if>
-                            <c:if test="${requestScope.reservation.receiver.gender eq false}">Female</c:if></td>
-                        </tr>
-                        <tr>
-                            <td>Mobile:</td>
-                            <td>${requestScope.reservation.receiver.mobile}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-12">
-                <table style="margin-top: 0px;" class="table table-borderless">
-                    <tr>
-
-                    <tr>
-                        <td>Address</td>
-                        <td>${requestScope.reservation.receiver.address}</td>
-                    </tr>
-
-                </table>
-
-            </div>
-            <h3 style="text-align: center">Service info</h3>
+                    
+                    
+            <h3 style="text-align: center; margin-top: 50px">Service info</h3>
             <button type="button" class="btn btn-primary" onclick="window.location.href='../examination/list?rid=${requestScope.reservation.id}'">View prescription list</button>
             
             <table class="table thead-dark" id="reservation-detail">
@@ -267,8 +260,8 @@
                         </tr>
                     </c:forEach>
                     <tr>
-                        <td colspan="5" style="text-align: right">Total cost</td>
-                        <td style="font-size: 18px">${requestScope.reservation.totalCost}</td>
+                        <td colspan="6" style="text-align: right">Total cost</td>
+                        <td style="font-size: 16px">${requestScope.reservation.totalCost}</td>
                     </tr>
                 </tbody>
             </table>
@@ -400,6 +393,13 @@
                 font-weight: bold;
                 font-size: 16px;
             }
+            p strong,span{
+                    font-size: 16px;
+                    color:black;
+                }
+                #Info h3{
+                    margin: 20px;
+                }
         </style>
     </body>
 </html> 

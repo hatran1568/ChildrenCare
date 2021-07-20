@@ -63,7 +63,7 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
-                    <a href="#" class="navbar-brand">Children Care</a>
+                    <a href="../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
@@ -148,8 +148,8 @@
 
                                 <div class="dropdown-content">
                                     <p> <a href="../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="#">Log Out</a></p>
+                                    <p> <a href="../customer/changepassword">Change Password</a></p>
+                                    <p> <a href="../logout">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
@@ -180,7 +180,7 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost : ${requestScope.totalcost}</h3></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost:  ${requestScope.totalcost}</h3></td>
                                 <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
