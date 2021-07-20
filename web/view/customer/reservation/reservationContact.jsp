@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        
+
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
@@ -23,7 +23,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../assets/css/custom.css" />
-        
+
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -69,7 +69,7 @@
                         <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
+                            <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -114,13 +114,13 @@
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
                             <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
-                                    </div>
-                                </li>
-                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                <div class="dropdown-menu">
+                                    <p class="dropdown-link dropdown-item"> <a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                    <p class="dropdown-link dropdown-item"> <a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                </div>
+                            </li>
+                            <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
@@ -140,7 +140,7 @@
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                    <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
 
                             </c:if>
@@ -168,65 +168,70 @@
             <h3 style="text-align: center">Receiver info</h3>
             <div class="row">
                 <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <form action="contact/addreceiver" class="needs-validation" novalidate method="POST" id="receiver-info">
-                <input type="text" name="rid" value="${requestScope.reservation.id}" hidden>
-                <div class="form-group">
-                    <label for="name">Full name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}" required>
-                    <div class="invalid-feedback">
-                        Please enter your name.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender:    </label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if> required>
-                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
-                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                    </div>
-                    <div class="invalid-feedback">
-                        Please choose a gender.
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="col-md-8">
+                    <form action="contact/addreceiver" class="needs-validation" novalidate method="POST" id="receiver-info">
+                        <input type="text" name="rid" value="${requestScope.reservation.id}" hidden>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}" required>
+                            <label for="name">Full name</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${requestScope.user.fullName}" required>
+                            <div class="invalid-feedback">
+                                Please enter your name.
+                            </div>
                         </div>
-                        <div class="invalid-feedback">
-                        Please enter your email.
-                        </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}" required>
+                            <label for="gender">Gender:    </label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if> required>
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                    <div class="invalid-feedback">
+                                        Please choose a gender.
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your email.
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}" required>
+                                    <div class="invalid-feedback">
+                                        Please enter your phone number.
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="invalid-feedback">
-                        Please enter your phone number.
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}" required>
+                            <div class="invalid-feedback">
+                                Please enter your address.
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address" value="${requestScope.user.address}" required>
-                </div>
-                <div class="invalid-feedback">
-                        Please enter your address.
+
+                        <div class="form-group">
+                            <label for="checkup-time">Checkup time</label>
+                            <input type="date" name="checkup-time" id="datepicker" width="276" required />
                         </div>
-                <div class="form-group">
-                    <label for="checkup-time">Checkup time</label>
-                    <input type="date" name="checkup-time" id="datepicker" width="276" required />
+                        <input id="submit_handle" type="submit" style="display: none">
+                    </form>
                 </div>
-                <input id="submit_handle" type="submit" style="display: none">
-            </form>
-                </div>
-                </div>
+            </div>
             <br>
             <h3 style="text-align: center">Service info</h3>
             <c:if test="${not empty requestScope.services}">
@@ -332,12 +337,12 @@
         <script src="../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
-                                                    
+                    $('ul.nav li.dropdown').hover(function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                    }, function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                    });
+
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -385,25 +390,25 @@
         <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
+            (function () {
+                'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script>
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>
     </body>
 </html> 
