@@ -1396,7 +1396,7 @@
 }
 
 .bootstrap-iso a {
-    color: #337ab7;
+    color: #252525;
     text-decoration: none;
 }
 
@@ -5383,12 +5383,12 @@
 }
 
 .bootstrap-iso .navbar-default {
-    background-color: #f8f8f8;
+/*    background-color: #f8f8f8;*/
     border-color: #e7e7e7;
 }
 
 .bootstrap-iso .navbar-default .navbar-brand {
-    color: #777;
+    /*color: #777;*/
 }
 
 .bootstrap-iso .navbar-default .navbar-brand:focus,
@@ -5402,7 +5402,7 @@
 }
 
 .bootstrap-iso .navbar-default .navbar-nav>li>a {
-    color: #777;
+    /*color: #777;*/
 }
 
 .bootstrap-iso .navbar-default .navbar-nav>li>a:focus,

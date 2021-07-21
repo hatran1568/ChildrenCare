@@ -80,45 +80,8 @@
                             <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                                <div id="login" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Login</h4>
-                                                <form action="login" method="POST">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Login" />
-                                                    <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                                <div id="register" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-
-                                        <div class="modal-content">
-                                            <div class="modal-body ">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Register</h4>
-                                                <form action="register" method="GET">
-                                                    <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                    Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                    Female <input type="radio" name="gender" value="female">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                    <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Register" />
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
+                                <li class="appointment-btn"><a class="login-trigger" href="showlogin">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="showregister">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
@@ -162,7 +125,7 @@
                                         <p> <a href="logout">Log Out</a></p>
                                     </div>
                                 </div>
-                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                                <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
                             </c:if>
                         </ul>
                     </div>
