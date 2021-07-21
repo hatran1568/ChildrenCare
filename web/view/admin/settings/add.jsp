@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Add a new Setting</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -196,31 +196,30 @@
                             <br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
                             <br>
-                            <form action="../../admin/setting/insert" method="POST" >
+                            <form action="../../admin/setting/insert" method="POST">
                                 <div class="form-group">
-                                    <label for="type">Type</label>
-                                    <select class="form-control" name="type">
+                                    <div>Type</div>
+                                    <select class="form-control" name="type" style="width: 35%; height: 7%; display: inline">
                                         <c:forEach items="${requestScope.uniqueTypes}" var="r">
                                             <option value="${r}">${r}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <label for="or">Or</label>
                                 <div class="form-group">
-                                    <label for="name">New Type</label>
-                                    <input type="text" class="form-control" name="newtype" placeholder="Enter new Type">
+                                    <div>Or New Type</div>
+                                    <input type="text" class="form-control" name="newtype" placeholder="Enter new Type" style="width: 35%; display: inline;">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="settingname" placeholder="Enter Name">
+                                    <div>Name</div>
+                                    <input type="text" class="form-control" name="settingname" placeholder="Enter Name" style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <input type="text" class="form-control" name="description" placeholder="Enter Description">
+                                    <div>Description</div>
+                                    <input type="text" class="form-control" name="description" placeholder="Enter Description" style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                        <label for="status">Status</label>
-                                        <input type="text" class="form-control" name="status" placeholder="Enter Status">
+                                    <div>Status</div>
+                                    <input type="text" class="form-control" name="status" placeholder="Enter Status" style="width: 35%; display: inline">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -235,9 +235,11 @@ public class SliderController extends HttpServlet {
     protected void saveFile(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Part part = request.getPart("file");
+        
         InputStream inputStream;
         FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
+        
         inputStream = request.getPart(part.getName()).getInputStream();
         // refines the fileName in case it is an absolute path
         int i = inputStream.available();
@@ -275,17 +277,37 @@ public class SliderController extends HttpServlet {
         InputStream inputStream;
         FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
-        inputStream = request.getPart(part.getName()).getInputStream();
+        if (fileName.trim().length()==0){
+               int id = Integer.parseInt(request.getParameter("rid"));
+
+        String tilte = request.getParameter("title");
+        String backlink = request.getParameter("backlink");
+        String note = request.getParameter("note");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        Slider s = new Slider();
+        s.setId(id);
+        s.setBacklink(backlink);
+        
+        s.setNotes(note);
+        s.setStatus(status);
+        s.setTitle(tilte);
+        SliderDAO sliDB = new SliderDAO();
+        s.setImageLink(sliDB.getSliderByID(id).getImageLink());
+        sliDB.getSliderByID(id);
+         sliDB.updateSlider(s);
+         response.sendRedirect("details?id=" + id);
+        }
+        else{
+          inputStream = request.getPart(part.getName()).getInputStream();
+        
         // refines the fileName in case it is an absolute path
         int i = inputStream.available();
         byte[] b = new byte[i];
         inputStream.read(b);
         fileName = extractFileName(part);
         
-        File test = getFolderUpload();
         String pathName = getFolderUpload()+"\\" + fileName;
         System.out.println(fileName);
-        File storeFile = new File(pathName);
         fileOutputStream  = new FileOutputStream(pathName);
         fileOutputStream.write(b);
         inputStream.close();
@@ -310,6 +332,8 @@ public class SliderController extends HttpServlet {
         file.delete();
         sliDB.updateSlider(s);
         response.sendRedirect("details?id=" + id);
+        }
+      
 
     }
 

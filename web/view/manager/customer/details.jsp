@@ -15,7 +15,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap-grid.min.css" integrity="sha512-LLxZHu50SXdFJdAzHmDJAoLaozhTB4BYZPoN+xdTRjiPmPhI+1mEJXdoHHiDWmd/jj/9x10pkd8mYGG9sqfPPA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
@@ -73,7 +74,7 @@
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
+                            <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -82,7 +83,7 @@
                                         <div class="modal-body">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Login</h4>
-                                            <form action="login" method="POST">
+                                            <form action="../../login" method="POST">
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
@@ -100,7 +101,7 @@
                                         <div class="modal-body ">
                                             <button data-dismiss="modal" class="close">&times;</button>
                                             <h4>Register</h4>
-                                            <form action="register" method="GET">
+                                            <form action="../../register" method="GET">
                                                 <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
                                                 Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
                                                 Female <input type="radio" name="gender" value="female">
@@ -117,7 +118,13 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
+                            <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
@@ -136,17 +143,13 @@
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
-
                                 <li class="dropdown">
                                     <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
-
                             </c:if>
-
                             <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
-
                                 <div class="dropdown-content">
                                     <p> <a href="../../userprofile">Profile</a></p>
                                     <p> <a href="../../customer/changepassword">Change Password</a></p>
@@ -157,7 +160,6 @@
                         </c:if>
                     </ul>
                 </div>
-
             </div>
         </section>
 
@@ -167,25 +169,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="card" style="margin: 20px; min-height: 600px">
+                    <div class="card" style="margin: 20px; min-height: 600px; padding: 10px">
 
                         <div class="card-body">
                            
 
                             <div class="row">
-                                <div class="col-2">
-                                    <div class="d-flex justify-content-start">
-                                        <div class="image-container">
-                                            <img src="../../${requestScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />
-                                            
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="col-10">
+                                
+                                
                                     <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="historyOfChange-tab" data-toggle="tab" href="#historyOfChange" role="tab" aria-controls="historyOfChange" aria-selected="false">Changes history</a>
@@ -193,8 +187,15 @@
                                     </ul>
                                     <div class="tab-content ml-1" id="myTabContent">
                                         <div class="tab-pane active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
-
-
+                                            <div class="row">
+                                                <div class="col-2">
+                                    <div class="d-flex justify-content-start">
+                                        <div class="image-container">
+                                            <img src="../../${requestScope.user.imageLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" />                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                        <div class="col-10">
                                             <div class="row">
                                                 <div class="col-sm-3 col-md-2 col-5">
                                                     <label style="font-weight:bold;">Full Name</label>
@@ -256,6 +257,10 @@
                                             <hr />
                                             <button id="edit-btn" class="btn pull-right" onclick="window.location.href = 'edit?uid=${requestScope.user.id}'">Edit</button>
                                         </div>
+                                            </div>
+
+                                            
+                                        </div>
                                         <div class="tab-pane" id="historyOfChange" role="tabpanel" aria-labelledby="historyOfChange-tab">
                                             <div class="row" style="margin:0">
                                                 <table id="user-history" class="table table-hover" style="margin-top: 10px">
@@ -281,7 +286,7 @@
                                                                     <td>${h.mobile}</td>
                                                                 <td>${h.address}</td>
                                                                 <td>${h.updatedBy.fullName}</td>
-                                                                <td>${h.updatedDate}</td>
+                                                                <td><fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value = "${h.updatedDate}" /></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -289,7 +294,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -357,11 +362,12 @@
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                                    $('ul.nav li.dropdown').hover(function () {
-                                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                                    }, function () {
-                                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+                                                    
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">

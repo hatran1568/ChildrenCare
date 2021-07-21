@@ -7,7 +7,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>FrontendFunn - Semantic UI - Sample Admin Dashboard Template</title>
+        <title>Edit user Information</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link
             rel="stylesheet"
@@ -197,41 +197,41 @@
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
                             <form action="../../admin/user/update" method="POST">
                                 <br><div class="form-group">
-                                    <label for="email">User ID</label>
-                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly>
+                                    <div for="email">User ID</div>
+                                    <input type="text" class="form-control" name="id" value="${requestScope.user.id}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
+                                    <div for="email">Email</div>
+                                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="full-name">Full name</label>
-                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly>
+                                    <div for="full-name">Full name</div>
+                                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}" readonly style="width: 35%; display: inline">
                                 </div>
                                     <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly>
+                                    <div for="gender">Gender</div>
+                                    <input type="text" class="form-control" name="full-name" value="<c:if test="${requestScope.user.gender==true}">Male</c:if><c:if test="${requestScope.user.gender==false}">Female</c:if>" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                        <label for="mobile">Mobile</label>
-                                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly>
+                                    <div for="mobile">Mobile</div>
+                                    <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly>
+                                    <div for="address">Address</div>
+                                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}" readonly style="width: 35%; display: inline">
                                 </div>
                                 <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <select class="form-control" name="role">
+                                    <div for="role">Role</div>
+                                    <select class="form-control" name="role" style="width: 35%; height: 7%; display: inline">
                                         <c:forEach items="${requestScope.roles}" var="r">
                                             <option <c:if test="${requestScope.user.role.id==r.id}">selected</c:if> value="${r.id}">${r.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select class="form-control" name="status">
+                                    <div for="status">Status</div>
+                                    <select class="form-control" name="status" style="width: 35%; height: 7%; display: inline">
                                         <option <c:if test="${requestScope.user.status.id==13}">selected</c:if> value="13">Not Verified</option>
                                         <option <c:if test="${requestScope.user.status.id==14}">selected</c:if> value="14">Active</option>
                                         <option <c:if test="${requestScope.user.status.id==15}">selected</c:if> value="15">Contact</option>

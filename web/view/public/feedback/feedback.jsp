@@ -1,4 +1,4 @@
-w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +14,10 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -54,71 +57,72 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 
         <!-- MENU -->
-        <section class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
+        <div  class="toolplate-iso bootstrap-iso">
+            <section class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
 
-                <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                    </button>
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                        </button>
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="home" class="navbar-brand">Children Care</a>
-                </div>
+                        <!-- lOGO TEXT HERE -->
+                        <a href="home" class="navbar-brand">Children Care</a>
+                    </div>
 
-                <!-- MENU LINKS -->
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                            <div id="login" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Login</h4>
-                                            <form action="login" method="POST">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
-                                            </form>
+                    <!-- MENU LINKS -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="home" class="smoothScroll dropdown">Home</a></li>
+                            <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
+                                <c:if test="${ empty sessionScope.user}">
+                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
+                                <div id="login" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <button data-dismiss="modal" class="close">&times;</button>
+                                                <h4>Login</h4>
+                                                <form action="login" method="POST">
+                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
+                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                    <input class="login-trigger" type="submit" value="Login" />
+                                                    <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>  
-                            </div>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                            <div id="register" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                                    </div>  
+                                </div>
+                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
+                                <div id="register" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
 
-                                    <div class="modal-content">
-                                        <div class="modal-body ">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Register</h4>
-                                            <form action="register" method="GET">
-                                                <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                Female <input type="radio" name="gender" value="female">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Register" />
-                                            </form>
+                                        <div class="modal-content">
+                                            <div class="modal-body ">
+                                                <button data-dismiss="modal" class="close">&times;</button>
+                                                <h4>Register</h4>
+                                                <form action="register" method="GET">
+                                                    <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
+                                                    Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
+                                                    Female <input type="radio" name="gender" value="female">
+                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
+                                                    <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
+                                                    <input type="text" name="address" class="username form-control" placeholder="Address"/>
+                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
+                                                    <input class="login-trigger" type="submit" value="Register" />
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>  
-                            </div>
+                                    </div>  
+                                </div>
 
-                        </c:if>
-                        <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown">
+                            </c:if>
+                            <c:if test="${not empty sessionScope.user}">
+                                <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="customer/reservation/my" class="smoothScroll">My Reservation</a></p>
@@ -127,65 +131,69 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
-                                    </div>
-                                </li>
-                                <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <div class="dropdown-menu">
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/feedback/list">Feedbacks</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
+                                        </div>
+                                    </li>
+                                    <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                        <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        </c:if>
                                     </c:if>
-                                </c:if>
-                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
+                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
-                                <li class="dropdown">
+                                    <li class="dropdown">
                                     <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
-                                </li>
-                            </c:if>
-                            <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <div class="dropdown ">
-                                <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    </li>
+                                </c:if>
+                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <div class="dropdown ">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
 
-                                <div class="dropdown-content">
-                                    <p> <a href="userprofile">Profile</a></p>
-                                    <p> <a href="customer/changepassword">Change Password</a></p>
-                                    <p> <a href="logout">Log Out</a></p>
+                                    <div class="dropdown-content">
+                                        <p> <a href="userprofile">Profile</a></p>
+                                        <p> <a href="customer/changepassword">Change Password</a></p>
+                                        <p> <a href="logout">Log Out</a></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                        </c:if>
-                    </ul>
+                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                            </c:if>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
-        
         <!-- NEWS -->
         <div class="container" style="margin-top: 25px; height: max-content; min-height: 700px;">
-            <form id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
+            <form novalidate  id="form" enctype="multipart/form-data" action="feedback/add" method="POST" class="ui form">
                 <h4 class="ui dividing header">Contact Information</h4>
                 <div class="two fields">
                     <div class="twelve wide  field">
-                        <label>Name</label>
+                        <label  for="validationCustom01">Name</label>
 
-                        <input type="text" name="fullname" placeholder="Bo Yates">
-
+                        <input pattern="[A-Za-z]{6}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input a valid name at least 6 characters
+                        </div>
                     </div>
                     <div class="four wide  field">
                         <label>Gender</label>
+                        <div class="two fields">
+                            <div class="eight wide field"><label style="display: inline-block; margin-right: 5px;" >Male :</label> <input id="male"  type="radio" name="gender" gender checked="true" value="true"> </div>
+                            <div class="eight wide  field"><label style="display: inline-block; margin-right: 5px;" >Female :</label> <input type="radio" name="gender"  value="false"></div>
+                        </div>
 
-                        <select name="gender">
-                            <option selected="true" value="true">Male</option>
-                            <option value="false">Female</option>
-                          
 
-                        </select>
 
 
                     </div>
@@ -193,11 +201,17 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
                 <div class="two fields">
                     <div class="field">
-                        <label>Email</label>
+                        <label for="validationCustom02" >Email</label>
 
-                        <input type="text" name="email" placeholder="Email@abc.com">
-
+                        <input pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please input a valid email
+                        </div>
                     </div>
+
                     <div class="field">
                         <label>Mobile</label>
 
@@ -248,6 +262,7 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
                     </div>
                     <div class="four wide field">
                         <label></label>
+                        <input type="submit" value="submit">
                         <div onclick="submit()" class="ui button" tabindex="0">Submit Feedback</div>
                     </div>
                 </div>
@@ -334,11 +349,11 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
                                 });
                             });
-                            function submit(){
-                                 document.getElementById("form").submit();
-                                
+                            function submit() {
+                                document.getElementById("form").submit();
+
                             }
-                           
+
 
         </script>
         <script>
@@ -350,6 +365,29 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
                 }
             };
         </script>
+        <script>
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('form')
+
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>
+
         <style>
             .rating {
                 position: relative;
@@ -459,4 +497,5 @@ w<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
         </style>
 
     </body>
+
 </html>
