@@ -182,7 +182,9 @@ public class ManagerCustomerController extends HttpServlet {
            throws ServletException, IOException {
         SettingDAO settingDB = new SettingDAO();
         ArrayList<Setting> roles = settingDB.getSetting("Role");
+        ArrayList<Setting> status = settingDB.getSetting("User Status");
         request.setAttribute("roles", roles);
+        request.setAttribute("status", status);
         request.getRequestDispatcher("../../view/manager/customer/add.jsp").forward(request, response);
     }
 
@@ -209,7 +211,9 @@ public class ManagerCustomerController extends HttpServlet {
         u.setFullName(request.getParameter("full-name"));
         u.setImageLink(request.getParameter("image-link"));
         u.setMobile(request.getParameter("mobile"));
-        
+        Setting status = new Setting();
+        status.setId(Integer.parseInt(request.getParameter("status")));
+        u.setStatus(status);
         Role r = new Role();
         r.setId(4);
         u.setRole(r);

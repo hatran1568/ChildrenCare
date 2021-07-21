@@ -70,7 +70,7 @@
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
                         <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
+                            <c:if test="${ empty sessionScope.user}">
                             <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
                             <div id="login" class="modal fade" role="dialog">
@@ -135,7 +135,7 @@
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
 
                             </c:if>
@@ -161,59 +161,74 @@
 
         <!-- End Banner -->
         <!-- section -->
-        
-        <div class="container">
-            <!--<div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>-->
-            <form action="new" method="POST" novalidate class="needs-validation">
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" required>
+
+        <div class="container" style="margin-top: 50px; margin-bottom: 50px">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Customer list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add new</div>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <form action="new" method="POST" novalidate class="needs-validation">
+                        <div class="form-row">
+                            <div style="padding-left: 0" class="form-group col-md-6">
+                                <label for="full-name">Full name</label>
+                                <input type="text" class="form-control" name="full-name" required>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6" style="height:87px">
+                                <label for="gender">Gender</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="gender" type="radio" id="male" value="male">
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="gender" type="radio" id="female" value="female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="text" class="form-control" name="image-link" value="#" hidden>
+                        <div class="form-row">
+                            <div style="padding-left: 0" class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email.
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="mobile">Mobile</label>
+                                <input type="text" class="form-control" name="mobile" required>
+                                <div class="invalid-feedback">
+                                    Mobile cannot be blank!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" name="address" required>
+                                <div class="invalid-feedback">
+                                    Address cannot be blank!
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select class="form-control" name="status">
+                                <c:forEach items="${requestScope.status}" var="s">
+                                    <option value="${s.id}">${s.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="full-name">Full name</label>
-                    <input type="text" class="form-control" name="full-name" required>
-                    <div class="invalid-feedback">
-                        Please choose a username.
-                    </div>
-                </div>
-                <input type="text" class="form-control" name="image-link" value="#" hidden>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="gender">
-                        <option value="male" >Male</option>
-                        <option value="female" >Female</option>
-                    </select>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="mobile">Mobile</label>
-                        <input type="text" class="form-control" name="mobile" required>
-                    </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" required>
-                </div>
-
-                <!--                                <div class="form-group">
-                                                    <label for="role">Role</label>
-                                                    <select class="form-control" name="role">
-                <%--<c:forEach items="${requestScope.roles}" var="r">--%>
-                    <option <c:if test="${requestScope.user.role.id == r.id}">selected</c:if> value="${r.id}">${r.name}</option>
-                <%--</c:forEach>--%>
-            </select>
-        </div>-->
-
-<!--                <div class="form-group">
-                    <label for="status">Status</label>
-                    <select class="form-control" name="status">
-                        <option value="0" <c:if test="${requestScope.user.status==false}">selected</c:if>>Not Verified</option>
-                        <option value="1" <c:if test="${requestScope.user.status==true}">selected</c:if>>Verified</option>
-                    </select>
-                </div>-->
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </div>
 
         <!-- Start Footer -->
@@ -275,11 +290,11 @@
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                                    $('ul.nav li.dropdown').hover(function () {
-                                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                                    }, function () {
-                                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -302,28 +317,31 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-          <script>
+        <script>
+            $(document).ready(function () {
+                $("#male").prop("checked", true);
+            });
+
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
+            (function () {
+                'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+// Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-</script>  
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>  
     </body>
 </html> 
