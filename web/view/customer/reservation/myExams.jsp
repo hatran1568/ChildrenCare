@@ -166,7 +166,7 @@
         <!-- HOME -->
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
             <div class="container" style="text-align: center;">
-                <h1 style="margin-top: 3%">Your Prescriptions</h1>
+                <h2 style="margin-top: 3%">Your Prescriptions</h2>
             </div>
             <div class="container" style="min-height: 700px; height: auto; max-width: 80%">
             <table class="table" id="myExams">
