@@ -13,8 +13,7 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
         <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -84,7 +83,7 @@
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="customer/reservation/my" class="smoothScroll">My Reservation</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
@@ -93,7 +92,7 @@
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
                                             <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
                                             <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
