@@ -12,7 +12,9 @@ import bean.User;
 import dao.PostDAO;
 import dao.SettingDAO;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -29,7 +31,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50)
 public class ManagerPostController extends HttpServlet {
 
 
@@ -176,14 +178,29 @@ public class ManagerPostController extends HttpServlet {
 
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
         // refines the fileName in case it is an absolute path
         fileName = new File(fileName).getName();
         if (fileName.trim().length()==0){
             p.setThumbnailLink(oldPost.getThumbnailLink());
         }else{
-            part.write("/" + File.separator + fileName);
-            p.setThumbnailLink("assets/images/" + fileName);
-            File file = new File("D:\\FPTU Materials\\Ky5_SUM21\\SWP\\source-new\\web\\" + oldPost.getThumbnailLink());
+            inputStream = request.getPart(part.getName()).getInputStream();
+        
+            // refines the fileName in case it is an absolute path
+            int i = inputStream.available();
+            byte[] b = new byte[i];
+            inputStream.read(b);
+            fileName = extractFileName(part);
+
+            String pathName = getFolderUpload()+"\\" + fileName;
+            System.out.println(fileName);
+            fileOutputStream  = new FileOutputStream(pathName);
+            fileOutputStream.write(b);
+            inputStream.close();
+            fileOutputStream.close();
+            p.setThumbnailLink("assets/images/"+fileName);
+            File file = new File(getFolderUpload()+"\\"  + postDB.getPostById(pid).getThumbnailLink());
             file.delete();
         }
         
