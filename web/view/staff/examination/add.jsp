@@ -26,12 +26,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+       
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
