@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
         <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
@@ -77,8 +78,8 @@
                             <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="showlogin">Login</a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="showregister">Sign up</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="register">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
@@ -117,9 +118,8 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="userprofile">Profile</a></p>
-                                        <p> <a href="customer/changepassword">Change Password</a></p>
-                                        <p> <a href="logout">Log Out</a></p>
+                                        <p style="text-align: left"> <a href="userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
                                 <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>

@@ -78,8 +78,8 @@
                             <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="../../showlogin">Login</a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="../../showregister">Sign up</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../../login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../../register">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
@@ -118,9 +118,8 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="../../userprofile">Profile</a></p>
-                                        <p> <a href="../../customer/changepassword">Change Password</a></p>
-                                        <p> <a href="../../logout">Log Out</a></p>
+                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
                                 <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
@@ -134,48 +133,14 @@
 
         <!-- End Banner -->
         <!-- section -->
-<!--        <div class="container">
-            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-            <form action="update" method="POST" >
-                <input type="text" name="id" value="${requestScope.user.id}" hidden>
-                <input type="text" name="status" value="${requestScope.user.status.id}" hidden>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" value="${requestScope.user.email}" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="full-name">Full name</label>
-                    <input type="text" class="form-control" name="full-name" value="${requestScope.user.fullName}">
-                </div>
-                <input type="text" class="form-control" name="image-link" value="${requestScope.user.imageLink}" hidden>
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select class="form-control" name="gender">
-                        <option value="male" <c:if test="${requestScope.user.gender==true}">selected</c:if>>Male</option>
-                        <option value="female" <c:if test="${requestScope.user.gender==false}">selected</c:if>>Female</option>
-                    </select>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="mobile">Mobile</label>
-                        <input type="text" class="form-control" name="mobile" value="${requestScope.user.mobile}">
-                    </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" value="${requestScope.user.address}">
-                </div>
-                
-
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>-->
 
         <div class="container" style="margin-top: 50px; margin-bottom: 50px">
             <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Customer list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <form action="new" method="POST" novalidate class="needs-validation">
+                    <form action="update" method="POST" novalidate class="needs-validation">
                         <div class="form-row">
                             <input type="text" name="id" value="${requestScope.user.id}" hidden>
                             <div style="padding-left: 0" class="form-group col-md-6">
@@ -202,8 +167,8 @@
                         <div class="form-row">
                             <div style="padding-left: 0" class="form-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="${requestScope.user.email}" disabled>
-                                
+                                <input type="email" class="form-control" id="email" value="${requestScope.user.email}" disabled>
+                            <input type="email" value="${requestScope.user.email}" hidden name="email"> 
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mobile">Mobile</label>

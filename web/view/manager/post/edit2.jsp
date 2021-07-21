@@ -81,7 +81,7 @@
                             <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="../../showlogin">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../../login">Login</a></li>
                                 <li class="appointment-btn"><a class="login-trigger" href="../../showregister">Sign up</a></li>
 
                             </c:if>
@@ -121,9 +121,8 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="../../userprofile">Profile</a></p>
-                                        <p> <a href="../../customer/changepassword">Change Password</a></p>
-                                        <p> <a href="../../logout">Log Out</a></p>
+                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
                                 <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
@@ -145,7 +144,7 @@
                         <div class="col-md-9">
 
                             <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
-                            <input class="form-control" onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                            <input class="form-control-file" onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <div style="display: none; color: red" id="alertfile">
                                 File size exceeded 50MB!
                             </div>
@@ -293,7 +292,6 @@
                 var maxFileSize = 1024 * 1024;
                 function savePost() {
                     document.getElementById("status").value = "25";
-                    
                     $('#submit_handle').click();
                 }
                 function saveDraftPost() {
