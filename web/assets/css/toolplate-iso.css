@@ -1,0 +1,1000 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiEyp8kv8JHgFVrJJfedw.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLGT9Z1xlEA.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/s/poppins/v15/pxiByp8kv8JHgFVrLEj6Z1xlEA.ttf) format('truetype');
+}
+
+.bootstrap-iso body {
+    background: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+.bootstrap-iso h1,
+.bootstrap-iso h2,
+.bootstrap-iso h3,
+.bootstrap-iso h4,
+.bootstrap-iso h5,
+.bootstrap-iso h6 {
+    font-weight: 600;
+    line-height: inherit;
+}
+
+.bootstrap-iso h1,
+.bootstrap-iso h2,
+.bootstrap-iso h3,
+.bootstrap-iso h4 {
+    letter-spacing: -1px;
+}
+
+.bootstrap-iso h5 {
+    font-weight: 500;
+}
+
+.bootstrap-iso h1 {
+    color: #252525;
+    font-size: 5em;
+}
+
+.bootstrap-iso h2 {
+    color: #272727;
+    font-size: 3em;
+    padding-bottom: 10px;
+}
+
+.bootstrap-iso h3 {
+    font-size: 1.8em;
+    line-height: 1.2em;
+    margin-bottom: 0;
+}
+
+.bootstrap-iso h4 {
+    color: #454545;
+    font-size: 1.8em;
+    padding-bottom: 2px;
+}
+
+.bootstrap-iso h6 {
+    letter-spacing: 0;
+    font-weight: normal;
+}
+
+.bootstrap-iso p {
+    color: #757575;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 24px;
+}
+
+.bootstrap-iso html {
+    -webkit-font-smoothing: antialiased;
+}
+
+.bootstrap-iso a {
+    color: #252525;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    text-decoration: none !important;
+}
+
+.bootstrap-iso a:hover,
+.bootstrap-iso a:active,
+.bootstrap-iso a:focus {
+    color: #a5c422;
+    outline: none;
+}
+
+.bootstrap-iso ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.bootstrap-iso ::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background: #000000;
+}
+
+.bootstrap-iso .section-title {
+    padding-bottom: 20px;
+}
+
+.bootstrap-iso .section-title h2 {
+    margin-top: 0;
+}
+
+.bootstrap-iso .section-btn {
+    background: #a5c422;
+    border: 0;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: inherit;
+    font-weight: 500;
+    padding: 14px 20px;
+    transition: transform 0.1s ease-in;
+    transform: translateX(0);
+}
+
+.bootstrap-iso .section-btn:hover {
+    transform: translateY(-5px);
+}
+
+.bootstrap-iso .text-align-right {
+    text-align: right;
+}
+
+.bootstrap-iso .text-align-center {
+    text-align: center;
+}
+
+.bootstrap-iso .border-top {
+    border-top: 1px solid #f2f2f2;
+    margin-top: 4em;
+    padding-top: 2.5em;
+}
+
+.bootstrap-iso .btn-gray {
+    background: #393939;
+}
+
+.bootstrap-iso .btn-blue {
+    background: #4267b2;
+}
+
+.bootstrap-iso .news-thumb {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.bootstrap-iso .news-thumb img {
+    border-radius: 10px 10px 0 0;
+}
+
+.bootstrap-iso .news-info {
+    padding: 30px;
+    text-align: left;
+}
+
+.bootstrap-iso .news-info span {
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.bootstrap-iso .news-info h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bootstrap-iso .author {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 1.5em;
+    margin-top: 2em;
+}
+
+.bootstrap-iso .author img,
+.bootstrap-iso .author .author-info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.bootstrap-iso .author-info h5 {
+    margin-bottom: 0;
+}
+
+.bootstrap-iso .author img {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.bootstrap-iso #about,
+.bootstrap-iso #team,
+.bootstrap-iso #news,
+.bootstrap-iso #news-detail {
+    position: relative;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.bootstrap-iso #news,
+.bootstrap-iso #service {
+    text-align: center;
+}
+
+.bootstrap-iso #google-map {
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.bootstrap-iso .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background: none repeat scroll 0 0 #ffffff;
+}
+
+.bootstrap-iso .spinner {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    position: relative;
+}
+
+.bootstrap-iso .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 45px;
+    height: 45px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 1px solid #575757;
+    border-top-color: #ffffff;
+    animation: spinner 0.9s linear infinite;
+}
+
+.bootstrap-iso header {
+    background: #ffffff;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    height: 45px;
+}
+
+.bootstrap-iso header .col-md-8 {
+    padding-right: 0;
+}
+
+.bootstrap-iso header p,
+.bootstrap-iso header span {
+    font-size: 12px;
+    line-height: 24px;
+    padding-top: 12px;
+}
+
+.bootstrap-iso header a,
+.bootstrap-iso header span {
+    color: #747474;
+}
+
+.bootstrap-iso header span {
+    font-weight: 500;
+    display: inline-block;
+    padding: 11px 15px;
+}
+
+.bootstrap-iso header span.date-icon {
+    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+    padding-right: 19px;
+    padding-left: 19px;
+}
+
+.bootstrap-iso header span i {
+    color: #a5c422;
+    margin-right: 5px;
+}
+
+.bootstrap-iso .navbar-default {
+    display: flex;
+    flex-wrap: nowrap;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.075);
+    border: none;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+.bootstrap-iso .navbar-default .navbar-brand {
+    color: #393939;
+    font-weight: 500;
+}
+
+.bootstrap-iso .navbar-default .navbar-brand .fa {
+    color: #a5c422;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav li.appointment-btn {
+    margin: 3px 0 0 20px;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav li.appointment-btn a {
+    background: #00aeef;
+    border-radius: 3px;
+    color: #ffffff;
+    font-weight: 600;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav li.appointment-btn a:hover {
+    background: #1a73e8;
+    color: #ffffff !important;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav li a {
+    color: #555555;
+    font-size: 15px;
+    font-weight: 500;
+    padding-right: 20px;
+    padding-left: 20px;
+    -webkit-transition: all ease-in-out 0.4s;
+    transition: all ease-in-out 0.4s;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav>li a:hover {
+    color: #393939 !important;
+}
+
+.bootstrap-iso .navbar-default .navbar-nav>li>a:hover,
+.bootstrap-iso .navbar-default .navbar-nav>li>a:focus {
+    /*color: #555555;*/
+}
+
+.bootstrap-iso .navbar-default .navbar-nav>.active>a,
+.bootstrap-iso .navbar-default .navbar-nav>.active>a:hover,
+.bootstrap-iso .navbar-default .navbar-nav>.active>a:focus {
+    color: #393939;
+    background-color: transparent;
+}
+
+.bootstrap-iso .navbar-default .navbar-toggle {
+    border: none;
+    padding-top: 10px;
+}
+
+.bootstrap-iso .navbar-default .navbar-toggle .icon-bar {
+    background: #393939;
+    border-color: transparent;
+}
+
+.bootstrap-iso .navbar-default .navbar-toggle:hover,
+.bootstrap-iso .navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.bootstrap-iso #home h1 {
+    color: #ffffff;
+    padding-bottom: 10px;
+    margin-top: 0;
+    font-size: 45px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.bootstrap-iso #home h3 {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: inherit;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 20px 0px;
+}
+
+.bootstrap-iso .slider .container {
+    width: 100%;
+}
+
+.bootstrap-iso .slider .owl-dots {
+    position: absolute;
+    top: 575px;
+    width: 100%;
+    justify-content: center;
+}
+
+.bootstrap-iso .owl-theme .owl-dots .owl-dot span {
+    width: 8px;
+    height: 8px;
+    margin: 5px 7px;
+    border: 2px solid #d9d9d9;
+    background: transparent;
+    display: block;
+    -webkit-backface-visibility: visible;
+    transition: opacity 200ms ease;
+    border-radius: 30px;
+}
+
+.bootstrap-iso .owl-theme .owl-dots .owl-dot.active span,
+.bootstrap-iso .owl-theme .owl-dots .owl-dot:hover span {
+    background-color: #ffffff;
+    border-color: transparent;
+}
+
+.bootstrap-iso .slider .caption {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgba(20, 20, 20, 0.2);
+    height: 100%;
+    color: #fff;
+    cursor: e-resize;
+}
+
+.bootstrap-iso .slider .item {
+    background-position: inherit;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-size: cover;
+    height: 650px;
+}
+
+.bootstrap-iso .slider .item-first {
+    background-image: url(../images/slider1.jpg);
+}
+
+.bootstrap-iso .slider .item-second {
+    background-image: url(../images/slider2.jpg);
+}
+
+.bootstrap-iso .slider .item-third {
+    background-image: url(../images/slider3.jpg);
+}
+
+.bootstrap-iso #about {
+    background: url('../images/about-bg.jpg') no-repeat top center;
+    background-size: cover;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.bootstrap-iso .profile img,
+.bootstrap-iso .profile figcaption {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 1em;
+}
+
+.bootstrap-iso .profile img {
+    border-radius: 100%;
+    width: 65px;
+    height: 65px;
+    margin-right: 1em;
+}
+
+.bootstrap-iso .profile figcaption h3 {
+    margin-top: 0;
+}
+
+.bootstrap-iso #about h6 {
+    color: #858585;
+    margin: 0;
+}
+
+.bootstrap-iso .team-thumb {
+    background-color: #f9f9f9;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.bootstrap-iso .team-info {
+    padding: 20px 30px 0 30px;
+    text-align: center;
+}
+
+.bootstrap-iso .team-contact-info {
+    border-top: 1px solid #e9e9e9;
+    padding-top: 1.2em;
+    margin-top: 1.5em;
+}
+
+.bootstrap-iso .team-contact-info .fa {
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.bootstrap-iso .team-contact-info p {
+    margin-bottom: 2px;
+}
+
+.bootstrap-iso .team-contact-info a {
+    color: #757575;
+}
+
+.bootstrap-iso .team-thumb .social-icon li {
+    font-weight: 500;
+}
+
+.bootstrap-iso .team-thumb .social-icon li a {
+    background: #ffffff;
+    border-radius: 100%;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 2px 0 2px;
+}
+
+.bootstrap-iso .team-thumb .social-icon {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: 0.5s 0.2s;
+    text-align: center;
+    position: relative;
+    top: 0;
+}
+
+.bootstrap-iso .team-thumb:hover .social-icon {
+    opacity: 1;
+    transition-delay: 0.3s;
+    transform: translateY(0px);
+    top: -22em;
+}
+
+.bootstrap-iso #service {
+    background: #a5c422;
+}
+
+.bootstrap-iso #service h2,
+.bootstrap-iso #service h4 {
+    color: #ffffff;
+}
+
+.bootstrap-iso #service p {
+    color: #d9d9d9;
+}
+
+.bootstrap-iso #service .service-thumb {
+    padding: 0 22px;
+}
+
+.bootstrap-iso #service .fa {
+    font-size: 50px;
+    margin-bottom: 10px;
+    background: #ffffff;
+    color: #a5c422;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    border-radius: 100%;
+}
+
+.bootstrap-iso #news,
+.bootstrap-iso #news-detail {
+    background: #f9f9f9;
+}
+
+.bootstrap-iso #news-detail blockquote {
+    margin: 30px 0;
+}
+
+.bootstrap-iso .news-detail-thumb .news-image img {
+    border-radius: 10px;
+}
+
+.bootstrap-iso .news-detail-thumb h3 {
+    margin-bottom: 8px;
+}
+
+.bootstrap-iso .news-image {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.bootstrap-iso .news-image img {
+    width: 100%;
+}
+
+.bootstrap-iso .news-detail-thumb ul {
+    margin: 32px 12px 22px 0px;
+}
+
+.bootstrap-iso .news-detail-thumb ul li {
+    list-style: circle;
+    font-weight: normal;
+    padding: 6px 12px 6px 0px;
+}
+
+.bootstrap-iso .news-sidebar {
+    margin-top: 16px;
+}
+
+.bootstrap-iso .news-social-share {
+    text-align: center;
+    padding-top: 22px;
+}
+
+.bootstrap-iso .news-social-share .btn {
+    border-radius: 100px;
+    border: none;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 2px 6px;
+    padding: 8px 14px;
+}
+
+.bootstrap-iso .news-social-share .btn-primary {
+    background: #3b5998;
+}
+
+.bootstrap-iso .news-social-share .btn-success {
+    background: #333333;
+}
+
+.bootstrap-iso .news-social-share .btn-danger {
+    background: #dd4b39;
+}
+
+.bootstrap-iso .news-social-share a .fa {
+    padding-right: 4px;
+}
+
+.bootstrap-iso .recent-post {
+    padding-top: 2px;
+    padding-bottom: 18px;
+}
+
+.bootstrap-iso .recent-post .media img {
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    margin-right: 5px;
+}
+
+.bootstrap-iso .recent-post .media-heading {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: inherit;
+    margin-top: 5px;
+}
+
+.bootstrap-iso .news-categories {
+    margin-top: 8px;
+}
+
+.bootstrap-iso .news-categories li a {
+    color: #2b2b2b;
+}
+
+.bootstrap-iso .news-ads {
+    background: #ffffff;
+    border-right: 4px solid #2b2b2b;
+    padding: 42px;
+    text-align: center;
+    margin: 26px 0 26px 0;
+}
+
+.bootstrap-iso .news-ads.sidebar-ads {
+    border-left: 4px solid #2b2b2b;
+    border-right: 0px;
+}
+
+.bootstrap-iso .news-ads h4 {
+    font-size: 18px;
+}
+
+.bootstrap-iso .news-tags h4 {
+    padding-bottom: 6px;
+}
+
+.bootstrap-iso .news-categories li,
+.bootstrap-iso .news-tags li {
+    list-style: none;
+    display: inline-block;
+    margin: 4px;
+}
+
+.bootstrap-iso .news-tags li a {
+    background: #393939;
+    border-radius: 50px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    float: left;
+    min-width: 30px;
+    padding: 6px 12px;
+    -webkit-transition: all ease-in-out 0.4s;
+    transition: all ease-in-out 0.4s;
+}
+
+.bootstrap-iso .news-tags li a:hover {
+    background: #4267b2;
+}
+
+.bootstrap-iso #appointment {
+    padding-top: 100px;
+}
+
+.bootstrap-iso #appointment label {
+    color: #393939;
+    font-weight: 500;
+}
+
+.bootstrap-iso #appointment .form-control {
+    background: #f9f9f9;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: 15px;
+    transition: all ease-in-out 0.4s;
+}
+
+.bootstrap-iso #appointment input,
+.bootstrap-iso #appointment select {
+    height: 45px;
+}
+
+.bootstrap-iso #appointment button#cf-submit {
+    background: #a5c422;
+    color: #ffffff;
+    font-weight: 600;
+    height: 55px;
+}
+
+.bootstrap-iso #appointment button#cf-submit:hover {
+    background: #393939;
+    color: #ffffff;
+}
+
+.bootstrap-iso footer {
+    padding-top: 80px;
+    padding-bottom: 40px;
+    background-color: currentColor;
+}
+
+.bootstrap-iso footer h4 {
+    padding-bottom: 5px;
+}
+
+.bootstrap-iso footer a {
+    color: #757575;
+}
+
+.bootstrap-iso footer a:hover {
+    color: #4267b2;
+}
+
+.bootstrap-iso .contact-info {
+    padding-top: 10px;
+}
+
+.bootstrap-iso .contact-info .fa {
+    background: #393939;
+    border-radius: 100%;
+    color: #ffffff;
+    font-size: 15px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.bootstrap-iso .latest-stories {
+    margin-bottom: 20px;
+}
+
+.bootstrap-iso .stories-image,
+.bootstrap-iso .stories-info {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.bootstrap-iso .stories-image img {
+    border-radius: 100%;
+    width: 65px;
+    height: 65px;
+}
+
+.bootstrap-iso .stories-info {
+    margin-left: 15px;
+}
+
+.bootstrap-iso .stories-info h5 {
+    margin-bottom: 2px;
+}
+
+.bootstrap-iso .stories-info span {
+    color: #858585;
+    font-size: 12px;
+}
+
+.bootstrap-iso .opening-hours p {
+    line-height: 18px;
+}
+
+.bootstrap-iso .opening-hours span {
+    font-weight: 500;
+    display: inline-block;
+    padding-left: 10px;
+}
+
+.bootstrap-iso .copyright-text p,
+.bootstrap-iso .footer-link a {
+    color: #858585;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.bootstrap-iso .footer-link a {
+    font-size: 12px;
+    display: inline-block;
+    padding: 0 10px;
+    margin-top: 4px;
+}
+
+.bootstrap-iso .angle-up-btn {
+    position: relative;
+    bottom: 4em;
+    display: block;
+}
+
+.bootstrap-iso .angle-up-btn a {
+    background: #ffffff;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px;
+    font-size: 20px;
+    color: #393939;
+    display: inline-block;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    transition: transform 0.1s ease-in;
+    transform: translateX(0);
+}
+
+.bootstrap-iso .angle-up-btn a:hover {
+    background: #4267b2;
+    color: #ffffff;
+    transform: translateY(-5px);
+}
+
+.bootstrap-iso .social-icon {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.bootstrap-iso .social-icon li {
+    display: inline-block;
+    list-style: none;
+}
+
+.bootstrap-iso .social-icon li a {
+    border-radius: 100px;
+    color: #464646;
+    font-size: 15px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    position: relative;
+}
+
+.bootstrap-iso .social-icon li a:hover {
+    background: #4267b2;
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 1200px) {
+    .bootstrap-iso h1 {
+        font-size: 4em;
+    }
+    .bootstrap-iso h2 {
+        font-size: 2.5em;
+    }
+    .bootstrap-iso h3 {
+        font-size: 1.5em;
+    }
+    .bootstrap-iso header {
+        height: inherit;
+    }
+    .bootstrap-iso header span.date-icon {
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+    .bootstrap-iso header span.email-icon {
+        padding-top: 0;
+    }
+    .bootstrap-iso .navbar-default .navbar-nav li a {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .bootstrap-iso .slider .item {
+        background-position: center;
+    }
+    .bootstrap-iso header {
+        padding-bottom: 10px;
+    }
+    .bootstrap-iso header .text-align-right {
+        text-align: left;
+    }
+    .bootstrap-iso header span {
+        padding-top: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .bootstrap-iso .navbar-default .navbar-collapse,
+    .bootstrap-iso .navbar-default .navbar-form {
+        border-color: transparent;
+    }
+    .bootstrap-iso .navbar-default .navbar-nav li.appointment-btn {
+        margin-left: 15px;
+    }
+    .bootstrap-iso .navbar-default .navbar-nav li a {
+        display: inline-block;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .bootstrap-iso .news-sidebar {
+        margin-top: 2em;
+    }
+    .bootstrap-iso #appointment-form {
+        padding-top: 4em;
+        padding-bottom: 4em;
+    }
+    .bootstrap-iso footer {
+        padding-top: 60px;
+        padding-bottom: 0;
+    }
+    .bootstrap-iso .footer-thumb {
+        padding-bottom: 10px;
+    }
+    .bootstrap-iso .border-top {
+        text-align: center;
+    }
+    .bootstrap-iso .copyright-text {
+        margin-top: 10px;
+    }
+    .bootstrap-iso .angle-up-btn {
+        bottom: 10em;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .bootstrap-iso h1 {
+        font-size: 3em;
+        line-height: 1.2em;
+    }
+    .bootstrap-iso h2 {
+        font-size: 2.1em;
+    }
+    .bootstrap-iso h4 {
+        font-size: 1.4em;
+    }
+    .bootstrap-iso #home h3 {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+}

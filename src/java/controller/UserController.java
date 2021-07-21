@@ -296,11 +296,11 @@ public class UserController extends HttpServlet {
             if (message.equals("notpermission")) {
                 String mess = "You are not allowed to asscess this page!";
 
-                request.getSession().setAttribute("mess", mess);
+                
             }
             if (message.equals("notlogin")) {
                 String mess = "Not Log in!";
-                request.getSession().setAttribute("mess", mess);
+                
             }
         }
 
@@ -317,7 +317,7 @@ public class UserController extends HttpServlet {
         //if user not exist alert wrong email or password
         if (list.size() == 0) {
             String alert = "Wrong email or password";
-            request.getSession().setAttribute("alert", alert);
+           
             response.sendRedirect("home");
             return;
 
