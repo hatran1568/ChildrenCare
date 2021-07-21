@@ -13,14 +13,16 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+        <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
@@ -165,34 +167,51 @@
 
         <!-- HOME -->
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
-            <div class="container" style="text-align: center;">
-                <h1 style="margin-top: 3%">Your Prescription</h1>
-                <div style="font-size: 15px;">
-                    <h2 style="margin-bottom: -1%; font-size: 20px">Receiver Information</h2><br>
-                    Full Name: ${requestScope.medexam.receiver.getFullName()}<br>
-                    Gender: <c:if test="${requestScope.medexam.receiver.isGender()}">Male</c:if>
-                            <c:if test="${!requestScope.medexam.receiver.isGender()}">Female</c:if><br>
-                    Mobile: ${requestScope.medexam.receiver.getMobile()}<br>
-                    Address: ${requestScope.medexam.receiver.getAddress()}<br>
-                    Email: ${requestScope.medexam.receiver.getEmail()}<br>
-                    Checkup Time: ${requestScope.medexam.getReservationService().reservation.getCheckupTime()}
+            <div class="container" style="text-align: left;">
+                <div style="text-align: center"><h1 style="margin-top: 3%">Your Prescription</h1></div>
+                
+                <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
+                    <h2 style="text-align: center; font-size: 30px">Receiver info</h2>
+                    <div class="row" style="margin-left: 15%">
+                        <p class="col-md-6">
+                            <strong>Receiver name:</strong>
+                            <span>${requestScope.medexam.receiver.fullName}</span>
+                        </p>
+                        <p class="col-md-6">
+                            <strong>Gender:</strong>
+                            <span><c:if test="${requestScope.medexam.receiver.gender eq true}">Male</c:if>
+                                <c:if test="${requestScope.medexam.receiver.gender eq false}">Female</c:if></span>
+                            </p>
+                    </div>
+                    <div class="row" style="margin-left: 15%">
+                        <p class="col-md-6">
+                            <strong> Email:</strong>
+                            <span>${requestScope.medexam.receiver.email}</span>
+                        </p>
+                        <p class="col-md-6">
+                            <strong>Mobile:</strong>
+                            <span>${requestScope.medexam.receiver.mobile}</span>
+                        </p>
+                    </div>
+                    <div class="row" style="margin-left: 15%">
+                        <p class="col-md-6">
+                            <strong>Address:</strong>
+                            <span>${requestScope.medexam.receiver.address}</span>
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="container" style="height: auto; max-width: 80%">
+            <div class="container" style="height: auto; max-width: 50%; margin-top: -5%">
             <table class="table" id="myExams">
                 <thead class="thead-dark">
                     <tr>
-                        <td class="col-md-1">Reservation ID</td>
-                        <td class="col-md-2">Service</td>
-                        <td class="col-md-2">Service Name</td>
+                        <td class="col-md-2">${requestScope.medexam.getReservationService().service.getFullname()}<br></td>
                         <td class="col-md-2">Prescription</td>
                 </thead>
                 <tbody>
                         <tr>
-                            <td class="col-md-1">${requestScope.medexam.getReservationService().reservation.id}</td>
                             <td><img src="../../${requestScope.medexam.getReservationService().service.thumbnailLink}" id="serviceThumbnail" style="width: 300px; height: 150px" class="img-thumbnail" /></td>
-                            <td class="col-md-2">${requestScope.medexam.getReservationService().service.getFullname()}</td>
-                            <td class="col-md-2">${requestScope.medexam.getPrescription()}</td>
+                            <td class="col-md-2" style="text-align: left">${requestScope.medexam.getPrescription()}</td>
                         </tr>
                 </tbody>
             </table>
@@ -326,5 +345,14 @@
                 </script>
                 <c:remove var="mess" scope="session" />
             </c:if>
+            <style>
+            p strong,span{
+                    font-size: 16px;
+                    color:black;
+                }
+                #Info h3{
+                    margin: 20px;
+                }
+        </style>
     </body>
 </html>
