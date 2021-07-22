@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -141,10 +141,8 @@
                     <div class="twelve wide  field">
                         <label  for="validationCustom01">Name</label>
 
-                        <input pattern="[A-Za-z]{6}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        <input pattern="[A-Za-z]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
+                       
                         <div class="invalid-feedback">
                             Please input a valid name at least 6 characters
                         </div>
@@ -166,10 +164,8 @@
                     <div class="field">
                         <label for="validationCustom02" >Email</label>
 
-                        <input pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        <input pattern="[^ @]*@[^ @]*"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
+                        
                         <div class="invalid-feedback">
                             Please input a valid email
                         </div>
@@ -193,7 +189,7 @@
                     </div>
                     <div class="twelve wide field">
                         <label>Feedback</label>
-                        <textarea name="note"></textarea>
+                        <textarea pattern="[0-9]{10}"  name="note"></textarea>
                         <input hidden="true" id="star" type="text" name="star">
                         <input hidden="true" value="${requestScope.id}"  type="text" name="sid">
                     </div>

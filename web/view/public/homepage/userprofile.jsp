@@ -242,7 +242,8 @@
                                 <c:if test="${sessionScope.user.status.id eq 18}">Inactive</c:if>
                                 </div>
                         </div><br>
-                            <button style="margin-right: 15%" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Information</button>
+                            <button style="" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Information</button>
+                            <button style="margin-left: 1%" class="btn btn-primary" onclick="window.location.href = 'customer/changepassword'">Change Password</button>
                     </div>
                         </table>
                             </div>

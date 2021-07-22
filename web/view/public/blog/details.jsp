@@ -160,7 +160,7 @@
                     <i>${requestScope.post.description}</i>
                 </div>
                     <hr />
-                <div class="row" style="font-size: 15px">
+                <div class="row" style="font-size: 15px; text-align: left">
                     ${requestScope.post.content}
                 </div>
                 <br>

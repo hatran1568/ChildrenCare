@@ -62,7 +62,6 @@ public class UserProfileController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -148,7 +147,7 @@ public class UserProfileController extends HttpServlet {
         User u = new User();
         u.setId(oldu.getId());
         u.setFullName(request.getParameter("fullName"));
-        u.setGender(Boolean.parseBoolean(request.getParameter("gender")));
+        u.setGender(request.getParameter("gender").equals("male"));
         u.setMobile(request.getParameter("mobile"));
         u.setAddress(request.getParameter("address"));
             //Avatar
