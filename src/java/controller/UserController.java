@@ -241,6 +241,18 @@ public class UserController extends HttpServlet {
      * @return a String containing servlet description
      */
     protected void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String message = request.getParameter("message");
+
+        if (message != null) {
+            if (message.equals("notpermission")) {
+                request.getRequestDispatcher("view/public/form/notauthoried.jsp").forward(request, response);
+
+            }
+            if (message.equals("notlogin")) {
+
+                 request.getRequestDispatcher("view/public/form/notlogin.jsp").forward(request, response);
+            }
+        }
         request.getRequestDispatcher("view/public/form/login.jsp").forward(request, response);
     }
 
@@ -373,18 +385,7 @@ public class UserController extends HttpServlet {
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         //check if there is any alert from system
-        String message = request.getParameter("message");
-
-        if (message != null) {
-            if (message.equals("notpermission")) {
-                response.sendRedirect("home");
-
-            }
-            if (message.equals("notlogin")) {
-
-                response.sendRedirect("home");
-            }
-        }
+       
 
         UserDAO userDb = new UserDAO();
         ArrayList<User> list = new ArrayList<User>();
