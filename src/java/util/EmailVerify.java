@@ -71,7 +71,7 @@ public class EmailVerify {
 
         // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
         //Email của Giang "giangtong09@gmail.com" "huepham1905"
-        transport.connect("smtp.gmail.com", "giangtong09@gmail.com", "huepham1905");
+        transport.connect("smtp.gmail.com", "childrencarewebsite@gmail.com", "hjsqgdkvxvmlyiaf");
         transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
         transport.close();
     }
@@ -106,7 +106,7 @@ public class EmailVerify {
 
         // Thay your_gmail thành gmail của bạn, thay your_password thành mật khẩu gmail của bạn
         //Email của Giang "giangtong09@gmail.com" "huepham1905"
-        transport.connect("smtp.gmail.com", "giangtong09@gmail.com", "huepham1905");
+        transport.connect("smtp.gmail.com", "childrencarewebsite@gmail.com", "hjsqgdkvxvmlyiaf");
         transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
         transport.close();
     }
