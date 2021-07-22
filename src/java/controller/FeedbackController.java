@@ -33,7 +33,8 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
+        maxRequestSize = 1024 * 1024 * 50,
+        location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
 @WebServlet(name = "FeedbackController", urlPatterns = {"/feedback"})
 public class FeedbackController extends HttpServlet {
 
@@ -145,12 +146,12 @@ public class FeedbackController extends HttpServlet {
         String r_gender = request.getParameter("gender");
         boolean gender = Boolean.parseBoolean(r_gender);
 
-        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        
         String email = request.getParameter("email");
         String mobile = request.getParameter("mobile");
         String r_star = request.getParameter("star");
         int star = 0;
-        if (r_star != null) {
+        if (r_star.length()!=0) {
             star = Integer.parseInt(r_star);
         }
         int sid = Integer.parseInt(request.getParameter("sid"));
@@ -172,7 +173,7 @@ public class FeedbackController extends HttpServlet {
         } else {
             feedbackDB.insertFeedback(f);
         }
-        request.getSession().setAttribute("mess", "Feedback Successfully");
+        
         response.sendRedirect("../home");
     }
 

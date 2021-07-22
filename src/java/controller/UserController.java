@@ -27,6 +27,7 @@ import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import util.EmailVerify;
+import util.MD5;
 
 /**
  *
@@ -61,7 +62,7 @@ public class UserController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -75,6 +76,89 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
 
         try {
+            String action = request.getServletPath();
+
+            switch (action) {
+                case "/admin/user/details":
+                    showUserDetails(request, response);
+                    break;
+                case "/admin/user/new":
+                    showAddForm(request, response);
+                    break;
+                case "/admin/user/insert":
+                    addUser(request, response);
+                    break;
+                case "/admin/user/delete":
+                    deleteUser(request, response);
+                    break;
+                case "/admin/user/edit":
+                    showEditForm(request, response);
+                    break;
+                case "/admin/user/update":
+                    editUser(request, response);
+                    break;
+                case "/admin/user/list":
+                    showListUser(request, response);
+                    break;
+                case "/login":
+                    showLoginForm(request, response);
+                    break;
+                case "/register":
+                    showRegisterForm(request, response);
+                    break;
+                case "/logout":
+                    logout(request, response);
+                    break;
+                case "/customer/changepassword":
+                    showChangePasswordForm(request, response);
+                    break;
+                case "/customer/change":
+                    changePassword(request, response);
+                    break;
+                case "/resetpassword":
+                    showResetPasswordForm(request, response);
+                    break;
+                case "/resetoldpassword":
+                    showNewPasswordForm(request, response);
+                    break;
+                case "/resetoldpassword/change":
+                    showInputNewPassword(request, response);
+                    break;
+                case "/resetoldpassword/update":
+                    updatePassword(request, response);
+                    break;
+                case "/verify": {
+                    try {
+                        verify(request, response);
+                    } catch (MessagingException ex) {
+                        Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+                case "/verifying":
+                    verifying(request, response);
+                    break;
+                default:
+
+                    break;
+            }
+        } catch (MessagingException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         try {
             String action = request.getServletPath();
 
             switch (action) {
@@ -147,24 +231,17 @@ public class UserController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
-
-    /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
+    
+    protected void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("view/public/form/login.jsp").forward(request, response);
+    }
+    protected void showRegisterForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.getRequestDispatcher("view/public/form/register.jsp").forward(request, response);
+    }
     protected void showListUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -294,13 +371,13 @@ public class UserController extends HttpServlet {
 
         if (message != null) {
             if (message.equals("notpermission")) {
-                String mess = "You are not allowed to asscess this page!";
+                response.sendRedirect("home");
 
                 
             }
             if (message.equals("notlogin")) {
-                String mess = "Not Log in!";
                 
+                 response.sendRedirect("home");
             }
         }
 
@@ -310,21 +387,21 @@ public class UserController extends HttpServlet {
         //get email and pass from client
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
+        pass = MD5.getMd5(pass);
 
         //search result in Database
         list = userDb.searchUserByEmailAndPass(email, pass);
 
         //if user not exist alert wrong email or password
         if (list.size() == 0) {
-            String alert = "Wrong email or password";
-           
-            response.sendRedirect("home");
+            String mess = "Wrong email or password";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("view/public/form/login.jsp").forward(request, response);
             return;
 
             // if user was verify redirect to home page
         } else if (list.get(0).getStatus().getId() != 13) {
-            String alert = "Login Successfully";
-            request.getSession().setAttribute("alert", alert);
+            
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
             if (list.get(0).getRole().getName().equals("Admin")) {
@@ -359,7 +436,7 @@ public class UserController extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
         String phone = request.getParameter("phone");
-        String fullnames = request.getParameter("fullname");
+        String fullnames = request.getParameter("name");
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
 
@@ -380,9 +457,9 @@ public class UserController extends HttpServlet {
 
         //if email was existed in system alert and redirect to homepage
         if (list.size() > 0) {
-            String alert = "Email had been registed! Please enter another Email!";
-            request.getSession().setAttribute("alert", alert);
-            response.sendRedirect("home");
+            String mess = "Email had been registed! Please enter another!";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("view/public/form/register.jsp").forward(request, response);
             return;
 
         }
@@ -392,10 +469,11 @@ public class UserController extends HttpServlet {
         u.setAddress(address);
         u.setEmail(email);
         u.setFullName(fullnames);
+        pass = MD5.getMd5(pass);
         u.setPassword(pass);
         u.setMobile(phone);
 
-        if (gender.equals("male")) {
+        if (gender.equals("true")) {
             u.setGender(true);
         } else {
             u.setGender(false);
@@ -421,7 +499,7 @@ public class UserController extends HttpServlet {
         EmailVerify.getInstance().sendText(u.getEmail(), code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
-        request.getRequestDispatcher("/view/homepage/verify.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/homepage/verify.jsp").forward(request, response);
     }
 
     //Check user input verify code
