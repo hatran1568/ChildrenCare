@@ -5,12 +5,12 @@
         <group>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Setting.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/toolplate-iso.css</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/assets/css/bootstrap-iso.css</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/add.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
-            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/edit.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/feedback/feedback.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
             <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReservationDAO.java</file>
         </group>
     </open-files>

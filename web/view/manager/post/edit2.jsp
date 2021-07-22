@@ -289,15 +289,20 @@
                 CKEDITOR.replace('content');
             </script>
             <script>
-                var maxFileSize = 1024 * 1024;
+                var maxFileSize = 1024;
                 function savePost() {
                     document.getElementById("status").value = "25";
-                    $('#submit_handle').click();
+                    
+                        $('#submit_handle').click();
+                    
+                    
                 }
                 function saveDraftPost() {
                     document.getElementById("status").value = "24";
-
-                    $('#submit_handle').click();
+                    
+                        $('#submit_handle').click();
+                    
+                    
                 }
                 var loadFile = function (event) {
                     //alert(event.target.files[0].size);
@@ -326,10 +331,10 @@
                                         event.preventDefault()
                                         event.stopPropagation()
                                     }
-
                                     form.classList.add('was-validated')
                                 }, false)
-                            })
+                            });
+                    
                 })()
 
             </script>
