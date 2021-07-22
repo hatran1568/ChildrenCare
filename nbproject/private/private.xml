@@ -4,6 +4,34 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/util/EmailVerify.java</file>
+
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ServiceController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/homepage/homepage.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/feedback/feedback.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/service/list2.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/reservation/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/bootstrap.min.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/bootstrap-iso.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/login/login.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/custom.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/post/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/reservationContact.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/tooplate-style.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerPostController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/feedback/feedback.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/style.css</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/add.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/bean/Setting.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/add.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/post/details.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/feedback/feedback.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/ReservationDAO.java</file>
         </group>
     </open-files>
 </project-private>

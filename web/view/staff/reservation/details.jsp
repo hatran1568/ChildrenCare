@@ -180,7 +180,7 @@
                     </p>
                     <p class="col-md-6">
                         <strong>Reservation date:</strong>
-                        <span>${requestScope.reservation.reservationDate}</span>
+                        <span><fmt:formatDate pattern="dd-MM-yyyy" value = "${requestScope.reservation.reservationDate}" /></span>
                     </p>
                 </div>
                 <div class="row">
@@ -190,7 +190,7 @@
                     </p>
                     <p class="col-md-6">
                         <strong>Checkup time:</strong>
-                        <span>${requestScope.reservation.checkupTime}</span>
+                        <span><fmt:formatDate pattern="dd-MM-yyyy" value = "${requestScope.reservation.checkupTime}" /></span>
                     </p>
                 </div> 
                 

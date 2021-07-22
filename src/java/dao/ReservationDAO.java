@@ -279,7 +279,7 @@ public class ReservationDAO extends BaseDAO {
             stm.setInt(2, s.getId());
             stm.setInt(3, 1);
             stm.setInt(4, rc.getId());
-            stm.setDate(5, r.getReservationDate());
+            stm.setDate(5, (Date) r.getReservationDate());
             stm.setFloat(6, s.getSalePrice());
 
             stm.executeUpdate();
