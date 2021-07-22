@@ -8,10 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Sign Up</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
-        <link href="assets/css/stylelogin.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/font.css" rel="stylesheet" type="text/css"/>
+
+        <link href="../assets/css/stylelogin.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/font.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <meta name="robots" content="noindex, follow">
     </head>
@@ -20,63 +21,58 @@
 
 
 
-            <section class="sign-in">
+            <section class="signup">
                 <div class="container">
-                    <div class="signin-content">
-                        <div class="signin-image">
-                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Login</span></div>
-                            <figure><img src="assets/images/signin-image.jpg" alt="sing up image"></figure>
-
-                        </div>
-                        <div class="signin-form">
-                            <c:if test="${not empty requestScope.mess}">
+                    <div class="signup-content">
+                        <div class="signup-form">
+                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a style="text-decoration: none" href="userprofile">User Profile</a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Change Password</span></div>
+                                    <c:if test="${not empty requestScope.mess}">
                                 <div class="alert alert-danger" role="alert">
                                     ${requestScope.mess}
                                 </div>
                             </c:if>
-                            <h2 class="form-title">Sign in</h2>
-                            <form novalidate="true" method="POST" action="login" class="register-form needs-validation" id="login-form">
-
+                            <h2 class="form-title">Change Password</h2>
+                            <form oninput='cpass.setCustomValidity(cpass.value !=npass.value ? "Passwords do not match." : "")' novalidate  method="POST" action="change" class="register-form needs-validation" id="register-form">
                                 <div class="form-group">
-                                    <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input required="true" type="text" name="email" id="your_name" placeholder="Your Email" />
+                                    <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="opass" id="pass" placeholder="Password"/>
                                     <div class="invalid-feedback">
-                                        Please do not let email empty
+                                        Please input a valid password in range [8,12] characters
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input required="true" type="password" name="pass" id="your_pass" placeholder="Password" />
+                                    <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="npass" id="pass" placeholder="Password"/>
                                     <div class="invalid-feedback">
-                                        Please do not let password empty
+                                        Please input a valid password in range [8,12] characters
                                     </div>
                                 </div>
-                                <a href="resetpassword">Forget Password</a>
-                                <div class="form-group form-button">
-                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
-                                    <input type="button" onclick="window.location.href='register'"  class="form-submit" value="Register" />
+                                <div class="form-group">
+                                    <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                    <input pattern="[A-Za-z0-9]{8,12}" type="password" name="cpass" id="re_pass" placeholder="Repeat your password"/>
+                                    <div class="invalid-feedback">
+                                        Passwords do not match
+                                    </div>
                                 </div>
                                 
+                                <div class="form-group form-button">
+                                    <input type="submit" name="signup" id="signup" class="form-submit" value="Change Password"/>
+                                  
+                                </div>
                             </form>
+                        </div>
+                        <div class="signup-image">
+                            <figure><img src="../assets/images/signup-image.jpg" alt="sing up image"></figure>
 
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-        <script src="assets/js/main.js" type="text/javascript"></script>
+        <script src="../assets/js/main.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
 
-            gtag('config', 'UA-23581568-13');
-        </script>
         <script>
             (function () {
                 'use strict'
@@ -98,6 +94,6 @@
                         })
             })()
         </script>
-        <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6724f2742ee73c2e","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2021.7.0","si":10}'></script>
+
     </body>
 </html> 

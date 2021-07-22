@@ -25,6 +25,7 @@
                 <div class="container">
                     <div class="signup-content">
                         <div class="signup-form">
+                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Register</span></div>
                               <c:if test="${not empty requestScope.mess}">
                                 <div class="alert alert-danger" role="alert">
                                     ${requestScope.mess}

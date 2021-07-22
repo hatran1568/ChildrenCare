@@ -174,8 +174,10 @@
                     <div class="field">
                         <label>Mobile</label>
 
-                        <input type="text" name="mobile" placeholder="01234456789">
-
+                        <input pattern="[0-9]{10}" type="text" name="mobile" placeholder="01234456789">
+                         <div class="invalid-feedback">
+                            Please input a valid phone with 10 digits
+                        </div>
                     </div>
                 </div>
 
@@ -189,7 +191,10 @@
                     </div>
                     <div class="twelve wide field">
                         <label>Feedback</label>
-                        <textarea pattern="[0-9]{10}"  name="note"></textarea>
+                        <textarea required="true"  name="note"></textarea>
+                         <div class="invalid-feedback">
+                            Please input a valid email
+                        </div>
                         <input hidden="true" id="star" type="text" name="star">
                         <input hidden="true" value="${requestScope.id}"  type="text" name="sid">
                     </div>
