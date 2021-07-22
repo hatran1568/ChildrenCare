@@ -396,6 +396,9 @@
             }
         </script>
         <script>
+            $(document).ready(function (){
+                $("#male").prop("checked", true);
+            });
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {

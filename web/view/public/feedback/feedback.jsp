@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -80,45 +80,8 @@
                             <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                                <div id="login" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Login</h4>
-                                                <form action="login" method="POST">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Login" />
-                                                    <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                                <div id="register" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-
-                                        <div class="modal-content">
-                                            <div class="modal-body ">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Register</h4>
-                                                <form action="register" method="GET">
-                                                    <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                    Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                    Female <input type="radio" name="gender" value="female">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                    <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Register" />
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
+                                <li class="appointment-btn"><a class="login-trigger" href="showlogin">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="showregister">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
@@ -162,7 +125,7 @@
                                         <p> <a href="logout">Log Out</a></p>
                                     </div>
                                 </div>
-                                <p class="dropdown-name ">${sessionScope.user.fullName}</p>
+                                <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
                             </c:if>
                         </ul>
                     </div>
@@ -178,10 +141,8 @@
                     <div class="twelve wide  field">
                         <label  for="validationCustom01">Name</label>
 
-                        <input pattern="[A-Za-z]{6}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        <input pattern="[A-Za-z]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
+                       
                         <div class="invalid-feedback">
                             Please input a valid name at least 6 characters
                         </div>
@@ -203,10 +164,8 @@
                     <div class="field">
                         <label for="validationCustom02" >Email</label>
 
-                        <input pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
+                        <input pattern="[^ @]*@[^ @]*"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
+                        
                         <div class="invalid-feedback">
                             Please input a valid email
                         </div>
@@ -230,7 +189,7 @@
                     </div>
                     <div class="twelve wide field">
                         <label>Feedback</label>
-                        <textarea name="note"></textarea>
+                        <textarea pattern="[0-9]{10}"  name="note"></textarea>
                         <input hidden="true" id="star" type="text" name="star">
                         <input hidden="true" value="${requestScope.id}"  type="text" name="sid">
                     </div>
