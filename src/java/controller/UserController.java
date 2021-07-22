@@ -508,13 +508,13 @@ public class UserController extends HttpServlet {
 
         User u = new User();
         u.setEmail(email);
-
+        
         String code = request.getParameter("code");
 
         String actual = request.getParameter("actualcode");
 
         UserDAO userDb = new UserDAO();
-
+        u = userDb.getUserByEmail(email);
         //Check if user input true code and set status to true
         if (code.equals(actual)) {
             userDb.updateStatus(u, 14);
