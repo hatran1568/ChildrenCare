@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import util.EmailVerify;
+import util.MD5;
 
 /**
  *
@@ -151,6 +152,8 @@ public class ManagerCustomerController extends HttpServlet {
         request.setAttribute("user", user);
         SettingDAO settingDB = new SettingDAO();
         ArrayList<Setting> roles = settingDB.getSetting("Role");
+        ArrayList<Setting> status = settingDB.getSetting("User Status");
+        request.setAttribute("status", status);
         request.setAttribute("roles", roles);
         request.getRequestDispatcher("../../view/manager/customer/edit.jsp").forward(request, response);
     }
@@ -205,7 +208,7 @@ public class ManagerCustomerController extends HttpServlet {
             buffer.append((char) randomLimitedInt);
         }
         String password = buffer.toString();
-        u.setPassword(password);
+        u.setPassword(MD5.getMd5(password));
         u.setAddress(request.getParameter("address"));
         u.setGender(request.getParameter("gender").equals("male"));
         u.setFullName(request.getParameter("full-name"));

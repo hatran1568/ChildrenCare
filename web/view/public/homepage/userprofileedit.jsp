@@ -193,14 +193,16 @@
                         </div>
                         <hr />
                         <div class="row" style="margin-top: -5%">
-                            <div class="col-sm-3 col-md-2 col-5">
+                            <div class="col-sm-3 col-md-2 col-5" style="margin-top:-2%">
                                 <label style="font-weight:bold;">Gender</label>
                             </div>
-                            <div class="col-md-8 col-6">
-                                <select class="form-control" name="gender" style="max-width: 50%; margin-top:-1%">
+                            <div class="col-md-8 col-6" style="margin-top:-2%">
+<!--                                <select class="form-control" name="gender" style="max-width: 50%; margin-top:-1%">
                                         <option <c:if test="${sessionScope.user.gender eq true}">selected</c:if> value="true">Male</option>
                                         <option <c:if test="${sessionScope.user.gender eq false}">selected</c:if> value="false">Female</option>
-                                </select>
+                                </select>-->
+                                Male <input type="radio" name="gender" value="male" <c:if test="${sessionScope.user.gender eq true}">checked</c:if> style="margin-right: 3%">
+                                Female <input type="radio" name="gender" <c:if test="${sessionScope.user.gender eq false}">checked</c:if> value="female">
                                 </div>
                             </div>
                             <hr />

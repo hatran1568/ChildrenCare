@@ -148,7 +148,7 @@ public class UserProfileController extends HttpServlet {
         User u = new User();
         u.setId(oldu.getId());
         u.setFullName(request.getParameter("fullName"));
-        u.setGender(Boolean.parseBoolean(request.getParameter("gender")));
+        u.setGender(request.getParameter("gender").equals("male"));
         u.setMobile(request.getParameter("mobile"));
         u.setAddress(request.getParameter("address"));
             //Avatar

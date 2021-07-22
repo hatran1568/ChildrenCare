@@ -362,7 +362,7 @@
                         padding: 10px;
                     }
                     #main-body .row :first-child{
-                        font-weight: bold;
+                        /*font-weight: bold;*/
                     }
                     
                     #main-body{

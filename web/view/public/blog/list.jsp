@@ -60,12 +60,11 @@
                     "bInfo" : false,
                     "bLengthChange": false, 
                     "pageLength": 30,
-                    "order": [[ 4, "desc" ]],
+                    "order": [[ 3, "desc" ]],
                     'columnDefs': [ 
-                        {"targets": [0, 1, 2, 3, 5], "orderable": false}
+                        {"targets": [0, 1, 2, 4], "orderable": false}
                     ],
                     columns: [
-                        null,
                         null,
                         null,
                         {data: "SortBy", title:"Sort By:",},
@@ -73,7 +72,7 @@
                         null,
                     ],
                     initComplete: function () {
-                        this.api().columns(5).every(function () {
+                        this.api().columns(4).every(function () {
                             var column = this;
                             var select = $('<select><option value=""></option></select>')
                                 .appendTo('#catfilter')
@@ -220,8 +219,7 @@
                         <c:if test="${p.getStatus().id == 25}">
                             <tr onclick="window.location.href='details?pid=${p.id}'">
                                 <td><img class="rounded mx-auto d-block" src="../${p.thumbnailLink}" style="width: 200px; height: 200px"></td>
-                                <td style="font-weight: bold;">${p.title}</td>
-                                <td class="">${p.description}</td>
+                                <td><span style="font-weight: bold;">${p.title}</span><br>${p.description}</td>
                                 <td style="text-align: center"><b>Author</b><br>${p.author.fullName}</td>
                                 <td>${p.updatedDate}</td>
                                 <td style="display: none">${p.category.name}</td>
