@@ -67,14 +67,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input pattern="[A-Za-z]{8,12}" required="true"  type="password" name="pass" id="pass" placeholder="Password"/>
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="pass" id="pass" placeholder="Password"/>
                                     <div class="invalid-feedback">
                                         Please input a valid password in range [8,12] characters
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                    <input pattern="[A-Za-z]{8,12}" type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                    <input pattern="[A-Za-z0-9]{8,12}" type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
                                     <div class="invalid-feedback">
                                        Passwords do not match
                                     </div>

@@ -34,7 +34,7 @@
                                     Wrong email or password
                                 </div>
                             </c:if>
-                            <h2 class="form-title">Sign up</h2>
+                            <h2 class="form-title">Sign in</h2>
                             <form novalidate="true" method="POST" action="login" class="register-form needs-validation" id="login-form">
 
                                 <div class="form-group">
@@ -54,7 +54,7 @@
 
                                 <div class="form-group form-button">
                                     <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
-                                    <input type="button"  class="form-submit" value="Register" />
+                                    <input type="button" onclick="window.location.href='register'"  class="form-submit" value="Register" />
                                 </div>
 
                             </form>

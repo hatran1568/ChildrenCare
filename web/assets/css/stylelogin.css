@@ -182,12 +182,12 @@ h2 {
   padding: 0;
   font-weight: bold;
   color: #222;
-  font-family: Poppins;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 36px; }
 
 .main {
   background: #f8f8f8;
-  padding: 150px 0; }
+  padding: 75px 0; }
 
 .clear {
   clear: both; }
@@ -198,7 +198,7 @@ body {
   color: #222;
   background: #f8f8f8;
   font-weight: 400;
-  font-family: Poppins; }
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 .container {
   width: 900px;
@@ -250,7 +250,7 @@ body {
   -ms-transform: translate(-50%, -50%); }
 
 .signup {
-  margin-bottom: 150px; }
+  margin-bottom: 0; }
 
 .signup-content {
   padding: 75px 0; }
@@ -323,7 +323,7 @@ input {
   border: none;
   border-bottom: 1px solid #999;
   padding: 6px 30px;
-  font-family: Poppins;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-sizing: border-box; }
   input::-webkit-input-placeholder {
     color: #999; }

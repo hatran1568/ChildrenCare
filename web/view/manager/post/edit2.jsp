@@ -346,29 +346,6 @@
                  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
              });
             </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
-
-
         <style>
             #main-body{
                 margin-top: 50px;
