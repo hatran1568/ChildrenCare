@@ -584,7 +584,7 @@ public class UserController extends HttpServlet {
                     + request.getServerPort()+request.getRequestURI()+"/change?";
                    
             String param =String.valueOf(u.getId());
-            param = JWT.generateJWT(param, 0);
+            param = JWT.generateJWT(param, 1).toString();
             url += param;
             String content = "<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"

@@ -19,7 +19,7 @@ public class JWT {
         return uniqueInstance;
     }
 
-    public static String generateJWT(String s, int minute) {
+    public static JWebToken generateJWT(String s, int minute) {
         JSONObject jwtPayload = new JSONObject();
         jwtPayload.put("status", 0);
 
@@ -31,8 +31,8 @@ public class JWT {
         LocalDateTime ldt = LocalDateTime.now().plusMinutes(minute);
         jwtPayload.put("exp", ldt.toEpochSecond(ZoneOffset.UTC)); //this needs to be configured
 
-        String token = new JWebToken(jwtPayload).toString();
-        return token;
+        JWebToken token = new JWebToken(jwtPayload);
+       return token;
     }
     private static String decode(String encodedString) {
         return new String(Base64.getUrlDecoder().decode(encodedString));
