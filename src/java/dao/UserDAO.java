@@ -16,6 +16,7 @@ import bean.Role;
 import bean.Setting;
 import bean.UserHistory;
 import java.sql.Statement;
+import util.MD5;
 
 /**
  *
@@ -712,7 +713,7 @@ public class UserDAO extends BaseDAO {
         try {
             String sql = "Update User set password = ? where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, password);
+            stm.setString(1, MD5.getMd5(password));
             stm.setInt(2, u.getId());
             stm.executeUpdate();
         } catch (SQLException ex) {

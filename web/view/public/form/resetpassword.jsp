@@ -24,7 +24,7 @@
                 <div class="container">
                     <div class="signin-content">
                         <div class="signin-image">
-                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Login</span></div>
+                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Reset Password</span></div>
                             <figure><img src="assets/images/signin-image.jpg" alt="sing up image"></figure>
 
                         </div>
@@ -35,26 +35,21 @@
                                 </div>
                             </c:if>
                             <h2 class="form-title">Sign in</h2>
-                            <form novalidate="true" method="POST" action="login" class="register-form needs-validation" id="login-form">
+                            <form novalidate="true" method="POST" action="resetoldpassword" class="register-form needs-validation" id="login-form">
 
                                 <div class="form-group">
                                     <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input required="true" type="text" name="email" id="your_name" placeholder="Your Email" />
+                                    <input pattern="[^ @]*@[^ @]*" required="true" type="text" name="email" id="your_name" placeholder="Your Email" />
                                     <div class="invalid-feedback">
-                                        Please do not let email empty
+                                        Please enter valid email
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input required="true" type="password" name="pass" id="your_pass" placeholder="Password" />
-                                    <div class="invalid-feedback">
-                                        Please do not let password empty
-                                    </div>
-                                </div>
-                                <a href="resetpassword">Forget Password</a>
+                                
+                              
                                 <div class="form-group form-button">
-                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
-                                    <input type="button" onclick="window.location.href='register'"  class="form-submit" value="Register" />
+                                   
+                                   <input type="submit" name="signup" id="signup" class="form-submit" value="Submit"/>
+                                    
                                 </div>
                                 
                             </form>

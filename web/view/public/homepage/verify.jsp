@@ -21,16 +21,6 @@
             <br>
             <input type="submit" value="submit">
         </form>
-             <c:if test="${ not empty sessionScope.alert}">
-              <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
+            
     </body>
 </html>

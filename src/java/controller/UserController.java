@@ -19,14 +19,20 @@ import javax.servlet.http.HttpServletResponse;
 import bean.Role;
 import bean.Setting;
 import bean.User;
+import util.JWebToken;
 import dao.ReceiverDAO;
 import dao.SettingDAO;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import util.EmailVerify;
+import util.JWT;
 import util.MD5;
 
 /**
@@ -62,7 +68,6 @@ public class UserController extends HttpServlet {
         }
     }
 
-    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -158,7 +163,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
+        try {
             String action = request.getServletPath();
 
             switch (action) {
@@ -235,13 +240,26 @@ public class UserController extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    
-    protected void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String message = request.getParameter("message");
+
+        if (message != null) {
+            if (message.equals("notpermission")) {
+                request.getRequestDispatcher("view/public/form/notauthoried.jsp").forward(request, response);
+
+            }
+            if (message.equals("notlogin")) {
+
+                 request.getRequestDispatcher("view/public/form/notlogin.jsp").forward(request, response);
+            }
+        }
         request.getRequestDispatcher("view/public/form/login.jsp").forward(request, response);
     }
-    protected void showRegisterForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    protected void showRegisterForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("view/public/form/register.jsp").forward(request, response);
     }
+
     protected void showListUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -367,19 +385,7 @@ public class UserController extends HttpServlet {
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         //check if there is any alert from system
-        String message = request.getParameter("message");
-
-        if (message != null) {
-            if (message.equals("notpermission")) {
-                response.sendRedirect("home");
-
-                
-            }
-            if (message.equals("notlogin")) {
-                
-                 response.sendRedirect("home");
-            }
-        }
+       
 
         UserDAO userDb = new UserDAO();
         ArrayList<User> list = new ArrayList<User>();
@@ -401,7 +407,7 @@ public class UserController extends HttpServlet {
 
             // if user was verify redirect to home page
         } else if (list.get(0).getStatus().getId() != 13) {
-            
+
             HttpSession session = request.getSession();
             session.setAttribute("user", list.get(0));
             if (list.get(0).getRole().getName().equals("Admin")) {
@@ -416,11 +422,7 @@ public class UserController extends HttpServlet {
             //if user was not verify alert that verify needed and forward to verify page
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("user", list.get(0));
-            String alert = "Please Verify your account!";
-            String verify = "verify";
-            request.getSession().setAttribute("alert", alert);
-            request.getSession().setAttribute("verify", verify);
+
             request.setAttribute("email", list.get(0).getEmail());
             request.getRequestDispatcher("verify").forward(request, response);
 
@@ -496,10 +498,10 @@ public class UserController extends HttpServlet {
         u.setEmail(email);
 
         //Send email with verify code and forward to verify page
-        EmailVerify.getInstance().sendText(u.getEmail(), code);
+        EmailVerify.getInstance().sendText(u.getEmail(), "Here is your verify code: " + code);
         request.setAttribute("email", email);
         request.setAttribute("code", code);
-        request.getRequestDispatcher("/view/public/homepage/verify.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/form/verify.jsp").forward(request, response);
     }
 
     //Check user input verify code
@@ -508,7 +510,7 @@ public class UserController extends HttpServlet {
 
         User u = new User();
         u.setEmail(email);
-        
+
         String code = request.getParameter("code");
 
         String actual = request.getParameter("actualcode");
@@ -534,12 +536,14 @@ public class UserController extends HttpServlet {
             if (!receiverDb.checkExistingReceiver(email)) {
                 receiverDb.addReceiver(r);
             }
-            request.getSession().setAttribute("alert", alert);
-            response.sendRedirect("home");
+
+            request.setAttribute("mess", "Login Successfully");
+            request.getRequestDispatcher("login").forward(request, response);
 
             //If code is wrong back to verify page
         } else {
             request.setAttribute("email", email);
+            request.setAttribute("mess", "Wrong verify code");
             request.getRequestDispatcher("verify").forward(request, response);
         }
     }
@@ -552,22 +556,36 @@ public class UserController extends HttpServlet {
     public void showChangePasswordForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User u = (User) request.getSession().getAttribute("user");
         request.setAttribute("user", u);
-        request.getRequestDispatcher("../view/user/changepassword.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/public/form/changepassword.jsp").forward(request, response);
     }
 
     public void showResetPasswordForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getRequestDispatcher("view/user/resetpassword.jsp").forward(request, response);
+        request.getRequestDispatcher("view/public/form/resetpassword.jsp").forward(request, response);
     }
 
     protected void showNewPasswordForm(HttpServletRequest request, HttpServletResponse response) throws IOException, MessagingException {
         String email = request.getParameter("email");
         UserDAO userDb = new UserDAO();
         if (userDb.getUserByEmail(email) == null) {
-            request.getSession().setAttribute("mess", "Email not resigsted");
-            response.sendRedirect("resetpassword");
+            try {
+                request.setAttribute("mess", "Email not resigsted");
+                request.getRequestDispatcher("../view/public/form/resetpassword.jsp").forward(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             User u = userDb.getUserByEmail(email);
+            String url = "";
+            url = request.getScheme()
+                    + "://"
+                    + request.getServerName()
+                    + ":"
+                    + request.getServerPort()+request.getRequestURI()+"/change?";
+                   
+            String param =String.valueOf(u.getId());
+            param = JWT.generateJWT(param, 0);
+            url += param;
             String content = "<!DOCTYPE html>\n"
                     + "<html lang=\"en\">\n"
                     + "<head>\n"
@@ -576,20 +594,32 @@ public class UserController extends HttpServlet {
                     + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
                     + "    <title>Document</title>\n"
                     + "</head><body><form action='" + request.getRequestURL() + "/change' method ='POST'><input style=\"display: none\"  type ='text' name ='user' value ='" + u.getId() + "'><input type='submit' value = 'click here to set new password'></form></body></html>";
-            EmailVerify.getInstance().sendHTML(u, content);
+            EmailVerify.getInstance().sendHTML(u, "This link will expire in 5 minutes"
+                    + "<a href = '" + url + "'>Click here to reset password</a>");
             response.sendRedirect("home");
         }
     }
 
+    
+
     protected void showInputNewPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("user"));
-        UserDAO userDb = new UserDAO();
-        User u = userDb.getUser(id);
-        request.setAttribute("user", u);
-        request.getRequestDispatcher("../view/user/newpassword.jsp").forward(request, response);
+        try {
+            String token = request.getQueryString();
+            JWebToken j = new  JWebToken(token) ;
+            token = j.getSubject();
+            
+            
+            int id = Integer.parseInt(token);
+            UserDAO userDb = new UserDAO();
+            User u = userDb.getUser(id);
+            request.setAttribute("user", u);
+            request.getRequestDispatcher("../view/public/form/newpassword.jsp").forward(request, response);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    protected void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User u = (User) request.getSession().getAttribute("user");
         String oPass = request.getParameter("oPass");
         String nPass = request.getParameter("nPass");
@@ -598,16 +628,16 @@ public class UserController extends HttpServlet {
             request.getSession().setAttribute("mess", "Please fill all fileds");
             response.sendRedirect("changepassword");
         } else {
-            if (!oPass.equals(u.getPassword())) {
-                request.getSession().setAttribute("mess", "Wrong password");
-                response.sendRedirect("changepassword");
+            if (!oPass.equals(MD5.getMd5(u.getPassword()))) {
+                request.setAttribute("mess", "Wrong password");
+                request.getRequestDispatcher("../view/public/form/changepassword.jsp").forward(request, response);
             }
             if (!nPass.equals(cPass)) {
                 request.getSession().setAttribute("mess", "Wrong password");
-                response.sendRedirect("changepassword");
+                 request.getRequestDispatcher("../view/public/form/changepassword.jsp").forward(request, response);
             }
             UserDAO userDb = new UserDAO();
-            userDb.changePassword(u, cPass);
+            userDb.changePassword(u, MD5.getMd5(cPass));
             response.sendRedirect("../logout");
         }
 

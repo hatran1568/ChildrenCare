@@ -237,7 +237,7 @@ public class CartController extends HttpServlet {
     //Delete Function to delete service  from Database/Session
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("rid"));
-        int sid = Integer.parseInt(request.getParameter("rid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
         ReservationDAO reservationDAO = new ReservationDAO();
         reservationDAO.deleteReservationService(rid, sid);
         response.sendRedirect("list");
