@@ -14,19 +14,19 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
-        <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
-        <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link href="<%=request.getContextPath()%>/assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link rel ="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap-iso.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.theme.default.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/custom.css" />
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -115,7 +115,7 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p style="text-align: left"> <a href="userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
@@ -137,7 +137,7 @@
                 <div class="row">
                     <div class="owl-carousel owl-theme" id="my_slider">
                         <c:forEach items="${requestScope.sliders}" var="s">
-                            <div class="item carousel-item" style="background-image: url(${s.imageLink})">
+                            <div class="item carousel-item" style="background-image: url(<%=request.getContextPath()%>/${s.imageLink})">
                                 <div class="caption">
                                     <div class="col-md-offset-1 col-md-10">
 
@@ -170,7 +170,7 @@
                     <c:forEach items="${requestScope.services}" var="s">
                         <div class="col-md-4 col-sm-6" style="padding: 15px; flex: 1">
                             <div>
-                                <img src="${s.thumbnailLink}" class="img-responsive" alt="">
+                                <img src="<%=request.getContextPath()%>/${s.thumbnailLink}" class="img-responsive" alt="">
 
                                 <div class="team-info">
                                     <h3><a href="service/details?id=${s.id}">${s.fullname}</a></h3>
@@ -235,7 +235,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div style="padding:15px">
-                            <img src="${requestScope.posts[0].thumbnailLink}" height="260" class="img-responsive" alt="">
+                            <img src="<%=request.getContextPath()%>/${requestScope.posts[0].thumbnailLink}" height="260" class="img-responsive" alt="">
                             <div class="featured-post-info">
                                 <p class="featured-post-category">${requestScope.posts[0].category.name}</p>
                             </div>
@@ -255,7 +255,7 @@
                     <div class="col-md-6 post-column">
                         <c:forEach var="i" begin="1" end="4">
                             <div class="featured-post-info" style="display: flex;flex-direction: row">
-                                <div class="thumb"><img src="${requestScope.posts[i].thumbnailLink}" width="140" height="110"></div>
+                                <div class="thumb"><img src="<%=request.getContextPath()%>/${requestScope.posts[i].thumbnailLink}" width="140" height="110"></div>
                                 <div style="padding-left: 15px">
                                     <p class="featured-post-category" style="font-size: 10px">${requestScope.posts[i].category.name}</p>
                                     <h3 style="margin-top:0; font-size: 18px">
@@ -344,14 +344,14 @@
         </footer>
 
         <!-- SCRIPTS -->
-        <script src="assets/js/jquery.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.sticky.js"></script>
-        <script src="assets/js/jquery.stellar.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/smoothscroll.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/custom-new.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/jquery.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/jquery.sticky.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/jquery.stellar.min.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/smoothscroll.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/owl.carousel.min.js"></script>
+        <script src="<%=request.getContextPath()%>/assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
                     $('ul.nav li.dropdown').hover(function () {
