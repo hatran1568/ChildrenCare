@@ -182,7 +182,7 @@ public class CartController extends HttpServlet {
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("rid"));
 
-        int sid = Integer.parseInt(request.getParameter("rid"));
+        int sid = Integer.parseInt(request.getParameter("sid"));
         reservationDB.deleteReservationService(rid, sid);
 
         response.sendRedirect("list");
@@ -229,7 +229,7 @@ public class CartController extends HttpServlet {
             Reservation r = reservationDB.getReservationById(Integer.parseInt(reservation_id));
             Service service = serviceDB.getService(service_id);
             reservationDB.addReservationService(r, service, 1);
-            System.out.println("re diff null " + reservation_id);
+            System.out.println("re diff null " + reservation_id + " User" + user.getFullName());
         } else if (user.getId() > 0) {
 
             int pr_id = reservationDB.getPendingReservation(user);
