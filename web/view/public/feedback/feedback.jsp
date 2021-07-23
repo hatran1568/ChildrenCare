@@ -141,8 +141,8 @@
                     <div class="twelve wide  field">
                         <label  for="validationCustom01">Name</label>
 
-                        <input pattern="[A-Za-z]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
-                       
+                        <input value="${sessionScope.user.fullName}" pattern="[A-Za-z]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
+
                         <div class="invalid-feedback">
                             Please input a valid name at least 6 characters
                         </div>
@@ -151,21 +151,21 @@
                         <label>Gender</label>
                         <div class="two fields">
                             <div class="eight wide field"><label style="display: inline-block; margin-right: 5px;" >Male :</label> <input id="male"  type="radio" name="gender" gender checked="true" value="true"> </div>
-                            <div class="eight wide  field"><label style="display: inline-block; margin-right: 5px;" >Female :</label> <input type="radio" name="gender"  value="false"></div>
+                            <div class="eight wide  field"><label style="display: inline-block; margin-right: 5px;" >Female :</label> <input <c:if test="${sessionScope.user.gender eq 'false'}"> checked='true'</c:if>  type="radio" name="gender"  value="false"></div>
+                            </div>
+
+
+
+
                         </div>
-
-
-
-
                     </div>
-                </div>
 
-                <div class="two fields">
-                    <div class="field">
-                        <label for="validationCustom02" >Email</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <label for="validationCustom02" >Email</label>
 
-                        <input pattern="[^ @]*@[^ @]*"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
-                        
+                            <input value="${sessionScope.user.email}" pattern="[^ @]*@[^ @]*"  id="validationCustom02" required="true" type="text" name="email" placeholder="Email@abc.com">
+
                         <div class="invalid-feedback">
                             Please input a valid email
                         </div>
@@ -174,8 +174,8 @@
                     <div class="field">
                         <label>Mobile</label>
 
-                        <input pattern="[0-9]{10}" type="text" name="mobile" placeholder="01234456789">
-                         <div class="invalid-feedback">
+                        <input value="${sessionScope.user.mobile}" required="true" pattern="[0-9]{10}" type="text" name="mobile" placeholder="01234456789">
+                        <div class="invalid-feedback">
                             Please input a valid phone with 10 digits
                         </div>
                     </div>
@@ -184,15 +184,18 @@
                 <div class="two fields">
                     <div class="four wide field">
                         <label>Image</label>
-                        <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                        <input  onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                         <img style="  box-sizing: border-box;
                              width: 100%; height: auto; 
                              " id="output"  > 
                     </div>
+                    <div style="display: none; color: red" id="alertfile">
+                        File size exceeded 10MB!
+                    </div>
                     <div class="twelve wide field">
                         <label>Feedback</label>
                         <textarea required="true"  name="note"></textarea>
-                         <div class="invalid-feedback">
+                        <div class="invalid-feedback">
                             Please input a valid email
                         </div>
                         <input hidden="true" id="star" type="text" name="star">
@@ -226,8 +229,8 @@
                     </div>
                     <div class="four wide field">
                         <label></label>
-                        <input type="submit" value="submit">
-                        <div onclick="submit()" class="ui button" tabindex="0">Submit Feedback</div>
+                        <input id="sub" hidden="true" type="submit" value="submit">
+                        <div onclick="feedback()" class="ui button" tabindex="0">Submit Feedback</div>
                     </div>
                 </div>
 
@@ -306,9 +309,10 @@
                             $(document).ready(function () {
 
                                 $("input[type='radio']").click(function () {
-                                    var sim = $("input[type='radio']:checked").val();
+                                    var sim = $("input[name='rating']:checked").val();
+                                    console.log(sim);
                                     $("#star").val(sim)
-
+                                    console.log($("#star").val());
 
 
                                 });
@@ -318,7 +322,13 @@
 
                             }
 
+                            function feedback() {
+                                
 
+                                $('#sub').click();
+
+
+                            }
         </script>
         <script>
             var loadFile = function (event) {
@@ -346,6 +356,13 @@
                                     event.stopPropagation()
                                 }
 
+                                form.classList.add('was-validated')
+                            }, false);
+                            form.addEventListener('submit', function (event) {
+                                if (document.getElementById('alertfile').style.display === 'block') {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
                                 form.classList.add('was-validated')
                             }, false)
                         })

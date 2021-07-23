@@ -146,7 +146,7 @@
                             <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
                             <input class="form-control-file" onchange="loadFile(event)" id="file" name="file" type="file" accept="image/*,.jpg">
                             <div style="display: none; color: red" id="alertfile">
-                                File size exceeded 50MB!
+                                File size exceeded 10MB!
                             </div>
                         </div>
                     </div>

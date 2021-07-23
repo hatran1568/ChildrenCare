@@ -30,8 +30,8 @@ import javax.servlet.http.Part;
  * @author Tran Thi Nguyet Ha
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50)
+        maxFileSize = 1024 * 1024 * 10, // 50MB
+        maxRequestSize = 1024 * 1024 * 10)
 public class ManagerPostController extends HttpServlet {
 
 
