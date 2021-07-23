@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-@WebServlet(name = "HomePageController", urlPatterns = {"/home"})
+@WebServlet(name = "HomePageController", urlPatterns = {""})
 public class HomePageController extends HttpServlet {
 
     /**
