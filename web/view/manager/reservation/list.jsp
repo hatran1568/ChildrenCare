@@ -33,8 +33,11 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 var sitetable = $('#reservations').DataTable({
+                    retrieve: true,
                     "searching": true,
                     "paging": true,
+                    "sPaginationType": "full_numbers",
+                    "bJQueryUI": true,
                     'columnDefs': [
                         {'orderable': false, 'targets': 3},
                         {'orderable': false, 'targets': 6},
@@ -49,7 +52,9 @@
                         {data: "Status", title: "Status", className: "dt-filter"},
                         null, null
                     ],
-
+                    "bInfo": false,
+                    "bLengthChange": false,
+                    "sDom": 'W<"clear">Tlfrtip',
                     initComplete: function () {
                         this.api().columns('.dt-filter').every(function () {
                             var column = this;
@@ -77,11 +82,6 @@
 
     <body class="is-preload">
 
-        <!-- PRE LOADER -->
-
-
-
-        <!-- HEADER -->
         <header>
             <div class="container">
                 <div class="row">
@@ -100,7 +100,6 @@
             </div>
         </header>
 
-
         <!-- MENU -->
         <section class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container">
@@ -113,12 +112,11 @@
                     </button>
 
                     <!-- lOGO TEXT HERE -->
+                    <a href="../../home" class="navbar-brand">Children Care</a>
                 </div>
 
                 <!-- MENU LINKS -->
                 <div class="collapse navbar-collapse">
-
-                    <a href="home" class="navbar-brand">Children Care</a>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
                         <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
@@ -136,7 +134,7 @@
                                                 <input type="text" name="email" class="username form-control" placeholder="Email"/>
                                                 <input type="password" name="pass" class="password form-control" placeholder="password"/>
                                                 <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">Forget Password</a>
+                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
                                             </form>
                                         </div>
                                     </div>
@@ -167,45 +165,47 @@
 
                         </c:if>
                         <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                            <li class="dropdown"><a href="../../customer/reservation/my" class="smoothScroll">My reservation</a></li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../service/list">Services</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                     </c:if>
                                 </c:if>
                                 <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                 <li class="dropdown">
-                                <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                 </li>
+
                             </c:if>
+
                             <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                             <div class="dropdown ">
                                 <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                 <div class="dropdown-content">
-                                    <p> <a href="userprofile">Profile</a></p>
+                                    <p> <a href="../../userprofile">Profile</a></p>
                                     <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="../../logout">Log Out</a></p>
+                                    <p> <a href="#">Log Out</a></p>
                                 </div>
                             </div>
                             <p class="dropdown-name ">${sessionScope.user.fullName}</p>
                         </c:if>
                     </ul>
                 </div>
+
             </div>
         </section>
 
@@ -231,14 +231,14 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Filters:</th>
-                            <th>Reservation Date </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Status </th>
-                            <th></th>
-                            <th></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            
                         </tr>
                     </tfoot>
                     <tbody>

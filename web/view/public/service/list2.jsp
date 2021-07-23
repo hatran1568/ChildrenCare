@@ -13,9 +13,8 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <c:if test="${not empty sessionScope.user}">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        </c:if>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-alpha2/css/bootstrap-grid.min.css" integrity="sha512-Jn+RkWIYxM5Cn3mfAWyV7CgxFnDFxe3EBh93974boKdhcAUE9TSr7qJTJNlzt+J2wG6a3sLYnEyRF+1/o01u9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -86,45 +85,8 @@
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                                <div id="login" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Login</h4>
-                                                <form action="../login" method="POST">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Login" />
-                                                    <a class="login-trigger" href="#" data-target="#" data-toggle="modal">Forget Password</a>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
-                                <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                                <div id="register" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-
-                                        <div class="modal-content">
-                                            <div class="modal-body ">
-                                                <button data-dismiss="modal" class="close">&times;</button>
-                                                <h4>Register</h4>
-                                                <form action="../register" method="GET">
-                                                    <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                    Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                    Female <input type="radio" name="gender" value="female">
-                                                    <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                    <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                    <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                    <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                    <input class="login-trigger" type="submit" value="Register" />
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
+                                <li class="appointment-btn"><a class="login-trigger" href="../login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../register">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
@@ -201,6 +163,7 @@
                 </div>
                 <div class="col-9">
                     <div class="container" >
+
                         <div>Results: ${requestScope.services.size()}</div>
                         <div class="row">
                             <c:forEach items="${requestScope.services}" var="s">
@@ -221,7 +184,7 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <button class="btn btn-outline-info" onclick="addToCart(${s.id})" style="border-color: #17a2b8">Add to Cart</button>
+                                            <button class="btn btn-outline-info" onclick="addToCart(${s.id}, ${requestScope.reservation_id})" style="border-color: #17a2b8">Add to Cart</button>
 
                                             <button class="btn btn-outline-warning" onclick="window.location.href = '../feedback?id=${s.id}'" style="border-color:#ffc107">Feedback</button>
                                         </div>
@@ -242,6 +205,9 @@
 
 
                     </div>
+                            <div class="container" style="text-align: right; margin-bottom: 30px"><c:if test="${requestScope.editSubmission == true}">
+                                    <button class="btn btn-primary" onclick="window.location.href='../customer/reservation/details?id=${requestScope.reservation_id}'">Back To Reservation</button>
+                        </c:if></div>
                 </div></div>
         </section>
 
@@ -337,6 +303,18 @@
                             }, function () {
                                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                             });
+                            function addToCart(id, reservation_id) {
+                                $.ajax({
+                                    url: "../cart/add",
+                                    data: {service_id: id, reservation_id: reservation_id},
+                                    success: function () {
+                                        setInterval('location.reload()', 100);
+                                    }
+
+
+                                });
+
+                            }
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">

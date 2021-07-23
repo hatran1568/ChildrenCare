@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "MyReservationController", urlPatterns = {"/customer/reservation/my"})
 public class MyReservationController extends HttpServlet {
-
+ReservationDAO reservationDB = new ReservationDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -86,7 +86,7 @@ public class MyReservationController extends HttpServlet {
         ArrayList<Reservation> list = new ArrayList<Reservation>();
         User u = (User) request.getSession().getAttribute("user");
 
-        ReservationDAO reservationDB = new ReservationDAO();
+        
         list = reservationDB.getReservationWithoutPending(u);
 
         for (Reservation reservation : list) {
@@ -113,14 +113,13 @@ public class MyReservationController extends HttpServlet {
         Reservation r = new Reservation();
         int id = Integer.parseInt(request.getParameter("id"));
         ArrayList<ReservationService> res = new ArrayList<>();
-        ReservationDAO redb = new ReservationDAO();
         r.setId(id);
         
         Reservation rerser = new Reservation();
         
-        rerser = redb.getReservationById(id);
-        rerser.setTotalCost(redb.getTotalCost(rerser));
-        res = redb.getReservationServices(rerser);
+        rerser = reservationDB.getReservationById(id);
+        rerser.setTotalCost(reservationDB.getTotalCost(rerser));
+        res = reservationDB.getReservationServices(rerser);
         request.setAttribute("reservation", rerser);
         request.setAttribute("list", res);
         request.getRequestDispatcher("../../view/customer/reservation/reservationInformation.jsp").forward(request, response);
@@ -135,10 +134,9 @@ public class MyReservationController extends HttpServlet {
     public void cancelReservation(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Reservation r = new Reservation();
         int id = Integer.parseInt(request.getParameter("id"));
-        ReservationDAO redb = new ReservationDAO();
-        r = redb.getReservationById(id);
-        redb.deleteReservationService(r);
-        redb.cancelReservation(r);
+        r = reservationDB.getReservationById(id);
+        reservationDB.deleteReservationService(r);
+        reservationDB.cancelReservation(r);
         response.sendRedirect("my");
     }
 
