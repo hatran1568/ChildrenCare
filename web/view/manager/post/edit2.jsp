@@ -144,7 +144,7 @@
                         <div class="col-md-9">
 
                             <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
-                            <input class="form-control-file" onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                            <input class="form-control-file" onchange="loadFile(event)" id="file" name="file" type="file" accept="image/*,.jpg">
                             <div style="display: none; color: red" id="alertfile">
                                 File size exceeded 50MB!
                             </div>
@@ -289,7 +289,7 @@
                 CKEDITOR.replace('content');
             </script>
             <script>
-                var maxFileSize = 1024;
+                var maxFileSize = 1024 * 1024;
                 function savePost() {
                     document.getElementById("status").value = "25";
                     
@@ -334,6 +334,13 @@
                                     form.classList.add('was-validated')
                                 }, false)
                             });
+                        form.addEventListener('submit', function (event) {
+                                    if (document.getElementById('alertfile').style.display === 'block') {
+                                        event.preventDefault()
+                                        event.stopPropagation()
+                                    }
+                                    form.classList.add('was-validated')
+                                }, false)    
                     
                 })()
 
