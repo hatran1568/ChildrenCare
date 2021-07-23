@@ -395,7 +395,7 @@ public class PostDAO extends BaseDAO {
                     + "from user a left join (select id as role_id, name as role_name from setting where type = \"Role\") as r\n"
                     + "on a.role_id = r.role_id) as tbl\n"
                     + "on y.author_id = tbl.user_id"
-                    + " where featured=1";
+                    + " where featured=1 order by updated_date desc";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();

@@ -191,6 +191,7 @@
         <servlet-name>HomePageController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+ 
     <servlet-mapping>
         <servlet-name>ReservationCompletionController</servlet-name>
         <url-pattern>/reservation/reservationcompletion</url-pattern>

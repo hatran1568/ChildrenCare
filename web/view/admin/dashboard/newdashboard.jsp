@@ -15,7 +15,7 @@
             integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
             crossorigin="anonymous"
             />
-
+        <link href="../../assets/css/custom.css" rel="stylesheet" type="text/css"/>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
@@ -30,7 +30,7 @@
 
     <body>
         <!-- sidebar -->
-        <div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+        <div style="top: 25px;" class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
             <div class="item">
                 <div class="header">General</div>
                 <div class="menu">
@@ -79,17 +79,7 @@
                     </div>
                 </form>
             </div>
-            <div class="ui segment inverted">
-                <div class="ui tiny olive inverted progress">
-                    <div class="bar" style="width: 54%"></div>
-                    <div class="label">Monthly Bandwidth</div>
-                </div>
-
-                <div class="ui tiny teal inverted progress">
-                    <div class="bar" style="width:78%"></div>
-                    <div class="label">Disk Usage</div>
-                </div>
-            </div>
+          
         </div>
 
         <!-- sidebar -->
@@ -100,7 +90,7 @@
                 <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
                     <i class="sidebar icon"></i>
                 </a>
-                <a href="#" class="header item">
+                <a href="../../home" class="header item">
                     ChildrenCare
                 </a>
             </div>
@@ -110,7 +100,7 @@
                     <i class="bell icon"></i>
                 </a>
                 <div class="ui dropdown item">
-                    <i class="user cirlce icon"></i>
+                    <img style="width: 50px" class="avatar" src="../../${sessionScope.user.imageLink}">
                     <div class="menu">
                         <a href="../../userprofile" class="item">
                             <i class="info circle icon"></i> Profile</a
@@ -126,7 +116,7 @@
 
         <!-- top nav -->
 
-        <div class="pusher">
+        <div style="margin-top: 80px" class="pusher">
             <div class="main-content">
                 <div class="ui grid stackable padded">
                     <div
@@ -261,7 +251,8 @@
                         </div>
                      
                 </div>
-            </div>
+            
+            </div></div>
 
             <script
                 src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
