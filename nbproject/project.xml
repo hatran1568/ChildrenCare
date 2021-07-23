@@ -47,7 +47,7 @@
             </test-roots>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
-            <definitions>../java-jwt-master\nblibraries.properties</definitions>
+            <definitions>lib\nblibraries.properties</definitions>
         </libraries>
     </configuration>
 </project>
