@@ -149,7 +149,7 @@
                     </p>
                     <p class="col-md-6">
                         <strong>Checkup date:</strong>
-                        <span>${requestScope.reservation.checkupTime}</span>
+                        <span><fmt:formatDate pattern="dd-MM-yyyy" value = "${requestScope.reservation.checkupTime}" /></span>
                     </p>
                 </div>
                     

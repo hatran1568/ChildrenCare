@@ -288,10 +288,25 @@
                 font-size: 15px;
             }
             table.dataTable th {
+                
                 font-size: 16px;
             }
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
+            }
+            
+            tbody, td, tfoot, th, thead, tr {
+                border-style: hidden;
+            }
+            
+            .table thead {
+                border-bottom: 2px solid black;
+                font-weight: bold;
+                margin: 0px auto;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
             }
         </style> 
     </body>

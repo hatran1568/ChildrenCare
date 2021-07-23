@@ -173,63 +173,107 @@
                                 <img src="${s.thumbnailLink}" class="img-responsive" alt="">
 
                                 <div class="team-info">
-                                    <h3><a href="#">${s.fullname}</a></h3>
+                                    <h3><a href="service/details?id=${s.id}">${s.fullname}</a></h3>
                                     <p>${s.description}</p>
-
                                 </div>
 
                             </div>
                         </div>
                     </c:forEach>
                     <div class="clearfix"></div>
+
                 </div>
+                <div style="display: flex;align-items: center;justify-content: center;"><button type="button" class="btn" id="more-service" onclick="window.location.href = 'service/list'">More services</button></div>
             </div>
+
         </section><!--
 
         
         <!-- NEWS -->
+        <!--        <section id="news" data-stellar-background-ratio="2.5">
+                    <div class="container">
+                        <div class="col-md-12 col-sm-12">
+                             SECTION TITLE 
+                            <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
+                                <h2>Latest posts</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+        
+        <c:forEach items="${requestScope.posts}" var="p">
+            <div class="col-md-4 col-sm-6">
+                 NEWS THUMB 
+                <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
+                    <a href="">
+                        <img src="${p.thumbnailLink}" class="img-responsive" alt="">
+                    </a>
+                    <div class="news-info">
+                        <span>${s.updatedDate}</span>
+
+                        <h3><a href="post/details?id=${p.id}">${p.title}</a></h3>
+                        <p>${p.description}</p>
+                        <div class="author">
+                            <div class="author-info">
+                                <h5>${p.author.fullName}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>   
+    </div>
+</div>
+</section>-->
+
         <section id="news" data-stellar-background-ratio="2.5">
             <div class="container">
                 <div class="col-md-12 col-sm-12">
-                    <!-- SECTION TITLE -->
-                    <div class="section-title wow fadeInUp" data-wow-delay="0.1s">
-                        <h2>Latest posts</h2>
+                    <div>
+                        <h2 style="text-align: center">Featured posts</h2>
                     </div>
                 </div>
                 <div class="row">
-
-                    <c:forEach items="${requestScope.posts}" var="p">
-                        <div class="col-md-4 col-sm-6">
-                            <!-- NEWS THUMB -->
-                            <div class="news-thumb wow fadeInUp" data-wow-delay="0.4s">
-                                <a href="">
-                                    <img src="${p.thumbnailLink}" class="img-responsive" alt="">
-                                </a>
-                                <div class="news-info">
-                                    <span>${s.updatedDate}</span>
-
-                                    <h3><a href="post/details?id=${p.id}">${p.title}</a></h3>
-                                    <p>${p.description}</p>
-                                    <div class="author">
-                                        <div class="author-info">
-                                            <h5>${p.author.fullName}</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="col-md-6">
+                        <div style="padding:15px">
+                            <img src="${requestScope.posts[0].thumbnailLink}" height="260" class="img-responsive" alt="">
+                            <div class="featured-post-info">
+                                <p class="featured-post-category">${requestScope.posts[0].category.name}</p>
+                            </div>
+                            <h3 style="margin-top:0">
+                                <a href="blog/details?pid=${requestScope.posts[0].id}">${requestScope.posts[0].title}</a>
+                            </h3> 
+                            <div class="post-author-date">
+                                <span >${requestScope.posts[0].author.fullName}</span>
+                                <span> - </span>
+                                <span><fmt:formatDate pattern="dd MMM yyyy" value="${requestScope.posts[0].updatedDate}"/></span>
+                            </div>
+                            <div class="post-description">
+                                <p>${requestScope.posts[0].description}</p>
                             </div>
                         </div>
-                    </c:forEach>   
+                    </div>
+                    <div class="col-md-6 post-column">
+                        <c:forEach var="i" begin="1" end="4">
+                            <div class="featured-post-info" style="display: flex;flex-direction: row">
+                                <div class="thumb"><img src="${requestScope.posts[i].thumbnailLink}" width="140" height="110"></div>
+                                <div style="padding-left: 15px">
+                                    <p class="featured-post-category" style="font-size: 10px">${requestScope.posts[i].category.name}</p>
+                                    <h3 style="margin-top:0; font-size: 18px">
+                                        <a href="blog/details?pid=${requestScope.posts[i].id}">${requestScope.posts[i].title}</a>
+                                    </h3>
+                                    <div class="post-author-date">
+                                <span >${requestScope.posts[i].author.fullName}</span>
+                                <span> - </span>
+                                <span><fmt:formatDate pattern="dd MMM yyyy" value="${requestScope.posts[i].updatedDate}"/></span>
+                            </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div class="more-post"><a href="blog/list"><span class="arrow"></span>More posts <i style="size: 2px;margin-left: 5px" class="fas fa-arrow-right"></i></a></div>
+                    </div>
                 </div>
             </div>
         </section>
-
-
-        <!-- MAKE AN APPOINTMENT -->
-
-
-
-
-
         <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
             <div class="container">
@@ -310,34 +354,66 @@
         <script src="assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
-        </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-
+                    $('ul.nav li.dropdown').hover(function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                    }, function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                     });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+        </script>
+        <style>
+            #more-service{
+                background: #00aeef;
+                border-radius: 3px;
+                color: #ffffff;
+                font-weight: 600;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                transition: all ease-in-out 0.4s;
+            }
+            #more-service:hover{
+                background: #337ab7;
+            }
+            .team-info h3 a:hover{
+                color:  #337ab7;
+            }
+            .featured-post-info{
+                padding: 15px 0 0 0;
+            }
+            .featured-post-category{
+                padding: 0px;
+                text-align: center;
+                display: inline-block;
+                /*                font-family: Rubik !important;*/
+                font-size: 13px;
+                line-height: 1 !important;
+                font-weight: 400 !important;
+                text-transform: uppercase !important;
+                color: #3a3737;
+            }
+            .post-author-date{
+                /*font-family: Rubik !important;*/
+                font-size: 14px !important;
+                line-height: 1 !important;
+                font-weight: 400 !important;
+                text-transform: capitalize !important;
+                margin-top: 0.75em;
+            }
+            .post-description p{
+                margin: 12px 0 0 0;
+                display: block;
+                font-size: 14px !important;
+                line-height: 1.4 !important;
+                text-align: justify;
+            }
+            .post-column{
+                display: flex;
+                flex-direction: column;
+            }
+            .more-post{
+                margin-top: 20px;
+                text-transform: uppercase;
+                
+            }
+        </style>
     </body>
 </html>

@@ -68,7 +68,7 @@ public class HomePageController extends HttpServlet {
             throws ServletException, IOException {
        
         PostDAO postDB = new PostDAO();
-        List<Post> posts = postDB.getFeaturedPosts().subList(0, 3);
+        List<Post> posts = postDB.getFeaturedPosts().subList(0, 5);
         
         SliderDAO sliderDB = new SliderDAO();
         ArrayList<Slider> sliders = sliderDB.getActiveSliders();

@@ -22,10 +22,8 @@
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
@@ -135,7 +133,7 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin: 75px auto">
-            <nav class="navbar navbar-light bg-light" style="margin: 0px 100px">
+<!--            <nav class="navbar navbar-light bg-light" style="margin: 0px 100px">
                 <form id="myForm" method="GET" action="list" class="form-inline">
                     <input name="rid" value="${requestScope.rid}" hidden>
                     Service:
@@ -148,9 +146,9 @@
                     </select>
                 </form>
                 
-            </nav>
+            </nav>-->
             
-            <table class="table table-bordered">
+            <table id="prescription" class="table">
                 <thead class="thead-dark">
                     <tr>
                         <td>Service</td>
@@ -255,7 +253,7 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-
+        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
                                     $('ul.nav li.dropdown').hover(function () {
@@ -264,32 +262,54 @@
                                         $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                                     });
         </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
+        <script>
                 $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
+                    $("#prescription").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        columns: [
+                            {data: "Service", title: "Service", className: "dt-filter"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            
+                        ],
+                        'columnDefs': [
+                            {'className': 'text-center', 'targets': [0,1,2,3,4,5]},
+                            {'orderable': false, 'targets' : [0,1,2,3,4,5]},
+                        ],
+//                        "bInfo" : false,
+                        "bLengthChange": false,
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
                 });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+            </script> 
         <style>
             .table{
                 margin-top: 40px;
-                
-
             }
             #reservation-detail{
                 width:100%; 
@@ -307,12 +327,35 @@
             thead{
                 font-weight: bold;
                 font-size: 16px;
-                background-color: darkgrey !important;
+                /*background-color: darkgrey !important;*/
             }
             thead:hover{
                 background-color: darkgrey !important;
             }
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                
+                font-size: 16px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
             
+            tbody, td, tfoot, th, thead, tr {
+                border-style: hidden;
+            }
+            
+            .table thead {
+                border-bottom: 2px solid black;
+                font-weight: bold;
+                margin: 0px auto;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
+            }
         </style>
     </body>
 </html> 
