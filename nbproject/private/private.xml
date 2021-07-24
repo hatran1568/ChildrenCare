@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/feedback/list.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/post/list2.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/util/JWT.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/reservation/list.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/cart/cart.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
