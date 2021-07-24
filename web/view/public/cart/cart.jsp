@@ -151,8 +151,10 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
+
                                 <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost: <fmt:formatNumber type = "number" 
                                                                                                       pattern = "###,###,###" value = "${requestScope.totalcost}" /></h3></td>
+
                                 <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
@@ -277,7 +279,8 @@
                                                             console.log(b)
                                                             var c = querry.toString();
                                                             document.getElementById(c).innerHTML = b["price"]
-                                                            document.getElementById("total").innerHTML = "Total Cost:  " + b["total"]
+
+                                                            document.getElementById("total").innerHTML = "Total Cost: " + b["total"]
 
                                                         }
 
