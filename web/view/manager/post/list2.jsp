@@ -159,7 +159,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <td></td>
+                        <td style="font-weight: bold;">Filters:</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -355,6 +355,10 @@
             }
             table.dataTable img{
                 max-width: 100px;
+                height: auto;
+                border-radius: 5px;
+                border: solid gray 2px;
+                padding: 0;
             }
             table.dataTable thead{
                 border: none;
