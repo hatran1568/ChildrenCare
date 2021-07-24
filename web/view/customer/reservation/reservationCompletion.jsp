@@ -117,7 +117,7 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="../<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p style="text-align: left"> <a href="../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
