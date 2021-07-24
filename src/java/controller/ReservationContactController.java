@@ -145,7 +145,14 @@ public class ReservationContactController extends HttpServlet {
         String email = request.getParameter("email");
         r.setEmail(email);
         r.setFullName(request.getParameter("name"));
-        r.setUser(u);
+        if (u!=null){
+            r.setUser(u);
+        } else {
+            u = new User();
+            u.setId(-1);
+            r.setUser(u);
+        }
+        
         r.setGender(request.getParameter("gender").equals("male"));
         r.setMobile(request.getParameter("mobile"));
         r.setAddress(request.getParameter("address"));
