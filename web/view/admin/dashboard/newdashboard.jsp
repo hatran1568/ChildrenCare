@@ -102,7 +102,7 @@
                 <div class="ui dropdown item">
                     <img style="width: 50px" class="avatar" src="../../${sessionScope.user.imageLink}">
                     <div class="menu">
-                        <a href="../../userprofile" class="item">
+                        <a href="../../customer/userprofile" class="item">
                             <i class="info circle icon"></i> Profile</a
                         >
                         <a href="../../logout" class="item">

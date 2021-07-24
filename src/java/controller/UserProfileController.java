@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import util.EmailVerify;
 
-@WebServlet(name = "UserProfileController", urlPatterns = {"/userprofile"})
+@WebServlet(name = "UserProfileController", urlPatterns = {"/customer/userprofile"})
 @MultipartConfig(
   fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
   maxFileSize = 1024 * 1024 * 10,      // 10 MB
@@ -77,13 +77,13 @@ public class UserProfileController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
-            case "/userprofile":
+            case "/customer/userprofile":
                 showUserProfile(request, response);
                 break;
-            case "/userprofile/edit":
+            case "/customer/userprofile/edit":
                 showEditForm(request, response);
                 break;
-            case "/userprofile/update":
+            case "/customer/userprofile/update":
                 updateUserProfile(request, response);
                 break;
             case "/login":
