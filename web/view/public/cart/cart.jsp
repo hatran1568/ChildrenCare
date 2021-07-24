@@ -74,7 +74,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href=".../service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
@@ -150,7 +150,7 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost:  ${requestScope.totalcost}</h3></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost :   ${requestScope.totalcost}</h3></td>
                                 <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
@@ -273,7 +273,7 @@
                                                             console.log(b)
                                                             var c = querry.toString();
                                                             document.getElementById(c).innerHTML = b["price"]
-                                                            document.getElementById("total").innerHTML = "Total Cost:" + b["total"]
+                                                            document.getElementById("total").innerHTML = "Total Cost: " + b["total"]
 
                                                         }
 
