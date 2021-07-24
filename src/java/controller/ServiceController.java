@@ -146,6 +146,7 @@ private ServiceDAO serviceDB = new ServiceDAO();
         ArrayList<ServiceCategory> categories = serviceDB.getCategories();
         
         ArrayList<Service> services = serviceDB.getServices(pageindex, pagesize, category, search);
+        request.setAttribute("category", category);
         request.setAttribute("editSubmission", editSubmission);
         request.setAttribute("reservation_id", rid);
         request.setAttribute("search", search);
