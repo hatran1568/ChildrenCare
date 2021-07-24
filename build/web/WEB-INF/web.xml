@@ -381,7 +381,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/userprofile/update</url-pattern>
+        <url-pattern>/customer/userprofile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>

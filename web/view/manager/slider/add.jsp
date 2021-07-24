@@ -150,7 +150,7 @@
 
                 <table style="width: 100%">
                     <tr>
-                        <td>Thumnail</td>
+                        <td>Thumbnail</td>
                         <td> <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <img id="output"  > </td>
                     </tr>
