@@ -76,6 +76,7 @@ public class ReservationContactController extends HttpServlet {
             case "/reservation/contact/addreceiver":
                 getReceiverInfo(request,response);
                 break;
+            
 //            case "/reservation/contact/forward":
 //                getReservationInfo(request, response);
 //                break;
@@ -145,7 +146,14 @@ public class ReservationContactController extends HttpServlet {
         String email = request.getParameter("email");
         r.setEmail(email);
         r.setFullName(request.getParameter("name"));
-        r.setUser(u);
+        if (u!=null){
+            r.setUser(u);
+        } else {
+            u = new User();
+            u.setId(-1);
+            r.setUser(u);
+        }
+        
         r.setGender(request.getParameter("gender").equals("male"));
         r.setMobile(request.getParameter("mobile"));
         r.setAddress(request.getParameter("address"));
@@ -159,7 +167,7 @@ public class ReservationContactController extends HttpServlet {
         
         String checkupTime = request.getParameter("checkup-time");
         try {
-            java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(checkupTime);
+            java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(checkupTime);
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             reservationDB.editCheckupTime(rid, sqlDate);
 

@@ -203,6 +203,7 @@ public class CartController extends HttpServlet {
         }
 
         int rid;
+        System.out.println("after: reservationid = "+ reservation_id);
         int service_id = Integer.parseInt(request.getParameter("service_id"));
         if (user == null) {
             user = new User();

@@ -173,7 +173,7 @@
                         <div class="row">
                             <c:forEach items="${requestScope.services}" var="s">
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="full news_blog" style="border: #013582;">
+                                    <div class="full news_blog rounded" style="border: solid black;">
                                         <img class="img-responsive rounded" src="../${s.thumbnailLink}" alt="#" />
 
 
