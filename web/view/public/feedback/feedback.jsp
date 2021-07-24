@@ -141,7 +141,7 @@
                     <div class="twelve wide  field">
                         <label  for="validationCustom01">Name</label>
 
-                        <input value="${sessionScope.user.fullName}" pattern="[A-Za-z]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
+                        <input value="${sessionScope.user.fullName}" pattern="[A-Za-z ]{6+}"  id="validationCustom01" required="true" type="text" name="fullname" placeholder="Bo Yates">
 
                         <div class="invalid-feedback">
                             Please input a valid name at least 6 characters

@@ -34,6 +34,11 @@
                                     ${requestScope.mess}
                                 </div>
                             </c:if>
+                              <c:if test="${not empty requestScope.succ}">
+                                <div class="alert alert-success" role="alert">
+                                    ${requestScope.succ}
+                                </div>
+                            </c:if>
                             <h2 class="form-title">Sign in</h2>
                             <form novalidate="true" method="POST" action="login" class="register-form needs-validation" id="login-form">
 

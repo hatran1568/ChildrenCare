@@ -1,11 +1,10 @@
-
-
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+
         <title>Children Care</title>
 
         <meta charset="UTF-8">
@@ -14,16 +13,21 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <script src="../assets/js/jquery.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
-        
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-alpha2/css/bootstrap-grid.min.css" integrity="sha512-Jn+RkWIYxM5Cn3mfAWyV7CgxFnDFxe3EBh93974boKdhcAUE9TSr7qJTJNlzt+J2wG6a3sLYnEyRF+1/o01u9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+        <link href="../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link rel ="stylesheet" href="../assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../assets/css/animate.css">
         <link rel="stylesheet" href="../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
@@ -32,8 +36,11 @@
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
+        <!-- PRE LOADER -->
 
-        <!-- Start header -->
+
+
+        <!-- HEADER -->
         <header>
             <div class="container">
                 <div class="row">
@@ -50,194 +57,183 @@
 
                 </div>
             </div>
-            
         </header>
-        <!-- End header -->
+
 
         <!-- MENU -->
-        <section class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
+        <div  class="toolplate-iso bootstrap-iso">
+            <section class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
 
-                <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                    </button>
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                        </button>
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="../home" class="navbar-brand">Children Care</a>
-                </div>
+                        <!-- lOGO TEXT HERE -->
+                    </div>
 
-                <!-- MENU LINKS -->
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                        <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                            <div id="login" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Login</h4>
-                                            <form action="../login" method="POST">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
-                                            </form>
-                                        </div>
+                    <!-- MENU LINKS -->
+                    <div class="collapse navbar-collapse">
+
+                        <a href="home" class="navbar-brand">Children Care</a>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
+                            <li><a href="list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                                <c:if test="${ empty sessionScope.user}">
+                                <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../register">Sign up</a></li>
+
+                            </c:if>
+                            <c:if test="${not empty sessionScope.user}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
                                     </div>
-                                </div>  
-                            </div>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                            <div id="register" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <div class="modal-content">
-                                        <div class="modal-body ">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Register</h4>
-                                            <form action="../register" method="GET">
-                                                <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                Female <input type="radio" name="gender" value="female">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Register" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-
-                        </c:if>
-                        <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown"><a href="../customer/reservation/my" class="smoothScroll">My Reservation</a></li>
-                            <li class="dropdown"><a href="../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></li>
+                                </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
-                                    </div>
-                                </li>
-                                <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <div class="dropdown-menu">
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/customer/list">Customers</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/reservation/list">Reservations</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/feedback/list">Feedbacks</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/post/list">Posts</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/slider/list">Sliders</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../manager/service/list">Services</a></p>
+                                        </div>
+                                    </li>
+                                    <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                        <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        </c:if>
                                     </c:if>
-                                </c:if>
-                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
+                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
-                                <li class="dropdown">
+                                    <li class="dropdown">
                                     <li><a href="../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
-                                </li>
-                            </c:if>
-                            <li><a style="font-size: 25px;color: #00aeef" href="#" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <div class="dropdown ">
-                                <img class="avatar" src="../${sessionScope.user.imageLink}">
+                                    </li>
+                                </c:if>
+                                <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <div class="dropdown ">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
 
-                                <div class="dropdown-content">
-                                    <p> <a href="../userprofile">Profile</a></p>
-                                    <p> <a href="#">Change Password</a></p>
-                                    <p> <a href="../logout">Log Out</a></p>
+                                    <div class="dropdown-content">
+                                        <p style="text-align: left"> <a href="../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                        </c:if>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!-- section -->
-        <section id="home" class="slider" data-stellar-background-ratio="0.5">
-        <div class="container row">
-        <div class="col-2">
-            
-            <div>
-                <form action="list">
-                    
-                
-                    <input type="search" placeholder="Search" name="search">
-                
-                </form>
-            </div> 
-            <c:forEach items="${requestScope.categories}" var="c">
-                <div><h3><a href="?category=${c.id}">${c.name}</a></h3></div>
-            </c:forEach>
-                <div><h3><a href="#">Static links</a></h3></div>
-        </div>
-        <div class="col-6">
-            <div class="container" >
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="full">
-                            <div class="heading_main text_align_center">
-                                <h2><span class="theme_color"></span>Services List</h2>    
-                            </div>
-                        </div>
+                                <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
+                            </c:if>
+                        </ul>
                     </div>
                 </div>
-                <div>Results: ${requestScope.services.size()}</div>
-                <div class="row">
-                    <c:forEach items="${requestScope.services}" var="s">
-                        <div class="col-md-4 col-sm-6 col-xs-12">
-                            <div class="full news_blog" style="border: #013582;">
-                                <img class="img-responsive" src="../${s.thumbnailLink}" alt="#" />
+            </section>
+        </div>
+
+
+        <!-- HOME -->
 
 
 
-                                <div style="background: #7f93db; height: 100%;">
-                                    <h2><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h2>
-                                    <p><c:if test="${s.description.length() >= 41}">
-                                        ${s.description.substring(0, 40)}...
-                                    </c:if>
-                                        <c:if test="${s.description.length() < 41}">
-                                        ${s.description}
-                                    </c:if>
-                                        </p>
-                                    <p>
-                                        <span style="text-decoration: line-through;">${s.originalPrice}</span>
-                                        <span style="text-decoration: white;">  -  ${s.salePrice}vnd</span>
-                                    </p>
+
+        <!-- HOME -->
+        <section data-stellar-background-ratio="0.5">
+            <div class="container" style="text-align: center;"><h2>Services List</h2></div>
+            <div class=" row container">
+                <div class="col-3" style="padding: 0 30px 0 30px;">
+
+                    <div>
+                        <form action="list">
+
+                            <input style="width: 150px; display: inline-block" type="search" class="form-control rounded col-10" placeholder="Search" name="search">
+                            <button class="btn btn-outline-info col-2"><i class="fas fa-search fa-lg"></i></button>
+
+                        </form>
+                    </div> 
+                    <div >
+                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
+                        <c:forEach items="${requestScope.categories}" var="c">
+                            <div class="category"><a <c:if test="${c.id == requestScope.category}">class="chosen"</c:if> href="?category=${c.id}">${c.name}</a></div>
+                                <hr>
+                        </c:forEach>
+                    </div>
+                    <div><a href="#">Static links</a></div>
+                </div>
+                <div class="col-9">
+                    <div class="container" >
+
+                        <div>Results: ${requestScope.services.size()}</div>
+                        <div class="row">
+                            <c:forEach items="${requestScope.services}" var="s">
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="full news_blog rounded" style="box-shadow:0 3px 10px 0 rgba(0, 0, 0, 0.19);">
+                                        <img class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
+
+
+
+                                        <div style="height: 100%; padding: 10px; padding-bottom: 0;">
+                                            <h4><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h4>
+                                            <p class="description">
+                                                ${s.description}
+                                            </p>
+                                            
+                                        </div>
+                                            <div style="padding: 10px; text-align: center;">
+                                            <p class="price" style="width: 27%; display: inline-block; text-align: left">
+                                                <c:if test="${s.originalPrice > s.salePrice}">
+                                                <span style="text-decoration: line-through; color: gray;"><fmt:formatNumber type = "number" 
+                                                                  pattern = "###,###,###" value = "${s.originalPrice}" /></span>
+                                                </c:if>
+                                                <c:if test="${s.originalPrice <= s.salePrice}">
+                                                <span style="text-decoration: line-through; color: transparent;"> ${s.originalPrice}</span>
+                                                </c:if>
+                                                <span style="text-decoration: white; font-size: 17px;"><fmt:formatNumber type = "number" 
+                                                                  pattern = "###,###,###" value = "${s.salePrice}" />đ</span>
+                                            </p>
+                                            <div style="height: 100%;  width: 70%; display: inline-block;">
+                                            <button class="btn btn-outline-info" onclick="addToCart(${s.id}, ${requestScope.reservation_id})" style="border-color: #17a2b8">Add to Cart</button>
+
+                                            <button class="btn btn-outline-warning" onclick="window.location.href = '../feedback?id=${s.id}'" style="border-color:#ffc107">Feedback</button>
+                                       
+                                            </div></div>
+
+                                    </div>
+
                                 </div>
-                                <div>
-                                    <button><a href="../cart/add?service_id=${s.id}">Add to Cart</a></button>
-                                    
-                                    <button><a href="../feedback?id=${s.id}">Feedback</a></button>
-                                </div>
+                            </c:forEach>
 
-                            </div>
+
 
                         </div>
-                    </c:forEach>
+                        <div id="pagination" class="pagination"></div>
+                        <script>
+                            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+
+                        </script>
+
+
+                    </div>
+                    <div class="container" style="text-align: right; margin-bottom: 30px"><c:if test="${requestScope.editSubmission == true}">
+                            <button class="btn btn-primary" onclick="window.location.href = '../customer/reservation/details?id=${requestScope.reservation_id}'">Back To Reservation</button>
+                        </c:if></div>
+                </div></div>
+        </section>
+
+
+        <!-- MAKE AN APPOINTMENT -->
 
 
 
-                </div>
-                <div id="pagination" class="pagination"></div>
-                <script>
-                    generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-                </script>
 
 
-            </div>
-        </div></div></section>
-        <!-- end section -->
-
-        <!-- Start Footer -->
+        <!-- FOOTER -->
         <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
@@ -255,28 +251,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -295,137 +291,20 @@
                             </ul>
                         </div>
                     </div>
-
-                    <div class="col-md-12 col-sm-12 border-top">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="copyright-text"> 
-                                <p>Copyright &copy; 2018 Your Company 
-
-                                    | Design: Tooplate</p>
-                            </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="footer-link"> 
-                                <a href="#">Laboratory Tests</a>
-                                <a href="#">Departments</a>
-                                <a href="#">Insurance Policy</a>
-                                <a href="#">Careers</a>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
-                        </div>   
                     </div>
+
 
                 </div>
             </div>
         </footer>
-            <!-- End Footer -->
 
-
-
-            <!-- ALL JS FILES -->
-            <script src="../assets/js/jquery.min.js"></script>
-            <script src="../assets/js/popper.min.js"></script>
-            <script src="../assets/js/bootstrap.min.js"></script>
-            <!-- ALL PLUGINS -->
-            <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-            <script src="../assets/js/jquery.pogo-slider.min.js"></script>
-            <script src="../assets/js/slider-index.js"></script>
-            <script src="../assets/js/smoothscroll.js"></script>
-            <script src="../assets/js/form-validator.min.js"></script>
-            <script src="../assets/js/contact-form-script.js"></script>
-            <script src="../assets/js/isotope.min.js"></script>
-            <script src="../assets/js/images-loded.min.js"></script>
-            <script src="../assets/js/custom.js"></script>
-            
-             
-            <script>
-                    function generatePagger(id, pageindex, totalpage, gap, page)
-                    {
-                        var container = document.getElementById(id);
-                        if (pageindex > gap + 1)
-                            container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
-
-                        for (var i = pageindex - gap; i < pageindex; i++)
-                        {
-                            if (i >= 1)
-                            {
-                                container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                            }
-                        }
-
-                        container.innerHTML += "<a class='active'>" + pageindex + "</a>";
-
-                        for (var i = pageindex + 1; i <= pageindex + gap; i++)
-                        {
-                            if (i <= totalpage)
-                            {
-                                container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
-                            }
-                        }
-
-                        if (pageindex < totalpage - gap)
-                            container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
-                    }
-                    generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
-
-            </script>
-            <style>
-
-                .pagination{
-                    display: inline-block;
-                }
-                .pagination a {
-                    color: black;
-                    float: left;
-                    padding: 8px 16px;
-                    text-decoration: none;
-                }
-
-                .pagination a.active {
-                    background-color: #4CAF50;
-                    color: white;
-                    border-radius: 5px;
-                }
-
-                .pagination a:hover:not(.active) {
-                    background-color: #ddd;
-                    border-radius: 5px;
-                }
-                .dropdown {
-                    color: white;
-                    margin-right: 150px;
-                    position: relative;
-                    display: inline-block;
-                }
-
-                .dropdown-content {
-
-                    text-align: center;
-                    display: none;
-                    position: absolute;
-                    background-color: #f9f9f9;
-                    min-width: 160px;
-                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                    padding: 12px 16px;
-                    z-index: 1;
-                }
-
-                .dropdown:hover .dropdown-content {
-                    display: block;
-                }
-                .avatar{
-
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                }
-
-            </style>
-            <script src="../assets/js/bootstrap.min.js"></script>
+        <!-- SCRIPTS -->
+        <script src="../assets/js/jquery.js"></script>
+        <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/jquery.sticky.js"></script>
         <script src="../assets/js/jquery.stellar.min.js"></script>
         <script src="../assets/js/wow.min.js"></script>
@@ -434,62 +313,116 @@
         <script src="../assets/js/custom-new.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+                                $('ul.nav li.dropdown').hover(function () {
+                                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                }, function () {
+                                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                                });
+                                function addToCart(id, reservation_id) {
+                                    $.ajax({
+                                        url: "../cart/add",
+                                        data: {service_id: id, reservation_id: reservation_id},
+                                        success: function () {
+                                            setInterval('location.reload()', 100);
+                                        }
+
+
+                                    });
+
+                                }
+        </script>
+        <script>
+            function generatePagger(id, pageindex, totalpage, gap, page)
+            {
+                var container = document.getElementById(id);
+                if (pageindex > gap + 1)
+                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
+
+                for (var i = pageindex - gap; i < pageindex; i++)
+                {
+                    if (i >= 1)
+                    {
+                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                    }
+                }
+
+                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
+
+                for (var i = pageindex + 1; i <= pageindex + gap; i++)
+                {
+                    if (i <= totalpage)
+                    {
+                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                    }
+                }
+
+                if (pageindex < totalpage - gap)
+                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
+            }
+            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+
         </script>
         <c:if test="${empty sessionScope.mess}">
-                <c:if test="${ not empty sessionScope.alert}">
-                    <script>
-                        $(document).ready(function () {
-                            let note = "${sessionScope.alert}"
-                            alert(note);
-
-                        });
-                    </script>
-                    <c:remove var="alert" scope="session" />
-
-                </c:if>
-            </c:if>
-            <c:if test="${ not empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
                 <script>
                     $(document).ready(function () {
-                        let mess = "${sessionScope.mess}"
-                        alert(mess);
+                        let note = "${sessionScope.alert}"
+                        alert(note);
 
                     });
                 </script>
-                <c:remove var="mess" scope="session" />
+                <c:remove var="alert" scope="session" />
+
             </c:if>
-                
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
         <style>
-            tfoot {
-                display: table-header-group;
+            .pagination{
+                display: inline-block;
             }
-            table.dataTable tfoot th {
-                text-align: center;
-            }
-            table.dataTable td {
-                font-size: 15px;
-            }
-            table.dataTable th {
-                font-size: 16px;
-            }
-            table.dataTable tbody tr:hover {
-                background-color: #c7c7c7;
-            }
-            table.dataTable.no-footer {
-                border-bottom: 0 !important;
-            }
-            table.dataTable thead th {
-                border-bottom: none;
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+
             }
 
-            table.dataTable tfoot th {
-                border-top: none;
-                border-bottom: 1px solid  #111;
+            .pagination a.active {
+                background-color: #0064af;
+                color: white;
+                border-radius: 5px;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+                border-radius: 5px;
+            }
+            .category{
+                font-size: 150%;
+            }
+            .category a:hover{
+                color: lightgray;
+            }
+            .category a.chosen{
+                color: #0064af;
+            }
+            .price{
+                color: #0064af;
+                font-weight: bold;
+            }
+            .description{
+                height: 50px;
+                overflow: hidden;
             }
         </style>
     </body>

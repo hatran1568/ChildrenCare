@@ -311,7 +311,7 @@ public class UserController extends HttpServlet {
             generatePassword[i] = (int) (Math.random() * 10);
             password += Integer.toString(generatePassword[i]);
         }
-        u.setPassword(MD5.getMd5(password));
+        u.setPassword(password);
         u.setMobile(request.getParameter("mobile"));
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
@@ -537,8 +537,8 @@ public class UserController extends HttpServlet {
                 receiverDb.addReceiver(r);
             }
 
-            request.setAttribute("mess", "Login Successfully");
-            request.getRequestDispatcher("login").forward(request, response);
+            request.setAttribute("succ", "Verify Successfully");
+            request.getRequestDispatcher("/view/public/form/login.jsp").forward(request, response);
 
             //If code is wrong back to verify page
         } else {

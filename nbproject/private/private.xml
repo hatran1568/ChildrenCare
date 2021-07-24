@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/HomePageController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/dao/BaseDAO.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/util/MD5.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ReservationCompletionController.java</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/util/EmailVerify.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/cart/cart.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/FeedbackController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/User.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/form/login.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/post/edit2.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/form/register.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/feedback/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerPostController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/feedback/feedback.jsp</file>
         </group>
     </open-files>
 </project-private>
