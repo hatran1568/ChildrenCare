@@ -192,9 +192,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>Filters:</th>
-                                        <th>Type<br></th>
                                         <th></th>
-                                        <th>Status<br></th>
+                                        <th></th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -206,8 +206,8 @@
                                         <td>${s.type}</td>
                                         <td>${s.name}</td>
                                         <td>${s.status}</td>
-                                        <td><a href="details?id=${s.id}"><i class="fas fa-eye" style="color: #00ffc8"></i></a></td>
-                                        <td><a href="edit?id=${s.id}"><i class="fas fa-pen" style="color: #d0ff00"></i></a></td>
+                                        <td><a href="details?id=${s.id}"><i class="fas fa-eye" style="align-content: center"></i></a></td>
+                                        <td><a href="edit?id=${s.id}"><i class="fas fa-pen" style="align-content: center"></i></a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

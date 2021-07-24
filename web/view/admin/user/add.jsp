@@ -171,31 +171,45 @@
                     <br><br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
                             <br>
-                            <form action="../../admin/user/insert" method="POST" >
+                            <form action="../../admin/user/insert" method="POST" novalidate class="needs-validation">
                                 <div class="form-group">
                                     <label for="email">Email</label><br>
-                                    <input type="email" class="form-control" name="email" placeholder="email@domain" style="width: 35%; display: inline;">
+                                    <input type="email" class="form-control" name="email" onchange="checkExistingEmail()" required placeholder="email@domain" style="width: 35%; display: inline;">
+                                </div>
+                                <div class="invalid-feedback">
+                                        Please enter an email.
+                                </div>
+                                <div id="email-notify" style="display: none">
+                                    Email already exists in DB
                                 </div>
                                 <div class="form-group">
                                     <label for="full-name">Full Name</label><br>
-                                    <input type="text" class="form-control" name="full-name" placeholder="Enter name" style="width: 35%; display: inline;">
+                                    <input type="text" class="form-control" name="full-name" required placeholder="Enter name" style="width: 35%; display: inline;">
+                                </div>
+                                <div class="invalid-feedback">
+                                        Please enter a name.
                                 </div>
                                     <!--<input type="text" class="form-control" name="password">-->
 <!--                                    <input type="text" class="form-control" name="image-link" hidden>-->
                                 <div class="form-group">
                                     <label for="gender" style="margin-right: 3%">Gender</label>
-                                    Male <input type="radio" name="gender" value="male" style="margin-right: 3%">
+                                    Male <input type="radio" name="gender" value="male" checked style="margin-right: 3%">
                                     Female <input type="radio" name="gender" value="female">
                                 </div>
                                 <div class="form-group">
                                         <label for="mobile">Mobile</label><br>
-                                        <input type="text" class="form-control" name="mobile" placeholder="123-45-678" style="width: 35%; display: inline;">
+                                        <input type="text" class="form-control" name="mobile" required pattern="[0-9]{10}" placeholder="123-45-678" style="width: 35%; display: inline;">
+                                </div>
+                                <div class="invalid-feedback">
+                                        Please enter a valid phone number.
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label><br>
-                                    <input type="text" class="form-control" name="address" placeholder="Enter Address" style="width: 35%; display: inline;">
+                                    <input type="text" class="form-control" name="address" required placeholder="Enter Address" style="width: 35%; display: inline;">
                                 </div>
-
+                                <div class="invalid-feedback">
+                                    Please enter an address.
+                                </div>
                                 <div class="form-group">
                                     <label for="role">Role</label><br>
                                     <select class="form-control" name="role" style="width: 35%; height: 7%; display: inline">
@@ -339,5 +353,32 @@
                 background-color: #c7c7c7;
             }
         </style>
+        <script>
+            $(document).ready(function (){
+                $("#male").prop("checked", true);
+            });
+            
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>
     </body>
 </html>

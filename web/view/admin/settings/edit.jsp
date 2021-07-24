@@ -170,7 +170,7 @@
                 <div class="container-fluid">
                     <br><br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
-                            <form action="../../admin/setting/update" method="POST">
+                            <form action="../../admin/setting/update" method="POST" novalidate class="needs-validation">
                                 <br><div class="form-group">
                                     <div for="id">Setting ID</div>
                                     <input type="text" class="form-control" name="id" value="${requestScope.setting.id}" readonly style="width: 35%; display: inline">
@@ -189,7 +189,10 @@
                                 </div>
                                 <div class="form-group">
                                     <div for="name">Name</div>
-                                    <input type="text" class="form-control" name="settingname" value="${requestScope.setting.name}" style="width: 35%; display: inline">
+                                    <input type="text" class="form-control" name="settingname" required value="${requestScope.setting.name}" style="width: 35%; display: inline">
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter a name.
                                 </div>
                                 <div class="form-group">
                                     <div for="description">Description</div>
@@ -197,7 +200,10 @@
                                 </div>
                                 <div class="form-group">
                                     <div for="status">Status</div>
-                                    <input type="text" class="form-control" name="status" value="${requestScope.setting.status}" style="width: 35%; display: inline">
+                                    <input type="text" class="form-control" name="status" required value="${requestScope.setting.status}" style="width: 35%; display: inline">
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter the status.
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -323,5 +329,32 @@
                 background-color: #c7c7c7;
             }
         </style>
+        <script>
+            $(document).ready(function (){
+                $("#male").prop("checked", true);
+            });
+            
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>
     </body>
 </html>

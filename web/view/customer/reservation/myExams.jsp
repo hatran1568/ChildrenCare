@@ -134,9 +134,6 @@
 
         <!-- HOME -->
         <section id="home" class="slider" data-stellar-background-ratio="0.5">
-            <div class="container" style="text-align: center;">
-                <h2 style="margin-top: 3%">Your Prescriptions</h2>
-            </div>
             <div class="container" style="min-height: 700px; height: auto; max-width: 80%">
             <c:if test="${requestScope.medexam.size()>0}">
             <table class="table" id="myExams">
@@ -171,7 +168,7 @@
             </table>
             </c:if>
             <c:if test="${requestScope.medexam.size()==0}">
-                <h1 style="text-align: center; font-size: 30px">You do not have any Prescriptions</h1>
+                <h2 style="text-align: center; font-size: 30px">You do not have any Prescriptions</h2>
             </c:if>
             </div>
         </section>
