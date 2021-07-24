@@ -608,7 +608,6 @@ public class UserController extends HttpServlet {
             JWebToken j = new  JWebToken(token) ;
             token = j.getSubject();
             
-            
             int id = Integer.parseInt(token);
             UserDAO userDb = new UserDAO();
             User u = userDb.getUser(id);

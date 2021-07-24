@@ -278,9 +278,8 @@
                                                             var b = JSON.parse(JSON.stringify(data));
                                                             console.log(b)
                                                             var c = querry.toString();
-                                                            document.getElementById(c).innerHTML = b["price"]
-
-                                                            document.getElementById("total").innerHTML = "Total Cost: " + b["total"]
+                                                            document.getElementById(c).innerHTML = new Intl.NumberFormat().format(b["price"]);
+                                                            document.getElementById("total").innerHTML = "Total Cost: " + new Intl.NumberFormat().format(b['total'])
 
                                                         }
 
