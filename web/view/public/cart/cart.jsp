@@ -150,7 +150,10 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost :   ${requestScope.totalcost}</h3></td>
+
+                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost: <fmt:formatNumber type = "number" 
+                                                                                                      pattern = "###,###,###" value = "${requestScope.totalcost}" /></h3></td>
+
                                 <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
@@ -160,11 +163,13 @@
                                 <tr >
                                     <td>${list.service.id}</td>
                                     <td>${list.service.fullname}</td>
-                                    <td >${list.unitPrice}</td>
+                                    <td ><fmt:formatNumber type = "number" 
+                                                      pattern = "###,###,###" value = "${list.unitPrice}" /></td>
 
                                     <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
-                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
+                                    <td id =${list.service.id}><fmt:formatNumber type = "number" 
+                                                                         pattern = "###,###,###" value = "${list.unitPrice * list.quantity}" /> </td>
                                     <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
 
                                 </tr>
@@ -273,6 +278,7 @@
                                                             console.log(b)
                                                             var c = querry.toString();
                                                             document.getElementById(c).innerHTML = b["price"]
+
                                                             document.getElementById("total").innerHTML = "Total Cost: " + b["total"]
 
                                                         }
@@ -314,5 +320,11 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+        <style>
+            .btn-outline-primary{
+                border: #337ab7;
+            }
+        </style>
+
     </body>
 </html> 

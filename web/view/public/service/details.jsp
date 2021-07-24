@@ -81,7 +81,7 @@
                         <a href="home" class="navbar-brand">Children Care</a>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href="" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="list" class="smoothScroll dropdown">Services</a></li>
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
@@ -151,14 +151,19 @@
                     <div>
                         <form action="list">
 
-
-                            <input type="search" class="form-control rounded" placeholder="Search" name="search">
+                            <input style="width: 150px; display: inline-block" type="search" class="form-control rounded col-10" placeholder="Search" name="search">
+                            <button class="btn btn-outline-info col-2"><i class="fas fa-search fa-lg"></i></button>
+                            
                         </form>
                     </div> 
+                    <div >
+                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
                     <c:forEach items="${requestScope.categories}" var="c">
-                        <div><h3 style="color: gray;"><a href="list?category=${c.id}">${c.name}</a></h3></div>
-                            </c:forEach>
-                    <div><h3><a href="#">Static links</a></h3></div>
+                        <div class="category"><a <c:if test="${c.id == requestScope.service.category.id}">class="chosen"</c:if> href="list?category=${c.id}">${c.name}</a></div>
+                        <hr>
+                    </c:forEach>
+                    </div>
+                    <div><a href="#">Static links</a></div>
                 </div>
                 <div class="col-9">
                     <div class="container" >
@@ -229,28 +234,6 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <!--                        <div class="footer-thumb"> 
-                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>Amazing Technology</h5></a>
-                                                            <span>March 08, 2018</span>
-                                                        </div>
-                                                    </div>
-                        
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>New Healing Process</h5></a>
-                                                            <span>February 20, 2018</span>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -332,6 +315,16 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-
+            <style>
+                .category{
+                    font-size: 21px;
+                }
+                .category a:hover{
+                    color: lightgray;
+                }
+                .category a.chosen{
+                    color: #0064af;
+                }
+            </style>
     </body>
 </html>

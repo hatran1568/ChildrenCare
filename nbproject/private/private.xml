@@ -3,21 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/post/list2.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/service/details.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/customer/reservation/reservationCompletion.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ReservationCompletionController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/CartController.java</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/cart/cart.jsp</file>
+            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/src/java/controller/ReservationContactController.java</file>
             <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/public/service/list2.jsp</file>
-            <file>file:/C:/Users/HP/OneDrive/Desktop/ite3/web/view/manager/feedback/list.jsp</file>
-
-            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/assets/css/custom.css</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/newdashboard.jsp</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/UserController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/HomePageController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerPostController.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/User.java</file>
-            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/feedback/feedback.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -45,7 +45,7 @@
                         {'className': 'text-center', 'targets': 5},
                         {'max-width': '5%', 'targets': 6},
                         {'max-width': '5%', 'targets': 5},
-                        {'orderable': false, 'targets': 6},
+                        {'orderable': false, 'targets': [6, 7]},
                         {'orderable': false, 'targets': 5},
                         {'orderable': false, 'targets': 3},
                     ],

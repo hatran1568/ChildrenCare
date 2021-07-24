@@ -16,6 +16,7 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -34,7 +35,6 @@ public class CartController extends HttpServlet {
 
     private ReservationDAO reservationDB = new ReservationDAO();
     private ServiceDAO serviceDB = new ServiceDAO();
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -149,7 +149,7 @@ public class CartController extends HttpServlet {
             request.setAttribute("totalcost", total);
             request.setAttribute("list", reservationServices);
         }
-
+        
         request.getRequestDispatcher("../view/public/cart/cart.jsp").forward(request, response);
 
     }
@@ -194,7 +194,7 @@ public class CartController extends HttpServlet {
         System.out.println("reservationid = "+ reservation_id);
         if (reservation_id == null || Integer.parseInt(reservation_id) == -1) {
             if (request.getSession().getAttribute("reservation_id") == null) {
-                reservation_id = null;
+                reservation_id = "-1";
             } else {
                 reservation_id = request.getSession().getAttribute("reservation_id").toString();
             }
@@ -224,8 +224,8 @@ public class CartController extends HttpServlet {
             Reservation reservation = reservationDB.getReservationById(rid);
             Service service = serviceDB.getService(service_id);
             reservationDB.addReservationService(reservation, service, 1);
-        } else if (user.getId() > 0 && reservation_id != null && reservation_id.length() != 0 && Integer.parseInt(reservation_id) != -1) {
-
+        } else if (user.getId() > 0  && reservation_id.length() != 0 && Integer.parseInt(reservation_id) != -1) {
+            
             Reservation r = reservationDB.getReservationById(Integer.parseInt(reservation_id));
             Service service = serviceDB.getService(service_id);
             reservationDB.addReservationService(r, service, 1);
