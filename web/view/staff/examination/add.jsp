@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Add examination</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -118,10 +118,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
             <h3 style="text-align: center">Patient info</h3>
             <div style="margin-top: 40px"  class="row justify-content-md-center">
                 <div style="margin-left: auto; margin-right: auto; float: none" class="col-md-8">
-                    <form action="add" method="post">
+                    <form action="add" method="post" novalidate class="needs-validation">
                         <input type="text" name="rid" value="${requestScope.rid}" hidden>
                         <input type="text" name="sid" value="${requestScope.sid}" hidden>
                         <div class="form-row">
@@ -284,7 +284,11 @@
                 $.ajax({
                    url: "checkemail" ,
                    method: "post",
-                   data: { email : $("#email").val()},
+                   data: { email : $("#email").val(),
+                            name: $("#name").val(),
+                        gender: $('input[name="gender"]:checked').val(),
+                            mobile: $("#mobile").val(),
+                        address $("#address").val()},
                    success: function(data) {
                        $("#name").val(data.fullName);
                        if (data.gender === true){

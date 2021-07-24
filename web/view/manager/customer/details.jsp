@@ -115,10 +115,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -133,14 +133,14 @@
 
         <!-- End Banner -->
         <!-- section -->
-        <div class="container">
+        <div class="container" style="margin-top: 50px; margin-bottom: 50px">
+        <div><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Customer list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>${requestScope.user.fullName}</div>
+
             <div class="row">
                 <div class="col-12">
-                    <div class="card" style="margin: 20px; min-height: 600px; padding: 10px">
+                    <div class="card" style="margin:20px; min-height: 600px; padding: 10px">
 
                         <div class="card-body">
-                           
-
                             <div class="row">
                                 
                                 

@@ -386,7 +386,7 @@ public class PostDAO extends BaseDAO {
                     + "(select p.id, p.content, p.description, updated_date, featured, thumbnail_link, author_id, category_id, p.status_id as p_status, title,\n"
                     + "s.name as category_name\n"
                     + "from post p left join (select id, name from setting where type=\"Post category\") as s\n"
-                    + "on p.category_id = s.id) as x\n"
+                    + "on p.category_id = s.id where p.status_id = 25) as x\n"
                     + "left join (select id as stt_id, name as status_name, type as stt_type from setting where type = \"Post Status\") as stt\n"
                     + "on x.p_status = stt.stt_id) as y\n"
                     + "\n"

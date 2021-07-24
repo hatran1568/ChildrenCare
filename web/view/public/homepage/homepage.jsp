@@ -118,7 +118,7 @@
                                     <img class="avatar" src="<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -254,7 +254,7 @@
                     </div>
                     <div class="col-md-6 post-column">
                         <c:forEach var="i" begin="1" end="4">
-                            <div class="featured-post-info" style="display: flex;flex-direction: row">
+                            <div class="featured-post-info" style="display: flex;flex-direction: row;">
                                 <div class="thumb"><img src="<%=request.getContextPath()%>/${requestScope.posts[i].thumbnailLink}" width="140" height="110"></div>
                                 <div style="padding-left: 15px">
                                     <p class="featured-post-category" style="font-size: 10px">${requestScope.posts[i].category.name}</p>
