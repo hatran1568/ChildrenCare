@@ -76,6 +76,7 @@ public class ReservationContactController extends HttpServlet {
             case "/reservation/contact/addreceiver":
                 getReceiverInfo(request,response);
                 break;
+            
 //            case "/reservation/contact/forward":
 //                getReservationInfo(request, response);
 //                break;
