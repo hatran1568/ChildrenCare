@@ -140,6 +140,8 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin-top: 75px">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Reservation list</a><i style="margin : 5px;" class="fas fa-angle-right"></i>Detail</div>
+
             <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
                 <h3 style="text-align: center">Reservation info</h3>
                 <div class="row">
@@ -368,6 +370,10 @@
                 }
                 #Info h3{
                     margin: 20px;
+                }
+                footer p span{
+                    color: #757575;
+                    font-size: 14px;
                 }
         </style>
     </body>

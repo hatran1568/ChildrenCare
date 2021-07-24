@@ -232,6 +232,7 @@
                         <h2 style="text-align: center">Featured posts</h2>
                     </div>
                 </div>
+                <c:if test="${requestScope.posts.size()>=5}">
                 <div class="row">
                     <div class="col-md-6">
                         <div style="padding:15px">
@@ -272,6 +273,7 @@
                         <div class="more-post"><a href="blog/list"><span class="arrow"></span>More posts <i style="size: 2px;margin-left: 5px" class="fas fa-arrow-right"></i></a></div>
                     </div>
                 </div>
+                            </c:if>
             </div>
         </section>
         <!-- FOOTER -->
@@ -375,6 +377,12 @@
             }
             .team-info h3 a:hover{
                 color:  #337ab7;
+            }
+            .team-info p{
+                
+                height: 75px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .featured-post-info{
                 padding: 15px 0 0 0;
