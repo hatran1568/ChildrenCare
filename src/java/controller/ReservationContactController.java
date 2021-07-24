@@ -159,7 +159,7 @@ public class ReservationContactController extends HttpServlet {
         
         String checkupTime = request.getParameter("checkup-time");
         try {
-            java.util.Date utilDate = new SimpleDateFormat("dd MMM yyyy").parse(checkupTime);
+            java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(checkupTime);
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             reservationDB.editCheckupTime(rid, sqlDate);
 

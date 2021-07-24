@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>${requestScope.post.title}</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -29,14 +29,9 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+        
     </head>
-     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+    <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
         <!-- PRE LOADER -->
 
@@ -63,7 +58,7 @@
 
 
         <!-- MENU -->
-        
+
         <div  class="toolplate-iso bootstrap-iso">
             <section class="navbar navbar-default navbar-static-top" role="navigation">
                 <div class="container">
@@ -141,56 +136,67 @@
         <!-- section -->
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
-                <div class="row">
-                    <div class="col-md-3">Thumbnail</div>
-                    <div class="col-md-9">
-                        <img src="../../${requestScope.post.thumbnailLink}" style="max-width: 500px">
+                                <div style="margin: 30px 0px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Details</div>
+
+                <div class="col-md-10" style="margin-left: 8.33%; margin-right: 8.33%">
+                    <div class="row">
+                        <div class="col-md-2"><strong>Thumbnail:</strong></div>
+                        <div class="col-md-10">
+                            <img src="../../${requestScope.post.thumbnailLink}" style="max-width: 500px">
+                        </div>
                     </div>
-                </div>
                     <hr />
-                <div class="row">
-                    <div class="col-md-3">Category</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.category.name}
+                    <div class="row">
+                        <p>
+                            <strong>Title:</strong>
+                            <span>${requestScope.post.title}</span>
+                        </p>
                     </div>
-                </div> 
-                    <hr />
-                <div class="row">
-                    <div class="col-md-3">Title</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.title}
+                    <div class="row">
+                        <p>
+                            <strong>Description:</strong>
+                            <span>${requestScope.post.description}</span>
+                        </p>
                     </div>
-                </div>
-                    <hr />
-                <div class="row">
-                    <div class="col-md-3">Description</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.description}
+
+                    <div class="row">
+                        <p class="col-md-6" style="padding-left: 6px">
+                            <strong>Author:</strong>
+                            <span>${requestScope.post.author.fullName}</span>
+                        </p>
+                        <p class="col-md-6">
+                            <strong>Updated date:</strong>
+                            <span><fmt:formatDate pattern="dd-MM-yyyy" value="${requestScope.post.updatedDate}"/></span>
+                        </p>
                     </div>
-                </div>
-                    <hr />
+                    <div class="row" >
+                        <p class="col-md-6" style="padding-left: 6px">
+                            <strong>Category:</strong>
+                            <span>${requestScope.post.category.name}</span>
+                        </p>
+                        <p class="col-md-6">
+                            <strong>Status:</strong>
+                            <span>${requestScope.post.status.name}</span>
+                        </p>
+                    </div>
+                    <div class="row">
+                        <p>
+                            <strong>Featured:</strong>
+                            <span><c:if test="${requestScope.post.featured eq true}">True</c:if>
+                                <c:if test="${requestScope.post.featured eq false}">False</c:if></span>
+                        </p>
+                    </div>
                 <div class="row">
-                    <div class="col-md-3">Content</div>
-                    <div style="white-space: pre-line" class="col-md-9">
+                    <div style="font-weight: bold;font-size: 16px;color: black">Content:</div>
+                    <div id="post-content">
                         ${requestScope.post.content}
                     </div>
                 </div>
-                    <hr />
-                <div class="row">
-                    <div class="col-md-3">Featured</div>
-                    <div class="col-md-9">
-                        <c:if test="${requestScope.post.featured eq true}">True</c:if>
-                        <c:if test="${requestScope.post.featured eq false}">False</c:if>
-                    </div>
-                </div>
-                    <hr />
-                <div class="row">
-                    <div class="col-md-3">Status</div>
-                    <div class="col-md-9">
-                        ${requestScope.post.status.name}
-                    </div>
-                </div>  
                     <button type="button" class="btn btn-primary pull-right" onclick="window.location.href = 'edit?pid=${requestScope.post.id}'">Edit post</button>
+                </div>
+                
+                
+                
             </div>
         </div>
 
@@ -218,28 +224,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-<!--                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -259,10 +265,10 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
+                    </div>
 
 
                 </div>
@@ -278,62 +284,58 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-        
-     <script>
-                var loadFile = function (event) {
-                    var output = document.getElementById('output');
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                    output.onload = function () {
-                        URL.revokeObjectURL(output.src) // free memory
-                    }
-                };
-               
-            </script>
+
+        <script>
+                    var loadFile = function (event) {
+                        var output = document.getElementById('output');
+                        output.src = URL.createObjectURL(event.target.files[0]);
+                        output.onload = function () {
+                            URL.revokeObjectURL(output.src) // free memory
+                        }
+                    };
+
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                            $('ul.nav li.dropdown').hover(function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                            }, function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                            });
-        </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
+                    $('ul.nav li.dropdown').hover(function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                    }, function () {
+                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
                     });
-                </script>
-                <c:remove var="alert" scope="session" />
+        </script>
 
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
-            <style>
+        <style>
+
+            #main-body .row{
+                margin: 10px 0px;
+                padding: 10px;
+            }
+            #main-body .row :first-child{
+                /*font-weight: bold;*/
+            }
+
+            #main-body{
+                margin: 10px 0px;
+            }
+            #main-body p strong,span{
+                font-size: 16px;
+                color:black;
+            }
+            #post-content{
+                font-size: 16px !important;
+                color:black !important;
+                text-align: justify;
+            }
+            p{
+                font-size: 16px;
+                color:black;
                 
-                    #main-body .row{
-                        margin: 10px 0px;
-                        padding: 10px;
-                    }
-                    #main-body .row :first-child{
-                        /*font-weight: bold;*/
-                    }
-                    
-                    #main-body{
-                        margin: 10px 0px;
-                    }
-                    
-                    
-                
-            </style>
+            }
+            
+            footer p{
+                color: #757575;
+                font-size: 14px
+            }
+        </style>
     </body>
 </html> 

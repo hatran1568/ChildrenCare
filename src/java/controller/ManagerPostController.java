@@ -200,7 +200,7 @@ public class ManagerPostController extends HttpServlet {
             inputStream.close();
             fileOutputStream.close();
             p.setThumbnailLink("assets/images/"+fileName);
-            File file = new File(getFolderUpload()+"\\"  + postDB.getPostById(pid).getThumbnailLink());
+            File file = new File(getFolderUpload()+"\\"  + oldPost.getThumbnailLink());
             file.delete();
         }
         
@@ -281,7 +281,7 @@ public class ManagerPostController extends HttpServlet {
     }
 
     public File getFolderUpload() {
-        File folderUpload = new File(getServletContext().getInitParameter("ImageDirectory"));
+        File folderUpload = new File(getServletContext().getRealPath("/") + "..\\..\\web\\assets\\images");
         if (!folderUpload.exists()) {
             folderUpload.mkdirs();
         }

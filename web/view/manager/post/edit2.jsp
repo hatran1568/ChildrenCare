@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Edit post</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -136,6 +136,7 @@
         <!-- section -->
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
+                <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
                 <form id="form" class="needs-validation" action="update" method="POST" enctype="multipart/form-data" novalidate>
 
                     <input type="text" value="${requestScope.post.id}" name="pid" hidden>
@@ -143,7 +144,7 @@
                         <div class="col-md-3">Thumbnail</div>
                         <div class="col-md-9">
 
-                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px"><br>
+                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px; margin-bottom: 30px"><br>
                             <input class="form-control-file" onchange="loadFile(event)" id="file" name="file" type="file" accept="image/*,.jpg">
                             <div style="display: none; color: red" id="alertfile">
                                 File size exceeded 50MB!
@@ -164,12 +165,13 @@
                     <hr />
                     <div class="row">
                         <div class="col-md-3">Title</div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 form-group">
                             <input class="form-control"  value="${requestScope.post.title}" style="width: 100%" type="text" name="title" required>
+                            <div class="invalid-feedback">
+                                Post title can't be blank!
+                            </div>
                         </div>
-                        <div class="invalid-feedback">
-                            Post title can't be blank!
-                        </div>
+                        
                     </div>
                     <hr />
                     <div class="row">
