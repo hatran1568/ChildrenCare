@@ -291,7 +291,7 @@
                 CKEDITOR.replace('content');
             </script>
             <script>
-                var maxFileSize = 1024 * 1024;
+                var maxFileSize = 1024 * 1024 *10;
                 function savePost() {
                     document.getElementById("status").value = "25";
                     
