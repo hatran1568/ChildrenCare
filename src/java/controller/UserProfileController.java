@@ -19,6 +19,8 @@ import bean.User;
 import dao.ReceiverDAO;
 import dao.SettingDAO;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +30,10 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import util.EmailVerify;
 
-@WebServlet(name = "UserProfileController", urlPatterns = {"/userprofile"})
-@MultipartConfig(
-  fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
-  maxFileSize = 1024 * 1024 * 10,      // 10 MB
-  maxRequestSize = 1024 * 1024 * 100, location = "C:\\Users\\ASUS\\Desktop\\Study Stuffs\\Kỳ 5 - Project\\NewNewCode\\web\\assets\\images\\avatar"   // 100 MB
-)
+@WebServlet(name = "UserProfileController", urlPatterns = {"/customer/userprofile"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 50, // 50MB
+        maxRequestSize = 1024 * 1024 * 50, location = "swp\\") // 50MB
 public class UserProfileController extends HttpServlet {
 
     /**
@@ -77,13 +77,13 @@ public class UserProfileController extends HttpServlet {
         String action = request.getServletPath();
 
         switch (action) {
-            case "/userprofile":
+            case "/customer/userprofile":
                 showUserProfile(request, response);
                 break;
-            case "/userprofile/edit":
+            case "/customer/userprofile/edit":
                 showEditForm(request, response);
                 break;
-            case "/userprofile/update":
+            case "/customer/userprofile/update":
                 updateUserProfile(request, response);
                 break;
             case "/login":
@@ -151,17 +151,30 @@ public class UserProfileController extends HttpServlet {
         u.setMobile(request.getParameter("mobile"));
         u.setAddress(request.getParameter("address"));
             //Avatar
-        Part part = request.getPart("imageLink");
+        Part part = request.getPart("file");
+        
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
+        
+        inputStream = request.getPart(part.getName()).getInputStream();
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-        part.write("/" + File.separator + fileName);
-        u.setImageLink("assets/images/avatar/" + fileName);
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        File test = getFolderUpload();
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
+        u.setImageLink("assets/images/" + fileName);
         
         UserDAO userDB = new UserDAO();
-        File file = new File("C:\\Users\\ASUS\\Desktop\\Study Stuffs\\Kỳ 5 - Project\\NewNewCode\\web\\" + userDB.getUser(oldu.getId()).getImageLink());
-        file.delete();
-        
         userDB.updateUser(u);
         User newu = userDB.getUser(u.getId());
         request.getSession().setAttribute("user", newu);
@@ -352,6 +365,13 @@ public class UserProfileController extends HttpServlet {
             }
         }
         return "";
+    }
+    public File getFolderUpload() {
+        File folderUpload = new File(getServletContext().getRealPath("/") + "..\\..\\web\\assets\\images");
+        if (!folderUpload.exists()) {
+            folderUpload.mkdirs();
+        }
+        return folderUpload;
     }
     @Override
     public String getServletInfo() {

@@ -15,71 +15,56 @@
             integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
             crossorigin="anonymous"
             />
-
+        <link href="../../assets/css/custom.css" rel="stylesheet" type="text/css"/>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
             integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
             crossorigin="anonymous"
             />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-        </script>
-        
-         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Users List</title>
         
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
         <link rel="stylesheet" href="../../assets/css/style.css" />
-        <!--
-    Ramayana CSS Template
-    https://templatemo.com/tm-529-ramayana
-        -->
-      
-        <!-- Additional CSS Files -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
         <script type="text/javascript">
         $(document).ready(function () {
-            var sitetable = $('#users').DataTable({
+            $('#users').DataTable({
                 "searching": true,
-                "paging": true, 
+                "paging": true,
                 'columnDefs': [
-                    {'max-width': '10%', 'targets': 3},
                     {'className': 'text-center', 'targets': 0},
-                    {'className': 'text-center', 'targets': 6},
-                    {'className': 'text-center', 'targets': 7},
-                    {'className': 'text-center', 'targets': 8},
-                    {'orderable': false, 'targets' : 7},
-                    {'orderable': false, 'targets' : 8},
+                    {'className': 'text-center', 'targets': 4},
+                    {'className': 'text-center', 'targets': 5},
+                    {'orderable': false, 'targets' : 4},
+                    {'orderable': false, 'targets' : 5},
                 ],
                 columns: [
                     null,
+                    { data: "Type", title:"Type", className: "dt-filter" },
                     null,
-                    { data: "Gender", title:"Gender", className: "dt-filter" },
-                    null,
-                    null,
-                    { data: "Role", title:"Role", className: "dt-filter" },
                     { data: "Status", title:"Status", className: "dt-filter" },
+                    null,
+                    null
                 ],
                 initComplete: function () {
                     this.api().columns('.dt-filter').every( function () {
                         var column = this;
-                        var select = $('<select><option value=""></option></select>')
+                        var select = $('<select style="width: 90%"><option value=""></option></select>')
                             .appendTo( $(column.footer()))
-                            .on( 'change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-
-                                column
-                                    .search( val ? '^'+val+'$' : '', true, false )
-                                    .draw();
-                            } );
+                            .on(
+                                'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                }
+                            );
 
                         column.data().unique().sort().each( function ( d, j ) {
                             select.append( '<option value="'+d+'">'+d+'</option>' )
@@ -93,11 +78,11 @@
 
     <body>
         <!-- sidebar -->
-        <div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+        <div style="top: 25px;" class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
             <div class="item">
                 <div class="header">General</div>
                 <div class="menu">
-                    <a class="item" href='../dashboard/view'>
+                    <a class="item" href="../dashboard/view">
                         <div>
                             <i class="icon tachometer alternate"></i>
                             Dashboard
@@ -113,7 +98,7 @@
                     <a href='../setting/list' class="item">
                         <div><i class="cogs icon"></i>Settings</div>
                     </a>
-                    <a href='../user/list' class="item">
+                    <a href='#top' class="item">
                         <div><i class="users icon"></i>User</div>
                     </a>
                 </div>
@@ -142,17 +127,7 @@
                     </div>
                 </form>
             </div>
-<!--            <div class="ui segment inverted">
-                <div class="ui tiny olive inverted progress">
-                    <div class="bar" style="width: 54%"></div>
-                    <div class="label">Monthly Bandwidth</div>
-                </div>
-
-                <div class="ui tiny teal inverted progress">
-                    <div class="bar" style="width:78%"></div>
-                    <div class="label">Disk Usage</div>
-                </div>
-            </div>-->
+          
         </div>
 
         <!-- sidebar -->
@@ -163,8 +138,8 @@
                 <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
                     <i class="sidebar icon"></i>
                 </a>
-                <a href="#" class="header item">
-                    Semantic UI
+                <a href="../../home" class="header item">
+                    ChildrenCare
                 </a>
             </div>
 
@@ -173,9 +148,9 @@
                     <i class="bell icon"></i>
                 </a>
                 <div class="ui dropdown item">
-                    <i class="user cirlce icon"></i>
+                    <img style="width: 50px" class="avatar" src="../../${sessionScope.user.imageLink}">
                     <div class="menu">
-                        <a href="../../userprofile" class="item">
+                        <a href="../../customer/userprofile" class="item">
                             <i class="info circle icon"></i> Profile</a
                         >
                         <a href="../../logout" class="item">
@@ -191,8 +166,8 @@
 
         <div class="pusher">
             <div class="main-content">
-                <div class="container-fluid">
-                    <br>
+                <div class="container-fluid" style="margin-left: 2%; margin-right: 2%">
+                    <br><br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List</div>
 
                             <div>

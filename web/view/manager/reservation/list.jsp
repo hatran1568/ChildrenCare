@@ -201,7 +201,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <td></td>
+                            <td style="font-weight: bold;">Filters:</td>
                             <td></td>
                             <td></td>
                             <td></td>

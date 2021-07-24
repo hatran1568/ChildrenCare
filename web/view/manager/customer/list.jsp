@@ -335,6 +335,9 @@
                 font-weight: normal;
                 text-align: center;
             }
+            .table td{
+                text-align: left;
+            }
         </style> 
     </body>
 </html> 

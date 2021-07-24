@@ -224,7 +224,7 @@
                     </div>
                     <div class="four wide field">
                         <label></label>
-                        <div onclick="submit()" class="ui button" tabindex="0">Save</div>  
+                        <div onclick="submit()" style="font-size: 16px;" class="ui button" tabindex="0">Save</div>  
                     </div>
                 </div>
 

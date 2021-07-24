@@ -41,6 +41,7 @@
                     "paging": true,
                     "sPaginationType": "full_numbers",
                     "bJQueryUI": true,
+                    "pageLength": 50,
                     'columnDefs': [
 
                         {'className': 'text-center', 'targets': 6},
@@ -200,7 +201,7 @@
             <div class="container">
 
                 <h2 style="text-align: center; margin: 3%; color: #0064af;">Feedbacks List</h2>
-                <table id="posts">
+                <table id="posts" class="table">
 
                     <thead>
                         <tr>
@@ -217,7 +218,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <td></td>
+                            <td style="font-weight: bold;">Filters:</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -376,6 +377,22 @@
             }
             table.dataTable thead td{
                 font-weight: bold;
+            }
+            tbody, td, tfoot, th, thead, tr {
+                border-style: hidden;
+            }
+            
+            .table thead {
+                border-bottom: 2px solid black;
+                font-weight: bold;
+                margin: 0px auto;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
+            }
+            .table td{
+                text-align: left;
             }
 
         </style>

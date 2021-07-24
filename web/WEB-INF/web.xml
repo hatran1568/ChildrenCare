@@ -373,15 +373,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/userprofile</url-pattern>
+        <url-pattern>/customer/userprofile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/userprofile/edit</url-pattern>
+        <url-pattern>/customer/userprofile/edit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>
-        <url-pattern>/userprofile/update</url-pattern>
+        <url-pattern>/customer/userprofile/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UserProfileController</servlet-name>

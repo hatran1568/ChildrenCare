@@ -38,20 +38,25 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 var sitetable = $('#reservations').DataTable({
+                    retrieve: true,
                     "searching": true,
                     "paging": true,
+                    "sPaginationType": "full_numbers",
+                    "bJQueryUI": true,
                     'columnDefs': [
                             {'orderable': false, 'targets': 3},
                     ],
                     columns: [
                         null,
-                        {data: "ReservationDate", title: "ReservationDate", className: "dt-filter"},
+                        null,
                         null,
                         null,
                         null,
                         {data: "Status", title: "Status", className: "dt-filter"}
                     ],
-
+                    "bInfo": false,
+                    "bLengthChange": false,
+                    "sDom": 'W<"clear">Tlfrtip',
                     initComplete: function () {
                         this.api().columns('.dt-filter').every(function () {
                             var column = this;
@@ -185,8 +190,8 @@
         <section>
             <div class="container">
 
-                <h2 style="text-align: center; margin: 3%; color: blue;">Reservations List</h2>
-                <table id="reservations">
+                <h2 style="text-align: center; margin: 3%; color: #0064af;">Reservations List</h2>
+                <table id="reservations" class='table'>
 
                     <thead>
                         <tr>
@@ -201,12 +206,12 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Filters:</th>
-                            <th>Reservation Date </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Status </th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             
                         </tr>
                     </tfoot>
@@ -350,8 +355,22 @@
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
             }
+            table.dataTable thead td{
+                font-weight: bold;
+            }
             
-
+            .table thead {
+                border-bottom: 2px solid black;
+                font-weight: bold;
+                margin: 0px auto;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
+            }
+            .table td{
+                text-align: left;
+            }
         </style>
         
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
