@@ -328,7 +328,7 @@ public class SliderController extends HttpServlet {
         SliderDAO sliDB = new SliderDAO();
         sliDB.getSliderByID(id);
         
-        File file = new File(getFolderUpload()+"\\"  + sliDB.getSliderByID(id).getImageLink());
+        File file = new File(getFolderUpload()+"\\..\\..\\"  + sliDB.getSliderByID(id).getImageLink());
         file.delete();
         sliDB.updateSlider(s);
         response.sendRedirect("details?id=" + id);
