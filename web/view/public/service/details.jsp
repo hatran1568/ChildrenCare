@@ -153,15 +153,15 @@
 
                             <input style="width: 150px; display: inline-block" type="search" class="form-control rounded col-10" placeholder="Search" name="search">
                             <button class="btn btn-outline-info col-2"><i class="fas fa-search fa-lg"></i></button>
-                            
+
                         </form>
                     </div> 
                     <div >
                         <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
-                    <c:forEach items="${requestScope.categories}" var="c">
-                        <div class="category"><a <c:if test="${c.id == requestScope.service.category.id}">class="chosen"</c:if> href="list?category=${c.id}">${c.name}</a></div>
-                        <hr>
-                    </c:forEach>
+                        <c:forEach items="${requestScope.categories}" var="c">
+                            <div class="category"><a <c:if test="${c.id == requestScope.service.category.id}">class="chosen"</c:if> href="list?category=${c.id}">${c.name}</a></div>
+                                <hr>
+                        </c:forEach>
                     </div>
                     <div><a href="#">Static links</a></div>
                 </div>
@@ -186,10 +186,13 @@
                                     <p>${requestScope.service.description}</p>
                                 </div>
 
-                                <div class="full paddding_left_15">
-                                    <span font-size: 150%;>$  </span>
-                                    <span style="text-decoration: line-through; font-size: 150%; font-family: 'Roboto'">${requestScope.service.originalPrice}</span>
-                                    <span style="text-decoration: white; font-size: 150%;">  -  ${requestScope.service.salePrice}</span>
+                                <div class="full paddding_left_15 price">
+                                    <c:if test="${requestScope.service.originalPrice > requestScope.service.salePrice}">
+                                        <span style="text-decoration: line-through; color: gray; display: block;"><fmt:formatNumber type = "number" 
+                                                          pattern = "###,###,###" value = "${requestScope.service.originalPrice}" /></span>
+                                        </c:if>
+                                    <span style="text-decoration: white; font-size: 20px; display: block;"><fmt:formatNumber type = "number" 
+                                                      pattern = "###,###,###" value = "${requestScope.service.salePrice}" />đ</span>
                                 </div>
                                 <div style="margin-top: 30px;">
                                     <button class="btn btn-outline-info" onclick="addToCart(${requestScope.service.id}, ${requestScope.reservation_id})" style="border-color: #17a2b8">Add to Cart</button>
@@ -315,16 +318,22 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-            <style>
-                .category{
-                    font-size: 21px;
-                }
-                .category a:hover{
-                    color: lightgray;
-                }
-                .category a.chosen{
-                    color: #0064af;
-                }
-            </style>
+        <style>
+            .category{
+                font-size: 21px;
+            }
+            .category a:hover{
+                color: lightgray;
+            }
+            .category a.chosen{
+                color: #0064af;
+            }
+            .price{
+                color: #0064af;
+                font-weight: bold;
+                font-size: 17px;
+                padding-top: 10px;
+            }
+        </style>
     </body>
 </html>
