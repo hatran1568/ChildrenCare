@@ -35,7 +35,6 @@ public class CartController extends HttpServlet {
 
     private ReservationDAO reservationDB = new ReservationDAO();
     private ServiceDAO serviceDB = new ServiceDAO();
-    private DecimalFormat df = new DecimalFormat("###,###,###");
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -151,7 +150,6 @@ public class CartController extends HttpServlet {
             request.setAttribute("list", reservationServices);
         }
         
-        request.setAttribute("df", df);
         request.getRequestDispatcher("../view/public/cart/cart.jsp").forward(request, response);
 
     }
