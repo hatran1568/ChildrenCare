@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="../../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="../assets/css/bootstrap-iso.css">
         <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
@@ -73,7 +73,7 @@
 
                     <!-- MENU LINKS -->
                     <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right" >
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
                             <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>

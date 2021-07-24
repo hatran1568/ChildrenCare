@@ -148,7 +148,7 @@
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal<i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu">
                                         <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
                                         <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
@@ -157,7 +157,7 @@
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage<i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
                                             <p class="dropdown-link dropdown-item"> <a href="../customer/list">Customers</a></p>
                                             <p class="dropdown-link dropdown-item"> <a href="../reservation/list">Reservations</a></p>
@@ -199,7 +199,7 @@
         <section>
             <div class="container">
 
-                <h2 style="text-align: center; margin: 3%; color: blue;">Feedbacks List</h2>
+                <h2 style="text-align: center; margin: 3%; color: #0064af;">Feedbacks List</h2>
                 <table id="posts">
 
                     <thead>
