@@ -158,8 +158,6 @@ public class ManagerPostController extends HttpServlet {
 
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Post p = new Post();
-        
-        
         int pid = Integer.parseInt(request.getParameter("pid"));
         int categoryID = Integer.parseInt(request.getParameter("postCategory"));
         String title = request.getParameter("title");
@@ -178,8 +176,23 @@ public class ManagerPostController extends HttpServlet {
         FileOutputStream fileOutputStream;
         // refines the fileName in case it is an absolute path
         fileName = new File(fileName).getName();
+        p.setTitle(title);
+        PostCategory pc = new PostCategory();
+        pc.setId(categoryID);
+        p.setCategory(pc);
+        p.setDescription(description);
+        p.setStatus(status);
+        p.setFeatured(featured);
+        User a = new User();
+        a.setId(oldPost.getAuthor().getId());
+        p.setAuthor(a);
+        p.setContent(content);
+        p.setId(pid);
+        
+        
         if (fileName.trim().length()==0){
             p.setThumbnailLink(oldPost.getThumbnailLink());
+            postDB.updatePost(p);
         }else{
             inputStream = request.getPart(part.getName()).getInputStream();
         
@@ -196,24 +209,12 @@ public class ManagerPostController extends HttpServlet {
             inputStream.close();
             fileOutputStream.close();
             p.setThumbnailLink("assets/images/"+fileName);
-            File file = new File(getFolderUpload()+"\\"  + oldPost.getThumbnailLink());
+            File file = new File(getFolderUpload() + "\\..\\..\\"  + postDB.getPostById(pid).getThumbnailLink());
             file.delete();
+            postDB.updatePost(p);
         }
         
-        p.setTitle(title);
-        PostCategory pc = new PostCategory();
-        pc.setId(categoryID);
-        p.setCategory(pc);
-        p.setDescription(description);
-        p.setStatus(status);
-        p.setFeatured(featured);
-        User a = new User();
-        a.setId(oldPost.getAuthor().getId());
-        p.setAuthor(a);
-        p.setContent(content);
-        p.setId(pid);
         
-        postDB.updatePost(p);
         response.sendRedirect("details?pid=" + pid);
     }
 
