@@ -35,7 +35,7 @@
                             <form oninput='re_pass.setCustomValidity(re_pass.value !=pass.value ? "Passwords do not match." : "")' novalidate  method="POST" action="register" class="register-form needs-validation" id="register-form">
                                 <div class="form-group">
                                     <label for="validationCustom01" ><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                    <input pattern="[A-Za-z]{6,}" required type="text" name="name" id="validationCustom01"" placeholder="Your Name"/>
+                                    <input pattern="[A-Za-z ]{6,}" required type="text" name="name" id="validationCustom01"" placeholder="Your Name"/>
                                     <div class="invalid-feedback">
                                         Please input a valid name at least 6 characters
                                     </div>

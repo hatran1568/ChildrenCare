@@ -494,7 +494,7 @@ public class ReservationDAO extends BaseDAO {
 
     public void editCheckupTime(int reservationID, Date checkupTime) {
         try {
-            String sql = "update reservation set checkup_time = ? where id = ?";
+            String sql = "update reservation set checkup_time = ?, reservation_date = now() where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setDate(1, checkupTime);
             stm.setInt(2, reservationID);

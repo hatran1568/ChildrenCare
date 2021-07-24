@@ -121,7 +121,7 @@ private ServiceDAO serviceDB = new ServiceDAO();
         String search = request.getParameter("search");
         if(search == null) search = " ";
         
-        String r_pagesize = getServletContext().getInitParameter("pagesize");
+        String r_pagesize = "12";
         int pagesize = Integer.parseInt(r_pagesize);
 
         String r_pageindex = request.getParameter("page");
@@ -155,7 +155,7 @@ private ServiceDAO serviceDB = new ServiceDAO();
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
-        request.getRequestDispatcher("/view/public/service/list2.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/public/service/list.jsp").forward(request, response);
     }
     
     protected void showServiceDetails(HttpServletRequest request, HttpServletResponse response)

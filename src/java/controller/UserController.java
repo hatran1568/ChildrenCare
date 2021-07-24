@@ -537,8 +537,8 @@ public class UserController extends HttpServlet {
                 receiverDb.addReceiver(r);
             }
 
-            request.setAttribute("mess", "Login Successfully");
-            request.getRequestDispatcher("login").forward(request, response);
+            request.setAttribute("succ", "Verify Successfully");
+            request.getRequestDispatcher("/view/public/form/login.jsp").forward(request, response);
 
             //If code is wrong back to verify page
         } else {

@@ -134,7 +134,8 @@
 
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 0px">
+            <h2 style="text-align: center; margin: 3%; color: #0064af;">Customers List</h2>
             <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
