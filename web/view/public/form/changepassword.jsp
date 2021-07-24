@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Sign Up</title>
+        <title>Change Password</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -35,14 +35,14 @@
                             <form oninput='cpass.setCustomValidity(cpass.value !=npass.value ? "Passwords do not match." : "")' novalidate  method="POST" action="change" class="register-form needs-validation" id="register-form">
                                 <div class="form-group">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="opass" id="pass" placeholder="Password"/>
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="opass" id="pass" placeholder="Old Password"/>
                                     <div class="invalid-feedback">
                                         Please input a valid password in range [8,12] characters
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="npass" id="pass" placeholder="Password"/>
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="npass" id="pass" placeholder="New Password"/>
                                     <div class="invalid-feedback">
                                         Please input a valid password in range [8,12] characters
                                     </div>

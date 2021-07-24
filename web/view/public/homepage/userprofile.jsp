@@ -212,7 +212,7 @@
                                 </div>
                         </div><br>
                             <button style="" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'userprofile/edit?uid=${sessionScope.user.id}'">Edit User Information</button>
-                            <button style="margin-left: 1%" class="btn btn-primary" onclick="window.location.href = 'customer/changepassword'">Change Password</button>
+                            <button style="margin-left: 1%" class="btn btn-primary" onclick="window.location.href = 'changepassword'">Change Password</button>
                     </div>
                         </table>
                             </div>
