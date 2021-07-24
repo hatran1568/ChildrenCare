@@ -5,8 +5,10 @@
  */
 package controller;
 
+import bean.Reservation;
 import bean.Service;
 import bean.ServiceCategory;
+import dao.ReservationDAO;
 import dao.ServiceDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +27,9 @@ import javax.servlet.http.HttpSession;
  * @author HP
  */
 public class ServiceController extends HttpServlet {
+        private ReservationDAO reservationDB = new ReservationDAO();
 
+private ServiceDAO serviceDB = new ServiceDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -99,6 +103,21 @@ public class ServiceController extends HttpServlet {
     protected void showListService(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String reservation_id = null;
+        if (request.getParameter("reservation_id") == null || Integer.parseInt(request.getParameter("reservation_id")) == -1) {
+            reservation_id = null;
+
+        }else  {
+            reservation_id = request.getParameter("reservation_id");
+        }
+        int rid = -1;
+        if(reservation_id != null && reservation_id.trim().length() > 0) rid = Integer.parseInt(reservation_id);
+        
+        boolean editSubmission = false;
+        if(rid != -1){
+            Reservation r = reservationDB.getReservationById(rid);
+            if(r.getStatus().getName().equals("Submitted")) editSubmission = true;
+        }
         String search = request.getParameter("search");
         if(search == null) search = " ";
         
@@ -117,16 +136,19 @@ public class ServiceController extends HttpServlet {
         }
         int category = Integer.parseInt(r_category);
 
-        ServiceDAO db = new ServiceDAO();
-        int count = db.count(category, search);
+        
+        int count = serviceDB.count(category, search);
         int totalpage = (count % pagesize == 0)
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
 
-        ArrayList<ServiceCategory> categories = db.getCategories();
+        ArrayList<ServiceCategory> categories = serviceDB.getCategories();
         
-        ArrayList<Service> services = db.getServices(pageindex, pagesize, category, search);
+        ArrayList<Service> services = serviceDB.getServices(pageindex, pagesize, category, search);
+        request.setAttribute("category", category);
+        request.setAttribute("editSubmission", editSubmission);
+        request.setAttribute("reservation_id", rid);
         request.setAttribute("search", search);
         request.setAttribute("categories", categories);
         request.setAttribute("services", services);
@@ -143,7 +165,6 @@ public class ServiceController extends HttpServlet {
             r_id = "0";//validation
         }
         int id = Integer.parseInt(r_id);
-        ServiceDAO serviceDB = new ServiceDAO();
         Service service = serviceDB.getService(id);
         
         ArrayList<ServiceCategory> categories = serviceDB.getCategories();

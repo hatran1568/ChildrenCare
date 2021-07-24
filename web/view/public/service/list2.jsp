@@ -81,7 +81,7 @@
                         <a href="home" class="navbar-brand">Children Care</a>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href="" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="list" class="smoothScroll dropdown">Services</a></li>
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
@@ -146,29 +146,35 @@
         <!-- HOME -->
         <section data-stellar-background-ratio="0.5">
             <div class="container" style="text-align: center;"><h2>Services List</h2></div>
-            <div class="container row">
-                <div class="col-3">
+            <div class=" row container">
+                <div class="col-3" style="padding: 0 30px 0 30px;">
 
                     <div>
                         <form action="list">
 
-
-                            <input type="search" class="form-control rounded" placeholder="Search" name="search">
+                            <input style="width: 150px; display: inline-block" type="search" class="form-control rounded col-10" placeholder="Search" name="search">
+                            <button class="btn btn-outline-info col-2"><i class="fas fa-search fa-lg"></i></button>
+                            
                         </form>
                     </div> 
+                    <div >
+                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
                     <c:forEach items="${requestScope.categories}" var="c">
-                        <div><h3 style="color: gray;"><a href="?category=${c.id}">${c.name}</a></h3></div>
-                            </c:forEach>
-                    <div><h3><a href="#">Static links</a></h3></div>
+                        <div class="category"><a <c:if test="${c.id == requestScope.category}">class="chosen"</c:if> href="?category=${c.id}">${c.name}</a></div>
+                        <hr>
+                    </c:forEach>
+                    </div>
+                    <div><a href="#">Static links</a></div>
                 </div>
                 <div class="col-9">
                     <div class="container" >
+
                         <div>Results: ${requestScope.services.size()}</div>
                         <div class="row">
                             <c:forEach items="${requestScope.services}" var="s">
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="full news_blog" style="border: #013582;">
-                                        <img class="img-responsive" src="../${s.thumbnailLink}" alt="#" />
+                                        <img class="img-responsive rounded" src="../${s.thumbnailLink}" alt="#" />
 
 
 
@@ -204,6 +210,9 @@
 
 
                     </div>
+                            <div class="container" style="text-align: right; margin-bottom: 30px"><c:if test="${requestScope.editSubmission == true}">
+                                    <button class="btn btn-primary" onclick="window.location.href='../customer/reservation/details?id=${requestScope.reservation_id}'">Back To Reservation</button>
+                        </c:if></div>
                 </div></div>
         </section>
 
@@ -312,6 +321,37 @@
 
                             }
         </script>
+        <script>
+                    function generatePagger(id, pageindex, totalpage, gap, page)
+                    {
+                        var container = document.getElementById(id);
+                        if (pageindex > gap + 1)
+                            container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
+
+                        for (var i = pageindex - gap; i < pageindex; i++)
+                        {
+                            if (i >= 1)
+                            {
+                                container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                            }
+                        }
+
+                        container.innerHTML += "<a class='active'>" + pageindex + "</a>";
+
+                        for (var i = pageindex + 1; i <= pageindex + gap; i++)
+                        {
+                            if (i <= totalpage)
+                            {
+                                container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                            }
+                        }
+
+                        if (pageindex < totalpage - gap)
+                            container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
+                    }
+                    generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+
+            </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
                 <script>
@@ -335,6 +375,37 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+            <style>
+                .pagination{
+                    display: inline-block;
+                }
+                .pagination a {
+                    color: black;
+                    float: left;
+                    padding: 8px 16px;
+                    text-decoration: none;
+                    
+                }
 
+                .pagination a.active {
+                    background-color: #0064af;
+                    color: white;
+                    border-radius: 5px;
+                }
+
+                .pagination a:hover:not(.active) {
+                    background-color: #ddd;
+                    border-radius: 5px;
+                }
+                .category{
+                    font-size: 150%;
+                }
+                .category a:hover{
+                    color: lightgray;
+                }
+                .category a.chosen{
+                    color: #0064af;
+                }
+            </style>
     </body>
 </html>

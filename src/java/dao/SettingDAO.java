@@ -50,7 +50,7 @@ public class SettingDAO extends BaseDAO {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }

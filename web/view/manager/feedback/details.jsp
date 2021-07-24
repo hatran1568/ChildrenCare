@@ -143,7 +143,7 @@
 
         <!-- NEWS -->
         <div class="container" style="margin-top: 20px; height: max-content; min-height: 700px;">
-            <form id="form" enctype="multipart/form-data" action="update" method="POST" class="ui form">
+            <form style="font-size: 14px" id="form" enctype="multipart/form-data" action="update" method="POST" class="ui form">
 
                 <div class="two  fields">
                     <div class="twelve wide   field">

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author HP
  */
 public class ManagerReservationController extends HttpServlet {
-
+private ReservationDAO reservationDB = new ReservationDAO();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -87,7 +87,6 @@ public class ManagerReservationController extends HttpServlet {
 
     private void showReservationList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ReservationDAO reservationDB = new ReservationDAO();
         ArrayList<Reservation> reservations = reservationDB.getSubmittedReservations();
         request.setAttribute("reservations", reservations);
         for (Reservation reservation : reservations) {
@@ -107,7 +106,6 @@ public class ManagerReservationController extends HttpServlet {
     private void approveReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("id"));
         ServiceDAO serviceDB = new ServiceDAO();
-        ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(rid);
         ArrayList<ReservationService> re_services = reservation.getListReservationService();
 
@@ -121,7 +119,6 @@ public class ManagerReservationController extends HttpServlet {
     private void rejectReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int rid = Integer.parseInt(request.getParameter("id"));
         ServiceDAO serviceDB = new ServiceDAO();
-        ReservationDAO reservationDB = new ReservationDAO();
         Reservation reservation = reservationDB.getReservationById(rid);
         reservationDB.setReservationStatus(rid, "Rejected");
 
@@ -131,7 +128,7 @@ public class ManagerReservationController extends HttpServlet {
 
     private int checkQuantity(int rid) throws ServletException, IOException {
 
-        ReservationDAO reservationDB = new ReservationDAO();
+        
         Reservation reservation = reservationDB.getReservationById(rid);
         ArrayList<ReservationService> re_services = reservation.getListReservationService();
         for (ReservationService rs : re_services) {

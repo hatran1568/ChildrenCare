@@ -16,7 +16,9 @@ import dao.PostDAO;
 import dao.SettingDAO;
 import dao.SliderDAO;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -32,9 +34,9 @@ import javax.servlet.http.Part;
  * @author ACER
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50,
-        location = "C:\\Users\\ACER\\Desktop\\SWP\\web\\assets\\images")
+        maxFileSize = 1024 * 1024 * 10, // 50MB
+        maxRequestSize = 1024 * 1024 * 10
+        )
 @WebServlet(name = "FeedbackController", urlPatterns = {"/feedback"})
 public class FeedbackController extends HttpServlet {
 
@@ -133,13 +135,28 @@ public class FeedbackController extends HttpServlet {
     }
 
     protected void insertFeedBack(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Part part = request.getPart("file");
-        String fileName = "#";
-        if (part != null) {
-            fileName = extractFileName(part);
-            // refines the fileName in case it is an absolute path
-            fileName = new File(fileName).getName();
-            part.write("/" + File.separator + fileName);
+         Part part = request.getPart("file");
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
+        String fileName = extractFileName(part);
+        if (fileName.trim().length()==0){
+             fileName = "default-image.jpg";
+        }
+        else{
+            inputStream = request.getPart(part.getName()).getInputStream();
+        
+        // refines the fileName in case it is an absolute path
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
         }
 
         String fullname = request.getParameter("fullname");
@@ -187,6 +204,13 @@ public class FeedbackController extends HttpServlet {
         }
         return "";
     }
+     public File getFolderUpload() {
+        File folderUpload = new File(getServletContext().getRealPath("/") + "..\\..\\web\\assets\\images");
+        if (!folderUpload.exists()) {
+            folderUpload.mkdirs();
+        }
+        return folderUpload;
+    }
 
     protected void showFeedbackDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
@@ -208,7 +232,7 @@ public class FeedbackController extends HttpServlet {
         FeedbackDAO feedbackDB = new FeedbackDAO();
         int status = Integer.parseInt(request.getParameter("status"));
         Setting s = new Setting();
-        s.setId(fid);
+        s.setId(status);
         feedbackDB.updateStatus(fid, s);
         response.sendRedirect("list");
     }

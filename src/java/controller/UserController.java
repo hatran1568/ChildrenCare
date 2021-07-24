@@ -316,7 +316,7 @@ public class UserController extends HttpServlet {
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));
         u.setRole(r);
-        u.setImageLink("None");
+        u.setImageLink("assets/images/default-image.jpg ");
         Setting set = new Setting();
         set.setId(Integer.parseInt(request.getParameter("status")));
         u.setStatus(set);

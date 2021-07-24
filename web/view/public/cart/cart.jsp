@@ -15,6 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="../../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="../assets/css/bootstrap-iso.css">
@@ -74,7 +75,7 @@
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href=".../service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="../service/list" class="smoothScroll dropdown">Services</a></li>
                             <li><a href="../blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
@@ -150,7 +151,10 @@
                                 <td > Quantity</td>
                                 <td>Cost</td>
                                 <td ></td>
-                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost:  ${requestScope.totalcost}</h3></td>
+
+                                <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost: <fmt:formatNumber type = "number" 
+                                                                                                      pattern = "###,###,###" value = "${requestScope.totalcost}" /></h3></td>
+
                                 <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
                                     <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
                             </tr>
@@ -160,11 +164,13 @@
                                 <tr >
                                     <td>${list.service.id}</td>
                                     <td>${list.service.fullname}</td>
-                                    <td >${list.unitPrice}</td>
+                                    <td ><fmt:formatNumber type = "number" 
+                                                      pattern = "###,###,###" value = "${list.unitPrice}" /></td>
 
                                     <td> <input onchange="ResetCart(this)" min="1" style="text-align: center;" name="${list.service.id}" type="number" value="${list.quantity}"></td>
 
-                                    <td id =${list.service.id}>${list.unitPrice * list.quantity} </td>
+                                    <td id =${list.service.id}><fmt:formatNumber type = "number" 
+                                                                         pattern = "###,###,###" value = "${list.unitPrice * list.quantity}" /> </td>
                                     <td id =${list.service.id}><a href="delete?sid=${list.service.id}&rid=${list.reservation.id}"><i class="fas fa-trash-alt"></i></a></td>
 
                                 </tr>
@@ -273,7 +279,8 @@
                                                             console.log(b)
                                                             var c = querry.toString();
                                                             document.getElementById(c).innerHTML = b["price"]
-                                                            document.getElementById("total").innerHTML = "Total Cost:" + b["total"]
+
+                                                            document.getElementById("total").innerHTML = "Total Cost: " + b["total"]
 
                                                         }
 
@@ -314,5 +321,11 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+        <style>
+            .btn-outline-primary{
+                border: #337ab7;
+            }
+        </style>
+
     </body>
 </html> 
