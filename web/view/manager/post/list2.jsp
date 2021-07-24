@@ -176,8 +176,8 @@
                         <tr>
                             <td>${p.id}</td>
                             <td>${p.category.name}</td>
-                            <td><img class="rounded mx-auto d-block" src="../../${p.thumbnailLink}"></td>
-                            <td style="font-weight: bold;">${p.title}</td>
+                            <td><a href="details?pid=${p.id}"><img class="rounded" src="../../${p.thumbnailLink}"></a></td>
+                            <td style="font-weight: bold;"><a href="details?pid=${p.id}">${p.title}</a></td>
                             <td>${p.author.fullName}</td>
                             <td>${p.updatedDate}</td>
                             <td>${p.status.name}</td>
@@ -360,6 +360,9 @@
                 border: none;
                 padding-bottom: 0;
                 margin-bottom: 0;
+            }
+            a:hover{
+                color: #0064af;
             }
         </style> 
     </body>
