@@ -226,7 +226,7 @@
                             <td>${requestScope.examinationCount[i]}</td>
                             <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
                             <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
-                                    <button class="btn" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
+                                    <button class="btn btn-primary" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
                                 </c:if></td>
                         </tr>
                     </c:forEach>

@@ -232,7 +232,7 @@
                         <h2 style="text-align: center">Featured posts</h2>
                     </div>
                 </div>
-                <c:if test="${requestScope.posts.size()>=5}">
+                <c:if test="${requestScope.posts.size()>=4}">
                 <div class="row">
                     <div class="col-md-6">
                         <div style="padding:15px">
@@ -253,6 +253,7 @@
                             </div>
                         </div>
                     </div>
+                                
                     <div class="col-md-6 post-column">
                         <c:forEach var="i" begin="1" end="4">
                             <div class="featured-post-info" style="display: flex;flex-direction: row;">
