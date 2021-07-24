@@ -147,15 +147,15 @@
                         <div class="form-group">
                             <label for="gender">Gender:    </label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if> required>
-                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" <c:if test="${requestScope.user.gender eq true}">checked</c:if> required>
+                                    <label class="form-check-label" for="male">Male</label>
                                     <div class="invalid-feedback">
                                         Please choose a gender.
                                     </div>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
-                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" <c:if test="${requestScope.user.gender eq false}">checked</c:if> required>
+                                    <label class="form-check-label" for="female">Female</label>
                                     
                                 </div>
 
