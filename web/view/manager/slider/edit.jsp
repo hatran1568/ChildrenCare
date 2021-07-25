@@ -142,11 +142,13 @@
 
                 <table style="width: 100%">
                     <tr>
-                        <td>Thumnail</td>
+                        <td>Thumbnail</td>
                         <td>
                             <input  onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <img style="max-height: 200px" id="output" src="../../${requestScope.slider.imageLink}" > 
-
+                            <div class="invalid-feedback">
+                                Please enter title.
+                            </div></td>
                         </td>
                     </tr>
                     <tr>
@@ -188,7 +190,7 @@
                     </tr>
                 </table>
                 <input type="text" hidden="true" value="${requestScope.slider.id}" name="rid">
-                <input class="btn btn-secondary pull-right" type="submit" value="Submit">
+                <input class="btn btn-primary pull-right" type="submit" value="Submit">
             </form>
 
 
