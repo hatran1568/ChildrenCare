@@ -169,7 +169,7 @@
             <div class="main-content">
                 <div class="container-fluid">
                     <br><br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
+                    <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../dashboard/view">Dashboard</a><i style="margin : 5px;"  class="fas fa-angle-right"></i><a href="../user/list">User List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>User Information</div>
                             <div>
                                 <a href="edit?id=${requestScope.user.id}"><button style="margin: 10px; color: #d4d4d4; background-color: #333333; border-radius: 10px; width: 15%; font-size: 15px">Edit user Information</button></a>
                             </div>
