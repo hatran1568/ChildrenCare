@@ -141,16 +141,17 @@
         <!-- Start  -->
 
         <div class="container" style="height: max-content; min-height: 700px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
             <form action="edit" method="POST" enctype="multipart/form-data">
                 <input type="text" name="id" value="${requestScope.service.id}" hidden>
                 <div class="form-group">
                     <label for="file"></label>
                     <img style="max-height: 200px" id="output" src="../../${requestScope.service.thumbnailLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail">
-                        <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                        <input onchange="loadFile(event)"  name="file" required type="file" accept="image/*,.jpg">
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full name</label>
-                    <input style="width: 100%" type="text" class="form-control" name="fullname" value="${requestScope.service.fullname}">
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" required value="${requestScope.service.fullname}">
                 </div>
                 <div class="form-group">
                     <label for="originalprice">Original price</label>

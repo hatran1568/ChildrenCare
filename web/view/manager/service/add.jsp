@@ -130,71 +130,98 @@
                 </div>
             </section>
         </div>
+
+
+
         <br>
         <br>
         <!-- Start  -->
         <div class="container" style="height: max-content; min-height: 700px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add new</div>
             <form action="add" method="POST" enctype="multipart/form-data" >
                 <div class="form-group">
                     <label for="file">Thumbnail Link</label>
-                    <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
-                            <img id="output"  >
+                    <input onchange="loadFile(event)"  name="file" required type="file" accept="image/*,.jpg">
+                    <img id="output"  >
+                    <div class="invalid-feedback">
+                        Please choose a picture.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full name</label>
-                    <input style="width: 100%" type="text" class="form-control" name="fullname" >
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" required>
+                    <div class="invalid-feedback">
+                        Please enter a name.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="originalprice">Original price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="originalprice" >
+                    <input style="width: 100%" type="number" class="form-control" name="originalprice" required >
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="saleprice">Sale price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="saleprice" >
+                    <input style="width: 100%" type="number" class="form-control" name="saleprice" required>
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="categoryid">Category ID </label>
-                    <input style="width: 100%" type="number" class="form-control" name="categoryid" >
+                    <input style="width: 100%" type="number" class="form-control" name="categoryid" required><div class="invalid-feedback">
+                        Please enter category id.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description  </label>
-                    <textarea style="width: 100%" type="text" class="form-control" name="description" ></textarea> 
+                    <textarea style="width: 100%" type="text" class="form-control" name="description" required ></textarea>
+                    <div class="invalid-feedback">
+                        Please enter description of this service or enter none
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="details">Details  </label>
-                    <textarea style="width: 100%" type="text" class="form-control" name="details"  ></textarea> 
+                    <textarea style="width: 100%" type="text" class="form-control" name="details"  required></textarea> 
+                    <div class="invalid-feedback">
+                        Please enter details of this service or enter none
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="featured">Featured</label>
-                    <select class="form-control" name="featured">
+                    <select class="form-control" name="featured" required>
                         <option value="True">True</option>
                         <option value="False">False</option>
                     </select>
 
-                    </div>
+                </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                         <option value="True">Active</option>
                         <option value="False">Inactive</option>
                     </select>
 
+                </div>
+
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input class="form-control" type="number" name="quantity" required>
+                    <div class="invalid-feedback">
+                        Please enter quantity
                     </div>
-                    
-                    
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input class="form-control" type="number" name="quantity" ">
-                    </div>
-                    
-                            <input type="reset" name="reset" value="Reset"> &nbsp;
-                            <input type="submit" name="submit" value="Add">
-                            
+                </div>
+
+                <input type="reset" name="reset" value="Reset"> &nbsp;
+                <input type="submit" name="submit" value="Add">
+
             </form>
         </div>
 
         <!-- Start Footer -->
-            <footer data-stellar-background-ratio="5">
+        <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
 
@@ -252,11 +279,11 @@
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+                        $('ul.nav li.dropdown').hover(function () {
+                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                        }, function () {
+                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                        });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -279,59 +306,59 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-           
+
         <script>
-                $(document).ready(function () {
-                    $("#customers").dataTable({
-                        retrieve: true,
-                        "searching": true,
-                        "paging": true,
-                        "sPaginationType": "full_numbers",
-                        "bJQueryUI": true,
-                        columns: [
-                            null,
-                            null,
-                            null,
-                            null,
-                           
-                            null,
-                            null,
-                            null,
-                            {data: "Featured", title: "Featured", className: "dt-filter"},
-                            {data: "Status", title: "Status", className: "dt-filter"},
-                            null,
-                            null,
-                            null,
-                        ],
-                        'columnDefs': [
-                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
-                            {'orderable': false, 'targets' : [4,5,6,7,8]},
-                        ],
-                        "bInfo" : false,
-                        "bLengthChange": false,
-                        "sDom": 'W<"clear">Tlfrtip',
-                        initComplete: function () {
-                            this.api().columns('.dt-filter').every(function () {
-                                var column = this;
-                                var select = $('<select><option value=""></option></select>')
-                                        .appendTo($(column.header()))
-                                        .on('change', function () {
-                                            var val = $.fn.dataTable.util.escapeRegex(
-                                                    $(this).val()
-                                                    );
-                                            column
-                                                    .search(val ? '^' + val + '$' : '', true, false)
-                                                    .draw();
-                                        });
-                                column.data().unique().sort().each(function (d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>')
-                                });
+            $(document).ready(function () {
+                $("#customers").dataTable({
+                    retrieve: true,
+                    "searching": true,
+                    "paging": true,
+                    "sPaginationType": "full_numbers",
+                    "bJQueryUI": true,
+                    columns: [
+                        null,
+                        null,
+                        null,
+                        null,
+
+                        null,
+                        null,
+                        null,
+                        {data: "Featured", title: "Featured", className: "dt-filter"},
+                        {data: "Status", title: "Status", className: "dt-filter"},
+                        null,
+                        null,
+                        null,
+                    ],
+                    'columnDefs': [
+                        {'className': 'text-center', 'targets': [0, 1, 2, 3, 4, 5, 6, 7]},
+                        {'orderable': false, 'targets': [4, 5, 6, 7, 8]},
+                    ],
+                    "bInfo": false,
+                    "bLengthChange": false,
+                    "sDom": 'W<"clear">Tlfrtip',
+                    initComplete: function () {
+                        this.api().columns('.dt-filter').every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                    .appendTo($(column.header()))
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                                $(this).val()
+                                                );
+                                        column
+                                                .search(val ? '^' + val + '$' : '', true, false)
+                                                .draw();
+                                    });
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
                             });
-                        }
-                    });
+                        });
+                    }
                 });
-            </script> 
-           <style>
+            });
+        </script> 
+        <style>
             tfoot {
                 display: table-header-group;
             }
@@ -358,5 +385,6 @@
                 }
             };
         </script>
+        
     </body>
 </html> 
