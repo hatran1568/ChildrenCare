@@ -520,6 +520,9 @@
 
                 cursor: pointer;
             }
+            table.dataTable {
+                margin-bottom: 30px;
+            }
         </style>
 
     </body>
