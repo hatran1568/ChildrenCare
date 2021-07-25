@@ -153,8 +153,8 @@
                     <c:forEach var="list" items="${requestScope.list}">
                         <tr>
                             <td class="col-md-1">${list.id}</td>
-                            <td class="col-md-2"> <p><input  class="date" type="date" value="${list.reservationDate}" readonly="true"></p></td>
-                            <td class="col-md-2"><input class="date" type="date" value="${list.checkupTime}" readonly="true"></td>
+                            <td class="col-md-2"> <c:if test="${not empty list.reservationDate}"><p><input  class="date" type="date" value="${list.reservationDate}" readonly="true"></p></c:if> </td>
+                            <td class="col-md-2"><c:if test="${not empty list.checkupTime}"><p><input  class="date" type="date" value="${list.checkupTime}" readonly="true"></p></c:if></td>
                             <td class="col-md-2">${list.status.name}</td>
                             <td class="col-md-2">${list.totalCost}</td>
                             <td class="col-md-2"><c:forEach items="${list.listService}" var="s">${s.fullname} <br></c:forEach></td>
