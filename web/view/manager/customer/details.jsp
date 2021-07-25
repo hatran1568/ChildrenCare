@@ -344,9 +344,7 @@
                 #user-history tbody td{
                     text-align: left;
                 }
-                #user-history td{
-                    border: 1px solid black;
-                }
+                
             </style>
     </body>
 </html> 

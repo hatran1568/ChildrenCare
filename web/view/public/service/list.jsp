@@ -188,11 +188,11 @@
                                             <div style="padding: 10px; text-align: center;">
                                             <p class="price" style="width: 27%; display: inline-block; text-align: left">
                                                 <c:if test="${s.originalPrice > s.salePrice}">
-                                                <span style="text-decoration: line-through; color: gray;"><fmt:formatNumber type = "number" 
+                                                <span style="text-decoration: line-through; color: gray; display: block;"><fmt:formatNumber type = "number" 
                                                                   pattern = "###,###,###" value = "${s.originalPrice}" /></span>
                                                 </c:if>
                                                 <c:if test="${s.originalPrice <= s.salePrice}">
-                                                <span style="text-decoration: line-through; color: transparent;"> ${s.originalPrice}</span>
+                                                <span style="text-decoration: line-through; color: transparent; display: block"> ${s.originalPrice}</span>
                                                 </c:if>
                                                 <span style="text-decoration: white; font-size: 17px;"><fmt:formatNumber type = "number" 
                                                                   pattern = "###,###,###" value = "${s.salePrice}" />đ</span>

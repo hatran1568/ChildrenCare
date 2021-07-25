@@ -76,7 +76,7 @@ public class ReservationContactController extends HttpServlet {
                 getReservationInfo(request,response);
                 break;
             case "/reservation/contact/addreceiver":
-                getReceiverInfo(request,response);
+                addReceiverInfo(request,response);
                 break;
             
             default:
@@ -129,7 +129,7 @@ public class ReservationContactController extends HttpServlet {
         request.getRequestDispatcher("../view/customer/reservation/reservationContact.jsp").forward(request, response);
     }
 
-    private void getReceiverInfo(HttpServletRequest request, HttpServletResponse response) 
+    private void addReceiverInfo(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
         User u = (User) request.getSession().getAttribute("user");
         Receiver r = new Receiver();

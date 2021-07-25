@@ -203,7 +203,7 @@
             <button type="button" class="btn btn-primary" onclick="window.location.href='../examination/list?rid=${requestScope.reservation.id}'">View prescription list</button>
             
             <table class="table thead-dark" id="reservation-detail">
-                <thead  class="thead-dark">
+                <thead style="font-weight:bold" class="thead-dark">
                     <tr>
                         <td style="width: 300px">Thumbnail</td>
                         <td >Title</td>
@@ -221,10 +221,12 @@
                             <td><img class="img-responsive" src="../../${requestScope.services[i].service.thumbnailLink}" alt="#" /></td>
                             <td>${requestScope.services[i].service.fullname}</td>
                             <td>${requestScope.services[i].service.category.name}</td>
-                            <td>${requestScope.services[i].unitPrice}</td>
+                            <td><fmt:formatNumber type = "number" 
+                                    pattern = "###,###,###" value = "${requestScope.services[i].unitPrice}" /></td>
                             <td>${requestScope.services[i].quantity}</td>
                             <td>${requestScope.examinationCount[i]}</td>
-                            <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
+                            <td><fmt:formatNumber type = "number" 
+                                    pattern = "###,###,###" value = "${requestScope.services[i].unitPrice * services[i].quantity}" /> </td>
                             <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
                                     <button class="btn btn-primary" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
                                 </c:if></td>
@@ -232,7 +234,8 @@
                     </c:forEach>
                     <tr>
                         <td colspan="6" style="text-align: right">Total cost</td>
-                        <td style="font-size: 16px">${requestScope.reservation.totalCost}</td>
+                        <td style="font-size: 16px"><fmt:formatNumber type = "number" 
+                                    pattern = "###,###,###" value = "${requestScope.reservation.totalCost}" />đ</td>
                     </tr>
                 </tbody>
             </table>

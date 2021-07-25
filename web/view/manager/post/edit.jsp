@@ -130,7 +130,7 @@
         <!-- section -->
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
-                <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+                <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
                 <form id="form" class="needs-validation" action="update" method="POST" enctype="multipart/form-data" novalidate>
 
                     <input type="text" value="${requestScope.post.id}" name="pid" hidden>

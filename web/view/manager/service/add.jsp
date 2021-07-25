@@ -14,7 +14,7 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="../../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="../../assets/css/bootstrap-iso.css">
@@ -27,7 +27,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        
+
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -36,7 +36,7 @@
 
 
         <!-- HEADER -->
-        
+
         <header>
             <div class="container">
                 <div class="row">
@@ -137,6 +137,7 @@
         <br>
         <!-- Start  -->
         <div class="container" style="height: max-content; min-height: 700px;">
+
             <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add new</div>
             <form action="add" method="POST" enctype="multipart/form-data" >
                 <div class="form-group">
@@ -214,6 +215,7 @@
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
+
                     <input class="form-control" type="number" name="quantity" required>
                     <div class="invalid-feedback">
                         Please enter quantity

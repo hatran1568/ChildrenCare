@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
-                <!-- MAIN CSS -->
+        <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
 
@@ -129,8 +129,9 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="section" id="main-body">
+
             <div class="container" style="min-height: 600px">
-                <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+                <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add New</div>
                 <form id="form" class="needs-validation" action="add" method="POST" enctype="multipart/form-data" novalidate>
 
                     <input type="text" name="pid" hidden>
@@ -142,7 +143,7 @@
                                 Post title can't be blank!
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="row" >
                         <div class="col-md-2 title">Thumbnail</div>
@@ -165,7 +166,7 @@
                             </select>
                         </div>
                     </div> 
-                    
+
                     <div class="row">
                         <div class="col-md-2 title" >Description</div>
                         <div class="col-md-10">
@@ -180,146 +181,146 @@
                     </div>
                     <div class="row" style="margin-top: 17px;">
                         <div class="col-md-2">Featured</div>
-                            <div class="col-md-10" style="margin-top: 10px;">
-                                <div class="form-check form-switch" >
-                                    <input style="width: 50px; height: 25px;" class="form-check-input" type="checkbox" name="featured">
-                                </div>  
-                            </div>
-                        
+                        <div class="col-md-10" style="margin-top: 10px;">
+                            <div class="form-check form-switch" >
+                                <input style="width: 50px; height: 25px;" class="form-check-input" type="checkbox" name="featured">
+                            </div>  
+                        </div>
+
                     </div>
-                        <input type="text" value="" id="status" name="status" hidden>
-                        <input id="submit_handle" type="submit" style="display: none">
-                        <button type="button" class="btn btn-primary pull-right" onclick="saveDraftPost()" id="saveDraft">Save draft</button>
-                        <button type="button" class="btn btn-primary pull-right" onclick="savePost()" id="save">Save</button>
-                    </form>
+                    <input type="text" value="" id="status" name="status" hidden>
+                    <input id="submit_handle" type="submit" style="display: none">
+                    <button type="button" class="btn btn-primary pull-right" onclick="saveDraftPost()" id="saveDraft">Save draft</button>
+                    <button type="button" class="btn btn-primary pull-right" onclick="savePost()" id="save">Save</button>
+                </form>
+            </div>
+        </div>
+        <footer data-stellar-background-ratio="5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-thumb"> 
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
+                            <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+
+                            <div class="contact-info">
+                                <p><i class="fa fa-phone"></i> 010-070-0170</p>
+                                <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4"> 
+                    </div>
+
+                    <div class="col-md-4 col-sm-4"> 
+                        <div class="footer-thumb">
+                            <div class="opening-hours">
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
+                                <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
+                                <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
+                                <p>Sunday <span>Closed</span></p>
+                            </div> 
+
+                            <ul class="social-icon">
+                                <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-instagram"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-            <footer data-stellar-background-ratio="5">
-                <div class="container">
-                    <div class="row">
+        </footer> 
 
-                        <div class="col-md-4 col-sm-4">
-                            <div class="footer-thumb"> 
-                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
-                                <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
-
-                                <div class="contact-info">
-                                    <p><i class="fa fa-phone"></i> 010-070-0170</p>
-                                    <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-4"> 
-                        </div>
-
-                        <div class="col-md-4 col-sm-4"> 
-                            <div class="footer-thumb">
-                                <div class="opening-hours">
-                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
-                                    <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
-                                    <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
-                                    <p>Sunday <span>Closed</span></p>
-                                </div> 
-
-                                <ul class="social-icon">
-                                    <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
-                                    <li><a href="#" class="fa fa-twitter"></a></li>
-                                    <li><a href="#" class="fa fa-instagram"></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
-                        </div>
+        <!-- SCRIPTS -->
+        <script src="../../assets/js/jquery.js"></script>
+        <script src="../../assets/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/jquery.sticky.js"></script>
+        <script src="../../assets/js/jquery.stellar.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+        <script src="../../assets/js/wow.min.js"></script>
+        <script src="../../assets/js/smoothscroll.js"></script>
+        <script src="../../assets/js/owl.carousel.min.js"></script>
+        <script src="../../assets/js/custom-new.js"></script>
 
 
-                    </div>
-                </div>
-            </footer> 
+        <script>
+                        CKEDITOR.replace('content');
+        </script>
+        <script>
+            var maxFileSize = 1024 * 1024 * 10;
+            function savePost() {
+                document.getElementById("status").value = "25";
 
-            <!-- SCRIPTS -->
-            <script src="../../assets/js/jquery.js"></script>
-            <script src="../../assets/js/bootstrap.min.js"></script>
-            <script src="../../assets/js/jquery.sticky.js"></script>
-            <script src="../../assets/js/jquery.stellar.min.js"></script>
-            <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
-            <script src="../../assets/js/wow.min.js"></script>
-            <script src="../../assets/js/smoothscroll.js"></script>
-            <script src="../../assets/js/owl.carousel.min.js"></script>
-            <script src="../../assets/js/custom-new.js"></script>
+                $('#submit_handle').click();
 
-          
-            <script>
-                CKEDITOR.replace('content');
-            </script>
-            <script>
-                var maxFileSize = 1024 * 1024 *10;
-                function savePost() {
-                    document.getElementById("status").value = "25";
-                    
-                        $('#submit_handle').click();
-                    
-                    
-                }
-                function saveDraftPost() {
-                    document.getElementById("status").value = "24";
-                    
-                        $('#submit_handle').click();
-                    
-                    
-                }
-                var loadFile = function (event) {
-                    //alert(event.target.files[0].size);
-                    if (event.target.files[0].size <= maxFileSize) {
-                        var output = document.getElementById('output');
-                        output.src = URL.createObjectURL(event.target.files[0]);
-                        output.onload = function () {
-                            URL.revokeObjectURL(output.src) // free memory
-                        }
-                        document.getElementById('alertfile').style.display = 'none';
-                    } else {
-                        document.getElementById('alertfile').style.display = 'block';
+
+            }
+            function saveDraftPost() {
+                document.getElementById("status").value = "24";
+
+                $('#submit_handle').click();
+
+
+            }
+            var loadFile = function (event) {
+                //alert(event.target.files[0].size);
+                if (event.target.files[0].size <= maxFileSize) {
+                    var output = document.getElementById('output');
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                    output.onload = function () {
+                        URL.revokeObjectURL(output.src) // free memory
                     }
-                };
-                (function () {
-                    'use strict'
+                    document.getElementById('alertfile').style.display = 'none';
+                } else {
+                    document.getElementById('alertfile').style.display = 'block';
+                }
+            };
+            (function () {
+                'use strict'
 
-       // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.querySelectorAll('.needs-validation')
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
 
-       // Loop over them and prevent submission
-                    Array.prototype.slice.call(forms)
-                            .forEach(function (form) {
-                                form.addEventListener('submit', function (event) {
-                                    if (!form.checkValidity()) {
-                                        event.preventDefault()
-                                        event.stopPropagation()
-                                    }
-                                    form.classList.add('was-validated')
-                                }, false)
-                            });
-                        form.addEventListener('submit', function (event) {
-                                    if (document.getElementById('alertfile').style.display === 'block') {
-                                        event.preventDefault()
-                                        event.stopPropagation()
-                                    }
-                                    form.classList.add('was-validated')
-                                }, false)    
-                    
-                })()
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+                                form.classList.add('was-validated')
+                            }, false)
+                        });
+                form.addEventListener('submit', function (event) {
+                    if (document.getElementById('alertfile').style.display === 'block') {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
 
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script>
-             $('ul.nav li.dropdown').hover(function () {
-                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-             }, function () {
-                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-             });
-            </script>
+            })()
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+        </script>
         <style>
             #main-body{
                 margin-top: 50px;

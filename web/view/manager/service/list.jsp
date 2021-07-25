@@ -135,8 +135,8 @@
 
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
-            <h2 style="text-align: center; margin: 3%; color: #0064af;">Service List</h2>
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px">
+            <h2 style="text-align: center; margin: 3%; color: #0064af;">Services</h2>
             <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new service</button> <br>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
@@ -148,7 +148,6 @@
                         <td>Original price</td>
                         <td>Sale price</td>                        
                         <td>Description</td>
-                        <td>Details </td>
                         <td>Featured</td>
                         <td>Status</td>
                         <td>Quantity</td>
@@ -161,7 +160,7 @@
                     <c:forEach items="${requestScope.services}" var="s">
                         <tr>
                             <td>${s.id}</td>
-                            <td><img id="output" src="../../${s.thumbnailLink}" id="imgProfile" style="width: 80px; height: 80px" class="img-thumbnail">
+                            <td><img id="output" src="../../${s.thumbnailLink}" id="imgProfile" style="width: 100px; height: auto;" class="img-thumbnail">
                         </td>
                             <td>${s.fullname}</td>
                             <td><fmt:formatNumber type = "number" 
@@ -170,8 +169,7 @@
                             pattern = "###,###,###" value = "${s.salePrice}" /></td>
                             
                            
-                            <td>${s.description}</td>
-                            <td>${s.details}</td>
+                            <td class="text-truncate" style="max-width: 150px;">${s.description}</td>
                             <td><c:if test="${s.featured == true}">True</c:if>
                                 <c:if test="${s.featured == false}">False</c:if></td>
                             <td><c:if test="${s.status == true}">Active</c:if>
@@ -292,7 +290,6 @@
                            
                             null,
                             null,
-                            null,
                             {data: "Featured", title: "Featured", className: "dt-filter"},
                             {data: "Status", title: "Status", className: "dt-filter"},
                             null,
@@ -301,7 +298,7 @@
                         ],
                         'columnDefs': [
                             {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
-                            {'orderable': false, 'targets' : [4,5,6,7,8]},
+                            {'orderable': false, 'targets' : [1,5,6,7,9,10]},
                         ],
                         "bInfo" : false,
                         "bLengthChange": false,

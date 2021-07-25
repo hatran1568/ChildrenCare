@@ -137,7 +137,8 @@ public class DashboardController extends HttpServlet {
         for (Service s : list) {
             toSer += fbDB.getService(s);
             tostar += fbDB.getRatingStar(s);
-            avg_feed.add(fbDB.getRatingStar(s) / fbDB.getService(s));
+            if(fbDB.getService(s) != 0) avg_feed.add(fbDB.getRatingStar(s) / fbDB.getService(s));
+            else avg_feed.add(0);
         }
         ArrayList<User> listPotential = new ArrayList<>();
         ArrayList<User> listCustomer = new ArrayList<>();
