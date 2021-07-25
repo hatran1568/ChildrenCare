@@ -168,8 +168,11 @@
                 </div>
                 <div class="col-9">
                     <div class="container" >
-
-                        <div>Results: ${requestScope.count}</div>
+                        <div  id="pagination1" class="pagination" style="margin-left: 900px;"></div>
+                        <div class="">Results: ${requestScope.count}</div>
+                        
+                        
+                        
                         <div class="row">
                             <c:forEach items="${requestScope.services}" var="s">
                                 <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top: 10px;">
@@ -243,6 +246,7 @@
                                     container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
                             }
                             generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+                            generatePagger("pagination1",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
 
 
                         </script>
