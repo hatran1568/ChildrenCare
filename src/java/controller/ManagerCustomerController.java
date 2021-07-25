@@ -115,22 +115,7 @@ public class ManagerCustomerController extends HttpServlet {
         request.getRequestDispatcher("../../view/manager/customer/list.jsp").forward(request, response);
     }
 
-//    private void getCustomerByStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        boolean status = Integer.parseInt(request.getParameter("status")) == 1;
-//        UserDAO userDB = new UserDAO();
-//        ArrayList<User> customers = userDB.getCustomers();
-//        ArrayList<User> filtered = new ArrayList<>();
-//        for (User u:customers){
-//            if (u.isStatus())
-//                filtered.add(u);
-//        }  
-//        String json = new Gson().toJson(filtered);
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(json);
-////        request.setAttribute("customers", filtered);
-////        request.getRequestDispatcher("../../../view/manager/customer/list.jsp").forward(request, response);
-//    }
+
 
     private void showCustomerDetails(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException{
