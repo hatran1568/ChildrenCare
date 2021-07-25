@@ -164,8 +164,10 @@
                             <td><img id="output" src="../../${s.thumbnailLink}" id="imgProfile" style="width: 80px; height: 80px" class="img-thumbnail">
                         </td>
                             <td>${s.fullname}</td>
-                            <td>${s.originalPrice}</td>
-                            <td>${s.salePrice}</td>
+                            <td><fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${s.originalPrice}" /></td>
+                            <td><fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${s.salePrice}" /></td>
                             
                            
                             <td>${s.description}</td>
