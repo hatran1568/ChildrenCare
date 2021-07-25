@@ -159,7 +159,7 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <td></td>
+                        <td style="font-weight: bold;">Filters:</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -176,8 +176,8 @@
                         <tr>
                             <td>${p.id}</td>
                             <td>${p.category.name}</td>
-                            <td><img class="rounded mx-auto d-block" src="../../${p.thumbnailLink}"></td>
-                            <td style="font-weight: bold;">${p.title}</td>
+                            <td><a href="details?pid=${p.id}"><img class="rounded" src="../../${p.thumbnailLink}"></a></td>
+                            <td style="font-weight: bold;"><a href="details?pid=${p.id}">${p.title}</a></td>
                             <td>${p.author.fullName}</td>
                             <td>${p.updatedDate}</td>
                             <td>${p.status.name}</td>
@@ -355,11 +355,18 @@
             }
             table.dataTable img{
                 max-width: 100px;
+                height: auto;
+                border-radius: 5px;
+                border: solid gray 2px;
+                padding: 0;
             }
             table.dataTable thead{
                 border: none;
                 padding-bottom: 0;
                 margin-bottom: 0;
+            }
+            a:hover{
+                color: #0064af;
             }
         </style> 
     </body>

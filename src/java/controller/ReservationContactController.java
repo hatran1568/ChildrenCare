@@ -9,6 +9,7 @@ import bean.Receiver;
 import bean.Reservation;
 import bean.ReservationService;
 import bean.User;
+import com.google.gson.Gson;
 import dao.ReceiverDAO;
 import dao.ReservationDAO;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Session;
@@ -77,15 +79,6 @@ public class ReservationContactController extends HttpServlet {
                 getReceiverInfo(request,response);
                 break;
             
-//            case "/reservation/contact/forward":
-//                getReservationInfo(request, response);
-//                break;
-//
-//            case "/reservation/contactedit":
-//               getCartInfoFromDB(request, response);
-//              
-//                break;
-//            case "/reservation/contact/forwardedit":
             default:
 //                getReservationInfoEdit(request, response);
                 break;
@@ -176,4 +169,6 @@ public class ReservationContactController extends HttpServlet {
         }
         response.sendRedirect("../reservationcompletion?rid=" + rid);
     }
+
+    
 }

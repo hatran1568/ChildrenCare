@@ -224,7 +224,11 @@
                     </div>
                     <div class="four wide field">
                         <label></label>
+<<<<<<< HEAD
                         <div style="font-size: 14px;" onclick="submit()" class="ui button" tabindex="0">Save</div>  
+=======
+                        <div onclick="submit()" style="font-size: 16px;" class="ui button" tabindex="0">Save</div>  
+>>>>>>> 8b5a58b6f2bae36a474eb582b978de430a244524
                     </div>
                 </div>
 

@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Edit service</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -14,24 +14,20 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="../../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link rel ="stylesheet" href="../../assets/css/bootstrap-iso.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
         <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
         <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/../../assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        <script>
-
-
-
-
-        </script>
+        
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -40,6 +36,7 @@
 
 
         <!-- HEADER -->
+        
         <header>
             <div class="container">
                 <div class="row">
@@ -58,116 +55,82 @@
             </div>
         </header>
 
-
         <!-- MENU -->
-        <section class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
+        <div  class="toolplate-iso bootstrap-iso">
+            <section class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="container">
 
-                <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                        <span class="icon icon-bar"></span>
-                    </button>
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                            <span class="icon icon-bar"></span>
+                        </button>
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="../../home" class="navbar-brand">Children Care</a>
-                </div>
+                        <!-- lOGO TEXT HERE -->
+                        <a href="../../home" class="navbar-brand">Children Care</a>
+                    </div>
 
-                <!-- MENU LINKS -->
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
-                        <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
-                        <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
-                            <c:if test="${ empty sessionScope.user}">
-                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Login</a></li>
-                            <div id="login" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Login</h4>
-                                            <form action="../../login" method="POST">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Login" />
-                                                <a class="login-trigger" href="#" data-target="#" data-toggle="modal">ForgetPassword</a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                            <li class="appointment-btn"><a class="login-trigger" href="#" data-target="#register" data-toggle="modal">Sign up</a></li>
-                            <div id="register" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
+                    <!-- MENU LINKS -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../../home" class="smoothScroll dropdown">Home</a></li>
+                            <li><a href="../../service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="../../blog/list" class="smoothScroll dropdown">Blog</a></li>
+                                <c:if test="${ empty sessionScope.user}">
+                                <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../../login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="../../showregister">Sign up</a></li>
 
-                                    <div class="modal-content">
-                                        <div class="modal-body ">
-                                            <button data-dismiss="modal" class="close">&times;</button>
-                                            <h4>Register</h4>
-                                            <form action="../../register" method="GET">
-                                                <input type="text" name="fullname" class="username form-control" placeholder="Full Name"/>
-                                                Male <input type="radio" name="gender" value="male" style="margin-right: 20px;">
-                                                Female <input type="radio" name="gender" value="female">
-                                                <input type="text" name="email" class="username form-control" placeholder="Email"/>
-                                                <input type="text" name="phone" class="username form-control" placeholder="Phone"/>                                                    
-                                                <input type="text" name="address" class="username form-control" placeholder="Address"/>
-                                                <input type="password" name="pass" class="password form-control" placeholder="password"/>
-                                                <input class="login-trigger" type="submit" value="Register" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-
-                        </c:if>
-                        <c:if test="${not empty sessionScope.user}">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
-                                <div class="dropdown-menu">
-                                    <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                    <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
-                                </div>
-                            </li>
-                            <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
-
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
-                                    <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
-                                    </div>
-                                </li>
-                                <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                    <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
-                                    </c:if>
-                                </c:if>
-                                <c:if test="${sessionScope.user.role.name == 'Staff'}">
-                                <li class="dropdown">
-                                <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
-                                </li>
                             </c:if>
-                            <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                            <div class="dropdown ">
-                                <img class="avatar" src="${sessionScope.user.imageLink}">
-                                <div class="dropdown-content">
-                                    <p> <a href="../../userprofile">Profile</a></p>
-                                    <p> <a href="../../customer/changepassword">Change Password</a></p>
-                                    <p> <a href="../../logout">Log Out</a></p>
+                            <c:if test="${not empty sessionScope.user}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <div class="dropdown-menu">
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="../../customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                    </div>
+                                </li>
+                                <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <div class="dropdown-menu">
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/customer/list">Customers</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/reservation/list">Reservations</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/feedback/list">Feedbacks</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/post/list">Posts</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/slider/list">Sliders</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="../../manager/service/list">Services</a></p>
+                                        </div>
+                                    </li>
+                                    <c:if test="${sessionScope.user.role.name == 'Admin'}">
+                                        <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${sessionScope.user.role.name == 'Staff'}">
+
+                                    <li class="dropdown">
+                                    <li><a href="../../staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    </li>
+                                </c:if>
+                                <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <div class="dropdown ">
+                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+
+                                    <div class="dropdown-content">
+                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="dropdown-name ">${sessionScope.user.fullName}</p>
-                        </c:if>
-                    </ul>
+                                <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
+                            </c:if>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
 
 
         <!-- End Banner -->
@@ -179,82 +142,72 @@
         <!-- Start  -->
 
         <div class="container" style="height: max-content; min-height: 700px;">
-            <form action="edit" method="POST">
+            <form action="edit" method="POST" enctype="multipart/form-data">
                 <input type="text" name="id" value="${requestScope.service.id}" hidden>
-                <table width="400" border="2" cellpadding="5" align="center" >
-                    <tr>
-                        <th colspan="2"> EDIT SERVICE INFORMATION </th>
-                    </tr>
+                <div class="form-group">
+                    <label for="file"></label>
+                    <img style="max-height: 200px" id="output" src="../../${requestScope.service.thumbnailLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail">
+                        <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="fullname">Full name</label>
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" value="${requestScope.service.fullname}">
+                </div>
+                <div class="form-group">
+                    <label for="originalprice">Original price</label>
+                    <input style="width: 100%" type="number" class="form-control" name="originalprice" value="${requestScope.service.originalPrice}">
+                </div>
+                <div class="form-group">
+                    <label for="saleprice">Sale price</label>
+                    <input style="width: 100%" type="number" class="form-control" name="saleprice" value="${requestScope.service.originalPrice}">
+                </div>
+                <div class="form-group">
+                    <label for="categoryid">Category ID </label>
+                    <input style="width: 100%" type="number" class="form-control" name="categoryid" value="${requestScope.service.category.id}">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description  </label>
+                    <textarea style="width: 100%" type="text" class="form-control" name="description" value="${requestScope.service.description}" >${requestScope.service.description}</textarea> 
+                </div>
+                <div class="form-group">
+                    <label for="details">Details  </label>
+                    <textarea style="width: 100%" type="text" class="form-control" name="details" value="${requestScope.service.details}" >${requestScope.service.details}</textarea> 
+                </div>
+                <div class="form-group">
+                    <label for="featured">Featured</label>
+                    
+                                <div class="form-check">
+                                    <input class="form-check-input" name="featured" type="radio" <c:if test="${requestScope.service.featured==true}">checked</c:if> id="True" value="True">
+                                    <label class="form-check-label" for="True">True</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="featured" type="radio" <c:if test="${requestScope.service.featured==false}">checked</c:if> id="False" value="False">
+                                    <label class="form-check-label" for="False">False</label>
+                                </div>
 
+                    </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <div class="form-check">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==true}">checked</c:if> id="True" value="True">
+                                    <label class="form-check-label" for="True">True</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==false}">checked</c:if> id="False" value="False">
+                                    <label class="form-check-label" for="False">False</label>
+                                </div>
 
-                    <tr>
-                        <td>Full name</td>
-                        <td><input type="text" name="fullname" value="${requestScope.service.fullname}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Original price </td>
-                        <td><input type="number" name="originalprice" value="${requestScope.service.originalPrice}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Sale price</td>
-                        <td><input type="number" name="saleprice" value="${requestScope.service.salePrice}" </td>
-
-                    </tr>
-                    <tr>
-                        <td>Thumbnail Link</td>
-                        <td><input type="text" name="thumbnaillink" value="${requestScope.service.thumbnailLink}"</td>
-
-                    </tr>
-
-                    <tr>
-                        <td>Category ID </td>
-                        <td><input type="number" name="categoryid" value="${requestScope.service.category.id}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Description </td>
-                        <td><input type="text" name="description" value="${requestScope.service.description}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Details </td>
-                        <td><input type="text" name="details" value="${requestScope.service.details}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Updated date </td>
-                        <td><input type="date" name="updateddate" value="${requestScope.service.updatedDate}"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Featured </td>
-                        <td><input type="text" name="featured"value="${requestScope.service.featured}" placeholder="Status"                
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>Status </td>
-                        <td><input type="text" name="status"value="${requestScope.service.status}" placeholder="Status"
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td>Quantity</td>
-                        <td>
-                            <input type="number" name="quantity" value="${requestScope.service.quantity}"</td>
-                    </tr>
-
-
-                    <tr>
-                        <td colspan="2" align="center">
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" class="form-control" name="quantity" value="${requestScope.service.quantity}">
+                    </div>
+                    
                             <input type="reset" name="reset" value="Reset"> &nbsp;
                             <input type="submit" name="submit" value="Edit">
                             <input type="text" value="${param.sid}" name="sid" hidden="true">
-                        </td>
-                    </tr>
-                </table>
             </form>
 
         </div>

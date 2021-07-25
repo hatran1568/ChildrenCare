@@ -123,10 +123,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -139,7 +139,9 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="margin: 75px auto">
+        <div class="container" id="main-body" style="margin: 75px auto">
+                        <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../reservation/details?rid=${requestScope.exam.reservationService.reservation.id}">Reservation details</a><i style="margin : 5px;"  class="fas fa-angle-right"></i><a href="list?rid=${requestScope.exam.reservationService.reservation.id}">Examination list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Examination details</div>
+
             <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
                 <h3 style="text-align: center">Examination details</h3>
                 <div class="row">
@@ -283,34 +285,18 @@
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
         </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+        
             <style>
-                p strong,span{
+                #main-body p strong,span{
                     font-size: 16px;
                     color:black;
                 }
                 #Info h3{
                     margin: 20px;
+                }
+                footer p span{
+                    color: #757575;
+                    font-size: 14px;
                 }
             </style>
     </body>

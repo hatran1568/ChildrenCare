@@ -114,10 +114,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="margin-top: 70px">
+        <div class="container" style="margin-top: 70px; margin-bottom: 70px">
             <h3 style="text-align: center">Receiver info</h3>
             <div class="row">
                 <div class="col-md-2"></div>
@@ -164,9 +164,12 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}" required>
+                                        <input type="email" class="form-control" name="email" id="email" value="${requestScope.user.email}" onchange="checkExistingEmail()" required>
                                     <div class="invalid-feedback">
                                         Please enter your email.
+                                    </div>
+                                    <div id="email-notify" style="display: none">
+                                        Email already exists in DB
                                     </div>
                                 </div>
 
@@ -174,9 +177,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="${requestScope.user.mobile}" pattern="[0-9]{10}">
                                     <div class="invalid-feedback">
-                                        Please enter your phone number.
+                                        Please enter a valid phone number.
                                     </div>
                                 </div>
 
@@ -360,11 +363,28 @@
             function submitReceiver() {
                 $('#submit_handle').click();
             }
+//            function checkExistingEmail() {
+//                $.ajax({
+//                   url: "contact/checkemail" ,
+//                   method: "post",
+//                   data: { email : $("#email").val()},
+//                   success: function(data) {
+//                       $.each(data, function(index, item) { // Iterate over the JSON array.
+//                            if (item === "true"){
+//                                document.getElementById("email-notify").style.display = "block";
+//                            } else {
+//                                document.getElementById("email-notify").style.display = "none";
+//                            }
+//    });
+//                }
+//                });
+//            }
         </script>
         <script>
             $(document).ready(function (){
                 $("#male").prop("checked", true);
             });
+            
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {

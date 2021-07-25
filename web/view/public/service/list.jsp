@@ -78,7 +78,7 @@
                     <!-- MENU LINKS -->
                     <div class="collapse navbar-collapse">
 
-                        <a href="home" class="navbar-brand">Children Care</a>
+                        <a href="../home" class="navbar-brand">Children Care</a>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="../home" class="smoothScroll dropdown">Home</a></li>
                             <li><a href="list" class="smoothScroll dropdown">Services</a></li>

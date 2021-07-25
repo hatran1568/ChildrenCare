@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>New service</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -178,82 +178,62 @@
         <br>
         <!-- Start  -->
         <div class="container" style="height: max-content; min-height: 700px;">
-            <form action="add" method="POST" >
-                <table width="500"  border="2" cellpadding="5" align="center" >
-                    <tr>
-                        <th colspan="2"> ADD NEW SERVICE </th>
-                    </tr> 
-                    <tr>
-                        <td>Full name</td>
-                        <td><input type="text" name="fullname" placeholder="Full name"</td>
+            <form action="add" method="POST" enctype="multipart/form-data" >
+                <div class="form-group">
+                    <label for="file">Thumbnail Link</label>
+                    <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                            <img id="output"  >
+                </div>
+                <div class="form-group">
+                    <label for="fullname">Full name</label>
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" >
+                </div>
+                <div class="form-group">
+                    <label for="originalprice">Original price</label>
+                    <input style="width: 100%" type="number" class="form-control" name="originalprice" >
+                </div>
+                <div class="form-group">
+                    <label for="saleprice">Sale price</label>
+                    <input style="width: 100%" type="number" class="form-control" name="saleprice" >
+                </div>
+                <div class="form-group">
+                    <label for="categoryid">Category ID </label>
+                    <input style="width: 100%" type="number" class="form-control" name="categoryid" >
+                </div>
+                <div class="form-group">
+                    <label for="description">Description  </label>
+                    <textarea style="width: 100%" type="text" class="form-control" name="description" ></textarea> 
+                </div>
+                <div class="form-group">
+                    <label for="details">Details  </label>
+                    <textarea style="width: 100%" type="text" class="form-control" name="details"  ></textarea> 
+                </div>
+                <div class="form-group">
+                    <label for="featured">Featured</label>
+                    <select class="form-control" name="featured">
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
 
-                    </tr>
-                    <tr>
-                        <td>Original price </td>
-                        <td><input type="number" name="originalprice" placeholder="Original price"</td>
+                    </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status">
+                        <option value="True">True</option>
+                        <option value="False">False</option>
+                    </select>
 
-                    </tr>
-                    <tr>
-                        <td>Sale price</td>
-                        <td><input type="number" name="saleprice" placeholder="Sale price" </td>
-
-                    </tr>
-                    <tr>
-                        <td>Thumbnail Link</td>
-                        <td><input type="text" name="thumbnaillink" placeholder="Thumbnal link"</td>
-
-                    </tr>
-
-                    <tr>
-                        <td>Category ID </td>
-                        <td>
-                            <select name="categoryid" >
-                                <c:forEach items="${requestScope.categories}" var="c">
-                                    <option value="${c.id}">
-                                        ${c.id}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Description </td>
-                        <td><input type="text" name="description" placeholder="description"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Details </td>
-                        <td><input type="text" name="details" placeholder="details"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Updated date </td>
-                        <td><input type="date" name="updateddate" placeholder="updated date"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Featured </td>
-                        <td><input type="text" name="featured" placeholder="featured: 0 or 1"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Status </td>
-                        <td><input type="text" name="status" placeholder="Status: 0 or 1"</td>
-
-                    </tr>
-                    <tr>
-                        <td>Quantity </td>
-                        <td><input type="number" name="quantity" placeholder="Quantity"</td>
-
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" align="center">
+                    </div>
+                    
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input class="form-control" type="number" name="quantity" ">
+                    </div>
+                    
                             <input type="reset" name="reset" value="Reset"> &nbsp;
                             <input type="submit" name="submit" value="Add">
-                        </td>
-                    </tr>
-                </table>
+                            
             </form>
         </div>
 

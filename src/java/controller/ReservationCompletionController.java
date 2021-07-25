@@ -65,20 +65,32 @@ public class ReservationCompletionController extends HttpServlet {
         //Set status to submitted
         reservationDB.submitReservation(rid);
         //Set Staff
-        ArrayList<User> staff = userDB.getStaff();
-        int minRes = 900;
         User assignStaff = new User();
-        for (User s : staff) {
-            if (reservationDB.countReservations(s) <= minRes) {
-                minRes = reservationDB.countReservations(s);
-                assignStaff.setId(s.getId());
-                assignStaff.setFullName(s.getFullName());
-                assignStaff.setEmail(s.getEmail());
-                assignStaff.setMobile(s.getMobile());
-                assignStaff.setImageLink(s.getImageLink());
+        if (reservation.getStaff() == null) {
+            ArrayList<User> staff = userDB.getStaff();
+            int minRes = 900;
+            for (User s : staff) {
+                if (reservationDB.countReservations(s) <= minRes) {
+                    minRes = reservationDB.countReservations(s);
+                    assignStaff.setId(s.getId());
+                    assignStaff.setFullName(s.getFullName());
+                    assignStaff.setEmail(s.getEmail());
+                    assignStaff.setMobile(s.getMobile());
+                    assignStaff.setImageLink(s.getImageLink());
+                }
             }
+            reservationDB.changeStaffReservation(rid, assignStaff.getId());
+            //Sub-function 3: Send email to customer confirming reservation and payment guides
+            User user = userDB.getUser(reservation.getCustomer().getId());
+            try {
+                String content = "Your reservation has been submitted. Your doctor is Dr. " + assignStaff.getFullName() + ". Email: " + assignStaff.getEmail() + ". Mobile: " + assignStaff.getMobile() + ". Please complete the transaction by transfering the fees to the following bank account: ";
+                e.sendText(user.getEmail(), content);
+            } catch (MessagingException ex) {
+                Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            assignStaff = reservationDB.getReservationById(rid).getStaff();
         }
-        reservationDB.changeStaffReservation(rid, assignStaff.getId());
         
 //        Reservation reservationedit = new Reservation();
 //        reservationedit =(Reservation) request.getSession().getAttribute("reservationidedit");
@@ -88,14 +100,6 @@ public class ReservationCompletionController extends HttpServlet {
 //            request.getSession().removeAttribute("reservationidedit");
 //        }
 
-        //Sub-function 3: Send email to customer confirming reservation and payment guides
-        User user = userDB.getUser(reservation.getCustomer().getId());
-        try {
-            String content = "Your reservation has been submitted. Your doctor is Dr. " + assignStaff.getFullName() + ". Email: " + assignStaff.getEmail() + ". Mobile: " + assignStaff.getMobile() + ". Please complete the transaction by transfering the fees to the following bank account: ";
-            e.sendText(user.getEmail(), content);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ReservationCompletionController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         ReceiverDAO rdao = new ReceiverDAO();
         Receiver receiver = rdao.getReceiversById(reservation.getCustomer().getId());

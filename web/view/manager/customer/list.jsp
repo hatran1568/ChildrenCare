@@ -116,10 +116,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -134,12 +134,12 @@
 
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 0px">
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 0px; margin-bottom: 50px">
             <h2 style="text-align: center; margin: 3%; color: #0064af;">Customers List</h2>
             <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
-                    <tr>
+                    <tr style="text-align: center; ">
                         <td>ID</td>
                         <td>Fullname</td>
                         <td>Gender</td>
@@ -150,14 +150,26 @@
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <c:forEach items="${requestScope.customers}" var="c">
+                <tfoot>
                         <tr>
-                            <td>${c.id}</td>
+                            <td style="font-weight: bold">Filter:</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                <tbody style="text-align: left">
+                    <c:forEach items="${requestScope.customers}" var="c">
+                        <tr >
+                            <td style="text-align: left">${c.id}</td>
                             <td>${c.fullName}</td>
                             <td><c:if test="${c.gender == true}">Male</c:if>
                                 <c:if test="${c.gender == false}">Female</c:if></td>
-                            <td>${c.email}</td>
+                            <td style="text-align: left">${c.email}</td>
                             <td>${c.mobile}</td>
                             <td>${c.status.name}</td>
                             <td><a href="details?uid=${c.id}"><i class="fas fa-eye"></i></a></td>
@@ -256,7 +268,7 @@
                             null,
                         ],
                         'columnDefs': [
-                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
+                            {'className': 'text-center', 'targets': [6,7]},
                             {'orderable': false, 'targets' : [4,5,6,7]},
                         ],
                         "bInfo" : false,
@@ -266,7 +278,7 @@
                             this.api().columns('.dt-filter').every(function () {
                                 var column = this;
                                 var select = $('<select><option value=""></option></select>')
-                                        .appendTo($(column.header()))
+                                        .appendTo($(column.footer()))
                                         .on('change', function () {
                                             var val = $.fn.dataTable.util.escapeRegex(
                                                     $(this).val()
@@ -292,6 +304,10 @@
                 
                 font-size: 16px;
             }
+            
+            tfoot {
+                display: table-header-group;
+            }
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
             }
@@ -299,15 +315,28 @@
             tbody, td, tfoot, th, thead, tr {
                 border-style: hidden;
             }
+             thead,tfoot{
+                border-bottom: 2px solid black;
+            }
             
             .table thead {
-                border-bottom: 2px solid black;
+                /*border-bottom: 2px solid black;*/
                 font-weight: bold;
                 margin: 0px auto;
+                
+            }
+            .table thead tr th{
+                border-bottom: 1px solid black;
+            }
+            .table tfoot tr td{
+                border-bottom: 1px solid black;
             }
             .table thead select{
                 font-weight: normal;
                 text-align: center;
+            }
+            .table td{
+                text-align: left;
             }
         </style> 
     </body>

@@ -15,34 +15,21 @@
             integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
             crossorigin="anonymous"
             />
-
+        <link href="../../assets/css/custom.css" rel="stylesheet" type="text/css"/>
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
             integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
             crossorigin="anonymous"
             />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-        </script>
-        
-         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Users List</title>
         
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 
-        <!-- Bootstrap core CSS -->
-        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
         <link rel="stylesheet" href="../../assets/css/style.css" />
-        <!--
-    Ramayana CSS Template
-    https://templatemo.com/tm-529-ramayana
-        -->
-      
-        <!-- Additional CSS Files -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
         <script type="text/javascript">
         $(document).ready(function () {
             $('#settings').DataTable({
@@ -91,11 +78,11 @@
 
     <body>
         <!-- sidebar -->
-        <div class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+        <div style="top: 25px;" class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
             <div class="item">
                 <div class="header">General</div>
                 <div class="menu">
-                    <a class="item" href='../dashboard/view'>
+                    <a class="item" href="../dashboard/view">
                         <div>
                             <i class="icon tachometer alternate"></i>
                             Dashboard
@@ -104,11 +91,11 @@
                 </div>
             </div>
             <div class="item">
-                <div class="header">
+                <div class="header" href="../dashboard/view">
                     Administration
                 </div>
                 <div class="menu">
-                    <a href='../setting/list' class="item">
+                    <a href='#top' class="item">
                         <div><i class="cogs icon"></i>Settings</div>
                     </a>
                     <a href='../user/list' class="item">
@@ -140,17 +127,7 @@
                     </div>
                 </form>
             </div>
-<!--            <div class="ui segment inverted">
-                <div class="ui tiny olive inverted progress">
-                    <div class="bar" style="width: 54%"></div>
-                    <div class="label">Monthly Bandwidth</div>
-                </div>
-
-                <div class="ui tiny teal inverted progress">
-                    <div class="bar" style="width:78%"></div>
-                    <div class="label">Disk Usage</div>
-                </div>
-            </div>-->
+          
         </div>
 
         <!-- sidebar -->
@@ -161,8 +138,8 @@
                 <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
                     <i class="sidebar icon"></i>
                 </a>
-                <a href="#" class="header item">
-                    Semantic UI
+                <a href="../../home" class="header item">
+                    ChildrenCare
                 </a>
             </div>
 
@@ -171,9 +148,9 @@
                     <i class="bell icon"></i>
                 </a>
                 <div class="ui dropdown item">
-                    <i class="user cirlce icon"></i>
+                    <img style="width: 50px" class="avatar" src="../../${sessionScope.user.imageLink}">
                     <div class="menu">
-                        <a href="../../userprofile" class="item">
+                        <a href="../../customer/userprofile" class="item">
                             <i class="info circle icon"></i> Profile</a
                         >
                         <a href="../../logout" class="item">
@@ -189,7 +166,8 @@
 
         <div class="pusher">
             <div class="main-content">
-                <div class="container-fluid">
+                <div class="container-fluid" style="margin-left: 2%; margin-right: 2%">
+                    <br>
                     <br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
 
@@ -200,7 +178,7 @@
                             <span id="filterGender" style="font-size: 15px; margin-left: 5%; margin-right: 1%"><b>Gender:</b></span>
                             <span id="filterRole" style="font-size: 15px; margin-right: 1%"><b>Role:</b></span>
                             <span id="filterStatus" style="font-size: 15px; margin-right: 1%"><b>Status:</b></span>-->
-                            <table id="settings" class="cell-border">
+                            <table id="settings">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -214,9 +192,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>Filters:</th>
-                                        <th>Type<br></th>
                                         <th></th>
-                                        <th>Status<br></th>
+                                        <th></th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -228,8 +206,8 @@
                                         <td>${s.type}</td>
                                         <td>${s.name}</td>
                                         <td>${s.status}</td>
-                                        <td><a href="details?id=${s.id}"><i class="fas fa-eye" style="color: #00ffc8"></i></a></td>
-                                        <td><a href="edit?id=${s.id}"><i class="fas fa-pen" style="color: #d0ff00"></i></a></td>
+                                        <td><a href="details?id=${s.id}"><i class="fas fa-eye" style="align-content: center"></i></a></td>
+                                        <td><a href="edit?id=${s.id}"><i class="fas fa-pen" style="align-content: center"></i></a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

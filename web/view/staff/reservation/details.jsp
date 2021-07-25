@@ -123,10 +123,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -140,6 +140,8 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin-top: 75px">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Reservation list</a><i style="margin : 5px;" class="fas fa-angle-right"></i>Detail</div>
+
             <div id="Info" class="col-md-8 justify-content-center" style="margin-left: 16.66%; margin-right: 16.66%">
                 <h3 style="text-align: center">Reservation info</h3>
                 <div class="row">
@@ -224,7 +226,7 @@
                             <td>${requestScope.examinationCount[i]}</td>
                             <td>${requestScope.services[i].unitPrice * services[i].quantity} </td>
                             <td><c:if test="${requestScope.examinationCount[i]<requestScope.services[i].quantity}">
-                                    <button class="btn" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
+                                    <button class="btn btn-primary" type="button" onclick="window.location.href = '../examination/new?rid=${requestScope.reservation.id}&sid=${requestScope.services[i].service.id}'">Add</button>
                                 </c:if></td>
                         </tr>
                     </c:forEach>
@@ -368,6 +370,10 @@
                 }
                 #Info h3{
                     margin: 20px;
+                }
+                footer p span{
+                    color: #757575;
+                    font-size: 14px;
                 }
         </style>
     </body>

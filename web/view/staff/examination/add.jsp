@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Add examination</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -118,10 +118,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@
             <h3 style="text-align: center">Patient info</h3>
             <div style="margin-top: 40px"  class="row justify-content-md-center">
                 <div style="margin-left: auto; margin-right: auto; float: none" class="col-md-8">
-                    <form action="add" method="post">
+                    <form action="add" method="post" novalidate class="needs-validation">
                         <input type="text" name="rid" value="${requestScope.rid}" hidden>
                         <input type="text" name="sid" value="${requestScope.sid}" hidden>
                         <div class="form-row">
@@ -147,12 +147,12 @@
                                 <input type="text" class="form-control" id="name" name="name">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="gender">Gender</label>
-                                <div class="form-check form-check-inline">
+                                <label for="gender" style="margin: auto 0">Gender:</label>
+                                <div class="form-check">
                                     <input class="form-check-input" name="gender" type="radio" id="male" value="male">
                                     <label class="form-check-label" for="male">Male</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check">
                                     <input class="form-check-input" name="gender" type="radio" id="female" value="female">
                                     <label class="form-check-label" for="female">Female</label>
                                 </div>
@@ -161,21 +161,33 @@
                         <div class="form-row">
                             <div style="padding-left: 0" class="form-group col-md-6">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input type="email" class="form-control" id="email" name="email" required="">
+                                <div class="invalid-feedback">
+                                    Please enter a valid email.
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="mobile">Mobile</label>
-                                <input type="text"  class="form-control" id="mobile" name="mobile">
+                                <input type="text"  class="form-control" id="mobile" name="mobile" pattern="^[0-9]{10}$" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid phone number (10-digit).
+                                </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" id="checkEmail" onclick="checkExistingEmail()">Check existing email</button>
+                        <button type="button" style="margin: 5px 0px" class="btn btn-primary" id="checkEmail" onclick="checkExistingEmail()">Check existing email</button>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" name="address">
+                            <input type="text" class="form-control" id="address" name="address" required>
+                            <div class="invalid-feedback">
+                                    Address cannot be blank!
+                                </div>
                         </div>
                         <div class="form-group">
                             <label for="prescription">Prescription</label>
                             <textarea style="height: 150px" class="form-control" name="prescription" id="prescription"></textarea>
+                            <div class="invalid-feedback">
+                                    Prescription cannot be blank!
+                                </div>
                         </div>
                         <input class="btn btn-primary" type="submit" value="Add prescription">
                     </form>
@@ -249,28 +261,9 @@
             }, function () {
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
+            
         </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
-
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+        
         <style>
             .form-control{
                 margin: 0;
@@ -284,7 +277,11 @@
                 $.ajax({
                    url: "checkemail" ,
                    method: "post",
-                   data: { email : $("#email").val()},
+                   data: { email : $("#email").val(),
+                            name: $("#name").val(),
+                        gender: $('input[name="gender"]:checked').val(),
+                            mobile: $("#mobile").val(),
+                        address: $("#address").val()},
                    success: function(data) {
                        $("#name").val(data.fullName);
                        if (data.gender === true){

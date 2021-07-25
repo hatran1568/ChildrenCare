@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Examination list</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -116,10 +116,10 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -133,20 +133,8 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="margin: 75px auto">
-<!--            <nav class="navbar navbar-light bg-light" style="margin: 0px 100px">
-                <form id="myForm" method="GET" action="list" class="form-inline">
-                    <input name="rid" value="${requestScope.rid}" hidden>
-                    Service:
-                    
-                    <select onchange="submit()" name="service">
-                        <option value="all">All</option>
-                        <c:forEach items="${requestScope.services}" var="s">
-                            <option value="${s.id}">${s.fullname}</option>
-                        </c:forEach>
-                    </select>
-                </form>
-                
-            </nav>-->
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../reservation/details?rid=${requestScope.exams[0].reservationService.reservation.id}">Reservation details</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Examination list</div>
+
             
             <table id="prescription" class="table">
                 <thead class="thead-dark">
@@ -159,6 +147,17 @@
                         <td></td>
                     </tr>
                 </thead>
+                <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                         
+                        </tr>
+                    </tfoot>
                 <tbody>
                     <c:forEach items="${requestScope.exams}" var="e">
                         <tr>
@@ -256,11 +255,11 @@
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                                    $('ul.nav li.dropdown').hover(function () {
-                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                                    }, function () {
-                                        $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                                    });
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
         </script>
         <script>
                 $(document).ready(function () {
@@ -290,7 +289,7 @@
                             this.api().columns('.dt-filter').every(function () {
                                 var column = this;
                                 var select = $('<select><option value=""></option></select>')
-                                        .appendTo($(column.header()))
+                                        .appendTo($(column.footer()))
                                         .on('change', function () {
                                             var val = $.fn.dataTable.util.escapeRegex(
                                                     $(this).val()
@@ -307,7 +306,7 @@
                     });
                 });
             </script> 
-        <style>
+<!--        <style>
             .table{
                 margin-top: 40px;
             }
@@ -331,6 +330,9 @@
             }
             thead:hover{
                 background-color: darkgrey !important;
+            }
+            tfoot {
+                display: table-header-group;
             }
             table.dataTable td {
                 font-size: 15px;
@@ -356,6 +358,47 @@
                 font-weight: normal;
                 text-align: center;
             }
-        </style>
+        </style>-->
+<style>
+            
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                
+                font-size: 16px;
+            }
+            
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+            
+            tbody, td, tfoot, th, thead, tr {
+                border-style: hidden;
+            }
+             thead,tfoot{
+                border-bottom: 2px solid black;
+            }
+            
+            .table thead {
+                /*border-bottom: 2px solid black;*/
+                font-weight: bold;
+                margin: 0px auto;
+                
+            }
+            .table thead tr th{
+                border-bottom: 1px solid black;
+            }
+            .table tfoot tr td{
+                border-bottom: 2px solid black;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
+            }
+        </style> 
     </body>
 </html> 

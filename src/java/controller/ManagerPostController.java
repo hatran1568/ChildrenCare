@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
-        maxFileSize = 1024 * 1024 * 10, // 50MB
+        maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 10)
 public class ManagerPostController extends HttpServlet {
 
@@ -153,7 +153,7 @@ public class ManagerPostController extends HttpServlet {
         SettingDAO settingDB = new SettingDAO();
         ArrayList<Setting> postCategories = settingDB.getSetting("Post category");
         request.setAttribute("categories", postCategories);
-        request.getRequestDispatcher("../../view/manager/post/edit2.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/post/edit.jsp").forward(request, response);
     }
 
     private void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
