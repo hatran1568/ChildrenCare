@@ -311,7 +311,7 @@ public class UserController extends HttpServlet {
             generatePassword[i] = (int) (Math.random() * 10);
             password += Integer.toString(generatePassword[i]);
         }
-        u.setPassword(password);
+        u.setPassword(MD5.getMd5(password));
         u.setMobile(request.getParameter("mobile"));
         Role r = new Role();
         r.setId(Integer.parseInt(request.getParameter("role")));

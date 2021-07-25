@@ -171,7 +171,7 @@
                     <br><br>
                             <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
                             <br>
-                            <form action="../../admin/setting/insert" method="POST">
+                            <form action="../../admin/setting/insert" method="POST" novalidate class="needs-validation">
                                 <div class="form-group">
                                     <div>Type</div>
                                     <select class="form-control" name="type" style="width: 35%; height: 7%; display: inline">
@@ -186,7 +186,10 @@
                                 </div>
                                 <div class="form-group">
                                     <div>Name</div>
-                                    <input type="text" class="form-control" name="settingname" placeholder="Enter Name" style="width: 35%; display: inline">
+                                    <input type="text" class="form-control" name="settingname" required placeholder="Enter Name" style="width: 35%; display: inline">
+                                </div>
+                                <div class="invalid-feedback">
+                                        Please enter a name.
                                 </div>
                                 <div class="form-group">
                                     <div>Description</div>
@@ -194,7 +197,10 @@
                                 </div>
                                 <div class="form-group">
                                     <div>Status</div>
-                                    <input type="text" class="form-control" name="status" placeholder="Enter Status" style="width: 35%; display: inline">
+                                    <input type="text" class="form-control" name="status" required placeholder="Enter Status" style="width: 35%; display: inline">
+                                </div>
+                                <div class="invalid-feedback">
+                                        Please enter the status.
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -320,5 +326,32 @@
                 background-color: #c7c7c7;
             }
         </style>
+        <script>
+            $(document).ready(function (){
+                $("#male").prop("checked", true);
+            });
+            
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                        .forEach(function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }
+
+                                form.classList.add('was-validated')
+                            }, false)
+                        })
+            })()
+        </script>
     </body>
 </html>

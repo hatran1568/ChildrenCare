@@ -32,39 +32,41 @@
         </script>
         <script type="text/javascript">
         $(document).ready(function () {
-            $('#users').DataTable({
+            var sitetable = $('#users').DataTable({
                 "searching": true,
-                "paging": true,
+                "paging": true, 
                 'columnDefs': [
+                    {'max-width': '10%', 'targets': 3},
                     {'className': 'text-center', 'targets': 0},
-                    {'className': 'text-center', 'targets': 4},
-                    {'className': 'text-center', 'targets': 5},
-                    {'orderable': false, 'targets' : 4},
-                    {'orderable': false, 'targets' : 5},
+                    {'className': 'text-center', 'targets': 6},
+                    {'className': 'text-center', 'targets': 7},
+                    {'className': 'text-center', 'targets': 8},
+                    {'orderable': false, 'targets' : 7},
+                    {'orderable': false, 'targets' : 8},
                 ],
                 columns: [
                     null,
-                    { data: "Type", title:"Type", className: "dt-filter" },
                     null,
+                    { data: "Gender", title:"Gender", className: "dt-filter" },
+                    null,
+                    null,
+                    { data: "Role", title:"Role", className: "dt-filter" },
                     { data: "Status", title:"Status", className: "dt-filter" },
-                    null,
-                    null
                 ],
                 initComplete: function () {
                     this.api().columns('.dt-filter').every( function () {
                         var column = this;
-                        var select = $('<select style="width: 90%"><option value=""></option></select>')
+                        var select = $('<select><option value=""></option></select>')
                             .appendTo( $(column.footer()))
-                            .on(
-                                'change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-                                    column
-                                        .search( val ? '^'+val+'$' : '', true, false )
-                                        .draw();
-                                }
-                            );
+                            .on( 'change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search( val ? '^'+val+'$' : '', true, false )
+                                    .draw();
+                            } );
 
                         column.data().unique().sort().each( function ( d, j ) {
                             select.append( '<option value="'+d+'">'+d+'</option>' )
@@ -191,11 +193,11 @@
                                     <tr>
                                         <th>Filters:</th>
                                         <th></th>
-                                        <th>Gender</th>
                                         <th></th>
                                         <th></th>
-                                        <th>Role</th>
-                                        <th>Status</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                     </tr>
@@ -216,8 +218,8 @@
                                             <c:if test="${a.status.id == 16}">Potential</c:if>
                                             <c:if test="${a.status.id == 17}">Customer</c:if>
                                             <c:if test="${a.status.id == 18}">Inactive</c:if></td>
-                                        <td><a href="details?id=${a.id}"><i class="fas fa-eye" style="color: #00ffc8"></i></a></td>
-                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen" style="color: #d0ff00"></i></a></td>
+                                        <td><a href="details?id=${a.id}"><i class="fas fa-eye" style="align-content: center"></i></a></td>
+                                        <td><a href="edit?id=${a.id}"><i class="fas fa-pen" style="align-content: center"></i></a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

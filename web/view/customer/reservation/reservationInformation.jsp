@@ -275,7 +275,7 @@
 
                 </tbody>
             </table>      
-             <c:if test="${requestScope.reservation.status.name eq 'Submitted'}">
+             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
                  <a style="float:right; margin-left: 5px;"  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Edit Reservation  
                 </a>
