@@ -155,8 +155,8 @@
                                 <td class="total-cost" rowspan="${requestScope.number}"><h3 id="total" >Total Cost: <fmt:formatNumber type = "number" 
                                                                                                       pattern = "###,###,###" value = "${requestScope.totalcost}" /></h3></td>
 
-                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="button btn btn-outline-primary"><a href="../service/list?reservation_id=${requestScope.list[0].reservation.id}">More Service</a></button>
-                                    <button type="button" class="button btn btn-outline-primary"><a href="../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}">Check Out</a></button></td>
+                                <td class="total-cost" rowspan="${requestScope.number}"><button type="button" class="btn btn-primary" onclick="window.location.href='../service/list?reservation_id=${requestScope.list[0].reservation.id}'">More Service</button>
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='../reservation/contact?reservation_id=${requestScope.list[0].reservation.id}'">Check Out</button></td>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,8 +182,8 @@
             </c:if>
             <c:if test="${empty requestScope.list}">
 
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
+                <h2>You have nothing in cart!</h2>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='../service/list'">More Service</button>
                 </c:if>
 
                 <!--            <h2>Total Cost:</h2>-->

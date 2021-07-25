@@ -174,8 +174,9 @@
                             <c:forEach items="${requestScope.services}" var="s">
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="full news_blog rounded" style="box-shadow:0 3px 10px 0 rgba(0, 0, 0, 0.19);">
-                                        <img class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
-
+                                        <div style="height: 280px;">
+                                        <img style="height: auto; border-bottom: lightgray solid 1px; padding: 0;" class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
+                                        </div>
 
 
                                         <div style="height: 100%; padding: 10px; padding-bottom: 0;">
@@ -188,11 +189,11 @@
                                             <div style="padding: 10px; text-align: center;">
                                             <p class="price" style="width: 27%; display: inline-block; text-align: left">
                                                 <c:if test="${s.originalPrice > s.salePrice}">
-                                                <span style="text-decoration: line-through; color: gray;"><fmt:formatNumber type = "number" 
+                                                <span style="text-decoration: line-through; color: gray; display: block;"><fmt:formatNumber type = "number" 
                                                                   pattern = "###,###,###" value = "${s.originalPrice}" /></span>
                                                 </c:if>
                                                 <c:if test="${s.originalPrice <= s.salePrice}">
-                                                <span style="text-decoration: line-through; color: transparent;"> ${s.originalPrice}</span>
+                                                <span style="text-decoration: line-through; color: transparent; display: block"> ${s.originalPrice}</span>
                                                 </c:if>
                                                 <span style="text-decoration: white; font-size: 17px;"><fmt:formatNumber type = "number" 
                                                                   pattern = "###,###,###" value = "${s.salePrice}" />đ</span>
@@ -424,6 +425,7 @@
                 height: 50px;
                 overflow: hidden;
             }
+            
         </style>
     </body>
 </html>

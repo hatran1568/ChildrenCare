@@ -133,7 +133,8 @@
 
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
+        <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px;">
+            <h2 style="text-align: center; margin: 3%; color: #0064af;">Sliders</h2>
                <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new Slider</button>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
@@ -151,7 +152,7 @@
                 <tbody>
                     <c:forEach items="${requestScope.all}" var="list">
                         <tr>
-                            <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
+                            <td > <img style="width: 100px; height: auto;" class="img-thumbnail" src="../../${list.imageLink}"></td>
                             <td>${list.id}</td>
                             <td>${list.title}</td>
                             <td>${list.backlink}</td>

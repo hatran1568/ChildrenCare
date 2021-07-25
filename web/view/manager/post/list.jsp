@@ -176,10 +176,11 @@
                         <tr>
                             <td>${p.id}</td>
                             <td>${p.category.name}</td>
-                            <td><a href="details?pid=${p.id}"><img class="rounded" src="../../${p.thumbnailLink}"></a></td>
+                            <td><a href="details?pid=${p.id}"><img style="width: 100px; height: auto;" class="rounded img-thumbnail" src="../../${p.thumbnailLink}"></a></td>
                             <td style="font-weight: bold;"><a href="details?pid=${p.id}">${p.title}</a></td>
                             <td>${p.author.fullName}</td>
-                            <td>${p.updatedDate}</td>
+                            <td><fmt:formatDate pattern = "dd-MM-yyyy" 
+                                            value = "${p.updatedDate}"></fmt:formatDate></td>
                             <td>${p.status.name}</td>
                             <td><a href="details?pid=${p.id}"><i class="fas fa-eye"></i></a></td>
                             <td><a href="edit?pid=${p.id}"><i class="fas fa-pen"></i></a></td>
@@ -353,13 +354,13 @@
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
             }
-            table.dataTable img{
+/*            table.dataTable img{
                 max-width: 100px;
                 height: auto;
                 border-radius: 5px;
                 border: solid gray 2px;
                 padding: 0;
-            }
+            }*/
             table.dataTable thead{
                 border: none;
                 padding-bottom: 0;
@@ -371,6 +372,9 @@
             
             table.dataTable {
                 margin-bottom: 30px;
+            }
+            td{
+                border-bottom: 1px solid lightgray;
             }
         </style> 
     </body>

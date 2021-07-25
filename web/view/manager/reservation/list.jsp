@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -40,13 +41,12 @@
                     "sPaginationType": "full_numbers",
                     "bJQueryUI": true,
                     'columnDefs': [
-                        {'orderable': false, 'targets': 3},
-                        {'orderable': false, 'targets': 6},
-                        {'orderable': false, 'targets': 7},
+                        {'orderable': false, 'targets': [4, 7, 8]},
                     ],
                     columns: [
                         null,
-                        {data: "ReservationDate", title: "ReservationDate", className: "dt-filter"},
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -191,6 +191,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Reservation Date</th>
+                            <th>Checkup Time</th>
                             <th>Customer</th>
                             <th>Service(s)</th>
                             <th>Total Cost</th>
@@ -208,21 +209,24 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             
                         </tr>
                     </tfoot>
                     <tbody>
                         <c:forEach items="${requestScope.reservations}" var="r">
-                            <tr>
-                                <td><a href="details?rid=${r.id}">${r.id}</a></td>
-                                <td>${r.reservationDate}</td>
+                         <tr >
+                                <td>${r.id}</td>
+                                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${r.reservationDate}"></fmt:formatDate></td>
+                                <td><fmt:formatDate pattern="dd-MM-yyyy" value="${r.checkupTime}"></fmt:formatDate></td>
                                 <td>${r.customer.fullName}</td>
                                 <td>${f.ratedStar} 
                                     <c:forEach items="${r.listReservationService}" var="s">
-                                        <a href="../service/edit?sid=${s.service.id}">${s.service.fullname}</a> - ${s.quantity} <br>
+                                        <a style="width: 70%;" href="../service/edit?sid=${s.service.id}">${s.service.fullname}</a> - ${s.quantity} <br>
                                     </c:forEach>
                                 </td>
-                                <td>${r.totalCost}</td>
+                                <td><fmt:formatNumber type = "number" 
+                                                  pattern = "###,###,###" value="${r.totalCost}"></fmt:formatNumber></td>
                                 <td>${r.status.name}</td>
                                 <td><c:if test="${r.status.name == 'Submitted'}">
                                         <button id="${r.id}" <c:if test="${r.enough == true}">onclick="changeStatus(this)"</c:if><c:if test="${r.enough == false}">onclick="display_lowquantity(${r.id});"</c:if>>Approve</button>
@@ -455,6 +459,9 @@
             }
             table.dataTable {
                 margin-bottom: 30px;
+            }
+            td{
+                border-bottom: 1px solid lightgray;
             }
 
         </style>

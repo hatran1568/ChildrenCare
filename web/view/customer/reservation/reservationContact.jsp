@@ -224,15 +224,18 @@
                             <tr >
                                 <td>${list.service.id}</td>
                                 <td>${list.service.fullname}</td>
-                                <td>${list.unitPrice}</td>
+                                <td><fmt:formatNumber type = "number" 
+                                      pattern = "###,###,###" value = "${list.unitPrice}" />đ</td>
                                 <td>${list.quantity}</td>
-                                <td>${list.unitPrice * list.quantity} </td>
+                                <td><fmt:formatNumber type = "number" 
+                                         pattern = "###,###,###" value = "${list.unitPrice * list.quantity}" />đ</td>
 
                             </tr>
                         </c:forEach>
                         <tr>
                             <td colspan="4" style="text-align: right">Total cost</td>
-                            <td style="font-size: 18px">${requestScope.totalCost}</td>
+                            <td style="font-size: 18px"><fmt:formatNumber type = "number" 
+                                      pattern = "###,###,###" value = "${requestScope.totalCost}" />đ</td>
                         </tr>
                     </tbody>
                 </table>

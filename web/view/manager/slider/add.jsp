@@ -138,7 +138,9 @@
 
 
         <!-- TEAM -->
-        <div class="container" style="height: max-content; min-height: 700px;">
+        <div class="container" style="height: max-content; min-height: 700px;margin-top: 40px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Slider List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add New</div>
+
             <form class="needs-validation" novalidate action="insert" method="POST" enctype="multipart/form-data">
 
                 <table style="width: 100%">
@@ -146,7 +148,7 @@
                         <td>Thumbnail</td>
                         <td> <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <img id="output"  >  <div class="invalid-feedback">
-                                Please enter your name.
+                                File size exceeds 10MB.
                             </div></td>
                     </tr>
                     <tr>
@@ -206,28 +208,6 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <!--                        <div class="footer-thumb"> 
-                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>Amazing Technology</h5></a>
-                                                            <span>March 08, 2018</span>
-                                                        </div>
-                                                    </div>
-                        
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>New Healing Process</h5></a>
-                                                            <span>February 20, 2018</span>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 

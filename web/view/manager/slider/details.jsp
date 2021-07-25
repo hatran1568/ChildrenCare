@@ -6,7 +6,7 @@
     <head>
 
         <title>Slider</title>
-        
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="description" content="">
@@ -14,7 +14,7 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -137,7 +137,9 @@
         </div>
         <!-- End Banner -->
         <!-- section -->
-        <div class="container" style="height: max-content;">
+        <div class="container" style="height: max-content; margin-top: 40px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Slider List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Details</div>
+
             <div style="text-align: center">
                 <img style="max-width: 200px" id="slider-image" src="../../${slider.imageLink}">
             </div>
@@ -154,21 +156,21 @@
                     <td>Status</td>
                     <td><c:if test="${requestScope.slider.status eq true}">Active</c:if>
                         <c:if test="${requestScope.slider.status eq false}">Inactive</c:if>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Notes</td>
-                    <td><textarea readonly="true" value="" name="note"  cols="150" rows="15">${requestScope.slider.notes}</textarea></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Notes</td>
+                        <td><textarea readonly="true" value="" name="note"  cols="150" rows="15">${requestScope.slider.notes}</textarea></td>
                 </tr>
             </table>
-                
-                        <button style="float : right" id="edit-btn" class="btn btn-primary" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
+
+            <button style="float : right" id="edit-btn" class="btn btn-primary" onclick="window.location.href = 'edit?id=${requestScope.slider.id}'">Edit</button>
         </div>
-        
 
 
 
-        
+
+
 
 
 
@@ -189,28 +191,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-<!--                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -230,10 +232,10 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
+                    </div>
 
 
                 </div>
@@ -249,7 +251,7 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-     <script>
+        <script>
                 var loadFile = function (event) {
                     var output = document.getElementById('output');
                     output.src = URL.createObjectURL(event.target.files[0]);
@@ -257,14 +259,14 @@
                         URL.revokeObjectURL(output.src) // free memory
                     }
                 };
-            </script>
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                            $('ul.nav li.dropdown').hover(function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                            }, function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                            });
+                $('ul.nav li.dropdown').hover(function () {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                }, function () {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -296,13 +298,13 @@
                 left: 45%;
             }
             table tr td:first-child{
-                    font-weight: bold;
-                    width: 30%;
-                }
+                font-weight: bold;
+                width: 30%;
+            }
 
-                table td{
-                    padding: 10px;
-                }
+            table td{
+                padding: 10px;
+            }
             .pagination a {
                 color: black;
                 float: left;
