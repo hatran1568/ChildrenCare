@@ -162,7 +162,11 @@ public class DashboardController extends HttpServlet {
 
             sum += resDB.getRevenue(s);
         }
+        if(toSer!=0)
         tostar = tostar / toSer;
+        else{
+            tostar = 0;
+        }
         request.setAttribute("service", list);
         request.setAttribute("star", avg_feed);
         request.setAttribute("tostar", tostar);
