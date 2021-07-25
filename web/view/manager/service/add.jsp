@@ -130,45 +130,68 @@
                 </div>
             </section>
         </div>
+
+
+
         <br>
         <br>
         <!-- Start  -->
         <div class="container" style="height: max-content; min-height: 700px;">
-            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add New</div>
 
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add new</div>
             <form action="add" method="POST" enctype="multipart/form-data" >
                 <div class="form-group">
                     <label for="file">Thumbnail Link</label>
-                    <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                    <input onchange="loadFile(event)"  name="file" required type="file" accept="image/*,.jpg">
                     <img id="output"  >
+                    <div class="invalid-feedback">
+                        Please choose a picture.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full name</label>
-                    <input style="width: 100%" type="text" class="form-control" name="fullname" >
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" required>
+                    <div class="invalid-feedback">
+                        Please enter a name.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="originalprice">Original price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="originalprice" >
+                    <input style="width: 100%" type="number" class="form-control" name="originalprice" required >
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="saleprice">Sale price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="saleprice" >
+                    <input style="width: 100%" type="number" class="form-control" name="saleprice" required>
+                    <div class="invalid-feedback">
+                        Please enter price.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="categoryid">Category ID </label>
-                    <input style="width: 100%" type="number" class="form-control" name="categoryid" >
+                    <input style="width: 100%" type="number" class="form-control" name="categoryid" required><div class="invalid-feedback">
+                        Please enter category id.
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="description">Description  </label>
-                    <textarea style="width: 100%" type="text" class="form-control" name="description" ></textarea> 
+                    <textarea style="width: 100%" type="text" class="form-control" name="description" required ></textarea>
+                    <div class="invalid-feedback">
+                        Please enter description of this service or enter none
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="details">Details  </label>
-                    <textarea style="width: 100%" type="text" class="form-control" name="details"  ></textarea> 
+                    <textarea style="width: 100%" type="text" class="form-control" name="details"  required></textarea> 
+                    <div class="invalid-feedback">
+                        Please enter details of this service or enter none
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="featured">Featured</label>
-                    <select class="form-control" name="featured">
+                    <select class="form-control" name="featured" required>
                         <option value="True">True</option>
                         <option value="False">False</option>
                     </select>
@@ -176,7 +199,7 @@
                 </div>
                 <div class="form-group">
                     <label for="status">Status</label>
-                    <select class="form-control" name="status">
+                    <select class="form-control" name="status" required>
                         <option value="True">Active</option>
                         <option value="False">Inactive</option>
                     </select>
@@ -186,7 +209,11 @@
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input class="form-control" type="number" name="quantity" ">
+
+                    <input class="form-control" type="number" name="quantity" required>
+                    <div class="invalid-feedback">
+                        Please enter quantity
+                    </div>
                 </div>
 
                 <input type="reset" name="reset" value="Reset"> &nbsp;
@@ -360,5 +387,6 @@
                 }
             };
         </script>
+        
     </body>
 </html> 

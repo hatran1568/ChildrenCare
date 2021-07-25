@@ -141,6 +141,7 @@
         <br>
         <br>
         <!-- section -->
+        <div style="margin-left: 200px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>View</div>
         <div class="container">
             <div class="row">
                 <div class="col-12">
