@@ -157,7 +157,7 @@
                         </form>
                     </div> 
                     <div >
-                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
+                        <a href="list"><h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4></a>
                         <c:forEach items="${requestScope.categories}" var="c">
                             <div class="category"><a <c:if test="${c.id == requestScope.service.category.id}">class="chosen"</c:if> href="list?category=${c.id}">${c.name}</a></div>
                                 <hr>
