@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Edit service</title>
+        <title>Service list</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -132,7 +132,6 @@
         </div>
 
 
-
         <!-- End Banner -->
         <!-- section -->
         <br>
@@ -190,11 +189,11 @@
                     <label for="status">Status</label>
                     <div class="form-check">
                                     <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==true}">checked</c:if> id="True" value="True">
-                                    <label class="form-check-label" for="True">True</label>
+                                    <label class="form-check-label" for="True">Active</label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==false}">checked</c:if> id="False" value="False">
-                                    <label class="form-check-label" for="False">False</label>
+                                    <label class="form-check-label" for="False">Inactive</label>
                                 </div>
 
                     </div>
@@ -214,68 +213,77 @@
 
         <!-- Start Footer -->
 
-        <!-- End Footer -->
-
-
-
-
-
-        <!-- Start Footer -->
-
-        <!-- End Footer -->
-
-        <footer id="footer" class="site-footer">
-
-
-            <div class="container" >
+     <footer data-stellar-background-ratio="5">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-sm-6 col-xs-12">
-                        <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                            <a href="#">Giangtt</a>.
-                        </p>
+
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-thumb"> 
+                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Contact Info</h4>
+                            <p>Fusce at libero iaculis, venenatis augue quis, pharetra lorem. Curabitur ut dolor eu elit consequat ultricies.</p>
+
+                            <div class="contact-info">
+                                <p><i class="fa fa-phone"></i> 010-070-0170</p>
+                                <p><i class="fa fa-envelope-o"></i> <a href="#">info@company.com</a></p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
+                    <div class="col-md-4 col-sm-4"> 
                     </div>
+
+                    <div class="col-md-4 col-sm-4"> 
+                        <div class="footer-thumb">
+                            <div class="opening-hours">
+                                <h4 class="wow fadeInUp" data-wow-delay="0.4s">Opening Hours</h4>
+                                <p>Monday - Friday <span>06:00 AM - 10:00 PM</span></p>
+                                <p>Saturday <span>09:00 AM - 08:00 PM</span></p>
+                                <p>Sunday <span>Closed</span></p>
+                            </div> 
+
+                            <ul class="social-icon">
+                                <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+                                <li><a href="#" class="fa fa-twitter"></a></li>
+                                <li><a href="#" class="fa fa-instagram"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 text-align-center">
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </footer>
-        <!-- End Footer -->
 
-
-
-        <a href="#" id="scroll-to-top" class="hvr-radial-out"><i class="fa fa-angle-up"></i></a>
-
-        <!-- ALL JS FILES -->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <!-- ALL PLUGINS -->
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/jquery.pogo-slider.min.js"></script>
+        <!-- SCRIPTS -->
+        <script src="../../assets/js/jquery.js"></script>
+        <script src="../../assets/js/bootstrap.min.js"></script>
+        <script src="../../assets/js/jquery.sticky.js"></script>
+        <script src="../../assets/js/jquery.stellar.min.js"></script>
+        <script src="../../assets/js/wow.min.js"></script>
+        <script src="../../assets/js/smoothscroll.js"></script>
+        <script src="../../assets/js/owl.carousel.min.js"></script>
+        <script src="../../assets/js/custom-new.js"></script>
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <script src="assets/js/slider-index.js"></script>
-        <script src="assets/js/smoothscroll.js"></script>
-        <script src="assets/js/form-validator.min.js"></script>
-        <script src="assets/js/contact-form-script.js"></script>
-        <script src="assets/js/isotope.min.js"></script>
-        <script src="assets/js/images-loded.min.js"></script>
-        <script src="assets/js/custom.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $('ul.nav li.dropdown').hover(function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+        </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
                 <script>
-            $(document).ready(function () {
-                let note = "${sessionScope.alert}"
-                alert(note);
-
-            });
+                    $(document).ready(function () {
+                        let note = "${sessionScope.alert}"
+                        alert(note);
+                    });
                 </script>
                 <c:remove var="alert" scope="session" />
 
@@ -286,11 +294,80 @@
                 $(document).ready(function () {
                     let mess = "${sessionScope.mess}"
                     alert(mess);
-
                 });
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
+           
+        <script>
+                $(document).ready(function () {
+                    $("#customers").dataTable({
+                        retrieve: true,
+                        "searching": true,
+                        "paging": true,
+                        "sPaginationType": "full_numbers",
+                        "bJQueryUI": true,
+                        columns: [
+                            null,
+                            null,
+                            null,
+                            null,
+                           
+                            null,
+                            null,
+                            null,
+                            {data: "Featured", title: "Featured", className: "dt-filter"},
+                            {data: "Status", title: "Status", className: "dt-filter"},
+                            null,
+                            null,
+                            null,
+                        ],
+                        'columnDefs': [
+                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
+                            {'orderable': false, 'targets' : [4,5,6,7,8]},
+                        ],
+                        "bInfo" : false,
+                        "bLengthChange": false,
+                        "sDom": 'W<"clear">Tlfrtip',
+                        initComplete: function () {
+                            this.api().columns('.dt-filter').every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                        .appendTo($(column.header()))
+                                        .on('change', function () {
+                                            var val = $.fn.dataTable.util.escapeRegex(
+                                                    $(this).val()
+                                                    );
+                                            column
+                                                    .search(val ? '^' + val + '$' : '', true, false)
+                                                    .draw();
+                                        });
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>')
+                                });
+                            });
+                        }
+                    });
+                });
+            </script> 
+           <style>
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tfoot th {
+                border-bottom: 2px solid #111;
+                text-align: center;
+            }
+            table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                font-size: 16px;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+        </style> 
         <script>
             var loadFile = function (event) {
                 var output = document.getElementById('output');
@@ -301,6 +378,4 @@
             };
         </script>
     </body>
-</html>
-
-
+</html> 

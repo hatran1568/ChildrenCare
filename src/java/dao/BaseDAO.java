@@ -16,9 +16,9 @@ public class BaseDAO {
     public static Connection getConnection(){
          try {
             if (connection == null) {
-                String user = "PieRow";
-                String pass = "38 Ly Nam De";
-                String url = "jdbc:mysql://localhost:3000/swp?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
+                String user = "root";
+                String pass = "quynhtrang2001";
+                String url = "jdbc:mysql://localhost:3306/swp?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true";
                 Class.forName("com.mysql.jdbc.Driver");
                 connection = DriverManager.getConnection(url, user, pass);
             }
