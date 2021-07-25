@@ -135,20 +135,29 @@
 
                     <input type="text" value="${requestScope.post.id}" name="pid" hidden>
                     <div class="row">
-                        <div class="col-md-3">Thumbnail</div>
-                        <div class="col-md-9">
+                        <div class="col-md-2 title" >Title</div>
+                        <div class="col-md-10 form-group">
+                            <input class="form-control"  value="${requestScope.post.title}" style="width: 100%; font-weight: bold; font-size: 16px;" type="text" name="title" required>
+                            <div class="invalid-feedback">
+                                Post title can't be blank!
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row" >
+                        <div class="col-md-2 title">Thumbnail</div>
+                        <div class="col-md-10">
 
-                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px; margin-bottom: 30px"><br>
+                            <img src="../../${requestScope.post.thumbnailLink}" id="output" style="max-width: 500px; margin-bottom: 30px; margin-top: 15px; border: solid gray 1px;" ><br>
                             <input class="form-control-file" onchange="loadFile(event)" id="file" name="file" type="file" accept="image/*,.jpg">
                             <div style="display: none; color: red" id="alertfile">
                                 File size exceeded 10MB!
                             </div>
                         </div>
                     </div>
-                    <hr />
                     <div class="row">
-                        <div class="col-md-3">Category</div>
-                        <div class="col-md-9">
+                        <div class="col-md-2 title" >Category</div>
+                        <div class="col-md-10">
                             <select class="form-control"  name="postCategory">
                                 <c:forEach items="${requestScope.categories}" var="c">
                                     <option value="${c.id}" <c:if test="${c.id == requestScope.post.category.id}">selected</c:if>>${c.name}</option>
@@ -156,44 +165,28 @@
                             </select>
                         </div>
                     </div> 
-                    <hr />
+                    
                     <div class="row">
-                        <div class="col-md-3">Title</div>
-                        <div class="col-md-9 form-group">
-                            <input class="form-control"  value="${requestScope.post.title}" style="width: 100%" type="text" name="title" required>
-                            <div class="invalid-feedback">
-                                Post title can't be blank!
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Description</div>
-                        <div class="col-md-9">
+                        <div class="col-md-2 title" >Description</div>
+                        <div class="col-md-10">
                             <textarea class="form-control" style="width: 100%" type="text" name="description">${requestScope.post.description}</textarea>
                         </div>
                     </div>
-                    <hr />
                     <div class="row">
-                        <div class="col-md-3">Content</div>
-                        <div class="col-md-9">
-                            <textarea class="form-control" style="width: 100%; height: 300px" type="text" name="content">${requestScope.post.content}</textarea>
+                        <div class="col-md-2 title" >Content</div>
+                        <div class="col-md-10" style="margin-top: 17px;">
+                            <textarea  class="form-control" style=" width: 100%; height: 300px" type="text" name="content">${requestScope.post.content}</textarea>
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-3">Featured</div>
-                        <div class="col-md-9">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="featured"  value="true" <c:if test="${requestScope.post.featured eq true}">checked</c:if>>True
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="featured"  value="false" <c:if test="${requestScope.post.featured eq false}">checked</c:if>>False
-                                </div>
+                    <div class="row" style="margin-top: 17px;">
+                        <div class="col-md-2">Featured</div>
+                            <div class="col-md-10" style="margin-top: 10px;">
+                                <div class="form-check form-switch" >
+                                    <input style="width: 50px; height: 25px;" class="form-check-input" type="checkbox" name="featured" <c:if test="${requestScope.post.featured}">checked=""</c:if>>
+                                </div>  
                             </div>
-                        </div>
-                        <hr />
+                        
+                    </div>
                         <input type="text" value="" id="status" name="status" hidden>
                         <input id="submit_handle" type="submit" style="display: none">
                         <button type="button" class="btn btn-primary pull-right" onclick="saveDraftPost()" id="saveDraft">Save draft</button>
@@ -218,28 +211,6 @@
                         </div>
 
                         <div class="col-md-4 col-sm-4"> 
-                            <!--                        <div class="footer-thumb"> 
-                                                        <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                                                        <div class="latest-stories">
-                                                            <div class="stories-image">
-                                                                <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                            </div>
-                                                            <div class="stories-info">
-                                                                <a href="#"><h5>Amazing Technology</h5></a>
-                                                                <span>March 08, 2018</span>
-                                                            </div>
-                                                        </div>
-                            
-                                                        <div class="latest-stories">
-                                                            <div class="stories-image">
-                                                                <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                            </div>
-                                                            <div class="stories-info">
-                                                                <a href="#"><h5>New Healing Process</h5></a>
-                                                                <span>February 20, 2018</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                         </div>
 
                         <div class="col-md-4 col-sm-4"> 
@@ -359,6 +330,17 @@
             }
             #saveDraft{
                 margin: 20px;
+            }
+            .col-md-2{
+                margin-top: 10px;
+                font-weight: bold; 
+                font-size: 16px; 
+                color: #0064af;
+            }
+            .roư{
+                width: 80%;
+                margin: auto;
+                margin-bottom: 15px;
             }
         </style>
     </body>

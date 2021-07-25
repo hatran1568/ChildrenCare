@@ -169,7 +169,7 @@
             <div class="main-content">
                 <div class="container-fluid">
                     <br><br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+                    <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../dashboard/view">Dashboard</a><i style="margin : 5px;"  class="fas fa-angle-right"></i><a href="../setting/list">Settings List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit a Setting</div>
                             <form action="../../admin/setting/update" method="POST" novalidate class="needs-validation">
                                 <br><div class="form-group">
                                     <div for="id">Setting ID</div>

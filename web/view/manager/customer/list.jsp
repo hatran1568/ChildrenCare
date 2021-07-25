@@ -135,7 +135,7 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 0px; margin-bottom: 50px">
-            <h2 style="text-align: center; margin: 3%; color: #0064af;">Customers List</h2>
+            <h2 style="text-align: center; margin: 3%; color: #0064af;">Customers</h2>
             <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new customer</button>
             <table id="customers" class="table" style="width:100%;">
                 <thead>
@@ -337,6 +337,9 @@
             }
             .table td{
                 text-align: left;
+            }
+            table.dataTable {
+                margin-bottom: 30px;
             }
         </style> 
     </body>
