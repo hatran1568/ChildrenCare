@@ -1,4 +1,4 @@
-DROP DATABASE IF EXIST swp;
+DROP DATABASE IF EXISTS swp;
 Create database swp;
 use swp;
 
