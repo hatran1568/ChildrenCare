@@ -73,21 +73,21 @@
                     <!-- MENU LINKS -->
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
-                            <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
+                            <li><a href="<%=request.getContextPath()%>/home" class="smoothScroll dropdown">Home</a></li>
+                            <li><a href="<%=request.getContextPath()%>/service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="<%=request.getContextPath()%>/blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
-                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="login">Login</a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="register">Sign up</a></li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="<%=request.getContextPath()%>/cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="<%=request.getContextPath()%>/login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="<%=request.getContextPath()%>/register">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
@@ -95,30 +95,30 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/feedback/list">Feedbacks</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/customer/list">Customers</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/reservation/list">Reservations</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/feedback/list">Feedbacks</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/post/list">Posts</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/slider/list">Sliders</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/service/list">Services</a></p>
                                         </div>
                                     </li>
                                     <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                        <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        <li class="dropdown"><a href="<%=request.getContextPath()%>/admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                     <li class="dropdown">
-                                    <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                     </li>
                                 </c:if>
-                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="<%=request.getContextPath()%>/cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
                                     <img class="avatar" src="<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="<%=request.getContextPath()%>/customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>

@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Feedback</title>
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -224,7 +224,11 @@
                     </div>
                     <div class="four wide field">
                         <label></label>
+<<<<<<< HEAD
+                        <div style="font-size: 14px;" onclick="submit()" class="ui button" tabindex="0">Save</div>  
+=======
                         <div onclick="submit()" style="font-size: 16px;" class="ui button" tabindex="0">Save</div>  
+>>>>>>> 8b5a58b6f2bae36a474eb582b978de430a244524
                     </div>
                 </div>
 
@@ -277,7 +281,7 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 text-align-center">
-                        <div class="angle-up-btn"> 
+                        <div  class="angle-up-btn"> 
                             <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
                     </div>

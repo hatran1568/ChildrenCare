@@ -153,7 +153,7 @@
                                         </div>
                                     </li>
                                     <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                        <li class="dropdown"><a href="../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        <li class="dropdown"><a href="../../admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
@@ -184,7 +184,7 @@
         <section>
             <div class="container">
 
-                <h2 style="text-align: center; margin: 3%; color: #0064af;">Reservations List</h2>
+                <h2 style="text-align: center; margin: 3%; color: #0064af;">Reservations</h2>
                 <table id="reservations">
 
                     <thead>
@@ -453,7 +453,9 @@
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
             }
-            
+            table.dataTable {
+                margin-bottom: 30px;
+            }
 
         </style>
 

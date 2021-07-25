@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Slider</title>
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -141,7 +141,7 @@
             <div style="text-align: center">
                 <img style="max-width: 200px" id="slider-image" src="../../${slider.imageLink}">
             </div>
-            <table style="width: 100%">
+            <table  style="width: 100%">
                 <tr>
                     <td>Title</td>
                     <td>${slider.title}</td>
@@ -162,7 +162,7 @@
                 </tr>
             </table>
                 
-                        <button id="edit-btn" class="btn pull-right" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
+                        <button style="float : right" id="edit-btn" class="btn btn-primary" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
         </div>
         
 
@@ -364,6 +364,9 @@
             .icon-change{
 
                 cursor: pointer;
+            }
+            td{
+                text-align: left;
             }
         </style>
 

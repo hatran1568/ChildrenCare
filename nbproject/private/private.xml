@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/UserController.java</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/dao/BaseDAO.java</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/BlogController.java</file>
@@ -11,6 +12,31 @@
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/web/view/admin/user/add.jsp</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/web/view/admin/settings/edit.jsp</file>
             <file>file:/C:/Users/ASUS/Desktop/Study%20Stuffs/Kỳ%205%20-%20Project/NewNewCode/src/java/controller/UserProfileController.java</file>
+=======
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/reservationContact.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/myReservation.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReservationDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/reservationCompletion.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/reservationInformation.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/add.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/customer/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/feedback/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/bean/Reservation.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/DashboardController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/MyReservationController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/SliderController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/filter/Authorization.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/edit.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/ManagerPostController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/feedback/feedback.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/dashboard.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/post/edit.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/post/details.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/newlist.jsp</file>
+>>>>>>> a9f89475df5fe331a911c5aeaccfa4109979114a
         </group>
     </open-files>
 </project-private>

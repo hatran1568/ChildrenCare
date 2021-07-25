@@ -5,8 +5,8 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
-        
+        <title>Slider</title>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="description" content="">
@@ -14,7 +14,7 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -138,23 +138,29 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="height: max-content; min-height: 700px;">
-            <form action="update" method="POST" enctype="multipart/form-data">
+            <form novalidate="true" class="needs-validation" action="update" method="POST" enctype="multipart/form-data">
 
                 <table style="width: 100%">
                     <tr>
                         <td>Thumnail</td>
                         <td>
-                            <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
+                            <input  onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <img style="max-height: 200px" id="output" src="../../${requestScope.slider.imageLink}" > 
+                            
                         </td>
                     </tr>
                     <tr>
                         <td>Title</td>
-                        <td><input value="${requestScope.slider.title}" style="width: 100%" type="text" name="title"></td>
+                        <td><input required="true" value="${requestScope.slider.title}" style="width: 100%" type="text" name="title"> <div class="invalid-feedback">
+                                Please enter title.
+                            </div></td>
                     </tr>
                     <tr>
                         <td>Backlink</td>
-                        <td><input value="${requestScope.slider.backlink}" style="width: 100%" type="text" name="backlink"></td>
+                        <td><input required="true" value="${requestScope.slider.backlink}" style="width: 100%" type="text" name="backlink">
+                            <div class="invalid-feedback">
+                                Please enter your name.
+                            </div></td>
                     </tr>
                     <tr>
                         <td>Status</td>
@@ -174,8 +180,11 @@
                     </tr>
                     <tr>
                         <td>Notes</td>
-                         <td><textarea value="${requestScope.slider.notes}" name="note"  cols="150" rows="15">${requestScope.slider.notes}</textarea></td>
-                       
+                        <td><textarea required="true" value="${requestScope.slider.notes}" name="note"  cols="150" rows="15">${requestScope.slider.notes}</textarea>
+                            <div class="invalid-feedback">
+                                Please enter your name.
+                            </div></td>
+
                     </tr>
                 </table>
                 <input type="text" hidden="true" value="${requestScope.slider.id}" name="rid">
@@ -209,28 +218,28 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-<!--                        <div class="footer-thumb"> 
-                            <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>Amazing Technology</h5></a>
-                                    <span>March 08, 2018</span>
-                                </div>
-                            </div>
-
-                            <div class="latest-stories">
-                                <div class="stories-image">
-                                    <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                </div>
-                                <div class="stories-info">
-                                    <a href="#"><h5>New Healing Process</h5></a>
-                                    <span>February 20, 2018</span>
-                                </div>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="footer-thumb"> 
+                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>Amazing Technology</h5></a>
+                                                            <span>March 08, 2018</span>
+                                                        </div>
+                                                    </div>
+                        
+                                                    <div class="latest-stories">
+                                                        <div class="stories-image">
+                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
+                                                        </div>
+                                                        <div class="stories-info">
+                                                            <a href="#"><h5>New Healing Process</h5></a>
+                                                            <span>February 20, 2018</span>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -250,10 +259,10 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 text-align-center">
-                            <div class="angle-up-btn"> 
-                                <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
-                            </div>
+                        <div class="angle-up-btn"> 
+                            <a href="#top" class="smoothScroll wow fadeInUp" data-wow-delay="1.2s"><i class="fa fa-angle-up"></i></a>
                         </div>
+                    </div>
 
 
                 </div>
@@ -269,44 +278,48 @@
         <script src="../../assets/js/smoothscroll.js"></script>
         <script src="../../assets/js/owl.carousel.min.js"></script>
         <script src="../../assets/js/custom-new.js"></script>
-     <script>
-                var loadFile = function (event) {
-                    var output = document.getElementById('output');
-                    output.src = URL.createObjectURL(event.target.files[0]);
-                    output.onload = function () {
-                        URL.revokeObjectURL(output.src) // free memory
-                    }
-                };
-            </script>
+        <script>
+                                var loadFile = function (event) {
+                                    var output = document.getElementById('output');
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                    output.onload = function () {
+                                        URL.revokeObjectURL(output.src) // free memory
+                                    }
+                                };
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-                            $('ul.nav li.dropdown').hover(function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-                            }, function () {
-                                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-                            });
-        </script>
-        <c:if test="${empty sessionScope.mess}">
-            <c:if test="${ not empty sessionScope.alert}">
-                <script>
-                    $(document).ready(function () {
-                        let note = "${sessionScope.alert}"
-                        alert(note);
-                    });
-                </script>
-                <c:remove var="alert" scope="session" />
+                                $('ul.nav li.dropdown').hover(function () {
+                                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                                }, function () {
+                                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                                });
+                                $(document).ready(function () {
+                                    $("#male").prop("checked", true);
+                                });
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+                                (function () {
+                                    'use strict'
 
-            </c:if>
-        </c:if>
-        <c:if test="${ not empty sessionScope.mess}">
-            <script>
-                $(document).ready(function () {
-                    let mess = "${sessionScope.mess}"
-                    alert(mess);
-                });
-            </script>
-            <c:remove var="mess" scope="session" />
-        </c:if>
+                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                    var forms = document.querySelectorAll('.needs-validation')
+
+                                    // Loop over them and prevent submission
+                                    Array.prototype.slice.call(forms)
+                                            .forEach(function (form) {
+                                                form.addEventListener('submit', function (event) {
+                                                    if (!form.checkValidity()) {
+                                                        event.preventDefault()
+                                                        event.stopPropagation()
+                                                    }
+
+                                                    form.classList.add('was-validated')
+                                                }, false)
+                                            })
+                                })()
+        </script>
+
         <style>
 
             .pagination{
@@ -316,13 +329,13 @@
                 left: 45%;
             }
             table tr td:first-child{
-                    font-weight: bold;
-                    width: 30%;
-                }
+                font-weight: bold;
+                width: 30%;
+            }
 
-                table td{
-                    padding: 10px;
-                }
+            table td{
+                padding: 10px;
+            }
             .pagination a {
                 color: black;
                 float: left;
