@@ -169,7 +169,7 @@
                 <div class="container-fluid" style="margin-left: 2%; margin-right: 2%">
                     <br>
                     <br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
+                    <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../dashboard/view">Dashboard</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Settings List</div>
 
                             <div>
                                 <button onclick="window.location.href = 'new'" style="margin: 10px; color: #d4d4d4; background-color: #333333; border-radius: 10px; width: 15%; font-size: 15px">Add New Settings</button>
