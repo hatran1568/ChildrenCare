@@ -136,7 +136,7 @@
 
 
         <div class="container" style="margin-top: 50px; margin-bottom: 50px">
-            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Customer list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Customer List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">

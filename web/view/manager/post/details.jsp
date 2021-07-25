@@ -136,7 +136,7 @@
         <!-- section -->
         <div class="section" id="main-body">
             <div class="container" style="min-height: 600px">
-                                <div style="margin: 30px 0px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Details</div>
+                                <div style="margin: 30px 0px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Post List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Details</div>
 
                 <div class="col-md-10" style="margin-left: 8.33%; margin-right: 8.33%">
                     <div class="row">

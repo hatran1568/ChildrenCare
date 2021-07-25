@@ -140,8 +140,8 @@
         <br>
         <!-- Start  -->
 
-        <div class="container" style="height: max-content; min-height: 700px;">
-            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service list</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
+        <div class="container" style="height: max-content; min-height: 700px; margin-top: 40px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Edit</div>
             <form action="edit" method="POST" enctype="multipart/form-data">
                 <input type="text" name="id" value="${requestScope.service.id}" hidden>
                 <div class="form-group">
