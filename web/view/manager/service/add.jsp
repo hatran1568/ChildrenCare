@@ -14,7 +14,7 @@
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script src="https://kit.fontawesome.com/561d0dd876.js" crossorigin="anonymous"></script>
-        
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="../../assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
         <link rel ="stylesheet" href="../../assets/css/bootstrap-iso.css">
@@ -27,7 +27,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
-        
+
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -36,7 +36,7 @@
 
 
         <!-- HEADER -->
-        
+
         <header>
             <div class="container">
                 <div class="row">
@@ -134,11 +134,13 @@
         <br>
         <!-- Start  -->
         <div class="container" style="height: max-content; min-height: 700px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Service List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add New</div>
+
             <form action="add" method="POST" enctype="multipart/form-data" >
                 <div class="form-group">
                     <label for="file">Thumbnail Link</label>
                     <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
-                            <img id="output"  >
+                    <img id="output"  >
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full name</label>
@@ -171,7 +173,7 @@
                         <option value="False">False</option>
                     </select>
 
-                    </div>
+                </div>
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" name="status">
@@ -179,22 +181,22 @@
                         <option value="False">Inactive</option>
                     </select>
 
-                    </div>
-                    
-                    
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input class="form-control" type="number" name="quantity" ">
-                    </div>
-                    
-                            <input type="reset" name="reset" value="Reset"> &nbsp;
-                            <input type="submit" name="submit" value="Add">
-                            
+                </div>
+
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input class="form-control" type="number" name="quantity" ">
+                </div>
+
+                <input type="reset" name="reset" value="Reset"> &nbsp;
+                <input type="submit" name="submit" value="Add">
+
             </form>
         </div>
 
         <!-- Start Footer -->
-            <footer data-stellar-background-ratio="5">
+        <footer data-stellar-background-ratio="5">
             <div class="container">
                 <div class="row">
 
@@ -252,11 +254,11 @@
         <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
-            $('ul.nav li.dropdown').hover(function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-            }, function () {
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-            });
+                        $('ul.nav li.dropdown').hover(function () {
+                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+                        }, function () {
+                            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+                        });
         </script>
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
@@ -279,59 +281,59 @@
             </script>
             <c:remove var="mess" scope="session" />
         </c:if>
-           
+
         <script>
-                $(document).ready(function () {
-                    $("#customers").dataTable({
-                        retrieve: true,
-                        "searching": true,
-                        "paging": true,
-                        "sPaginationType": "full_numbers",
-                        "bJQueryUI": true,
-                        columns: [
-                            null,
-                            null,
-                            null,
-                            null,
-                           
-                            null,
-                            null,
-                            null,
-                            {data: "Featured", title: "Featured", className: "dt-filter"},
-                            {data: "Status", title: "Status", className: "dt-filter"},
-                            null,
-                            null,
-                            null,
-                        ],
-                        'columnDefs': [
-                            {'className': 'text-center', 'targets': [0,1,2,3,4,5,6,7]},
-                            {'orderable': false, 'targets' : [4,5,6,7,8]},
-                        ],
-                        "bInfo" : false,
-                        "bLengthChange": false,
-                        "sDom": 'W<"clear">Tlfrtip',
-                        initComplete: function () {
-                            this.api().columns('.dt-filter').every(function () {
-                                var column = this;
-                                var select = $('<select><option value=""></option></select>')
-                                        .appendTo($(column.header()))
-                                        .on('change', function () {
-                                            var val = $.fn.dataTable.util.escapeRegex(
-                                                    $(this).val()
-                                                    );
-                                            column
-                                                    .search(val ? '^' + val + '$' : '', true, false)
-                                                    .draw();
-                                        });
-                                column.data().unique().sort().each(function (d, j) {
-                                    select.append('<option value="' + d + '">' + d + '</option>')
-                                });
+            $(document).ready(function () {
+                $("#customers").dataTable({
+                    retrieve: true,
+                    "searching": true,
+                    "paging": true,
+                    "sPaginationType": "full_numbers",
+                    "bJQueryUI": true,
+                    columns: [
+                        null,
+                        null,
+                        null,
+                        null,
+
+                        null,
+                        null,
+                        null,
+                        {data: "Featured", title: "Featured", className: "dt-filter"},
+                        {data: "Status", title: "Status", className: "dt-filter"},
+                        null,
+                        null,
+                        null,
+                    ],
+                    'columnDefs': [
+                        {'className': 'text-center', 'targets': [0, 1, 2, 3, 4, 5, 6, 7]},
+                        {'orderable': false, 'targets': [4, 5, 6, 7, 8]},
+                    ],
+                    "bInfo": false,
+                    "bLengthChange": false,
+                    "sDom": 'W<"clear">Tlfrtip',
+                    initComplete: function () {
+                        this.api().columns('.dt-filter').every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                    .appendTo($(column.header()))
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                                $(this).val()
+                                                );
+                                        column
+                                                .search(val ? '^' + val + '$' : '', true, false)
+                                                .draw();
+                                    });
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
                             });
-                        }
-                    });
+                        });
+                    }
                 });
-            </script> 
-           <style>
+            });
+        </script> 
+        <style>
             tfoot {
                 display: table-header-group;
             }

@@ -138,7 +138,9 @@
 
 
         <!-- TEAM -->
-        <div class="container" style="height: max-content; min-height: 700px;">
+        <div class="container" style="height: max-content; min-height: 700px;margin-top: 40px;">
+            <div style="margin-bottom: 30px"><a href="../../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="list">Slider List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add New</div>
+
             <form class="needs-validation" novalidate action="insert" method="POST" enctype="multipart/form-data">
 
                 <table style="width: 100%">
