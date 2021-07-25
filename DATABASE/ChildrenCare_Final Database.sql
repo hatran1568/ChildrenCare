@@ -1,3 +1,7 @@
+Drop database swp;
+Create database swp;
+use swp;
+
 /*
  Navicat Premium Data Transfer
 
@@ -11,7 +15,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 25/07/2021 23:22:34
+ Date: 25/07/2021 23:32:12
 */
 
 SET NAMES utf8mb4;
@@ -162,6 +166,15 @@ CREATE TABLE `medical_examination`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of medical_examination
+-- ----------------------------
+INSERT INTO `medical_examination` VALUES (18, 4, 16, 'Three time a day');
+INSERT INTO `medical_examination` VALUES (18, 4, 17, ' 3 times a day');
+INSERT INTO `medical_examination` VALUES (18, 4, 18, 'Should come back to hospital');
+INSERT INTO `medical_examination` VALUES (18, 11, 19, '3 times a day');
+INSERT INTO `medical_examination` VALUES (18, 11, 20, '2 times a day');
+
+-- ----------------------------
 -- Table structure for post
 -- ----------------------------
 DROP TABLE IF EXISTS `post`;
@@ -218,7 +231,11 @@ CREATE TABLE `receiver`  (
 -- ----------------------------
 -- Records of receiver
 -- ----------------------------
-INSERT INTO `receiver` VALUES (16, 1, 'Giang', 1, NULL, 'Vietnam', 'giangtthe153299@fpt.edu.vn');
+INSERT INTO `receiver` VALUES (16, 1, 'Giang', 1, '0977659677', 'Vietnam', 'giangtthe153299@fpt.edu.vn');
+INSERT INTO `receiver` VALUES (17, -1, 'trang', 1, '0977659677', 'Viet nam', 'tranglvqhe153785@fpt.edu.vn');
+INSERT INTO `receiver` VALUES (18, -1, 'Ha', 1, '0977659677', 'Viet Nam', 'hattnhe153299@fpt.edu.vn');
+INSERT INTO `receiver` VALUES (19, -1, 'Bo Yates', 0, '0977659677', 'Viet Nam', 'Fusce@loremipsum.ca');
+INSERT INTO `receiver` VALUES (20, -1, 'Ngoc anh', 1, '0977659677', 'Viet Nam', 'anhntnhe151378@fpt.edu.vn');
 
 -- ----------------------------
 -- Table structure for reservation
@@ -244,7 +261,7 @@ CREATE TABLE `reservation`  (
 -- ----------------------------
 -- Records of reservation
 -- ----------------------------
-INSERT INTO `reservation` VALUES (18, 1, '2021-07-25', 22, 4, 16, '2021-07-29 00:00:00');
+INSERT INTO `reservation` VALUES (18, 1, '2021-07-25', 27, 4, 16, '2021-07-29 00:00:00');
 INSERT INTO `reservation` VALUES (50, 1, '2021-07-30', 21, 4, 16, '2021-07-29 00:00:00');
 INSERT INTO `reservation` VALUES (51, 2, '2021-07-16', 20, 4, 16, '2021-07-29 00:00:00');
 INSERT INTO `reservation` VALUES (52, 2, '2021-07-17', 22, 4, 16, '2021-07-30 00:00:00');
