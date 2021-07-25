@@ -191,11 +191,11 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <div class="form-check">
-                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==true}">checked</c:if> id="True" value="True">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.status==true}">checked</c:if> id="True" value="True">
                                     <label class="form-check-label" for="True">Active</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==false}">checked</c:if> id="False" value="False">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.status==false}">checked</c:if> id="False" value="False">
                                     <label class="form-check-label" for="False">Inactive</label>
                                 </div>
 
