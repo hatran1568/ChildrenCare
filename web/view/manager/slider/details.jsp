@@ -162,7 +162,7 @@
                 </tr>
             </table>
                 
-                        <button id="edit-btn" class="btn pull-right" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
+                        <button style="float : right" id="edit-btn" class="btn btn-primary" onclick="window.location.href='edit?id=${requestScope.slider.id}'">Edit</button>
         </div>
         
 
