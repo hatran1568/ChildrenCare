@@ -16,6 +16,7 @@ import bean.Post;
 import bean.PostCategory;
 import bean.Role;
 import bean.Setting;
+import static dao.BaseDAO.connection;
 
 /**
  *
@@ -103,7 +104,8 @@ public class PostDAO extends BaseDAO {
         }
     }
 
-    public void addPost(Post p) {
+    public int addPost(Post p) {
+        int id = 0;
         try {
             String sql = "INSERT INTO `swp`.`post`\n"
                     + "(\n"
@@ -127,6 +129,7 @@ public class PostDAO extends BaseDAO {
                     + "?,\n"
                     + "?,\n"
                     + "?);";
+                    
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, p.getContent());
@@ -139,9 +142,14 @@ public class PostDAO extends BaseDAO {
             stm.setString(8, p.getTitle());
 
             stm.executeUpdate();
+            
+            stm = connection.prepareStatement("select last_insert_id() as id;");
+            ResultSet rs = stm.executeQuery();
+            if(rs.next()) return rs.getInt("id");
         } catch (SQLException ex) {
             Logger.getLogger(PostDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return id;
     }
 
     public ArrayList<PostCategory> getCategories() {

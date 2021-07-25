@@ -133,7 +133,7 @@ public class ManagerPostController extends HttpServlet {
         request.setAttribute("simpleDateFormat", simpleDateFormat);
         request.setAttribute("categories", categories);
         request.setAttribute("posts", posts);
-        request.getRequestDispatcher("../../view/manager/post/list2.jsp").forward(request, response);
+        request.getRequestDispatcher("../../view/manager/post/list.jsp").forward(request, response);
     }
 
     private void showPostDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -163,7 +163,7 @@ public class ManagerPostController extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String content = request.getParameter("content");
-        boolean featured = request.getParameter("featured").equals("true");
+        boolean featured = Boolean.valueOf( request.getParameter("featured"));
         Setting status = new Setting();
         status.setId(Integer.parseInt(request.getParameter("status")));
         
@@ -226,44 +226,59 @@ public class ManagerPostController extends HttpServlet {
         request.getRequestDispatcher("../../view/manager/post/add.jsp").forward(request, response);
     }
     private void addPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Part part = request.getPart("file");
-        String fileName = extractFileName(part);
-        // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-
-        part.write("/" + File.separator + fileName);
+        Post p = new Post();
         int categoryID = Integer.parseInt(request.getParameter("postCategory"));
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String content = request.getParameter("content");
-        boolean featured = request.getParameter("featured").equals("true");
-        boolean status = request.getParameter("status").equals("true");
-
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        
-        SettingDAO settingDB = new SettingDAO();
-        Setting s = settingDB.getSetting(categoryID);
+        boolean featured = Boolean.valueOf( request.getParameter("featured"));
+        Setting status = new Setting();
+        status.setId(Integer.parseInt(request.getParameter("status")));
         
         PostDAO postDB = new PostDAO();
 
-        Post p = new Post();
-        p.setThumbnailLink("assets/images/" + fileName);
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
+        // refines the fileName in case it is an absolute path
+        fileName = new File(fileName).getName();
         p.setTitle(title);
-        
         PostCategory pc = new PostCategory();
         pc.setId(categoryID);
-        pc.setName(s.getName());
         p.setCategory(pc);
-        
         p.setDescription(description);
-        p.setContent(content);
-        //p.setStatus(status);
+        p.setStatus(status);
         p.setFeatured(featured);
-        p.setAuthor(user);
-        postDB.addPost(p);
-        Post newpost = postDB.getLatestPost();
-        response.sendRedirect("details?pid="+newpost.getId());
+        User a = (User) request.getSession().getAttribute("user");
+        p.setAuthor(a);
+        p.setContent(content);
+        
+        int id = 0;
+        if (fileName.trim().length()==0){
+            p.setThumbnailLink(fileName);
+            id = postDB.addPost(p);
+        }else{
+            inputStream = request.getPart(part.getName()).getInputStream();
+        
+            // refines the fileName in case it is an absolute path
+            int i = inputStream.available();
+            byte[] b = new byte[i];
+            inputStream.read(b);
+            fileName = extractFileName(part);
+
+            String pathName = getFolderUpload()+"\\" + fileName;
+            System.out.println(fileName);
+            fileOutputStream  = new FileOutputStream(pathName);
+            fileOutputStream.write(b);
+            inputStream.close();
+            fileOutputStream.close();
+            p.setThumbnailLink("assets/images/"+fileName);
+            id = postDB.addPost(p);
+        }
+        
+        
+        response.sendRedirect("details?pid=" + id);
     }
 
     private String extractFileName(Part part) {

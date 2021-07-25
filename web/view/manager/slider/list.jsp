@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Slider</title>
+        <title>Children Care</title>
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -23,13 +23,7 @@
         <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="../../assets/css/animate.css">
-        <link rel="stylesheet" href="../../assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="../../assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- MAIN CSS -->
+                <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../assets/css/tooplate-style.css">
         <link rel="stylesheet" href="../../assets/css/custom.css" />
 
@@ -141,23 +135,23 @@
         <!-- section -->
         <div class="container" style="height: max-content; vertical-align: middle; min-height: 600px; margin-top: 80px">
                <button type="button" class="btn btn-primary pull-left" onclick="window.location.href='add'">Add new Slider</button>
-            <table id="customers" class="table" style="width:100%; margin-bottom: 25px;">
+            <table id="customers" class="table" style="width:100%;">
                 <thead>
                     <tr>
-                        <td>Image</td>
-                        <td>ID</td>
-                        <td>Title</td>
-                        <td>BackLink</td>
-                        <td >Status</td>
+                        <th>Image</th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>BackLink</th>
+                        <th >Status</th>
                       
-                        <td>Details</td>
+                        <th>Details</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${requestScope.all}" var="list">
                         <tr>
-                            <td > <img style="min-height: 80px; max-height: 80px; width: 100px;" src="../../${list.imageLink}"></td>
+                            <td > <img style="min-height: 80px; max-height: 80px; max-width: 100px;" src="../../${list.imageLink}"></td>
                             <td>${list.id}</td>
                             <td>${list.title}</td>
                             <td>${list.backlink}</td>
@@ -237,11 +231,27 @@
                 $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
             });
         </script>
-        <style>
-            .dataTables_paginate {
-                margin-bottom: 25px;
-            }
-        </style>
+        <c:if test="${empty sessionScope.mess}">
+            <c:if test="${ not empty sessionScope.alert}">
+                <script>
+                    $(document).ready(function () {
+                        let note = "${sessionScope.alert}"
+                        alert(note);
+                    });
+                </script>
+                <c:remove var="alert" scope="session" />
+
+            </c:if>
+        </c:if>
+        <c:if test="${ not empty sessionScope.mess}">
+            <script>
+                $(document).ready(function () {
+                    let mess = "${sessionScope.mess}"
+                    alert(mess);
+                });
+            </script>
+            <c:remove var="mess" scope="session" />
+        </c:if>
         <script>
                 $(document).ready(function () {
                     $("#customers").dataTable({
@@ -289,6 +299,58 @@
                     });
                 });
             </script> 
+            <style>
+table.dataTable td {
+                font-size: 15px;
+            }
+            table.dataTable th {
+                
+                font-size: 16px;
+            }
             
+            tfoot {
+                display: table-header-group;
+            }
+            table.dataTable tbody tr:hover {
+                background-color: #c7c7c7;
+            }
+            
+            tbody, td, tfoot, th, thead, tr {
+                border-style: hidden;
+            }
+             thead,tfoot{
+                border-bottom: 2px solid black;
+            }
+            
+            .table thead {
+                /*border-bottom: 2px solid black;*/
+                font-weight: bold;
+                margin: 0px auto;
+                
+            }
+            .table thead tr th{
+                border-bottom: 1px solid black;
+            }
+            .table tfoot tr td{
+                border-bottom: 1px solid black;
+            }
+            .table thead select{
+                font-weight: normal;
+                text-align: center;
+            }
+            table.dataTable td{
+                text-align: left;
+            }
+            table.dataTable {
+                margin-bottom: 30px;
+            }
+            th{
+                text-align: left;
+            }
+            .table img{
+                max-width: 100px;
+            }
+            
+            </style>
     </body>
 </html> 
