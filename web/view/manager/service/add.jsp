@@ -171,7 +171,13 @@
                 </div>
                 <div class="form-group">
                     <label for="categoryid">Category ID </label>
-                    <input style="width: 100%" type="number" class="form-control" name="categoryid" required><div class="invalid-feedback">
+                    
+                    <select class="form-control"  name="categoryid">
+                                <c:forEach items="${requestScope.categories}" var="c">
+                                    <option value="${c.id}">${c.name}</option>
+                                </c:forEach>
+                            </select>
+                    <div class="invalid-feedback">
                         Please enter category id.
                     </div>
                 </div>
