@@ -11,7 +11,9 @@ import bean.Setting;
 import dao.ServiceDAO;
 import dao.SettingDAO;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -30,7 +32,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 50, // 50MB
-        maxRequestSize = 1024 * 1024 * 50, location = "E:\\SU2021\\SWP391\\images")
+        maxRequestSize = 1024 * 1024 * 50, location = "swp\\") // 50MB
 public class ManagerServiceController extends HttpServlet {
 
     /**
@@ -165,12 +167,28 @@ public class ManagerServiceController extends HttpServlet {
     protected void addServiceList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Part part = request.getPart("file");
+       Part part = request.getPart("file");
+        
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
         String fileName = extractFileName(part);
+        
+        inputStream = request.getPart(part.getName()).getInputStream();
         // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-
-        part.write("/" + File.separator + fileName);
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        File test = getFolderUpload();
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
+        
         String fullname= request.getParameter("fullname");
         int originalprice= Integer.parseInt(request.getParameter("originalprice")) ;
         int saleprice= Integer.parseInt(request.getParameter("saleprice")) ;
@@ -218,29 +236,64 @@ public class ManagerServiceController extends HttpServlet {
     }
     protected void editServiceList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        Part part = request.getPart("file");
+        InputStream inputStream;
+        FileOutputStream fileOutputStream;
+        String fileName = extractFileName(part);
+        if (fileName.trim().length()==0){
         Service s= new Service();
-        int id= Integer.parseInt(request.getParameter("sid"));
+        int sid= Integer.parseInt(request.getParameter("sid"));
         
         String fullname= request.getParameter("fullname");
         float originalprice= Float.parseFloat(request.getParameter("originalprice")) ;
         float saleprice= Float.parseFloat(request.getParameter("saleprice")) ;
-        
-        //String thumbnaillink= request.getParameter("thumbnaillink");
-        Part part = request.getPart("file");
-        String fileName = extractFileName(part);
+               
+        int categoryid= Integer.parseInt(request.getParameter("categoryid")) ;
+        String description= request.getParameter("description");
+        String details= request.getParameter("details");
+        boolean featured=Boolean.parseBoolean(request.getParameter("featured")) ;
+        boolean status= Boolean.parseBoolean(request.getParameter("status")) ;
+        int quantity= Integer.parseInt(request.getParameter("quantity"));
+         
+        s.setDescription(description);
+        s.setDetails(details);
+        s.setFeatured(featured);
+        s.setOriginalPrice(originalprice);
+        s.setSalePrice(saleprice);   
+        s.setId(sid);
+        ServiceCategory sc= new ServiceCategory();
+        sc.setId(categoryid);
+        s.setStatus(status);
+        s.setFullname(fullname);
+        s.setQuantity(quantity);
+        s.setCategory(sc);
         ServiceDAO serviceDB= new ServiceDAO();
-        Service oldservice= serviceDB.getService(id);
-        // refines the fileName in case it is an absolute path
-        fileName = new File(fileName).getName();
-        if (fileName.trim().length()==0){
-            s.setThumbnailLink(oldservice.getThumbnailLink());
-        }else{
-            part.write("/" + File.separator + fileName);
-            s.setThumbnailLink("assets/images/service/" + fileName);
-            File file = new File("E:\\SU2021\\SWP391\\images" + oldservice.getThumbnailLink());
-            file.delete();
+        s.setThumbnailLink(serviceDB.getService(sid).getThumbnailLink());
+        serviceDB.update(s);
+        response.sendRedirect("list");
         }
+        
+        else{
+        inputStream = request.getPart(part.getName()).getInputStream();
+        // refines the fileName in case it is an absolute path
+        int i = inputStream.available();
+        byte[] b = new byte[i];
+        inputStream.read(b);
+        fileName = extractFileName(part);
+        
+        String pathName = getFolderUpload()+"\\" + fileName;
+        System.out.println(fileName);
+        fileOutputStream  = new FileOutputStream(pathName);
+        fileOutputStream.write(b);
+        inputStream.close();
+        fileOutputStream.close();
+        
+        Service s= new Service();
+        int sid= Integer.parseInt(request.getParameter("sid"));
+        
+        String fullname= request.getParameter("fullname");
+        float originalprice= Float.parseFloat(request.getParameter("originalprice")) ;
+        float saleprice= Float.parseFloat(request.getParameter("saleprice")) ;        
         int categoryid= Integer.parseInt(request.getParameter("categoryid")) ;
         String description= request.getParameter("description");
         String details= request.getParameter("details");
@@ -255,7 +308,7 @@ public class ManagerServiceController extends HttpServlet {
         s.setOriginalPrice(originalprice);
         s.setSalePrice(saleprice);
        
-        s.setId(id);
+        s.setId(sid);
         ServiceCategory sc= new ServiceCategory();
         sc.setId(categoryid);
         
@@ -263,10 +316,15 @@ public class ManagerServiceController extends HttpServlet {
         s.setFullname(fullname);
         s.setQuantity(quantity);
         s.setCategory(sc);
-        
-        
+        s.setThumbnailLink("assets/images/" + fileName);
+        ServiceDAO serviceDB= new ServiceDAO();
+        File file = new File(getFolderUpload()+"\\..\\..\\"  + serviceDB.getService(sid).getThumbnailLink());
+        file.delete();
         serviceDB.update(s);
         response.sendRedirect("list");
+        
+        
+        };
 
     }  
     public void delete(HttpServletRequest request, HttpServletResponse response)
@@ -288,12 +346,12 @@ public class ManagerServiceController extends HttpServlet {
         return "";
     }
 
+
     public File getFolderUpload() {
-        File folderUpload = new File(getServletContext().getInitParameter("ImageDirectory"));
+        File folderUpload = new File(getServletContext().getRealPath("/") + "..\\..\\web\\assets\\images");
         if (!folderUpload.exists()) {
             folderUpload.mkdirs();
         }
         return folderUpload;
-    }
-        
+    }  
 }

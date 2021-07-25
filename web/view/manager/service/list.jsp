@@ -146,9 +146,7 @@
                         <td>Image</td>
                         <td>Fullname</td>
                         <td>Original price</td>
-                        <td>Sale price</td>
-                        
-                        
+                        <td>Sale price</td>                        
                         <td>Description</td>
                         <td>Details </td>
                         <td>Featured</td>
@@ -174,8 +172,8 @@
                             <td>${s.details}</td>
                             <td><c:if test="${s.featured == true}">True</c:if>
                                 <c:if test="${s.featured == false}">False</c:if></td>
-                            <td><c:if test="${s.status == true}">True</c:if>
-                                <c:if test="${s.status == false}">False</c:if></td>
+                            <td><c:if test="${s.status == true}">Active</c:if>
+                                <c:if test="${s.status == false}">Inactive</c:if></td>
                             <td>${s.quantity}</td>
                             
                             <td><a href="details?sid=${s.id}"><i class="fas fa-eye"></i></a></td>

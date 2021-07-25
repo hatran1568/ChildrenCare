@@ -1,441 +1,364 @@
+<!DOCTYPE html>
 
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
-        <title>Users List</title>
-
-        <script src="../../vendor/jquery/jquery.min.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
-
-        <!-- Bootstrap core CSS -->
-        <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <!--
-    Ramayana CSS Template
-    https://templatemo.com/tm-529-ramayana
-        -->
-
-        <!-- Additional CSS Files -->
-        <link rel="stylesheet" href="../../assets/css/footer.css"/>
-        <link rel="stylesheet" href="../../assets/css/fontawesome.css"/>
-        <link rel="stylesheet" href="../../assets/css/templatemo-style.css"/>
-
-
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Dashboard</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+            crossorigin="anonymous"
+            />
+        <link href="../../assets/css/custom.css" rel="stylesheet" type="text/css"/>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+            integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+            crossorigin="anonymous"
+            />
+        <link rel="stylesheet" href="../../assets/css/style.css" />
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         </script>
     </head>
 
-    <body class="is-preload">
+    <body>
+        <!-- sidebar -->
+        <div style="top: 25px;" class="ui sidebar inverted vertical menu sidebar-menu" id="sidebar">
+            <div class="item">
+                <div class="header">General</div>
+                <div class="menu">
+                    <a class="item">
+                        <div>
+                            <i class="icon tachometer alternate"></i>
+                            Dashboard
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">
+                    Administration
+                </div>
+                <div class="menu">
+                    <a href='../setting/list' class="item">
+                        <div><i class="cogs icon"></i>Settings</div>
+                    </a>
+                    <a href='../user/list' class="item">
+                        <div><i class="users icon"></i>User</div>
+                    </a>
+                </div>
+            </div>
 
-        <!-- Wrapper -->
-        <div id="wrapper">
 
-            <!-- Main -->
-            <div id="main">
-                <div class="inner">
+            <div class="item">
+                <div class="header">Other</div>
+                <div class="menu">
+                    <a href="../../home" class="item">
+                        <div>
+                            <i class="icon envelope"></i>
+                            Homepage
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-                    <!-- Header -->
-                    <header id="header">
-                        <div class="logo">
-                            <div class="dropdown">
-                                <img class="avatar" src="../../${sessionScope.user.imageLink}">
-                                <div class="dropdown-content">
-                                    <p>Profile</p>
-                                    <p>Change Password</p>
-                                    <p>Log out</p>
+            <div class="item">
+                <form action="#">
+                    <div class="ui mini action input">
+                        <input type="text" placeholder="Search..." />
+                        <button class="ui mini icon button">
+                            <i class=" search icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+          
+        </div>
+
+        <!-- sidebar -->
+        <!-- top nav -->
+
+        <nav class="ui top fixed inverted menu">
+            <div class="left menu">
+                <a href="#" class="sidebar-menu-toggler item" data-target="#sidebar">
+                    <i class="sidebar icon"></i>
+                </a>
+                <a href="../../home" class="header item">
+                    ChildrenCare
+                </a>
+            </div>
+
+            <div class="right menu">
+                <a href="#" class="item">
+                    <i class="bell icon"></i>
+                </a>
+                <div class="ui dropdown item">
+                    <img style="width: 50px" class="avatar" src="../../${sessionScope.user.imageLink}">
+                    <div class="menu">
+                        <a href="../../customer/userprofile" class="item">
+                            <i class="info circle icon"></i> Profile</a
+                        >
+                        <a href="../../logout" class="item">
+                            <i class="sign-out icon"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- top nav -->
+
+        <div style="margin-top: 80px" class="pusher">
+            <div class="main-content">
+                <div class="ui grid stackable padded">
+                    <div
+                        class="four wide computer eight wide tablet sixteen wide mobile column"
+                        >
+                        <div class="ui fluid card">
+                            <div class="content">
+                                
+
+                                <div style="text-align: center" class="header">
+                                    <h4 style="margin-top: 0;" class="title">Reservation Statistics</h4>
+
+                                    <canvas id="myChart" style=" width:100%;max-width:700px;height: 315px;"></canvas>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div onclick="window.location.href='../../manager/reservation/list'" class="ui two buttons">
+                                    <div class="ui red button">More Info</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="four wide computer eight wide tablet sixteen wide mobile column"
+                        >
+                        <div class="ui fluid card">
+                            <div class="content">
+                                                               <div style="height: max-content; min-height: 350px ;text-align: center" class="header">
+                                    <h4 class="title">Total Revenue ${requestScope.sum}</h4>
+                                    <ul style="list-style-type: none;">
+                                        <li><br></li>
+                                        <c:forEach items="${requestScope.service}" var="list">
+                                            <li>
+                                                ${list.fullname} : ${requestScope.revernue[list.id -1]}
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                    
 
                                 </div>
                             </div>
-
-                        </div>
-                    </header>
-
-
-
-                    <!-- Right Image -->
-                    <section class="right-image">
-                        <div class="container-fluid">
-                            <table class="table"></table> 
-                            <div class="row">
-                                <div style="margin-bottom: 10px;" class="col-md-6">
-                                    <div class="card">
-
-                                        <div style="text-align: center" class="header">
-                                            <h3 class="title">Reservation Statistics</h3>
-
-                                            <canvas id="myChart" style=" width:100%;max-width:700px;height: 300px;"></canvas>
-                                        </div>
-
-
-
-
-                                    </div>
-                                </div>  
-
-                                <div  style="margin-bottom: 10px;" class=" col-md-6">
-                                    <div class="card">
-
-                                        <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
-                                            <h4 class="title">Total Revenue ${requestScope.sum}</h4>
-                                            <ul style="list-style-type: none;">
-                                                <c:forEach items="${requestScope.service}" var="list">
-                                                    <li>
-                                                        ${list.fullname} : ${requestScope.revernue[list.id -1]}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-
-                                        </div>
-
-
-                                    </div>
+                            <div class="extra content">
+                                <div onclick="window.location.href='../../manager/service/list'" class="ui two buttons">
+                                    <div class="ui green button">More Info</div>
                                 </div>
-                                <div style="margin-bottom: 10px;" class="col-md-6">
-                                    <div class="card">
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="four wide computer eight wide tablet sixteen wide mobile column"
+                        >
+                        <div class="ui fluid card">
+                            <div class="content">
+                              
+                                <div style="height: max-content; min-height: 350px ;text-align: center" class="header">
 
-                                        <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
-                                            <h4 id="0" class="title">Average Rating : </h4>
+                                    <h4>Total Customer : ${requestScope.Customer}</h4>
+                                    <ul style="list-style-type: none;">
+                                        <li><br></li>
+                                        <li>
+                                            Newly registered : ${requestScope.registed}
+                                        </li>
+                                        <li>
+                                            Newly Reserved : ${requestScope.reserved}
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div onclick="window.location.href='../../manager/customer/list'" class="ui two buttons">
+
+                                    <div class="ui teal button">More Info</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="four wide computer eight wide tablet sixteen wide mobile column"
+                        >
+                        <div class="ui fluid card">
+                            <div class="content">
+
+                                <div style="height: max-content; min-height: 350px ;text-align: center" class="header">
+                                    <h4 id="0" class="title">Average Rating : <br></h4>
+                                    <script>
+                                        $(document).ready(function () {
+                                        drawRate(${requestScope.tostar}, 0)
+                                        });
+                                    </script>
+                                    <ul style="list-style-type: none;">
+                                        <li></li>
+                                            <c:forEach items="${requestScope.service}" var="list">
+                                            <li id="${list.id}">
+                                                ${list.fullname} : 
+                                            </li>
                                             <script>
                                                 $(document).ready(function () {
-                                                drawRate(${requestScope.tostar}, 0)
+                                                drawRate(${star[list.id -1]},${list.id})
                                                 });
                                             </script>
-                                            <ul style="list-style-type: none;">
-                                                <c:forEach items="${requestScope.service}" var="list">
-                                                    <li id="${list.id}">
-                                                        ${list.fullname} : 
-                                                    </li>
-                                                    <script>
-                                                        $(document).ready(function () {
-                                                        drawRate(${star[list.id -1]},${list.id})
-                                                        });
-                                                    </script>
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
-
-
-                                    </div>
+                                        </c:forEach>
+                                    </ul>
                                 </div>
-                                <div  style="margin-bottom: 10px;" class=" col-md-6">
-                                    <div class="card">
-
-                                        <div style="height: max-content; min-height: 380px ;text-align: center" class="header">
-
-                                            <h4>Total Customer : ${requestScope.Customer}</h4>
-                                            <ul style="list-style-type: none;">
-
-                                                <li id="${list.id}">
-                                                    Newly Registed  : ${requestScope.registed} : 
-                                                </li>
-
-                                                Newly Reserved : ${requestScope.reserved} : 
-                                                </li>
-
-
-                                            </ul>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                                <div  style="margin: 10px 0;" class=" col-md-12">
-                                    <div class="card">
-
-                                        <div style="text-align: center" class="header">
-                                            <h3 class="title">Trend</h3>
-                                            <form id="myForm" action="view" method="GET">
-                                                <input onchange="submit()" id="start" type="date" name="start" max="No">
-                                                <input id="end" onchange="submit()" type="date" name="end">
-                                            </form>
-                                            <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
-                                        </div>
-
-                                    </div>
+                            </div>
+                            <div class="extra content">
+                                <div onclick="window.location.href='../../manager/feedback/list'" class="ui two buttons">
+                                    <div class="ui purple button">More Info</div>
                                 </div>
                             </div>
                         </div>
-
-                    </section>
+                    </div>
                 </div>
-            </div>
-            <!-- Sidebar -->
-            <div id="sidebar">
-
-                <div class="inner">
-
-                    <!-- Search Box -->
-                    <section id="search" class="alt">
-                        <div>
-
-                            <a class="icon-home" href="#">Children Care</a>
-
+                <div class="ui grid stackable padded">
+                    <div class="column">
+                        <div style="text-align: center" class="header">
+                            <h3 class="title">Trend</h3>
+                            <form id="myForm" action="view" method="GET">
+                                <input onchange="submit()" id="start" type="date" name="start" <c:if test="${not empty param.start}">value="${param.start}"</c:if> max="No">
+                                    <input id="end" onchange="submit()" type="date"<c:if test="${not empty param.end}">value="${param.end}"</c:if> name="end">
+                                </form>
+                                <canvas id="Chart1" style=" width:100%;max-width: 600px; margin: 0 auto;height: 300px;"></canvas>
+                            </div>
                         </div>
-                    </section>
-
-                    <!-- Menu -->
-                    <nav id="menu">
-                        <ul>
-                            <li><a href="../../home">Homepage</a></li>
-                            <li><a href="../../admin/user/list">User</a></li>
-
-                            <li><a href="#">Chart</a></li>
-                            <li><a href="../../admin/setting/list">Settings</a></li>
-
-
-
-
-                        </ul>
-                    </nav>
-
-
-
-
-                    <!-- Footer -->
-
-
+                    </div>
+                    <div class="ui grid stackable padded">
+                        <div
+                            class="four wide computer eight wide tablet sixteen wide mobile  center aligned column"
+                            >
+                           
+                        </div>
+                     
                 </div>
-            </div>
-            <!-- Site footer -->
+            
+            </div></div>
 
-        </div>
-    </div>
-</div>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"
+            ></script>
+            <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+                integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
+                crossorigin="anonymous"
+            ></script>
+            <script>
+                                        function drawRate(star, ele) {
 
-<footer id="footer" class="site-footer">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-                <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by
-                    <a href="#">Giangtt</a>.
-                </p>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <ul class="social-icons">
-                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- Scripts -->
-<!-- Bootstrap core JavaScript -->
+                                        for (var i = 0; i < star; i++) {
+                                        document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
+                                        }
+                                        for (var i = 0; i < 5 - star; i++) {
+                                        document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
+                                        }
+                                        }
 
 
 
-<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                                        var date = new Date();
+                                        var today = new Date();
+                                        var dd = today.getDate();
+                                        var mm = today.getMonth() + 1; //January is 0!
+                                        var yyyy = today.getFullYear();
+                                        if (dd < 10) {
+                                        dd = '0' + dd
+                                        }
+                                        if (mm < 10) {
+                                        mm = '0' + mm
+                                        }
 
-<script src="../../assets/js/browser.min.js"></script>
-<script src="../../assets/js/breakpoints.min.js"></script>
-<script src="../../assets/js/transition.js"></script>
-<script src="../../assets/js/owl-carousel.js"></script>
-<script src="../../assets/js/custom.js"></script>
+                                        today = yyyy + '-' + mm + '-' + dd;
+            <c:if test="${empty param.start or empty param.end}">
+                                        document.getElementById("end").valueAsDate = date;
+                                        date.setDate(date.getDate() - 7);
+                                        document.getElementById("start").valueAsDate = date
+                                                document.getElementById("start").setAttribute("max", today);
+                                        document.getElementById("end").setAttribute("max", today);
+            </c:if>
+        </script>
+        <script>
+            var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
+            var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
+            var barColors = [
+                    "#00aba9",
+                    "#b91d47",
+                    "#2b5797",
+                    "#f7ef02",
+                    "#0026ff",
+                    "#ff0000"
+            ];
+            new Chart("myChart", {
+            type: "pie",
+                    data: {
+                    labels: xValues,
+                            datasets: [{
+                            backgroundColor: barColors,
+                                    data: yValues
+                            }]
+                    },
+                    options: {
+                    title: {
+                    display: true,
+                            text: ""
+                    }
+                    }
+            });</script>
+ 
+        <script>
+            $(document).ready(function () {
 
-
-<script>
-                                                       
-
-
-</script>
-<script>
-    var xValues = ["Submited", "Cancel", "Success", "Pending", "Approve", "Reject"];
-    var yValues = [${requestScope.Submit},${requestScope.Cancel},${requestScope.Success},${requestScope.Pending},${requestScope.Approve},${requestScope.Reject}];
-    var barColors = [
-            "#00aba9",
-            "#b91d47",
-            "#2b5797",
-            "#f7ef02",
-            "#0026ff",
-            "#ff0000"
-    ];
-    new Chart("myChart", {
-    type: "pie",
-            data: {
-            labels: xValues,
-                    datasets: [{
-                    backgroundColor: barColors,
-                            data: yValues
-                    }]
-            },
-            options: {
-            title: {
-            display: true,
-                    text: ""
+            });
+            var xValues = [<c:forEach var = "i" begin="1" end="${requestScope.listre.size()}">
+                ${i},
+            </c:forEach>];
+            new Chart("Chart1", {
+            type: "line",
+                    data: {
+                    labels: xValues,
+                            datasets: [{
+                            data: [<c:forEach var = "i" items="${requestScope.listre}">
+                ${i},
+            </c:forEach>],
+                                    borderColor: "red",
+                                    fill: false
+                            }, {
+                            data: [<c:forEach var = "i" items="${requestScope.listSuccessre}">
+                ${i},
+            </c:forEach>],
+                                    borderColor: "green",
+                                    fill: false
+                            }]
+                    },
+                    options: {
+                    legend: {display: false}
+                    }
+            });
+            function submit(){
+            document.getElementById("myForm").submit();
             }
-            }
-    });</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-</script>
-<script>
-    $(document).ready(function () {
-
-    });
-    var xValues = [<c:forEach var = "i" begin="1" end="${requestScope.listre.size()}">
-        ${i},
-    </c:forEach>];
-    new Chart("Chart1", {
-    type: "line",
-            data: {
-            labels: xValues,
-                    datasets: [{
-                    data: [<c:forEach var = "i" items="${requestScope.listre}">
-        ${i},
-    </c:forEach>],
-                            borderColor: "red",
-                            fill: false
-                    }, {
-                    data: [<c:forEach var = "i" items="${requestScope.listSuccessre}">
-        ${i},
-    </c:forEach>],
-                            borderColor: "green",
-                            fill: false
-                    }]
-            },
-            options: {
-            legend: {display: false}
-            }
-    });
-    function submit(){
-    document.getElementById("myForm").submit();
-    }
-</script>
-
-<script>
-    function drawRate(star, ele) {
-
-    for (var i = 0; i < star; i++) {
-    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star checked'></span>"
-    }
-    for (var i = 0; i < 5 - star; i++) {
-    document.getElementById(ele.toString()).innerHTML += "<span class='fa fa-star'></span>"
-    }
-    }
-
-
-
-    var date = new Date();
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    if (dd < 10){
-    dd = '0' + dd
-    }
-    if (mm < 10){
-    mm = '0' + mm
-    }
-
-    today = yyyy + '-' + mm + '-' + dd;
-    document.getElementById("end").valueAsDate = date;
-    ;
-    date.setDate(date.getDate() - 7);
-    document.getElementById("start").valueAsDate = date
-            document.getElementById("start").setAttribute("max", today);
-    document.getElementById("end").setAttribute("max", today);</script>
-
-
-<style>
-    tfoot {
-        display: table-header-group;
-    }
-    table.dataTable tfoot th {
-        border-bottom: 2px solid #111;
-        text-align: center;
-    }
-    table.dataTable td {
-        font-size: 15px;
-    }
-    table.dataTable th {
-        font-size: 16px;
-    }
-    table.dataTable tbody tr:hover {
-        background-color: #c7c7c7;
-    }
-    .pagination{
-        display: inline-block;
-    }
-    .pagination a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-    }
-
-    .pagination a.active {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-    }
-
-    .pagination a:hover:not(.active) {
-        background-color: #ddd;
-        border-radius: 5px;
-    }
-    .dropdown {
-        color: white;
-        margin-right: 150px;
-        position: relative;
-        display: inline-block;
-    }
-
-    .dropdown-content {
-
-        text-align: center;
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 12px 16px;
-        z-index: 1;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-    .avatar{
-
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-    }
-    .checked {
-        color: orange;
-    }
-    .card{
-        min-height: 430px;
-    }
-    h4{
-        margin-top: 30% !important;
-    }
-</style>
-<c:if test="${ not empty sessionScope.mess}">
-    <script>
-        $(document).ready(function () {
-        let mess = "${sessionScope.mess}"
-                alert(mess);
-        });
-    </script>
-    <c:remove var="mess" scope="session" />
-</c:if>
-</body>
-
+        </script>
+        <script src="../../assets/js/script.js"></script>
+    </body>
 </html>

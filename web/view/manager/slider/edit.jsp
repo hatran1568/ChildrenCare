@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Children Care</title>
+        <title>Slider</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -146,9 +146,11 @@
                         <td>
                             <input  onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                             <img style="max-height: 200px" id="output" src="../../${requestScope.slider.imageLink}" > 
+
                             <div class="invalid-feedback">
                                 Please enter title.
                             </div></td>
+
                         </td>
                     </tr>
                     <tr>

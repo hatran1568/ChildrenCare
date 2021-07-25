@@ -169,7 +169,7 @@
             <div class="main-content">
                 <div class="container-fluid">
                     <br><br>
-                            <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i>Dashboard<i style="margin : 5px;"  class="fas fa-angle-right"></i>User List<i style="margin : 5px;"  class="fas fa-angle-right"></i>Add</div>
+                    <div><i class="fas fa-home"></i><i style="margin : 5px;" class="fas fa-angle-right"></i><a href="../dashboard/view">Dashboard</a><i style="margin : 5px;"  class="fas fa-angle-right"></i><a href="../user/list">User List</a><i style="margin : 5px;"  class="fas fa-angle-right"></i>Add a User</div>
                             <br>
                             <form action="../../admin/user/insert" method="POST" novalidate class="needs-validation">
                                 <div class="form-group">
