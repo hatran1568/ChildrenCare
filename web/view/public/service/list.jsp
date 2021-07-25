@@ -158,7 +158,7 @@
                         </form>
                     </div> 
                     <div >
-                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
+                        <a href="list"><h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4></a>
                         <c:forEach items="${requestScope.categories}" var="c">
                             <div class="category"><a <c:if test="${c.id == requestScope.category}">class="chosen"</c:if> href="?category=${c.id}">${c.name}</a></div>
                                 <hr>
@@ -168,14 +168,17 @@
                 </div>
                 <div class="col-9">
                     <div class="container" >
-
-                        <div>Results: ${requestScope.services.size()}</div>
+                        <div  id="pagination1" class="pagination" style="margin-left: 900px;"></div>
+                        <div class="">Results: ${requestScope.count}</div>
+                        
+                        
+                        
                         <div class="row">
                             <c:forEach items="${requestScope.services}" var="s">
-                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="col-md-4 col-sm-6 col-xs-12" style="margin-top: 10px;">
                                     <div class="full news_blog rounded" style="box-shadow:0 3px 10px 0 rgba(0, 0, 0, 0.19);">
                                         <div class="text-center" style="height: 280px;">
-                                        <img style="margin: 0 auto ;height: auto; max-height: 280px; width: auto; padding: 0;" class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
+                                            <img style="margin: 0 auto ;height: auto; max-height: 280px; width: auto; padding: 0;" class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
                                         </div>
 
 
@@ -184,25 +187,25 @@
                                             <p class="description">
                                                 ${s.description}
                                             </p>
-                                            
+
                                         </div>
-                                            <div style="padding: 10px; text-align: center;">
+                                        <div style="padding: 10px; text-align: center;">
                                             <p class="price" style="width: 27%; display: inline-block; text-align: left">
                                                 <c:if test="${s.originalPrice > s.salePrice}">
-                                                <span style="text-decoration: line-through; color: gray; display: block;"><fmt:formatNumber type = "number" 
-                                                                  pattern = "###,###,###" value = "${s.originalPrice}" /></span>
-                                                </c:if>
-                                                <c:if test="${s.originalPrice <= s.salePrice}">
-                                                <span style="text-decoration: line-through; color: transparent; display: block"> ${s.originalPrice}</span>
+                                                    <span style="text-decoration: line-through; color: gray; display: block;"><fmt:formatNumber type = "number" 
+                                                                      pattern = "###,###,###" value = "${s.originalPrice}" /></span>
+                                                    </c:if>
+                                                    <c:if test="${s.originalPrice <= s.salePrice}">
+                                                    <span style="text-decoration: line-through; color: transparent; display: block"> ${s.originalPrice}</span>
                                                 </c:if>
                                                 <span style="text-decoration: white; font-size: 17px;"><fmt:formatNumber type = "number" 
                                                                   pattern = "###,###,###" value = "${s.salePrice}" />đ</span>
                                             </p>
                                             <div style="height: 100%;  width: 70%; display: inline-block;">
-                                            <button class="btn btn-outline-info" onclick="addToCart(${s.id}, ${requestScope.reservation_id})" style="border-color: #17a2b8">Add to Cart</button>
+                                                <button class="btn btn-outline-info" onclick="addToCart(${s.id}, ${requestScope.reservation_id})" style="border-color: #17a2b8">Add to Cart</button>
 
-                                            <button class="btn btn-outline-warning" onclick="window.location.href = '../feedback?id=${s.id}'" style="border-color:#ffc107">Feedback</button>
-                                       
+                                                <button class="btn btn-outline-warning" onclick="window.location.href = '../feedback?id=${s.id}'" style="border-color:#ffc107">Feedback</button>
+
                                             </div></div>
 
                                     </div>
@@ -215,7 +218,36 @@
                         </div>
                         <div id="pagination" class="pagination"></div>
                         <script>
+                            function generatePagger(id, pageindex, totalpage, gap, page)
+                            {
+                                var container = document.getElementById(id);
+                                if (pageindex > gap + 1)
+                                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
+
+                                for (var i = pageindex - gap; i < pageindex; i++)
+                                {
+                                    if (i >= 1)
+                                    {
+                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                                    }
+                                }
+
+                                container.innerHTML += "<a class='active'>" + pageindex + "</a>";
+
+                                for (var i = pageindex + 1; i <= pageindex + gap; i++)
+                                {
+                                    if (i <= totalpage)
+                                    {
+                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                                    }
+                                }
+
+                                if (pageindex < totalpage - gap)
+                                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
+                            }
                             generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+                            generatePagger("pagination1",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
+
 
                         </script>
 
@@ -252,28 +284,6 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
-                        <!--                        <div class="footer-thumb"> 
-                                                    <h4 class="wow fadeInUp" data-wow-delay="0.4s">Latest News</h4>
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>Amazing Technology</h5></a>
-                                                            <span>March 08, 2018</span>
-                                                        </div>
-                                                    </div>
-                        
-                                                    <div class="latest-stories">
-                                                        <div class="stories-image">
-                                                            <a href="#"><img src="images/news-image.jpg" class="img-responsive" alt=""></a>
-                                                        </div>
-                                                        <div class="stories-info">
-                                                            <a href="#"><h5>New Healing Process</h5></a>
-                                                            <span>February 20, 2018</span>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
                     </div>
 
                     <div class="col-md-4 col-sm-4"> 
@@ -345,6 +355,9 @@
                     {
                         container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
                     }
+                    else{
+                        
+                    }
                 }
 
                 container.innerHTML += "<a class='active'>" + pageindex + "</a>";
@@ -360,9 +373,9 @@
                 if (pageindex < totalpage - gap)
                     container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
             }
-            generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
 
         </script>
+
         <c:if test="${empty sessionScope.mess}">
             <c:if test="${ not empty sessionScope.alert}">
                 <script>
@@ -425,7 +438,7 @@
                 height: 50px;
                 overflow: hidden;
             }
-            
+
         </style>
     </body>
 </html>

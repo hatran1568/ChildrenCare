@@ -54,9 +54,9 @@ public class ServiceDAO extends BaseDAO {
         try {
             String a = " ";
             if (cid != 0) {
-                a = "and category_id = " + String.valueOf(cid);
+                a = " and category_id = " + String.valueOf(cid);
             }
-            if (search != null && search.length() != 0) {
+            if (search != null && search.trim().length() != 0) {
                 search = " and fullname like '%" + search + "%' ";
             } else {
                 search = " ";
@@ -196,9 +196,9 @@ public class ServiceDAO extends BaseDAO {
         try {
             String a = " ";
             if (cid != 0) {
-                a = "and s.category_id = " + String.valueOf(cid);
+                a = " and s.category_id = " + String.valueOf(cid);
             }
-            if (search != null && search.length() != 0) {
+            if (search != null && search.trim().length() != 0) {
                 search = " and fullname like '%" + search + "%' ";
             } else {
                 search = " ";

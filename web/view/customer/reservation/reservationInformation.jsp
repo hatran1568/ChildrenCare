@@ -266,7 +266,7 @@
                             <td>${list.service.originalPrice}</td>
                             <td>${list.service.salePrice}</td>  
                             <td>${list.quantity}</td>
-                            <td><a href="#"><i class="fas fa-flag fa-2x"></i></a></td>
+                            <td><a href="../../feedback?id=${list.service.id}"><i class="fas fa-flag fa-2x"></i></a></td>
 
 
                         </tr>
