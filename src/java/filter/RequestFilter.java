@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ACER
  */
-public class Authorization implements Filter {
+public class RequestFilter implements Filter {
 
     private ServletContext context;
 
