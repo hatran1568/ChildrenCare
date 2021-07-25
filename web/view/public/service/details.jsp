@@ -208,8 +208,13 @@
                     <div class="container" style="font-family: 'Roboto'; font-size: 120%;">
                         </br>
                         ${requestScope.service.details}
-                    </div>       
+                    </div>  
+                    <div class="container" style="margin-top: 20px;">
+                    <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+                        <button onclick="window.location.href='../manager/service/edit?sid=${requestScope.service.id}'" class="btn btn-primary" style="float: right;">Edit Service</button>
+                    </c:if></div>
                 </div></div>
+                        
         </section>
 
 

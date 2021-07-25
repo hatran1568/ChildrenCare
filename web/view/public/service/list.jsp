@@ -174,8 +174,8 @@
                             <c:forEach items="${requestScope.services}" var="s">
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="full news_blog rounded" style="box-shadow:0 3px 10px 0 rgba(0, 0, 0, 0.19);">
-                                        <div style="height: 280px;">
-                                        <img style="height: auto; border-bottom: lightgray solid 1px; padding: 0;" class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
+                                        <div class="text-center" style="height: 280px;">
+                                        <img style="margin: 0 auto ;height: auto; max-height: 280px; width: auto; padding: 0;" class="img-responsive rounded card-img-top" src="../${s.thumbnailLink}" alt="#" />
                                         </div>
 
 
