@@ -217,7 +217,7 @@
                     </tfoot>
                     <tbody>
                         <c:forEach items="${requestScope.reservations}" var="r">
-                            <tr>
+                            <tr style="cursor: pointer" onclick="window.location.href='details?rid=${r.id}'">
                                 <td><a href="details?rid=${r.id}">${r.id}</a></td>
                                 <td>${r.reservationDate}</td>
                                 <td>${r.customer.fullName}</td>
@@ -228,7 +228,7 @@
                                 </td>
                                 <td>${r.totalCost}</td>
                                 <td>${r.status.name}</td>
-
+                                
                             </tr>
                         </c:forEach>
                     </tbody>
