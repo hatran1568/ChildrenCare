@@ -182,8 +182,8 @@
             </c:if>
             <c:if test="${empty requestScope.list}">
 
-                <h1>You have nothing in cart!</h1>
-                <button type="button" class="button btn btn-outline-primary"><a href="../service/list">More Service</a>
+                <h2>You have nothing in cart!</h2>
+                <button type="button" class="btn btn-primary" onclick="window.location.href='../service/list'">More Service</button>
                 </c:if>
 
                 <!--            <h2>Total Cost:</h2>-->

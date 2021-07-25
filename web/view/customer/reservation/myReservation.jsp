@@ -137,7 +137,7 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="min-height: 700px; height: auto;">
-
+<c:if test="${requestScope.list.size()>0}">
             <table class="table" id="reservation-detail">
                 <thead class="thead-dark">
                     <tr>
@@ -164,7 +164,11 @@
 
                 </tbody>
             </table>
-
+</c:if>
+            <c:if test="${requestScope.list.size()==0}">
+                <h2 style=" font-size: 30px; margin-top: 40px;">You do not have any Reservation</h2>
+                <button class="btn btn-primary" onclick="window.location.href='../../cart/list'">Go to Cart</button>
+            </c:if>
 
 
 

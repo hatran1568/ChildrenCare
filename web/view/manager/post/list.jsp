@@ -179,7 +179,8 @@
                             <td><a href="details?pid=${p.id}"><img style="width: 100px; height: auto;" class="rounded img-thumbnail" src="../../${p.thumbnailLink}"></a></td>
                             <td style="font-weight: bold;"><a href="details?pid=${p.id}">${p.title}</a></td>
                             <td>${p.author.fullName}</td>
-                            <td>${p.updatedDate}</td>
+                            <td><fmt:formatDate pattern = "dd-MM-yyyy" 
+                                            value = "${p.updatedDate}"></fmt:formatDate></td>
                             <td>${p.status.name}</td>
                             <td><a href="details?pid=${p.id}"><i class="fas fa-eye"></i></a></td>
                             <td><a href="edit?pid=${p.id}"><i class="fas fa-pen"></i></a></td>
