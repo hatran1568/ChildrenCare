@@ -137,7 +137,7 @@
         <!-- End Banner -->
         <!-- section -->
         <div class="container" style="min-height: 700px; height: auto;">
-
+<c:if test="${requestScope.list.size()>0}">
             <table class="table" id="reservation-detail">
                 <thead class="thead-dark">
                     <tr>
@@ -153,10 +153,10 @@
                     <c:forEach var="list" items="${requestScope.list}">
                         <tr>
                             <td class="col-md-1">${list.id}</td>
-                            <td class="col-md-2"> <c:if test="${not empty list.reservationDate}"><p><input  class="date" type="date" value="${list.reservationDate}" readonly="true"></p></c:if> </td>
-                            <td class="col-md-2"><c:if test="${not empty list.checkupTime}"><p><input  class="date" type="date" value="${list.checkupTime}" readonly="true"></p></c:if></td>
+                            <td class="col-md-2"> <c:if test="${not empty list.reservationDate}"><p><fmt:formatDate pattern="dd-MM-yyyy" value='${list.reservationDate}'></fmt:formatDate></p></c:if> </td>
+                            <td class="col-md-2"><c:if test="${not empty list.checkupTime}"><p><fmt:formatDate pattern="dd-MM-yyyy" value='${list.checkupTime}'></fmt:formatDate></p></c:if></td>
                             <td class="col-md-2">${list.status.name}</td>
-                            <td class="col-md-2">${list.totalCost}</td>
+                            <td class="col-md-2"><fmt:formatNumber pattern="###,###,###" value='${list.totalCost}'></fmt:formatNumber></td>
                             <td class="col-md-2"><c:forEach items="${list.listService}" var="s">${s.fullname} <br></c:forEach></td>
                             <td class="col-md-1"><a href="details?id=${list.id}"><i class="fas fa-external-link-square-alt fa-2x"></i></a></td>
                         </tr>
@@ -164,7 +164,11 @@
 
                 </tbody>
             </table>
-
+</c:if>
+            <c:if test="${requestScope.list.size()==0}">
+                <h2 style=" font-size: 30px; margin-top: 40px;">You do not have any Reservation</h2>
+                <button class="btn btn-primary" onclick="window.location.href='../../cart/list'">Go to Cart</button>
+            </c:if>
 
 
 

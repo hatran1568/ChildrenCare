@@ -160,11 +160,13 @@
                     <c:forEach items="${requestScope.services}" var="s">
                         <tr>
                             <td>${s.id}</td>
-                            <td><img id="output" src="../../${s.thumbnailLink}" id="imgProfile" style="width: 100px; height: auto;" class="img-thumbnail">
+                            <td><a href="details?sid=${s.id}"><img id="output" src="../../${s.thumbnailLink}" id="imgProfile" style="width: 100px; height: auto;" class="img-thumbnail"></a>
                         </td>
-                            <td>${s.fullname}</td>
-                            <td>${s.originalPrice}</td>
-                            <td>${s.salePrice}</td>
+                        <td><a href="details?sid=${s.id}">${s.fullname}</a></td>
+                            <td><fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${s.originalPrice}" /></td>
+                            <td><fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${s.salePrice}" /></td>
                             
                            
                             <td class="text-truncate" style="max-width: 150px;">${s.description}</td>
@@ -338,6 +340,9 @@
             }
             table.dataTable tbody tr:hover {
                 background-color: #c7c7c7;
+            }
+            table a:hover{
+                color: #337ab7;
             }
         </style> 
         <script>

@@ -54,9 +54,9 @@ public class ServiceDAO extends BaseDAO {
         try {
             String a = " ";
             if (cid != 0) {
-                a = "and category_id = " + String.valueOf(cid);
+                a = " and category_id = " + String.valueOf(cid);
             }
-            if (search != null && search.length() != 0) {
+            if (search != null && search.trim().length() != 0) {
                 search = " and fullname like '%" + search + "%' ";
             } else {
                 search = " ";
@@ -65,7 +65,7 @@ public class ServiceDAO extends BaseDAO {
                     + " from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n"
                     + " id, fullname, original_price, sale_price, thumbnail_link, category_id, description, details, updated_date, featured, status, quantity\n"
                     + " from service \n"
-                    + " where (status is null or status = 1) \n" + a + search
+                    + " where (status = 1) \n" + a + search
                     + " order by featured desc) as x\n"
                     + " where rid >= (? - 1)*? + 1 and rid <= ? * ?";
 
@@ -196,9 +196,9 @@ public class ServiceDAO extends BaseDAO {
         try {
             String a = " ";
             if (cid != 0) {
-                a = "and s.category_id = " + String.valueOf(cid);
+                a = " and s.category_id = " + String.valueOf(cid);
             }
-            if (search != null && search.length() != 0) {
+            if (search != null && search.trim().length() != 0) {
                 search = " and fullname like '%" + search + "%' ";
             } else {
                 search = " ";

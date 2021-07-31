@@ -157,7 +157,7 @@
                         </form>
                     </div> 
                     <div >
-                        <h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4>
+                        <a href="list"><h4 style="color: #0064af;margin: 10px 0 30px 0;">Categories</h4></a>
                         <c:forEach items="${requestScope.categories}" var="c">
                             <div class="category"><a <c:if test="${c.id == requestScope.service.category.id}">class="chosen"</c:if> href="list?category=${c.id}">${c.name}</a></div>
                                 <hr>
@@ -208,8 +208,13 @@
                     <div class="container" style="font-family: 'Roboto'; font-size: 120%;">
                         </br>
                         ${requestScope.service.details}
-                    </div>       
+                    </div>  
+                    <div class="container" style="margin-top: 20px;">
+                    <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
+                        <button onclick="window.location.href='../manager/service/edit?sid=${requestScope.service.id}'" class="btn btn-primary" style="float: right;">Edit Service</button>
+                    </c:if></div>
                 </div></div>
+                        
         </section>
 
 

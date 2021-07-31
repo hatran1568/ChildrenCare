@@ -212,7 +212,8 @@
                                                     <label style="font-weight:bold;">Original Price</label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    ${requestScope.services.originalPrice}
+                                                   <fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${requestScope.services.originalPrice}" />
                                                 </div>
                                             </div>
                                             <hr />
@@ -222,7 +223,9 @@
                                                     <label style="font-weight:bold;">Sale Price</label>
                                                 </div>
                                                 <div class="col-md-8 col-6">
-                                                    ${requestScope.services.salePrice}
+                                                    <fmt:formatNumber type = "number" 
+                            pattern = "###,###,###" value = "${requestScope.services.salePrice}" />
+                                                    
                                                 </div>
                                             </div>
                                                 <hr />

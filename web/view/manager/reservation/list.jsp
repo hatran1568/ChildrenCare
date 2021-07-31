@@ -215,7 +215,7 @@
                     </tfoot>
                     <tbody>
                         <c:forEach items="${requestScope.reservations}" var="r">
-                            <tr>
+                         <tr >
                                 <td>${r.id}</td>
                                 <td><fmt:formatDate pattern="dd-MM-yyyy" value="${r.reservationDate}"></fmt:formatDate></td>
                                 <td><fmt:formatDate pattern="dd-MM-yyyy" value="${r.checkupTime}"></fmt:formatDate></td>

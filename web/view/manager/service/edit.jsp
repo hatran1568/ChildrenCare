@@ -147,19 +147,21 @@
                 <div class="form-group">
                     <label for="file"></label>
                     <img style="max-height: 200px" id="output" src="../../${requestScope.service.thumbnailLink}" id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail">
-                        <input onchange="loadFile(event)"  name="file" required type="file" accept="image/*,.jpg">
+                        <input onchange="loadFile(event)"  name="file" type="file" accept="image/*,.jpg">
                 </div>
                 <div class="form-group">
                     <label for="fullname">Full name</label>
-                    <input style="width: 100%" type="text" class="form-control" name="fullname" required value="${requestScope.service.fullname}">
+                    <input style="width: 100%" type="text" class="form-control" name="fullname" value="${requestScope.service.fullname}">
                 </div>
                 <div class="form-group">
                     <label for="originalprice">Original price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="originalprice" value="${requestScope.service.originalPrice}">
+                    <input style="width: 100%" type="number" class="form-control" name="originalprice"  value = "${requestScope.service.originalPrice}">
+                    
+                
                 </div>
                 <div class="form-group">
                     <label for="saleprice">Sale price</label>
-                    <input style="width: 100%" type="number" class="form-control" name="saleprice" value="${requestScope.service.originalPrice}">
+                    <input style="width: 100%" type="number" class="form-control" name="saleprice" value="${requestScope.service.salePrice}">
                 </div>
                 <div class="form-group">
                     <label for="categoryid">Category ID </label>
@@ -189,11 +191,11 @@
                 <div class="form-group">
                     <label for="status">Status</label>
                     <div class="form-check">
-                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==true}">checked</c:if> id="True" value="True">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.status==true}">checked</c:if> id="True" value="True">
                                     <label class="form-check-label" for="True">Active</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.details==false}">checked</c:if> id="False" value="False">
+                                    <input class="form-check-input" name="status" type="radio" <c:if test="${requestScope.service.status==false}">checked</c:if> id="False" value="False">
                                     <label class="form-check-label" for="False">Inactive</label>
                                 </div>
 

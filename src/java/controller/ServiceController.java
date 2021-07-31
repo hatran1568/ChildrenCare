@@ -121,8 +121,8 @@ private ServiceDAO serviceDB = new ServiceDAO();
         String search = request.getParameter("search");
         if(search == null) search = " ";
         
-        String r_pagesize = "12";
-        int pagesize = Integer.parseInt(r_pagesize);
+        String r_pagesize = "9";
+        int pagesize = 9;
 
         String r_pageindex = request.getParameter("page");
         if (r_pageindex == null) {
@@ -142,7 +142,8 @@ private ServiceDAO serviceDB = new ServiceDAO();
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
-
+        System.out.println("count:" + count);
+        System.out.println("es:" + editSubmission);
         ArrayList<ServiceCategory> categories = serviceDB.getCategories();
         
         ArrayList<Service> services = serviceDB.getServices(pageindex, pagesize, category, search);
@@ -155,6 +156,7 @@ private ServiceDAO serviceDB = new ServiceDAO();
         request.setAttribute("totalpage", totalpage);
         request.setAttribute("pageindex", pageindex);
         request.setAttribute("paggerUrl", url);
+        request.setAttribute("count", count);
         request.getRequestDispatcher("/view/public/service/list.jsp").forward(request, response);
     }
     

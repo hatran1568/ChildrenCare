@@ -266,7 +266,7 @@
                             <td>${list.service.originalPrice}</td>
                             <td>${list.service.salePrice}</td>  
                             <td>${list.quantity}</td>
-                            <td><a href="#"><i class="fas fa-flag fa-2x"></i></a></td>
+                            <td><a href="../../feedback?id=${list.service.id}"><i class="fas fa-flag fa-2x"></i></a></td>
 
 
                         </tr>
@@ -275,7 +275,7 @@
 
                 </tbody>
             </table>      
-             <c:if test="${requestScope.reservation.status.name eq 'Submited'}">
+             <c:if test="${requestScope.reservation.status.name eq 'Submitted'}">
                  <a style="float:right; margin-left: 5px;"  class="collapsebtn btn btn-primary" href="../../cart/list?rid=${requestScope.reservation.id}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     Edit Reservation  
                 </a>

@@ -165,13 +165,14 @@
                         <h2>Our services</h2>
                     </div>
                 </div>
-                <div class="row" style="display: flex">
+                <div class="row" style="display: flex; margin-bottom: 10px;">
 
                     <c:forEach items="${requestScope.services}" var="s">
-                        <div class="col-md-4 col-sm-6" style="padding: 15px; flex: 1">
+                        <div class="col-md-4 col-sm-6" style="margin: 3px; padding: 15px; flex: 1; box-shadow:0 3px 3px 0 rgba(0, 0, 0, 0.19);">
                             <div>
-                                <img src="<%=request.getContextPath()%>/${s.thumbnailLink}" class="img-responsive" alt="">
-
+                                <div style="height: 280px;">
+                                <img style="margin: 0 auto ;height: auto; max-height: 280px; width: auto; padding: 0;" src="<%=request.getContextPath()%>/${s.thumbnailLink}" class="img-responsive" alt="">
+                                </div>
                                 <div class="team-info">
                                     <h3><a href="service/details?id=${s.id}">${s.fullname}</a></h3>
                                     <p>${s.description}</p>
@@ -237,6 +238,7 @@
                     <div class="col-md-6">
                         <div style="padding:15px">
                             <img src="<%=request.getContextPath()%>/${requestScope.posts[0].thumbnailLink}" style="object-fit: contain; width: 400px; height: 300px" alt="">
+
                             <div class="featured-post-info">
                                 <p class="featured-post-category">${requestScope.posts[0].category.name}</p>
                             </div>
