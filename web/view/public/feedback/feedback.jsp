@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
 
-        <title>Feedback</title>
+        <title>Children Care</title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -13,22 +13,22 @@
         <meta name="keywords" content="">
         <meta name="author" content="Tooplate">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js" integrity="sha512-a6ctI6w1kg3J4dSjknHj3aWLEbjitAXAjLDRUxo2wyYmDFRcz2RJuQr5M3Kt8O/TtUSp8n2rAyaXYy1sjoKmrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link href="assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
-        <link rel ="stylesheet" href="assets/css/bootstrap-iso.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
+        <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+        <link href="<%=request.getContextPath()%>/assets/css/toolplate-iso.css" rel="stylesheet" type="text/css"/>
+        <link rel ="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap-iso.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="assets/css/owl.carousel.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- MAIN CSS -->
-        <link rel="stylesheet" href="assets/css/tooplate-style.css">
-        <link rel="stylesheet" href="assets/css/custom.css" />
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/tooplate-style.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/custom.css" />
     </head>
     <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -75,54 +75,53 @@
                     <!-- MENU LINKS -->
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="home" class="smoothScroll dropdown">Home</a></li>
-                            <li><a href="service/list" class="smoothScroll dropdown">Services</a></li>
-                            <li><a href="blog/list" class="smoothScroll dropdown">Blog</a></li>
+                            <li><a href="<%=request.getContextPath()%>/home" class="smoothScroll dropdown">Home</a></li>
+                            <li><a href="<%=request.getContextPath()%>/service/list" class="smoothScroll dropdown">Services</a></li>
+                            <li><a href="<%=request.getContextPath()%>/blog/list" class="smoothScroll dropdown">Blog</a></li>
                                 <c:if test="${ empty sessionScope.user}">
-                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="showlogin">Login</a></li>
-                                <li class="appointment-btn"><a class="login-trigger" href="showregister">Sign up</a></li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="<%=request.getContextPath()%>/cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="<%=request.getContextPath()%>/login">Login</a></li>
+                                <li class="appointment-btn"><a class="login-trigger" href="<%=request.getContextPath()%>/register">Sign up</a></li>
 
                             </c:if>
                             <c:if test="${not empty sessionScope.user}">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal</a>
+                                    <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Personal <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                     <div class="dropdown-menu">
-                                        <p class="dropdown-link dropdown-item"> <a href="customer/reservation/my" class="smoothScroll">My Reservation</a></p>
-                                        <p class="dropdown-link dropdown-item"> <a href="customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/customer/reservation/my" class="smoothScroll">My Reservation</a></p>
+                                        <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/customer/myprescription/exams" class="smoothScroll">My Prescriptions</a></p>
                                     </div>
                                 </li>
                                 <c:if test="${sessionScope.user.role.name == 'Manager' || sessionScope.user.role.name == 'Admin'}">
 
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage</a>
+                                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Manage <i style="margin-left: 3px" class="fa fa-caret-down" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/customer/list">Customers</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/reservation/list">Reservations</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/feedback/list">Feedbacks</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/post/list">Posts</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/slider/list">Sliders</a></p>
-                                            <p class="dropdown-link dropdown-item"> <a href="manager/service/list">Services</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/customer/list">Customers</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/reservation/list">Reservations</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/feedback/list">Feedbacks</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/post/list">Posts</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/slider/list">Sliders</a></p>
+                                            <p class="dropdown-link dropdown-item"> <a href="<%=request.getContextPath()%>/manager/service/list">Services</a></p>
                                         </div>
                                     </li>
                                     <c:if test="${sessionScope.user.role.name == 'Admin'}">
-                                        <li class="dropdown"><a href="admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
+                                        <li class="dropdown"><a href="<%=request.getContextPath()%>/admin/dashboard/view" class="smoothScroll">Dashboard</a></li>
                                         </c:if>
                                     </c:if>
                                     <c:if test="${sessionScope.user.role.name == 'Staff'}">
 
                                     <li class="dropdown">
-                                    <li><a href="staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/staff/reservation/list" class="smoothScroll dropdown">Reservations list</a></li>
                                     </li>
                                 </c:if>
-                                <li><a style="font-size: 25px;color: #00aeef" href="cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a style="font-size: 25px;color: #00aeef" href="<%=request.getContextPath()%>/cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="<%=request.getContextPath()%>/${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p> <a href="userprofile">Profile</a></p>
-                                        <p> <a href="customer/changepassword">Change Password</a></p>
-                                        <p> <a href="logout">Log Out</a></p>
+                                        <p style="text-align: left"> <a href="<%=request.getContextPath()%>/customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left; margin-bottom: 0"> <a href="logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
                                 <p class="dropdown-name" style="margin:auto; color: black">${sessionScope.user.fullName}</p>
