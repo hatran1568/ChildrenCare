@@ -183,7 +183,7 @@
 
 
                                         <div style="height: 100%; padding: 10px; padding-bottom: 0;">
-                                            <h4><a href="details?id=${s.id}">${s.id}. ${s.fullname}</a></h4>
+                                            <h4><a href="details?id=${s.id}"> ${s.fullname}</a></h4>
                                             <p class="description">
                                                 ${s.description}
                                             </p>

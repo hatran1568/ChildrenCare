@@ -185,7 +185,7 @@ public class CartController extends HttpServlet {
         int sid = Integer.parseInt(request.getParameter("sid"));
         reservationDB.deleteReservationService(rid, sid);
 
-        response.sendRedirect("list");
+        response.sendRedirect("list?rid="+rid);
     }
 
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -142,8 +142,8 @@ private ServiceDAO serviceDB = new ServiceDAO();
                 ? count / pagesize
                 : count / pagesize + 1;
         String url = "list";
-        System.out.println("count:" + totalpage);
-        System.out.println("total:" + totalpage);
+        System.out.println("count:" + count);
+        System.out.println("es:" + editSubmission);
         ArrayList<ServiceCategory> categories = serviceDB.getCategories();
         
         ArrayList<Service> services = serviceDB.getServices(pageindex, pagesize, category, search);

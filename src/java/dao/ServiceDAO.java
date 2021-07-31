@@ -65,7 +65,7 @@ public class ServiceDAO extends BaseDAO {
                     + " from (select ROW_NUMBER() OVER (ORDER BY id ASC) as rid, \n"
                     + " id, fullname, original_price, sale_price, thumbnail_link, category_id, description, details, updated_date, featured, status, quantity\n"
                     + " from service \n"
-                    + " where (status is null or status = 1) \n" + a + search
+                    + " where (status = 1) \n" + a + search
                     + " order by featured desc) as x\n"
                     + " where rid >= (? - 1)*? + 1 and rid <= ? * ?";
 
