@@ -232,11 +232,11 @@
                         <h2 style="text-align: center">Featured posts</h2>
                     </div>
                 </div>
-                <c:if test="${requestScope.posts.size()>=4}">
+                <c:if test="${requestScope.posts.size()>=5}">
                 <div class="row">
                     <div class="col-md-6">
                         <div style="padding:15px">
-                            <img src="<%=request.getContextPath()%>/${requestScope.posts[0].thumbnailLink}" height="260" class="img-responsive" alt="">
+                            <img src="<%=request.getContextPath()%>/${requestScope.posts[0].thumbnailLink}" style="object-fit: contain; width: 400px; height: 300px" alt="">
                             <div class="featured-post-info">
                                 <p class="featured-post-category">${requestScope.posts[0].category.name}</p>
                             </div>
@@ -257,7 +257,7 @@
                     <div class="col-md-6 post-column">
                         <c:forEach var="i" begin="1" end="4">
                             <div class="featured-post-info" style="display: flex;flex-direction: row;">
-                                <div class="thumb"><img src="<%=request.getContextPath()%>/${requestScope.posts[i].thumbnailLink}" width="140" height="110"></div>
+                                <div class="thumb"><img src="<%=request.getContextPath()%>/${requestScope.posts[i].thumbnailLink}" style="object-fit: contain; width: 140px; height: 110px"></div>
                                 <div style="padding-left: 15px">
                                     <p class="featured-post-category" style="font-size: 10px">${requestScope.posts[i].category.name}</p>
                                     <h3 style="margin-top:0; font-size: 18px">
