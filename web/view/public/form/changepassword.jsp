@@ -25,7 +25,7 @@
                 <div class="container">
                     <div class="signup-content">
                         <div class="signup-form">
-                            <div style=" display: inline-block; margin-bottom: 30px"><a href="home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a style="text-decoration: none" href="userprofile">User Profile</a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Change Password</span></div>
+                            <div style=" display: inline-block; margin-bottom: 30px"><a href="../home"><i class="fas fa-home"></i></a><i style="margin : 5px;" class="fas fa-angle-right"></i><a style="text-decoration: none" href="userprofile">User Profile</a><i style="margin : 5px;" class="fas fa-angle-right"></i><span >Change Password</span></div>
                                     <c:if test="${not empty requestScope.mess}">
                                 <div class="alert alert-danger" role="alert">
                                     ${requestScope.mess}
@@ -35,7 +35,8 @@
                             <form oninput='cpass.setCustomValidity(cpass.value !=npass.value ? "Passwords do not match." : "")' novalidate  method="POST" action="change" class="register-form needs-validation" id="register-form">
                                 <div class="form-group">
                                     <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="opass" id="pass" placeholder="Old Password"/>
+                                     
+                                    <input pattern="[A-Za-z0-9]{8,12}" required="true"  type="password" name="opass" id="opass" placeholder="Old Password"/>
                                     <div class="invalid-feedback">
                                         Please input a valid password in range [8,12] characters
                                     </div>

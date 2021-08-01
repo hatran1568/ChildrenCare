@@ -191,7 +191,6 @@ public class CartController extends HttpServlet {
     protected void addToCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         String reservation_id = request.getParameter("reservation_id");
-        System.out.println("reservationid = "+ reservation_id);
         if (reservation_id == null || Integer.parseInt(reservation_id) == -1) {
             if (request.getSession().getAttribute("reservation_id") == null) {
                 reservation_id = "-1";
@@ -203,7 +202,6 @@ public class CartController extends HttpServlet {
         }
 
         int rid;
-        System.out.println("after: reservationid = "+ reservation_id);
         int service_id = Integer.parseInt(request.getParameter("service_id"));
         if (user == null) {
             user = new User();
@@ -230,7 +228,6 @@ public class CartController extends HttpServlet {
             Reservation r = reservationDB.getReservationById(Integer.parseInt(reservation_id));
             Service service = serviceDB.getService(service_id);
             reservationDB.addReservationService(r, service, 1);
-            System.out.println("re diff null " + reservation_id + " User" + user.getFullName());
         } else if (user.getId() > 0) {
 
             int pr_id = reservationDB.getPendingReservation(user);
@@ -247,7 +244,6 @@ public class CartController extends HttpServlet {
                 reservationDB.addReservationService(reservation, service, 1);
                 request.getSession().setAttribute("reservation_id", rid);
             }
-            System.out.println("other");
         }
     }
 

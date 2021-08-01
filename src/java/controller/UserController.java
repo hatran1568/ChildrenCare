@@ -620,25 +620,19 @@ public class UserController extends HttpServlet {
 
     protected void changePassword(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User u = (User) request.getSession().getAttribute("user");
-        String oPass = request.getParameter("oPass");
-        String nPass = request.getParameter("nPass");
-        String cPass = request.getParameter("cPass");
-        if (oPass.length() == 0 || nPass.length() == 0 || cPass.length() == 0) {
-            request.getSession().setAttribute("mess", "Please fill all fileds");
-            response.sendRedirect("changepassword");
-        } else {
-            if (!oPass.equals(MD5.getMd5(u.getPassword()))) {
+        String oPass = request.getParameter("opass");
+        String nPass = request.getParameter("npass");
+        String cPass = request.getParameter("cpass");
+      
+            if (!MD5.getMd5(oPass).equals(u.getPassword())) {
                 request.setAttribute("mess", "Wrong password");
                 request.getRequestDispatcher("../view/public/form/changepassword.jsp").forward(request, response);
             }
-            if (!nPass.equals(cPass)) {
-                request.getSession().setAttribute("mess", "Wrong password");
-                 request.getRequestDispatcher("../view/public/form/changepassword.jsp").forward(request, response);
-            }
+          
             UserDAO userDb = new UserDAO();
-            userDb.changePassword(u, MD5.getMd5(cPass));
+            userDb.changePassword(u, nPass);
             response.sendRedirect("../logout");
-        }
+        
 
     }
 

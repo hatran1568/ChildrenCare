@@ -120,7 +120,7 @@
                                 </c:if>
                                 <li><a style="font-size: 25px;color: #00aeef" href="../../cart/list" class="smoothScroll"><i class="fa fa-shopping-cart"></i></a></li>
                                 <div class="dropdown ">
-                                    <img class="avatar" src="${sessionScope.user.imageLink}">
+                                    <img class="avatar" src="../../${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
                                         <p style="text-align: left"> <a href="../../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
@@ -546,7 +546,100 @@
             text-align: center;
             color: black;
         }
-    </style>
+    </style> <style>
+
+            .pagination{
+                display: inline-block;
+                margin: 0 auto;
+                position: relative;
+                left: 45%;
+            }
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 5px;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: #ddd;
+                border-radius: 5px;
+            }
+
+            .avatar{
+
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            .sli{
+                margin: 0 auto;
+                width: 300px;
+            }
+            .in-text{
+                position: absolute;
+                top: 70px;
+                left: 40%;
+                visibility: hidden;
+
+            }
+            .news_blog:hover > .in-text{
+
+                visibility: visible;
+
+            }
+
+            .in-text:hover{
+                display: block;
+            }
+
+            .news_blog:hover{
+                opacity: 0.4;
+            }
+            .btn{
+                bottom: 0;
+            }
+            nav{
+
+            }
+            table,th,td{
+                text-align: center;
+
+            }
+            td{
+                min-height: 120px;
+            }
+            .icon-change{
+
+                cursor: pointer;
+            }
+            .date{
+                border-top-style: hidden;
+                border-right-style: hidden;
+                border-left-style: hidden;
+                border-bottom-style: hidden;
+                outline: none;
+                text-align: center;
+
+            }
+            input[type=date]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                display: none;
+            }
+
+
+
+            input[type=date]::-webkit-calendar-picker-indicator {
+                -webkit-appearance: none;
+                display: none;
+            }
+        </style>
 
 </body>
 </html> 
