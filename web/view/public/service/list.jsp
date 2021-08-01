@@ -125,7 +125,7 @@
                                     <img class="avatar" src="${sessionScope.user.imageLink}">
 
                                     <div class="dropdown-content">
-                                        <p style="text-align: left"> <a href="../userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
+                                        <p style="text-align: left"> <a href="../customer/userprofile"><i style="margin-right: 5px" class="fas fa-info-circle"></i>Profile</a></p>
                                         <p style="text-align: left; margin-bottom: 0"> <a href="../logout"><i style="margin-right: 5px" class="fas fa-sign-out-alt"></i>Log Out</a></p>
                                     </div>
                                 </div>
@@ -222,13 +222,13 @@
                             {
                                 var container = document.getElementById(id);
                                 if (pageindex > gap + 1)
-                                    container.innerHTML += "<a href='" + page + "?page=1'>First</a>";
+                                    container.innerHTML += "<a href='" + page + "page=1'>First</a>";
 
                                 for (var i = pageindex - gap; i < pageindex; i++)
                                 {
                                     if (i >= 1)
                                     {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                                        container.innerHTML += "<a href='" + page + "page=" + i + "'>" + i + "</a>";
                                     }
                                 }
 
@@ -238,12 +238,12 @@
                                 {
                                     if (i <= totalpage)
                                     {
-                                        container.innerHTML += "<a href='" + page + "?page=" + i + "'>" + i + "</a>";
+                                        container.innerHTML += "<a href='" + page + "page=" + i + "'>" + i + "</a>";
                                     }
                                 }
 
                                 if (pageindex < totalpage - gap)
-                                    container.innerHTML += "<a href='" + page + "?page=" + totalpage + "'>Last</a>"
+                                    container.innerHTML += "<a href='" + page + "page=" + totalpage + "'>Last</a>"
                             }
                             generatePagger("pagination",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
                             generatePagger("pagination1",${requestScope.pageindex},${requestScope.totalpage}, 2, "${requestScope.paggerUrl}");
@@ -334,7 +334,6 @@
                                         url: "../cart/add",
                                         data: {service_id: id, reservation_id: reservation_id},
                                         success: function () {
-                                            setInterval('location.reload()', 100);
                                         }
 
 

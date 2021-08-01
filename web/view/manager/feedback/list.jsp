@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Tooplate">
         <meta name="author" content="">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2c55db574f.js" crossorigin="anonymous"></script>
@@ -41,13 +42,11 @@
                     "paging": true,
                     "sPaginationType": "full_numbers",
                     "bJQueryUI": true,
-                    "pageLength": 50,
+                    "pageLength": 20,
                     'columnDefs': [
 
                         {'className': 'text-center', 'targets': 6},
                         {'className': 'text-center', 'targets': 5},
-                        {'max-width': '5%', 'targets': 6},
-                        {'max-width': '5%', 'targets': 5},
                         {'orderable': false, 'targets': [6, 7]},
                         {'orderable': false, 'targets': 5},
                         {'orderable': false, 'targets': 3},
@@ -233,7 +232,7 @@
                             <tr>
                                 <td>${f.fullName}</td>
                                 <td>${f.service.fullname}</td>
-                                <td class="text-truncate">${f.content}</td>
+                                <td class="text-truncate" style="max-width: 300px;">${f.content}</td>
                                 <td style="display: none;">${f.ratedStar}</td>
                                 <td value="${f.ratedStar}"> 
                                     <c:forEach var = "i" begin = "1" end = "5">
