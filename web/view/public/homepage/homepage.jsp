@@ -143,7 +143,7 @@
 
                                         <h1>${s.title}</h1>
                                         <h3>${s.notes}</h3>
-                                        <a href="${s.backlink}" class="section-btn btn btn-default smoothScroll">Read more</a>
+                                        <a href="<%=request.getContextPath()%>/${s.backlink}" class="section-btn btn btn-default smoothScroll">Read more</a>
                                     </div>
                                 </div>
                             </div>
