@@ -141,9 +141,10 @@ private ServiceDAO serviceDB = new ServiceDAO();
         int totalpage = (count % pagesize == 0)
                 ? count / pagesize
                 : count / pagesize + 1;
-        String url = "list";
-        System.out.println("count:" + count);
-        System.out.println("es:" + editSubmission);
+        String url = "list?";
+        if(editSubmission){
+            url = "list?reservation_id=" + rid + "&";
+        }
         ArrayList<ServiceCategory> categories = serviceDB.getCategories();
         
         ArrayList<Service> services = serviceDB.getServices(pageindex, pagesize, category, search);

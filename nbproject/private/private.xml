@@ -2,6 +2,41 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+=======
+
+        <group>
+            <file>file:/D:/College/new/web/view/public/cart/cart.jsp</file>
+            <file>file:/D:/College/new/src/java/controller/ServiceController.java</file>
+            <file>file:/D:/College/new/web/view/customer/reservation/myExams.jsp</file>
+            <file>file:/D:/College/new/src/java/controller/CartController.java</file>
+            <file>file:/D:/College/new/web/view/customer/reservation/reservationInformation.jsp</file>
+            <file>file:/D:/College/new/web/view/customer/reservation/myReservation.jsp</file>
+            <file>file:/D:/College/new/web/view/public/service/list.jsp</file>
+            <file>file:/D:/College/new/src/java/dao/ServiceDAO.java</file>
+        </group>
+        <group>
+            <file>file:/D:/College/new/src/java/controller/ReservationCompletionController.java</file>
+            <file>file:/D:/College/new/src/java/controller/CartController.java</file>
+            <file>file:/D:/College/new/web/view/manager/feedback/list.jsp</file>
+            <file>file:/D:/College/new/web/view/manager/feedback/details.jsp</file>
+
+        <group>
+            <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/FeedbackDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ReservationDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/ServiceDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/UserDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/customer/reservation/reservationInformation.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/public/service/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/controller/DashboardController.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/manager/slider/list.jsp</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SettingDAO.java</file>
+            <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/dashboard.jsp</file>
+        </group>
+>>>>>>> ebba26c79e69a5db47c8dcec8e36269ad7c25338
         <group>
             <file>file:/C:/Users/ACER/Desktop/SWP/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/FeedbackDAO.java</file>
@@ -17,6 +52,34 @@
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/BaseDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/src/java/dao/SettingDAO.java</file>
             <file>file:/C:/Users/ACER/Desktop/SWP/web/view/admin/dashboard/dashboard.jsp</file>
+<<<<<<< HEAD
+=======
+
+
+        <group>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/service/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/homepage/homepage.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
+
+        </group>
+        <group>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/UserDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/service/list.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/dao/PostDAO.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/HomePageController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerCustomerController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/public/homepage/homepage.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/web/view/manager/customer/details.jsp</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ReservationContactController.java</file>
+            <file>file:/D:/FPTU%20Materials/Ky5_SUM21/SWP/source-new/src/java/controller/ManagerPostController.java</file>
+
+>>>>>>> ebba26c79e69a5db47c8dcec8e36269ad7c25338
         </group>
         <group/>
     </open-files>
